@@ -1,0 +1,16 @@
+﻿using FleetManager.communication.Enums;
+
+namespace FleetManager.communication.Resposnes
+{
+    public class ResponseVehicleJson
+    {
+        public long Id { get; set; }
+        public string LicensePlate { get; set; } = string.Empty;
+        public string Brand { get; set; } = string.Empty;
+        public FuelTypeEnum FuelType { get; set; }
+        public TransmissionTypeEnum TransmissionType { get; set; }
+        public int CurrentMileage { get; set; }
+        public ResponseShortCategoryJson Category { get; set; } = default!;
+
+    }
+}
