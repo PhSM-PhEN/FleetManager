@@ -17,6 +17,7 @@ namespace FleetManager.Application.AutoMapper
             CreateMap<RequestCategoryJson, Category>();
             CreateMap<RequestVehicleJson, Vehicle>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
+            CreateMap<RequestVehicleUpdateCurrentMiliageJson, Vehicle>();
                 
 
         }

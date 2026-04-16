@@ -4,7 +4,7 @@ using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToVehicle;
 using FleetManager.Exception.ExceptionBase;
 
-namespace FleetManager.Application.UseCase.ToVehicle.Update
+namespace FleetManager.Application.UseCase.ToVehicle.Update.UpdateVehicle
 {
     public class UpdateVehicleUseCase(IUnitOfWork unitOfWork, IVehicleUpdateOnlyRepository repository, IMapper mapper) : IUpdateVehicleUseCase
     {
@@ -23,7 +23,8 @@ namespace FleetManager.Application.UseCase.ToVehicle.Update
 
             _mapper.Map(request, vehicle);
 
-            _repository.Update(vehicle);
+             _repository.Update(vehicle);
+
             await _unitOfWork.Commit();
         }
         private static void Validate(RequestVehicleJson request)

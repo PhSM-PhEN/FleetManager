@@ -2,7 +2,8 @@
 using FleetManager.Application.UseCase.ToVehicle.GetAll;
 using FleetManager.Application.UseCase.ToVehicle.GetById;
 using FleetManager.Application.UseCase.ToVehicle.Register;
-using FleetManager.Application.UseCase.ToVehicle.Update;
+using FleetManager.Application.UseCase.ToVehicle.Update.UpdateKm;
+using FleetManager.Application.UseCase.ToVehicle.Update.UpdateVehicle;
 using FleetManager.communication.Requests;
 using FleetManager.communication.Resposnes;
 using Microsoft.AspNetCore.Mvc;
@@ -52,6 +53,18 @@ namespace FleetManager.Api.Controllers
             await useCase.Execute(id, request);
             return NoContent();
         }
+        [HttpPut]
+        [Route("kmtotal/{id}")]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ResponseVehicleJson), StatusCodes.Status200OK)]
+        public async Task<IActionResult> UpdateKm([FromServices] IUpdateVehicleKmUseCase useCase, [FromRoute] long id, [FromBody] RequestVehicleUpdateCurrentMiliageJson request)
+        {
+            var response = await useCase.Execute(id, request);
+
+            return Ok(response);
+        }
+
         [HttpDelete]
         [Route("{id}")]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]

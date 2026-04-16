@@ -11,7 +11,7 @@ namespace FleetManager.Domain.Entities
         public string Renavam { get; set; } = string.Empty;
         public string LicensePlate { get; set; } = string.Empty;
         public string Color { get; set; } = string.Empty;
-        public int CurrentMileage { get; set; }
+        public long CurrentMileage { get; set; }
         public FuelTypeEnum FuelType { get; set; }
         public TransmissionTypeEnum TransmissionType { get; set; }
         public DateTime CreateAt { get; private set; } = DateTime.UtcNow;

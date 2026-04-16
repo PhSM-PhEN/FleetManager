@@ -21,8 +21,7 @@ namespace FleetManager.Application.UseCase.ToVehicle
             RuleFor(v => v.Model)
                 .Cascade(CascadeMode.Stop)
                 .NotEmpty()
-                    .WithMessage(ResourceErrorMessages.MODEL_REQUIRED);
-                
+                    .WithMessage(ResourceErrorMessages.MODEL_REQUIRED);   
 
             RuleFor(v => v.Renavam)
                 .Cascade(CascadeMode.Stop)

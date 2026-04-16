@@ -40,6 +40,7 @@ namespace FleetManager.Infrastructure
             services.AddScoped<IVehicleWriteOnlyRepository, VehicleRepository>();
             services.AddScoped<IVehicleReadOnlyRepository, VehicleRepository>();
             services.AddScoped<IVehicleUpdateOnlyRepository, VehicleRepository>();
+            
 
             services.AddScoped<IUnitOfWork, UnitiOkWork>();
         }

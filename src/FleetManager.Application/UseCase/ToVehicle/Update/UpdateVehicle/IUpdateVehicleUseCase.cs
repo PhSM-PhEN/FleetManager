@@ -1,6 +1,6 @@
 ﻿using FleetManager.communication.Requests;
 
-namespace FleetManager.Application.UseCase.ToVehicle.Update
+namespace FleetManager.Application.UseCase.ToVehicle.Update.UpdateVehicle
 {
     public interface IUpdateVehicleUseCase
     {

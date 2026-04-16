@@ -115,6 +115,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to current mileage must be greater than the current.
+        /// </summary>
+        public static string CURRENT_MILIAGE_MUST_BE_GREATER_THAN_THE_CURRENT {
+            get {
+                return ResourceManager.GetString("CURRENT_MILIAGE_MUST_BE_GREATER_THAN_THE_CURRENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fuel type invalid.
         /// </summary>
         public static string FUEL_TYPE_INVALID {

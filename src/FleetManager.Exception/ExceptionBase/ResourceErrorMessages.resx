@@ -177,4 +177,7 @@
   <data name="MANUFACTURE_MUST_BE_GREATER_THAN_OR_EQUAL_TO_2010" xml:space="preserve">
     <value>Manufacture must be greater than or equal to 2010</value>
   </data>
+  <data name="CURRENT_MILIAGE_MUST_BE_GREATER_THAN_THE_CURRENT" xml:space="preserve">
+    <value>current mileage must be greater than the current</value>
+  </data>
 </root>

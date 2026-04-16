@@ -48,7 +48,7 @@ namespace FleetManager.Infrastructure.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Color = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CurrentMileage = table.Column<int>(type: "int", nullable: false),
+                    CurrentMileage = table.Column<long>(type: "bigint", nullable: false),
                     FuelType = table.Column<int>(type: "int", nullable: false),
                     TransmissionType = table.Column<int>(type: "int", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),

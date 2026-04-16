@@ -14,7 +14,7 @@ namespace FleetManager.communication.Resposnes
         public string Brand { get; set; } = string.Empty;
         public FuelTypeEnum FuelType { get; set; }
         public TransmissionTypeEnum TransmissionType { get; set; }
-        public int CurrentMileage { get; set; }
+        public long CurrentMileage { get; set; }
         public int CategoryId { get; set; }
 
     }
