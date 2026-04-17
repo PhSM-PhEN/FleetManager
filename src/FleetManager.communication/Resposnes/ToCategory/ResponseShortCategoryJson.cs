@@ -1,4 +1,4 @@
-﻿namespace FleetManager.communication.Resposnes
+﻿namespace FleetManager.communication.Resposnes.ToCategory
 {
     public class ResponseShortCategoryJson
     {

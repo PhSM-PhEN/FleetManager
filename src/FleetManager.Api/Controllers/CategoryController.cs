@@ -3,9 +3,9 @@ using FleetManager.Application.UseCase.ToCategory.GetAll;
 using FleetManager.Application.UseCase.ToCategory.GetById;
 using FleetManager.Application.UseCase.ToCategory.Register;
 using FleetManager.Application.UseCase.ToCategory.Update;
-using FleetManager.communication.Requests;
+using FleetManager.communication.Requests.ToCategory;
 using FleetManager.communication.Resposnes;
-using FleetManager.Domain.Entities;
+using FleetManager.communication.Resposnes.ToCategory;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FleetManager.Api.Controllers

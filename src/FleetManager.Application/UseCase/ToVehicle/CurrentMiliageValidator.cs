@@ -1,4 +1,4 @@
-﻿using FleetManager.communication.Requests;
+﻿using FleetManager.communication.Requests.ToVehicle;
 using FleetManager.Exception.ExceptionBase;
 using FluentValidation;
 

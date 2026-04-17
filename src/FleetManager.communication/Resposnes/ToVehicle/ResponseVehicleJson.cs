@@ -1,6 +1,6 @@
 ﻿using FleetManager.communication.Enums;
 
-namespace FleetManager.communication.Resposnes
+namespace FleetManager.communication.Resposnes.ToVehicle
 {
     public class ResponseVehicleJson
     {

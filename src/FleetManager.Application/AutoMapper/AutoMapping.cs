@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
-using FleetManager.communication.Requests;
-using FleetManager.communication.Resposnes;
+using FleetManager.communication.Requests.ToCategory;
+using FleetManager.communication.Requests.ToVehicle;
+using FleetManager.communication.Resposnes.ToCategory;
+using FleetManager.communication.Resposnes.ToVehicle;
 using FleetManager.Domain.Entities;
 
 namespace FleetManager.Application.AutoMapper
@@ -16,7 +18,9 @@ namespace FleetManager.Application.AutoMapper
         {
             CreateMap<RequestCategoryJson, Category>();
             CreateMap<RequestVehicleJson, Vehicle>()
-                .ForMember(dest => dest.Id, opt => opt.Ignore());
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.IsActive, opt => opt.Ignore());
+
             CreateMap<RequestVehicleUpdateCurrentMiliageJson, Vehicle>();
                 
 

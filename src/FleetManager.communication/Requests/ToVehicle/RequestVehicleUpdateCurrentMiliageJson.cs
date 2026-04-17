@@ -1,4 +1,4 @@
-﻿namespace FleetManager.communication.Requests
+﻿namespace FleetManager.communication.Requests.ToVehicle
 {
     public class RequestVehicleUpdateCurrentMiliageJson
     {

@@ -180,4 +180,10 @@
   <data name="CURRENT_MILIAGE_MUST_BE_GREATER_THAN_THE_CURRENT" xml:space="preserve">
     <value>current mileage must be greater than the current</value>
   </data>
+  <data name="CHASSIS_NUMBER_INVALID" xml:space="preserve">
+    <value>Chassis number invalid</value>
+  </data>
+  <data name="CHASSIS_NUMBER_REQUIRED" xml:space="preserve">
+    <value>Chassis number required</value>
+  </data>
 </root>

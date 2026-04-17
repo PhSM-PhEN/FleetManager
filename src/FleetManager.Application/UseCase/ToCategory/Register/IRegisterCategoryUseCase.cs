@@ -1,5 +1,5 @@
-﻿using FleetManager.communication.Requests;
-using FleetManager.communication.Resposnes;
+﻿using FleetManager.communication.Requests.ToCategory;
+using FleetManager.communication.Resposnes.ToCategory;
 
 namespace FleetManager.Application.UseCase.ToCategory.Register
 {

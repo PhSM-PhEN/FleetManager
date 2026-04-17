@@ -4,8 +4,9 @@ using FleetManager.Application.UseCase.ToVehicle.GetById;
 using FleetManager.Application.UseCase.ToVehicle.Register;
 using FleetManager.Application.UseCase.ToVehicle.Update.UpdateKm;
 using FleetManager.Application.UseCase.ToVehicle.Update.UpdateVehicle;
-using FleetManager.communication.Requests;
+using FleetManager.communication.Requests.ToVehicle;
 using FleetManager.communication.Resposnes;
+using FleetManager.communication.Resposnes.ToVehicle;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FleetManager.Api.Controllers
@@ -28,11 +29,15 @@ namespace FleetManager.Api.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(ResponseAllVehicleJson), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetAll([FromServices] IGetAllVehicleUseCase useCase)
         {
             var response = await useCase.Execute();
-            return Ok(response);
+            if (response.Vehicle.Count != 0) 
+            {
+                return Ok(response);
+            }
+            return NoContent();
         }
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ResponseVehicleByIdJson), StatusCodes.Status200OK)]

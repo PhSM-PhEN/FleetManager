@@ -1,5 +1,4 @@
-﻿using FleetManager.communication.Requests;
-using FleetManager.Domain.Entities;
+﻿using FleetManager.communication.Requests.ToVehicle;
 using FleetManager.Exception.ExceptionBase;
 using FluentValidation;
 
@@ -29,7 +28,14 @@ namespace FleetManager.Application.UseCase.ToVehicle
                     .WithMessage(ResourceErrorMessages.RENAVAM_REQUIRED)
                 .Length(11)
                     .WithMessage(ResourceErrorMessages.INVALID_LENGTH);
-
+            RuleFor(v => v.ChassisNumber)
+                .Cascade(CascadeMode.Stop)
+                .NotEmpty()
+                    .WithMessage(ResourceErrorMessages.CHASSIS_NUMBER_REQUIRED)
+                .Matches(@"^[A-HJ-NPR-Z0-9]{17}$")
+                    .WithMessage(ResourceErrorMessages.CHASSIS_NUMBER_INVALID)
+                .Length(17)
+                    .WithMessage(ResourceErrorMessages.INVALID_LENGTH);
             RuleFor(v => v.Brand)
                 .NotEmpty()
                 .WithMessage(ResourceErrorMessages.BRAND_REQUIRED);

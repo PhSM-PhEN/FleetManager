@@ -1,5 +1,5 @@
-﻿using FleetManager.communication.Requests;
-using FleetManager.communication.Resposnes;
+﻿using FleetManager.communication.Requests.ToVehicle;
+using FleetManager.communication.Resposnes.ToVehicle;
 
 namespace FleetManager.Application.UseCase.ToVehicle.Register
 {

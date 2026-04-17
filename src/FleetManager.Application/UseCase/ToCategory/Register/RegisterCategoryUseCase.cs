@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using FleetManager.communication.Requests;
-using FleetManager.communication.Resposnes;
+using FleetManager.communication.Requests.ToCategory;
+using FleetManager.communication.Resposnes.ToCategory;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToCategory;

@@ -9,12 +9,14 @@ namespace FleetManager.Domain.Entities
         public string Model { get; set; } = string.Empty;
         public int ManufacturingYear { get; set; }
         public string Renavam { get; set; } = string.Empty;
+        public string ChassisNumber { get; set; } = string.Empty;
         public string LicensePlate { get; set; } = string.Empty;
         public string Color { get; set; } = string.Empty;
         public long CurrentMileage { get; set; }
         public FuelTypeEnum FuelType { get; set; }
         public TransmissionTypeEnum TransmissionType { get; set; }
         public DateTime CreateAt { get; private set; } = DateTime.UtcNow;
+        public bool IsActive { get; set; } = true;
         public int CategoryId { get; set; }
         public Category Category { get; set; } = default!;
 

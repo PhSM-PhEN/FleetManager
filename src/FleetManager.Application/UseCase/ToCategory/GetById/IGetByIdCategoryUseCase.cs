@@ -1,4 +1,4 @@
-﻿using FleetManager.communication.Resposnes;
+﻿using FleetManager.communication.Resposnes.ToCategory;
 
 namespace FleetManager.Application.UseCase.ToCategory.GetById
 {

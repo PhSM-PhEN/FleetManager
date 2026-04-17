@@ -1,6 +1,6 @@
 ﻿using FleetManager.communication.Enums;
 
-namespace FleetManager.communication.Requests
+namespace FleetManager.communication.Requests.ToVehicle
 {
     public class RequestVehicleJson
     {
@@ -9,6 +9,7 @@ namespace FleetManager.communication.Requests
         public string Model { get; set; } = string.Empty;
         public int ManufacturingYear { get; set; }
         public string Renavam { get; set; } = string.Empty;
+        public string ChassisNumber { get; set; } = string.Empty;
         public string LicensePlate { get; set; } = string.Empty;
         public string Color { get; set; } = string.Empty;
         public int CurrentMileage { get; set; }

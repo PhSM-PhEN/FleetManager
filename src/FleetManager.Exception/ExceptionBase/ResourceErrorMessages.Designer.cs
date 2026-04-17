@@ -88,6 +88,24 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chassis number invalid.
+        /// </summary>
+        public static string CHASSIS_NUMBER_INVALID {
+            get {
+                return ResourceManager.GetString("CHASSIS_NUMBER_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chassis number required.
+        /// </summary>
+        public static string CHASSIS_NUMBER_REQUIRED {
+            get {
+                return ResourceManager.GetString("CHASSIS_NUMBER_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Color required.
         /// </summary>
         public static string COLOR_REQUIRED {

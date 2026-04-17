@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FleetManager.communication.Requests;
+using FleetManager.communication.Requests.ToCategory;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToCategory;
 using FleetManager.Exception.ExceptionBase;

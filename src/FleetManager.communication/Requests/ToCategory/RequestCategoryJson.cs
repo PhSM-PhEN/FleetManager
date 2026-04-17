@@ -1,4 +1,4 @@
-﻿namespace FleetManager.communication.Requests
+﻿namespace FleetManager.communication.Requests.ToCategory
 {
     public class RequestCategoryJson
     {

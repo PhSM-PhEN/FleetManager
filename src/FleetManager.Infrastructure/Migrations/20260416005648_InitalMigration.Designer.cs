@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FleetManager.Infrastructure.Migrations
 {
     [DbContext(typeof(FleetManagerDbContext))]
-    [Migration("20260402011416_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260416005648_InitalMigration")]
+    partial class InitalMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,6 +60,10 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<string>("ChassisNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Color")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -67,11 +71,14 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("CurrentMileage")
-                        .HasColumnType("int");
+                    b.Property<long>("CurrentMileage")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("FuelType")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("LicensePlate")
                         .IsRequired()
