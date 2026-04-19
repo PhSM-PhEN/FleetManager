@@ -133,11 +133,29 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to current mileage must be greater than the current.
+        ///   Looks up a localized string similar to Email already registered.
         /// </summary>
-        public static string CURRENT_MILIAGE_MUST_BE_GREATER_THAN_THE_CURRENT {
+        public static string EMAIL_ALREADY_REGISTERED {
             get {
-                return ResourceManager.GetString("CURRENT_MILIAGE_MUST_BE_GREATER_THAN_THE_CURRENT", resourceCulture);
+                return ResourceManager.GetString("EMAIL_ALREADY_REGISTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email invalid.
+        /// </summary>
+        public static string EMAIL_INVALID {
+            get {
+                return ResourceManager.GetString("EMAIL_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email Required.
+        /// </summary>
+        public static string EMAIL_REQUIRED {
+            get {
+                return ResourceManager.GetString("EMAIL_REQUIRED", resourceCulture);
             }
         }
         
@@ -156,6 +174,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string INVALID_LENGTH {
             get {
                 return ResourceManager.GetString("INVALID_LENGTH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid password.
+        /// </summary>
+        public static string INVALID_PASSWORD {
+            get {
+                return ResourceManager.GetString("INVALID_PASSWORD", resourceCulture);
             }
         }
         
@@ -232,11 +259,47 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to password must contain an lowercase letter.
+        /// </summary>
+        public static string PASSWORD_MUST_CONTAIN_AN_LOWRECASE_LETTER {
+            get {
+                return ResourceManager.GetString("PASSWORD_MUST_CONTAIN_AN_LOWRECASE_LETTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to password must contain an uppercase letter.
+        /// </summary>
+        public static string PASSWORD_MUST_CONTAIN_AN_UPPERCASE_LETTER {
+            get {
+                return ResourceManager.GetString("PASSWORD_MUST_CONTAIN_AN_UPPERCASE_LETTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to password must contain number.
+        /// </summary>
+        public static string PASSWORD_MUST_CONTAIN_NUMBER {
+            get {
+                return ResourceManager.GetString("PASSWORD_MUST_CONTAIN_NUMBER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Renavam required.
         /// </summary>
         public static string RENAVAM_REQUIRED {
             get {
                 return ResourceManager.GetString("RENAVAM_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The mileage must be greater than the current.
+        /// </summary>
+        public static string THE_MILEAGE_MUST_BE_HIGHER_THAN_THE_CURRENT {
+            get {
+                return ResourceManager.GetString("THE_MILEAGE_MUST_BE_HIGHER_THAN_THE_CURRENT", resourceCulture);
             }
         }
         

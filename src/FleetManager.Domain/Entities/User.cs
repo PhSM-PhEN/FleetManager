@@ -2,10 +2,10 @@
 
 namespace FleetManager.Domain.Entities
 {
-    public class Users
+    public class User
     {
-        public long UserId { get; set; }
-        public string FullName { get; set; } = string.Empty;
+        public long Id { get; set; }
+        public string Name { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public Guid UserIdentifier { get; set; }

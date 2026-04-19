@@ -1,8 +1,11 @@
 ﻿using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToCategory;
+using FleetManager.Domain.Repositories.ToUser;
 using FleetManager.Domain.Repositories.ToVehicle;
+using FleetManager.Domain.Security.Cryptography;
 using FleetManager.Infrastructure.DataAccess;
 using FleetManager.Infrastructure.DataAccess.ToCategory;
+using FleetManager.Infrastructure.DataAccess.ToUsers;
 using FleetManager.Infrastructure.DataAccess.ToVehicle;
 using FleetManager.Infrastructure.Extension;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +18,7 @@ namespace FleetManager.Infrastructure
     {
         public static void AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddScoped<IPasswordEncripter, Security.Cryptography.BCrypt>();
             AddRepositories(services);
             if (configuration.IsTestEnviroment() == false)
             {
@@ -40,7 +44,10 @@ namespace FleetManager.Infrastructure
             services.AddScoped<IVehicleWriteOnlyRepository, VehicleRepository>();
             services.AddScoped<IVehicleReadOnlyRepository, VehicleRepository>();
             services.AddScoped<IVehicleUpdateOnlyRepository, VehicleRepository>();
-            
+
+            services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
+            services.AddScoped<IUserReadOnlyRepository, UserRepository>();
+            services.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
 
             services.AddScoped<IUnitOfWork, UnitiOkWork>();
         }

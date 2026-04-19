@@ -63,7 +63,7 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ResponseVehicleJson), StatusCodes.Status200OK)]
-        public async Task<IActionResult> UpdateKm([FromServices] IUpdateVehicleKmUseCase useCase, [FromRoute] long id, [FromBody] RequestVehicleUpdateCurrentMiliageJson request)
+        public async Task<IActionResult> UpdateKm([FromServices] IUpdateVehicleKmUseCase useCase, [FromRoute] long id, [FromBody] RequestVehicleUpdateCurrentMileageJson request)
         {
             var response = await useCase.Execute(id, request);
 

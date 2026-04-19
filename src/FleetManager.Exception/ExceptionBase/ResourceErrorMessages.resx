@@ -177,13 +177,34 @@
   <data name="MANUFACTURE_MUST_BE_GREATER_THAN_OR_EQUAL_TO_2010" xml:space="preserve">
     <value>Manufacture must be greater than or equal to 2010</value>
   </data>
-  <data name="CURRENT_MILIAGE_MUST_BE_GREATER_THAN_THE_CURRENT" xml:space="preserve">
-    <value>current mileage must be greater than the current</value>
+  <data name="THE_MILEAGE_MUST_BE_HIGHER_THAN_THE_CURRENT" xml:space="preserve">
+    <value>The mileage must be greater than the current</value>
   </data>
   <data name="CHASSIS_NUMBER_INVALID" xml:space="preserve">
     <value>Chassis number invalid</value>
   </data>
   <data name="CHASSIS_NUMBER_REQUIRED" xml:space="preserve">
     <value>Chassis number required</value>
+  </data>
+  <data name="EMAIL_REQUIRED" xml:space="preserve">
+    <value>Email Required</value>
+  </data>
+  <data name="EMAIL_INVALID" xml:space="preserve">
+    <value>Email invalid</value>
+  </data>
+  <data name="INVALID_PASSWORD" xml:space="preserve">
+    <value>Invalid password</value>
+  </data>
+  <data name="PASSWORD_MUST_CONTAIN_AN_UPPERCASE_LETTER" xml:space="preserve">
+    <value>password must contain an uppercase letter</value>
+  </data>
+  <data name="PASSWORD_MUST_CONTAIN_AN_LOWRECASE_LETTER" xml:space="preserve">
+    <value>password must contain an lowercase letter</value>
+  </data>
+  <data name="PASSWORD_MUST_CONTAIN_NUMBER" xml:space="preserve">
+    <value>password must contain number</value>
+  </data>
+  <data name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
+    <value>Email already registered</value>
   </data>
 </root>

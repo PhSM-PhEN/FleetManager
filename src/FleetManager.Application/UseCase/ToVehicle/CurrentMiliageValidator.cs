@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace FleetManager.Application.UseCase.ToVehicle
 {
-    public class CurrentMiliageValidator : AbstractValidator<RequestVehicleUpdateCurrentMiliageJson>
+    public class CurrentMiliageValidator : AbstractValidator<RequestVehicleUpdateCurrentMileageJson>
     {
         public CurrentMiliageValidator() 
         {

@@ -1,7 +1,8 @@
 ﻿namespace FleetManager.communication.Requests.ToVehicle
 {
-    public class RequestVehicleUpdateCurrentMiliageJson
+    public class RequestVehicleUpdateCurrentMileageJson
     {
+
         public long CurrentMileage { get; set; }
     }
 }

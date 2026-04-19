@@ -1,4 +1,5 @@
 ﻿using FleetManager.communication.Resposnes;
+using FleetManager.Domain.DomainExceptionBase;
 using FleetManager.Exception.ExceptionBase;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -13,12 +14,16 @@ namespace FleetManager.Api.Filters
             {
                 HandleErrorOnValidationException(context);
             }
+            else if(context.Exception is DomainException)
+            {
+                HandleDomainRuleException(context);
+            }
             else
             {
                 ThrowUnknownError(context);
             }
         }
-        private static void HandleErrorOnValidationException(ExceptionContext context) 
+        private static void HandleErrorOnValidationException(ExceptionContext context)
         {
             var fleetManagerException = context.Exception as FleetManagerException;
             var errorResponse = new ResponseErrorJson(fleetManagerException!.GetErrors());
@@ -26,6 +31,14 @@ namespace FleetManager.Api.Filters
             context.HttpContext.Response.StatusCode = fleetManagerException.StatusCode;
             context.Result = new ObjectResult(errorResponse);
 
+        }
+        private static void HandleDomainRuleException(ExceptionContext context)
+        {
+            var domainException = context.Exception as DomainException;
+            var errorResponse = new ResponseErrorJson([domainException!.Message]);
+
+            context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
+            context.Result = new ObjectResult(errorResponse);
         }
         private static void ThrowUnknownError(ExceptionContext context)
         {

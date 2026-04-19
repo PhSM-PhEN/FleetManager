@@ -4,6 +4,7 @@ using FleetManager.Application.UseCase.ToCategory.GetAll;
 using FleetManager.Application.UseCase.ToCategory.GetById;
 using FleetManager.Application.UseCase.ToCategory.Register;
 using FleetManager.Application.UseCase.ToCategory.Update;
+using FleetManager.Application.UseCase.ToUser.Register;
 using FleetManager.Application.UseCase.ToVehicle.Delete;
 using FleetManager.Application.UseCase.ToVehicle.GetAll;
 using FleetManager.Application.UseCase.ToVehicle.GetById;
@@ -39,6 +40,8 @@ namespace FleetManager.Application.UseCase
             services.AddScoped<IUpdateVehicleUseCase, UpdateVehicleUseCase>();
             services.AddScoped<IDeleteVehicleUseCase, DeleteVehicleUseCase>();
             services.AddScoped<IUpdateVehicleKmUseCase, UpdateVehicleKmUseCase>();
+
+            services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
         }
     }
 }

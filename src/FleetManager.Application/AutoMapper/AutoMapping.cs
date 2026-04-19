@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using FleetManager.communication.Requests.ToCategory;
+using FleetManager.communication.Requests.ToUser;
 using FleetManager.communication.Requests.ToVehicle;
 using FleetManager.communication.Resposnes.ToCategory;
 using FleetManager.communication.Resposnes.ToVehicle;
@@ -17,12 +18,17 @@ namespace FleetManager.Application.AutoMapper
         private void RequestToEntities()
         {
             CreateMap<RequestCategoryJson, Category>();
+
             CreateMap<RequestVehicleJson, Vehicle>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.IsActive, opt => opt.Ignore());
 
-            CreateMap<RequestVehicleUpdateCurrentMiliageJson, Vehicle>();
+            CreateMap<RequestVehicleUpdateCurrentMileageJson, Vehicle>();
+            
+
+            CreateMap<RequestRegisterUserJson, User>()
                 
+                .ForMember(dest => dest.Password, opt => opt.Ignore())  ;
 
         }
         private void EntitiesToResponse()
