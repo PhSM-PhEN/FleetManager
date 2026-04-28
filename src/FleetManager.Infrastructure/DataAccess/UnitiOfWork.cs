@@ -2,7 +2,7 @@
 
 namespace FleetManager.Infrastructure.DataAccess
 {
-    internal class UnitiOkWork(FleetManagerDbContext dbContext) : IUnitOfWork
+    internal class UnitiOfWork(FleetManagerDbContext dbContext) : IUnitOfWork
     {
         private readonly FleetManagerDbContext _fleetManagerDbContext = dbContext;
         public async Task Commit()

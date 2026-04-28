@@ -31,13 +31,14 @@ namespace FleetManager.Application.UseCase
             services.AddAutoMapper(config => config.AddProfile<AutoMapping>());
         }
         private static void AddUseCase(IServiceCollection services)
-        {
+        {   //Category
             services.AddScoped<IRegisterCategoryUseCase, RegisterCategoryUseCase>();
             services.AddScoped<IUpdateCategoryUseCase, UpdateCategoryUseCase>();
             services.AddScoped<IGetAllCategoyUseCase, GetAllCategoyUseCase>();
             services.AddScoped<IGetByIdCategoryUseCase, GetByIdCategoryUseCase>();
             services.AddScoped<IDeleteCategoryUseCase, DeleteCategoryUseCase>();
 
+            //Vehicle
             services.AddScoped<IGetAllVehicleUseCase, GetAllVehicleUseCase>();
             services.AddScoped<IGetByIdVehicleUseCase, GetByIdVehicleUseCase>();            
             services.AddScoped<IRegisterVehicleUseCase, RegisterVehicleUseCase>();
@@ -45,11 +46,13 @@ namespace FleetManager.Application.UseCase
             services.AddScoped<IDeleteVehicleUseCase, DeleteVehicleUseCase>();
             services.AddScoped<IUpdateVehicleKmUseCase, UpdateVehicleKmUseCase>();
 
+            //User
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
             services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
             services.AddScoped<IDeleteUserAccountUseCase, DeleteUserAccountUseCase>();
             services.AddScoped<IUpdateProfileUseCase, UpdateProfileUseCase>();
 
+            //Login
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
         }
     }

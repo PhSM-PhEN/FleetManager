@@ -1,4 +1,5 @@
 ﻿using FleetManager.Domain.Repositories;
+using FleetManager.Domain.Repositories.ToAddress;
 using FleetManager.Domain.Repositories.ToCategory;
 using FleetManager.Domain.Repositories.ToUser;
 using FleetManager.Domain.Repositories.ToVehicle;
@@ -6,6 +7,7 @@ using FleetManager.Domain.Security.Cryptography;
 using FleetManager.Domain.Security.Token;
 using FleetManager.Domain.Services.LoggeUser;
 using FleetManager.Infrastructure.DataAccess;
+using FleetManager.Infrastructure.DataAccess.ToAddress;
 using FleetManager.Infrastructure.DataAccess.ToCategory;
 using FleetManager.Infrastructure.DataAccess.ToUsers;
 using FleetManager.Infrastructure.DataAccess.ToVehicle;
@@ -50,21 +52,27 @@ namespace FleetManager.Infrastructure
         }
         private static void AddRepositories(IServiceCollection services)
         {
+            //category
             services.AddScoped<ICategoryWriteOnlyRepository, CategoryRepository>();
             services.AddScoped<ICategoryReadOnlyRepository, CategoryRepository>();
             services.AddScoped<ICategoryUpdateOnlyRepository, CategoryRepository>();
-
+            
+            //vehicle
             services.AddScoped<IVehicleWriteOnlyRepository, VehicleRepository>();
             services.AddScoped<IVehicleReadOnlyRepository, VehicleRepository>();
             services.AddScoped<IVehicleUpdateOnlyRepository, VehicleRepository>();
 
+            //user
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
             services.AddScoped<IUserReadOnlyRepository, UserRepository>();
             services.AddScoped<IUserUpdateOnlyRepository, UserRepository>();
 
-            
+            //address
+            services.AddScoped<IAddressWriteOnlyRepository , AddressRepository>();
 
-            services.AddScoped<IUnitOfWork, UnitiOkWork>();
+
+            //UnitOfWork
+            services.AddScoped<IUnitOfWork, UnitiOfWork>();
         }
 
     }
