@@ -19,10 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UseCase\ToUser\GetUser\" />
-    <Folder Include="UseCase\ToUser\Delete\" />
     <Folder Include="UseCase\ToUser\ChangePassword\" />
-    <Folder Include="UseCase\ToUser\Update\" />
   </ItemGroup>
 
 </Project>

@@ -4,7 +4,11 @@ using FleetManager.Application.UseCase.ToCategory.GetAll;
 using FleetManager.Application.UseCase.ToCategory.GetById;
 using FleetManager.Application.UseCase.ToCategory.Register;
 using FleetManager.Application.UseCase.ToCategory.Update;
+using FleetManager.Application.UseCase.ToLogin;
+using FleetManager.Application.UseCase.ToUser.Delete;
+using FleetManager.Application.UseCase.ToUser.GetUser;
 using FleetManager.Application.UseCase.ToUser.Register;
+using FleetManager.Application.UseCase.ToUser.Update;
 using FleetManager.Application.UseCase.ToVehicle.Delete;
 using FleetManager.Application.UseCase.ToVehicle.GetAll;
 using FleetManager.Application.UseCase.ToVehicle.GetById;
@@ -42,6 +46,11 @@ namespace FleetManager.Application.UseCase
             services.AddScoped<IUpdateVehicleKmUseCase, UpdateVehicleKmUseCase>();
 
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
+            services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
+            services.AddScoped<IDeleteUserAccountUseCase, DeleteUserAccountUseCase>();
+            services.AddScoped<IUpdateProfileUseCase, UpdateProfileUseCase>();
+
+            services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
         }
     }
 }

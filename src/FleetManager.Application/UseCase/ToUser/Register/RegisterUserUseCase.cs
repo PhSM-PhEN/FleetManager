@@ -5,18 +5,20 @@ using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToUser;
 using FleetManager.Domain.Security.Cryptography;
+using FleetManager.Domain.Security.Token;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToUser.Register
 {
     public class RegisterUserUseCase(IUnitOfWork unitOfWork, IUserWriteOnlyRepository repository,
         IUserReadOnlyRepository userReadOnly,
-        IPasswordEncripter encripter,IMapper mapper) : IRegisterUserUseCase
+        IPasswordEncripter encripter,IMapper mapper, IAccesTokenGenerator tokenGenerator) : IRegisterUserUseCase
     {
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
         private readonly IUserWriteOnlyRepository _repository = repository;
         private readonly IUserReadOnlyRepository _userReadOnly = userReadOnly;
         private readonly IPasswordEncripter _encripter = encripter;
+        private readonly IAccesTokenGenerator _tokenGenerator = tokenGenerator;
         private readonly IMapper _mapper = mapper;
 
         public async Task<ResponseRegisterUserJson> Execute(RequestRegisterUserJson request)
@@ -33,7 +35,7 @@ namespace FleetManager.Application.UseCase.ToUser.Register
             return new ResponseRegisterUserJson
             {
                 Name = user.Name,
-                Token = "" // future implementation for token generation
+                Token = _tokenGenerator.GenerateToken(user)
 
             };
         }

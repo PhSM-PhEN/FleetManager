@@ -6,12 +6,14 @@ using FleetManager.Application.UseCase.ToCategory.Update;
 using FleetManager.communication.Requests.ToCategory;
 using FleetManager.communication.Resposnes;
 using FleetManager.communication.Resposnes.ToCategory;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FleetManager.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CategoryController : ControllerBase
     {
         [HttpPost]
