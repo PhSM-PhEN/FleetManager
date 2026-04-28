@@ -10,4 +10,8 @@
     <ProjectReference Include="..\FleetManager.Exception\FleetManager.Exception.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repositories\ToAddress\" />
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,64 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{827E0CD3-B72D-47B6-A68D-7590B98EB39B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FleetManager.Api", "src\FleetManager.Api\FleetManager.Api.csproj", "{57338CDD-07FD-0B60-9AD3-D2E8591374FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FleetManager.Application", "src\FleetManager.Application\FleetManager.Application.csproj", "{079986D5-5F55-3D00-AC33-51F0A8504D3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FleetManager.communication", "src\FleetManager.communication\FleetManager.communication.csproj", "{C42C0B44-5755-9DFB-484F-04F4C564C7B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FleetManager.Domain", "src\FleetManager.Domain\FleetManager.Domain.csproj", "{3AFF11EE-C750-4092-5943-5665B3F79263}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FleetManager.Exception", "src\FleetManager.Exception\FleetManager.Exception.csproj", "{CF140615-290C-170E-088F-02F89E6C2290}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FleetManager.Infrastructure", "src\FleetManager.Infrastructure\FleetManager.Infrastructure.csproj", "{B6A78CF0-3FD2-C4F9-B36C-2F977E9443A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57338CDD-07FD-0B60-9AD3-D2E8591374FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57338CDD-07FD-0B60-9AD3-D2E8591374FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57338CDD-07FD-0B60-9AD3-D2E8591374FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57338CDD-07FD-0B60-9AD3-D2E8591374FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{079986D5-5F55-3D00-AC33-51F0A8504D3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{079986D5-5F55-3D00-AC33-51F0A8504D3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{079986D5-5F55-3D00-AC33-51F0A8504D3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{079986D5-5F55-3D00-AC33-51F0A8504D3F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C42C0B44-5755-9DFB-484F-04F4C564C7B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C42C0B44-5755-9DFB-484F-04F4C564C7B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C42C0B44-5755-9DFB-484F-04F4C564C7B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C42C0B44-5755-9DFB-484F-04F4C564C7B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AFF11EE-C750-4092-5943-5665B3F79263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AFF11EE-C750-4092-5943-5665B3F79263}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AFF11EE-C750-4092-5943-5665B3F79263}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AFF11EE-C750-4092-5943-5665B3F79263}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF140615-290C-170E-088F-02F89E6C2290}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF140615-290C-170E-088F-02F89E6C2290}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF140615-290C-170E-088F-02F89E6C2290}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF140615-290C-170E-088F-02F89E6C2290}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6A78CF0-3FD2-C4F9-B36C-2F977E9443A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6A78CF0-3FD2-C4F9-B36C-2F977E9443A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6A78CF0-3FD2-C4F9-B36C-2F977E9443A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6A78CF0-3FD2-C4F9-B36C-2F977E9443A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{57338CDD-07FD-0B60-9AD3-D2E8591374FA} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{079986D5-5F55-3D00-AC33-51F0A8504D3F} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{C42C0B44-5755-9DFB-484F-04F4C564C7B2} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{3AFF11EE-C750-4092-5943-5665B3F79263} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{CF140615-290C-170E-088F-02F89E6C2290} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+		{B6A78CF0-3FD2-C4F9-B36C-2F977E9443A3} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3F0C6F39-9D94-45C6-A34B-E16DE25F7D3F}
+	EndGlobalSection
+EndGlobal

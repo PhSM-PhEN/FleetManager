@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Requests\ToAddress\" />
+    <Folder Include="Resposnes\ToAddress\" />
+  </ItemGroup>
+
 </Project>
