@@ -1,4 +1,5 @@
 ﻿using FleetManager.Application.AutoMapper;
+using FleetManager.Application.UseCase.ToAddress.Register;
 using FleetManager.Application.UseCase.ToCategory.Delete;
 using FleetManager.Application.UseCase.ToCategory.GetAll;
 using FleetManager.Application.UseCase.ToCategory.GetById;
@@ -51,6 +52,9 @@ namespace FleetManager.Application.UseCase
             services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
             services.AddScoped<IDeleteUserAccountUseCase, DeleteUserAccountUseCase>();
             services.AddScoped<IUpdateProfileUseCase, UpdateProfileUseCase>();
+
+            //address
+            services.AddScoped<IRequestRegisterAdressUseCase, RequestRegisterAddressUseCase>();
 
             //Login
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();

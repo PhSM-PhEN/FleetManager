@@ -14,8 +14,8 @@ namespace FleetManager.Application.UseCase.ToVehicle
                 .Cascade(CascadeMode.Stop)
                 .NotEmpty()
                     .WithMessage(ResourceErrorMessages.LICENSE_PLATE_REQUIRED)
-                .Matches(@"^[A-Z]{3}[0-9]{4}$|^[A-Z]{3}[0-9][A-Z0-9][0-9]{2}$")
-                    .WithMessage(ResourceErrorMessages.LICENSE_PLATE_INVALID_FORMAT);
+                .Matches(@"^[A-Z]{3}-?[0-9]{4}$|^[A-Z]{3}[0-9][A-Z0-9][0-9]{2}$")
+    .WithMessage(ResourceErrorMessages.LICENSE_PLATE_INVALID_FORMAT);
 
             RuleFor(v => v.Model)
                 .Cascade(CascadeMode.Stop)
