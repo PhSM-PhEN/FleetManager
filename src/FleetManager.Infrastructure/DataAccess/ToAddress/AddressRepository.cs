@@ -4,7 +4,7 @@ using FleetManager.Domain.Repositories.ToAddress;
 
 namespace FleetManager.Infrastructure.DataAccess.ToAddress;
 
-public class AddressRepository(FleetManagerDbContext dbContext) : IAddressWriteOnlyRepository
+public class AddressRepository(FleetManagerDbContext dbContext) : IAddressWriteOnlyRepository, IAddressReadOnlyRepository
 {
     private readonly FleetManagerDbContext _dbContext = dbContext;
     public async Task Add(Address address)
@@ -13,6 +13,16 @@ public class AddressRepository(FleetManagerDbContext dbContext) : IAddressWriteO
     }
 
     public Task Delete(long id)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<List<Address>> GetAll()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<Address> GetById(long id)
     {
         throw new NotImplementedException();
     }
