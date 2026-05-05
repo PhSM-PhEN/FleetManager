@@ -3,8 +3,8 @@ using FleetManager.Domain.Entities;
 
 namespace FleetManager.Domain.Repositories.ToAddress;
 
-public interface IAddressReadOnlyRepository
+public interface IAddressUpdateOnlyRepository
 {
-    Task< List<Address>> GetAll();
+    void Update(Address address);
     Task<Address?> GetById(long id);
 }
