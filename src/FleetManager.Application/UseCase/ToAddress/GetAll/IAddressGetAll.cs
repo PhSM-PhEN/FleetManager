@@ -3,7 +3,7 @@ using FleetManager.communication.Resposnes.ToAddress;
 
 namespace FleetManager.Application.UseCase.ToAddress.GetAll;
 
-public interface IAddressGetAll
+public interface IGetAllAddressUseCase
 {
-    Task <ResponseAddressJson> Execute ();
+    Task <ResponseListAddressJson> Execute ();
 }

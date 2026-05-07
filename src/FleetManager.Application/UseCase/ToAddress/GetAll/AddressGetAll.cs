@@ -5,17 +5,17 @@ using FleetManager.Domain.Repositories.ToAddress;
 
 namespace FleetManager.Application.UseCase.ToAddress.GetAll;
 
-public class AddressGetAll(IAddressReadOnlyRepository repository, IMapper mapper) : IAddressGetAll
+public class GetAllAddressUseCase(IAddressReadOnlyRepository repository, IMapper mapper) : IGetAllAddressUseCase
 {
     private readonly IAddressReadOnlyRepository _repository = repository;
     private readonly IMapper _mapper = mapper;
-    public async Task<ResponseAddressJson> Execute()
+    public async Task<ResponseListAddressJson> Execute()
     {
         var address =  await _repository.GetAll();
         
-       return new ResponseAddressJson
+       return new ResponseListAddressJson
        {
-           // falta o list response para o address
+           Address = _mapper.Map<List<ResponseShortAddressJson>>(address)
        };
         
     }
