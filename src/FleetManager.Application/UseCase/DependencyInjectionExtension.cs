@@ -55,7 +55,7 @@ namespace FleetManager.Application.UseCase
             services.AddScoped<IUpdateProfileUseCase, UpdateProfileUseCase>();
 
             //address
-            services.AddScoped<IRequestRegisterAdressUseCase, RequestRegisterAddressUseCase>();
+            services.AddScoped<IRequestAdressUseCase, RequestAddressUseCase>();
             services.AddScoped<IGetAllAddressUseCase, GetAllAddressUseCase>();
 
             //Login

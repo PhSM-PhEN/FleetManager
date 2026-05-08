@@ -1,3 +1,4 @@
+using FleetManager.Application.UseCase.ToAddress.GetAll;
 using FleetManager.Application.UseCase.ToAddress.Register;
 using FleetManager.communication.Requests.ToAddress;
 using FleetManager.communication.Resposnes;
@@ -13,12 +14,20 @@ namespace FleetManager.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(ResponseAddressJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Register([FromServices] IRequestRegisterAdressUseCase useCase,
+        public async Task<IActionResult> Register([FromServices] IRequestAdressUseCase useCase,
          [FromBody] RequestAddressJson request )
         {
-            var result = await useCase.Execute(request);
+            var response = await useCase.Execute(request);
 
-            return Created(string.Empty, result);
+            return Created(string.Empty, response);
+        }
+        [HttpGet]
+        [ProducesResponseType(typeof(ResponseListAddressJson) , StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Getall([FromServices] IGetAllAddressUseCase useCase)
+        {
+            var response = await useCase.Execute();
+            return Ok(response);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using FleetManager.communication.Enums;
+﻿
 
 namespace FleetManager.communication.Requests.ToVehicle
 {
@@ -13,8 +13,7 @@ namespace FleetManager.communication.Requests.ToVehicle
         public string LicensePlate { get; set; } = string.Empty;
         public string Color { get; set; } = string.Empty;
         public int CurrentMileage { get; set; }
-        public FuelTypeEnum FuelType { get; set; }
-        public TransmissionTypeEnum TransmissionType { get; set; }
+
         public int CategoryId { get; set; }
     }
 }

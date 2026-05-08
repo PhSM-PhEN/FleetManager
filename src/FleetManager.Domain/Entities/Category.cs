@@ -8,7 +8,6 @@ namespace FleetManager.Domain.Entities
         public string Name { get; set; } = string.Empty;
         public decimal BaseDailyRate { get; set; }
         public decimal BaseMileageRate { get; set; }
-        public TransmissionTypeEnum TransmissionType { get; set; }
         public ICollection<Vehicle> Vehicles { get; set; } = [];
     }
 }
