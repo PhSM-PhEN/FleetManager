@@ -48,14 +48,6 @@ namespace FleetManager.Application.UseCase.ToVehicle
                 .NotEmpty()
                 .WithMessage(ResourceErrorMessages.COLOR_REQUIRED);
 
-            RuleFor(v => v.FuelType)
-                .IsInEnum()
-                .WithMessage(ResourceErrorMessages.FUEL_TYPE_INVALID);
-
-            RuleFor(v => v.TransmissionType)
-                .IsInEnum()
-                .WithMessage(ResourceErrorMessages.TRANSMISSION_TYPE_INVALID);
-
             RuleFor(v => v.CurrentMileage)
                 .GreaterThanOrEqualTo(0)
                 .WithMessage(ResourceErrorMessages.CURRENT_MILEAGE_EMPTY);

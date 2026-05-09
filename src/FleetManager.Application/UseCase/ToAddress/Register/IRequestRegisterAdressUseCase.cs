@@ -4,7 +4,7 @@ using FleetManager.communication.Resposnes.ToAddress;
 
 namespace FleetManager.Application.UseCase.ToAddress.Register;
 
-public interface IRequestRegisterAdressUseCase
+public interface IRequestAdressUseCase
 {
     Task<ResponseAddressJson> Execute(RequestAddressJson request);
 }

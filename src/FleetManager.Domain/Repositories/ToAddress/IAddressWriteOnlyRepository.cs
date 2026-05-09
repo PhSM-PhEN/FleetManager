@@ -8,4 +8,5 @@ public interface IAddressWriteOnlyRepository
     Task Add(Address address);
     
     Task Delete (long id);
+   
 }

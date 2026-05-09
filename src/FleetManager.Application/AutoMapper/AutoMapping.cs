@@ -45,6 +45,7 @@ namespace FleetManager.Application.AutoMapper
             CreateMap<Vehicle, ResponseRegisterVehicleJson>();
             CreateMap<User, ResponseUserProfileJson>();
             CreateMap<Address, ResponseAddressJson>();
+            CreateMap<Address, ResponseShortAddressJson>();
 
 
         }
