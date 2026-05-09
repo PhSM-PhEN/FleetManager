@@ -1,7 +1,7 @@
-using System;
 using AutoMapper;
 using FleetManager.communication.Resposnes.ToAddress;
 using FleetManager.Domain.Repositories.ToAddress;
+using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToAddress.GetAll;
 
@@ -12,6 +12,10 @@ public class GetAllAddressUseCase(IAddressReadOnlyRepository repository, IMapper
     public async Task<ResponseListAddressJson> Execute()
     {
         var address =  await _repository.GetAll();
+        if (address.Count == 0)
+        {
+            throw new NotFoundException(ResourceErrorMessages.NOT_FOUND);
+        }
         
        return new ResponseListAddressJson
        {
