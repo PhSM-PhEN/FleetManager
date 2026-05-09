@@ -18,8 +18,4 @@
     <ProjectReference Include="..\FleetManager.Infrastructure\FleetManager.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UseCase\ToUser\ChangePassword\" />
-  </ItemGroup>
-
 </Project>
