@@ -12,10 +12,7 @@ namespace FleetManager.Application.UseCase.ToCategory.GetById
         public async Task<ResponseShortCategoryJson> Execute(int id)
         {
             var result = await _readOnlyRepository.GetById(id);
-            if (result is null)
-            {
-                throw new NotFoundException(ResourceErrorMessages.NOT_FOUND);
-            }
+            
             return _mapper.Map<ResponseShortCategoryJson>(result);
         }
     }

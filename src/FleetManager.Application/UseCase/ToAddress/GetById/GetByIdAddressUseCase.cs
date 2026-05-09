@@ -1,8 +1,7 @@
-using System;
+
 using AutoMapper;
 using FleetManager.communication.Resposnes.ToAddress;
 using FleetManager.Domain.Repositories.ToAddress;
-using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToAddress.GetById;
 
@@ -14,10 +13,8 @@ public class GetByIdAddressUseCase(IAddressReadOnlyRepository repository, IMappe
     {
         var address = await _repository.GetById(id);
 
-        if(address is null)
-        {
-            throw new NotFoundException(ResourceErrorMessages.NOT_FOUND);
-        }
+        
+        
         return _mapper.Map<ResponseAddressJson>(address);
 
         

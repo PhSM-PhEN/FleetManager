@@ -1,4 +1,5 @@
 using FleetManager.Application.UseCase.ToAddress.GetAll;
+using FleetManager.Application.UseCase.ToAddress.GetById;
 using FleetManager.Application.UseCase.ToAddress.Register;
 using FleetManager.communication.Requests.ToAddress;
 using FleetManager.communication.Resposnes;
@@ -27,6 +28,14 @@ namespace FleetManager.Api.Controllers
         public async Task<IActionResult> Getall([FromServices] IGetAllAddressUseCase useCase)
         {
             var response = await useCase.Execute();
+            return Ok(response);
+        }
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(ResponseAddressJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetById([FromRoute] long id, [FromServices] IGetByIdAddressUseCase useCase)
+        {
+            var response = await useCase.Execute(id);
             return Ok(response);
         }
     }
