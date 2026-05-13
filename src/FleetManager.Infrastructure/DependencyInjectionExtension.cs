@@ -70,6 +70,7 @@ namespace FleetManager.Infrastructure
             //address
             services.AddScoped<IAddressWriteOnlyRepository , AddressRepository>();
             services.AddScoped<IAddressReadOnlyRepository, AddressRepository>();
+            services.AddScoped<IAddressUpdateOnlyRepository, AddressRepository>();
 
 
             //UnitOfWork

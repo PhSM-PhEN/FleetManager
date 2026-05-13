@@ -2,7 +2,7 @@ using System;
 
 namespace FleetManager.Application.UseCase.ToAddress;
 
-public interface IUpdateAddressUseCase
+public interface UpdateAddressUseCase
 {
 
 }

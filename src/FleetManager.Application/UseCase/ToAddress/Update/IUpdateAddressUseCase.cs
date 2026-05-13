@@ -6,5 +6,5 @@ namespace FleetManager.Application.UseCase.ToAddress.Update;
 
 public interface IUpdateAddressUseCase
 {
-    Task<ResponseAddressJson> Execute(long id , RequestAddressJson request);
+    Task Execute(long id , RequestAddressJson request);
 }
