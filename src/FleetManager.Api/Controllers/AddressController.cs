@@ -1,3 +1,4 @@
+using FleetManager.Application.UseCase.ToAddress.Delete;
 using FleetManager.Application.UseCase.ToAddress.GetAll;
 using FleetManager.Application.UseCase.ToAddress.GetById;
 using FleetManager.Application.UseCase.ToAddress.Register;
@@ -28,7 +29,11 @@ namespace FleetManager.Api.Controllers
         public async Task<IActionResult> Getall([FromServices] IGetAllAddressUseCase useCase)
         {
             var response = await useCase.Execute();
-            return Ok(response);
+            if(response.Address.Count != 0)
+            {
+                return Ok(response);
+            }
+            return NoContent();
         }
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ResponseAddressJson), StatusCodes.Status200OK)]
@@ -37,6 +42,15 @@ namespace FleetManager.Api.Controllers
         {
             var response = await useCase.Execute(id);
             return Ok(response);
+        }
+        [HttpDelete]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Delete([FromRoute] long id, [FromServices] IDeleteAddressUseCase useCase)
+        {
+            await useCase.Execute(id);
+            return NoContent();
         }
     }
 }
