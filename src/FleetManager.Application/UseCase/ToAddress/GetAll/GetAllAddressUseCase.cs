@@ -14,7 +14,7 @@ public class GetAllAddressUseCase(IAddressReadOnlyRepository repository, IMapper
         var address =  await _repository.GetAll();
         if (address.Count == 0)
         {
-            throw new NotFoundException(ResourceErrorMessages.NOT_FOUND);
+            throw new NotFoundException("not found");
         }
         
        return new ResponseListAddressJson
