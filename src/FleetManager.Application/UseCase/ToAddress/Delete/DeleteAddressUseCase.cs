@@ -13,11 +13,11 @@ public class DeleteAddressUseCase(IAddressReadOnlyRepository readRepository,IAdd
     public async Task Execute(long id)
     {
         var address = await _readRepoditory.GetById(id);
-        if (address == null )
+        if (address is null )
         {
-            throw new NotFoundException(ResourceErrorMessages.NOT_FOUND);
+            throw new NotFoundException("Not found");
         }
-        await _repository.Delete(address!.Id);
+        await _repository.Delete(id);
         await _unitOfWork.Commit();
 
         
