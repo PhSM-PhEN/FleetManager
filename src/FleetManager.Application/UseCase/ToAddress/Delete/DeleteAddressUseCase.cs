@@ -15,7 +15,7 @@ public class DeleteAddressUseCase(IAddressReadOnlyRepository readRepository,IAdd
         var address = await _readRepoditory.GetById(id);
         if (address is null )
         {
-            throw new NotFoundException("Not found");
+            throw new NotFoundException(ResourceErrorMessages.ADDRESS_NOT_FOUND);
         }
         await _repository.Delete(id);
         await _unitOfWork.Commit();
