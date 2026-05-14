@@ -21,6 +21,8 @@
   <ItemGroup>
     <Folder Include="UseCase\ToAddress\Delete\" />
     <Folder Include="UseCase\ToAddress\Update\" />
+    <Folder Include="UseCase\ToClient\" />
+    <Folder Include="UseCase\ToClient\Register\" />
     <Folder Include="UseCase\ToUser\ChangePassword\" />
   </ItemGroup>
 
