@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FleetManager.Infrastructure.Migrations
 {
     [DbContext(typeof(FleetManagerDbContext))]
-    [Migration("20260428233928_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20260514150510_InitialMigrateDataBase")]
+    partial class InitialMigrateDataBase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -76,9 +76,6 @@ namespace FleetManager.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("TransmissionType")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
@@ -99,15 +96,19 @@ namespace FleetManager.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("CnhCategory")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("CnhRegisterNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("FirstAndLastName")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("RG")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("StatusCivil")
                         .IsRequired()
                         .HasColumnType("longtext");
 

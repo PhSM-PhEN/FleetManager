@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="Repositories\ToAddress\" />
+    <Folder Include="Repositories\ToClient\" />
   </ItemGroup>
 
 </Project>

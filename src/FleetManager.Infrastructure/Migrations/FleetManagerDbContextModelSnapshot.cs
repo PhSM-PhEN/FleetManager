@@ -73,9 +73,6 @@ namespace FleetManager.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("TransmissionType")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
@@ -96,15 +93,19 @@ namespace FleetManager.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("CnhCategory")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("CnhRegisterNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("FirstAndLastName")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("RG")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("StatusCivil")
                         .IsRequired()
                         .HasColumnType("longtext");
 

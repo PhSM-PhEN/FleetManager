@@ -8,8 +8,9 @@ public class Client
     public string FirstAndLastName {get; set; } = string.Empty;
     public string RG {get ; set ;} = string.Empty;
     public string CPF {get; set;} = string.Empty;
-    public string StatusCivil {get; set;} = string.Empty;
-
+    public string CnhRegisterNumber {get; set;} = string.Empty;
+    public string CnhCategory {get; set;} = string.Empty;
+    
     public Address Address {get; set; } = default!;
 
 }

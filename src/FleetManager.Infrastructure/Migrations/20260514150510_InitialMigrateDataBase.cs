@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FleetManager.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class InitialMigrateDataBase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -46,9 +46,8 @@ namespace FleetManager.Infrastructure.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    BaseDailyRate = table.Column<decimal>(type: "decimal(65,2)", nullable: false),
-                    BaseMileageRate = table.Column<decimal>(type: "decimal(65,2)", nullable: false),
-                    TransmissionType = table.Column<int>(type: "int", nullable: false)
+                    BaseDailyRate = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
+                    BaseMileageRate = table.Column<decimal>(type: "decimal(65,3)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -90,7 +89,9 @@ namespace FleetManager.Infrastructure.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CPF = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    StatusCivil = table.Column<string>(type: "longtext", nullable: false)
+                    CnhRegisterNumber = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CnhCategory = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     AddressId = table.Column<long>(type: "bigint", nullable: false)
                 },
