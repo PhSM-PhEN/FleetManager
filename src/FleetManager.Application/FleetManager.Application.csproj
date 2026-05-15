@@ -19,7 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="UseCase\ToAddress\GetAll\" />
     <Folder Include="UseCase\ToAddress\GetById\" />
     <Folder Include="UseCase\ToUser\ChangePassword\" />
   </ItemGroup>
