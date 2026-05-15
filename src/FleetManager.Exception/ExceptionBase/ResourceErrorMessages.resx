@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<accessability>public</accessability>
+	<data id="330afa55-6a86-435a-b8d5-60eceb0bac57" name="ADDRESS_NOT_FOUND" xml:space="preserve">
+		<value>Address not found</value>
+		<comment></comment>
+	</data>
+	<data id="a08b7c21-a45f-479b-8e27-337f1fdf09ab" name="BRAND_REQUIRED" xml:space="preserve">
+		<value>Brand required</value>
+		<comment></comment>
+	</data>
+	<data id="86cf2cbc-c845-42a8-8900-ee6ffba59070" name="CATEGORY_ID_INVALID" xml:space="preserve">
+		<value>Category id invalid</value>
+		<comment></comment>
+	</data>
+	<data id="ffc9d332-4c1b-4555-8a72-8cda6133c54d" name="CATEGORY_NOT_FOUND" xml:space="preserve">
+		<value>Category not found</value>
+		<comment></comment>
+	</data>
+	<data id="0aef8356-b816-415b-b75f-484b1b68222c" name="CHASSIS_NUMBER_INVALID" xml:space="preserve">
+		<value>Chassis number invalid</value>
+		<comment></comment>
+	</data>
+	<data id="608d1419-0a2b-4f0b-bc4a-8e53a2877232" name="CHASSIS_NUMBER_REQUIRED" xml:space="preserve">
+		<value>Chassis number required</value>
+		<comment></comment>
+	</data>
+	<data id="1b3581eb-e2d8-420d-8222-509624d65d8c" name="CITY_REQUIRED" xml:space="preserve">
+		<value>City required</value>
+		<comment></comment>
+	</data>
+	<data id="d3f1fc07-865a-455f-875a-c647a4fffbaf" name="CNH_CATEGORY_INVALID" xml:space="preserve">
+		<value>CNH categor invalid</value>
+		<comment></comment>
+	</data>
+	<data id="85a846ac-6f8c-430a-bbc8-02a9ee70e8d9" name="CNH_CATEGORY_REQUIRED" xml:space="preserve">
+		<value>CNH category requerid</value>
+		<comment>
+</comment>
+	</data>
+	<data id="ab759e6e-2c96-4f17-a764-585775d15e95" name="CNH_REGISTER_NUMBER_INVALID" xml:space="preserve">
+		<value>CNH register number invalid</value>
+		<comment></comment>
+	</data>
+	<data id="a4610318-fdf8-42c8-8164-b7ed571772da" name="CNH_REGISTER_NUMEBER_REQUIRED" xml:space="preserve">
+		<value>CNH register number required</value>
+		<comment></comment>
+	</data>
+	<data id="c119008f-003e-45b8-a720-dc7694249460" name="CNH_REQUIRED" xml:space="preserve">
+		<value>CNH required</value>
+		<comment></comment>
+	</data>
+	<data id="926375f1-1683-484a-938e-92834e93991c" name="COLOR_REQUIRED" xml:space="preserve">
+		<value>Color required</value>
+		<comment></comment>
+	</data>
+	<data id="870c5e75-053c-4883-abf2-3fab6abde299" name="CPF_INVALID" xml:space="preserve">
+		<value>CPF invalid</value>
+		<comment></comment>
+	</data>
+	<data id="35c492fd-81f6-495b-abbb-14837542fc94" name="CPF_REQUIRED" xml:space="preserve">
+		<value>CPF required</value>
+		<comment></comment>
+	</data>
+	<data id="9e3faed0-b693-4fac-94cd-0deb6a0cc404" name="CREATE_AT_INVALID" xml:space="preserve">
+		<value>Create at invalid</value>
+		<comment></comment>
+	</data>
+	<data id="6a3674c7-f2fb-4ef1-a24a-d6078fa27955" name="CURRENT_MILEAGE_EMPTY" xml:space="preserve">
+		<value>Current milieage empty</value>
+		<comment></comment>
+	</data>
+	<data id="764db6e7-5332-4b3d-b802-f7fd00ccf311" name="EMAIL_ALREADY_REGISTERED" xml:space="preserve">
+		<value>Email already registered</value>
+		<comment></comment>
+	</data>
+	<data id="74d79a81-1f03-423e-9cfe-5cd27fee1eef" name="EMAIL_INVALID" xml:space="preserve">
+		<value>Email invalid</value>
+		<comment></comment>
+	</data>
+	<data id="b5072c9d-6b41-4072-9f7d-a78a689d0945" name="EMAIL_OR_PASSWORD_INVALID" xml:space="preserve">
+		<value>Email or passord invalid</value>
+		<comment></comment>
+	</data>
+	<data id="ef32a53a-77c8-4de3-b447-4fe335100584" name="EMAIL_REQUIRED" xml:space="preserve">
+		<value>Email Required</value>
+		<comment></comment>
+	</data>
+	<data id="61073240-f9c9-43c3-8c89-a505673c3d6a" name="FUEL_TYPE_INVALID" xml:space="preserve">
+		<value>Fuel type invalid</value>
+		<comment></comment>
+	</data>
+	<data id="33ac137b-284c-4a63-96d8-9a9cefcaff26" name="INVALID_LENGTH" xml:space="preserve">
+		<value>Invalid length</value>
+		<comment></comment>
+	</data>
+	<data id="c66c7c68-649d-49ec-8649-fff8e2dde9b8" name="INVALID_PASSWORD" xml:space="preserve">
+		<value>Invalid password</value>
+		<comment></comment>
+	</data>
+	<data id="7d8f9ddf-8221-4003-8052-86a8e5c74ade" name="LICENSE_PLATE_INVALID_FORMAT" xml:space="preserve">
+		<value>License plate invalid format</value>
+		<comment></comment>
+	</data>
+	<data id="e07a25c8-1e2c-4f85-802e-883b7bf92351" name="LICENSE_PLATE_MUST_BE_7_CHARACTERS_LONG" xml:space="preserve">
+		<value>License plate must be 7 characters long</value>
+		<comment></comment>
+	</data>
+	<data id="acae662a-778e-4d29-81ce-931f25ca7d08" name="LICENSE_PLATE_REQUIRED" xml:space="preserve">
+		<value>License plate required</value>
+		<comment></comment>
+	</data>
+	<data id="041bc4dc-1c90-4ab1-802c-55ff0fa2c542" name="MANUFACTURE_MUST_BE_GREATER_THAN_OR_EQUAL_TO_2010" xml:space="preserve">
+		<value>Manufacture must be greater than or equal to 2010</value>
+		<comment></comment>
+	</data>
+	<data id="c2de609c-26d4-4e61-9ca0-6e85f98fd24d" name="MODEL_REQUIRED" xml:space="preserve">
+		<value>Model required</value>
+		<comment></comment>
+	</data>
+	<data id="3cd92d01-c6da-4515-8d31-963bcd9c05df" name="MUST_BE_GREATER_THAN_ZERO" xml:space="preserve">
+		<value>Must Be Greater than zero</value>
+		<comment></comment>
+	</data>
+	<data id="5da2c20e-ae0e-44a9-9feb-a5cbab205efc" name="NAME_REQUIRED" xml:space="preserve">
+		<value>Name required</value>
+		<comment></comment>
+	</data>
+	<data id="914df340-725e-4841-9d3a-985c074196a5" name="NOT_FOUND" xml:space="preserve">
+		<value>Not found</value>
+		<comment></comment>
+	</data>
+	<data id="862b020c-4bc8-42a5-966d-6c4d7ad68f4f" name="NUMBER_REQUIRED" xml:space="preserve">
+		<value>Number required</value>
+		<comment></comment>
+	</data>
+	<data id="52dd2cb4-c71f-43aa-af61-d73d7c2b858d" name="PASSWORD_MUST_CONTAIN_AN_LOWRECASE_LETTER" xml:space="preserve">
+		<value>password must contain an lowercase letter</value>
+		<comment></comment>
+	</data>
+	<data id="9714651a-ab3d-459c-b679-5ef48367d468" name="PASSWORD_MUST_CONTAIN_AN_UPPERCASE_LETTER" xml:space="preserve">
+		<value>password must contain an uppercase letter</value>
+		<comment></comment>
+	</data>
+	<data id="c4ee4d83-459b-4e1c-9305-42b40cbe5c89" name="PASSWORD_MUST_CONTAIN_NUMBER" xml:space="preserve">
+		<value>password must contain number</value>
+		<comment></comment>
+	</data>
+	<data id="755e77b6-6b32-43d5-929f-53a8a7d40d07" name="RENAVAM_REQUIRED" xml:space="preserve">
+		<value>Renavam required</value>
+		<comment></comment>
+	</data>
+	<data id="141c41f1-f0a2-4c14-9b1f-97adb09f422a" name="RG_INVALID" xml:space="preserve">
+		<value>RG invalid</value>
+		<comment></comment>
+	</data>
+	<data id="445bdf61-1bf4-4174-9364-5db36ded25e4" name="RG_REQUIRED" xml:space="preserve">
+		<value>RG required</value>
+		<comment></comment>
+	</data>
+	<data id="7f2551a3-6391-4740-80b3-82fb5121cc5c" name="STATE_REQUIRED" xml:space="preserve">
+		<value>State required</value>
+		<comment></comment>
+	</data>
+	<data id="4d0e2764-7425-47e5-adf4-d204905aafdc" name="STREET_REQUIRED" xml:space="preserve">
+		<value>Street required</value>
+		<comment></comment>
+	</data>
+	<data id="abdb87ac-49d2-471f-b5da-ddf10deaa0f3" name="THE_MILEAGE_MUST_BE_HIGHER_THAN_THE_CURRENT" xml:space="preserve">
+		<value>The mileage must be greater than the current</value>
+		<comment></comment>
+	</data>
+	<data id="82231b78-6338-4ce7-91ed-b7efa09af62e" name="TRANSMISSION_TYPE_INVALID" xml:space="preserve">
+		<value>Transmission type invalid</value>
+		<comment></comment>
+	</data>
+	<data id="e826457a-4dc9-4a33-86e3-613706aefd06" name="UNKNOW_ERROR" xml:space="preserve">
+		<value>Unknow error</value>
+		<comment></comment>
+	</data>
+	<data id="3853a355-092c-4d7d-8f18-3d0c9a88cc43" name="VEHICLE_NOT_FOUND" xml:space="preserve">
+		<value>Vehicle not found</value>
+		<comment></comment>
+	</data>
+	<data id="2e2fd7b5-0905-46e5-835d-66aebb85a6c4" name="ZIPCODE_INVALID" xml:space="preserve">
+		<value>Zipcode invalid</value>
+		<comment></comment>
+	</data>
+	<data id="2e29b109-2261-4eb5-a296-9192c2ddbf56" name="ZIPCODE_REQUIRED" xml:space="preserve">
+		<value>Zipcode required</value>
+		<comment></comment>
+	</data>
+</root>
