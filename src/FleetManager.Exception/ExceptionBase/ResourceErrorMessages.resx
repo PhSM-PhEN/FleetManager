@@ -1,6 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<accessability>public</accessability>
+	<!-- Microsoft ResX file format -->
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="assembly">
+		<value>System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
 	<data id="330afa55-6a86-435a-b8d5-60eceb0bac57" name="ADDRESS_NOT_FOUND" xml:space="preserve">
 		<value>Address not found</value>
 		<comment></comment>
@@ -50,11 +65,11 @@
 		<comment></comment>
 	</data>
 	<data id="b5072c9d-6b41-4072-9f7d-a78a689d0945" name="EMAIL_OR_PASSWORD_INVALID" xml:space="preserve">
-		<value>Email or passord invalid</value>
+		<value>Email or password invalid</value>
 		<comment></comment>
 	</data>
 	<data id="ef32a53a-77c8-4de3-b447-4fe335100584" name="EMAIL_REQUIRED" xml:space="preserve">
-		<value>Email Required</value>
+		<value>Email required</value>
 		<comment></comment>
 	</data>
 	<data id="61073240-f9c9-43c3-8c89-a505673c3d6a" name="FUEL_TYPE_INVALID" xml:space="preserve">
@@ -90,7 +105,7 @@
 		<comment></comment>
 	</data>
 	<data id="3cd92d01-c6da-4515-8d31-963bcd9c05df" name="MUST_BE_GREATER_THAN_ZERO" xml:space="preserve">
-		<value>Must Be Greater than zero</value>
+		<value>Must be greater than zero</value>
 		<comment></comment>
 	</data>
 	<data id="5da2c20e-ae0e-44a9-9feb-a5cbab205efc" name="NAME_REQUIRED" xml:space="preserve">
@@ -106,15 +121,15 @@
 		<comment></comment>
 	</data>
 	<data id="52dd2cb4-c71f-43aa-af61-d73d7c2b858d" name="PASSWORD_MUST_CONTAIN_AN_LOWRECASE_LETTER" xml:space="preserve">
-		<value>password must contain an lowercase letter</value>
+		<value>Password must contain an lowercase letter</value>
 		<comment></comment>
 	</data>
 	<data id="9714651a-ab3d-459c-b679-5ef48367d468" name="PASSWORD_MUST_CONTAIN_AN_UPPERCASE_LETTER" xml:space="preserve">
-		<value>password must contain an uppercase letter</value>
+		<value>Password must contain an uppercase letter</value>
 		<comment></comment>
 	</data>
 	<data id="c4ee4d83-459b-4e1c-9305-42b40cbe5c89" name="PASSWORD_MUST_CONTAIN_NUMBER" xml:space="preserve">
-		<value>password must contain number</value>
+		<value>Password must contain number</value>
 		<comment></comment>
 	</data>
 	<data id="755e77b6-6b32-43d5-929f-53a8a7d40d07" name="RENAVAM_REQUIRED" xml:space="preserve">
@@ -138,7 +153,7 @@
 		<comment></comment>
 	</data>
 	<data id="e826457a-4dc9-4a33-86e3-613706aefd06" name="UNKNOW_ERROR" xml:space="preserve">
-		<value>Unknow error</value>
+		<value>Unknown error</value>
 		<comment></comment>
 	</data>
 	<data id="3853a355-092c-4d7d-8f18-3d0c9a88cc43" name="VEHICLE_NOT_FOUND" xml:space="preserve">
