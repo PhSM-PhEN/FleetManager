@@ -12,35 +12,19 @@
   </ItemGroup>
 
   <ItemGroup>
-<<<<<<< Updated upstream
-=======
-   
->>>>>>> Stashed changes
     <ProjectReference Include="..\FleetManager.communication\FleetManager.communication.csproj" />
     <ProjectReference Include="..\FleetManager.Domain\FleetManager.Domain.csproj" />
     <ProjectReference Include="..\FleetManager.Exception\FleetManager.Exception.csproj" />
     <ProjectReference Include="..\FleetManager.Infrastructure\FleetManager.Infrastructure.csproj" />
   </ItemGroup>
 
-<<<<<<< Updated upstream
   <ItemGroup>
+    <Folder Include="UseCase\ToAddress\GetById\" />
     <Folder Include="UseCase\ToAddress\Delete\" />
     <Folder Include="UseCase\ToAddress\Update\" />
     <Folder Include="UseCase\ToClient\" />
     <Folder Include="UseCase\ToClient\Register\" />
     <Folder Include="UseCase\ToUser\ChangePassword\" />
   </ItemGroup>
-=======
-   <ItemGroup>
-      <Folder Include="UseCase\ToAddress\GetById\" />
-      <Folder Include="UseCase\ToAddress\Delete\" />
-      <Folder Include="UseCase\ToAddress\Update\" />
-      <Folder Include="UseCase\ToClient\" />
-      <Folder Include="UseCase\ToClient\Register\" />
-      <Folder Include="UseCase\ToUser\ChangePassword\" />
-    </ItemGroup>
-
- 
->>>>>>> Stashed changes
 
 </Project>
