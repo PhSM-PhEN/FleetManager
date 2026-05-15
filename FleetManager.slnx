@@ -1,7 +1,6 @@
 <Solution>
   <Folder Name="/src/">
     <Project Path="src/FleetManager.Api/FleetManager.Api.csproj" />
-    <Project Path="src/FleetManager.Application/FleetManager.Application.csproj" />
     <Project Path="src/FleetManager.communication/FleetManager.communication.csproj" />
     <Project Path="src/FleetManager.Domain/FleetManager.Domain.csproj" />
     <Project Path="src/FleetManager.Exception/FleetManager.Exception.csproj" />
