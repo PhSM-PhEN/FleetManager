@@ -19,7 +19,14 @@
   </ItemGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <Folder Include="UseCase\ToAddress\GetById\" />
+=======
+    <Folder Include="UseCase\ToAddress\Delete\" />
+    <Folder Include="UseCase\ToAddress\Update\" />
+    <Folder Include="UseCase\ToClient\" />
+    <Folder Include="UseCase\ToClient\Register\" />
+>>>>>>> 4e98a3359905a864048c77bc1849ada4e62fd529
     <Folder Include="UseCase\ToUser\ChangePassword\" />
   </ItemGroup>
 

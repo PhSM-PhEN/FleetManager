@@ -1,10 +1,9 @@
 using System;
 
-namespace FleetManager.Domain.Entities;
+namespace FleetManager.communication.Requests.ToClient;
 
-public class Client
+public class RequestClientJson
 {
-    public long Id {get; set;}
     public string FirstAndLastName {get; set; } = string.Empty;
     public string RG {get ; set ;} = string.Empty;
     public string CPF {get; set;} = string.Empty;
@@ -12,6 +11,4 @@ public class Client
     public string CnhCategory {get; set;} = string.Empty;
     public string PhoneNumber {get ; set ;} = string.Empty;
     public long AddressId {get ; set ;}
-    public Address Address {get; set; } = default!;
-
 }

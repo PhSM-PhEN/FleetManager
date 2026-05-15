@@ -1,6 +1,7 @@
 using System;
 using System.Data;
 using FleetManager.communication.Requests.ToAddress;
+using FleetManager.Exception.ExceptionBase;
 using FluentValidation;
 
 namespace FleetManager.Application.UseCase.ToAddress;
@@ -9,14 +10,14 @@ public class AddressValidator : AbstractValidator<RequestAddressJson>
 {
     public AddressValidator()
     {
-        RuleFor(x => x.Street).NotEmpty().WithMessage("Street required");
-        RuleFor(x => x.Number).NotEmpty().WithMessage("Number required");
-        RuleFor(x => x.City).NotEmpty().WithMessage("City required");
-        RuleFor(x => x.State).NotEmpty().WithMessage("State required");
+        RuleFor(x => x.Street).NotEmpty().WithMessage(ResourceErrorMessages.STREET_REQUIRED);
+        RuleFor(x => x.Number).NotEmpty().WithMessage(ResourceErrorMessages.NUMBER_REQUIRED);
+        RuleFor(x => x.City).NotEmpty().WithMessage(ResourceErrorMessages.CITY_REQUIRED);
+        RuleFor(x => x.State).NotEmpty().WithMessage(ResourceErrorMessages.STATE_REQUIRED);
         RuleFor(x => x.ZipCode).Cascade(CascadeMode.Stop)
-            .NotEmpty().WithMessage("ZipCode required")
+            .NotEmpty().WithMessage(ResourceErrorMessages.ZIPCODE_REQUIRED)
         .Matches(@"^\d{5}-?\d{3}$")
-            .WithMessage("ZipCode invalid");
+            .WithMessage(ResourceErrorMessages.ZIPCODE_INVALID);
 
     }
 }

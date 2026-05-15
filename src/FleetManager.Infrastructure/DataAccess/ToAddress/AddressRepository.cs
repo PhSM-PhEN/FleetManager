@@ -17,7 +17,7 @@ public class AddressRepository(FleetManagerDbContext dbContext) : IAddressWriteO
     {
         var result = await _dbContext.Addresses.FindAsync(id);
          _dbContext.Addresses.Remove(result!);
-        throw new NotImplementedException();
+        
     }
 
     public async Task<List<Address>> GetAll()
@@ -29,7 +29,7 @@ public class AddressRepository(FleetManagerDbContext dbContext) : IAddressWriteO
     {
         return await _dbContext.Addresses.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
     }
-
+  
     public void Update(Address address)
     {
         _dbContext.Addresses.Update(address);

@@ -12,9 +12,9 @@ public class GetAllAddressUseCase(IAddressReadOnlyRepository repository, IMapper
     public async Task<ResponseListAddressJson> Execute()
     {
         var address =  await _repository.GetAll();
-        if (address.Count == 0)
+        if (address is null)
         {
-            throw new NotFoundException(ResourceErrorMessages.NOT_FOUND);
+            throw new NotFoundException(ResourceErrorMessages.ADDRESS_NOT_FOUND);
         }
         
        return new ResponseListAddressJson
