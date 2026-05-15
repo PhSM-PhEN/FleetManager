@@ -92,43 +92,7 @@ namespace FleetManager.Exception.ExceptionBase {
 		/// <summary>
 		/// 
 		/// </summary>
-		public static string CNH_CATEGORY_INVALID => ResourceManager.GetString("CNH_CATEGORY_INVALID", resourceCulture);
-
-		/// <summary>
-		/// 
-
-		/// </summary>
-		public static string CNH_CATEGORY_REQUIRED => ResourceManager.GetString("CNH_CATEGORY_REQUIRED", resourceCulture);
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public static string CNH_REGISTER_NUMBER_INVALID => ResourceManager.GetString("CNH_REGISTER_NUMBER_INVALID", resourceCulture);
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public static string CNH_REGISTER_NUMEBER_REQUIRED => ResourceManager.GetString("CNH_REGISTER_NUMEBER_REQUIRED", resourceCulture);
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public static string CNH_REQUIRED => ResourceManager.GetString("CNH_REQUIRED", resourceCulture);
-
-		/// <summary>
-		/// 
-		/// </summary>
 		public static string COLOR_REQUIRED => ResourceManager.GetString("COLOR_REQUIRED", resourceCulture);
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public static string CPF_INVALID => ResourceManager.GetString("CPF_INVALID", resourceCulture);
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public static string CPF_REQUIRED => ResourceManager.GetString("CPF_REQUIRED", resourceCulture);
 
 		/// <summary>
 		/// 
@@ -239,16 +203,6 @@ namespace FleetManager.Exception.ExceptionBase {
 		/// 
 		/// </summary>
 		public static string RENAVAM_REQUIRED => ResourceManager.GetString("RENAVAM_REQUIRED", resourceCulture);
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public static string RG_INVALID => ResourceManager.GetString("RG_INVALID", resourceCulture);
-
-		/// <summary>
-		/// 
-		/// </summary>
-		public static string RG_REQUIRED => ResourceManager.GetString("RG_REQUIRED", resourceCulture);
 
 		/// <summary>
 		/// 
