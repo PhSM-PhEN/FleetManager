@@ -1,5 +1,3 @@
-using System;
-
 namespace FleetManager.Domain.Entities;
 
 public class Client

@@ -1,6 +1,7 @@
 ﻿using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToAddress;
 using FleetManager.Domain.Repositories.ToCategory;
+using FleetManager.Domain.Repositories.ToClient;
 using FleetManager.Domain.Repositories.ToUser;
 using FleetManager.Domain.Repositories.ToVehicle;
 using FleetManager.Domain.Security.Cryptography;
@@ -9,6 +10,7 @@ using FleetManager.Domain.Services.LoggeUser;
 using FleetManager.Infrastructure.DataAccess;
 using FleetManager.Infrastructure.DataAccess.ToAddress;
 using FleetManager.Infrastructure.DataAccess.ToCategory;
+using FleetManager.Infrastructure.DataAccess.ToClient;
 using FleetManager.Infrastructure.DataAccess.ToUsers;
 using FleetManager.Infrastructure.DataAccess.ToVehicle;
 using FleetManager.Infrastructure.Extension;
@@ -71,6 +73,11 @@ namespace FleetManager.Infrastructure
             services.AddScoped<IAddressWriteOnlyRepository , AddressRepository>();
             services.AddScoped<IAddressReadOnlyRepository, AddressRepository>();
             services.AddScoped<IAddressUpdateOnlyRepository, AddressRepository>();
+
+            //Client
+            services.AddScoped<IClientWriteOnlyRepository, ClientRepository>();
+            services.AddScoped<IClientReadOnlyRepository, ClientRepository>();
+            services.AddScoped<IClientUpdateOnlyRepository, ClientRepository>();    
 
 
             //UnitOfWork

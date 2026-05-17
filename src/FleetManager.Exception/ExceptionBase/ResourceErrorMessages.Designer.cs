@@ -70,6 +70,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AddressId must be greater than 0.
+        /// </summary>
+        public static string ADDRESSID_MUST_BE_GREATER_THAN_0 {
+            get {
+                return ResourceManager.GetString("ADDRESSID_MUST_BE_GREATER_THAN_0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Brand required.
         /// </summary>
         public static string BRAND_REQUIRED {
@@ -124,11 +133,47 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CNH category is required.
+        /// </summary>
+        public static string CNH_CATEGORY_IS_REQUIRED {
+            get {
+                return ResourceManager.GetString("CNH_CATEGORY_IS_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CNH register number is required.
+        /// </summary>
+        public static string CNH_REGISTER_NUMBER_IS_REQUIRED {
+            get {
+                return ResourceManager.GetString("CNH_REGISTER_NUMBER_IS_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CNH register number must contain 11 digits.
+        /// </summary>
+        public static string CNH_REGISTER_NUMBER_MUST_CONTAIN_11_DIGITS {
+            get {
+                return ResourceManager.GetString("CNH_REGISTER_NUMBER_MUST_CONTAIN_11_DIGITS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Color required.
         /// </summary>
         public static string COLOR_REQUIRED {
             get {
                 return ResourceManager.GetString("COLOR_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CPF is required.
+        /// </summary>
+        public static string CPF_IS_REQUIRED {
+            get {
+                return ResourceManager.GetString("CPF_IS_REQUIRED", resourceCulture);
             }
         }
         
@@ -196,6 +241,24 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid CNH category.
+        /// </summary>
+        public static string INVALID_CNH_CATEGORY {
+            get {
+                return ResourceManager.GetString("INVALID_CNH_CATEGORY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid CPF format.
+        /// </summary>
+        public static string INVALID_CPF_FORMAT {
+            get {
+                return ResourceManager.GetString("INVALID_CPF_FORMAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid length.
         /// </summary>
         public static string INVALID_LENGTH {
@@ -210,6 +273,24 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string INVALID_PASSWORD {
             get {
                 return ResourceManager.GetString("INVALID_PASSWORD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid phone number format.
+        /// </summary>
+        public static string INVALID_PHONE_NUMBER_FORMAT {
+            get {
+                return ResourceManager.GetString("INVALID_PHONE_NUMBER_FORMAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid RG format.
+        /// </summary>
+        public static string INVALID_RG_FORMAT {
+            get {
+                return ResourceManager.GetString("INVALID_RG_FORMAT", resourceCulture);
             }
         }
         
@@ -268,6 +349,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name must be greater than 3 letters.
+        /// </summary>
+        public static string NAME_MUST_BE_GREATER_THAN_3_LETTERS {
+            get {
+                return ResourceManager.GetString("NAME_MUST_BE_GREATER_THAN_3_LETTERS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name required.
         /// </summary>
         public static string NAME_REQUIRED {
@@ -322,11 +412,29 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Phone number is required.
+        /// </summary>
+        public static string PHONE_NUMBER_IS_REQUERID {
+            get {
+                return ResourceManager.GetString("PHONE_NUMBER_IS_REQUERID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Renavam required.
         /// </summary>
         public static string RENAVAM_REQUIRED {
             get {
                 return ResourceManager.GetString("RENAVAM_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RG is required.
+        /// </summary>
+        public static string RG_IS_REQUIRED {
+            get {
+                return ResourceManager.GetString("RG_IS_REQUIRED", resourceCulture);
             }
         }
         

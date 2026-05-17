@@ -1,11 +1,10 @@
-using System;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories.ToClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace FleetManager.Infrastructure.DataAccess.ToClient;
 
-public class ClientRespository(FleetManagerDbContext dbContext) : IClientWriteOnlyRepository, IClientReadOnlyRepository, IClientUpdateOnlyRepository
+public class ClientRepository(FleetManagerDbContext dbContext) : IClientWriteOnlyRepository, IClientReadOnlyRepository, IClientUpdateOnlyRepository
 {
     private readonly FleetManagerDbContext _dbContext = dbContext;
 
@@ -14,9 +13,11 @@ public class ClientRespository(FleetManagerDbContext dbContext) : IClientWriteOn
         await _dbContext.Clients.AddAsync(client);
     }
 
-    public Task Delete(long id)
+    public async Task Delete(long id)
     {
-        throw new NotImplementedException();
+        var client = await _dbContext.Clients.FindAsync(id);
+        _dbContext.Clients.Remove(client!);
+
     }
 
     public async Task<List<Client>> GetAll()
@@ -27,7 +28,7 @@ public class ClientRespository(FleetManagerDbContext dbContext) : IClientWriteOn
 
     public async Task<Client?> GetById(long id)
     {
-        return await _dbContext.Clients.AsNoTracking().Include(a => a.Address).FirstOrDefaultAsync(client => client.Id ==id);
+        return await _dbContext.Clients.AsNoTracking().Include(a => a.Address).FirstOrDefaultAsync(client => client.Id == id);
     }
     async Task<Client?> IClientUpdateOnlyRepository.GetById(long id)
     {
@@ -36,6 +37,6 @@ public class ClientRespository(FleetManagerDbContext dbContext) : IClientWriteOn
 
     public void Update(Client client)
     {
-        throw new NotImplementedException();
+        _dbContext.Clients.Update(client);
     }
 }
