@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <Folder Include="DataAccess\ToAddress\" />
-    <Folder Include="DataAccess\ToClient\" />
   </ItemGroup>
 
 </Project>
