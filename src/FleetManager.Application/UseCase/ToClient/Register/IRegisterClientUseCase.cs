@@ -5,6 +5,6 @@ namespace FleetManager.Application.UseCase.ToClient.Register
 {
     public interface IRegisterClientUseCase
     {
-        Task<ResponseShorClientJson> Execute(RequestClientJson request);
+        Task<ResponseShortClientJson> Execute(RequestClientJson request);
     }
 }

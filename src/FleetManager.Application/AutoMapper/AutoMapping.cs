@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using FleetManager.communication.Requests.ToAddress;
 using FleetManager.communication.Requests.ToCategory;
+using FleetManager.communication.Requests.ToClient;
 using FleetManager.communication.Requests.ToUser;
 using FleetManager.communication.Requests.ToVehicle;
 using FleetManager.communication.Resposnes.ToAddress;
 using FleetManager.communication.Resposnes.ToCategory;
+using FleetManager.communication.Resposnes.ToClient;
 using FleetManager.communication.Resposnes.ToUsers;
 using FleetManager.communication.Resposnes.ToVehicle;
 using FleetManager.Domain.Entities;
@@ -33,6 +35,8 @@ namespace FleetManager.Application.AutoMapper
 
             CreateMap<RequestAddressJson, Address>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
+            CreateMap<RequestClientJson, Client>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
 
 
 
@@ -46,7 +50,7 @@ namespace FleetManager.Application.AutoMapper
             CreateMap<User, ResponseUserProfileJson>();
             CreateMap<Address, ResponseAddressJson>();
             CreateMap<Address, ResponseShortAddressJson>();
-
+            CreateMap<Client, ResponseShortClientJson>();
 
         }
     }

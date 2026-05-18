@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using FleetManager.communication.Requests.ToClient;
 using FleetManager.communication.Resposnes.ToClient;
+using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToClient;
+using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToClient.Register
 {
@@ -11,13 +13,28 @@ namespace FleetManager.Application.UseCase.ToClient.Register
         private readonly IClientWriteOnlyRepository _repository = repository;
         private readonly IMapper _mapper = mapper;
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
-        public Task<ResponseShorClientJson> Execute(RequestClientJson request)
+        public async Task<ResponseShortClientJson> Execute(RequestClientJson request)
         {
-            throw new NotImplementedException();
-        }
+            Validate(request);
+            
+            var client = _mapper.Map<Client>(request);
+            await _repository.Add(client);
+            await _unitOfWork.Commit();
 
+            return _mapper.Map<ResponseShortClientJson>(client);
+
+        }
         private void Validate(RequestClientJson request)
         {
+            var validator = new ClientValidator();
+            
+            var result = validator.Validate(request);
+
+            if (result.IsValid == false)
+            {
+                var errors = result.Errors.Select(e => e.ErrorMessage).ToList();
+                throw new ErrorOnValidationException(errors);
+            }
 
         }
     }

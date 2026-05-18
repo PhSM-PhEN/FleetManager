@@ -105,6 +105,10 @@ namespace FleetManager.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("RG")
                         .IsRequired()
                         .HasColumnType("longtext");
