@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FleetManager.communication.Resposnes.ToCategory;
+using FleetManager.communication.Responses.ToCategory;
 using FleetManager.Domain.Repositories.ToCategory;
 
 namespace FleetManager.Application.UseCase.ToCategory.GetAll

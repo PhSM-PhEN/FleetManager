@@ -1,4 +1,4 @@
-﻿namespace FleetManager.communication.Resposnes.ToClient
+﻿namespace FleetManager.communication.Responses.ToClient
 {
     public class ResponseShortClientJson
     {

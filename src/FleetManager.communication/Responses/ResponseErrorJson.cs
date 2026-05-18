@@ -1,4 +1,4 @@
-﻿namespace FleetManager.communication.Resposnes
+﻿namespace FleetManager.communication.Responses
 {
     public class ResponseErrorJson
     {

@@ -1,4 +1,4 @@
-﻿using FleetManager.communication.Resposnes.ToVehicle;
+﻿using FleetManager.communication.Responses.ToVehicle;
 
 namespace FleetManager.Application.UseCase.ToVehicle.GetAll
 {

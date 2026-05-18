@@ -4,8 +4,8 @@ using FleetManager.Application.UseCase.ToCategory.GetById;
 using FleetManager.Application.UseCase.ToCategory.Register;
 using FleetManager.Application.UseCase.ToCategory.Update;
 using FleetManager.communication.Requests.ToCategory;
-using FleetManager.communication.Resposnes;
-using FleetManager.communication.Resposnes.ToCategory;
+using FleetManager.communication.Responses;
+using FleetManager.communication.Responses.ToCategory;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

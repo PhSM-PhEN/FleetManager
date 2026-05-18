@@ -4,11 +4,11 @@ using FleetManager.communication.Requests.ToCategory;
 using FleetManager.communication.Requests.ToClient;
 using FleetManager.communication.Requests.ToUser;
 using FleetManager.communication.Requests.ToVehicle;
-using FleetManager.communication.Resposnes.ToAddress;
-using FleetManager.communication.Resposnes.ToCategory;
-using FleetManager.communication.Resposnes.ToClient;
-using FleetManager.communication.Resposnes.ToUsers;
-using FleetManager.communication.Resposnes.ToVehicle;
+using FleetManager.communication.Responses.ToAddress;
+using FleetManager.communication.Responses.ToCategory;
+using FleetManager.communication.Responses.ToClient;
+using FleetManager.communication.Responses.ToUsers;
+using FleetManager.communication.Responses.ToVehicle;
 using FleetManager.Domain.Entities;
 
 namespace FleetManager.Application.AutoMapper
@@ -51,6 +51,7 @@ namespace FleetManager.Application.AutoMapper
             CreateMap<Address, ResponseAddressJson>();
             CreateMap<Address, ResponseShortAddressJson>();
             CreateMap<Client, ResponseShortClientJson>();
+            CreateMap<Client, ResponseListClientJson>();
 
         }
     }

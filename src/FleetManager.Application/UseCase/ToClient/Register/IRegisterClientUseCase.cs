@@ -1,5 +1,5 @@
 ﻿using FleetManager.communication.Requests.ToClient;
-using FleetManager.communication.Resposnes.ToClient;
+using FleetManager.communication.Responses.ToClient;
 
 namespace FleetManager.Application.UseCase.ToClient.Register
 {

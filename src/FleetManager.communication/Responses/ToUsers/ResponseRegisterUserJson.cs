@@ -1,4 +1,4 @@
-﻿namespace FleetManager.communication.Resposnes.ToUsers
+﻿namespace FleetManager.communication.Responses.ToUsers
 {
     public class ResponseRegisterUserJson
     {

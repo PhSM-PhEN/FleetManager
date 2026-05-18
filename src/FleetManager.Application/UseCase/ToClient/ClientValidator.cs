@@ -23,7 +23,7 @@ namespace FleetManager.Application.UseCase.ToClient
             RuleFor(client => client.RG)
                 .NotEmpty()
                 .WithMessage(ResourceErrorMessages.RG_IS_REQUIRED)
-                .Matches(@"^\d{1,2}\.?\d{3}\.?\d{3}-?[0-9Xx]$")
+                .Matches(@"^(\d{1,2}\.?\d{3}\.?\d{3}-?[0-9Xx]|\d{7,9})$")
                 .WithMessage(ResourceErrorMessages.INVALID_RG_FORMAT);
 
             RuleFor(client => client.CPF)

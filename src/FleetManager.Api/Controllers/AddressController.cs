@@ -5,8 +5,8 @@ using FleetManager.Application.UseCase.ToAddress.GetById;
 using FleetManager.Application.UseCase.ToAddress.Register;
 using FleetManager.Application.UseCase.ToAddress.Update;
 using FleetManager.communication.Requests.ToAddress;
-using FleetManager.communication.Resposnes;
-using FleetManager.communication.Resposnes.ToAddress;
+using FleetManager.communication.Responses;
+using FleetManager.communication.Responses.ToAddress;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FleetManager.Api.Controllers

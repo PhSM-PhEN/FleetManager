@@ -5,8 +5,8 @@ using FleetManager.Application.UseCase.ToVehicle.Register;
 using FleetManager.Application.UseCase.ToVehicle.Update.UpdateKm;
 using FleetManager.Application.UseCase.ToVehicle.Update.UpdateVehicle;
 using FleetManager.communication.Requests.ToVehicle;
-using FleetManager.communication.Resposnes;
-using FleetManager.communication.Resposnes.ToVehicle;
+using FleetManager.communication.Responses;
+using FleetManager.communication.Responses.ToVehicle;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FleetManager.Api.Controllers

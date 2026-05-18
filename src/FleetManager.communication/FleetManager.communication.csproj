@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <Folder Include="Requests\ToAddress\" />
-    <Folder Include="Resposnes\ToAddress\" />
   </ItemGroup>
 
 </Project>

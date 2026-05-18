@@ -1,5 +1,5 @@
 ﻿using FleetManager.communication.Requests.ToVehicle;
-using FleetManager.communication.Resposnes.ToVehicle;
+using FleetManager.communication.Responses.ToVehicle;
 
 namespace FleetManager.Application.UseCase.ToVehicle.Update.UpdateKm
 {

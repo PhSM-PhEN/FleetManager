@@ -22,6 +22,10 @@
     <Folder Include="UseCase\ToAddress\GetById\" />
     <Folder Include="UseCase\ToAddress\Delete\" />
     <Folder Include="UseCase\ToAddress\Update\" />
+    <Folder Include="UseCase\ToClient\Delete\" />
+    <Folder Include="UseCase\ToClient\GetAll\" />
+    <Folder Include="UseCase\ToClient\GetById\" />
+    <Folder Include="UseCase\ToClient\Update\" />
     <Folder Include="UseCase\ToUser\ChangePassword\" />
   </ItemGroup>
 

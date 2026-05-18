@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FleetManager.communication.Resposnes.ToVehicle;
+using FleetManager.communication.Responses.ToVehicle;
 using FleetManager.Domain.Repositories.ToVehicle;
 
 namespace FleetManager.Application.UseCase.ToVehicle.GetAll

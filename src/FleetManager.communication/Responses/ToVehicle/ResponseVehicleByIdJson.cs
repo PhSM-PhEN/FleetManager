@@ -1,7 +1,7 @@
 ﻿
-using FleetManager.communication.Resposnes.ToCategory;
+using FleetManager.communication.Responses.ToCategory;
 
-namespace FleetManager.communication.Resposnes.ToVehicle
+namespace FleetManager.communication.Responses.ToVehicle
 {
     public class ResponseVehicleByIdJson
     {

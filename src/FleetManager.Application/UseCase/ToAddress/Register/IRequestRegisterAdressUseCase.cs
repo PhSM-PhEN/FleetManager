@@ -1,6 +1,6 @@
 using System;
 using FleetManager.communication.Requests.ToAddress;
-using FleetManager.communication.Resposnes.ToAddress;
+using FleetManager.communication.Responses.ToAddress;
 
 namespace FleetManager.Application.UseCase.ToAddress.Register;
 

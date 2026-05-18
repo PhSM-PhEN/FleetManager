@@ -1,7 +1,7 @@
 using System;
 using AutoMapper;
 using FleetManager.communication.Requests.ToAddress;
-using FleetManager.communication.Resposnes.ToAddress;
+using FleetManager.communication.Responses.ToAddress;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToAddress;
