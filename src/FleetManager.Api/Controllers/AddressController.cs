@@ -28,6 +28,7 @@ namespace FleetManager.Api.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(ResponseListAddressJson) , StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Getall([FromServices] IGetAllAddressUseCase useCase)
         {
             var response = await useCase.Execute();
@@ -40,6 +41,7 @@ namespace FleetManager.Api.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ResponseAddressJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById([FromRoute] long id, [FromServices] IGetByIdAddressUseCase useCase)
         {
             var response = await useCase.Execute(id);
@@ -49,6 +51,7 @@ namespace FleetManager.Api.Controllers
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+
         public async Task<IActionResult> Delete([FromRoute] long id, [FromServices] IDeleteAddressUseCase useCase)
         {
             await useCase.Execute(id);
@@ -58,6 +61,7 @@ namespace FleetManager.Api.Controllers
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Update([FromRoute] long id, [FromServices] IUpdateAddressUseCase useCase, [FromBody] RequestAddressJson request)
         {
             await useCase.Execute(id, request);

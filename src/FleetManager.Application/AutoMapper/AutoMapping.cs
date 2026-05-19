@@ -44,6 +44,7 @@ namespace FleetManager.Application.AutoMapper
         private void EntitiesToResponse()
         {
             CreateMap<Category, ResponseShortCategoryJson>();
+            CreateMap<Category, ResponseCategoryJson>();
             CreateMap<Vehicle, ResponseVehicleJson>();
             CreateMap<Vehicle, ResponseVehicleByIdJson>();
             CreateMap<Vehicle, ResponseRegisterVehicleJson>();
@@ -52,6 +53,7 @@ namespace FleetManager.Application.AutoMapper
             CreateMap<Address, ResponseShortAddressJson>();
             CreateMap<Client, ResponseShortClientJson>();
             CreateMap<Client, ResponseListClientJson>();
+            CreateMap<Client, ResponseClientJson>();
 
         }
     }

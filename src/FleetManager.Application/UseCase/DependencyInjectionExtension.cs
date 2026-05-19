@@ -10,6 +10,7 @@ using FleetManager.Application.UseCase.ToCategory.GetById;
 using FleetManager.Application.UseCase.ToCategory.Register;
 using FleetManager.Application.UseCase.ToCategory.Update;
 using FleetManager.Application.UseCase.ToClient.GetAll;
+using FleetManager.Application.UseCase.ToClient.GetById;
 using FleetManager.Application.UseCase.ToClient.Register;
 using FleetManager.Application.UseCase.ToLogin;
 using FleetManager.Application.UseCase.ToUser.Delete;
@@ -69,6 +70,7 @@ namespace FleetManager.Application.UseCase
             //client 
             services.AddScoped<IRegisterClientUseCase, RegisterClientUseCase>();
             services.AddScoped<IGetAllClientUseCase, GetAllClientUseCase>();
+            services.AddScoped<IGetByIdClientUseCase, GetByIdClientUseCase>();
             //Login
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
         }

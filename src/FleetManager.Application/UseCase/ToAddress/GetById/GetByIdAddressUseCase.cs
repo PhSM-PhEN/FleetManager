@@ -13,8 +13,6 @@ public class GetByIdAddressUseCase(IAddressReadOnlyRepository repository, IMappe
     {
         var address = await _repository.GetById(id);
 
-        
-
         return _mapper.Map<ResponseAddressJson>(address);
     }
 }

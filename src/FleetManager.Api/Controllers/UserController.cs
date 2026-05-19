@@ -26,6 +26,7 @@ namespace FleetManager.Api.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(ResponseUserProfileJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetUser([FromServices] IGetUserProfileUseCase useCase)
         {
             var response = await useCase.Execute();
