@@ -13,6 +13,8 @@
   <ItemGroup>
     <Folder Include="Repositories\ToAddress\" />
     <Folder Include="Repositories\ToClient\" />
+    <Folder Include="Repositories\ToCompany\" />
+    <Folder Include="Repositories\ToRental\" />
   </ItemGroup>
 
 </Project>

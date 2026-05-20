@@ -4,8 +4,8 @@ namespace FleetManager.Domain.Repositories.ToVehicle
 {
     public interface IVehicleReadOnlyRepository
     {
-        public Task<List<Vehicle>> GetAll();
+        Task<List<Vehicle>> GetAll();
 
-        public Task<Vehicle?> GetById(long id);
+        Task<Vehicle?> GetById(long id);
     }
 }
