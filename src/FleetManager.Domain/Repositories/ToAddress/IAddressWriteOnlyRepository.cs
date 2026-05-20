@@ -1,4 +1,3 @@
-using System;
 using FleetManager.Domain.Entities;
 
 namespace FleetManager.Domain.Repositories.ToAddress;
