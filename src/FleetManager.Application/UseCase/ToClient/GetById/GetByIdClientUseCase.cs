@@ -15,7 +15,7 @@ public class GetByIdClientUseCase(IMapper mapper, IClientReadOnlyRepository repo
         var client = await _repository.GetById(id);
         if(client == null)
         {
-            throw new NotFoundException("Client not found");
+            throw new NotFoundException(ResourceErrorMessages.CLIENT_NOT_FOUND);
         }
         return _mapper.Map<ResponseClientJson>(client);
         

@@ -1,4 +1,3 @@
-using System;
 using AutoMapper;
 using FleetManager.communication.Responses.ToClient;
 using FleetManager.Domain.Repositories.ToClient;
@@ -17,7 +16,7 @@ public class GetAllClientUseCase(IMapper mapper, IClientReadOnlyRepository repos
 
         if(client.Count == 0)
         {
-            throw new NotFoundException("Client Not Found.");
+            throw new NotFoundException(ResourceErrorMessages.CLIENT_NOT_FOUND);
         }    
         
 
@@ -26,6 +25,6 @@ public class GetAllClientUseCase(IMapper mapper, IClientReadOnlyRepository repos
             Clients = _mapper.Map<List<ResponseShortClientJson>>(client) 
         };
 
-        throw new NotImplementedException();
+        
     }
 }

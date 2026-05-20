@@ -133,6 +133,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Client not found.
+        /// </summary>
+        public static string CLIENT_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("CLIENT_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CNH category is required.
         /// </summary>
         public static string CNH_CATEGORY_IS_REQUIRED {

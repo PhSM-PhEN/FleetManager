@@ -141,6 +141,9 @@
   <data name="CITY_REQUIRED" xml:space="preserve">
     <value>City required</value>
   </data>
+  <data name="CLIENT_NOT_FOUND" xml:space="preserve">
+    <value>Client not found</value>
+  </data>
   <data name="CNH_CATEGORY_IS_REQUIRED" xml:space="preserve">
     <value>CNH category is required</value>
   </data>
