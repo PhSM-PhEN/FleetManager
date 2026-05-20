@@ -24,6 +24,9 @@
     <Folder Include="UseCase\ToAddress\Update\" />
     <Folder Include="UseCase\ToClient\GetAll\" />
     <Folder Include="UseCase\ToClient\GetById\" />
+    <Folder Include="UseCase\ToCompany\" />
+    <Folder Include="UseCase\ToCompany\Register\" />
+    <Folder Include="UseCase\ToRental\" />
     <Folder Include="UseCase\ToUser\ChangePassword\" />
   </ItemGroup>
 

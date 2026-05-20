@@ -1,12 +1,15 @@
-﻿using AutoMapper;
+﻿using System.Runtime.CompilerServices;
+using AutoMapper;
 using FleetManager.communication.Requests.ToAddress;
 using FleetManager.communication.Requests.ToCategory;
 using FleetManager.communication.Requests.ToClient;
+using FleetManager.communication.Requests.ToCompany;
 using FleetManager.communication.Requests.ToUser;
 using FleetManager.communication.Requests.ToVehicle;
 using FleetManager.communication.Responses.ToAddress;
 using FleetManager.communication.Responses.ToCategory;
 using FleetManager.communication.Responses.ToClient;
+using FleetManager.communication.Responses.ToCompany;
 using FleetManager.communication.Responses.ToUsers;
 using FleetManager.communication.Responses.ToVehicle;
 using FleetManager.Domain.Entities;
@@ -32,10 +35,11 @@ namespace FleetManager.Application.AutoMapper
 
             CreateMap<RequestRegisterUserJson, User>()
                 .ForMember(dest => dest.Password, opt => opt.Ignore());
-
             CreateMap<RequestAddressJson, Address>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
             CreateMap<RequestClientJson, Client>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore());
+            CreateMap<RequestCompanyJson, Company>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
 
 
@@ -54,6 +58,8 @@ namespace FleetManager.Application.AutoMapper
             CreateMap<Client, ResponseShortClientJson>();
             CreateMap<Client, ResponseListClientJson>();
             CreateMap<Client, ResponseClientJson>();
+            CreateMap<Company, ResponseCompanyJson>();
+            CreateMap<Company, ResponseListCompanyJson>();
 
         }
     }
