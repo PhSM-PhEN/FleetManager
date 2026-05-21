@@ -14,7 +14,11 @@ using FleetManager.Application.UseCase.ToClient.GetAll;
 using FleetManager.Application.UseCase.ToClient.GetById;
 using FleetManager.Application.UseCase.ToClient.Register;
 using FleetManager.Application.UseCase.ToClient.Update;
+using FleetManager.Application.UseCase.ToCompany.Delete;
+using FleetManager.Application.UseCase.ToCompany.GetAll;
+using FleetManager.Application.UseCase.ToCompany.GetById;
 using FleetManager.Application.UseCase.ToCompany.Register;
+using FleetManager.Application.UseCase.ToCompany.Update;
 using FleetManager.Application.UseCase.ToLogin;
 using FleetManager.Application.UseCase.ToUser.Delete;
 using FleetManager.Application.UseCase.ToUser.GetUser;
@@ -50,35 +54,40 @@ namespace FleetManager.Application.UseCase
             services.AddScoped<IDeleteCategoryUseCase, DeleteCategoryUseCase>();
 
             //Vehicle
+            services.AddScoped<IRegisterVehicleUseCase, RegisterVehicleUseCase>();
             services.AddScoped<IGetAllVehicleUseCase, GetAllVehicleUseCase>();
             services.AddScoped<IGetByIdVehicleUseCase, GetByIdVehicleUseCase>();            
-            services.AddScoped<IRegisterVehicleUseCase, RegisterVehicleUseCase>();
             services.AddScoped<IUpdateVehicleUseCase, UpdateVehicleUseCase>();
-            services.AddScoped<IDeleteVehicleUseCase, DeleteVehicleUseCase>();
             services.AddScoped<IUpdateVehicleKmUseCase, UpdateVehicleKmUseCase>();
+            services.AddScoped<IDeleteVehicleUseCase, DeleteVehicleUseCase>();
 
             //User
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
-            services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>();
-            services.AddScoped<IDeleteUserAccountUseCase, DeleteUserAccountUseCase>();
+            services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>(); 
             services.AddScoped<IUpdateProfileUseCase, UpdateProfileUseCase>();
+            services.AddScoped<IDeleteUserAccountUseCase, DeleteUserAccountUseCase>();
 
             //address
             services.AddScoped<IRequestAdressUseCase, RequestAddressUseCase>();
             services.AddScoped<IGetAllAddressUseCase, GetAllAddressUseCase>();
             services.AddScoped<IGetByIdAddressUseCase, GetByIdAddressUseCase>();
-            services.AddScoped<IDeleteAddressUseCase, DeleteAddressUseCase>();
             services.AddScoped<IUpdateAddressUseCase, UpdateAddressUseCase>();
+            services.AddScoped<IDeleteAddressUseCase, DeleteAddressUseCase>();
 
             //client 
             services.AddScoped<IRegisterClientUseCase, RegisterClientUseCase>();
             services.AddScoped<IGetAllClientUseCase, GetAllClientUseCase>();
             services.AddScoped<IGetByIdClientUseCase, GetByIdClientUseCase>();
-            services.AddScoped<IDeleteClientUseCase, DeleteClientUseCase>();
             services.AddScoped<IUpdateClientUseCase, UpdateClientUseCase>();
+            services.AddScoped<IDeleteClientUseCase, DeleteClientUseCase>();
+            
 
             // company
             services.AddScoped<IRegisterCompanyUseCase, RegisterCompanyUseCase>();
+            services.AddScoped<IGetAllCompanyUseCase, GetAllCompanyUseCase>();
+            services.AddScoped<IGetByIdCompanyUseCase, GetByIdCompanyUseCase>();
+            services.AddScoped<IUpdateCompanyUseCase, UpdateCompanyUseCase>();
+            services.AddScoped<IDeleteCompanyUseCase, DeleteCompanyUseCase>();
 
             //Login
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
