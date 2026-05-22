@@ -133,6 +133,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ClientId is required..
+        /// </summary>
+        public static string CLIENT_IS_REQUIRED {
+            get {
+                return ResourceManager.GetString("CLIENT_IS_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Client not found.
         /// </summary>
         public static string CLIENT_NOT_FOUND {
@@ -174,6 +183,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string COLOR_REQUIRED {
             get {
                 return ResourceManager.GetString("COLOR_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CompanyId is requeired..
+        /// </summary>
+        public static string COMPANYID_IS_REQUIRED {
+            get {
+                return ResourceManager.GetString("COMPANYID_IS_REQUIRED", resourceCulture);
             }
         }
         
@@ -237,6 +255,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string EMAIL_REQUIRED {
             get {
                 return ResourceManager.GetString("EMAIL_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End date must be greater than current date..
+        /// </summary>
+        public static string END_DATE_MUST_BE_GREATER_THAN_CURRENT_DATE {
+            get {
+                return ResourceManager.GetString("END_DATE_MUST_BE_GREATER_THAN_CURRENT_DATE", resourceCulture);
             }
         }
         
@@ -448,6 +475,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start date must be less than end date..
+        /// </summary>
+        public static string START_DATE_MUST_BE_LESS_THAN_END_DATE {
+            get {
+                return ResourceManager.GetString("START_DATE_MUST_BE_LESS_THAN_END_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to State required.
         /// </summary>
         public static string STATE_REQUIRED {
@@ -475,6 +511,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total price must be greater than zero..
+        /// </summary>
+        public static string TOTAL_PRICE_MUST_BE_GREATER_THAN_ZERO {
+            get {
+                return ResourceManager.GetString("TOTAL_PRICE_MUST_BE_GREATER_THAN_ZERO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Transmission type invalid.
         /// </summary>
         public static string TRANSMISSION_TYPE_INVALID {
@@ -493,11 +538,29 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to UserId is required..
+        /// </summary>
+        public static string USERID_IS_REQUIRED {
+            get {
+                return ResourceManager.GetString("USERID_IS_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vehicle not found.
         /// </summary>
         public static string VEHICLE_NOT_FOUND {
             get {
                 return ResourceManager.GetString("VEHICLE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VehicleId is required..
+        /// </summary>
+        public static string VEHICLEID_IS_REQUIRED {
+            get {
+                return ResourceManager.GetString("VEHICLEID_IS_REQUIRED", resourceCulture);
             }
         }
         

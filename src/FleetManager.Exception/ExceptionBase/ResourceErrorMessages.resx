@@ -141,6 +141,9 @@
   <data name="CITY_REQUIRED" xml:space="preserve">
     <value>City required</value>
   </data>
+  <data name="CLIENT_IS_REQUIRED" xml:space="preserve">
+    <value>ClientId is required.</value>
+  </data>
   <data name="CLIENT_NOT_FOUND" xml:space="preserve">
     <value>Client not found</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="COLOR_REQUIRED" xml:space="preserve">
     <value>Color required</value>
+  </data>
+  <data name="COMPANYID_IS_REQUIRED" xml:space="preserve">
+    <value>CompanyId is requeired.</value>
   </data>
   <data name="CPF_IS_REQUIRED" xml:space="preserve">
     <value>CPF is required</value>
@@ -176,6 +182,9 @@
   </data>
   <data name="EMAIL_REQUIRED" xml:space="preserve">
     <value>Email required</value>
+  </data>
+  <data name="END_DATE_MUST_BE_GREATER_THAN_CURRENT_DATE" xml:space="preserve">
+    <value>End date must be greater than current date.</value>
   </data>
   <data name="FUEL_TYPE_INVALID" xml:space="preserve">
     <value>Fuel type invalid</value>
@@ -246,6 +255,9 @@
   <data name="RG_IS_REQUIRED" xml:space="preserve">
     <value>RG is required</value>
   </data>
+  <data name="START_DATE_MUST_BE_LESS_THAN_END_DATE" xml:space="preserve">
+    <value>Start date must be less than end date.</value>
+  </data>
   <data name="STATE_REQUIRED" xml:space="preserve">
     <value>State required</value>
   </data>
@@ -255,11 +267,20 @@
   <data name="THE_MILEAGE_MUST_BE_HIGHER_THAN_THE_CURRENT" xml:space="preserve">
     <value>The mileage must be greater than the current</value>
   </data>
+  <data name="TOTAL_PRICE_MUST_BE_GREATER_THAN_ZERO" xml:space="preserve">
+    <value>Total price must be greater than zero.</value>
+  </data>
   <data name="TRANSMISSION_TYPE_INVALID" xml:space="preserve">
     <value>Transmission type invalid</value>
   </data>
   <data name="UNKNOW_ERROR" xml:space="preserve">
     <value>Unknown error</value>
+  </data>
+  <data name="USERID_IS_REQUIRED" xml:space="preserve">
+    <value>UserId is required.</value>
+  </data>
+  <data name="VEHICLEID_IS_REQUIRED" xml:space="preserve">
+    <value>VehicleId is required.</value>
   </data>
   <data name="VEHICLE_NOT_FOUND" xml:space="preserve">
     <value>Vehicle not found</value>

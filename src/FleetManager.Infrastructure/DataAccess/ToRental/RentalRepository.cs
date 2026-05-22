@@ -1,4 +1,3 @@
-using System;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories.ToRental;
 using Microsoft.EntityFrameworkCore;

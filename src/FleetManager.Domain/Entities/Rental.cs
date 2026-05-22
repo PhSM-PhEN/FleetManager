@@ -18,7 +18,7 @@ namespace FleetManager.Domain.Entities
         public Vehicle Vehicle { get; set; } = default!;
         public Category Category { get; set; } = default!;
         public User User { get; set; } = default!;
-        public DateTime StartDate { get; set; } = DateTime.UtcNow;
+        public DateTime StartDate { get; set; } 
         public DateTime EndDate { get; set; }
         public RentalStatus Status { get; set; }
         
