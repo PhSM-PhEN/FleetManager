@@ -21,14 +21,12 @@ namespace FleetManager.Infrastructure.DataAccess.ToVehicle
         public async Task<List<Vehicle>> GetAll()
         {
             return await _dbContext.Vehicles
-                .Include(v => v.Category)
                 .AsNoTracking()
                 .ToListAsync();
         }
         async Task<Vehicle?> IVehicleReadOnlyRepository.GetById(long id)
         {
             return await _dbContext.Vehicles
-                .Include(v => v.Category)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(v => v.Id == id);
         }
@@ -37,7 +35,6 @@ namespace FleetManager.Infrastructure.DataAccess.ToVehicle
             return await _dbContext.Vehicles 
                 .FirstOrDefaultAsync(v => v.Id == id);
         }
-
         public void Update(Vehicle vehicle)
         {
             _dbContext.Vehicles.Update(vehicle);
