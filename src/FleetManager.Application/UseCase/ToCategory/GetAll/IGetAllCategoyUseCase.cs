@@ -1,9 +1,9 @@
-﻿using FleetManager.communication.Responses.ToCategory;
+﻿using FleetManager.communication.Responses;
 
 namespace FleetManager.Application.UseCase.ToCategory.GetAll
 {
     public interface IGetAllCategoyUseCase
     {
-        Task<ResponseCategoryJson> Execute();
+        Task<ResponseListCategoryJson> Execute();
     }
 }

@@ -1,4 +1,4 @@
-﻿using FleetManager.communication.Requests.ToCategory;
+﻿using FleetManager.communication.Requests;
 using FleetManager.Domain.Entities;
 
 namespace FleetManager.Application.UseCase.ToCategory.Update

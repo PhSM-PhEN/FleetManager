@@ -1,5 +1,5 @@
 using AutoMapper;
-using FleetManager.communication.Responses.ToAddress;
+using FleetManager.communication.Responses;
 using FleetManager.Domain.Repositories.ToAddress;
 using FleetManager.Exception.ExceptionBase;
 

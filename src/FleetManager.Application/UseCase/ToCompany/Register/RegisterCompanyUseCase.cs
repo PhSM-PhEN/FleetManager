@@ -1,7 +1,7 @@
 using System;
 using AutoMapper;
-using FleetManager.communication.Requests.ToCompany;
-using FleetManager.communication.Responses.ToCompany;
+using FleetManager.communication.Requests;
+using FleetManager.communication.Responses;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToCompany;

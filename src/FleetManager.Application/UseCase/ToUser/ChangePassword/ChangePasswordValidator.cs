@@ -1,4 +1,4 @@
-﻿using FleetManager.communication.Requests.ToUser;
+﻿using FleetManager.communication.Requests;
 using FluentValidation;
 
 namespace FleetManager.Application.UseCase.ToUser.ChangePassword

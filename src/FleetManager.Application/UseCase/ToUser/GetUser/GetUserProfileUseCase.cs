@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FleetManager.communication.Responses.ToUsers;
+using FleetManager.communication.Responses;
 using FleetManager.Domain.Services.LoggeUser;
 
 namespace FleetManager.Application.UseCase.ToUser.GetUser

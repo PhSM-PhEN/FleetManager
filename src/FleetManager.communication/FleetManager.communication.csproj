@@ -12,10 +12,4 @@
     <None Remove="Enums\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Requests\ToAddress\" />
-    <Folder Include="Requests\ToCompany\" />
-    <Folder Include="Responses\ToCompany\" />
-  </ItemGroup>
-
 </Project>

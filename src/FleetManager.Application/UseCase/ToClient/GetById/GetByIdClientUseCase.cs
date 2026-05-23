@@ -1,6 +1,6 @@
 using System;
 using AutoMapper;
-using FleetManager.communication.Responses.ToClient;
+using FleetManager.communication.Responses;
 using FleetManager.Domain.Repositories.ToClient;
 using FleetManager.Exception.ExceptionBase;
 

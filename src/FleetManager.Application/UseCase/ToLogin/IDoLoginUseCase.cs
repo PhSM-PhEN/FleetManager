@@ -1,5 +1,5 @@
-﻿using FleetManager.communication.Requests.ToLogin;
-using FleetManager.communication.Responses.ToUsers;
+﻿using FleetManager.communication.Requests;
+using FleetManager.communication.Responses;
 
 namespace FleetManager.Application.UseCase.ToLogin
 {

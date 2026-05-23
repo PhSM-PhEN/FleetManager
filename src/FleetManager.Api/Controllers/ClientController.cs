@@ -3,9 +3,8 @@ using FleetManager.Application.UseCase.ToClient.GetAll;
 using FleetManager.Application.UseCase.ToClient.GetById;
 using FleetManager.Application.UseCase.ToClient.Register;
 using FleetManager.Application.UseCase.ToClient.Update;
-using FleetManager.communication.Requests.ToClient;
+using FleetManager.communication.Requests;
 using FleetManager.communication.Responses;
-using FleetManager.communication.Responses.ToClient;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FleetManager.Api.Controllers

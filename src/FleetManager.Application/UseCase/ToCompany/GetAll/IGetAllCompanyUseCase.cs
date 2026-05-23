@@ -1,5 +1,5 @@
 
-using FleetManager.communication.Responses.ToCompany;
+using FleetManager.communication.Responses;
 
 namespace FleetManager.Application.UseCase.ToCompany.GetAll;
 

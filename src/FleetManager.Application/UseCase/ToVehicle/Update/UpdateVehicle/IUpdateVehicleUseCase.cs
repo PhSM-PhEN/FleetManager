@@ -1,4 +1,4 @@
-﻿using FleetManager.communication.Requests.ToVehicle;
+﻿using FleetManager.communication.Requests;
 
 namespace FleetManager.Application.UseCase.ToVehicle.Update.UpdateVehicle
 {

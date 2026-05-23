@@ -1,6 +1,6 @@
 using System;
 using System.Data;
-using FleetManager.communication.Requests.ToAddress;
+using FleetManager.communication.Requests;
 using FleetManager.Exception.ExceptionBase;
 using FluentValidation;
 

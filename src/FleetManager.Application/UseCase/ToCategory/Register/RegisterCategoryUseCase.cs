@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using FleetManager.communication.Requests.ToCategory;
-using FleetManager.communication.Responses.ToCategory;
+using FleetManager.communication.Requests;
+using FleetManager.communication.Responses;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToCategory;
@@ -15,7 +15,7 @@ namespace FleetManager.Application.UseCase.ToCategory.Register
         private readonly IMapper _mapper = mapper;
         private readonly ICategoryWriteOnlyRepository _categoryWriteOnlyRepository = categoryWriteOnly;
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
-        public async Task<ResponseShortCategoryJson> Execute(RequestCategoryJson request)
+        public async Task<ResponseCategoryJson> Execute(RequestCategoryJson request)
         {
             Validate(request);
 
@@ -24,7 +24,7 @@ namespace FleetManager.Application.UseCase.ToCategory.Register
             await _categoryWriteOnlyRepository.Add(category);
             await _unitOfWork.Commit();
 
-            return _mapper.Map<ResponseShortCategoryJson>(category);
+            return _mapper.Map<ResponseCategoryJson>(category);
 
         }
         private static void Validate(RequestCategoryJson request)

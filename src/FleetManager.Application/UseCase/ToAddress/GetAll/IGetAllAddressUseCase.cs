@@ -1,5 +1,5 @@
 using System;
-using FleetManager.communication.Responses.ToAddress;
+using FleetManager.communication.Responses;
 
 namespace FleetManager.Application.UseCase.ToAddress.GetAll;
 

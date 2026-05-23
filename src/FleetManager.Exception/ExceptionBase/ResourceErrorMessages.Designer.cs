@@ -187,6 +187,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company not found..
+        /// </summary>
+        public static string COMPANY_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("COMPANY_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CompanyId is requeired..
         /// </summary>
         public static string COMPANYID_IS_REQUIRED {
@@ -327,6 +336,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string INVALID_RG_FORMAT {
             get {
                 return ResourceManager.GetString("INVALID_RG_FORMAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Trasmission type.
+        /// </summary>
+        public static string INVALID_TRANSMISSION_TYPE {
+            get {
+                return ResourceManager.GetString("INVALID_TRANSMISSION_TYPE", resourceCulture);
             }
         }
         
@@ -543,6 +561,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string USERID_IS_REQUIRED {
             get {
                 return ResourceManager.GetString("USERID_IS_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vehicle not available.
+        /// </summary>
+        public static string VEHICLE_NOT_AVAILABLE {
+            get {
+                return ResourceManager.GetString("VEHICLE_NOT_AVAILABLE", resourceCulture);
             }
         }
         

@@ -4,9 +4,8 @@ using FleetManager.Application.UseCase.ToVehicle.GetById;
 using FleetManager.Application.UseCase.ToVehicle.Register;
 using FleetManager.Application.UseCase.ToVehicle.Update.UpdateKm;
 using FleetManager.Application.UseCase.ToVehicle.Update.UpdateVehicle;
-using FleetManager.communication.Requests.ToVehicle;
+using FleetManager.communication.Requests;
 using FleetManager.communication.Responses;
-using FleetManager.communication.Responses.ToVehicle;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FleetManager.Api.Controllers

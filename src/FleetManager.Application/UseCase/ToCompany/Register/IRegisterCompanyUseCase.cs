@@ -1,6 +1,6 @@
 using System;
-using FleetManager.communication.Requests.ToCompany;
-using FleetManager.communication.Responses.ToCompany;
+using FleetManager.communication.Requests;
+using FleetManager.communication.Responses;
 
 namespace FleetManager.Application.UseCase.ToCompany.Register;
 

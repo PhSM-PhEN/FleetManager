@@ -1,21 +1,19 @@
-﻿using System.Threading.Tasks;
-using FleetManager.communication.Requests.ToRental;
-using FleetManager.communication.Responses.ToRental;
+﻿using FleetManager.communication.Requests;
+using FleetManager.communication.Responses;
 using FleetManager.Domain.Repositories;
-using FleetManager.Domain.Repositories.ToAddress;
 using FleetManager.Domain.Repositories.ToCategory;
 using FleetManager.Domain.Repositories.ToClient;
 using FleetManager.Domain.Repositories.ToCompany;
 using FleetManager.Domain.Repositories.ToVehicle;
 using FleetManager.Domain.Services.LoggeUser;
 using FleetManager.Exception.ExceptionBase;
-using FleetManager.Infrastructure.DataAccess.ToRental;
 
 namespace FleetManager.Application.UseCase.ToRental.Register
 {
-    public class RegisterRentUseCase(ILoggedUser loggedUser, ICompanyReadOnlyRepository companyReadOnly,
-                                    IVehicleReadOnlyRepository vehicleReadOnly, ICategoryReadOnlyRepository categoryReadOnly,
-                                    IClientReadOnlyRepository clientReadOnly, IUnitOfWork unitOfWork) : IRegisterRentUseCase
+    public class RegisterRentUseCase(
+        ILoggedUser loggedUser, ICompanyReadOnlyRepository companyReadOnly,
+        IVehicleReadOnlyRepository vehicleReadOnly, ICategoryReadOnlyRepository categoryReadOnly,
+        IClientReadOnlyRepository clientReadOnly, IUnitOfWork unitOfWork) : IRegisterRentUseCase
     {
         private readonly ILoggedUser _loggedUser = loggedUser;
         private readonly ICompanyReadOnlyRepository _companyReadOnly = companyReadOnly;
@@ -27,15 +25,13 @@ namespace FleetManager.Application.UseCase.ToRental.Register
         { 
             var loggedUser = await _loggedUser.Get();
             Validate(request);
-            await EnsureCompanyExist(request.CompanyId);
-            await EnsureClientExist(request.ClientId);
-            await EnsureVehicleExist(request.VehicleId);
-            await EnsureCategoryExist(request.CategoryId);
+            await ValidateBusinessRules(request);
             
             
+            await _unitOfWork.Commit();
             throw new NotImplementedException();
         }
-        private void Validate(RequestRentJson request)
+        private static void Validate(RequestRentJson request)
         {
             var validate = new RentalValidator();
             var result = validate.Validate(request);
@@ -46,7 +42,15 @@ namespace FleetManager.Application.UseCase.ToRental.Register
                 throw new ErrorOnValidationException(errors);
             }
         }
-        private async Task EnsureClientExist(long clientId)
+        private async Task ValidateBusinessRules(RequestRentJson request)
+        {
+            await EnsureCategoryExists(request.CompanyId);
+            await EnsureClientExists(request.ClientId);
+            await EnsureVehicleExists(request.VehicleId);
+            await EnsureCompanyExists(request.CompanyId);
+            await EnsureCategoryExists(request.CategoryId);
+        }
+        private async Task EnsureClientExists(long clientId)
 
         {
             var result = await _clientReadOnly.GetById(clientId);
@@ -57,19 +61,15 @@ namespace FleetManager.Application.UseCase.ToRental.Register
             }
         }
        
-        private async Task EnsureVehicleExist(long id)
+        private async Task EnsureVehicleExists(long id)
         {
             var result = await _vehicleReadOnly.GetById(id);
             if(result is null)
             {
                 throw new NotFoundException(ResourceErrorMessages.VEHICLE_NOT_FOUND);
             }
-            if(result.IsActive is false)
-            {
-                throw new ErrorOnValidationException(new List<string>{"Vehicle not dispnivel"});
-            }
         }
-        private async Task EnsureCategoryExist(int id)
+        private async Task EnsureCategoryExists(int id)
         {
             var result = await _categoryReadOnly.GetById(id);
             if(result is null)
@@ -77,12 +77,12 @@ namespace FleetManager.Application.UseCase.ToRental.Register
                 throw new NotFoundException(ResourceErrorMessages.CATEGORY_NOT_FOUND);
             }
         }
-        private async Task EnsureCompanyExist(int id)
+        private async Task EnsureCompanyExists(int id)
         {
             var result = await _companyReadOnly.GetById(id);
             if(result is null)
             {
-                throw new NotFoundException("company not found");
+                throw new NotFoundException(ResourceErrorMessages.COMPANY_NOT_FOUND);
             }
         }
        

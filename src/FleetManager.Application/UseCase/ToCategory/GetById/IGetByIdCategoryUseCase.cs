@@ -1,9 +1,9 @@
-﻿using FleetManager.communication.Responses.ToCategory;
+﻿using FleetManager.communication.Responses;
 
 namespace FleetManager.Application.UseCase.ToCategory.GetById
 {
     public interface IGetByIdCategoryUseCase
     {
-        Task<ResponseShortCategoryJson> Execute(int id);
+        Task<ResponseCategoryJson> Execute(int id);
     }
 }

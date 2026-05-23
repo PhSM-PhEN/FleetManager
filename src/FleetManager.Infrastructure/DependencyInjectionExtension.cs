@@ -4,6 +4,7 @@ using FleetManager.Domain.Repositories.ToCategory;
 using FleetManager.Domain.Repositories.ToClient;
 using FleetManager.Domain.Repositories.ToCompany;
 using FleetManager.Domain.Repositories.ToRental;
+using FleetManager.Domain.Repositories.ToRentalPlans;
 using FleetManager.Domain.Repositories.ToUser;
 using FleetManager.Domain.Repositories.ToVehicle;
 using FleetManager.Domain.Security.Cryptography;
@@ -15,6 +16,7 @@ using FleetManager.Infrastructure.DataAccess.ToCategory;
 using FleetManager.Infrastructure.DataAccess.ToClient;
 using FleetManager.Infrastructure.DataAccess.ToCompany;
 using FleetManager.Infrastructure.DataAccess.ToRental;
+using FleetManager.Infrastructure.DataAccess.ToRentalPlans;
 using FleetManager.Infrastructure.DataAccess.ToUsers;
 using FleetManager.Infrastructure.DataAccess.ToVehicle;
 using FleetManager.Infrastructure.Extension;
@@ -93,6 +95,10 @@ namespace FleetManager.Infrastructure
             services.AddScoped<ICompanyWriteOnlyRepository, CompanyRepository>();
             services.AddScoped<ICompanyUpdateOnlyRepository, CompanyRepository>();
 
+            //retal plan
+            services.AddScoped<IRentalPlansReadOnlyRepository, RentalPlansRepository>();
+            services.AddScoped<IRentalPlansWriteOnlyRepository, RentalPlansRepository>();
+            services.AddScoped<IRentalPlansUpdateOnlyRepository, RentalPlansRepository>();
 
             //UnitOfWork
             services.AddScoped<IUnitOfWork, UnitiOfWork>();

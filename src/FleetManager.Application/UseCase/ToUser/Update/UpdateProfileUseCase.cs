@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FleetManager.communication.Requests.ToUser;
+using FleetManager.communication.Requests;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToUser;
 using FleetManager.Domain.Services.LoggeUser;

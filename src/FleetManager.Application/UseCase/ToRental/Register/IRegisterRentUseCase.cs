@@ -1,5 +1,5 @@
-﻿using FleetManager.communication.Requests.ToRental;
-using FleetManager.communication.Responses.ToRental;
+﻿using FleetManager.communication.Requests;
+using FleetManager.communication.Responses;
 
 namespace FleetManager.Application.UseCase.ToRental.Register
 {

@@ -1,4 +1,4 @@
-﻿using FleetManager.communication.Requests.ToCategory;
+﻿using FleetManager.communication.Requests;
 using FleetManager.Exception.ExceptionBase;
 using FluentValidation;
 
@@ -10,8 +10,8 @@ namespace FleetManager.Application.UseCase.ToCategory
         {
             RuleFor(x => x.Name)
                 .NotEmpty().WithMessage(ResourceErrorMessages.NAME_REQUIRED);
-            RuleFor(x => x.BaseDailyRate)
-                .GreaterThan(0).WithMessage(ResourceErrorMessages.MUST_BE_GREATER_THAN_ZERO);
+            RuleFor(x => x.TransmissionType)
+                .IsInEnum().WithMessage(ResourceErrorMessages.INVALID_TRANSMISSION_TYPE);
 
 
         }

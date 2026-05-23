@@ -162,6 +162,9 @@
   <data name="COMPANYID_IS_REQUIRED" xml:space="preserve">
     <value>CompanyId is requeired.</value>
   </data>
+  <data name="COMPANY_NOT_FOUND" xml:space="preserve">
+    <value>Company not found.</value>
+  </data>
   <data name="CPF_IS_REQUIRED" xml:space="preserve">
     <value>CPF is required</value>
   </data>
@@ -206,6 +209,9 @@
   </data>
   <data name="INVALID_RG_FORMAT" xml:space="preserve">
     <value>Invalid RG format</value>
+  </data>
+  <data name="INVALID_TRANSMISSION_TYPE" xml:space="preserve">
+    <value>Invalid Trasmission type</value>
   </data>
   <data name="LICENSE_PLATE_INVALID_FORMAT" xml:space="preserve">
     <value>License plate invalid format</value>
@@ -281,6 +287,9 @@
   </data>
   <data name="VEHICLEID_IS_REQUIRED" xml:space="preserve">
     <value>VehicleId is required.</value>
+  </data>
+  <data name="VEHICLE_NOT_AVAILABLE" xml:space="preserve">
+    <value>Vehicle not available</value>
   </data>
   <data name="VEHICLE_NOT_FOUND" xml:space="preserve">
     <value>Vehicle not found</value>

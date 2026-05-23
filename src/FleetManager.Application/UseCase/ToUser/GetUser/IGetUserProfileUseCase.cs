@@ -1,4 +1,4 @@
-﻿using FleetManager.communication.Responses.ToUsers;
+﻿using FleetManager.communication.Responses;
 
 namespace FleetManager.Application.UseCase.ToUser.GetUser
 {

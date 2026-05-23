@@ -14,8 +14,10 @@ namespace FleetManager.Domain.Entities
         public string ChassisNumber { get; set; } = string.Empty;
         public string LicensePlate { get; set; } = string.Empty;
         public string Color { get; set; } = string.Empty;
+        public int CategoryId { get; set; }
         public long CurrentMileage { get; private set; }
         public DateTime CreateAt { get; private set; } = DateTime.UtcNow;
+        public Category Category { get; set; } = default!;
         public bool IsActive { get; private set; } = true;
         public void UpdateCurrentMileage(long newMileage)
         {
@@ -32,7 +34,7 @@ namespace FleetManager.Domain.Entities
         {
             IsActive = false;
         }
-
+      
         public void Activate()
         {
             IsActive = true;

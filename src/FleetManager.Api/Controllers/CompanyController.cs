@@ -4,9 +4,8 @@ using FleetManager.Application.UseCase.ToCompany.GetAll;
 using FleetManager.Application.UseCase.ToCompany.GetById;
 using FleetManager.Application.UseCase.ToCompany.Register;
 using FleetManager.Application.UseCase.ToCompany.Update;
-using FleetManager.communication.Requests.ToCompany;
+using FleetManager.communication.Requests;
 using FleetManager.communication.Responses;
-using FleetManager.communication.Responses.ToCompany;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 

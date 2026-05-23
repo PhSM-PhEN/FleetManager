@@ -3,9 +3,8 @@ using FleetManager.Application.UseCase.ToCategory.GetAll;
 using FleetManager.Application.UseCase.ToCategory.GetById;
 using FleetManager.Application.UseCase.ToCategory.Register;
 using FleetManager.Application.UseCase.ToCategory.Update;
-using FleetManager.communication.Requests.ToCategory;
+using FleetManager.communication.Requests;
 using FleetManager.communication.Responses;
-using FleetManager.communication.Responses.ToCategory;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +16,7 @@ namespace FleetManager.Api.Controllers
     public class CategoryController : ControllerBase
     {
         [HttpPost]
-        [ProducesResponseType(typeof(ResponseShortCategoryJson), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseCategoryJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register([FromServices] IRegisterCategoryUseCase useCase,
             [FromBody] RequestCategoryJson request)
@@ -28,7 +27,7 @@ namespace FleetManager.Api.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(ResponseShortCategoryJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseCategoryJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetAll([FromServices] IGetAllCategoyUseCase useCase)
@@ -43,7 +42,7 @@ namespace FleetManager.Api.Controllers
             return NoContent();
         }
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(ResponseCategoryJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseListCategoryJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById([FromServices] IGetByIdCategoryUseCase useCase, [FromRoute] int id)
