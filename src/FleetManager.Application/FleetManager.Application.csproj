@@ -30,7 +30,6 @@
     <Folder Include="UseCase\ToCompany\GetById\" />
     <Folder Include="UseCase\ToCompany\Register\" />
     <Folder Include="UseCase\ToCompany\Update\" />
-    <Folder Include="UseCase\ToRental\" />
     <Folder Include="UseCase\ToUser\ChangePassword\" />
   </ItemGroup>
 

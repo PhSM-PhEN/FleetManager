@@ -15,9 +15,7 @@
   <ItemGroup>
     <Folder Include="Requests\ToAddress\" />
     <Folder Include="Requests\ToCompany\" />
-    <Folder Include="Requests\ToRental\" />
     <Folder Include="Responses\ToCompany\" />
-    <Folder Include="Responses\ToRental\" />
   </ItemGroup>
 
 </Project>
