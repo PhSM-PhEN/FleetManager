@@ -12,13 +12,13 @@ namespace FleetManager.Application.UseCase.ToUser.Register
 {
     public class RegisterUserUseCase(IUnitOfWork unitOfWork, IUserWriteOnlyRepository repository,
         IUserReadOnlyRepository userReadOnly,
-        IPasswordEncripter encripter,IMapper mapper, IAccesTokenGenerator tokenGenerator) : IRegisterUserUseCase
+        IPasswordEncripter encripter,IMapper mapper, IAccessTokenGenerator tokenGenerator) : IRegisterUserUseCase
     {
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
         private readonly IUserWriteOnlyRepository _repository = repository;
         private readonly IUserReadOnlyRepository _userReadOnly = userReadOnly;
         private readonly IPasswordEncripter _encripter = encripter;
-        private readonly IAccesTokenGenerator _tokenGenerator = tokenGenerator;
+        private readonly IAccessTokenGenerator _tokenGenerator = tokenGenerator;
         private readonly IMapper _mapper = mapper;
 
         public async Task<ResponseRegisterUserJson> Execute(RequestRegisterUserJson request)

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace FleetManager.Infrastructure.Security.Token
 {
-    public class JwtTokenGenerator(uint expirationTimeInMinutes, string signingKey) : IAccesTokenGenerator
+    public class JwtTokenGenerator(uint expirationTimeInMinutes, string signingKey) : IAccessTokenGenerator
     {
         private readonly uint _expirationTimeInMinutes = expirationTimeInMinutes;
         private readonly string _signingKey = signingKey;

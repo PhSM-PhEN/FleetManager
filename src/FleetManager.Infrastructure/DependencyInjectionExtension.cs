@@ -48,7 +48,7 @@ namespace FleetManager.Infrastructure
             var expirationTimeMinutes = configuration.GetValue<uint>("Settings:Jwt:ExpiresInMinutes");
             var signingKey = configuration.GetValue<string>("Settings:Jwt:SigningKey");
 
-            services.AddScoped<IAccesTokenGenerator>(config => new JwtTokenGenerator(expirationTimeMinutes, signingKey!));
+            services.AddScoped<IAccessTokenGenerator>(config => new JwtTokenGenerator(expirationTimeMinutes, signingKey!));
         }
         private static void AddDataContext(IServiceCollection services, IConfiguration configuration)
         {
@@ -101,7 +101,7 @@ namespace FleetManager.Infrastructure
             services.AddScoped<IRentalPlansUpdateOnlyRepository, RentalPlansRepository>();
 
             //UnitOfWork
-            services.AddScoped<IUnitOfWork, UnitiOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
     }

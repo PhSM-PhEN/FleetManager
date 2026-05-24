@@ -1,5 +1,4 @@
 ﻿using FleetManager.Domain.DomainExceptionBase;
-using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Domain.Entities
 {
@@ -23,8 +22,7 @@ namespace FleetManager.Domain.Entities
         {
             if (newMileage < CurrentMileage)
             {
-                throw new DomainRuleException(
-                    ResourceErrorMessages.THE_MILEAGE_MUST_BE_HIGHER_THAN_THE_CURRENT);
+                throw new DomainRuleException("THE_MILEAGE_MUST_BE_HIGHER_THAN_THE_CURRENT");
             }
 
             CurrentMileage = newMileage;

@@ -8,11 +8,11 @@ using FleetManager.Exception.ExceptionBase;
 namespace FleetManager.Application.UseCase.ToLogin
 {
     public class DoLoginUseCase(IUserReadOnlyRepository userReadOnlyRepository, IPasswordEncripter passwordEncripter,
-        IAccesTokenGenerator tokenGenerator) : IDoLoginUseCase
+        IAccessTokenGenerator tokenGenerator) : IDoLoginUseCase
     {
         private readonly IUserReadOnlyRepository _userReadOnlyRepository = userReadOnlyRepository;
         private readonly IPasswordEncripter _passwordEncripter = passwordEncripter;
-        private readonly IAccesTokenGenerator _tokenGenerator = tokenGenerator;
+        private readonly IAccessTokenGenerator _tokenGenerator = tokenGenerator;
 
 
         public async Task<ResponseRegisterUserJson> Execute(RequestLoginUserJson request)

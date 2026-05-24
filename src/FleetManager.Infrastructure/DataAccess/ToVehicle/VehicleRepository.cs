@@ -4,40 +4,40 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FleetManager.Infrastructure.DataAccess.ToVehicle
 {
-    internal class VehicleRepository(FleetManagerDbContext context) : IVehicleWriteOnlyRepository, IVehicleReadOnlyRepository, IVehicleUpdateOnlyRepository
+    internal class VehicleRepository(FleetManagerDbContext dbContext) : IVehicleWriteOnlyRepository, IVehicleReadOnlyRepository, IVehicleUpdateOnlyRepository
     {
-        private readonly FleetManagerDbContext _dbContext = context;
+     
         public async Task Add(Vehicle vehicle)
         {
-            await _dbContext.Vehicles.AddAsync(vehicle);
+            await dbContext.Vehicles.AddAsync(vehicle);
         }
 
         public async Task Delete(long id)
         {
-            var result =  await _dbContext.Vehicles.FindAsync(id);
-            _dbContext.Vehicles.Remove(result!);
+            var result =  await dbContext.Vehicles.FindAsync(id);
+            dbContext.Vehicles.Remove(result!);
         }
 
         public async Task<List<Vehicle>> GetAll()
         {
-            return await _dbContext.Vehicles
+            return await dbContext.Vehicles
                 .AsNoTracking()
                 .ToListAsync();
         }
         async Task<Vehicle?> IVehicleReadOnlyRepository.GetById(long id)
         {
-            return await _dbContext.Vehicles
+            return await dbContext.Vehicles
                 .AsNoTracking()
                 .FirstOrDefaultAsync(v => v.Id == id);
         }
         async Task<Vehicle?> IVehicleUpdateOnlyRepository.GetById(long id)
         {
-            return await _dbContext.Vehicles 
+            return await dbContext.Vehicles 
                 .FirstOrDefaultAsync(v => v.Id == id);
         }
         public void Update(Vehicle vehicle)
         {
-            _dbContext.Vehicles.Update(vehicle);
+            dbContext.Vehicles.Update(vehicle);
         }
     }
 }

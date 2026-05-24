@@ -2,7 +2,7 @@
 
 namespace FleetManager.Domain.Security.Token
 {
-    public interface IAccesTokenGenerator
+    public interface IAccessTokenGenerator
     {
         string GenerateToken(User user);
     }
