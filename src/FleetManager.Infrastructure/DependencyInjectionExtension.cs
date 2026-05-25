@@ -32,7 +32,7 @@ namespace FleetManager.Infrastructure
     {
         public static void AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IPasswordEncripter, Security.Cryptography.BCrypt>();
+            services.AddScoped<IPasswordEncrypter, Security.Cryptography.BCrypt>();
             services.AddScoped<ILoggedUser, LoggedUser>();
             AddToken(services, configuration);
             AddRepositories(services);

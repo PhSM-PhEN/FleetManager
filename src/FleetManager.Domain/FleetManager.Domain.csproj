@@ -13,4 +13,19 @@
     <Folder Include="Repositories\ToRental\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="DomainExceptionBase\ResourceMessages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>ResourceMessages.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="DomainExceptionBase\ResourceMessages.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResourceMessages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

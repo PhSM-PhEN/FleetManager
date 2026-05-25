@@ -10,7 +10,7 @@ namespace FleetManager.Application.UseCase.ToClient
         {
             RuleFor(client => client.FirstAndLastName)
                 .NotEmpty()
-                .WithMessage(ResourceErrorMessages.NAME_REQUIRED)
+                .WithMessage(ResourceErrorMessages.NAME_IS_REQUIRED)
                 .MinimumLength(3)
                 .WithMessage(ResourceErrorMessages.NAME_MUST_BE_GREATER_THAN_3_LETTERS);
 

@@ -234,8 +234,8 @@
   <data name="NAME_MUST_BE_GREATER_THAN_3_LETTERS" xml:space="preserve">
     <value>Name must be greater than 3 letters</value>
   </data>
-  <data name="NAME_REQUIRED" xml:space="preserve">
-    <value>Name required</value>
+  <data name="NAME_IS_REQUIRED" xml:space="preserve">
+    <value>Name is required</value>
   </data>
   <data name="NOT_FOUND" xml:space="preserve">
     <value>Not found</value>
@@ -299,5 +299,17 @@
   </data>
   <data name="ZIPCODE_REQUIRED" xml:space="preserve">
     <value>Zipcode required</value>
+  </data>
+  <data name="INVALID_RENTAL_MODE" xml:space="preserve">
+    <value>Invalid rental mode.</value>
+  </data>
+  <data name="PRICE_RENTAL_MUST_BE_GREATER_THAN_ZERO" xml:space="preserve">
+    <value>Price rental must be greater than zero.</value>
+  </data>
+  <data name="PRICE_PER_KM_MUST_BE_GREATER_THAN_ZERO" xml:space="preserve">
+    <value>Price per km must be greater than zero</value>
+  </data>
+  <data name="INCLUDED_KM_MUST_BE_GREATER_THAN_OR_EQUAL_TO_ZERO" xml:space="preserve">
+    <value>Included km must be greater than or equal to zero</value>
   </data>
 </root>

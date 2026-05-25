@@ -63,15 +63,12 @@ namespace FleetManager.Infrastructure.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("BaseDailyRate")
-                        .HasColumnType("decimal(65,30)");
-
-                    b.Property<decimal>("BaseMileageRate")
-                        .HasColumnType("decimal(65,30)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<int>("TransmissionType")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -158,9 +155,6 @@ namespace FleetManager.Infrastructure.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
                     b.Property<long>("ClientId")
                         .HasColumnType("bigint");
 
@@ -170,11 +164,11 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<int>("RentalPlanId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(65,30)");
@@ -187,17 +181,52 @@ namespace FleetManager.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
-
                     b.HasIndex("ClientId");
 
                     b.HasIndex("CompanyId");
+
+                    b.HasIndex("RentalPlanId");
 
                     b.HasIndex("UserId");
 
                     b.HasIndex("VehicleId");
 
                     b.ToTable("Rentals");
+                });
+
+            modelBuilder.Entity("FleetManager.Domain.Entities.RentalPlan", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("IncludedKm")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("Mode")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<decimal>("PricePerKm")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<decimal>("PriceRental")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<int>("Transmission")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RentalPlans");
                 });
 
             modelBuilder.Entity("FleetManager.Domain.Entities.User", b =>
@@ -310,12 +339,6 @@ namespace FleetManager.Infrastructure.Migrations
 
             modelBuilder.Entity("FleetManager.Domain.Entities.Rental", b =>
                 {
-                    b.HasOne("FleetManager.Domain.Entities.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("FleetManager.Domain.Entities.Client", "Client")
                         .WithMany()
                         .HasForeignKey("ClientId")
@@ -325,6 +348,12 @@ namespace FleetManager.Infrastructure.Migrations
                     b.HasOne("FleetManager.Domain.Entities.Company", "Company")
                         .WithMany()
                         .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FleetManager.Domain.Entities.RentalPlan", "RentalPlan")
+                        .WithMany()
+                        .HasForeignKey("RentalPlanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -340,11 +369,11 @@ namespace FleetManager.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
-
                     b.Navigation("Client");
 
                     b.Navigation("Company");
+
+                    b.Navigation("RentalPlan");
 
                     b.Navigation("User");
 

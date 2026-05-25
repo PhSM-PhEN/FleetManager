@@ -20,6 +20,7 @@ using FleetManager.Application.UseCase.ToCompany.GetById;
 using FleetManager.Application.UseCase.ToCompany.Register;
 using FleetManager.Application.UseCase.ToCompany.Update;
 using FleetManager.Application.UseCase.ToLogin;
+using FleetManager.Application.UseCase.ToRentalPlan.Register;
 using FleetManager.Application.UseCase.ToUser.Delete;
 using FleetManager.Application.UseCase.ToUser.GetUser;
 using FleetManager.Application.UseCase.ToUser.Register;
@@ -88,6 +89,10 @@ namespace FleetManager.Application.UseCase
             services.AddScoped<IGetByIdCompanyUseCase, GetByIdCompanyUseCase>();
             services.AddScoped<IUpdateCompanyUseCase, UpdateCompanyUseCase>();
             services.AddScoped<IDeleteCompanyUseCase, DeleteCompanyUseCase>();
+
+            //retal plan
+            services.AddScoped<IRegisterRentalPlanUseCase, RegisterRentalPlanUseCase>();
+
 
             //Login
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();

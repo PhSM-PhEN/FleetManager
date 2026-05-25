@@ -286,6 +286,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Included km must be greater than or equal to zero.
+        /// </summary>
+        public static string INCLUDED_KM_MUST_BE_GREATER_THAN_OR_EQUAL_TO_ZERO {
+            get {
+                return ResourceManager.GetString("INCLUDED_KM_MUST_BE_GREATER_THAN_OR_EQUAL_TO_ZERO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid CNH category.
         /// </summary>
         public static string INVALID_CNH_CATEGORY {
@@ -327,6 +336,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string INVALID_PHONE_NUMBER_FORMAT {
             get {
                 return ResourceManager.GetString("INVALID_PHONE_NUMBER_FORMAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid rental mode..
+        /// </summary>
+        public static string INVALID_RENTAL_MODE {
+            get {
+                return ResourceManager.GetString("INVALID_RENTAL_MODE", resourceCulture);
             }
         }
         
@@ -403,20 +421,20 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name is required.
+        /// </summary>
+        public static string NAME_IS_REQUIRED {
+            get {
+                return ResourceManager.GetString("NAME_IS_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name must be greater than 3 letters.
         /// </summary>
         public static string NAME_MUST_BE_GREATER_THAN_3_LETTERS {
             get {
                 return ResourceManager.GetString("NAME_MUST_BE_GREATER_THAN_3_LETTERS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Name required.
-        /// </summary>
-        public static string NAME_REQUIRED {
-            get {
-                return ResourceManager.GetString("NAME_REQUIRED", resourceCulture);
             }
         }
         
@@ -471,6 +489,24 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string PHONE_NUMBER_IS_REQUERID {
             get {
                 return ResourceManager.GetString("PHONE_NUMBER_IS_REQUERID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price per km must be greater than zero.
+        /// </summary>
+        public static string PRICE_PER_KM_MUST_BE_GREATER_THAN_ZERO {
+            get {
+                return ResourceManager.GetString("PRICE_PER_KM_MUST_BE_GREATER_THAN_ZERO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price rental must be greater than zero..
+        /// </summary>
+        public static string PRICE_RENTAL_MUST_BE_GREATER_THAN_ZERO {
+            get {
+                return ResourceManager.GetString("PRICE_RENTAL_MUST_BE_GREATER_THAN_ZERO", resourceCulture);
             }
         }
         

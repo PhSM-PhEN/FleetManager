@@ -9,7 +9,7 @@ namespace FleetManager.Application.UseCase.ToUser.Update
         public UpdateValidator()
         {
             RuleFor(user => user.Name)
-                .NotEmpty().WithMessage(ResourceErrorMessages.NAME_REQUIRED);
+                .NotEmpty().WithMessage(ResourceErrorMessages.NAME_IS_REQUIRED);
             RuleFor(user => user.Email)
                 .NotEmpty().WithMessage(ResourceErrorMessages.EMAIL_REQUIRED)
                 .EmailAddress()

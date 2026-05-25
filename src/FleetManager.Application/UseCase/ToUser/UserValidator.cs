@@ -10,7 +10,7 @@ namespace FleetManager.Application.UseCase.ToUser
         {
             RuleFor(u => u.Name)
                 .NotEmpty()
-                .WithMessage(ResourceErrorMessages.NAME_REQUIRED);
+                .WithMessage(ResourceErrorMessages.NAME_IS_REQUIRED);
             RuleFor(u => u.Email)
                 .NotEmpty()
                 .WithMessage(ResourceErrorMessages.EMAIL_REQUIRED)

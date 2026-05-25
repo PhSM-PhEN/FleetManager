@@ -9,10 +9,10 @@ using FluentValidation.Results;
 
 namespace FleetManager.Application.UseCase.ToUser.ChangePassword
 {
-    public class ChangePasswordUserUseCase(ILoggedUser loggedUser, IPasswordEncripter passwordEncripter, IUserUpdateOnlyRepository updateRepository, IUnitOfWork unitOfWork) : IChangePasswordUserUseCase
+    public class ChangePasswordUserUseCase(ILoggedUser loggedUser, IPasswordEncrypter passwordEncripter, IUserUpdateOnlyRepository updateRepository, IUnitOfWork unitOfWork) : IChangePasswordUserUseCase
     {
         private readonly ILoggedUser _loggedUser = loggedUser;
-        private readonly IPasswordEncripter _passwordEncripter = passwordEncripter;
+        private readonly IPasswordEncrypter _passwordEncripter = passwordEncripter;
         private readonly IUserUpdateOnlyRepository _updateRepository = updateRepository;
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
         public async Task Execute(RequestChangePasswordJson request)

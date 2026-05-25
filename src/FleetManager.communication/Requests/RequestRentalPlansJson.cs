@@ -10,6 +10,6 @@ namespace FleetManager.communication.Requests
         public decimal PriceRental { get; set; }
         public decimal PricePerKm { get; set; }
         public decimal IncludedKm { get; set; }
-        public bool IsActive { get; set; } = true;
+        
     }
 }

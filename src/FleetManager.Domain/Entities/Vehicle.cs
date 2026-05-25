@@ -22,7 +22,7 @@ namespace FleetManager.Domain.Entities
         {
             if (newMileage < CurrentMileage)
             {
-                throw new DomainRuleException("THE_MILEAGE_MUST_BE_HIGHER_THAN_THE_CURRENT");
+                throw new DomainRuleException(ResourceMessages.THE_MILEAGE_MUST_BE_HIGHER_THAN_THE_CURRENT);
             }
 
             CurrentMileage = newMileage;

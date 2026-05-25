@@ -2,7 +2,7 @@
 
 namespace FleetManager.communication.Responses
 {
-    public class ResponseRentalPlansJson
+    public class ResponseRentalPlanJson
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
@@ -11,6 +11,6 @@ namespace FleetManager.communication.Responses
         public decimal PriceRental { get; set; }
         public decimal PricePerKm { get; set; }
         public decimal IncludedKm { get; set; }
-        public bool IsActive { get; set; } = true;
+        
     }
 }

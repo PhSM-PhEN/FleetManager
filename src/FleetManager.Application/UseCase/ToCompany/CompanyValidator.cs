@@ -9,7 +9,7 @@ public class CompanyValidator : AbstractValidator<RequestCompanyJson>
     public CompanyValidator()
     {
         RuleFor(c => c.Name).NotEmpty()
-            .WithMessage(ResourceErrorMessages.NAME_REQUIRED);
+            .WithMessage(ResourceErrorMessages.NAME_IS_REQUIRED);
         RuleFor(c => c.Cnpj).NotEmpty()
             .WithMessage("Cnpj required")
             .Matches(@"^\d{2}\.?\d{3}\.?\d{3}/?\d{4}-?\d{2}$")
