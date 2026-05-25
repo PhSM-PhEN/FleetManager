@@ -1,20 +1,18 @@
 ﻿using AutoMapper;
 using FleetManager.communication.Responses;
 using FleetManager.Domain.Repositories.ToVehicle;
+using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToVehicle.GetById
 {
     public class GetByIdVehicleUseCase(IMapper mapper , 
         IVehicleReadOnlyRepository vehicleReadOnly) : IGetByIdVehicleUseCase
     {
-        private readonly IMapper _mapper = mapper;
-        private readonly IVehicleReadOnlyRepository _vehicleReadOnly = vehicleReadOnly;
 
         public async Task<ResponseVehicleByIdJson> Execute(long id)
         {
-            var respone = await _vehicleReadOnly.GetById(id);
-
-            return _mapper.Map<ResponseVehicleByIdJson>(respone);
+            var respone = await vehicleReadOnly.GetById(id);
+            return mapper.Map<ResponseVehicleByIdJson>(respone);
         }
     }
 }
