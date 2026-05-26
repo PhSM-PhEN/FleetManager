@@ -12,23 +12,17 @@ namespace FleetManager.Application.UseCase.ToRental.Register
 {
     public class RegisterRentUseCase(
         ILoggedUser loggedUser, ICompanyReadOnlyRepository companyReadOnly,
-        IVehicleReadOnlyRepository vehicleReadOnly, ICategoryReadOnlyRepository categoryReadOnly,
-        IClientReadOnlyRepository clientReadOnly, IUnitOfWork unitOfWork) : IRegisterRentUseCase
+        IVehicleReadOnlyRepository vehicleReadOnly, IClientReadOnlyRepository clientReadOnly, IUnitOfWork unitOfWork) : IRegisterRentUseCase
     {
-        private readonly ILoggedUser _loggedUser = loggedUser;
-        private readonly ICompanyReadOnlyRepository _companyReadOnly = companyReadOnly;
-        private readonly IVehicleReadOnlyRepository _vehicleReadOnly = vehicleReadOnly;
-        private readonly ICategoryReadOnlyRepository _categoryReadOnly = categoryReadOnly;
-        private readonly IClientReadOnlyRepository _clientReadOnly = clientReadOnly;
-        private readonly IUnitOfWork _unitOfWork = unitOfWork;
+
         public async Task<ResponseRentalJson> Execute(RequestRentJson request)
         { 
-            var loggedUser = await _loggedUser.Get();
+            var logged = await loggedUser.Get();
             Validate(request);
             await ValidateBusinessRules(request);
             
             
-            await _unitOfWork.Commit();
+            await unitOfWork.Commit();
             throw new NotImplementedException();
         }
         private static void Validate(RequestRentJson request)
@@ -44,16 +38,15 @@ namespace FleetManager.Application.UseCase.ToRental.Register
         }
         private async Task ValidateBusinessRules(RequestRentJson request)
         {
-            await EnsureCategoryExists(request.CompanyId);
             await EnsureClientExists(request.ClientId);
             await EnsureVehicleExists(request.VehicleId);
             await EnsureCompanyExists(request.CompanyId);
-            await EnsureCategoryExists(request.CategoryId);
+           
         }
         private async Task EnsureClientExists(long clientId)
 
         {
-            var result = await _clientReadOnly.GetById(clientId);
+            var result = await clientReadOnly.GetById(clientId);
             
             if(result == null)
             {
@@ -63,29 +56,21 @@ namespace FleetManager.Application.UseCase.ToRental.Register
        
         private async Task EnsureVehicleExists(long id)
         {
-            var result = await _vehicleReadOnly.GetById(id);
+            var result = await vehicleReadOnly.GetById(id);
             if(result is null)
             {
                 throw new NotFoundException(ResourceErrorMessages.VEHICLE_NOT_FOUND);
             }
         }
-        private async Task EnsureCategoryExists(int id)
-        {
-            var result = await _categoryReadOnly.GetById(id);
-            if(result is null)
-            {
-                throw new NotFoundException(ResourceErrorMessages.CATEGORY_NOT_FOUND);
-            }
-        }
+       
         private async Task EnsureCompanyExists(int id)
         {
-            var result = await _companyReadOnly.GetById(id);
+            var result = await companyReadOnly.GetById(id);
             if(result is null)
             {
                 throw new NotFoundException(ResourceErrorMessages.COMPANY_NOT_FOUND);
             }
         }
-       
        
     }
     

@@ -3,8 +3,6 @@ using AutoMapper;
 using FleetManager.communication.Responses;
 using FleetManager.Domain.Repositories.ToRentalPlans;
 using FleetManager.Exception.ExceptionBase;
-using Microsoft.EntityFrameworkCore.Migrations.Operations;
-
 namespace FleetManager.Application.UseCase.ToRentalPlan.GetAll;
 
 public class GetAllRentalPlanUseCase(IMapper mapper, IRentalPlansReadOnlyRepository repository) : IGetAllRentalPlanUseCase

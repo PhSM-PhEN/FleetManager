@@ -62,6 +62,8 @@ namespace FleetManager.Application.AutoMapper
             CreateMap<Company, ResponseListCompanyJson>();
 
             CreateMap<RentalPlan, ResponseRentalPlanJson>();
+            CreateMap<RentalPlan, ResponseListRentalPlanJson>();
+            CreateMap<RentalPlan, ResponseShortRentalPlansJson>();
 
         }
     }

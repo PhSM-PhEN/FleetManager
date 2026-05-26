@@ -20,9 +20,11 @@ using FleetManager.Application.UseCase.ToCompany.GetById;
 using FleetManager.Application.UseCase.ToCompany.Register;
 using FleetManager.Application.UseCase.ToCompany.Update;
 using FleetManager.Application.UseCase.ToLogin;
+using FleetManager.Application.UseCase.ToRentalPlan.Delete;
 using FleetManager.Application.UseCase.ToRentalPlan.GetAll;
 using FleetManager.Application.UseCase.ToRentalPlan.GetById;
 using FleetManager.Application.UseCase.ToRentalPlan.Register;
+using FleetManager.Application.UseCase.ToRentalPlan.Update;
 using FleetManager.Application.UseCase.ToUser.Delete;
 using FleetManager.Application.UseCase.ToUser.GetUser;
 using FleetManager.Application.UseCase.ToUser.Register;
@@ -96,6 +98,8 @@ namespace FleetManager.Application.UseCase
             services.AddScoped<IRegisterRentalPlanUseCase, RegisterRentalPlanUseCase>();
             services.AddScoped<IGetAllRentalPlanUseCase, GetAllRentalPlanUseCase>();
             services.AddScoped<IGetByIdRentalPlanUseCase, GetByIdRentalPlanUseCase>();
+            services.AddScoped<IUpdateRentalPlanUseCase, UpdateRentalPlanUseCase>();
+            services.AddScoped<IDeleteRentalPlanUseCase, DeleteRentalPlanUseCase>();
 
             //Login
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
