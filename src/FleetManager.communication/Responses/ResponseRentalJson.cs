@@ -5,11 +5,9 @@
         public class Rental
         {
             public long Id { get; set; }
-            public int CompanyId { get; set; }
-            public long ClientId { get; set; }
-            public long VehicleId { get; set; }
-            public int CategoryId { get; set; }
-            public long UserId { get; set; }
+            public string CompanyName { get; set; } = string.Empty;
+            public string ClientName { get; set; } = string.Empty;
+            public string VehicleName { get; set; } = string.Empty;
             public decimal TotalPrice { get; set; }
 
         }

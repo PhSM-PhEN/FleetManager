@@ -10,7 +10,6 @@ namespace FleetManager.Domain.Entities
         public TransmissionType Transmission { get; set; }
         public decimal PriceRental { get; private set; }
         public decimal PricePerKm { get; private set; }
-        public decimal IncludedKm { get; set; }
         public bool IsActive { get; set; } = true;
 
 
