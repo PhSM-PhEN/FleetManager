@@ -9,16 +9,10 @@ namespace FleetManager.Application.UseCase.ToVehicle.Update.UpdateKm
 {
     public class UpdateVehicleKmUseCase(IUnitOfWork unitOfWork, IVehicleUpdateOnlyRepository repository, IMapper mapper) : IUpdateVehicleKmUseCase
     {
-
-        private readonly IMapper _mapper = mapper;
-        private readonly IVehicleUpdateOnlyRepository _repository = repository;
-
-        private readonly IUnitOfWork _unitOfWork = unitOfWork;
-
         public async Task<ResponseVehicleJson> Execute(long id, RequestVehicleUpdateCurrentMileageJson request)
         {
             Validate(request);
-            var vehicle = await _repository.GetById(id);
+            var vehicle = await repository.GetById(id);
 
             if (vehicle == null)
             {
@@ -29,10 +23,10 @@ namespace FleetManager.Application.UseCase.ToVehicle.Update.UpdateKm
             
             
 
-            _repository.Update(vehicle);
-            await _unitOfWork.Commit();
+            repository.Update(vehicle);
+            await unitOfWork.Commit();
 
-            return _mapper.Map<ResponseVehicleJson>(vehicle);
+            return mapper.Map<ResponseVehicleJson>(vehicle);
         }
         private void Validate(RequestVehicleUpdateCurrentMileageJson request)
         {

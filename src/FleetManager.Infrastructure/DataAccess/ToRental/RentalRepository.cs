@@ -20,7 +20,11 @@ public class RentalRepository(FleetManagerDbContext dbContext) : IRentalWriteOnl
 
     public async Task<List<Rental>> GetAll()
     {
-        return await dbContext.Rentals.AsNoTracking().ToListAsync();
+        return await dbContext.Rentals
+        .Include(r => r.Client)
+        .Include(r => r.Vehicle)
+        .Include(r =>r.Company)
+        .AsNoTracking().ToListAsync();
     }
 
     public async Task<Rental?> GetById(long id)

@@ -13,6 +13,7 @@ namespace FleetManager.Application.UseCase.ToVehicle.GetAll
         {
             var vehicles = await _vehicleReadOnly.GetAll();
             
+            
 
             return new ResponseAllVehicleJson
             {

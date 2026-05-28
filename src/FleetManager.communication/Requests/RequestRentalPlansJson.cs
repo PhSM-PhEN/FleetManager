@@ -9,7 +9,7 @@ namespace FleetManager.communication.Requests
         public TransmissionType Transmission { get; set; }
         public decimal PriceRental { get; set; }
         public decimal PricePerKm { get; set; }
-        public decimal IncludedKm { get; set; }
+
         
     }
 }
