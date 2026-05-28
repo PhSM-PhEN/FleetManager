@@ -6,12 +6,14 @@ using FleetManager.Application.UseCase.ToVehicle.Update.UpdateKm;
 using FleetManager.Application.UseCase.ToVehicle.Update.UpdateVehicle;
 using FleetManager.communication.Requests;
 using FleetManager.communication.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FleetManager.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class VehicleController : ControllerBase
     {
         [HttpPost]

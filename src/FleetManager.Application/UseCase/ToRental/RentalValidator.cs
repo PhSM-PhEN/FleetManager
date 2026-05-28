@@ -20,10 +20,6 @@ namespace FleetManager.Application.UseCase.ToRental
                 .GreaterThan(0)
                 .WithMessage(ResourceErrorMessages.VEHICLEID_IS_REQUIRED);
 
-            RuleFor(rent => rent.TotalPrice)
-                .GreaterThan(0)
-                .WithMessage(ResourceErrorMessages.TOTAL_PRICE_MUST_BE_GREATER_THAN_ZERO);
-
             RuleFor(rent => rent.StartDate)
                 .LessThan(rent => rent.EndDate)
                 .WithMessage(ResourceErrorMessages.START_DATE_MUST_BE_LESS_THAN_END_DATE);

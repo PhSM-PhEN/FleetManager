@@ -4,6 +4,7 @@ using FleetManager.Application.UseCase.ToUser.Register;
 using FleetManager.Application.UseCase.ToUser.Update;
 using FleetManager.communication.Requests;
 using FleetManager.communication.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FleetManager.Api.Controllers
@@ -22,7 +23,9 @@ namespace FleetManager.Api.Controllers
 
             return Created(string.Empty, response);
         }
+        
         [HttpGet]
+        [Authorize]
         [ProducesResponseType(typeof(ResponseUserProfileJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
@@ -32,6 +35,7 @@ namespace FleetManager.Api.Controllers
             return Ok(response);
         }
         [HttpDelete]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> DeleteUser([FromServices] IDeleteUserAccountUseCase useCase)
@@ -40,6 +44,7 @@ namespace FleetManager.Api.Controllers
             return NoContent();
         }
         [HttpPut]
+        [Authorize]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> UpdateUser([FromServices] IUpdateProfileUseCase useCase, [FromBody] RequestUpdateUserJson request)

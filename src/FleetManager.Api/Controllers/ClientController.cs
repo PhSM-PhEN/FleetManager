@@ -5,12 +5,14 @@ using FleetManager.Application.UseCase.ToClient.Register;
 using FleetManager.Application.UseCase.ToClient.Update;
 using FleetManager.communication.Requests;
 using FleetManager.communication.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FleetManager.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ClientController : ControllerBase
     {
         [HttpPost]

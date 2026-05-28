@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FleetManager.Infrastructure.Migrations
 {
     [DbContext(typeof(FleetManagerDbContext))]
-    [Migration("20260524160141_Initial_Migration")]
-    partial class Initial_Migration
+    [Migration("20260528020604_InitialMigrations")]
+    partial class InitialMigrations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -167,11 +167,23 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<decimal>("IncludedKm")
+                        .HasColumnType("decimal(65,30)");
+
                     b.Property<int>("RentalPlanId")
                         .HasColumnType("int");
 
+                    b.Property<decimal>("SnapshotPricePerKm")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<decimal>("SnapshotPriceRental")
+                        .HasColumnType("decimal(65,30)");
+
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<int>("TotalDays")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(65,30)");
@@ -204,9 +216,6 @@ namespace FleetManager.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("IncludedKm")
-                        .HasColumnType("decimal(65,30)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("tinyint(1)");

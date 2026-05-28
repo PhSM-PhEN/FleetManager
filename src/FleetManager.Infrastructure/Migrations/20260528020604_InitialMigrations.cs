@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FleetManager.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial_Migration : Migration
+    public partial class InitialMigrations : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -66,7 +66,6 @@ namespace FleetManager.Infrastructure.Migrations
                     Transmission = table.Column<int>(type: "int", nullable: false),
                     PriceRental = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
                     PricePerKm = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
-                    IncludedKm = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
                     IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
@@ -201,8 +200,12 @@ namespace FleetManager.Infrastructure.Migrations
                     ClientId = table.Column<long>(type: "bigint", nullable: false),
                     VehicleId = table.Column<long>(type: "bigint", nullable: false),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    TotalPrice = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
                     RentalPlanId = table.Column<int>(type: "int", nullable: false),
+                    TotalDays = table.Column<int>(type: "int", nullable: false),
+                    IncludedKm = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
+                    SnapshotPriceRental = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
+                    SnapshotPricePerKm = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },

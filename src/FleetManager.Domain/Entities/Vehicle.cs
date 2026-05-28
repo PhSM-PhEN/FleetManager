@@ -1,5 +1,4 @@
 ﻿using FleetManager.Domain.DomainExceptionBase;
-using FleetManager.Domain.Enums;
 
 namespace FleetManager.Domain.Entities
 {
@@ -16,7 +15,6 @@ namespace FleetManager.Domain.Entities
         public string Color { get; set; } = string.Empty;
         public int CategoryId { get; set; }
         public long CurrentMileage { get; private set; }
-        public TransmissionType Transmission {get ; set; }
         public DateTime CreateAt { get; private set; } = DateTime.UtcNow;
         public Category Category { get; set; } = default!;
         public bool IsActive { get; private set; } = true;

@@ -3,7 +3,7 @@ using FleetManager.communication.Responses;
 
 namespace FleetManager.Application.UseCase.ToRental.Register
 {
-    public interface IRegisterRentUseCase
+    public interface IRegisterRentalUseCase
     {
         Task<ResponseRentalJson> Execute(RequestRentJson request);
     }

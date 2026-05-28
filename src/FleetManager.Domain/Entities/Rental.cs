@@ -22,8 +22,10 @@ namespace FleetManager.Domain.Entities
         public Client Client { get; set; } = default!;
         public Vehicle Vehicle { get; set; } = default!;
         public User User { get; set; } = default!;
-        private DateTime _startDate { get; set; } 
-        private DateTime _endDate { get; set; }
+
+        private DateTime _startDate ;
+
+        private DateTime _endDate ;
 
         public DateTime StartDate
         {
@@ -58,21 +60,20 @@ namespace FleetManager.Domain.Entities
         public void AttachPlan(RentalPlan plan)
         {
         if (plan is null)
-            throw new DomainRuleException("RentalPlan cannot be null.");
+            throw new DomainRuleException(ResourceMessages.RENTAL_PLAN_CANNOT_BE_NULL);
 
         if (!plan.IsActive)
-            throw new DomainRuleException("Cannot attach an inactive RentalPlan.");
+            throw new DomainRuleException(ResourceMessages.RENTAL_PLAN_IS_NOT_ACTIVE);
 
         RentalPlanId         = plan.Id;
-        RentalPlan           = plan;
-        SnapshotPriceRental  = plan.PriceRental;  // ← fotografia
-        SnapshotPricePerKm   = plan.PricePerKm;   // ← fotografia
+        SnapshotPriceRental  = plan.PriceRental;  
+        SnapshotPricePerKm   = plan.PricePerKm;   
         RecalculateIfReady();
         }
         public void UpdateIncludedKm(decimal newKm)
         {
         if (newKm < 0)
-            throw new DomainRuleException("IncludedKm cannot be negative.");
+            throw new DomainRuleException(ResourceMessages.INCLUDED_KM_CANNOT_BE_NEGATIVE);
 
         IncludedKm = newKm;
         CalculateTotalPrice();
@@ -80,7 +81,7 @@ namespace FleetManager.Domain.Entities
         private void CalculateTotalDays()
         {
             if (_endDate < _startDate)
-                throw new DomainRuleException("End date must be greater than or equal to start date.");
+                throw new DomainRuleException(ResourceMessages.END_DATE_MUST_BE_GREATER_THAN_START_DATE);
 
             TotalDays = (_endDate - _startDate).Days;
             

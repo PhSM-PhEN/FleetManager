@@ -61,6 +61,42 @@ namespace FleetManager.Domain.DomainExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to End date must be greater than start date..
+        /// </summary>
+        public static string END_DATE_MUST_BE_GREATER_THAN_START_DATE {
+            get {
+                return ResourceManager.GetString("END_DATE_MUST_BE_GREATER_THAN_START_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Included km cannot be negative.
+        /// </summary>
+        public static string INCLUDED_KM_CANNOT_BE_NEGATIVE {
+            get {
+                return ResourceManager.GetString("INCLUDED_KM_CANNOT_BE_NEGATIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rental Plan cannot be null..
+        /// </summary>
+        public static string RENTAL_PLAN_CANNOT_BE_NULL {
+            get {
+                return ResourceManager.GetString("RENTAL_PLAN_CANNOT_BE_NULL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rental plan is not active.
+        /// </summary>
+        public static string RENTAL_PLAN_IS_NOT_ACTIVE {
+            get {
+                return ResourceManager.GetString("RENTAL_PLAN_IS_NOT_ACTIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The miliage must be higher than the current.
         /// </summary>
         public static string THE_MILEAGE_MUST_BE_HIGHER_THAN_THE_CURRENT {

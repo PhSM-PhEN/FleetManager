@@ -520,6 +520,24 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rental plan is not active..
+        /// </summary>
+        public static string RENTAL_PLAN_IS_NOT_ACTIVE {
+            get {
+                return ResourceManager.GetString("RENTAL_PLAN_IS_NOT_ACTIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rental plan not found..
+        /// </summary>
+        public static string RENTAL_PLAN_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("RENTAL_PLAN_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RG is required.
         /// </summary>
         public static string RG_IS_REQUIRED {
@@ -601,6 +619,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vehicle has no category.
+        /// </summary>
+        public static string VEHICLE_HAS_NO_CATEGORY {
+            get {
+                return ResourceManager.GetString("VEHICLE_HAS_NO_CATEGORY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vehicle not available.
         /// </summary>
         public static string VEHICLE_NOT_AVAILABLE {
@@ -615,6 +642,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string VEHICLE_NOT_FOUND {
             get {
                 return ResourceManager.GetString("VEHICLE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vehicle trasmission mismatch..
+        /// </summary>
+        public static string VEHICLE_TRANSMISSION_MISMATCH {
+            get {
+                return ResourceManager.GetString("VEHICLE_TRANSMISSION_MISMATCH", resourceCulture);
             }
         }
         

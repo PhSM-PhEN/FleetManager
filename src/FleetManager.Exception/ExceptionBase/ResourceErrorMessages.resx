@@ -312,4 +312,16 @@
   <data name="INCLUDED_KM_MUST_BE_GREATER_THAN_OR_EQUAL_TO_ZERO" xml:space="preserve">
     <value>Included km must be greater than or equal to zero</value>
   </data>
+  <data name="VEHICLE_TRANSMISSION_MISMATCH" xml:space="preserve">
+    <value>Vehicle trasmission mismatch.</value>
+  </data>
+  <data name="RENTAL_PLAN_NOT_FOUND" xml:space="preserve">
+    <value>Rental plan not found.</value>
+  </data>
+  <data name="RENTAL_PLAN_IS_NOT_ACTIVE" xml:space="preserve">
+    <value>Rental plan is not active.</value>
+  </data>
+  <data name="VEHICLE_HAS_NO_CATEGORY" xml:space="preserve">
+    <value>Vehicle has no category</value>
+  </data>
 </root>

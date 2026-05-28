@@ -51,9 +51,7 @@ namespace FleetManager.Application.UseCase.ToVehicle
             RuleFor(v => v.CurrentMileage)
                 .GreaterThanOrEqualTo(0)
                 .WithMessage(ResourceErrorMessages.CURRENT_MILEAGE_EMPTY);
-            RuleFor(v => v.CategoryId)
-                .GreaterThan(0)
-                .WithMessage(ResourceErrorMessages.CATEGORY_ID_INVALID);
+            
         }
 
     }

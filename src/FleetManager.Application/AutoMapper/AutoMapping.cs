@@ -38,6 +38,7 @@ namespace FleetManager.Application.AutoMapper
             CreateMap<RequestRentalPlansJson, RentalPlan>()
                 .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.IsActive, opt => opt.Ignore());
+            
 
         }
         private void EntitiesToResponse()
@@ -64,6 +65,9 @@ namespace FleetManager.Application.AutoMapper
             CreateMap<RentalPlan, ResponseRentalPlanJson>();
             CreateMap<RentalPlan, ResponseListRentalPlanJson>();
             CreateMap<RentalPlan, ResponseShortRentalPlansJson>();
+
+            
+               
 
         }
     }

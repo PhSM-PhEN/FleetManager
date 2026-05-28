@@ -28,6 +28,7 @@ namespace FleetManager.Infrastructure.DataAccess.ToVehicle
         {
             return await dbContext.Vehicles
                 .AsNoTracking()
+                .Include(v => v.Category)
                 .FirstOrDefaultAsync(v => v.Id == id);
         }
         async Task<Vehicle?> IVehicleUpdateOnlyRepository.GetById(long id)
