@@ -2,6 +2,7 @@
 using FleetManager.Application.UseCase.ToRental.Register;
 using FleetManager.communication.Requests;
 using FleetManager.communication.Responses;
+using FleetManager.Communication.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +22,7 @@ namespace FleetManager.Api.Controllers
             return Created(string.Empty, response);
         }
         [HttpGet]
-        [ProducesResponseType(typeof(ResponseRentalJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseListRentalJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAll([FromServices] IGetAllRentalUseCase useCase)
         {

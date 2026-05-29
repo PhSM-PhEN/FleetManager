@@ -1,4 +1,4 @@
-﻿namespace FleetManager.communication.Responses
+namespace FleetManager.communication.Responses
 {
     public class ResponseRentalJson
     {  

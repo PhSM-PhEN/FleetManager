@@ -22,14 +22,20 @@ public class RentalRepository(FleetManagerDbContext dbContext) : IRentalWriteOnl
     {
         return await dbContext.Rentals
         .Include(r => r.Client)
+            .ThenInclude(c => c.Address)
         .Include(r => r.Vehicle)
         .Include(r =>r.Company)
+            .ThenInclude(r => r.Address)
         .AsNoTracking().ToListAsync();
     }
 
     public async Task<Rental?> GetById(long id)
     {
-        return await dbContext.Rentals.AsNoTracking().FirstOrDefaultAsync(rent => rent.Id == id);
+        return await dbContext.Rentals.AsNoTracking()
+        .Include(r => r.Company)
+        .Include(r => r.Vehicle)
+        .Include(r => r.Client)
+        .FirstOrDefaultAsync(rent => rent.Id == id);
     }
     async Task<Rental?> IRentalUpdateOnlyRepository.GetById(int id)
     {
