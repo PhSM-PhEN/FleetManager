@@ -12,4 +12,5 @@ public class ResponseClientJson
     public string CnhRegisterNumber {get; set;} = string.Empty;
     public string CnhCategory {get; set;} = string.Empty;
     public long AddressId {get; set;}
+    public ResponseAddressJson Address {get ; set ;} = new();
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FleetManager.communication.Requests;
 using FleetManager.communication.Responses;
+using FleetManager.Communication.Responses;
 using FleetManager.Domain.Entities;
 
 namespace FleetManager.Application.AutoMapper
@@ -65,6 +66,7 @@ namespace FleetManager.Application.AutoMapper
             CreateMap<RentalPlan, ResponseRentalPlanJson>();
             CreateMap<RentalPlan, ResponseListRentalPlanJson>();
             CreateMap<RentalPlan, ResponseShortRentalPlansJson>();
+            CreateMap<Rental, ResponseRentalInfoJson>();
 
             
                

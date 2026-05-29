@@ -9,4 +9,5 @@ public class ResponseCompanyJson
     public string Cnpj { get; set; } = string.Empty;
     public string PhoneNumber { get; set; } = string.Empty;
     public long AddressId { get; set; } 
+    public ResponseAddressJson Address {get ; set ;} = new();
 }

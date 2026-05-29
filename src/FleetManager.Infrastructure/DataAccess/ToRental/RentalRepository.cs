@@ -22,10 +22,8 @@ public class RentalRepository(FleetManagerDbContext dbContext) : IRentalWriteOnl
     {
         return await dbContext.Rentals
         .Include(r => r.Client)
-            .ThenInclude(c => c.Address)
         .Include(r => r.Vehicle)
         .Include(r =>r.Company)
-            .ThenInclude(r => r.Address)
         .AsNoTracking().ToListAsync();
     }
 
@@ -33,8 +31,12 @@ public class RentalRepository(FleetManagerDbContext dbContext) : IRentalWriteOnl
     {
         return await dbContext.Rentals.AsNoTracking()
         .Include(r => r.Company)
+            .ThenInclude(r => r.Address)
         .Include(r => r.Vehicle)
+            .ThenInclude(r => r.Category)
         .Include(r => r.Client)
+            .ThenInclude(r => r.Address)
+        .Include(r => r.RentalPlan)
         .FirstOrDefaultAsync(rent => rent.Id == id);
     }
     async Task<Rental?> IRentalUpdateOnlyRepository.GetById(int id)
