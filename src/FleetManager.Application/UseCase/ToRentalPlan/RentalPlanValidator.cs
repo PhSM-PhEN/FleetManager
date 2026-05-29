@@ -14,7 +14,7 @@ namespace FleetManager.Application.UseCase.ToRentalPlan
             RuleFor(rp => rp.Transmission).IsInEnum().WithMessage(ResourceErrorMessages.INVALID_TRANSMISSION_TYPE);
             RuleFor(rp => rp.PriceRental).GreaterThan(0).WithMessage(ResourceErrorMessages.PRICE_RENTAL_MUST_BE_GREATER_THAN_ZERO);
             RuleFor(rp => rp.PricePerKm).GreaterThan(0).WithMessage(ResourceErrorMessages.PRICE_PER_KM_MUST_BE_GREATER_THAN_ZERO);
-            RuleFor(rp => rp.IncludedKm).GreaterThanOrEqualTo(0).WithMessage(ResourceErrorMessages.INCLUDED_KM_MUST_BE_GREATER_THAN_OR_EQUAL_TO_ZERO);  
+             
         }
       
     }
