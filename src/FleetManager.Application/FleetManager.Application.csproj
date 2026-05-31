@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FleetManager.communication\FleetManager.Communication.csproj" />
+    <ProjectReference Include="..\FleetManager.Communication\FleetManager.Communication.csproj" />
     <ProjectReference Include="..\FleetManager.Domain\FleetManager.Domain.csproj" />
     <ProjectReference Include="..\FleetManager.Exception\FleetManager.Exception.csproj" />
     <ProjectReference Include="..\FleetManager.Infrastructure\FleetManager.Infrastructure.csproj" />

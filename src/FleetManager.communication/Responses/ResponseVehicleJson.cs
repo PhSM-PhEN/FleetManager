@@ -1,4 +1,4 @@
-﻿namespace FleetManager.communication.Responses
+﻿namespace FleetManager.Communication.Responses
 {
     public class ResponseVehicleJson
     {

@@ -1,6 +1,6 @@
-﻿using FleetManager.communication.ToEnums;
+﻿using FleetManager.Communication.ToEnums;
 
-namespace FleetManager.communication.Responses
+namespace FleetManager.Communication.Responses
 {
     public class ResponseCategoryJson
     {

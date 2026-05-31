@@ -1,5 +1,5 @@
 using System;
-using FleetManager.communication.Responses;
+using FleetManager.Communication.Responses;
 
 namespace FleetManager.Application.UseCase.ToAddress.GetById;
 

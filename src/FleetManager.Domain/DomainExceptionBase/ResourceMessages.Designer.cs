@@ -61,6 +61,24 @@ namespace FleetManager.Domain.DomainExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot completed rental..
+        /// </summary>
+        public static string CANNOT_CANCEL_COMPLETED_RENTAL {
+            get {
+                return ResourceManager.GetString("CANNOT_CANCEL_COMPLETED_RENTAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot complete concelled rental..
+        /// </summary>
+        public static string CANNOT_COMPLETE_CANCELLED_RENTAL {
+            get {
+                return ResourceManager.GetString("CANNOT_COMPLETE_CANCELLED_RENTAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End date must be greater than start date..
         /// </summary>
         public static string END_DATE_MUST_BE_GREATER_THAN_START_DATE {
@@ -70,11 +88,20 @@ namespace FleetManager.Domain.DomainExceptionBase {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Included km cannot be negative.
+        ///   Looks up a localized string similar to Included km cannot be negative..
         /// </summary>
         public static string INCLUDED_KM_CANNOT_BE_NEGATIVE {
             get {
                 return ResourceManager.GetString("INCLUDED_KM_CANNOT_BE_NEGATIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rental cannot be markd overdue..
+        /// </summary>
+        public static string RENTAL_CANNOT_BE_MARKED_OVERDUE {
+            get {
+                return ResourceManager.GetString("RENTAL_CANNOT_BE_MARKED_OVERDUE", resourceCulture);
             }
         }
         
@@ -88,7 +115,7 @@ namespace FleetManager.Domain.DomainExceptionBase {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rental plan is not active.
+        ///   Looks up a localized string similar to Rental plan is not active..
         /// </summary>
         public static string RENTAL_PLAN_IS_NOT_ACTIVE {
             get {
@@ -97,7 +124,7 @@ namespace FleetManager.Domain.DomainExceptionBase {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The miliage must be higher than the current.
+        ///   Looks up a localized string similar to The miliage must be higher than the current..
         /// </summary>
         public static string THE_MILEAGE_MUST_BE_HIGHER_THAN_THE_CURRENT {
             get {

@@ -1,6 +1,6 @@
 using System;
 
-namespace FleetManager.communication.Responses;
+namespace FleetManager.Communication.Responses;
 
 public class ResponseAddressJson
 {

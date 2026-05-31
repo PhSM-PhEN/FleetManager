@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using FleetManager.communication.Responses;
+using FleetManager.Communication.Responses;
 using FleetManager.Domain.Repositories.ToVehicle;
 
 namespace FleetManager.Application.UseCase.ToVehicle.GetAll
@@ -9,13 +9,13 @@ namespace FleetManager.Application.UseCase.ToVehicle.GetAll
         private readonly IMapper _mapper = mapper;
         private readonly IVehicleReadOnlyRepository _vehicleReadOnly = vehicleReadOnly;
      
-        public async Task<ResponseAllVehicleJson> Execute()
+        public async Task<ResponseListVehicleJson> Execute()
         {
             var vehicles = await _vehicleReadOnly.GetAll();
             
             
 
-            return new ResponseAllVehicleJson
+            return new ResponseListVehicleJson
             {
                 Vehicle = _mapper.Map<List<ResponseVehicleJson>>(vehicles)
             };

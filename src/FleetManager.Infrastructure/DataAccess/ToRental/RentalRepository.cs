@@ -39,7 +39,7 @@ public class RentalRepository(FleetManagerDbContext dbContext) : IRentalWriteOnl
         .Include(r => r.RentalPlan)
         .FirstOrDefaultAsync(rent => rent.Id == id);
     }
-    async Task<Rental?> IRentalUpdateOnlyRepository.GetById(int id)
+    async Task<Rental?> IRentalUpdateOnlyRepository.GetById(long id)
     {
         return await dbContext.Rentals.FirstOrDefaultAsync(rent => rent.Id == id);
     }

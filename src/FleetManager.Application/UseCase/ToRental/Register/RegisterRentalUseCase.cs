@@ -1,5 +1,5 @@
-﻿using FleetManager.communication.Requests;
-using FleetManager.communication.Responses;
+﻿using FleetManager.Communication.Requests;
+using FleetManager.Communication.Responses;
 using FleetManager.Domain.DomainExceptionBase;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories;
@@ -8,7 +8,7 @@ using FleetManager.Domain.Repositories.ToCompany;
 using FleetManager.Domain.Repositories.ToRental;
 using FleetManager.Domain.Repositories.ToRentalPlans;
 using FleetManager.Domain.Repositories.ToVehicle;
-using FleetManager.Domain.Services.LoggeUser;
+using FleetManager.Domain.Services.LoggedUser;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToRental.Register

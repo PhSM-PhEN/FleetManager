@@ -57,7 +57,7 @@ namespace FleetManager.Application.UseCase
         {   //Category
             services.AddScoped<IRegisterCategoryUseCase, RegisterCategoryUseCase>();
             services.AddScoped<IUpdateCategoryUseCase, UpdateCategoryUseCase>();
-            services.AddScoped<IGetAllCategoyUseCase, GetAllCategoyUseCase>();
+            services.AddScoped<IGetAllCategoryUseCase, GetAllCategoryUseCase>();
             services.AddScoped<IGetByIdCategoryUseCase, GetByIdCategoryUseCase>();
             services.AddScoped<IDeleteCategoryUseCase, DeleteCategoryUseCase>();
 

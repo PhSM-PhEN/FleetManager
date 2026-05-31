@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using FleetManager.communication.Responses;
+using FleetManager.Communication.Responses;
 using FleetManager.Domain.Repositories.ToCategory;
 
 namespace FleetManager.Application.UseCase.ToCategory.GetAll
 {
-    public class GetAllCategoyUseCase(IMapper mapper,
-        ICategoryReadOnlyRepository categoryReadOnly) : IGetAllCategoyUseCase
+    public class GetAllCategoryUseCase(IMapper mapper,
+        ICategoryReadOnlyRepository categoryReadOnly) : IGetAllCategoryUseCase
     {
         private readonly IMapper _mapper = mapper;
         private readonly ICategoryReadOnlyRepository _categoryRepository = categoryReadOnly;

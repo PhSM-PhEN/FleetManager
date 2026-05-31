@@ -1,4 +1,4 @@
-﻿namespace FleetManager.communication.Requests
+﻿namespace FleetManager.Communication.Requests
 {
     public class RequestClientJson
     {

@@ -2,8 +2,8 @@
 using FleetManager.Application.UseCase.ToUser.GetUser;
 using FleetManager.Application.UseCase.ToUser.Register;
 using FleetManager.Application.UseCase.ToUser.Update;
-using FleetManager.communication.Requests;
-using FleetManager.communication.Responses;
+using FleetManager.Communication.Requests;
+using FleetManager.Communication.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,9 +1,9 @@
-﻿using FleetManager.communication.Requests;
+﻿using FleetManager.Communication.Requests;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToUser;
 using FleetManager.Domain.Security.Cryptography;
-using FleetManager.Domain.Services.LoggeUser;
+using FleetManager.Domain.Services.LoggedUser;
 using FleetManager.Exception.ExceptionBase;
 using FluentValidation.Results;
 
@@ -11,20 +11,17 @@ namespace FleetManager.Application.UseCase.ToUser.ChangePassword
 {
     public class ChangePasswordUserUseCase(ILoggedUser loggedUser, IPasswordEncrypter passwordEncripter, IUserUpdateOnlyRepository updateRepository, IUnitOfWork unitOfWork) : IChangePasswordUserUseCase
     {
-        private readonly ILoggedUser _loggedUser = loggedUser;
-        private readonly IPasswordEncrypter _passwordEncripter = passwordEncripter;
-        private readonly IUserUpdateOnlyRepository _updateRepository = updateRepository;
-        private readonly IUnitOfWork _unitOfWork = unitOfWork;
+     
         public async Task Execute(RequestChangePasswordJson request)
         {
-            var loggedUser = await _loggedUser.Get();
-            Validate(request, loggedUser);
+            var User = await loggedUser.Get();
+            Validate(request, User);
 
-            var user = await _updateRepository.GetById(loggedUser.Id);
-            user.Password = _passwordEncripter.Encrypt(request.NewPassword);
+            var user = await updateRepository.GetById(User.Id);
+            user.Password = passwordEncripter.Encrypt(request.NewPassword);
 
-           _updateRepository.Update(user);
-            await _unitOfWork.Commit();
+           updateRepository.Update(user);
+            await unitOfWork.Commit();
         }
 
 
@@ -33,7 +30,7 @@ namespace FleetManager.Application.UseCase.ToUser.ChangePassword
             var validator = new ChangePasswordValidator();
             var result = validator.Validate(request);
 
-            var passwordMach = _passwordEncripter.Verify(request.Password, user.Password);
+            var passwordMach = passwordEncripter.Verify(request.Password, user.Password);
 
 
             if (passwordMach == false)

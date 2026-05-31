@@ -9,7 +9,7 @@ using FleetManager.Domain.Repositories.ToUser;
 using FleetManager.Domain.Repositories.ToVehicle;
 using FleetManager.Domain.Security.Cryptography;
 using FleetManager.Domain.Security.Token;
-using FleetManager.Domain.Services.LoggeUser;
+using FleetManager.Domain.Services.LoggedUser;
 using FleetManager.Infrastructure.DataAccess;
 using FleetManager.Infrastructure.DataAccess.ToAddress;
 using FleetManager.Infrastructure.DataAccess.ToCategory;

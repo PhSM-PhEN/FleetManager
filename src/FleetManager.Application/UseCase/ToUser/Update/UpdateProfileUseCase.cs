@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using FleetManager.communication.Requests;
+using FleetManager.Communication.Requests;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToUser;
-using FleetManager.Domain.Services.LoggeUser;
+using FleetManager.Domain.Services.LoggedUser;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToUser.Update

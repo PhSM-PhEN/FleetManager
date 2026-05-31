@@ -1,6 +1,6 @@
 ﻿using FleetManager.Domain.Entities;
 using FleetManager.Domain.Security.Token;
-using FleetManager.Domain.Services.LoggeUser;
+using FleetManager.Domain.Services.LoggedUser;
 using FleetManager.Infrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using System.IdentityModel.Tokens.Jwt;

@@ -1,5 +1,5 @@
-﻿using FleetManager.communication.Requests;
-using FleetManager.communication.Responses;
+﻿using FleetManager.Communication.Requests;
+using FleetManager.Communication.Responses;
 using FleetManager.Domain.Repositories.ToUser;
 using FleetManager.Domain.Security.Cryptography;
 using FleetManager.Domain.Security.Token;

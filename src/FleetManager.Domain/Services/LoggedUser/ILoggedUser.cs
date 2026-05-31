@@ -1,6 +1,6 @@
 ﻿using FleetManager.Domain.Entities;
 
-namespace FleetManager.Domain.Services.LoggeUser
+namespace FleetManager.Domain.Services.LoggedUser
 {
     public interface ILoggedUser
     {

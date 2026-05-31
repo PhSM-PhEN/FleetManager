@@ -1,6 +1,6 @@
 using System;
 
-namespace FleetManager.communication.Requests;
+namespace FleetManager.Communication.Requests;
 
 public class RequestAddressJson
 {

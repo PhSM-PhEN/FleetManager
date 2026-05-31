@@ -3,8 +3,8 @@ using FleetManager.Application.UseCase.ToCategory.GetAll;
 using FleetManager.Application.UseCase.ToCategory.GetById;
 using FleetManager.Application.UseCase.ToCategory.Register;
 using FleetManager.Application.UseCase.ToCategory.Update;
-using FleetManager.communication.Requests;
-using FleetManager.communication.Responses;
+using FleetManager.Communication.Requests;
+using FleetManager.Communication.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,7 +30,7 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(typeof(ResponseCategoryJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetAll([FromServices] IGetAllCategoyUseCase useCase)
+        public async Task<IActionResult> GetAll([FromServices] IGetAllCategoryUseCase useCase)
         {
             var response = await useCase.Execute();
             if (response.Categories.Count != 0)

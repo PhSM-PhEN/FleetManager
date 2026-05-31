@@ -1,6 +1,6 @@
 ﻿using FleetManager.Application.UseCase.ToLogin;
-using FleetManager.communication.Requests;
-using FleetManager.communication.Responses;
+using FleetManager.Communication.Requests;
+using FleetManager.Communication.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FleetManager.Api.Controllers

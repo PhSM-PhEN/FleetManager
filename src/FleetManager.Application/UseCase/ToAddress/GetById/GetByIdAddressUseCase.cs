@@ -1,6 +1,6 @@
 
 using AutoMapper;
-using FleetManager.communication.Responses;
+using FleetManager.Communication.Responses;
 using FleetManager.Domain.Repositories.ToAddress;
 
 namespace FleetManager.Application.UseCase.ToAddress.GetById;

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using FleetManager.communication.Requests;
-using FleetManager.communication.Responses;
+using FleetManager.Communication.Requests;
+using FleetManager.Communication.Responses;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.Entities;
 

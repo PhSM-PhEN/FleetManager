@@ -1,5 +1,5 @@
 using System;
-using FleetManager.communication.Requests;
+using FleetManager.Communication.Requests;
 
 namespace FleetManager.Application.UseCase.ToRentalPlan.Update;
 

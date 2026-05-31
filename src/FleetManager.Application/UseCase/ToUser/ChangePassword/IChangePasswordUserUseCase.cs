@@ -1,4 +1,4 @@
-﻿using FleetManager.communication.Requests;
+﻿using FleetManager.Communication.Requests;
 
 namespace FleetManager.Application.UseCase.ToUser.ChangePassword
 {

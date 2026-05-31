@@ -1,4 +1,4 @@
-﻿namespace FleetManager.communication.ToEnums
+﻿namespace FleetManager.Communication.ToEnums
 {
     public enum TransmissionType
     {

@@ -1,8 +1,8 @@
-﻿namespace FleetManager.communication.ToEnums
+﻿namespace FleetManager.Communication.ToEnums
 {
     public enum RentalMode
     {
         Daily,
-        Monthl
+        Monthly
     }
 }

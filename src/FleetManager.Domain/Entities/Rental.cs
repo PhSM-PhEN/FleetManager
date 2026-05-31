@@ -1,5 +1,6 @@
 ﻿
 using FleetManager.Domain.DomainExceptionBase;
+using FleetManager.Domain.Enums;
 namespace FleetManager.Domain.Entities
 {
     public class Rental
@@ -15,6 +16,7 @@ namespace FleetManager.Domain.Entities
         public decimal IncludedKm {get ; set;}
         public decimal SnapshotPriceRental {get; private set;}
         public decimal SnapshotPricePerKm {get; set ;}
+        public RentalStatus Status { get; private set; } = RentalStatus.Active;
 
 
         public RentalPlan RentalPlan { get; set; } = default!;
@@ -47,7 +49,30 @@ namespace FleetManager.Domain.Entities
                 RecalculateIfReady();
             }
         }
-        
+        public void Cancel()
+        {
+            if (Status == RentalStatus.Completed)
+            {
+                throw new DomainRuleException(ResourceMessages.CANNOT_CANCEL_COMPLETED_RENTAL);
+            }
+            Status = RentalStatus.Cancelled;
+        }
+        public void Complete()
+        {
+            if (Status == RentalStatus.Cancelled)
+            {
+                throw new DomainRuleException(ResourceMessages.CANNOT_COMPLETE_CANCELLED_RENTAL);
+            }
+            Status = RentalStatus.Completed;
+        }
+        public void Overdue()
+        {
+            if (Status != RentalStatus.Active)
+                throw new DomainRuleException(ResourceMessages.RENTAL_CANNOT_BE_MARKED_OVERDUE);
+            Status = RentalStatus.Overdue;
+        }
+
+
         private void RecalculateIfReady()
         {
             if(_startDate == default || _endDate == default || SnapshotPriceRental == 0)

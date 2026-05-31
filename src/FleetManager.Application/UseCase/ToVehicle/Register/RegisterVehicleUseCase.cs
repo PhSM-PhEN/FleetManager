@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FleetManager.Application.UseCase.ToCategory.GetById;
-using FleetManager.communication.Requests;
-using FleetManager.communication.Responses;
+using FleetManager.Communication.Requests;
+using FleetManager.Communication.Responses;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToCategory;

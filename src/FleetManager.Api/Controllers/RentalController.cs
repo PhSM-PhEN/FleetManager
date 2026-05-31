@@ -1,8 +1,8 @@
 ﻿using FleetManager.Application.UseCase.ToRental.GetAll;
 using FleetManager.Application.UseCase.ToRental.GetById;
 using FleetManager.Application.UseCase.ToRental.Register;
-using FleetManager.communication.Requests;
-using FleetManager.communication.Responses;
+using FleetManager.Communication.Requests;
+using FleetManager.Communication.Responses;
 using FleetManager.Communication.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
