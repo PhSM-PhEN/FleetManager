@@ -28,8 +28,7 @@ namespace FleetManager.Api.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(ResponseListCategoryJson), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetAll([FromServices] IGetAllCategoryUseCase useCase)
         {
             var response = await useCase.Execute();

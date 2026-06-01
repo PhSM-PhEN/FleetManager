@@ -8,21 +8,19 @@ namespace FleetManager.Application.UseCase.ToClient.Update
 {
     public class UpdateClientUseCase(IClientUpdateOnlyRepository updateRepository,  IUnitOfWork unitOfWork, IMapper mapper) : IUpdateClientUseCase
     {
-        private readonly IClientUpdateOnlyRepository _updateRepository = updateRepository;
-        private readonly IUnitOfWork _unitOfWork = unitOfWork;
-        private readonly IMapper _mapper = mapper;
+       
         public async Task Execute(long id, RequestClientJson request)
         {
             Validate(request);
-            var client = await _updateRepository.GetById(id);
+            var client = await updateRepository.GetById(id);
             if (client == null)
             {
                 throw new NotFoundException(ResourceErrorMessages.CLIENT_NOT_FOUND);
             }
-            _mapper.Map(request, client);
+            mapper.Map(request, client);
 
-            _updateRepository.Update(client);
-            await _unitOfWork.Commit();
+            updateRepository.Update(client);
+            await unitOfWork.Commit();
 
 
         }

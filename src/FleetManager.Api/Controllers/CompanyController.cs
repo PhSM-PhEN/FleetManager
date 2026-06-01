@@ -26,8 +26,8 @@ namespace FleetManager.Api.Controllers
         }
         [HttpGet]
         [ProducesResponseType(typeof(ResponseListCompanyJson), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status204NoContent)]
+
         public async Task<IActionResult> GetAll([FromServices] IGetAllCompanyUseCase useCase)
         {
             var response = await useCase.Execute();
@@ -56,7 +56,7 @@ namespace FleetManager.Api.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+
         public async Task<IActionResult> Delete([FromServices] IDeleteCompanyUseCase useCase, [FromRoute] int id)
         {
             await useCase.Execute(id);

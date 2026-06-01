@@ -28,8 +28,7 @@ namespace FleetManager.Api.Controllers
         }
         [HttpGet]
         [ProducesResponseType(typeof(ResponseListAddressJson) , StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Getall([FromServices] IGetAllAddressUseCase useCase)
         {
             var response = await useCase.Execute();
@@ -61,7 +60,6 @@ namespace FleetManager.Api.Controllers
         [HttpPut]
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Update([FromServices] IUpdateAddressUseCase useCase, [FromRoute] long id, [FromBody] RequestAddressJson request)
         {

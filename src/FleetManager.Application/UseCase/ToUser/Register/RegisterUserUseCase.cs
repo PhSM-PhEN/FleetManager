@@ -14,28 +14,22 @@ namespace FleetManager.Application.UseCase.ToUser.Register
         IUserReadOnlyRepository userReadOnly,
         IPasswordEncrypter encripter,IMapper mapper, IAccessTokenGenerator tokenGenerator) : IRegisterUserUseCase
     {
-        private readonly IUnitOfWork _unitOfWork = unitOfWork;
-        private readonly IUserWriteOnlyRepository _repository = repository;
-        private readonly IUserReadOnlyRepository _userReadOnly = userReadOnly;
-        private readonly IPasswordEncrypter _encripter = encripter;
-        private readonly IAccessTokenGenerator _tokenGenerator = tokenGenerator;
-        private readonly IMapper _mapper = mapper;
-
+     
         public async Task<ResponseLoginJson> Execute(RequestRegisterUserJson request)
         {
             await Validate(request); 
             
-            var user = _mapper.Map<User>(request);
-            user.Password = _encripter.Encrypt(request.Password);
+            var user = mapper.Map<User>(request);
+            user.Password = encripter.Encrypt(request.Password);
             user.UserIdentifier = Guid.NewGuid();
 
-            await _repository.Add(user);
-            await _unitOfWork.Commit();
+            await repository.Add(user);
+            await unitOfWork.Commit();
 
             return new ResponseLoginJson
             {
                 Name = user.Name,
-                Token = _tokenGenerator.GenerateToken(user)
+                Token = tokenGenerator.GenerateToken(user)
 
             };
         }
@@ -44,7 +38,7 @@ namespace FleetManager.Application.UseCase.ToUser.Register
             var validate = new UserValidator();
             var result = validate.Validate(request);
 
-            var emailExists = await _userReadOnly.ExistByEmail(request.Email);
+            var emailExists = await userReadOnly.ExistByEmail(request.Email);
 
             if (emailExists)
             {
