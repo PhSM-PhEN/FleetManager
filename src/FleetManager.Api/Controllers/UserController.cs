@@ -36,7 +36,7 @@ namespace FleetManager.Api.Controllers
         [HttpDelete]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+
         public async Task<IActionResult> DeleteUser([FromServices] IDeleteUserAccountUseCase useCase)
         {
             await useCase.Execute();
