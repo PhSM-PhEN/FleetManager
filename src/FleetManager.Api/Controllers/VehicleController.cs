@@ -30,7 +30,7 @@ namespace FleetManager.Api.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(ResponseListVehicleJson), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetAll([FromServices] IGetAllVehicleUseCase useCase)
         {
             var response = await useCase.Execute();
