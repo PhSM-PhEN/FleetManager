@@ -76,7 +76,7 @@ namespace FleetManager.Application.UseCase
             services.AddScoped<IDeleteUserAccountUseCase, DeleteUserAccountUseCase>();
 
             //address
-            services.AddScoped<IRequestAdressUseCase, RequestAddressUseCase>();
+            services.AddScoped<IRequestRegisterAddressUseCase, RequestAddressUseCase>();
             services.AddScoped<IGetAllAddressUseCase, GetAllAddressUseCase>();
             services.AddScoped<IGetByIdAddressUseCase, GetByIdAddressUseCase>();
             services.AddScoped<IUpdateAddressUseCase, UpdateAddressUseCase>();

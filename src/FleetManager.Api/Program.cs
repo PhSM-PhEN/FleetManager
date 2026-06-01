@@ -91,7 +91,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-if (builder.Configuration.IsTestEnviroment() == false)
+if (builder.Configuration.IsTestEnvironment() == false)
 {
     await MigrateDataBase();
 }

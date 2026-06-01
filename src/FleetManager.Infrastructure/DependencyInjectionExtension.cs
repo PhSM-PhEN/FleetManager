@@ -37,7 +37,7 @@ namespace FleetManager.Infrastructure
             AddToken(services, configuration);
             AddRepositories(services);
 
-            if (configuration.IsTestEnviroment() == false)
+            if (configuration.IsTestEnvironment() == false)
             {
                 AddDataContext(services, configuration);
                 

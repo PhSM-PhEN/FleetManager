@@ -19,7 +19,7 @@ namespace FleetManager.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(ResponseAddressJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Register([FromServices] IRequestAdressUseCase useCase,
+        public async Task<IActionResult> Register([FromServices] IRequestRegisterAddressUseCase useCase,
          [FromBody] RequestAddressJson request )
         {
             var response = await useCase.Execute(request);

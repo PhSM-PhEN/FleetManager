@@ -9,7 +9,7 @@ using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToAddress.Register;
 
-public class RequestAddressUseCase(IMapper mapper, IUnitOfWork unitOfWork, IAddressWriteOnlyRepository repository) : IRequestAdressUseCase
+public class RequestAddressUseCase(IMapper mapper, IUnitOfWork unitOfWork, IAddressWriteOnlyRepository repository) : IRequestRegisterAddressUseCase
 {
     private readonly IMapper _mapper = mapper;
     private readonly IUnitOfWork _unitOfWork = unitOfWork;

@@ -16,7 +16,7 @@ namespace FleetManager.Api.Controllers
     public class ClientController : ControllerBase
     {
         [HttpPost]
-        [ProducesResponseType(typeof(RequestClientJson), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseShortClientJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register([FromServices] IRegisterClientUseCase useCase,[FromBody] RequestClientJson request)
         {
