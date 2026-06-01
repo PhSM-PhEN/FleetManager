@@ -11,6 +11,7 @@ namespace FleetManager.Infrastructure.Migrations
             var dbContext = serviceProvider.GetRequiredService<FleetManagerDbContext>();
             await dbContext.Database.MigrateAsync();
         }
+        
 
     }
 }

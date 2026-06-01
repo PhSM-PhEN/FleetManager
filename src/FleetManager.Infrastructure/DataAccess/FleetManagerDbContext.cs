@@ -14,6 +14,34 @@ namespace FleetManager.Infrastructure.DataAccess
         public DbSet<Rental> Rentals {get ; set; }
         public DbSet<RentalPlan> RentalPlans { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Client>()
+                .HasIndex(c => c.CPF).IsUnique();
+
+            modelBuilder.Entity<Client>()
+                .HasIndex(c => c.CnhRegisterNumber).IsUnique();
+
+            modelBuilder.Entity<Company>()
+                .HasIndex(c => c.Cnpj).IsUnique();
+
+            modelBuilder.Entity<Vehicle>()
+                .HasIndex(v => v.LicensePlate).IsUnique();
+
+            modelBuilder.Entity<Vehicle>()
+                .HasIndex(v => v.Renavam).IsUnique();
+
+            modelBuilder.Entity<Vehicle>()
+                .HasIndex(v => v.ChassisNumber).IsUnique();
+
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Email).IsUnique();
+
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.UserIdentifier).IsUnique();
+        }
+
 
     }
 }
