@@ -41,7 +41,5 @@ namespace FleetManager.Infrastructure.DataAccess
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.UserIdentifier).IsUnique();
         }
-
-
     }
 }

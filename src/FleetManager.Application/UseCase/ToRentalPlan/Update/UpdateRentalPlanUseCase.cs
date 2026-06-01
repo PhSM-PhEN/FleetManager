@@ -1,4 +1,3 @@
-using System;
 using AutoMapper;
 using FleetManager.Communication.Requests;
 using FleetManager.Domain.Repositories;

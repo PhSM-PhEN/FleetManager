@@ -34,8 +34,10 @@
     <Folder Include="UseCase\ToCompany\GetById\" />
     <Folder Include="UseCase\ToCompany\Register\" />
     <Folder Include="UseCase\ToCompany\Update\" />
+    <Folder Include="UseCase\ToRental\Delete\" />
     <Folder Include="UseCase\ToRental\GetAll\" />
     <Folder Include="UseCase\ToRental\GetById\" />
+    <Folder Include="UseCase\ToRental\Update\" />
     <Folder Include="UseCase\ToUser\ChangePassword\" />
   </ItemGroup>
 

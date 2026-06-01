@@ -54,7 +54,7 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Delete([FromServices] IDeleteRentalPlanUseCase useCase, [FromRoute] int id )
+        public async Task<IActionResult> Delete( [FromRoute] int id, [FromServices] IDeleteRentalPlanUseCase useCase)
         {
             await useCase.Execute(id);
             return NoContent();
