@@ -27,8 +27,7 @@ namespace FleetManager.Api.Controllers
         [HttpGet]
         [Authorize]
         [ProducesResponseType(typeof(ResponseUserProfileJson), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+
         public async Task<IActionResult> GetUser([FromServices] IGetUserProfileUseCase useCase)
         {
             var response = await useCase.Execute();
@@ -46,7 +45,7 @@ namespace FleetManager.Api.Controllers
         [HttpPut]
         [Authorize]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+
         public async Task<IActionResult> UpdateUser([FromServices] IUpdateProfileUseCase useCase, [FromBody] RequestUpdateUserJson request)
         {
             await useCase.Execute(request);
