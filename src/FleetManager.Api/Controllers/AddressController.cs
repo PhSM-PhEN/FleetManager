@@ -43,7 +43,7 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(typeof(ResponseAddressJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetById([FromRoute] long id, [FromServices] IGetByIdAddressUseCase useCase)
+        public async Task<IActionResult> GetById( [FromServices] IGetByIdAddressUseCase useCase, [FromRoute] long id)
         {
             var response = await useCase.Execute(id);
             return Ok(response);
@@ -53,7 +53,7 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
 
-        public async Task<IActionResult> Delete([FromRoute] long id, [FromServices] IDeleteAddressUseCase useCase)
+        public async Task<IActionResult> Delete([FromServices] IDeleteAddressUseCase useCase, [FromRoute] long id)
         {
             await useCase.Execute(id);
             return NoContent();
@@ -63,7 +63,7 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Update([FromRoute] long id, [FromServices] IUpdateAddressUseCase useCase, [FromBody] RequestAddressJson request)
+        public async Task<IActionResult> Update([FromServices] IUpdateAddressUseCase useCase, [FromRoute] long id, [FromBody] RequestAddressJson request)
         {
             await useCase.Execute(id, request);
             return NoContent();

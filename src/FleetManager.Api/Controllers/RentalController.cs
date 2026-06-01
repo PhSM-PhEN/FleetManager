@@ -3,7 +3,6 @@ using FleetManager.Application.UseCase.ToRental.GetById;
 using FleetManager.Application.UseCase.ToRental.Register;
 using FleetManager.Communication.Requests;
 using FleetManager.Communication.Responses;
-using FleetManager.Communication.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,7 +10,7 @@ namespace FleetManager.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class RentalController : ControllerBase
     {
         [HttpPost]
@@ -34,7 +33,7 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(typeof(ResponseRentalInfoJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetById([FromRoute] long id, [FromServices] IGetByIdRentalUseCase useCase)
+        public async Task<IActionResult> GetById([FromServices] IGetByIdRentalUseCase useCase, [FromRoute] long id)
         {
             var response = await useCase.Execute(id);
             return Ok(response);

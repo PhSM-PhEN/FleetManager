@@ -27,9 +27,9 @@ namespace FleetManager.Api.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(ResponseCategoryJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseListCategoryJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetAll([FromServices] IGetAllCategoryUseCase useCase)
         {
             var response = await useCase.Execute();
@@ -55,7 +55,7 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> Update([FromServices] IUpdateCategoryUseCase useCase, [FromRoute] int id, RequestCategoryJson request)
+        public async Task<IActionResult> Update([FromServices] IUpdateCategoryUseCase useCase, [FromRoute] int id, [FromBody] RequestCategoryJson request)
         {
             await useCase.Execute(id, request);
 

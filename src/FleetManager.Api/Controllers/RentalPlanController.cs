@@ -33,10 +33,10 @@ namespace FleetManager.Api.Controllers
             return Ok(respone);
         }
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(ResponseListAddressJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseRentalPlanJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetById([FromRoute] int id, [FromServices] IGetByIdRentalPlanUseCase useCase )
+        public async Task<IActionResult> GetById([FromServices] IGetByIdRentalPlanUseCase useCase, [FromRoute] int id)
         {
             var response = await useCase.Execute(id);
 
@@ -46,7 +46,7 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Update([FromRoute] int id, [FromServices] IUpdateRentalPlanUseCase useCase, RequestRentalPlansJson request)
+        public async Task<IActionResult> Update([FromServices] IUpdateRentalPlanUseCase useCase, [FromRoute] int id, [FromBody] RequestRentalPlansJson request)
         {
             await useCase.Execute(id, request);
             return NoContent();
@@ -55,7 +55,7 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Delete([FromRoute] int id, [FromServices] IDeleteRentalPlanUseCase useCase)
+        public async Task<IActionResult> Delete([FromServices] IDeleteRentalPlanUseCase useCase, [FromRoute] int id )
         {
             await useCase.Execute(id);
             return NoContent();

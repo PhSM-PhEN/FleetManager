@@ -1,4 +1,3 @@
-using System;
 using AutoMapper;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.Repositories.ToRental;

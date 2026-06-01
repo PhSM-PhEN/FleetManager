@@ -49,18 +49,16 @@ namespace FleetManager.Api.Controllers
             return Ok(response);
 
         }
-        [HttpPut]
-        [Route("{id}")]
+        [HttpPut("{id}")]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> Update([FromServices] IUpdateVehicleUseCase useCase, [FromRoute] long id, RequestVehicleJson request)
+        public async Task<IActionResult> Update([FromServices] IUpdateVehicleUseCase useCase, [FromRoute] long id, [FromBody] RequestVehicleJson request)
         {
             await useCase.Execute(id, request);
             return NoContent();
         }
-        [HttpPut]
-        [Route("kmtotal/{id}")]
+        [HttpPut("kmtotal/{id}")]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ResponseVehicleJson), StatusCodes.Status200OK)]
@@ -71,8 +69,7 @@ namespace FleetManager.Api.Controllers
             return Ok(response);
         }
 
-        [HttpDelete]
-        [Route("{id}")]
+        [HttpDelete("{id}")]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Delete([FromServices] IDeleteVehicleUseCase useCase, [FromRoute] long id)

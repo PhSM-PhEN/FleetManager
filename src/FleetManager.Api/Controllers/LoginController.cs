@@ -10,7 +10,7 @@ namespace FleetManager.Api.Controllers
     public class LoginController : ControllerBase
     {
         [HttpPost]
-        [ProducesResponseType(typeof(ResponseRegisterUserJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseLoginJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status401Unauthorized)]
         public async Task<IActionResult> Login([FromServices] IDoLoginUseCase useCase,
             [FromBody] RequestLoginUserJson request)

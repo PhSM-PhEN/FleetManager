@@ -1,4 +1,3 @@
-using System.Globalization;
 using FleetManager.Application.UseCase.ToCompany.Delete;
 using FleetManager.Application.UseCase.ToCompany.GetAll;
 using FleetManager.Application.UseCase.ToCompany.GetById;
@@ -7,7 +6,6 @@ using FleetManager.Application.UseCase.ToCompany.Update;
 using FleetManager.Communication.Requests;
 using FleetManager.Communication.Responses;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FleetManager.Api.Controllers
@@ -39,19 +37,17 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(typeof(ResponseCompanyJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetById([FromRoute] int id, [FromServices] IGetByIdCompanyUseCase useCase)
+        public async Task<IActionResult> GetById([FromServices] IGetByIdCompanyUseCase useCase, [FromRoute] int id)
         {
             var response = await useCase.Execute(id);
 
             return Ok(response);
         }
         [HttpPut("{id}")]
-        
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Update([FromRoute]int id, [FromServices] IUpdateCompanyUseCase useCase,
-         [FromBody] RequestCompanyJson request)
+        public async Task<IActionResult> Update([FromServices] IUpdateCompanyUseCase useCase, [FromRoute] int id, [FromBody] RequestCompanyJson request)
         {
             await useCase.Execute(id, request);
 
@@ -61,7 +57,7 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Delete([FromRoute] int id, [FromServices] IDeleteCompanyUseCase useCase)
+        public async Task<IActionResult> Delete([FromServices] IDeleteCompanyUseCase useCase, [FromRoute] int id)
         {
             await useCase.Execute(id);
             return NoContent();

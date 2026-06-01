@@ -21,7 +21,7 @@ namespace FleetManager.Application.UseCase.ToUser.Register
         private readonly IAccessTokenGenerator _tokenGenerator = tokenGenerator;
         private readonly IMapper _mapper = mapper;
 
-        public async Task<ResponseRegisterUserJson> Execute(RequestRegisterUserJson request)
+        public async Task<ResponseLoginJson> Execute(RequestRegisterUserJson request)
         {
             await Validate(request); 
             
@@ -32,7 +32,7 @@ namespace FleetManager.Application.UseCase.ToUser.Register
             await _repository.Add(user);
             await _unitOfWork.Commit();
 
-            return new ResponseRegisterUserJson
+            return new ResponseLoginJson
             {
                 Name = user.Name,
                 Token = _tokenGenerator.GenerateToken(user)

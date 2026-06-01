@@ -18,7 +18,7 @@ namespace FleetManager.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(RequestClientJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Register([FromServices] IRegisterClientUseCase useCase, RequestClientJson request)
+        public async Task<IActionResult> Register([FromServices] IRegisterClientUseCase useCase,[FromBody] RequestClientJson request)
         {
             var response = await useCase.Execute(request);
 
@@ -46,16 +46,16 @@ namespace FleetManager.Api.Controllers
             return Ok(response);
         }
         [HttpPut("{id}")]
-        [ProducesResponseType(typeof(ResponseClientJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseClientJson), StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Update([FromServices] IUpdateClientUseCase useCase, [FromRoute] long id, RequestClientJson request)
+        public async Task<IActionResult> Update([FromServices] IUpdateClientUseCase useCase, [FromRoute] long id, [FromBody] RequestClientJson request)
         {
             await useCase.Execute(id, request);
-            return Ok();
+            return NoContent();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]

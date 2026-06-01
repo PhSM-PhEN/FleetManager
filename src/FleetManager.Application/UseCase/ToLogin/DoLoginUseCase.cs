@@ -15,7 +15,7 @@ namespace FleetManager.Application.UseCase.ToLogin
         private readonly IAccessTokenGenerator _tokenGenerator = tokenGenerator;
 
 
-        public async Task<ResponseRegisterUserJson> Execute(RequestLoginUserJson request)
+        public async Task<ResponseLoginJson> Execute(RequestLoginUserJson request)
         {
             var user = await _userReadOnlyRepository.GetUserByEmail(request.Email) ?? throw new InvalidLoginException(); 
             var passwordMatch = _passwordEncripter.Verify(request.Password, user.Password);
@@ -25,7 +25,7 @@ namespace FleetManager.Application.UseCase.ToLogin
             {
                 throw new InvalidLoginException();
             }
-            return new ResponseRegisterUserJson
+            return new ResponseLoginJson
             {
                 Name = user.Name,
                 Token = _tokenGenerator.GenerateToken(user)

@@ -65,7 +65,7 @@ namespace FleetManager.Domain.Entities
             }
             Status = RentalStatus.Completed;
         }
-        public void Overdue()
+        public void MarkAsOverdue()
         {
             if (Status != RentalStatus.Active)
                 throw new DomainRuleException(ResourceMessages.RENTAL_CANNOT_BE_MARKED_OVERDUE);
