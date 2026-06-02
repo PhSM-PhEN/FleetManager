@@ -32,8 +32,11 @@ namespace FleetManager.Api.Controllers
         public async Task<IActionResult> GetAll([FromServices] IGetAllClientUseCase useCase)
         {
             var response = await useCase.Execute();
-
-            return Ok(response);
+            if(response.Clients.Count != 0 )
+            {
+                return Ok(response);
+            }
+            return NoContent();
         }
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ResponseClientJson), StatusCodes.Status200OK)]

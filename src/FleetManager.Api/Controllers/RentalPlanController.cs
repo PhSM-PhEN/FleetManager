@@ -29,7 +29,11 @@ namespace FleetManager.Api.Controllers
         public async Task<IActionResult> GetAll([FromServices] IGetAllRentalPlanUseCase useCase)
         {
             var respone = await useCase.Execute();
-            return Ok(respone);
+            if(respone.RentalPlans.Count != 0)
+            {
+                return Ok(respone);
+            }
+            return NoContent();
         }
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ResponseRentalPlanJson), StatusCodes.Status200OK)]
