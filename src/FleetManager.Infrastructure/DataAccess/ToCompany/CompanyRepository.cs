@@ -21,12 +21,16 @@ namespace FleetManager.Infrastructure.DataAccess.ToCompany
 
         public async Task<List<Company>> GetAll()
         {
-            return await dbContext.Companies.AsNoTracking().ToListAsync();
+            return await dbContext.Companies.AsNoTracking()
+            .Include(c => c.Address)
+            .ToListAsync();
         }
 
         public async Task<Company?> GetById(int id)
         {
-            return await dbContext.Companies.AsNoTracking().FirstOrDefaultAsync(comp => comp.Id == id);
+            return await dbContext.Companies.AsNoTracking()
+            .Include(c => c.Address)
+            .FirstOrDefaultAsync(comp => comp.Id == id);
             
         }
         async Task<Company?> ICompanyUpdateOnlyRepository.GetById(int id)
