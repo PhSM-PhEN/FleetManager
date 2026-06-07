@@ -1,12 +1,13 @@
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories.ToRental;
 using Microsoft.EntityFrameworkCore;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FleetManager.Infrastructure.DataAccess.ToRental;
 
 public class RentalRepository(FleetManagerDbContext dbContext) : IRentalWriteOnlyRepository, IRentalReadOnlyRepository, IRentalUpdateOnlyRepository
 {
-   
+
     public async Task Add(Rental rental)
     {
         await dbContext.Rentals.AddAsync(rental);
@@ -23,7 +24,7 @@ public class RentalRepository(FleetManagerDbContext dbContext) : IRentalWriteOnl
         return await dbContext.Rentals
         .Include(r => r.Client)
         .Include(r => r.Vehicle)
-        .Include(r =>r.Company)
+        .Include(r => r.Company)
         .AsNoTracking().ToListAsync();
     }
 
@@ -47,5 +48,29 @@ public class RentalRepository(FleetManagerDbContext dbContext) : IRentalWriteOnl
     public void Update(Rental rental)
     {
         dbContext.Rentals.Update(rental);
+    }
+
+    public async Task<List<Rental>> FilterByMonth(User user, DateTime date)
+    {
+        var startDate = new DateTime(year: date.Year, month: date.Month, day: 1).Date;
+
+        int daysInMonth = DateTime.DaysInMonth(date.Year, date.Month);
+
+        var endDate = new DateTime(year: date.Year, month: date.Month, daysInMonth, 23, minute: 59, second: 59);
+
+        return await dbContext.Rentals
+            .AsNoTracking()
+                .Where(r => r.UserId == user.Id && r.StartDate >= startDate && r.StartDate <= endDate)
+                .Include(r => r.Company)
+                    .ThenInclude(r => r.Address)
+                .Include(r => r.Vehicle)
+                    .ThenInclude(r => r.Category)
+                .Include(r => r.Client)
+                    .ThenInclude(r => r.Address)
+                .Include(r => r.RentalPlan)
+                    .OrderBy(r => r.StartDate)
+                .ToListAsync();
+
+
     }
 }

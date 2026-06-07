@@ -5,5 +5,7 @@ namespace FleetManager.Domain.Repositories.ToRental;
 public interface IRentalReadOnlyRepository
 {
     Task<List<Rental>> GetAll();
+    Task<List<Rental>> FilterByMonth(User user, DateTime date);
     Task<Rental?> GetById(long id);
+
 }
