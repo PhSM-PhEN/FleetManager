@@ -17,4 +17,8 @@
     <ProjectReference Include="..\..\src\FleetManager.Infrastructure\FleetManager.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Request\" />
+  </ItemGroup>
+
 </Project>
