@@ -17,7 +17,8 @@ namespace FleetManager.Application.UseCase.ToClient.Register
         {
             Validate(request);
             
-            var client = _mapper.Map<Client>(request);
+            var client = new Client(request.FirstAndLastName, request.PhoneNumber, request.RG,
+            request.CPF, request.CnhRegisterNumber, request.CnhCategory, request.AddressId);
             await _repository.Add(client);
             await _unitOfWork.Commit();
 
@@ -35,7 +36,8 @@ namespace FleetManager.Application.UseCase.ToClient.Register
                 var errors = result.Errors.Select(e => e.ErrorMessage).ToList();
                 throw new ErrorOnValidationException(errors);
             }
-
+            
         }
+       
     }
 }
