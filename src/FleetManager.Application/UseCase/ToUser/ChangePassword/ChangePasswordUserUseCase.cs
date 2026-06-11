@@ -18,7 +18,7 @@ namespace FleetManager.Application.UseCase.ToUser.ChangePassword
             Validate(request, User);
 
             var user = await updateRepository.GetById(User.Id);
-            user.Password = passwordEncripter.Encrypt(request.NewPassword);
+            user.ChangePassword(passwordEncripter.Encrypt(request.NewPassword));
 
            updateRepository.Update(user);
             await unitOfWork.Commit();

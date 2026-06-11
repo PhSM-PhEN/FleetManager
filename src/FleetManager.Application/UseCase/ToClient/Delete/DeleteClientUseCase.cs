@@ -17,8 +17,8 @@ namespace FleetManager.Application.UseCase.ToClient.Delete
             {
                 throw new NotFoundException(ResourceErrorMessages.CLIENT_NOT_FOUND);
             }
-
-            await _repository.Delete(id);
+            client.Disable();
+            
             await _unitOfWork.Commit();
         }
     }

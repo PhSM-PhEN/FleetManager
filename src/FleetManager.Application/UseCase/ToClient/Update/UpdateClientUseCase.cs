@@ -1,12 +1,11 @@
-﻿using AutoMapper;
-using FleetManager.Communication.Requests;
+﻿using FleetManager.Communication.Requests;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToClient;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToClient.Update
 {
-    public class UpdateClientUseCase(IClientUpdateOnlyRepository updateRepository,  IUnitOfWork unitOfWork, IMapper mapper) : IUpdateClientUseCase
+    public class UpdateClientUseCase(IClientUpdateOnlyRepository updateRepository,  IUnitOfWork unitOfWork) : IUpdateClientUseCase
     {
        
         public async Task Execute(long id, RequestClientJson request)
@@ -17,7 +16,9 @@ namespace FleetManager.Application.UseCase.ToClient.Update
             {
                 throw new NotFoundException(ResourceErrorMessages.CLIENT_NOT_FOUND);
             }
-            mapper.Map(request, client);
+            
+            client.Update(request.FirstAndLastName, request.PhoneNumber, 
+                request.RG, request.CnhRegisterNumber, request.CnhCategory);
 
             updateRepository.Update(client);
             await unitOfWork.Commit();

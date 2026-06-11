@@ -131,5 +131,14 @@ namespace FleetManager.Domain.DomainExceptionBase {
                 return ResourceManager.GetString("THE_MILEAGE_MUST_BE_HIGHER_THAN_THE_CURRENT", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User already admin..
+        /// </summary>
+        public static string USER_ALREADY_ADMIN {
+            get {
+                return ResourceManager.GetString("USER_ALREADY_ADMIN", resourceCulture);
+            }
+        }
     }
 }

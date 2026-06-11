@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using FleetManager.Communication.Requests;
+﻿using FleetManager.Communication.Requests;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToUser;
 using FleetManager.Domain.Services.LoggedUser;
@@ -7,12 +6,11 @@ using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToUser.Update
 {
-    public class UpdateProfileUseCase(ILoggedUser loggedUser, IUserReadOnlyRepository readOnlyRepository, IUserUpdateOnlyRepository repository,IMapper mapper,  IUnitOfWork unitOfWork) : IUpdateProfileUseCase
+    public class UpdateProfileUseCase(ILoggedUser loggedUser, IUserReadOnlyRepository readOnlyRepository, IUserUpdateOnlyRepository repository,  IUnitOfWork unitOfWork) : IUpdateProfileUseCase
     {
         private readonly ILoggedUser _loggedUser = loggedUser;
         private readonly IUserReadOnlyRepository _readOnlyRepository = readOnlyRepository;
         private readonly IUserUpdateOnlyRepository _updateOnlyRepository = repository;
-        private readonly IMapper _mapper = mapper;  
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
         public async Task Execute(RequestUpdateUserJson request)
         {
@@ -21,8 +19,7 @@ namespace FleetManager.Application.UseCase.ToUser.Update
 
             var user = await _updateOnlyRepository.GetById(loggedUser.Id);
 
-            user.Name = request.Name;
-            user.Email = request.Email;
+            user.Update(request.Name, request.Email);
 
             _updateOnlyRepository.Update(user);
 

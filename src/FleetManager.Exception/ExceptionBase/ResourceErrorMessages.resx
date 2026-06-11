@@ -324,4 +324,7 @@
   <data name="VEHICLE_HAS_NO_CATEGORY" xml:space="preserve">
     <value>Vehicle has no category</value>
   </data>
+  <data name="ADMIN_ALREADY_EXISTS" xml:space="preserve">
+    <value>Admin already exists</value>
+  </data>
 </root>

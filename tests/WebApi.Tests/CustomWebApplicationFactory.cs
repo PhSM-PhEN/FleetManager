@@ -28,7 +28,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         var user = UserBuilder.Build();
         user.Id = 1;
         var password = user.Password;
-        user.Password = passwordEncrypter.Encrypt(password);
+        user.ChangePassword(passwordEncrypter.Encrypt(password));
         dbContext.Users.Add(user);
 
         var token = tokenGenerator.GenerateToken(user);
@@ -40,7 +40,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         var user = UserBuilder.Build();
         user.Id = 2;
         var password = user.Password;
-        user.Password = passwordEncrypter.Encrypt(password);
+        user.ChangePassword(passwordEncrypter.Encrypt(password));
         dbContext.Users.Add(user);
 
         var token = tokenGenerator.GenerateToken(user);

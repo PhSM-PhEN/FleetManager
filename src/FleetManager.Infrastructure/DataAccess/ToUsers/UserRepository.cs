@@ -1,4 +1,5 @@
 ﻿using FleetManager.Domain.Entities;
+using FleetManager.Domain.Enums;
 using FleetManager.Domain.Repositories.ToUser;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +22,11 @@ namespace FleetManager.Infrastructure.DataAccess.ToUsers
         public async Task<bool> ExistByEmail(string email)
         {
             return await dbContext.Users.AnyAsync(u => u.Email == email);
+        }
+
+        public async Task<bool> ExistByRole(string roles)
+        {
+            return await dbContext.Users.AnyAsync(u => u.Role == roles);
         }
 
         public async Task<User> GetById(long id)

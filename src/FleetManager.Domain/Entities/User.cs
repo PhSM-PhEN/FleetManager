@@ -1,23 +1,43 @@
-﻿using FleetManager.Domain.Enums;
+﻿using FleetManager.Domain.DomainExceptionBase;
+using FleetManager.Domain.Enums;
 
 namespace FleetManager.Domain.Entities
 {
     public class User
     {
         public long Id { get; set; }
-        public string _name { get; private set; } = string.Empty;
-        public string _email { get; private set; } = string.Empty;
-        public string _password { get; private set; } = string.Empty;
-        public Guid _userIdentifier { get; private set; }
+        public string Name { get; private set; } = string.Empty;
+        public string Email { get; private set; } = string.Empty;
+        public string Password { get; private set; } = string.Empty;
+        public Guid UserIdentifier { get; private set; }
         public string Role { get; private set; } = Roles.TEAM_MEMBER;
 
         public User(string name, string email, string password)
         {
-            _name = name;
-            _email = email;
-            _password = password;
-            _userIdentifier = new Guid();
+            Name = name;
+            Email = email;
+            ChangePassword(password);
+            UserIdentifier = Guid.NewGuid();
         }
-        
+        public void Update(string name, string email)
+        {
+            Name = name;
+            Email = email;
+
+        }
+        public void ChangePassword(string encryptedPassword)
+        {
+            Password = encryptedPassword;
+        }
+        public void PrometeToAdmin()
+        {
+            if (Role == Roles.TEAM_MEMBER)
+            {
+                throw new DomainRuleException(ResourceMessages.USER_ALREADY_ADMIN);
+            }
+                Role = Roles.ADMIN;
+           
+        }
+        public void DemoteToTeamMember() => Role = Roles.TEAM_MEMBER;
     }
 }

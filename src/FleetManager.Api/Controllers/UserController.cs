@@ -4,6 +4,7 @@ using FleetManager.Application.UseCase.ToUser.Register;
 using FleetManager.Application.UseCase.ToUser.Update;
 using FleetManager.Communication.Requests;
 using FleetManager.Communication.Responses;
+using FleetManager.Domain.Enums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -43,7 +44,7 @@ namespace FleetManager.Api.Controllers
             return NoContent();
         }
         [HttpPut]
-        [Authorize]
+        [Authorize(Roles = Roles.ADMIN)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
 
         public async Task<IActionResult> UpdateUser([FromServices] IUpdateProfileUseCase useCase, [FromBody] RequestUpdateUserJson request)

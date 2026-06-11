@@ -79,6 +79,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Admin already exists.
+        /// </summary>
+        public static string ADMIN_ALREADY_EXISTS {
+            get {
+                return ResourceManager.GetString("ADMIN_ALREADY_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Brand required.
         /// </summary>
         public static string BRAND_REQUIRED {

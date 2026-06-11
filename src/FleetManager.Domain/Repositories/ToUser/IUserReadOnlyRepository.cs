@@ -7,5 +7,6 @@ namespace FleetManager.Domain.Repositories.ToUser
         Task<User?> GetUserByEmail(string email);
 
         Task<bool> ExistByEmail(string email);
+        Task<bool> ExistByRole(string roles);
     }
 }
