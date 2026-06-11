@@ -11,7 +11,7 @@ namespace FleetManager.Domain.Entities
         public string CPF { get; private set; } = string.Empty;
         public string CnhRegisterNumber { get; private set; } = string.Empty;
         public string CnhCategory { get; private set; } = string.Empty;
-        public bool IsActive { get; private set; }
+        public bool IsActive { get; private set; } = true;
         public long AddressId { get; set; }
         public Address Address { get; set; } = default!;
 

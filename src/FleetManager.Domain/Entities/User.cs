@@ -31,7 +31,7 @@ namespace FleetManager.Domain.Entities
         }
         public void PrometeToAdmin()
         {
-            if (Role == Roles.TEAM_MEMBER)
+            if (Role == Roles.ADMIN)
             {
                 throw new DomainRuleException(ResourceMessages.USER_ALREADY_ADMIN);
             }
