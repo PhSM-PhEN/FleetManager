@@ -21,7 +21,8 @@ public class UpdateAddressUseCase(IAddressUpdateOnlyRepository updateOnlyReposit
         {
             throw new NotFoundException("Addres not found");
         }
-        _mapper.Map(request, address);
+        address.Update(request.Street, request.Number, request.City, request.State, request.ZipCode);
+        
         _updateOnlyRepository.Update(address);
         await _unitOfWork.Commit();
         

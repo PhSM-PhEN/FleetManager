@@ -1,14 +1,35 @@
 using System;
+using System.Data;
 
 namespace FleetManager.Domain.Entities;
 
 public class Address
 {
     public long Id { get; set; }
-    public string Street {get; set;} = string.Empty;
-    public string Number {get; set;} = string.Empty;
-    public string City {get; set;} = string.Empty;
-    public string State {get; set;} = string.Empty;
-    public string ZipCode {get; set;} = string.Empty;
+    public string Street {get; private set;} = string.Empty;
+    public string Number {get; private set;} = string.Empty;
+    public string City {get; private set;} = string.Empty;
+    public string State {get; private set;} = string.Empty;
+    public string ZipCode {get; private set;} = string.Empty;
+
+    public Address(){}
+    public Address(string street, string number, string city, string state, string zipCode)
+    {
+        Street = street;
+        Number = number;
+        City = city;
+        State = state;
+        ZipCode = zipCode;
+    }
+    public void Update(string street, string number, string city, string state, string zipCode)
+    {
+        Street = street;
+        Number = number;
+        City = city;
+        State = state;
+        ZipCode = zipCode;
+    }
+
+
     
 }

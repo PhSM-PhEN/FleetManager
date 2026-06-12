@@ -17,7 +17,8 @@ public class RequestAddressUseCase(IMapper mapper, IUnitOfWork unitOfWork, IAddr
     public async Task<ResponseAddressJson> Execute(RequestAddressJson request)
     {
         Validate(request);
-        var address = _mapper.Map<Address>(request);
+        var address  = new Address(request.Street, request.Number, request.City, request.State, request.ZipCode);
+        
         await _repository.Add(address);
         await _unitOfWork.Commit();
 
