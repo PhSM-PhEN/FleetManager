@@ -4,7 +4,7 @@ using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToClient.Delete
 {
-    public class DeleteClientUseCase (IClientReadOnlyRepository clientRepository, IUnitOfWork unitOfWork) : IDeleteClientUseCase
+    public class DeleteClientUseCase (IClientUpdateOnlyRepository clientRepository, IUnitOfWork unitOfWork) : IDeleteClientUseCase
     {
 
    
@@ -17,7 +17,7 @@ namespace FleetManager.Application.UseCase.ToClient.Delete
                 throw new NotFoundException(ResourceErrorMessages.CLIENT_NOT_FOUND);
             }
             client.Disable();
-            
+            clientRepository.Update(client);
             await unitOfWork.Commit();
         }
     }

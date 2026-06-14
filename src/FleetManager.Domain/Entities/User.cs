@@ -29,7 +29,7 @@ namespace FleetManager.Domain.Entities
         {
             Password = encryptedPassword;
         }
-        public void PrometeToAdmin()
+        public void PromoteToAdmin()
         {
             if (Role == Roles.ADMIN)
             {

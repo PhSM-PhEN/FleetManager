@@ -11,13 +11,15 @@ namespace CommonTestUtilities.Entitie
         {
             var passwordEncrypter = new PasswordEncrypterBuilder().Build();
 
-            var user = new Faker<User>()
-                .RuleFor(u => u.Id, _ => 1)
-                .RuleFor(u => u.Name, f => f.Person.FirstName)
-                .RuleFor(u => u.Email, (f, u) => f.Internet.Email(u.Name))
-                .RuleFor(u => u.Password, (_, user) => passwordEncrypter.Encrypt(user.Password))
-                .RuleFor(u => u.UserIdentifier, _ => Guid.NewGuid())
-                .RuleFor(u => u.Role, _ => role);
+            var faker = new Faker();
+            var name = faker.Person.FirstName;
+            var email = faker.Internet.Email(name);
+            var password = passwordEncrypter.Encrypt(faker.Internet.Password(prefix: "aA1"));
+
+            var user = new User(name, email, password);
+
+            if (role == Roles.ADMIN)
+                user.PromoteToAdmin();
 
             return user;
         }

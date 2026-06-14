@@ -13,13 +13,13 @@ public class VehicleReadOnlyRepositoryBuilder
         _repository = new Mock<IVehicleReadOnlyRepository>();
     }
 
-    public async Task<VehicleReadOnlyRepositoryBuilder> GetAll(List<Vehicle> vehicles)
+    public VehicleReadOnlyRepositoryBuilder GetAll(List<Vehicle> vehicles)
     {
         _repository.Setup(r => r.GetAll()).ReturnsAsync(vehicles);
        
         return this;
     }
-    public async Task<VehicleReadOnlyRepositoryBuilder> GetById(long id, Vehicle vehicle)
+    public VehicleReadOnlyRepositoryBuilder GetById(long id, Vehicle vehicle)
     {
         _repository.Setup(r => r.GetById(id)).ReturnsAsync(vehicle);
 
