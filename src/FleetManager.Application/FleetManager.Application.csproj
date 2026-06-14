@@ -28,7 +28,6 @@
     <Folder Include="UseCase\ToAddress\Update\" />
     <Folder Include="UseCase\ToClient\GetAll\" />
     <Folder Include="UseCase\ToClient\GetById\" />
-    <Folder Include="UseCase\ToCompany\" />
     <Folder Include="UseCase\ToCompany\Delete\" />
     <Folder Include="UseCase\ToCompany\GetAll\" />
     <Folder Include="UseCase\ToCompany\GetById\" />
