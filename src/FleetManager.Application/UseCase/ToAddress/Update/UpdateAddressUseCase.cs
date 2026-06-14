@@ -1,5 +1,3 @@
-
-using AutoMapper;
 using FleetManager.Communication.Requests;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToAddress;
@@ -7,24 +5,22 @@ using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToAddress.Update;
 
-public class UpdateAddressUseCase(IAddressUpdateOnlyRepository updateOnlyRepository, IMapper mapper, IUnitOfWork unitOfWork) : IUpdateAddressUseCase
+public class UpdateAddressUseCase(IAddressUpdateOnlyRepository updateOnlyRepository, IUnitOfWork unitOfWork) : IUpdateAddressUseCase
 {
-    private readonly IAddressUpdateOnlyRepository _updateOnlyRepository = updateOnlyRepository;
-    private readonly IMapper _mapper = mapper;
-    private readonly IUnitOfWork _unitOfWork = unitOfWork;
+ 
     public async Task Execute(long id ,RequestAddressJson request)
     {   
         Validate(request);
-        var address = await _updateOnlyRepository.GetById(id);
+        var address = await updateOnlyRepository.GetById(id);
 
-        if(address == null)
+        if(address is null)
         {
-            throw new NotFoundException("Addres not found");
+            throw new NotFoundException(ResourceErrorMessages.ADDRESS_NOT_FOUND);
         }
         address.Update(request.Street, request.Number, request.City, request.State, request.ZipCode);
         
-        _updateOnlyRepository.Update(address);
-        await _unitOfWork.Commit();
+        updateOnlyRepository.Update(address);
+        await unitOfWork.Commit();
         
         
     }

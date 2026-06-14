@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using FleetManager.Application.UseCase.ToCategory.GetById;
 using FleetManager.Communication.Requests;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.Entities;
@@ -10,15 +9,10 @@ using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToVehicle.Register
 {
-    public class RegisterVehicleUseCase(IMapper mapper,
-            IVehicleWriteOnlyRepository vehicleWriteOnly,
-            IUnitOfWork unitOfWork,
-            ICategoryReadOnlyRepository categoryGetById) : IRegisterVehicleUseCase
+    public class RegisterVehicleUseCase(IMapper mapper,IVehicleWriteOnlyRepository vehicleWriteOnly,
+            IUnitOfWork unitOfWork, ICategoryReadOnlyRepository categoryGetById) : IRegisterVehicleUseCase
     {
-        private readonly IUnitOfWork _unitOfWork = unitOfWork;
-        private readonly IVehicleWriteOnlyRepository _vehicleWriteOnly = vehicleWriteOnly;
-        private readonly ICategoryReadOnlyRepository _categoryGetById = categoryGetById;
-        private readonly IMapper _mapper = mapper;
+
         public async Task<ResponseRegisterVehicleJson> Execute(RequestVehicleJson request)
         {
 
@@ -26,14 +20,15 @@ namespace FleetManager.Application.UseCase.ToVehicle.Register
             await ValidateCategory(request.CategoryId);
             
 
-            var vehicle = _mapper.Map<Vehicle>(request);
-            
+            var vehicle = new Vehicle(request.Model, request.Brand, request.ManufacturingYear, request.Renavam, request.ChassisNumber,
+                                        request.Color, request.LicensePlate, request.CategoryId, request.CurrentMileage);
 
-            await _vehicleWriteOnly.Add(vehicle);
 
-            await _unitOfWork.Commit();
+            await vehicleWriteOnly.Add(vehicle);
 
-            return _mapper.Map<ResponseRegisterVehicleJson>(vehicle);
+            await unitOfWork.Commit();
+
+            return mapper.Map<ResponseRegisterVehicleJson>(vehicle);
         }
         private static void Validate(RequestVehicleJson request)
         {
@@ -51,7 +46,7 @@ namespace FleetManager.Application.UseCase.ToVehicle.Register
         {
 
 
-            var result = await _categoryGetById.GetById(categoryId);
+            var result = await categoryGetById.GetById(categoryId);
 
             if (result is null)
             {

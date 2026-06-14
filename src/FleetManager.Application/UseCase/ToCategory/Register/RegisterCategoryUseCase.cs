@@ -19,8 +19,7 @@ namespace FleetManager.Application.UseCase.ToCategory.Register
         {
             Validate(request);
 
-            var category = _mapper.Map<Category>(request);
-
+            var category = new Category(request.Name, (Domain.Enums.TransmissionType)request.TransmissionType);
             await _categoryWriteOnlyRepository.Add(category);
             await _unitOfWork.Commit();
 

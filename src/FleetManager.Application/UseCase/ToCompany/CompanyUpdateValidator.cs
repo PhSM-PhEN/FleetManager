@@ -1,0 +1,26 @@
+﻿using FleetManager.Communication.Requests;
+using FleetManager.Exception.ExceptionBase;
+using FluentValidation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FleetManager.Application.UseCase.ToCompany
+{
+    public class CompanyUpdateValidator : AbstractValidator<RequestUpdateCompanyJson>
+    {
+        public CompanyUpdateValidator() 
+        {
+            RuleFor(c => c.Name).NotEmpty()
+            .WithMessage(ResourceErrorMessages.NAME_IS_REQUIRED);
+            RuleFor(c => c.PhoneNumber).NotEmpty()
+                .WithMessage(ResourceErrorMessages.PHONE_NUMBER_IS_REQUERID)
+                .Matches(@"^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$")
+                .WithMessage(ResourceErrorMessages.INVALID_PHONE_NUMBER_FORMAT);
+            RuleFor(c => c.AddressId).GreaterThan(0)
+                .WithMessage(ResourceErrorMessages.ADDRESSID_MUST_BE_GREATER_THAN_0);
+        }
+    }
+}

@@ -1,6 +1,3 @@
-using System;
-using System.Data;
-
 namespace FleetManager.Domain.Entities;
 
 public class Address
@@ -12,7 +9,7 @@ public class Address
     public string State {get; private set;} = string.Empty;
     public string ZipCode {get; private set;} = string.Empty;
 
-    public Address(){}
+    protected Address(){}
     public Address(string street, string number, string city, string state, string zipCode)
     {
         Street = street;

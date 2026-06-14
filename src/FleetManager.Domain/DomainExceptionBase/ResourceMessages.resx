@@ -129,6 +129,9 @@
   <data name="INCLUDED_KM_CANNOT_BE_NEGATIVE" xml:space="preserve">
     <value>Included km cannot be negative.</value>
   </data>
+  <data name="PRICE_CANNOT_BE_NEGATIVE" xml:space="preserve">
+    <value>Price cannot be negative.</value>
+  </data>
   <data name="RENTAL_CANNOT_BE_MARKED_OVERDUE" xml:space="preserve">
     <value>Rental cannot be markd overdue.</value>
   </data>

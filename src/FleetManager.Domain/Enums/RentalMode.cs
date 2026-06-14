@@ -2,7 +2,7 @@
 {
     public enum RentalMode
     {
-        Daily,
-        Monthly
+        Daily = 0,
+        Monthly = 1
     }
 }

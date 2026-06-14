@@ -1,17 +1,15 @@
-﻿using AutoMapper;
-using FleetManager.Communication.Requests;
+﻿using FleetManager.Communication.Requests;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToCategory;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToCategory.Update
 {
-    public class UpdateCategoryUseCase(IUnitOfWork unitOfWork, ICategoryUpdateOnlyRepository updateRepository,
-        IMapper mapper) : IUpdateCategoryUseCase
+    public class UpdateCategoryUseCase(IUnitOfWork unitOfWork, ICategoryUpdateOnlyRepository updateRepository) : IUpdateCategoryUseCase
     {
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
         private readonly ICategoryUpdateOnlyRepository _updateRepository = updateRepository;
-        private readonly IMapper _mapper = mapper;
+
 
         public async Task Execute(int id, RequestCategoryJson request)
         {
@@ -23,7 +21,8 @@ namespace FleetManager.Application.UseCase.ToCategory.Update
             {
                 throw new NotFoundException(ResourceErrorMessages.CATEGORY_NOT_FOUND);
             }
-            _mapper.Map(request, category);
+            category.Update(request.Name, (Domain.Enums.TransmissionType)request.TransmissionType);
+
             _updateRepository.Update(category);
 
             await _unitOfWork.Commit();

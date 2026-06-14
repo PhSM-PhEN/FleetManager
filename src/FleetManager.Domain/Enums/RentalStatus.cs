@@ -2,10 +2,9 @@
 {
     public enum RentalStatus
     {
-        Active,
-        Completed,
-        Overdue,
-        Cancelled
-        
+        Active  = 0,
+        Completed = 1,
+        Overdue = 2,
+        Cancelled = 3   
     }
 }

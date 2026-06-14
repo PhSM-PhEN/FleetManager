@@ -3,12 +3,27 @@
     public class Company
     {
         public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public string Cnpj { get; set; } = string.Empty;
-        public string PhoneNumber { get; set; } = string.Empty;
+        public string Name { get; private set; } = string.Empty;
+        public string Cnpj { get; private set; } = string.Empty;
+        public string PhoneNumber { get; private set; } = string.Empty;
         public long AddressId { get; set; }
         public Address Address { get; set; } = default!;
 
+        protected Company() { }
 
+        public Company(string name, string cnpj, string phoneNumber, long addressId)
+        {
+            Name = name;
+            Cnpj = cnpj;
+            PhoneNumber = phoneNumber;
+            AddressId = addressId;
+        }
+
+        public void Update(string name, string phoneNumber, long addressId)
+        {
+            Name = name;
+            PhoneNumber = phoneNumber;
+            AddressId = addressId;
+        }
     }
 }

@@ -4,14 +4,13 @@ using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToClient.Delete
 {
-    public class DeleteClientUseCase (IClientWriteOnlyRepository repository, IClientReadOnlyRepository clientRepository, IUnitOfWork unitOfWork) : IDeleteClientUseCase
+    public class DeleteClientUseCase (IClientReadOnlyRepository clientRepository, IUnitOfWork unitOfWork) : IDeleteClientUseCase
     {
-        private readonly IClientWriteOnlyRepository _repository = repository;
-        private readonly IClientReadOnlyRepository _clientRepository = clientRepository;
-        private readonly IUnitOfWork _unitOfWork = unitOfWork;
+
+   
         public async Task Execute(long id)
         {
-            var client = await _clientRepository.GetById(id);
+            var client = await clientRepository.GetById(id);
 
             if (client == null)
             {
@@ -19,7 +18,7 @@ namespace FleetManager.Application.UseCase.ToClient.Delete
             }
             client.Disable();
             
-            await _unitOfWork.Commit();
+            await unitOfWork.Commit();
         }
     }
 }

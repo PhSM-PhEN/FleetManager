@@ -1,5 +1,3 @@
-using System;
-using AutoMapper;
 using FleetManager.Communication.Requests;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToCompany;
@@ -7,27 +5,25 @@ using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToCompany.Update;
 
-public class UpdateCompanyUseCase(IMapper mapper, ICompanyUpdateOnlyRepository repository, IUnitOfWork unitOfWork) : IUpdateCompanyUseCase
+public class UpdateCompanyUseCase(ICompanyUpdateOnlyRepository repository, IUnitOfWork unitOfWork) : IUpdateCompanyUseCase
 {
-    private readonly IMapper _mapper = mapper;
-    private readonly ICompanyUpdateOnlyRepository _repository = repository;
-    private readonly IUnitOfWork _unitOfWork = unitOfWork;
-    public async Task Execute(int id, RequestCompanyJson request)
+
+    public async Task Execute(int id, RequestUpdateCompanyJson request)
     {
         Validate(request);
-        var company = await _repository.GetById(id);
+        var company = await repository.GetById(id);
         if(company is null)
         {
-            throw new NotFoundException("Company not found");
+            throw new NotFoundException(ResourceErrorMessages.COMPANY_NOT_FOUND);
         }
-        _mapper.Map(request, company);
-        _repository.Update(company);
+        company.Update(request.Name, request.PhoneNumber, request.AddressId);
+        repository.Update(company);
         
-        await _unitOfWork.Commit();
+        await unitOfWork.Commit();
     }
-    private void Validate(RequestCompanyJson request)
+    private void Validate(RequestUpdateCompanyJson request)
     {
-        var validator = new CompanyValidator();
+        var validator = new CompanyUpdateValidator();
         var result = validator.Validate(request);
 
         if(result.IsValid == false)

@@ -97,6 +97,15 @@ namespace FleetManager.Domain.DomainExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Price cannot be negative..
+        /// </summary>
+        public static string PRICE_CANNOT_BE_NEGATIVE {
+            get {
+                return ResourceManager.GetString("PRICE_CANNOT_BE_NEGATIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rental cannot be markd overdue..
         /// </summary>
         public static string RENTAL_CANNOT_BE_MARKED_OVERDUE {

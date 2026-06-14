@@ -12,7 +12,7 @@ namespace FleetManager.Application.UseCase.ToVehicle.Update.UpdateVehicle
         private readonly IVehicleUpdateOnlyRepository _repository = repository;
         private readonly IMapper _mapper = mapper;
 
-        public async Task Execute(long id, RequestVehicleJson request)
+        public async Task Execute(long id, RequestUpdateVehicleJson request)
         {
             Validate(request);
             var vehicle = await _repository.GetById(id);
@@ -27,9 +27,9 @@ namespace FleetManager.Application.UseCase.ToVehicle.Update.UpdateVehicle
 
             await _unitOfWork.Commit();
         }
-        private static void Validate(RequestVehicleJson request)
+        private static void Validate(RequestUpdateVehicleJson request)
         {
-            var validator = new VehicleValidator();
+            var validator = new VehicleUpdateValidator();
             var result = validator.Validate(request);
             if (result.IsValid == false)
             {

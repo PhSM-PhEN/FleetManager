@@ -4,19 +4,20 @@ using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToCategory.Delete
 {
-    public class DeleteCategoryUseCase(IUnitOfWork unitOfWork, ICategoryWriteOnlyRepository repository, ICategoryReadOnlyRepository readOnlyRepository) : IDeleteCategoryUseCase
+    public class DeleteCategoryUseCase(IUnitOfWork unitOfWork, ICategoryUpdateOnlyRepository repository) : IDeleteCategoryUseCase
     {
         private readonly IUnitOfWork _unitOfWork = unitOfWork;
-        private readonly ICategoryWriteOnlyRepository _repository = repository;
-        private readonly ICategoryReadOnlyRepository _readOnlyRepository = readOnlyRepository;
+        private readonly ICategoryUpdateOnlyRepository _repository = repository;
+
         public async Task Execute(int id)
         {
-            var category = await _readOnlyRepository.GetById(id);
+            var category = await _repository.GetById(id);
             if (category == null)
             {
                 throw new NotFoundException(ResourceErrorMessages.CATEGORY_NOT_FOUND);
             }
-            await _repository.Delete(id);
+            category.Disable();
+            _repository.Update(category);
             await _unitOfWork.Commit();
         }
     }
