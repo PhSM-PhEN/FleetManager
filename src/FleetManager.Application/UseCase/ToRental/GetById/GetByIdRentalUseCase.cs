@@ -12,7 +12,7 @@ public class GetByIdRentalUseCase(IMapper mapper, IRentalReadOnlyRepository repo
         var rentalDetail = await repository.GetById(id);
         if(rentalDetail == null)
         {
-            throw new NotFoundException("Rental not found");
+            throw new NotFoundException(ResourceErrorMessages.RENTAL_NOT_FOUND);
         }
         return mapper.Map<ResponseRentalInfoJson>(rentalDetail);
     }

@@ -12,8 +12,8 @@ public class RequestRentalPlanJsonBuilder
         var mode = faker.PickRandom<RentalMode>();
         var transmission = faker.PickRandom<TransmissionType>();
 
-        var modeName = mode == RentalMode.Daily ? "Daly" : "Monthly";
-        var transmissionName = transmission == TransmissionType.Manual ? "manual" : "automatic";
+        var modeName = mode == RentalMode.Daily ? "Daily" : "Monthly";
+        var transmissionName = transmission == TransmissionType.Manual ? "Manual" : "Automatic";
 
         return new Faker<RequestRentalPlansJson>()
             .RuleFor(r => r.Name, _ => $"{modeName} {transmissionName}")

@@ -1,4 +1,3 @@
-using System;
 using AutoMapper;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.Repositories.ToCompany;
@@ -15,7 +14,7 @@ public class GetAllCompanyUseCase(IMapper mapper, ICompanyReadOnlyRepository rep
         var company = await _repository.GetAll();
         if(company.Count == 0)
         {
-            throw new NotFoundException("Company not register");
+            throw new NotFoundException(ResourceErrorMessages.COMPANY_NOT_FOUND);
         }
         return new ResponseListCompanyJson
         {

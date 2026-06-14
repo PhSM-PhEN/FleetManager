@@ -63,6 +63,9 @@ namespace FleetManager.Infrastructure.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -88,7 +91,7 @@ namespace FleetManager.Infrastructure.Migrations
 
                     b.Property<string>("CPF")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("CnhCategory")
                         .IsRequired()
@@ -96,11 +99,14 @@ namespace FleetManager.Infrastructure.Migrations
 
                     b.Property<string>("CnhRegisterNumber")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("FirstAndLastName")
                         .IsRequired()
                         .HasColumnType("longtext");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
@@ -113,6 +119,12 @@ namespace FleetManager.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
+
+                    b.HasIndex("CPF")
+                        .IsUnique();
+
+                    b.HasIndex("CnhRegisterNumber")
+                        .IsUnique();
 
                     b.ToTable("Clients");
                 });
@@ -130,7 +142,7 @@ namespace FleetManager.Infrastructure.Migrations
 
                     b.Property<string>("Cnpj")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -143,6 +155,9 @@ namespace FleetManager.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AddressId");
+
+                    b.HasIndex("Cnpj")
+                        .IsUnique();
 
                     b.ToTable("Companies");
                 });
@@ -178,6 +193,9 @@ namespace FleetManager.Infrastructure.Migrations
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<int>("TotalDays")
                         .HasColumnType("int");
@@ -248,7 +266,7 @@ namespace FleetManager.Infrastructure.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -266,6 +284,12 @@ namespace FleetManager.Infrastructure.Migrations
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("UserIdentifier")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -287,7 +311,7 @@ namespace FleetManager.Infrastructure.Migrations
 
                     b.Property<string>("ChassisNumber")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<string>("Color")
                         .IsRequired()
@@ -296,15 +320,15 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<long>("CurrentMileage")
-                        .HasColumnType("bigint");
+                    b.Property<decimal>("CurrentMileage")
+                        .HasColumnType("decimal(65,30)");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("LicensePlate")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("ManufacturingYear")
                         .HasColumnType("int");
@@ -315,11 +339,20 @@ namespace FleetManager.Infrastructure.Migrations
 
                     b.Property<string>("Renavam")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("ChassisNumber")
+                        .IsUnique();
+
+                    b.HasIndex("LicensePlate")
+                        .IsUnique();
+
+                    b.HasIndex("Renavam")
+                        .IsUnique();
 
                     b.ToTable("Vehicles");
                 });

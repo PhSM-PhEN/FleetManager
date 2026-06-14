@@ -6,7 +6,7 @@ namespace FleetManager.Infrastructure.Extension
     {
         public static bool IsTestEnvironment(this IConfiguration configuration)
         {
-            return configuration.GetValue<bool>("ImMemoryTest");
+            return configuration.GetValue<bool>("InMemoryTest");
         }
     }
 }

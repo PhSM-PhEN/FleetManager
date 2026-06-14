@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FleetManager.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigrations : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -46,7 +46,8 @@ namespace FleetManager.Infrastructure.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    TransmissionType = table.Column<int>(type: "int", nullable: false)
+                    TransmissionType = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -82,7 +83,7 @@ namespace FleetManager.Infrastructure.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Email = table.Column<string>(type: "longtext", nullable: false)
+                    Email = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Password = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -108,12 +109,13 @@ namespace FleetManager.Infrastructure.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     RG = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CPF = table.Column<string>(type: "longtext", nullable: false)
+                    CPF = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CnhRegisterNumber = table.Column<string>(type: "longtext", nullable: false)
+                    CnhRegisterNumber = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CnhCategory = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     AddressId = table.Column<long>(type: "bigint", nullable: false)
                 },
                 constraints: table =>
@@ -136,7 +138,7 @@ namespace FleetManager.Infrastructure.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Cnpj = table.Column<string>(type: "longtext", nullable: false)
+                    Cnpj = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     PhoneNumber = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -165,16 +167,16 @@ namespace FleetManager.Infrastructure.Migrations
                     Model = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ManufacturingYear = table.Column<int>(type: "int", nullable: false),
-                    Renavam = table.Column<string>(type: "longtext", nullable: false)
+                    Renavam = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ChassisNumber = table.Column<string>(type: "longtext", nullable: false)
+                    ChassisNumber = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    LicensePlate = table.Column<string>(type: "longtext", nullable: false)
+                    LicensePlate = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Color = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
-                    CurrentMileage = table.Column<long>(type: "bigint", nullable: false),
+                    CurrentMileage = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
@@ -200,12 +202,13 @@ namespace FleetManager.Infrastructure.Migrations
                     ClientId = table.Column<long>(type: "bigint", nullable: false),
                     VehicleId = table.Column<long>(type: "bigint", nullable: false),
                     UserId = table.Column<long>(type: "bigint", nullable: false),
-                    TotalPrice = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     RentalPlanId = table.Column<int>(type: "int", nullable: false),
                     TotalDays = table.Column<int>(type: "int", nullable: false),
                     IncludedKm = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
                     SnapshotPriceRental = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
                     SnapshotPricePerKm = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime(6)", nullable: false)
                 },
@@ -251,9 +254,27 @@ namespace FleetManager.Infrastructure.Migrations
                 column: "AddressId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Clients_CnhRegisterNumber",
+                table: "Clients",
+                column: "CnhRegisterNumber",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Clients_CPF",
+                table: "Clients",
+                column: "CPF",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Companies_AddressId",
                 table: "Companies",
                 column: "AddressId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Companies_Cnpj",
+                table: "Companies",
+                column: "Cnpj",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rentals_ClientId",
@@ -281,9 +302,39 @@ namespace FleetManager.Infrastructure.Migrations
                 column: "VehicleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_UserIdentifier",
+                table: "Users",
+                column: "UserIdentifier",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Vehicles_CategoryId",
                 table: "Vehicles",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vehicles_ChassisNumber",
+                table: "Vehicles",
+                column: "ChassisNumber",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vehicles_LicensePlate",
+                table: "Vehicles",
+                column: "LicensePlate",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vehicles_Renavam",
+                table: "Vehicles",
+                column: "Renavam",
+                unique: true);
         }
 
         /// <inheritdoc />

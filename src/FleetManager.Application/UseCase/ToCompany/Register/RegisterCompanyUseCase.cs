@@ -8,7 +8,8 @@ using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToCompany.Register;
 
-public class RegisterCompanyUseCase(IMapper mapper, ICompanyWriteOnlyRepository repository, IUnitOfWork unitOfWork) : IRegisterCompanyUseCase
+public class RegisterCompanyUseCase(IMapper mapper, ICompanyWriteOnlyRepository repository,
+    ICompanyReadOnlyRepository readOnlyRepository,IUnitOfWork unitOfWork) : IRegisterCompanyUseCase
 {
 
     public async Task<ResponseCompanyJson> Execute(RequestCompanyJson request)
@@ -18,7 +19,13 @@ public class RegisterCompanyUseCase(IMapper mapper, ICompanyWriteOnlyRepository 
         await repository.Add(company);
         await unitOfWork.Commit();
         
-        return mapper.Map<ResponseCompanyJson>(company);
+        var response = await readOnlyRepository.GetById(company.Id);
+        if (response == null)
+        {
+            throw new NotFoundException(ResourceErrorMessages.COMPANY_NOT_FOUND);
+        }
+
+        return mapper.Map<ResponseCompanyJson>(response);
     }
     private static void Validate (RequestCompanyJson request)
     {

@@ -18,7 +18,7 @@ public class RequestVehicleJsonBuilder
         .RuleFor(r => r.LicensePlate, f => f.Random.Replace("???-####"))
         .RuleFor(r => r.Color, f => f.Commerce.Color())
         .RuleFor(r => r.CurrentMileage, f => f.Random.Decimal(0, 30000))
-        .RuleFor(r => r.CategoryId, _ = categoryId)
+        .RuleFor(r => r.CategoryId, _ => categoryId)
         .Generate();
     }
 }

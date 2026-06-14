@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 using WebApi.Tests.Resource;
 
 
@@ -29,8 +28,9 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
                 var provider = services.AddEntityFrameworkInMemoryDatabase().BuildServiceProvider();
                 services.AddDbContext<FleetManagerDbContext>(config =>
                 {
-                    config.UseInMemoryDatabase("InMemoryDbForTesting")
-                        .UseInternalServiceProvider(provider);
+                    config.UseInMemoryDatabase("InMemoryDbForTesting");
+
+                    config.UseInternalServiceProvider(provider);
                 });
 
                 var scope = services.BuildServiceProvider().CreateScope();
@@ -79,7 +79,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         USER_ADM_MEMBER = new UserIdentityManager(user, password, token);
         return user;
     }
-    private Rental AddRental(FleetManagerDbContext dbContext, User user)
+    private static Rental AddRental(FleetManagerDbContext dbContext, User user)
     {
         var rental = RentalBuilder.Build(userId: user.Id);
         dbContext.Rentals.Add(rental);
