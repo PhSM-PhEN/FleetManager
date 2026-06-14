@@ -1,4 +1,3 @@
-using AutoMapper;
 using FleetManager.Communication.Requests;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToRental;
@@ -6,24 +5,29 @@ using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToRental.Update;
 
-public class UpdateRentalUseCase(IRentalUpdateOnlyRepository repository, IUnitOfWork unitOfWork, IMapper mapper) : IUpdateRentalUseCase
+public class UpdateRentalUseCase(IRentalUpdateOnlyRepository repository, IUnitOfWork unitOfWork) : IUpdateRentalUseCase
 {
-    public async Task Execute(long id, RequestRentJson request)
+    public async Task Execute(long id, RequestUpdateRentJson request)
     {
         Validate(request);
         var rental = await repository.GetById(id);
         if(rental is null)
         {
-            throw new NotFoundException("Rental not found");
+            throw new NotFoundException(ResourceErrorMessages.RENTAL_NOT_FOUND);
         }
-        mapper.Map(request, rental);
+        rental.Reschedule(request.StartDate, request.EndDate);
+
+        if (request.IncludedKm > 0)
+            rental.UpdateIncludedKm(request.IncludedKm);
+
         repository.Update(rental);
         await unitOfWork.Commit();
+  
         
     }
-    private static void Validate(RequestRentJson request)
+    private static void Validate(RequestUpdateRentJson request)
     {
-        var Validator = new RentalValidator();
+        var Validator = new RentalUpdateValidator();
         var result = Validator.Validate(request);
 
         if(result.IsValid == false)

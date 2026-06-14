@@ -6,12 +6,21 @@ namespace FleetManager.Domain.Entities
     public class RentalPlan
     {
         public int Id { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public RentalMode Mode { get; set; }
-        public TransmissionType Transmission { get; set; }
-        public decimal PriceRental { get;  set; }
-        public decimal PricePerKm { get;  set; }
-        public bool IsActive { get; set; } = true;
+        public string Name { get; private set; } = string.Empty;
+        public RentalMode Mode { get; private set; }
+        public TransmissionType Transmission { get; private set; }
+        public decimal PriceRental { get; private set; }
+        public decimal PricePerKm { get; private set; }
+        public bool IsActive { get; private set; } = true;
+
+        public void Update(string name, RentalMode mode, TransmissionType transmission,
+                           decimal priceRental, decimal pricePerKm)
+        {
+            Name = name;
+            Mode = mode;
+            Transmission = transmission;
+            UpdatePrices(priceRental, pricePerKm); // só aqui
+        }
 
         protected RentalPlan() { }
 
@@ -22,17 +31,6 @@ namespace FleetManager.Domain.Entities
             Transmission = transmission;
             PriceRental = priceRental;
             PricePerKm = pricePerKm;
-        }
-        public void Update(string name, RentalMode mode, TransmissionType transmission, decimal priceRental, decimal pricePerKm)
-        {
-            Name = name;
-            Mode = mode;
-            Transmission = transmission;
-            PriceRental = priceRental;
-            PricePerKm = pricePerKm;
-            UpdatePrices(priceRental, pricePerKm);
-
-
         }
         public void Disable()
         {

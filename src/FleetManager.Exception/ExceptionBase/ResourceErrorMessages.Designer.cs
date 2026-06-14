@@ -529,6 +529,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rental not found..
+        /// </summary>
+        public static string RENTAL_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("RENTAL_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rental plan is not active..
         /// </summary>
         public static string RENTAL_PLAN_IS_NOT_ACTIVE {

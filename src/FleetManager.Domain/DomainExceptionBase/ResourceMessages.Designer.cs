@@ -79,6 +79,15 @@ namespace FleetManager.Domain.DomainExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot Reschedule non active rental.
+        /// </summary>
+        public static string CANNOT_RESCHEDULE_NON_ACTIVE_RENTAL {
+            get {
+                return ResourceManager.GetString("CANNOT_RESCHEDULE_NON_ACTIVE_RENTAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End date must be greater than start date..
         /// </summary>
         public static string END_DATE_MUST_BE_GREATER_THAN_START_DATE {

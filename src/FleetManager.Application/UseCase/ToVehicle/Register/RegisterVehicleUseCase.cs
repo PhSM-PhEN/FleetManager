@@ -20,7 +20,7 @@ namespace FleetManager.Application.UseCase.ToVehicle.Register
             await ValidateCategory(request.CategoryId);
             
 
-            var vehicle = new Vehicle(request.Model, request.Brand, request.ManufacturingYear, request.Renavam, request.ChassisNumber,
+            var vehicle = new Vehicle(request.Brand, request.Model, request.ManufacturingYear, request.Renavam, request.ChassisNumber,
                                         request.Color, request.LicensePlate, request.CategoryId, request.CurrentMileage);
 
 

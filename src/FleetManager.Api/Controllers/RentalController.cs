@@ -48,7 +48,7 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Update([FromRoute] long id,[FromServices] IUpdateRentalUseCase useCase, [FromBody] RequestRentJson request)
+        public async Task<IActionResult> Update([FromRoute] long id,[FromServices] IUpdateRentalUseCase useCase, [FromBody] RequestUpdateRentJson request)
         {
             await useCase.Execute(id, request); 
             return NoContent();

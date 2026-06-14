@@ -327,4 +327,7 @@
   <data name="ADMIN_ALREADY_EXISTS" xml:space="preserve">
     <value>Admin already exists</value>
   </data>
+  <data name="RENTAL_NOT_FOUND" xml:space="preserve">
+    <value>Rental not found.</value>
+  </data>
 </root>

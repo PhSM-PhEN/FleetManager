@@ -1,4 +1,3 @@
-using AutoMapper;
 using FleetManager.Communication.Requests;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToRentalPlans;
@@ -6,7 +5,7 @@ using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToRentalPlan.Update;
 
-public class UpdateRentalPlanUseCase(IMapper mapper, IRentalPlansUpdateOnlyRepository repository, IUnitOfWork unitOfWork) : IUpdateRentalPlanUseCase
+public class UpdateRentalPlanUseCase(IRentalPlansUpdateOnlyRepository repository, IUnitOfWork unitOfWork) : IUpdateRentalPlanUseCase
 {
     public async Task Execute(int id, RequestRentalPlansJson request)
     {
@@ -14,9 +13,9 @@ public class UpdateRentalPlanUseCase(IMapper mapper, IRentalPlansUpdateOnlyRepos
         var rentalPlan = await repository.GetById(id);
         if(rentalPlan is null)
         {
-            throw new NotFoundException("Rental plan not found");
+            throw new NotFoundException(ResourceErrorMessages.RENTAL_PLAN_NOT_FOUND);
         }
-        mapper.Map(request, rentalPlan);
+        rentalPlan.Update(request.Name, (Domain.Enums.RentalMode)request.Mode, (Domain.Enums.TransmissionType)request.Transmission, request.PriceRental, request.PricePerKm);
         repository.Update(rentalPlan);
         await unitOfWork.Commit();
 
