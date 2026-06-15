@@ -1,5 +1,4 @@
-﻿
-using FleetManager.Domain.DomainExceptionBase;
+﻿using FleetManager.Domain.DomainExceptionBase;
 using FleetManager.Domain.Enums;
 namespace FleetManager.Domain.Entities
 {
@@ -12,12 +11,12 @@ namespace FleetManager.Domain.Entities
         public long UserId { get; private set; }
         public decimal TotalPrice { get; private set; }
         public int RentalPlanId { get; private set; }
+        public RentalMode SnapshotMode { get; private set; }
         public int TotalDays { get; private set; }
         public decimal IncludedKm { get; private set; }
         public decimal SnapshotPriceRental { get; private set; }
         public decimal SnapshotPricePerKm { get; private set; }
         public RentalStatus Status { get; private set; } = RentalStatus.Active;
-
 
         public RentalPlan RentalPlan { get; set; } = default!;
         public Company Company { get; set; } = default!;
@@ -26,7 +25,6 @@ namespace FleetManager.Domain.Entities
         public User User { get; set; } = default!;
 
         private DateTime _startDate;
-
         private DateTime _endDate;
 
         public DateTime StartDate { get => _startDate; private set { _startDate = value; } }
@@ -45,6 +43,7 @@ namespace FleetManager.Domain.Entities
             _endDate = endDate;
             RecalculateIfReady();
         }
+
         public void Reschedule(DateTime newStartDate, DateTime newEndDate)
         {
             if (Status != RentalStatus.Active)
@@ -54,39 +53,40 @@ namespace FleetManager.Domain.Entities
             _endDate = newEndDate;
             RecalculateIfReady();
         }
+
         public void Cancel()
         {
             if (Status == RentalStatus.Completed)
-            {
                 throw new DomainRuleException(ResourceMessages.CANNOT_CANCEL_COMPLETED_RENTAL);
-            }
+
             Status = RentalStatus.Cancelled;
         }
+
         public void Complete()
         {
             if (Status == RentalStatus.Cancelled)
-            {
                 throw new DomainRuleException(ResourceMessages.CANNOT_COMPLETE_CANCELLED_RENTAL);
-            }
+
             Status = RentalStatus.Completed;
         }
+
         public void MarkAsOverdue()
         {
             if (Status != RentalStatus.Active)
                 throw new DomainRuleException(ResourceMessages.RENTAL_CANNOT_BE_MARKED_OVERDUE);
+
             Status = RentalStatus.Overdue;
         }
-
 
         private void RecalculateIfReady()
         {
             if (_startDate == default || _endDate == default || SnapshotPriceRental == 0)
-            {
                 return;
-            }
+
             CalculateTotalDays();
             CalculateTotalPrice();
         }
+
         public void AttachPlan(RentalPlan plan)
         {
             if (plan is null)
@@ -98,8 +98,11 @@ namespace FleetManager.Domain.Entities
             RentalPlanId = plan.Id;
             SnapshotPriceRental = plan.PriceRental;
             SnapshotPricePerKm = plan.PricePerKm;
+            SnapshotMode = plan.Mode;
+
             RecalculateIfReady();
         }
+
         public void UpdateIncludedKm(decimal newKm)
         {
             if (newKm < 0)
@@ -108,24 +111,31 @@ namespace FleetManager.Domain.Entities
             IncludedKm = newKm;
             CalculateTotalPrice();
         }
+
         private void CalculateTotalDays()
         {
             if (_endDate < _startDate)
                 throw new DomainRuleException(ResourceMessages.END_DATE_MUST_BE_GREATER_THAN_START_DATE);
 
-            TotalDays = (_endDate - _startDate).Days;
+            var totalDays = (_endDate - _startDate).Days;
 
+            if (SnapshotMode == RentalMode.Monthly && totalDays % 30 != 0)
+                throw new DomainRuleException("ResourceMessages.MONTHLY_RENTAL_MUST_BE_MULTIPLE_OF_30_DAYS");
 
+            TotalDays = SnapshotMode == RentalMode.Monthly
+                ? totalDays / 30
+                : totalDays;
         }
+
         private void CalculateTotalPrice()
         {
             decimal basePrice = TotalDays * SnapshotPriceRental;
+
             decimal kmPrice = IncludedKm > 0
-            ? IncludedKm * SnapshotPricePerKm : 0;
+                ? IncludedKm * SnapshotPricePerKm
+                : 0;
 
             TotalPrice = basePrice + kmPrice;
         }
-
     }
-
 }
