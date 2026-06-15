@@ -1,5 +1,7 @@
-﻿using FleetManager.Application.UseCase.ToUser.Delete;
+﻿using FleetManager.Application.UseCase.ToUser.ChangePassword;
+using FleetManager.Application.UseCase.ToUser.Delete;
 using FleetManager.Application.UseCase.ToUser.GetUser;
+using FleetManager.Application.UseCase.ToUser.Promote;
 using FleetManager.Application.UseCase.ToUser.Register;
 using FleetManager.Application.UseCase.ToUser.Update;
 using FleetManager.Communication.Requests;
@@ -15,16 +17,27 @@ namespace FleetManager.Api.Controllers
     public class UserController : ControllerBase
     {
         [HttpPost]
+        [AllowAnonymous]
         [ProducesResponseType(typeof(ResponseLoginJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register([FromServices] IRegisterUserUseCase useCase,
-            [FromBody] RequestRegisterUserJson request)
+     [FromBody] RequestRegisterUserJson request)
         {
             var response = await useCase.Execute(request);
-
             return Created(string.Empty, response);
         }
-        
+
+        [HttpPut("/promote")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Promote([FromServices] IPromoteUserUseCase useCase)
+        {
+            await useCase.Execute();
+            return NoContent();
+        }
+
         [HttpGet]
         [Authorize]
         [ProducesResponseType(typeof(ResponseUserProfileJson), StatusCodes.Status200OK)]
@@ -34,15 +47,7 @@ namespace FleetManager.Api.Controllers
             var response = await useCase.Execute();
             return Ok(response);
         }
-        [HttpDelete]
-        [Authorize]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-
-        public async Task<IActionResult> DeleteUser([FromServices] IDeleteUserAccountUseCase useCase)
-        {
-            await useCase.Execute();
-            return NoContent();
-        }
+     
         [HttpPut]
         [Authorize(Roles = Roles.ADMIN)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -50,6 +55,25 @@ namespace FleetManager.Api.Controllers
         public async Task<IActionResult> UpdateUser([FromServices] IUpdateProfileUseCase useCase, [FromBody] RequestUpdateUserJson request)
         {
             await useCase.Execute(request);
+            return NoContent();
+        }
+        [HttpPut("ChangePassword")]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> ChangePassword([FromServices] IChangePasswordUserUseCase useCase, [FromBody] RequestChangePasswordJson request)
+        {
+            await useCase.Execute(request);
+            return NoContent();
+        }
+
+        [HttpDelete]
+        [Authorize]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+
+        public async Task<IActionResult> DeleteUser([FromServices] IDeleteUserAccountUseCase useCase)
+        {
+            await useCase.Execute();
             return NoContent();
         }
     }

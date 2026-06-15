@@ -28,8 +28,10 @@ using FleetManager.Application.UseCase.ToRentalPlan.GetAll;
 using FleetManager.Application.UseCase.ToRentalPlan.GetById;
 using FleetManager.Application.UseCase.ToRentalPlan.Register;
 using FleetManager.Application.UseCase.ToRentalPlan.Update;
+using FleetManager.Application.UseCase.ToUser.ChangePassword;
 using FleetManager.Application.UseCase.ToUser.Delete;
 using FleetManager.Application.UseCase.ToUser.GetUser;
+using FleetManager.Application.UseCase.ToUser.Promote;
 using FleetManager.Application.UseCase.ToUser.Register;
 using FleetManager.Application.UseCase.ToUser.Update;
 using FleetManager.Application.UseCase.ToVehicle.Delete;
@@ -73,7 +75,9 @@ namespace FleetManager.Application.UseCase
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
             services.AddScoped<IGetUserProfileUseCase, GetUserProfileUseCase>(); 
             services.AddScoped<IUpdateProfileUseCase, UpdateProfileUseCase>();
+            services.AddScoped<IChangePasswordUserUseCase, ChangePasswordUserUseCase>();
             services.AddScoped<IDeleteUserAccountUseCase, DeleteUserAccountUseCase>();
+            services.AddScoped<IPromoteUserUseCase, PromoteUserUseCase>();
 
             //address
             services.AddScoped<IRequestRegisterAddressUseCase, RequestAddressUseCase>();

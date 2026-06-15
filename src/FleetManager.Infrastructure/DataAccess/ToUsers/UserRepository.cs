@@ -1,5 +1,4 @@
 ﻿using FleetManager.Domain.Entities;
-using FleetManager.Domain.Enums;
 using FleetManager.Domain.Repositories.ToUser;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +10,11 @@ namespace FleetManager.Infrastructure.DataAccess.ToUsers
         public async Task Add(User user)
         {
             await dbContext.Users.AddAsync(user); 
+        }
+
+        public async Task<bool> AnyUserExist()
+        {
+            return await dbContext.Users.AnyAsync();
         }
 
         public async Task Delete(User user)

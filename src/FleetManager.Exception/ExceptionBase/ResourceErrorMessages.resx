@@ -160,7 +160,7 @@
     <value>Color required</value>
   </data>
   <data name="COMPANYID_IS_REQUIRED" xml:space="preserve">
-    <value>CompanyId is requeired.</value>
+    <value>CompanyId is required.</value>
   </data>
   <data name="COMPANY_NOT_FOUND" xml:space="preserve">
     <value>Company not found.</value>
@@ -252,7 +252,7 @@
   <data name="PASSWORD_MUST_CONTAIN_NUMBER" xml:space="preserve">
     <value>Password must contain number</value>
   </data>
-  <data name="PHONE_NUMBER_IS_REQUERID" xml:space="preserve">
+  <data name="PHONE_NUMBER_IS_REQUIRED" xml:space="preserve">
     <value>Phone number is required</value>
   </data>
   <data name="RENAVAM_REQUIRED" xml:space="preserve">

@@ -18,15 +18,14 @@ namespace FleetManager.Application.UseCase.ToUser.Register
         public async Task<ResponseLoginJson> Execute(RequestRegisterUserJson request)
         {
             await Validate(request);
-
-            var adminExists = await userReadOnly.ExistByRole(Roles.ADMIN);
-            if (adminExists)
-            {
-                throw new ErrorOnValidationException([ResourceErrorMessages.ADMIN_ALREADY_EXISTS]);
-            }
+            var anyUserExist = await userReadOnly.AnyUserExist();
 
             var user = new User(request.Name, request.Email, encripter.Encrypt(request.Password));
 
+            if(!anyUserExist)
+            {
+                user.PromoteToAdmin();
+            }   
 
             await repository.Add(user);
             await unitOfWork.Commit();

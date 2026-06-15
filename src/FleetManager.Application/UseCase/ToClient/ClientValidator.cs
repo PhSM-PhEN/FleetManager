@@ -16,7 +16,7 @@ namespace FleetManager.Application.UseCase.ToClient
 
             RuleFor(client => client.PhoneNumber)
                 .NotEmpty()
-                .WithMessage(ResourceErrorMessages.PHONE_NUMBER_IS_REQUERID)
+                .WithMessage(ResourceErrorMessages.PHONE_NUMBER_IS_REQUIRED)
                 .Matches(@"^\(?\d{2}\)?\s?\d{4,5}-?\d{4}$")
                 .WithMessage(ResourceErrorMessages.INVALID_PHONE_NUMBER_FORMAT);
 

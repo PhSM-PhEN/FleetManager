@@ -31,9 +31,6 @@
 
   <ItemGroup>
     <Folder Include="Resource\" />
-    <Folder Include="ToUser\ChangePassword\" />
-    <Folder Include="ToUser\Delete\" />
-    <Folder Include="ToUser\GetProfile\" />
     <Folder Include="ToUser\Update\" />
   </ItemGroup>
 

@@ -205,7 +205,7 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CompanyId is requeired..
+        ///   Looks up a localized string similar to CompanyId is required..
         /// </summary>
         public static string COMPANYID_IS_REQUIRED {
             get {
@@ -495,9 +495,9 @@ namespace FleetManager.Exception.ExceptionBase {
         /// <summary>
         ///   Looks up a localized string similar to Phone number is required.
         /// </summary>
-        public static string PHONE_NUMBER_IS_REQUERID {
+        public static string PHONE_NUMBER_IS_REQUIRED {
             get {
-                return ResourceManager.GetString("PHONE_NUMBER_IS_REQUERID", resourceCulture);
+                return ResourceManager.GetString("PHONE_NUMBER_IS_REQUIRED", resourceCulture);
             }
         }
         
