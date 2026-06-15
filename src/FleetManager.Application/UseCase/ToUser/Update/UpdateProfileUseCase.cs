@@ -28,25 +28,24 @@ namespace FleetManager.Application.UseCase.ToUser.Update
           
 
         }
-        private async Task Validate(RequestUpdateUserJson request, string currenteEmail)
+        private async Task Validate(RequestUpdateUserJson request, string currentEmail)
         {
             var validator = new UpdateValidator();
             var result = validator.Validate(request);
-            if (currenteEmail.Equals(request.Email) == false)
+
+            if (currentEmail.Equals(request.Email) == false)
             {
                 var emailAlreadyExists = await _readOnlyRepository.ExistByEmail(request.Email);
-                if (emailAlreadyExists)
-                {
-                    result.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, ResourceErrorMessages.EMAIL_ALREADY_REGISTERED));
-                }
-
-                if (result.IsValid == false)
-                {
-                    var errroMessage = result.Errors.Select(error => error.ErrorMessage).ToList();
-                    throw new ErrorOnValidationException(errroMessage);
-                }
+                 if (emailAlreadyExists)
+                        result.Errors.Add(new FluentValidation.Results.ValidationFailure(string.Empty, ResourceErrorMessages.EMAIL_ALREADY_REGISTERED));
             }
 
+            if (result.IsValid == false)
+            {
+                 var errorMessage = result.Errors.Select(e => e.ErrorMessage).ToList();
+                throw new ErrorOnValidationException(errorMessage);
+            }
         }
+
     }
 }
