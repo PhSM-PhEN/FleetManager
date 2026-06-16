@@ -73,4 +73,11 @@ public class RentalRepository(FleetManagerDbContext dbContext) : IRentalWriteOnl
 
 
     }
+
+    public async Task<bool> VehicleHasActiveRental(long vehicleId)
+    {
+        return await dbContext.Rentals.AsNoTracking()
+            .AnyAsync(r => r.VehicleId == vehicleId &&
+            (r.Status == Domain.Enums.RentalStatus.Active || r.Status == Domain.Enums.RentalStatus.Overdue));
+    }
 }

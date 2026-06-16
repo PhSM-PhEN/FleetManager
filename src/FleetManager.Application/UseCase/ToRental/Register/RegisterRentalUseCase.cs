@@ -13,7 +13,7 @@ using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToRental.Register
 {
-    public class RegisterRentalUseCase(ILoggedUser loggedUser,
+    public class RegisterRentalUseCase(ILoggedUser loggedUser, IRentalReadOnlyRepository rentalReadOnly,
                                         ICompanyReadOnlyRepository companyReadOnly, IVehicleReadOnlyRepository vehicleReadOnly,
                                         IClientReadOnlyRepository clientReadOnly, IRentalWriteOnlyRepository repository,
                                         IRentalPlansReadOnlyRepository rentalPlansRead, IUnitOfWork unitOfWork) : IRegisterRentalUseCase
@@ -57,8 +57,10 @@ namespace FleetManager.Application.UseCase.ToRental.Register
         {
             var client = await EnsureClientExists(request.ClientId);
             var vehicle = await EnsureVehicleExists(request.VehicleId);
+            await EnsureVehicleIsAvailable(request.VehicleId); 
             var company = await EnsureCompanyExists(request.CompanyId);
             var rentalPlan = await EnsureRentalPlanExists(request.RentalPlanId);
+            
 
             EnsureVehicleMatchesPlanTransmission(vehicle, rentalPlan);
 
@@ -101,6 +103,12 @@ namespace FleetManager.Application.UseCase.ToRental.Register
 
             if (vehicle.Category.TransmissionType != plan.Transmission)
                 throw new DomainRuleException(ResourceErrorMessages.VEHICLE_TRANSMISSION_MISMATCH);
+        }
+        private async Task EnsureVehicleIsAvailable(long vehicleId)
+        {
+            var hasActiveRental = await rentalReadOnly.VehicleHasActiveRental(vehicleId);
+            if (hasActiveRental)
+                throw new DomainRuleException(ResourceErrorMessages.VEHICLE_NOT_AVAILABLE);
         }
     }
 }
