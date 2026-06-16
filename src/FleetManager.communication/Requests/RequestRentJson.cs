@@ -9,6 +9,6 @@
         public int RentalPlanId {get ; set ;}
         public decimal IncludedKm { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
     }
 }

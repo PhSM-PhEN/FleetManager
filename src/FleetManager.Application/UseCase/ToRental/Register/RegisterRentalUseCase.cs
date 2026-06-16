@@ -1,4 +1,5 @@
-﻿using FleetManager.Communication.Requests;
+﻿using System.Numerics;
+using FleetManager.Communication.Requests;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.DomainExceptionBase;
 using FleetManager.Domain.Entities;
@@ -15,18 +16,23 @@ namespace FleetManager.Application.UseCase.ToRental.Register
 {
     public class RegisterRentalUseCase(ILoggedUser loggedUser, IRentalReadOnlyRepository rentalReadOnly,
                                         ICompanyReadOnlyRepository companyReadOnly, IVehicleReadOnlyRepository vehicleReadOnly,
-                                        IClientReadOnlyRepository clientReadOnly, IRentalWriteOnlyRepository repository,
+                                        IClientReadOnlyRepository clientReadOnly, IRentalWriteOnlyRepository repository, 
                                         IRentalPlansReadOnlyRepository rentalPlansRead, IUnitOfWork unitOfWork) : IRegisterRentalUseCase
     {
         public async Task<ResponseRentalJson> Execute(RequestRentJson request)
         {
             var logged = await loggedUser.Get();
             Validate(request);
+
+            
+
             var (vehicle, rentalPlan, company, client) = await ValidateBusinessRules(request);
 
+            var endDate = rentalPlan.Mode == Domain.Enums.RentalMode.Monthly ?
+            request.StartDate.AddDays(30) :
+            request.EndDate!.Value;
 
-
-            var rental = new Rental(request.CompanyId, request.ClientId, request.VehicleId, logged.Id, request.StartDate, request.EndDate);
+            var rental = new Rental(request.CompanyId, request.ClientId, request.VehicleId, logged.Id, request.StartDate, endDate);
 
             rental.AttachPlan(rentalPlan);
 

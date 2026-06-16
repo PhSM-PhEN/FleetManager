@@ -83,8 +83,8 @@ namespace FleetManager.Domain.Entities
             if (_startDate == default || _endDate == default || SnapshotPriceRental == 0)
                 return;
 
-            CalculateTotalDays();
-            CalculateTotalPrice();
+            var days = CalculateTotalDays();
+            CalculateTotalPrice(days);
         }
 
         public void AttachPlan(RentalPlan plan)
@@ -109,27 +109,25 @@ namespace FleetManager.Domain.Entities
                 throw new DomainRuleException(ResourceMessages.INCLUDED_KM_CANNOT_BE_NEGATIVE);
 
             IncludedKm = newKm;
-            CalculateTotalPrice();
+            var days = CalculateTotalDays();
+            CalculateTotalPrice(days);
         }
 
-        private void CalculateTotalDays()
+        private int CalculateTotalDays()
         {
             if (_endDate < _startDate)
                 throw new DomainRuleException(ResourceMessages.END_DATE_MUST_BE_GREATER_THAN_START_DATE);
 
-            var totalDays = (_endDate - _startDate).Days;
-
-            if (SnapshotMode == RentalMode.Monthly && totalDays % 30 != 0)
-                throw new DomainRuleException("ResourceMessages.MONTHLY_RENTAL_MUST_BE_MULTIPLE_OF_30_DAYS");
-
-            TotalDays = SnapshotMode == RentalMode.Monthly
-                ? totalDays / 30
-                : totalDays;
+            return (_endDate - _startDate).Days;
         }
 
-        private void CalculateTotalPrice()
+        private void CalculateTotalPrice(int days)
         {
-            decimal basePrice = TotalDays * SnapshotPriceRental;
+            TotalDays = days;
+            decimal basePrice = SnapshotMode == RentalMode.Monthly
+            ? Math.Floor(days / 30m) * SnapshotPriceRental : 
+            days * SnapshotPriceRental ; 
+        
 
             decimal kmPrice = IncludedKm > 0
                 ? IncludedKm * SnapshotPricePerKm
