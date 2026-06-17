@@ -9,11 +9,13 @@ namespace CommonTestUtilities.Entitie
         {
             var faker = new Faker();
             return new Address(
+                
                 faker.Address.StreetName(),
                 faker.Address.BuildingNumber(),
                 faker.Address.City(),
                 faker.Address.StateAbbr(),
                 faker.Address.ZipCode());
+                
         }
     }
 }

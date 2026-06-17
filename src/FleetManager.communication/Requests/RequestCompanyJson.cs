@@ -1,5 +1,3 @@
-using System;
-
 namespace FleetManager.Communication.Requests;
 
 public class RequestCompanyJson
