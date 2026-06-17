@@ -15,7 +15,8 @@ public class UpdateRentalPlanUseCase(IRentalPlansUpdateOnlyRepository repository
         {
             throw new NotFoundException(ResourceErrorMessages.RENTAL_PLAN_NOT_FOUND);
         }
-        rentalPlan.Update(request.Name, (Domain.Enums.RentalMode)request.Mode, (Domain.Enums.TransmissionType)request.Transmission, request.PriceRental, request.PricePerKm);
+        rentalPlan.Update(request.Name, (Domain.Enums.RentalMode)request.Mode, (Domain.Enums.TransmissionType)request.Transmission,
+         request.PriceRental,request.TotalKmIncluded , request.PricePerKm);
         repository.Update(rentalPlan);
         await unitOfWork.Commit();
 

@@ -14,7 +14,8 @@ namespace FleetManager.Application.UseCase.ToRentalPlan.Register
         {
             Validate(request);
 
-            var rentalPlan = new RentalPlan(request.Name, (Domain.Enums.RentalMode)request.Mode, (Domain.Enums.TransmissionType)request.Transmission, request.PriceRental, request.PricePerKm);
+            var rentalPlan = new RentalPlan(request.Name, (Domain.Enums.RentalMode)request.Mode,
+             (Domain.Enums.TransmissionType)request.Transmission, request.PriceRental, request.TotalKmIncluded, request.PricePerKm);
 
             await repository.Add(rentalPlan);
             await unitOfWork.Commit();

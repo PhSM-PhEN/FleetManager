@@ -10,26 +10,29 @@ namespace FleetManager.Domain.Entities
         public RentalMode Mode { get; private set; }
         public TransmissionType Transmission { get; private set; }
         public decimal PriceRental { get; private set; }
+        public decimal TotalKmIncluded {get ; private set ; }
         public decimal PricePerKm { get; private set; }
         public bool IsActive { get; private set; } = true;
 
         public void Update(string name, RentalMode mode, TransmissionType transmission,
-                           decimal priceRental, decimal pricePerKm)
+                           decimal priceRental, decimal totalKmIncluded, decimal pricePerKm)
         {
             Name = name;
             Mode = mode;
             Transmission = transmission;
-            UpdatePrices(priceRental, pricePerKm); // só aqui
+            TotalKmIncluded = totalKmIncluded;
+            UpdatePrices(priceRental, pricePerKm); 
         }
 
         protected RentalPlan() { }
 
-        public RentalPlan(string name, RentalMode mode, TransmissionType transmission, decimal priceRental, decimal pricePerKm)
+        public RentalPlan(string name, RentalMode mode, TransmissionType transmission, decimal priceRental, decimal totalKmIncluded , decimal pricePerKm)
         {
             Name = name;
             Mode = mode;
             Transmission = transmission;
             PriceRental = priceRental;
+            TotalKmIncluded = totalKmIncluded;
             PricePerKm = pricePerKm;
         }
         public void Disable()

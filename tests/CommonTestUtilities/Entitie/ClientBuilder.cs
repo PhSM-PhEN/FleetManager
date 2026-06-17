@@ -5,7 +5,7 @@ namespace CommonTestUtilities.Entitie;
 
 public class ClientBuilder
 {
-    public static Client Build()
+    public static Client Build(long addressId)
     {
         var faker = new Faker();
         return new Client(
@@ -15,6 +15,6 @@ public class ClientBuilder
             faker.Random.Replace("###.###.###-##"),
             faker.Random.Replace("#########"),
             faker.PickRandom("A", "B", "C", "D", "E", "AB"),
-            1);
+            addressId);
     }
 }
