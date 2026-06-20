@@ -37,7 +37,7 @@ namespace WebApi.Tests.ToCompany.Register
             responseBody.RootElement.GetProperty("address").GetProperty("street").GetString().ShouldNotBeNullOrWhiteSpace();
         }
         [Fact]
-        public async Task Error_Without_token()
+        public async Task Error_Without_Token()
         {
             var request = CompanyBuilder.Build();
             var result = await DoPost(METHOD, request);
