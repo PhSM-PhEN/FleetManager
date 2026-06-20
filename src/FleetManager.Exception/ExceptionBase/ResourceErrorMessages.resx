@@ -330,4 +330,7 @@
   <data name="RENTAL_NOT_FOUND" xml:space="preserve">
     <value>Rental not found.</value>
   </data>
+  <data name="CNPJ_IS_REQUIRED" xml:space="preserve">
+    <value>CNPJ is required.</value>
+  </data>
 </root>

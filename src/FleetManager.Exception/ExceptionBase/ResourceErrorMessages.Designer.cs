@@ -187,6 +187,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CNPJ is required..
+        /// </summary>
+        public static string CNPJ_IS_REQUIRED {
+            get {
+                return ResourceManager.GetString("CNPJ_IS_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Color required.
         /// </summary>
         public static string COLOR_REQUIRED {

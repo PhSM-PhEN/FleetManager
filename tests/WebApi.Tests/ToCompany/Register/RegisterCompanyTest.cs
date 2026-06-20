@@ -1,6 +1,8 @@
+using System.Net;
 using System.Text.Json;
 using CommonTestUtilities.Entitie;
 using CommonTestUtilities.Request;
+using FleetManager.Exception.ExceptionBase;
 using Shouldly;
 
 namespace WebApi.Tests.ToCompany.Register
@@ -41,7 +43,24 @@ namespace WebApi.Tests.ToCompany.Register
             var result = await DoPost(METHOD, request);
             result.StatusCode.ShouldBe(System.Net.HttpStatusCode.Unauthorized);
         }
-        
+        [Fact]
+        public async Task Error_Name_Empty()
+        {
+            var request = RequestCompanyJsonBuilder.Build();
+            request.Name = string.Empty;
+            var result = await DoPost(METHOD, request, _adminToken);
+
+            result.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+
+            var body = await result.Content.ReadAsStreamAsync();
+            var response = await JsonDocument.ParseAsync(body);
+            
+            var erros = response.RootElement.GetProperty("errorMessage").EnumerateArray();
+            var expectedMessage = ResourceErrorMessages.ResourceManager.GetString("NAME_IS_REQUIRED");
+
+            erros.ShouldContain(x => x.GetString()!.Equals(expectedMessage));
+
+        }
 
     }
 

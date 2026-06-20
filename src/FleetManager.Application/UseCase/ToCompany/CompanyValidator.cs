@@ -11,7 +11,7 @@ public class CompanyValidator : AbstractValidator<RequestCompanyJson>
         RuleFor(c => c.Name).NotEmpty()
             .WithMessage(ResourceErrorMessages.NAME_IS_REQUIRED);
         RuleFor(c => c.Cnpj).NotEmpty()
-            .WithMessage("Cnpj required")
+            .WithMessage(ResourceErrorMessages.CNPJ_IS_REQUIRED)
             .Matches(@"^\d{2}\.?\d{3}\.?\d{3}/?\d{4}-?\d{2}$")
             .WithMessage("cnpj invalid");
         RuleFor(c => c.PhoneNumber).NotEmpty()
