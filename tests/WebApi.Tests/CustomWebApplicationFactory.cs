@@ -13,12 +13,14 @@ using WebApi.Tests.Resource;
 
 namespace WebApi.Tests;
 
-public class CustomWebApplicationFactory : WebApplicationFactory<Program> 
+public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 {
-    public RentalIdentityManager RENTAL_TEAM_MEMBER { get ; private set ;} = default!;
-    public RentalIdentityManager RENTAL_ADM_MEMBER { get ; private set ;} = default!;
-    public UserIdentityManager USER_TEAM_MEMBER { get ; private set ;} = default!;
-    public UserIdentityManager USER_ADM_MEMBER {get ; private set ;} = default!;
+    public CompanyIdentityManager COMPANY_TEAM_MEMBER { get; private set; } = default!;
+    public CompanyIdentityManager COMPANY_ADM_MEMBER { get; private set; } = default!;
+    public RentalIdentityManager RENTAL_TEAM_MEMBER { get; private set; } = default!;
+    public RentalIdentityManager RENTAL_ADM_MEMBER { get; private set; } = default!;
+    public UserIdentityManager USER_TEAM_MEMBER { get; private set; } = default!;
+    public UserIdentityManager USER_ADM_MEMBER { get; private set; } = default!;
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
@@ -44,26 +46,30 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     }
     private void StartDataBase(FleetManagerDbContext dbContext, IPasswordEncrypter passwordEncrypter, IAccessTokenGenerator tokenGenerator)
     {
-    var address = AddAddress(dbContext);
-    dbContext.SaveChanges();
+        var address = AddAddress(dbContext);
+        dbContext.SaveChanges();
 
-    var company = AddCompany(dbContext, address.Id);
-    var category = AddCategory(dbContext);
-    dbContext.SaveChanges();
+        var companyTeamMember = AddCompany(dbContext, address.Id);
+        var companyAdmMember = AddCompany(dbContext, address.Id);
+        var category = AddCategory(dbContext);
+        dbContext.SaveChanges();
 
-    var vehicle = AddVehicle(dbContext, category.Id);
-    var client = AddClient(dbContext, address.Id);
-    var userTeamMember = AddUserTeamMember(dbContext, passwordEncrypter, tokenGenerator);
-    var userAdmin = AddUserAdmin(dbContext, passwordEncrypter, tokenGenerator);
-    dbContext.SaveChanges();
+        var vehicle = AddVehicle(dbContext, category.Id);
+        var client = AddClient(dbContext, address.Id);
+        var userTeamMember = AddUserTeamMember(dbContext, passwordEncrypter, tokenGenerator);
+        var userAdmin = AddUserAdmin(dbContext, passwordEncrypter, tokenGenerator);
+        dbContext.SaveChanges();
 
-    var rentalTeamMember = AddRental(dbContext, userTeamMember, company.Id, client.Id, vehicle.Id);
-    var rentalAdmin = AddRental(dbContext, userAdmin, company.Id, client.Id, vehicle.Id);
+        var rentalTeamMember = AddRental(dbContext, userTeamMember, companyTeamMember.Id, client.Id, vehicle.Id);
+        var rentalAdmin = AddRental(dbContext, userAdmin, companyAdmMember.Id, client.Id, vehicle.Id);
 
-    RENTAL_TEAM_MEMBER = new RentalIdentityManager(rentalTeamMember);
-    RENTAL_ADM_MEMBER = new RentalIdentityManager(rentalAdmin);
+        COMPANY_TEAM_MEMBER = new CompanyIdentityManager(companyTeamMember);
+        COMPANY_ADM_MEMBER = new CompanyIdentityManager(companyAdmMember);
 
-    dbContext.SaveChanges();
+        RENTAL_TEAM_MEMBER = new RentalIdentityManager(rentalTeamMember);
+        RENTAL_ADM_MEMBER = new RentalIdentityManager(rentalAdmin);
+
+        dbContext.SaveChanges();
     }
     private User AddUserTeamMember(FleetManagerDbContext dbContext, IPasswordEncrypter passwordEncrypter, IAccessTokenGenerator tokenGenerator)
     {
