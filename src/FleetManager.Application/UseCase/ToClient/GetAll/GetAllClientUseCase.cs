@@ -1,30 +1,27 @@
 using AutoMapper;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.Repositories.ToClient;
-using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToClient.GetAll;
 
 public class GetAllClientUseCase(IMapper mapper, IClientReadOnlyRepository repository) : IGetAllClientUseCase
 {
-    private readonly IMapper _mapper = mapper;
-    private readonly IClientReadOnlyRepository _repository = repository;
-   
-    async Task<ResponseListClientJson> IGetAllClientUseCase.Execute()
+    public async Task<ResponsePaginatedJson<ResponseShortClientJson>> Execute(int pageNumber, int pageSize)
     {
-        var client = await _repository.GetAll();
-
-        if(client.Count == 0)
-        {
-            throw new NotFoundException(ResourceErrorMessages.CLIENT_NOT_FOUND);
-        }    
+        if(pageNumber <= 0)
+            pageNumber = 1;
+        if(pageSize <= 0)
+            pageSize = 10;
         
+        var (client, totalCount) = await repository.GetAll(pageNumber, pageSize);
 
-        return  new ResponseListClientJson
+        return new ResponsePaginatedJson<ResponseShortClientJson>
         {
-            Clients = _mapper.Map<List<ResponseShortClientJson>>(client) 
+            Data = mapper.Map<List<ResponseShortClientJson>>(client),
+            PageNumber = pageNumber,
+            PageSize = pageSize,
+            TotalCount = totalCount
+
         };
-
-        
     }
 }

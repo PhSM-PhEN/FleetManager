@@ -20,10 +20,20 @@ public class ClientRepository(FleetManagerDbContext dbContext) : IClientWriteOnl
 
     }
 
-    public async Task<List<Client>> GetAll()
+    public async Task<(List<Client>, int totalCount)> GetAll(int pageNumber, int pageSize)
     {
-        return await _dbContext.Clients.AsNoTracking()
-                     .ToListAsync();
+        var query = _dbContext.Clients
+        .Include(a => a.Address)
+        .AsNoTracking();
+
+        var totalcount = await query.CountAsync();
+        
+        var client = await query
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        return (client, totalcount);
     }
 
     public async Task<Client?> GetById(long id)

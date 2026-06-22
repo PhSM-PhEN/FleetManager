@@ -5,6 +5,6 @@ namespace FleetManager.Domain.Repositories.ToClient;
 
 public interface IClientReadOnlyRepository
 {   
-    Task<List<Client>> GetAll();
+    Task<(List<Client>, int totalCount)> GetAll(int pageNumber, int pageSize);
     Task<Client?> GetById(long id);
 }

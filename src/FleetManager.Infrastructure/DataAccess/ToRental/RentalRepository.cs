@@ -1,7 +1,6 @@
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories.ToRental;
 using Microsoft.EntityFrameworkCore;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FleetManager.Infrastructure.DataAccess.ToRental;
 
@@ -19,13 +18,21 @@ public class RentalRepository(FleetManagerDbContext dbContext) : IRentalWriteOnl
         dbContext.Rentals.Remove(result!);
     }
 
-    public async Task<List<Rental>> GetAll()
+    public async Task<(List<Rental>, int totalCount)> GetAll(int pageNumber, int pageSize)
     {
-        return await dbContext.Rentals
+        var query = dbContext.Rentals
         .Include(r => r.Client)
         .Include(r => r.Vehicle)
         .Include(r => r.Company)
-        .AsNoTracking().ToListAsync();
+        .AsNoTracking();
+
+        var totalCount = await query.CountAsync();
+
+        var rental = await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        return (rental, totalCount);
     }
 
     public async Task<Rental?> GetById(long id)

@@ -1,5 +1,3 @@
-using System;
-
 namespace FleetManager.Communication.Responses;
 
 public class ResponseListClientJson

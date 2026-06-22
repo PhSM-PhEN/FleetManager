@@ -24,16 +24,14 @@ namespace FleetManager.Api.Controllers
             return Created(string.Empty, response);
         }
         [HttpGet]
-        [ProducesResponseType(typeof(ResponseListRentalJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseRentalJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> GetAll([FromServices] IGetAllRentalUseCase useCase)
+        public async Task<IActionResult> GetAll([FromServices] IGetAllRentalUseCase useCase,
+        [FromQuery] int pageNumber = 1,[FromQuery] int pageSize = 10)
         {
-            var response = await useCase.Execute();
-            if(response.Rentals.Count != 0)
-            {
-                return Ok(response);
-            }
-            return NoContent();
+            var response = await useCase.Execute(pageNumber, pageSize);
+            return Ok(response);
+            
         }
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ResponseRentalInfoJson), StatusCodes.Status200OK)]

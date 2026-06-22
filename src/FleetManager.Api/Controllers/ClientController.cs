@@ -29,14 +29,13 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(typeof(ResponseListClientJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
 
-        public async Task<IActionResult> GetAll([FromServices] IGetAllClientUseCase useCase)
+        public async Task<IActionResult> GetAll([FromServices] IGetAllClientUseCase useCase, [FromQuery] int pageNumber, [FromQuery] int pageSize)
         {
-            var response = await useCase.Execute();
-            if(response.Clients.Count != 0 )
-            {
-                return Ok(response);
-            }
-            return NoContent();
+            var response = await useCase.Execute(pageNumber, pageSize);
+            
+            return Ok(response);
+            
+            
         }
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ResponseClientJson), StatusCodes.Status200OK)]

@@ -29,7 +29,7 @@ namespace FleetManager.Api.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(ResponseListVehicleJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseVehicleJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetAll([FromServices] IGetAllVehicleUseCase useCase,
             [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10 )
