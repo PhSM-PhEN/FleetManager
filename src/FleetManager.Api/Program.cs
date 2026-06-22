@@ -1,7 +1,5 @@
 using FleetManager.Api.Filters;
-using FleetManager.Api.Token;
 using FleetManager.Application.UseCase;
-using FleetManager.Domain.Security.Token;
 using FleetManager.Infrastructure;
 using FleetManager.Infrastructure.Extension;
 using FleetManager.Infrastructure.Migrations;
@@ -50,9 +48,12 @@ builder.Services.AddSwaggerGen(config =>
 builder.Services.AddMvc(opt => opt.Filters.Add(typeof(ExceptionFilter)));
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApplicationServices();
-builder.Services.AddScoped<ITokenProvider, HttpcontextTokenValue>();
+
 
 builder.Services.AddHttpContextAccessor();
+
+var jwtIssuer = builder.Configuration.GetValue<string>("Settings:Jwt:Issuer") ?? "FleetManagerApi";
+var jwtAudience = builder.Configuration.GetValue<string>("Settings:Jwt:Audience") ?? "FleetManagerClients";
 
 builder.Services.AddAuthentication(config =>
 {
@@ -63,8 +64,10 @@ builder.Services.AddAuthentication(config =>
 {
     config.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidateIssuer = false,
-        ValidateAudience = false,
+        ValidateIssuer = true,
+        ValidIssuer = jwtIssuer,
+        ValidateAudience = true,
+        ValidAudience = jwtAudience,
         ClockSkew = new TimeSpan(0),
         IssuerSigningKey = new SymmetricSecurityKey(
             System.Text.Encoding.UTF8
@@ -86,7 +89,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

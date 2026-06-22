@@ -1,28 +1,25 @@
 ﻿using FleetManager.Domain.Entities;
-using FleetManager.Domain.Security.Token;
 using FleetManager.Domain.Services.LoggedUser;
-using FleetManager.Infrastructure.DataAccess;
-using Microsoft.EntityFrameworkCore;
-using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 
 namespace FleetManager.Infrastructure.Services.LoggedUser
 {
-    public class LoggedUser(FleetManagerDbContext dbContext, ITokenProvider tokenProvider) : ILoggedUser
+    public class LoggedUser(IHttpContextAccessor httpContextAccessor) : ILoggedUser
     {
-        private readonly FleetManagerDbContext _dbContext = dbContext;
-        private readonly ITokenProvider _tokenProvider = tokenProvider;
-        public async Task<User> Get()
+        public Task<User> Get()
         {
-            string token = _tokenProvider.TokenOnRequest();
+            var claims = httpContextAccessor.HttpContext!.User;
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var jwt = tokenHandler.ReadJwtToken(token);
+            var identifier = claims.FindFirst(ClaimTypes.Sid)?.Value
+                ?? throw new UnauthorizedAccessException("Token inválido ou ausente.");
 
-            var identifier = jwt.Claims.First(claim => claim.Type == ClaimTypes.Sid).Value;
+            var name = claims.FindFirst(ClaimTypes.Name)?.Value ?? string.Empty;
+            var role = claims.FindFirst(ClaimTypes.Role)?.Value ?? string.Empty;
 
-            return await _dbContext.Users.AsNoTracking()
-                .FirstAsync(user => user.UserIdentifier == Guid.Parse(identifier));
+            var user = new User(Guid.Parse(identifier), name, role);
+
+            return Task.FromResult(user);
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using FleetManager.Communication.Requests;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.Entities;
-using FleetManager.Domain.Enums;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToUser;
 using FleetManager.Domain.Security.Cryptography;

@@ -1,4 +1,5 @@
-﻿using FleetManager.Domain.Repositories;
+﻿using FleetManager.Domain.DomainExceptionBase;
+using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToAddress;
 using FleetManager.Domain.Repositories.ToCategory;
 using FleetManager.Domain.Repositories.ToClient;
@@ -46,9 +47,12 @@ namespace FleetManager.Infrastructure
         private static void AddToken(IServiceCollection services, IConfiguration configuration)
         {
             var expirationTimeMinutes = configuration.GetValue<uint>("Settings:Jwt:ExpiresMinutes");
-            var signingKey = configuration.GetValue<string>("Settings:Jwt:SigningKey");
+            var signingKey = configuration.GetValue<string>("Settings:Jwt:SigningKey") 
+                ?? throw new InvalidOperationException(ResourceMessages.SIGNINGKEY_NOT_CONFIGURED);
+            var issuer = configuration.GetValue<string>("Settings:Jwt:Issuer") ?? "FleetManagerApi";
+            var audience = configuration.GetValue<string>("Settings:Jwt:Audience") ?? "FleetManagerClients";
 
-            services.AddScoped<IAccessTokenGenerator>(config => new JwtTokenGenerator(expirationTimeMinutes, signingKey!));
+            services.AddScoped<IAccessTokenGenerator>(config => new JwtTokenGenerator(expirationTimeMinutes, signingKey, issuer, audience));
         }
         private static void AddDataContext(IServiceCollection services, IConfiguration configuration)
         {

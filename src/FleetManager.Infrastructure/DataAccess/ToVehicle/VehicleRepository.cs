@@ -18,11 +18,17 @@ namespace FleetManager.Infrastructure.DataAccess.ToVehicle
             dbContext.Vehicles.Remove(result!);
         }
 
-        public async Task<List<Vehicle>> GetAll()
+        public async Task<(List<Vehicle>, int totalCount)> GetAll(int pageNumber, int pageSize)
         {
-            return await dbContext.Vehicles
-                .AsNoTracking()
+            var query = dbContext.Vehicles.AsNoTracking();
+            var totalCount = await query.CountAsync();
+
+            var vehicle = await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
+
+            return (vehicle, totalCount);            
         }
         async Task<Vehicle?> IVehicleReadOnlyRepository.GetById(long id)
         {

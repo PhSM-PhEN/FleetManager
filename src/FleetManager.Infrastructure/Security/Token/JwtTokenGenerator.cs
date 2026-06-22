@@ -7,9 +7,11 @@ using System.Text;
 
 namespace FleetManager.Infrastructure.Security.Token
 {
-    public class JwtTokenGenerator(uint expirationTimeInMinutes, string signingKey) : IAccessTokenGenerator
+    public class JwtTokenGenerator(uint expirationTimeInMinutes, string signingKey, string issuer, string audience) : IAccessTokenGenerator
     {
         private readonly uint _expirationTimeInMinutes = expirationTimeInMinutes;
+        private readonly string _issuer = issuer;
+        private readonly string _audience = audience;
         private readonly string _signingKey = signingKey;
 
         public string GenerateToken(User user)
@@ -26,6 +28,8 @@ namespace FleetManager.Infrastructure.Security.Token
             {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.AddMinutes(_expirationTimeInMinutes),
+                Issuer = _issuer,
+                Audience = _audience,
                 SigningCredentials = new SigningCredentials(SecurityKey(), SecurityAlgorithms.HmacSha256Signature)
             };
 

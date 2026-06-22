@@ -19,6 +19,12 @@ namespace FleetManager.Domain.Entities
             ChangePassword(password);
             UserIdentifier = Guid.NewGuid();
         }
+        internal User(Guid identifier, string name, string role)
+        {
+            UserIdentifier = identifier;
+            Name = name;
+            Role = role;
+        }
         public void Update(string name, string email)
         {
             Name = name;
@@ -38,6 +44,8 @@ namespace FleetManager.Domain.Entities
                 Role = Roles.ADMIN;
            
         }
+       
+
         public void DemoteToTeamMember() => Role = Roles.TEAM_MEMBER;
     }
 }

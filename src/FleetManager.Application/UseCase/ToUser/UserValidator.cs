@@ -15,7 +15,7 @@ namespace FleetManager.Application.UseCase.ToUser
                 .NotEmpty()
                 .WithMessage(ResourceErrorMessages.EMAIL_REQUIRED)
                 .EmailAddress()
-                .When(user => !string.IsNullOrEmpty(user.Email) == false, ApplyConditionTo.CurrentValidator)
+                .When(user => !string.IsNullOrEmpty(user.Email), ApplyConditionTo.CurrentValidator)
                 .WithMessage(ResourceErrorMessages.EMAIL_INVALID);
 
             RuleFor(user  => user.Password).SetValidator(new PasswordValidator<RequestRegisterUserJson>());

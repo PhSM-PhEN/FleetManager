@@ -151,6 +151,15 @@ namespace FleetManager.Domain.DomainExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to signingkey not configured..
+        /// </summary>
+        public static string SIGNINGKEY_NOT_CONFIGURED {
+            get {
+                return ResourceManager.GetString("SIGNINGKEY_NOT_CONFIGURED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The miliage must be higher than the current..
         /// </summary>
         public static string THE_MILEAGE_MUST_BE_HIGHER_THAN_THE_CURRENT {

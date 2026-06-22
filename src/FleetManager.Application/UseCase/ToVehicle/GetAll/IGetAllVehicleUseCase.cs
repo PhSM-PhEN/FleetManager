@@ -4,6 +4,6 @@ namespace FleetManager.Application.UseCase.ToVehicle.GetAll
 {
     public interface IGetAllVehicleUseCase
     {
-        Task<ResponseListVehicleJson> Execute();
+        Task<ResponsePaginatedJson<ResponseVehicleJson>> Execute(int pageNumber, int pageSize);
     }
 }
