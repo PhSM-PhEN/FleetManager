@@ -9,7 +9,7 @@ namespace FleetManager.Application.UseCase.ToCategory.GetById
     {
         private readonly IMapper _mapper = mapper;
         private readonly ICategoryReadOnlyRepository _readOnlyRepository = readOnlyRepository;
-        public async Task<ResponseCategoryJson> Execute(int id)
+        public async Task<ResponseCategoryJson> Execute(long id)
         {
             var result = await _readOnlyRepository.GetById(id);
             

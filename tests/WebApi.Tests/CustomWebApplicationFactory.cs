@@ -121,7 +121,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         dbContext.Companies.Add(company);
         return company;
     }
-    private static Rental AddRental(FleetManagerDbContext dbContext, User user, int companyId, long clientId, long vehicleId)
+    private static Rental AddRental(FleetManagerDbContext dbContext, User user, long companyId, long clientId, long vehicleId)
     {
         var rental = RentalBuilder.Build(userId: user.Id, companyId: companyId, clientId: clientId, vehicleId: vehicleId);
         dbContext.Rentals.Add(rental);

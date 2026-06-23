@@ -5,5 +5,5 @@ namespace FleetManager.Application.UseCase.ToCompany.Update;
 
 public interface IUpdateCompanyUseCase
 {
-    Task Execute(int id, RequestUpdateCompanyJson request);
+    Task Execute(long id, RequestUpdateCompanyJson request);
 }

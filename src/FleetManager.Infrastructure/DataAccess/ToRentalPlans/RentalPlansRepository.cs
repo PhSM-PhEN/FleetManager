@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FleetManager.Infrastructure.DataAccess.ToRentalPlans
 {
-    public class RentalPlansRepository(FleetManagerDbContext dbContext) : IRentalPlansReadOnlyRepository, IRentalPlansUpdateOnlyRepository, IRentalPlansWriteOnlyRepository
+    public class RentalPlansRepository(FleetManagerDbContext dbContext) : IRentalPlansReadOnlyRepository, 
+    IRentalPlansUpdateOnlyRepository,
+    IRentalPlansWriteOnlyRepository
     {
         
         public async Task Add(RentalPlan rentalPlan)
@@ -12,7 +14,7 @@ namespace FleetManager.Infrastructure.DataAccess.ToRentalPlans
             await dbContext.RentalPlans.AddAsync(rentalPlan);
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(long id)
         {
             var rentalPlan = await dbContext.RentalPlans.FindAsync(id);
             if (rentalPlan != null)
@@ -30,14 +32,20 @@ namespace FleetManager.Infrastructure.DataAccess.ToRentalPlans
         {
             return await dbContext.RentalPlans.AsNoTracking().FirstOrDefaultAsync(rp => rp.Id == id);
         }
-        async Task<RentalPlan?> IRentalPlansUpdateOnlyRepository.GetById(int id)
+        async Task<RentalPlan?> IRentalPlansUpdateOnlyRepository.GetById(long id)
         {
             return await dbContext.RentalPlans.FirstOrDefaultAsync(rp => rp.Id == id);
         }
+        
+
+            
+        
 
         public void Update(RentalPlan rentalPlan)
         {
             dbContext.RentalPlans.Update(rentalPlan);
         }
+
+       
     }
 }

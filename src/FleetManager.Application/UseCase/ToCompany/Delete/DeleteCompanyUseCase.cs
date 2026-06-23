@@ -1,4 +1,3 @@
-using System;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToCompany;
 using FleetManager.Exception.ExceptionBase;
@@ -10,7 +9,7 @@ public class DeleteCompanyUseCase(IUnitOfWork unitOfWork, ICompanyWriteOnlyRepos
     private readonly IUnitOfWork _unitOfWork = unitOfWork;
     private readonly ICompanyWriteOnlyRepository _repository = repository;
     private readonly ICompanyReadOnlyRepository _readRepository = readRepository;
-    public async Task Execute(int id)
+    public async Task Execute(long id)
     {
         var company = await _readRepository.GetById(id);
         if(company is null)

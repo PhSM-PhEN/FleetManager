@@ -5,5 +5,5 @@ namespace FleetManager.Application.UseCase.ToRentalPlan.GetById;
 
 public interface IGetByIdRentalPlanUseCase
 {
-    Task<ResponseRentalPlanJson> Execute(int id);
+    Task<ResponseRentalPlanJson> Execute(long id);
 }

@@ -5,6 +5,6 @@ namespace FleetManager.Domain.Repositories.ToCompany;
 
 public interface ICompanyUpdateOnlyRepository
 {
-    Task<Company?> GetById(int id);
+    Task<Company?> GetById(long id);
     void Update(Company company);
 }

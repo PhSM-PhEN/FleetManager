@@ -2,9 +2,9 @@
 
 namespace FleetManager.Domain.Entities
 {
-    public class Vehicle
+    public class Vehicle : AuditableEntity
     {
-        public long Id { get; set; }
+        
         public string Brand { get; private set; } = string.Empty;
         public string Model { get; private set; } = string.Empty;
         public int ManufacturingYear { get; private set; }
@@ -12,7 +12,7 @@ namespace FleetManager.Domain.Entities
         public string ChassisNumber { get; private set; } = string.Empty;
         public string LicensePlate { get; private set; } = string.Empty;
         public string Color { get; private set; } = string.Empty;
-        public int CategoryId { get; private set; }
+        public long CategoryId { get; private set; }
         public decimal CurrentMileage { get; private set; }
         public DateTime CreateAt { get; private set; } = DateTime.UtcNow;
         public bool IsActive { get; private set; } = true;
@@ -22,7 +22,7 @@ namespace FleetManager.Domain.Entities
 
         public Vehicle(string brand, string model, int manufacturingYear, string renavam,
                        string chassisNumber, string licensePlate, string color,
-                       int categoryId, decimal currentMileage)
+                       long categoryId, decimal currentMileage)
         {
             Brand = brand;
             Model = model;
@@ -35,7 +35,7 @@ namespace FleetManager.Domain.Entities
             CurrentMileage = currentMileage;
         }
 
-        public void Update(string brand, string model, string color, int categoryId)
+        public void Update(string brand, string model, string color, long categoryId)
         {
             Brand = brand;
             Model = model;

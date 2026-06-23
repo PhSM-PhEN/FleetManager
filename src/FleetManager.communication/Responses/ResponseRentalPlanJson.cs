@@ -4,7 +4,7 @@ namespace FleetManager.Communication.Responses
 {
     public class ResponseRentalPlanJson
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public RentalMode Mode { get; set; }
         public TransmissionType Transmission { get; set; }

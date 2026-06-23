@@ -2,15 +2,15 @@
 using FleetManager.Domain.Enums;
 namespace FleetManager.Domain.Entities
 {
-    public class Rental
+    public class Rental : AuditableEntity
     {
-        public long Id { get; set; }
-        public int CompanyId { get; private set; }
+        
+        public long CompanyId { get; private set; }
         public long ClientId { get; private set; }
         public long VehicleId { get; private set; }
         public long UserId { get; private set; }
         public decimal TotalPrice { get; private set; }
-        public int RentalPlanId { get; private set; }
+        public long RentalPlanId { get; private set; }
         public RentalMode SnapshotMode { get; private set; }
         public int TotalDays { get; private set; }
         public decimal IncludedKm { get; private set; }
@@ -32,7 +32,7 @@ namespace FleetManager.Domain.Entities
 
         protected Rental() { }
 
-        public Rental(int companyId, long clientId, long vehicleId, long userId,
+        public Rental(long companyId, long clientId, long vehicleId, long userId,
                       DateTime startDate, DateTime endDate)
         {
             CompanyId = companyId;

@@ -9,7 +9,7 @@ public class GetByIdCompanyUseCase(IMapper mapper, ICompanyReadOnlyRepository re
 {
     private readonly IMapper _mapper = mapper;
     private readonly ICompanyReadOnlyRepository _repository = repository;
-    public async Task<ResponseCompanyJson> Execute(int id)
+    public async Task<ResponseCompanyJson> Execute(long id)
     {
         var company = await _repository.GetById(id);
 

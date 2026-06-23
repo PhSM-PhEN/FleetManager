@@ -84,13 +84,13 @@ namespace FleetManager.Application.UseCase.ToRental.Register
             return result ?? throw new NotFoundException(ResourceErrorMessages.VEHICLE_NOT_FOUND);
         }
 
-        private async Task<Company> EnsureCompanyExists(int id)
+        private async Task<Company> EnsureCompanyExists(long id)
         {
             var result = await companyReadOnly.GetById(id);
             return result ?? throw new NotFoundException(ResourceErrorMessages.COMPANY_NOT_FOUND);
         }
 
-        private async Task<RentalPlan> EnsureRentalPlanExists(int id)
+        private async Task<RentalPlan> EnsureRentalPlanExists(long id)
         {
             var result = await rentalPlansRead.GetById(id)
                 ?? throw new NotFoundException(ResourceErrorMessages.RENTAL_PLAN_NOT_FOUND);

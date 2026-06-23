@@ -42,7 +42,7 @@ namespace FleetManager.Application.UseCase.ToVehicle.Register
                 throw new ErrorOnValidationException(errorMessage);
             }
         }
-        private async Task ValidateCategory(int categoryId)
+        private async Task ValidateCategory(long categoryId)
         {
 
 

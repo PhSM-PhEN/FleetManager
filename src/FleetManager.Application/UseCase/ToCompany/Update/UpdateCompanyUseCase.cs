@@ -8,7 +8,7 @@ namespace FleetManager.Application.UseCase.ToCompany.Update;
 public class UpdateCompanyUseCase(ICompanyUpdateOnlyRepository repository, IUnitOfWork unitOfWork) : IUpdateCompanyUseCase
 {
 
-    public async Task Execute(int id, RequestUpdateCompanyJson request)
+    public async Task Execute(long id, RequestUpdateCompanyJson request)
     {
         Validate(request);
         var company = await repository.GetById(id);

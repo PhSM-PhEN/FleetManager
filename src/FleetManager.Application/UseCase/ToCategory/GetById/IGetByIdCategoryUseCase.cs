@@ -4,6 +4,6 @@ namespace FleetManager.Application.UseCase.ToCategory.GetById
 {
     public interface IGetByIdCategoryUseCase
     {
-        Task<ResponseCategoryJson> Execute(int id);
+        Task<ResponseCategoryJson> Execute(long id);
     }
 }

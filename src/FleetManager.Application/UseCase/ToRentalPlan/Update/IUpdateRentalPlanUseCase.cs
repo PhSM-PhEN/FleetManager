@@ -5,5 +5,5 @@ namespace FleetManager.Application.UseCase.ToRentalPlan.Update;
 
 public interface IUpdateRentalPlanUseCase
 {
-    Task Execute(int id, RequestRentalPlansJson request);
+    Task Execute(long id, RequestRentalPlansJson request);
 }

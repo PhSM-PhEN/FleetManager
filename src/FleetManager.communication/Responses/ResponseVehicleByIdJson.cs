@@ -11,7 +11,7 @@
         public string Color { get; set; } = string.Empty;
         public long CurrentMileage { get; set; }
         public DateTime CreateAt { get;  set; }
-        public int CategoryId {get; set;}
+        public long CategoryId {get; set;}
         public ResponseCategoryJson Category { get; set; } = new ();
 
     }

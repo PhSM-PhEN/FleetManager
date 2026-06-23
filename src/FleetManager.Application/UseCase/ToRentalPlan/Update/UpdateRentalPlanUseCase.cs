@@ -7,7 +7,7 @@ namespace FleetManager.Application.UseCase.ToRentalPlan.Update;
 
 public class UpdateRentalPlanUseCase(IRentalPlansUpdateOnlyRepository repository, IUnitOfWork unitOfWork) : IUpdateRentalPlanUseCase
 {
-    public async Task Execute(int id, RequestRentalPlansJson request)
+    public async Task Execute(long id, RequestRentalPlansJson request)
     {
         Validate(request);
         var rentalPlan = await repository.GetById(id);

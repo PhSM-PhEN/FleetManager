@@ -11,6 +11,6 @@
         public string LicensePlate { get; set; } = string.Empty;
         public string Color { get; set; } = string.Empty;
         public decimal CurrentMileage { get; set; }
-        public int CategoryId { get; set; }
+        public long CategoryId { get; set; }
     }
 }

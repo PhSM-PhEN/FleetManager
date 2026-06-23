@@ -5,7 +5,7 @@ namespace CommonTestUtilities.Entitie;
 
 public class RentalBuilder
 {
-    public static Rental Build(int companyId = 1, long clientId = 1,
+    public static Rental Build(long companyId = 1, long clientId = 1,
                                long vehicleId = 1, long userId = 1)
     {
         var faker = new Faker();

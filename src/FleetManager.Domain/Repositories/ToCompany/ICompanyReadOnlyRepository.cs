@@ -6,5 +6,5 @@ namespace FleetManager.Domain.Repositories.ToCompany;
 public interface ICompanyReadOnlyRepository
 {
     Task<List<Company>> GetAll();
-    Task<Company?> GetById(int id);
+    Task<Company?> GetById(long id);
 }

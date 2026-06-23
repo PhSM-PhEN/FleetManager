@@ -1,10 +1,15 @@
 ﻿using FleetManager.Domain.Entities;
+using FleetManager.Domain.Services.LoggedUser;
+using FleetManager.Infrastructure.Services.LoggedUser;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace FleetManager.Infrastructure.DataAccess
 {
-    public class FleetManagerDbContext(DbContextOptions options) : DbContext(options)
+    public class FleetManagerDbContext(DbContextOptions options, IHttpContextAccessor httpContextAccessor, ILoggedUser loggedUser) : DbContext(options)
     {
+        private readonly IHttpContextAccessor _httpContextAccessor = httpContextAccessor;
+        private readonly ILoggedUser _loggedUser = loggedUser;
         public DbSet<Category> Categories { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<User> Users { get; set; }
@@ -14,6 +19,22 @@ namespace FleetManager.Infrastructure.DataAccess
         public DbSet<Rental> Rentals {get ; set; }
         public DbSet<RentalPlan> RentalPlans { get; set; }
 
+        public override async Task<int> SaveChangesAsync(CancellationToken ct = default)
+        {
+            if(_httpContextAccessor.HttpContext is not null)
+            {
+                var user = await _loggedUser.Get();
+                foreach(var entry in ChangeTracker.Entries<AuditableEntity>())
+                {
+                    if(entry.State == EntityState.Added)
+                        entry.Entity.SetCreatedBy(user.Id);
+                        
+                    if(entry.State == EntityState.Modified)
+                        entry.Entity.SetUpdatedBy(user.Id);
+                }
+            }
+            return await base.SaveChangesAsync(ct);
+        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

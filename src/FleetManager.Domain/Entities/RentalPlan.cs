@@ -3,9 +3,9 @@ using FleetManager.Domain.Enums;
 
 namespace FleetManager.Domain.Entities
 {
-    public class RentalPlan
+    public class RentalPlan : AuditableEntity
     {
-        public int Id { get; set; }
+       
         public string Name { get; private set; } = string.Empty;
         public RentalMode Mode { get; private set; }
         public TransmissionType Transmission { get; private set; }

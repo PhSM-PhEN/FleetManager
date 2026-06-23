@@ -13,7 +13,7 @@ namespace FleetManager.Infrastructure.DataAccess.ToCompany
             await dbContext.Companies.AddAsync(company);
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(long id)
         {
             var result = await dbContext.Companies.FindAsync(id);
             dbContext.Companies.Remove(result!);
@@ -26,14 +26,14 @@ namespace FleetManager.Infrastructure.DataAccess.ToCompany
             .ToListAsync();
         }
 
-        public async Task<Company?> GetById(int id)
+        public async Task<Company?> GetById(long id)
         {
             return await dbContext.Companies.AsNoTracking()
             .Include(c => c.Address)
             .FirstOrDefaultAsync(comp => comp.Id == id);
             
         }
-        async Task<Company?> ICompanyUpdateOnlyRepository.GetById(int id)
+        async Task<Company?> ICompanyUpdateOnlyRepository.GetById(long id)
         {
             return await dbContext.Companies.FirstOrDefaultAsync(comp => comp.Id == id);
         }

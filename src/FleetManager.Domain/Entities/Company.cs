@@ -1,8 +1,8 @@
 ﻿namespace FleetManager.Domain.Entities
 {
-    public class Company
+    public class Company : AuditableEntity
     {
-        public int Id { get; set; }
+        
         public string Name { get; private set; } = string.Empty;
         public string Cnpj { get; private set; } = string.Empty;
         public string PhoneNumber { get; private set; } = string.Empty;

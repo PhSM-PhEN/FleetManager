@@ -6,6 +6,6 @@ namespace FleetManager.Domain.Repositories.ToCategory
     {
         Task<List<Category>> GetAll();
 
-        Task<Category?> GetById(int id);
+        Task<Category?> GetById(long id);
     }
 }

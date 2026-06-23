@@ -8,7 +8,7 @@ namespace FleetManager.Application.UseCase.ToRentalPlan.GetById;
 
 public class GetByIdRentalPlanUseCase(IMapper mapper, IRentalPlansReadOnlyRepository repository) : IGetByIdRentalPlanUseCase
 {
-    public async Task<ResponseRentalPlanJson> Execute(int id)
+    public async Task<ResponseRentalPlanJson> Execute(long id)
     {
         var rentalPlan = await repository.GetById(id);
         if(rentalPlan is null)

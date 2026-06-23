@@ -2,9 +2,9 @@
 
 namespace FleetManager.Domain.Entities
 {
-    public class Client
+    public class Client : AuditableEntity
     {
-        public long Id { get; set; }
+      
         public string FirstAndLastName { get; private set; } = string.Empty;
         public string PhoneNumber { get; private set; } = string.Empty;
         public string RG { get; private set; } = string.Empty;

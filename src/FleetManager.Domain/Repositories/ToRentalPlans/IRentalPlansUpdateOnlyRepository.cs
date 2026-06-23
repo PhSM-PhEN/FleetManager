@@ -4,7 +4,7 @@ namespace FleetManager.Domain.Repositories.ToRentalPlans
 {
     public interface IRentalPlansUpdateOnlyRepository
     {
-        Task<RentalPlan?> GetById(int id);
+        Task<RentalPlan?> GetById(long id);
         void Update(RentalPlan rentalPlan);
     }
 }

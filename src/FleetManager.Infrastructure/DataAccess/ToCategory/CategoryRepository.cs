@@ -18,7 +18,7 @@ namespace FleetManager.Infrastructure.DataAccess.ToCategory
             dbContext.Categories.Remove(result!);
         }
 
-        async Task<Category?> ICategoryReadOnlyRepository.GetById(int id)
+        async Task<Category?> ICategoryReadOnlyRepository.GetById(long id)
         {
 
             return await dbContext.Categories.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
@@ -34,7 +34,7 @@ namespace FleetManager.Infrastructure.DataAccess.ToCategory
             dbContext.Categories.Update(category);
         }
 
-        public async Task<Category?> GetById(int id)
+        public async Task<Category?> GetById(long id)
         {
             return await dbContext.Categories.FirstOrDefaultAsync(c => c.Id == id);
         }
