@@ -19,8 +19,9 @@ namespace FleetManager.Domain.Entities
             ChangePassword(password);
             UserIdentifier = Guid.NewGuid();
         }
-        internal User(Guid identifier, string name, string role)
+        internal User(long id, Guid identifier, string name, string role)
         {
+            Id = id;
             UserIdentifier = identifier;
             Name = name;
             Role = role;

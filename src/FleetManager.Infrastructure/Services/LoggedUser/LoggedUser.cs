@@ -16,8 +16,9 @@ namespace FleetManager.Infrastructure.Services.LoggedUser
 
             var name = claims.FindFirst(ClaimTypes.Name)?.Value ?? string.Empty;
             var role = claims.FindFirst(ClaimTypes.Role)?.Value ?? string.Empty;
+            var id = long.Parse(claims.FindFirst("db_id")?.Value ?? "0");
 
-            var user = new User(Guid.Parse(identifier), name, role);
+            var user = new User(id, Guid.Parse(identifier), name, role);
 
             return Task.FromResult(user);
         }

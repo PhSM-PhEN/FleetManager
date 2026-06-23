@@ -22,6 +22,7 @@ namespace FleetManager.Infrastructure.Security.Token
                 new(ClaimTypes.Name, user.Name),
                 new(ClaimTypes.Sid, user.UserIdentifier.ToString()),
                 new(ClaimTypes.Role, user.Role),
+                new("db_id", user.Id.ToString()),
             };
 
             var tokenDescriptor = new SecurityTokenDescriptor
