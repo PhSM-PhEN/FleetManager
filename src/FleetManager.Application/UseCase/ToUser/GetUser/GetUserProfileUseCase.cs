@@ -1,20 +1,19 @@
 ﻿using AutoMapper;
 using FleetManager.Communication.Responses;
+using FleetManager.Domain.Repositories.ToUser;
 using FleetManager.Domain.Services.LoggedUser;
 
 namespace FleetManager.Application.UseCase.ToUser.GetUser
 {
-    public class GetUserProfileUseCase(ILoggedUser loggedUser, IMapper mapper) : IGetUserProfileUseCase
+    public class GetUserProfileUseCase(ILoggedUser loggedUser, IUserReadOnlyRepository userRepository,
+                                   IMapper mapper) : IGetUserProfileUseCase
     {
-        private readonly ILoggedUser _loggedUser = loggedUser;
-        
-        private readonly IMapper _mapper = mapper;
         public async Task<ResponseUserProfileJson> Execute()
         {
-            
-            var user = await _loggedUser.Get();
+            var logged = await loggedUser.Get();
+            var user = await userRepository.GetUserById(logged.Id);
 
-            return _mapper.Map<ResponseUserProfileJson>(user);
+            return mapper.Map<ResponseUserProfileJson>(user);
         }
     }
 }

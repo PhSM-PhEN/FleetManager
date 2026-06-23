@@ -11,16 +11,18 @@ namespace FleetManager.Application.UseCase.ToUser.ChangePassword
 {
     public class ChangePasswordUserUseCase(ILoggedUser loggedUser, IPasswordEncrypter passwordEncripter, IUserUpdateOnlyRepository updateRepository, IUnitOfWork unitOfWork) : IChangePasswordUserUseCase
     {
-     
+
         public async Task Execute(RequestChangePasswordJson request)
         {
-            var User = await loggedUser.Get();
-            Validate(request, User);
+            var logged = await loggedUser.Get();
 
-            var user = await updateRepository.GetById(User.Id);
+
+            var user = await updateRepository.GetById(logged.Id);
+
+            Validate(request, user);
             user.ChangePassword(passwordEncripter.Encrypt(request.NewPassword));
 
-           updateRepository.Update(user);
+            updateRepository.Update(user);
             await unitOfWork.Commit();
         }
 

@@ -1,4 +1,5 @@
-﻿using CommonTestUtilities.Entitie;
+﻿using Shouldly;
+using System.Text.Json;
 
 namespace WebApi.Tests.ToCompany.Get
 {
@@ -8,20 +9,29 @@ namespace WebApi.Tests.ToCompany.Get
         private readonly HttpClient _;
         private readonly string _userTeamMember;
         private readonly string _userAdmin;
-       // private readonly int _companyId;
+        private readonly int _companyId;
         public GetByIdCompanyTest(CustomWebApplicationFactory customWebApplication) : base(customWebApplication)
         {
             _ = customWebApplication.CreateClient();
             _userTeamMember = customWebApplication.USER_TEAM_MEMBER.GetToken();
             _userAdmin = customWebApplication.USER_TEAM_MEMBER.GetToken();
-          //  _companyId = customWebApplication.COMPANY_TEAM_MEMBER.
+            _companyId = customWebApplication.COMPANY_TEAM_MEMBER.GetById();
         }
         [Fact]
         public async Task Success_Admin_Token()
         {
-            
 
-            var result = await DoGet(MEHTOD,  _userAdmin);
+
+            var result = await DoGet(requestUri: $"{MEHTOD}/{_companyId}", _userAdmin);
+
+            result.StatusCode.ShouldBe(System.Net.HttpStatusCode.OK);
+
+            var body = await result.Content.ReadAsStreamAsync();
+
+            var responseBody = await JsonDocument.ParseAsync(body);
+
+            responseBody.RootElement.GetProperty("id").GetInt64().ShouldBe(_companyId);
+
         }
     }
 }

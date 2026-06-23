@@ -77,6 +77,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         var password = user.Password;
         user.ChangePassword(passwordEncrypter.Encrypt(password));
         dbContext.Users.Add(user);
+        dbContext.SaveChanges();
 
         var token = tokenGenerator.GenerateToken(user);
         USER_TEAM_MEMBER = new UserIdentityManager(user, password, token);
@@ -89,6 +90,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         user.ChangePassword(passwordEncrypter.Encrypt(password));
         user.PromoteToAdmin();
         dbContext.Users.Add(user);
+        dbContext.SaveChanges();
 
         var token = tokenGenerator.GenerateToken(user);
         USER_ADM_MEMBER = new UserIdentityManager(user, password, token);

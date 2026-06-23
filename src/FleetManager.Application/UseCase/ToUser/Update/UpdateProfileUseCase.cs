@@ -15,9 +15,10 @@ namespace FleetManager.Application.UseCase.ToUser.Update
         public async Task Execute(RequestUpdateUserJson request)
         {
             var loggedUser = await _loggedUser.Get();
-            await Validate(request, loggedUser.Email);
 
             var user = await _updateOnlyRepository.GetById(loggedUser.Id);
+
+            await Validate(request, user.Email);
 
             user.Update(request.Name, request.Email);
 

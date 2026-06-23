@@ -43,6 +43,12 @@ namespace FleetManager.Infrastructure.DataAccess.ToUsers
             return await dbContext.Users.AsNoTracking().FirstOrDefaultAsync(u => u.Email.Equals(email));
         }
 
+        public async Task<User?> GetUserById(long id)
+        {
+            return await dbContext.Users.AsNoTracking().FirstAsync(u => u.Id == id);
+
+        }
+
         public void Update(User user)
         {
             dbContext.Users.Update(user);
