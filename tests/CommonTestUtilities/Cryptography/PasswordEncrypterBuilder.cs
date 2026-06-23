@@ -1,7 +1,7 @@
 ﻿using FleetManager.Domain.Security.Cryptography;
 using Moq;
 
-namespace CommonTestUtilities.Criptography
+namespace CommonTestUtilities.Cryptography
 {
     public class PasswordEncrypterBuilder  
     {

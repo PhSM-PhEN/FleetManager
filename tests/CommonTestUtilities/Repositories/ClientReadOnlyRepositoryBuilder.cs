@@ -17,9 +17,9 @@ public class ClientReadOnlyRepositoryBuilder
         _repository.Setup(c => c.GetById(client.Id)).ReturnsAsync(client);
         return this;
     }
-    public ClientReadOnlyRepositoryBuilder GetAll(List<Client> clients)
+    public ClientReadOnlyRepositoryBuilder GetAll(List<Client> clients, int pageNumber = 1, int pageSize = 10)
     {
-        _repository.Setup(c => c.GetAll()).ReturnsAsync(clients);
+        _repository.Setup(c => c.GetAll(pageNumber, pageSize)).ReturnsAsync((clients, clients.Count));
         return this;
     }
 

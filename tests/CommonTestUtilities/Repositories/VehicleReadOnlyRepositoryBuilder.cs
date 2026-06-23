@@ -13,9 +13,9 @@ public class VehicleReadOnlyRepositoryBuilder
         _repository = new Mock<IVehicleReadOnlyRepository>();
     }
 
-    public VehicleReadOnlyRepositoryBuilder GetAll(List<Vehicle> vehicles)
+    public VehicleReadOnlyRepositoryBuilder GetAll(List<Vehicle> vehicles, int pageNumber = 1, int pageSize = 10)
     {
-        _repository.Setup(r => r.GetAll()).ReturnsAsync(vehicles);
+        _repository.Setup(r => r.GetAll(pageNumber, pageSize)).ReturnsAsync((vehicles, vehicles.Count));
        
         return this;
     }

@@ -3,7 +3,7 @@ using Moq;
 
 namespace CommonTestUtilities.Repositories;
 
-public class CompanyWriteOnlyRepositoryBuider
+public class CompanyWriteOnlyRepositoryBuilder
 {
     public static ICompanyWriteOnlyRepository Build()
     {

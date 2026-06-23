@@ -1,4 +1,3 @@
-using System;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories.ToRental;
 using Moq;
@@ -18,9 +17,9 @@ public class RentalReadOnlyRepositoryBuilder
         _repository.Setup(r => r.GetById(rental.Id)).ReturnsAsync(rental);
         return this;
     }
-    public RentalReadOnlyRepositoryBuilder GetAll(List<Rental> rentals)
+    public RentalReadOnlyRepositoryBuilder GetAll(List<Rental> rentals, int pageNumber = 1, int pageSize = 10)
     {
-        _repository.Setup(r => r.GetAll()).ReturnsAsync(rentals);
+        _repository.Setup(r => r.GetAll(pageNumber, pageSize)).ReturnsAsync((rentals, rentals.Count));
         return this;
     }
 
