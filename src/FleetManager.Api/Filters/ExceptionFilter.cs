@@ -10,35 +10,23 @@ namespace FleetManager.Api.Filters
     {
         public void OnException(ExceptionContext context)
         {
-            if (context.Exception is FleetManagerException)
+            if (context.Exception is FleetManagerException fleetEx)
             {
-                HandleErrorOnValidationException(context);
+                HandleException(context,fleetEx.StatusCode, fleetEx.GetErrors());
             }
-            else if(context.Exception is DomainException)
+            else if(context.Exception is DomainException domainEx)
             {
-                HandleDomainRuleException(context);
+                HandleException(context, StatusCodes.Status400BadRequest, [domainEx.Message]);
             }
             else
             {
                 ThrowUnknownError(context);
             }
         }
-        private static void HandleErrorOnValidationException(ExceptionContext context)
+        private void HandleException (ExceptionContext context, int statusCode, List<string> errors)
         {
-            var fleetManagerException = context.Exception as FleetManagerException;
-            var errorResponse = new ResponseErrorJson(fleetManagerException!.GetErrors());
-
-            context.HttpContext.Response.StatusCode = fleetManagerException.StatusCode;
-            context.Result = new ObjectResult(errorResponse);
-
-        }
-        private static void HandleDomainRuleException(ExceptionContext context)
-        {
-            var domainException = context.Exception as DomainException;
-            var errorResponse = new ResponseErrorJson([domainException!.Message]);
-
-            context.HttpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
-            context.Result = new ObjectResult(errorResponse);
+             context.HttpContext.Response.StatusCode = statusCode;
+             context.Result = new ObjectResult(new ResponseErrorJson(errors));
         }
         private static void ThrowUnknownError(ExceptionContext context)
         {
