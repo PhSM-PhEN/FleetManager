@@ -67,7 +67,7 @@ public class RentalRepository(FleetManagerDbContext dbContext) : IRentalWriteOnl
 
         return await dbContext.Rentals
             .AsNoTracking()
-                .Where(r => r.UserId == user.Id && r.StartDate >= startDate && r.StartDate <= endDate)
+                .Where(r => r.CreatedBy == user.Id && r.StartDate >= startDate && r.StartDate <= endDate)
                 .Include(r => r.Company)
                     .ThenInclude(r => r.Address)
                 .Include(r => r.Vehicle)

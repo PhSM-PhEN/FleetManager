@@ -13,14 +13,14 @@ using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToRental.Register
 {
-    public class RegisterRentalUseCase(ILoggedUser loggedUser, IRentalReadOnlyRepository rentalReadOnly,
+    public class RegisterRentalUseCase( IRentalReadOnlyRepository rentalReadOnly,
                                         ICompanyReadOnlyRepository companyReadOnly, IVehicleReadOnlyRepository vehicleReadOnly,
                                         IClientReadOnlyRepository clientReadOnly, IRentalWriteOnlyRepository repository, 
                                         IRentalPlansReadOnlyRepository rentalPlansRead, IUnitOfWork unitOfWork) : IRegisterRentalUseCase
     {
         public async Task<ResponseRentalJson> Execute(RequestRentJson request)
         {
-            var logged = await loggedUser.Get();
+            
             Validate(request);
 
             
@@ -31,7 +31,7 @@ namespace FleetManager.Application.UseCase.ToRental.Register
             request.StartDate.AddDays(30) :
             request.EndDate!.Value;
 
-            var rental = new Rental(request.CompanyId, request.ClientId, request.VehicleId, logged.Id, request.StartDate, endDate);
+            var rental = new Rental(request.CompanyId, request.ClientId, request.VehicleId, request.StartDate, endDate);
 
             rental.AttachPlan(rentalPlan);
 

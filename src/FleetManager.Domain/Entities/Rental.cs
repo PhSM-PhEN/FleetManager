@@ -8,7 +8,6 @@ namespace FleetManager.Domain.Entities
         public long CompanyId { get; private set; }
         public long ClientId { get; private set; }
         public long VehicleId { get; private set; }
-        public long UserId { get; private set; }
         public decimal TotalPrice { get; private set; }
         public long RentalPlanId { get; private set; }
         public RentalMode SnapshotMode { get; private set; }
@@ -22,7 +21,6 @@ namespace FleetManager.Domain.Entities
         public Company Company { get; set; } = default!;
         public Client Client { get; set; } = default!;
         public Vehicle Vehicle { get; set; } = default!;
-        public User User { get; set; } = default!;
 
         private DateTime _startDate;
         private DateTime _endDate;
@@ -32,13 +30,12 @@ namespace FleetManager.Domain.Entities
 
         protected Rental() { }
 
-        public Rental(long companyId, long clientId, long vehicleId, long userId,
+        public Rental(long companyId, long clientId, long vehicleId, 
                       DateTime startDate, DateTime endDate)
         {
             CompanyId = companyId;
             ClientId = clientId;
             VehicleId = vehicleId;
-            UserId = userId;
             _startDate = startDate;
             _endDate = endDate;
             RecalculateIfReady();

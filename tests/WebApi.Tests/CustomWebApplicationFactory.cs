@@ -1,4 +1,3 @@
-using System.Security.Cryptography.X509Certificates;
 using CommonTestUtilities.Entitie;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Security.Cryptography;
@@ -56,31 +55,58 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     }
     private void StartDataBase(FleetManagerDbContext dbContext, IPasswordEncrypter passwordEncrypter, IAccessTokenGenerator tokenGenerator)
     {
-        var address = AddAddress(dbContext);
+    
+        var addressTeamMember = AddAddress(dbContext);
+        var addressAdmMember = AddAddress(dbContext);
         dbContext.SaveChanges();
 
-        var companyTeamMember = AddCompany(dbContext, address.Id);
-        var companyAdmMember = AddCompany(dbContext, address.Id);
-        var category = AddCategory(dbContext);
+    
+        var companyTeamMember = AddCompany(dbContext, addressTeamMember.Id);
+        var companyAdmMember = AddCompany(dbContext, addressAdmMember.Id);
+
+    
+        var categoryTeamMember = AddCategory(dbContext);
+        var categoryAdmMember = AddCategory(dbContext);
         dbContext.SaveChanges();
 
-        var vehicle = AddVehicle(dbContext, category.Id);
-        var client = AddClient(dbContext, address.Id);
-        var userTeamMember = AddUserTeamMember(dbContext, passwordEncrypter, tokenGenerator);
-        var userAdmin = AddUserAdmin(dbContext, passwordEncrypter, tokenGenerator);
+    
+        var vehicleTeamMember = AddVehicle(dbContext, categoryTeamMember.Id);
+        var vehicleAdmMember = AddVehicle(dbContext, categoryAdmMember.Id);
+
+   
+        var clientTeamMember = AddClient(dbContext, addressTeamMember.Id);
+        var clientAdmMember = AddClient(dbContext, addressAdmMember.Id);
+
+    
+        AddUserTeamMember(dbContext, passwordEncrypter, tokenGenerator);
+        AddUserAdmin(dbContext, passwordEncrypter, tokenGenerator);
         dbContext.SaveChanges();
 
-        var rentalTeamMember = AddRental(dbContext, userTeamMember, companyTeamMember.Id, client.Id, vehicle.Id);
-        var rentalAdmin = AddRental(dbContext, userAdmin, companyAdmMember.Id, client.Id, vehicle.Id);
+   
+        var rentalPlanTeamMember = AddRentalPlan(dbContext);
+        var rentalPlanAdmMember = AddRentalPlan(dbContext);
+        dbContext.SaveChanges();
 
+    
+        var rentalTeamMember = AddRental(dbContext, companyTeamMember.Id, clientTeamMember.Id, vehicleTeamMember.Id);
+        var rentalAdmMember = AddRental(dbContext, companyAdmMember.Id, clientAdmMember.Id, vehicleAdmMember.Id);
+        dbContext.SaveChanges();
+
+   
+        ADDRESS_TEAM_MEMBER = new AddressIdentityManager(addressTeamMember);
+        ADDRESS_ADM_MEMBER = new AddressIdentityManager(addressAdmMember);
+        CATEGORY_TEAM_MEMBER = new CategoryIdentitiyManager(categoryTeamMember);
+        CATEGORY_ADM_MEMBER = new CategoryIdentitiyManager(categoryAdmMember);
+        CLIENT_TEAM_MEMBER = new ClientIdentityManager(clientTeamMember);
         COMPANY_TEAM_MEMBER = new CompanyIdentityManager(companyTeamMember);
         COMPANY_ADM_MEMBER = new CompanyIdentityManager(companyAdmMember);
-
+        RENTAL_PLAN_TEAM_MEMBER = new RentalPlanIdentityManager(rentalPlanTeamMember);
+        RENTAL_PLAN_ADM_MEMBER = new RentalPlanIdentityManager(rentalPlanAdmMember);
         RENTAL_TEAM_MEMBER = new RentalIdentityManager(rentalTeamMember);
-        RENTAL_ADM_MEMBER = new RentalIdentityManager(rentalAdmin);
-
-        dbContext.SaveChanges();
-    }
+        RENTAL_ADM_MEMBER = new RentalIdentityManager(rentalAdmMember);
+        VEHICLE_TEAM_MEMBER = new VehicleIdentitiyManager(vehicleTeamMember);
+        VEHICLE_ADM_MEMBER = new VehicleIdentitiyManager(vehicleAdmMember);
+}
     private User AddUserTeamMember(FleetManagerDbContext dbContext, IPasswordEncrypter passwordEncrypter, IAccessTokenGenerator tokenGenerator)
     {
         var user = UserBuilder.Build();
@@ -131,9 +157,9 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         dbContext.Companies.Add(company);
         return company;
     }
-    private static Rental AddRental(FleetManagerDbContext dbContext, User user, long companyId, long clientId, long vehicleId)
+    private static Rental AddRental(FleetManagerDbContext dbContext, long companyId, long clientId, long vehicleId)
     {
-        var rental = RentalBuilder.Build(userId: user.Id, companyId: companyId, clientId: clientId, vehicleId: vehicleId);
+        var rental = RentalBuilder.Build(companyId: companyId, clientId: clientId, vehicleId: vehicleId);
         dbContext.Rentals.Add(rental);
         return rental;
     }

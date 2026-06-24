@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FleetManager.Infrastructure.Migrations
 {
     [DbContext(typeof(FleetManagerDbContext))]
-    [Migration("20260624124408_Initial_Migration")]
-    partial class Initial_Migration
+    [Migration("20260624185631_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -245,9 +245,6 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Property<long?>("UpdatedBy")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
-
                     b.Property<long>("VehicleId")
                         .HasColumnType("bigint");
 
@@ -258,8 +255,6 @@ namespace FleetManager.Infrastructure.Migrations
                     b.HasIndex("CompanyId");
 
                     b.HasIndex("RentalPlanId");
-
-                    b.HasIndex("UserId");
 
                     b.HasIndex("VehicleId");
 
@@ -468,12 +463,6 @@ namespace FleetManager.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FleetManager.Domain.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("FleetManager.Domain.Entities.Vehicle", "Vehicle")
                         .WithMany()
                         .HasForeignKey("VehicleId")
@@ -485,8 +474,6 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Navigation("Company");
 
                     b.Navigation("RentalPlan");
-
-                    b.Navigation("User");
 
                     b.Navigation("Vehicle");
                 });

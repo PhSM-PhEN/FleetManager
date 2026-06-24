@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FleetManager.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial_Migration : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -65,9 +65,9 @@ namespace FleetManager.Infrastructure.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Mode = table.Column<int>(type: "int", nullable: false),
                     Transmission = table.Column<int>(type: "int", nullable: false),
-                    PriceRental = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
-                    TotalKmIncluded = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
-                    PricePerKm = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
+                    PriceRental = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    TotalKmIncluded = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    PricePerKm = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
@@ -189,7 +189,7 @@ namespace FleetManager.Infrastructure.Migrations
                     Color = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CategoryId = table.Column<long>(type: "bigint", nullable: false),
-                    CurrentMileage = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
+                    CurrentMileage = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: false),
@@ -218,14 +218,13 @@ namespace FleetManager.Infrastructure.Migrations
                     CompanyId = table.Column<long>(type: "bigint", nullable: false),
                     ClientId = table.Column<long>(type: "bigint", nullable: false),
                     VehicleId = table.Column<long>(type: "bigint", nullable: false),
-                    UserId = table.Column<long>(type: "bigint", nullable: false),
-                    TotalPrice = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     RentalPlanId = table.Column<long>(type: "bigint", nullable: false),
                     SnapshotMode = table.Column<int>(type: "int", nullable: false),
                     TotalDays = table.Column<int>(type: "int", nullable: false),
-                    IncludedKm = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
-                    SnapshotPriceRental = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
-                    SnapshotPricePerKm = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
+                    IncludedKm = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    SnapshotPriceRental = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    SnapshotPricePerKm = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
@@ -253,12 +252,6 @@ namespace FleetManager.Infrastructure.Migrations
                         name: "FK_Rentals_RentalPlans_RentalPlanId",
                         column: x => x.RentalPlanId,
                         principalTable: "RentalPlans",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Rentals_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -314,11 +307,6 @@ namespace FleetManager.Infrastructure.Migrations
                 column: "RentalPlanId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Rentals_UserId",
-                table: "Rentals",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Rentals_VehicleId",
                 table: "Rentals",
                 column: "VehicleId");
@@ -366,6 +354,9 @@ namespace FleetManager.Infrastructure.Migrations
                 name: "Rentals");
 
             migrationBuilder.DropTable(
+                name: "Users");
+
+            migrationBuilder.DropTable(
                 name: "Clients");
 
             migrationBuilder.DropTable(
@@ -373,9 +364,6 @@ namespace FleetManager.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "RentalPlans");
-
-            migrationBuilder.DropTable(
-                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Vehicles");
