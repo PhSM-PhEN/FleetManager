@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using CommonTestUtilities.Entitie;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Security.Cryptography;
@@ -14,13 +15,22 @@ using WebApi.Tests.Resource;
 namespace WebApi.Tests;
 
 public class CustomWebApplicationFactory : WebApplicationFactory<Program>
-{
+{ 
+    public AddressIdentityManager ADDRESS_TEAM_MEMBER {get ; private set ;} = default!;
+    public AddressIdentityManager ADDRESS_ADM_MEMBER {get ; private set ;} = default!;
+    public CategoryIdentitiyManager CATEGORY_TEAM_MEMBER {get ; private set ;} = default!;
+    public CategoryIdentitiyManager CATEGORY_ADM_MEMBER {get ; private set ;} = default!;
+    public ClientIdentityManager CLIENT_TEAM_MEMBER {get ; private set ;} = default!;
     public CompanyIdentityManager COMPANY_TEAM_MEMBER { get; private set; } = default!;
     public CompanyIdentityManager COMPANY_ADM_MEMBER { get; private set; } = default!;
+    public RentalPlanIdentityManager RENTAL_PLAN_TEAM_MEMBER {get ; private set ;} = default!;
+    public RentalPlanIdentityManager RENTAL_PLAN_ADM_MEMBER {get ; private set ;} = default!;
     public RentalIdentityManager RENTAL_TEAM_MEMBER { get; private set; } = default!;
     public RentalIdentityManager RENTAL_ADM_MEMBER { get; private set; } = default!;
     public UserIdentityManager USER_TEAM_MEMBER { get; private set; } = default!;
     public UserIdentityManager USER_ADM_MEMBER { get; private set; } = default!;
+    public VehicleIdentitiyManager VEHICLE_TEAM_MEMBER { get ; private set ;} = default!;
+    public VehicleIdentitiyManager VEHICLE_ADM_MEMBER {get ; private set ;}  = default!;
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
@@ -135,7 +145,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         return rentalPlan;
     }
 
-    private static Vehicle AddVehicle(FleetManagerDbContext dbContext, int categoryId)
+    private static Vehicle AddVehicle(FleetManagerDbContext dbContext, long categoryId)
     {
         var vehicle = VehicleBuilder.Build(categoryId);
         dbContext.Vehicles.Add(vehicle);

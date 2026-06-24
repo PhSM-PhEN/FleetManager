@@ -5,7 +5,7 @@ namespace CommonTestUtilities.Entitie;
 
 public class VehicleBuilder
 {
-    public static Vehicle Build(int categoryId = 1)
+    public static Vehicle Build(long categoryId = 1)
     {
         var faker = new Faker();
         return new Vehicle(

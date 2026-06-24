@@ -1,12 +1,13 @@
 using FleetManager.Domain.Entities;
 
-namespace WebApi.Tests.Resource;
-
-public class RentalIdentityManager(Rental rental)
+namespace WebApi.Tests.Resource
 {
-    private readonly Rental _rental = rental;
+    
+    public class RentalIdentityManager(Rental rental)
+    {
 
-    public long GetById() => _rental.Id;
-    public DateTime GetStartDate() => _rental.StartDate;
-    public DateTime GetEndDate() => _rental.EndDate;
+        public long GetById() => rental.Id;    
+        public DateTime GetStartDate() => rental.StartDate;
+        public DateTime GetEndDate() => rental.EndDate;
+    }
 }
