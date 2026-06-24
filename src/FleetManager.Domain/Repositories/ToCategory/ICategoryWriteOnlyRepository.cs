@@ -6,6 +6,6 @@ namespace FleetManager.Domain.Repositories.ToCategory
     {
         Task Add(Category category);
 
-        Task Delete(int id);
+        Task Delete(long id);
     }
 }

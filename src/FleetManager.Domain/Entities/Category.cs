@@ -4,7 +4,7 @@ namespace FleetManager.Domain.Entities
 {
     public class Category
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; private set; } = string.Empty;
         public TransmissionType TransmissionType { get; private set; }
         public bool IsActive { get; private set; } = true;

@@ -12,7 +12,7 @@ namespace FleetManager.Infrastructure.DataAccess.ToCategory
             await dbContext.Categories.AddAsync(category);
         }
 
-        public async Task Delete(int id)
+        public async Task Delete(long id)
         {
             var result = await dbContext.Categories.FindAsync(id);
             dbContext.Categories.Remove(result!);

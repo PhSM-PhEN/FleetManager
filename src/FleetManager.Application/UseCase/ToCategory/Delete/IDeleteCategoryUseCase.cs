@@ -2,6 +2,6 @@
 {
     public interface IDeleteCategoryUseCase
     {
-        Task Execute(int id);
+        Task Execute(long id);
     }
 }

@@ -5,6 +5,6 @@ namespace FleetManager.Application.UseCase.ToCategory.Update
 {
     public interface IUpdateCategoryUseCase
     {
-        Task Execute(int id, RequestCategoryJson request);
+        Task Execute(long id, RequestCategoryJson request);
     }
 }

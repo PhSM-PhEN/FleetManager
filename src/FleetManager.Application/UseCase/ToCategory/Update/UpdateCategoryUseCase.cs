@@ -7,15 +7,13 @@ namespace FleetManager.Application.UseCase.ToCategory.Update
 {
     public class UpdateCategoryUseCase(IUnitOfWork unitOfWork, ICategoryUpdateOnlyRepository updateRepository) : IUpdateCategoryUseCase
     {
-        private readonly IUnitOfWork _unitOfWork = unitOfWork;
-        private readonly ICategoryUpdateOnlyRepository _updateRepository = updateRepository;
 
 
-        public async Task Execute(int id, RequestCategoryJson request)
+        public async Task Execute(long id, RequestCategoryJson request)
         {
             Validate(request);
 
-            var category = await _updateRepository.GetById(id);
+            var category = await updateRepository.GetById(id);
 
             if (category is null)
             {
@@ -23,9 +21,9 @@ namespace FleetManager.Application.UseCase.ToCategory.Update
             }
             category.Update(request.Name, (Domain.Enums.TransmissionType)request.TransmissionType);
 
-            _updateRepository.Update(category);
+            updateRepository.Update(category);
 
-            await _unitOfWork.Commit();
+            await unitOfWork.Commit();
 
         }
         private static void Validate(RequestCategoryJson request)
