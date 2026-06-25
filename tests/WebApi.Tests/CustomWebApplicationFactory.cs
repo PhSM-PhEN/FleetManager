@@ -14,22 +14,22 @@ using WebApi.Tests.Resource;
 namespace WebApi.Tests;
 
 public class CustomWebApplicationFactory : WebApplicationFactory<Program>
-{ 
-    public AddressIdentityManager ADDRESS_TEAM_MEMBER {get ; private set ;} = default!;
-    public AddressIdentityManager ADDRESS_ADM_MEMBER {get ; private set ;} = default!;
-    public CategoryIdentitiyManager CATEGORY_TEAM_MEMBER {get ; private set ;} = default!;
-    public CategoryIdentitiyManager CATEGORY_ADM_MEMBER {get ; private set ;} = default!;
-    public ClientIdentityManager CLIENT_TEAM_MEMBER {get ; private set ;} = default!;
+{
+    public AddressIdentityManager ADDRESS_TEAM_MEMBER { get; private set; } = default!;
+    public AddressIdentityManager ADDRESS_ADM_MEMBER { get; private set; } = default!;
+    public CategoryIdentitiyManager CATEGORY_TEAM_MEMBER { get; private set; } = default!;
+    public CategoryIdentitiyManager CATEGORY_ADM_MEMBER { get; private set; } = default!;
+    public ClientIdentityManager CLIENT_TEAM_MEMBER { get; private set; } = default!;
     public CompanyIdentityManager COMPANY_TEAM_MEMBER { get; private set; } = default!;
     public CompanyIdentityManager COMPANY_ADM_MEMBER { get; private set; } = default!;
-    public RentalPlanIdentityManager RENTAL_PLAN_TEAM_MEMBER {get ; private set ;} = default!;
-    public RentalPlanIdentityManager RENTAL_PLAN_ADM_MEMBER {get ; private set ;} = default!;
+    public RentalPlanIdentityManager RENTAL_PLAN_TEAM_MEMBER { get; private set; } = default!;
+    public RentalPlanIdentityManager RENTAL_PLAN_ADM_MEMBER { get; private set; } = default!;
     public RentalIdentityManager RENTAL_TEAM_MEMBER { get; private set; } = default!;
     public RentalIdentityManager RENTAL_ADM_MEMBER { get; private set; } = default!;
     public UserIdentityManager USER_TEAM_MEMBER { get; private set; } = default!;
     public UserIdentityManager USER_ADM_MEMBER { get; private set; } = default!;
-    public VehicleIdentitiyManager VEHICLE_TEAM_MEMBER { get ; private set ;} = default!;
-    public VehicleIdentitiyManager VEHICLE_ADM_MEMBER {get ; private set ;}  = default!;
+    public VehicleIdentitiyManager VEHICLE_TEAM_MEMBER { get; private set; } = default!;
+    public VehicleIdentitiyManager VEHICLE_ADM_MEMBER { get; private set; } = default!;
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
@@ -55,44 +55,44 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     }
     private void StartDataBase(FleetManagerDbContext dbContext, IPasswordEncrypter passwordEncrypter, IAccessTokenGenerator tokenGenerator)
     {
-    
+
         var addressTeamMember = AddAddress(dbContext);
         var addressAdmMember = AddAddress(dbContext);
         dbContext.SaveChanges();
 
-    
+
         var companyTeamMember = AddCompany(dbContext, addressTeamMember.Id);
         var companyAdmMember = AddCompany(dbContext, addressAdmMember.Id);
 
-    
+
         var categoryTeamMember = AddCategory(dbContext);
         var categoryAdmMember = AddCategory(dbContext);
         dbContext.SaveChanges();
 
-    
+
         var vehicleTeamMember = AddVehicle(dbContext, categoryTeamMember.Id);
         var vehicleAdmMember = AddVehicle(dbContext, categoryAdmMember.Id);
 
-   
+
         var clientTeamMember = AddClient(dbContext, addressTeamMember.Id);
         var clientAdmMember = AddClient(dbContext, addressAdmMember.Id);
 
-    
+
         AddUserTeamMember(dbContext, passwordEncrypter, tokenGenerator);
         AddUserAdmin(dbContext, passwordEncrypter, tokenGenerator);
         dbContext.SaveChanges();
 
-   
+
         var rentalPlanTeamMember = AddRentalPlan(dbContext);
         var rentalPlanAdmMember = AddRentalPlan(dbContext);
         dbContext.SaveChanges();
 
-    
+
         var rentalTeamMember = AddRental(dbContext, companyTeamMember.Id, clientTeamMember.Id, vehicleTeamMember.Id);
         var rentalAdmMember = AddRental(dbContext, companyAdmMember.Id, clientAdmMember.Id, vehicleAdmMember.Id);
         dbContext.SaveChanges();
 
-   
+
         ADDRESS_TEAM_MEMBER = new AddressIdentityManager(addressTeamMember);
         ADDRESS_ADM_MEMBER = new AddressIdentityManager(addressAdmMember);
         CATEGORY_TEAM_MEMBER = new CategoryIdentitiyManager(categoryTeamMember);
@@ -106,7 +106,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         RENTAL_ADM_MEMBER = new RentalIdentityManager(rentalAdmMember);
         VEHICLE_TEAM_MEMBER = new VehicleIdentitiyManager(vehicleTeamMember);
         VEHICLE_ADM_MEMBER = new VehicleIdentitiyManager(vehicleAdmMember);
-}
+    }
     private User AddUserTeamMember(FleetManagerDbContext dbContext, IPasswordEncrypter passwordEncrypter, IAccessTokenGenerator tokenGenerator)
     {
         var user = UserBuilder.Build();

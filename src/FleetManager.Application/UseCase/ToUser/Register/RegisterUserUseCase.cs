@@ -17,6 +17,7 @@ namespace FleetManager.Application.UseCase.ToUser.Register
         public async Task<ResponseLoginJson> Execute(RequestRegisterUserJson request)
         {
             await Validate(request);
+
             var anyUserExist = await userReadOnly.AnyUserExist();
 
             var user = new User(request.Name, request.Email, encripter.Encrypt(request.Password));

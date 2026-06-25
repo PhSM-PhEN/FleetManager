@@ -17,7 +17,7 @@ namespace FleetManager.Api.Controllers
     public class UserController : ControllerBase
     {
         [HttpPost]
-        [AllowAnonymous]
+        
         [ProducesResponseType(typeof(ResponseLoginJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register([FromServices] IRegisterUserUseCase useCase,
