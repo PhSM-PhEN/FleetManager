@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Extensions\" />
     <Folder Include="UseCase\ToRentalPlan\GetAll\" />
     <Folder Include="UseCase\ToRentalPlan\GetById\" />
     <Folder Include="UseCase\ToRentalPlan\Delete\" />

@@ -3,6 +3,6 @@
     public class RequestVehicleUpdateCurrentMileageJson
     {
 
-        public decimal CurrentMileage { get; set; }
+        public long CurrentMileage { get; set; }
     }
 }

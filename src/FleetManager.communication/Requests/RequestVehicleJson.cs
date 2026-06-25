@@ -10,7 +10,7 @@
         public string ChassisNumber { get; set; } = string.Empty;
         public string LicensePlate { get; set; } = string.Empty;
         public string Color { get; set; } = string.Empty;
-        public decimal CurrentMileage { get; set; }
+        public long CurrentMileage { get; set; }
         public long CategoryId { get; set; }
     }
 }

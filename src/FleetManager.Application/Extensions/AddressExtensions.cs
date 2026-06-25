@@ -1,0 +1,36 @@
+using FleetManager.Communication.Responses;
+using FleetManager.Domain.Entities;
+
+namespace FleetManager.Application.Extensions
+{
+    public static class AddressExtensions
+    {
+        public static ResponseShortAddressJson ToShotResponse(this Address address)
+        {
+            return new ResponseShortAddressJson
+            {
+                Id = address.Id,
+                Street = address.Street,
+                City = address.City,
+
+            };
+        }
+        public static ResponseAddressJson ToResponse(this Address address)
+        {
+            return new ResponseAddressJson
+            {
+                Id = address.Id,
+                Street = address.Street,
+                Number = address.Number,
+                City = address.City,
+                State = address.State,
+                ZipCode = address.ZipCode
+
+            };
+        }
+        public static List<ResponseShortAddressJson> ToShortResponse(this List<Address> addresses)
+        {
+            return addresses.Select(a => a.ToShotResponse()).ToList();
+        }
+    }
+}

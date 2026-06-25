@@ -1,4 +1,5 @@
-﻿using FleetManager.Communication.Requests;
+﻿using FleetManager.Application.Extensions;
+using FleetManager.Communication.Requests;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories;
@@ -30,12 +31,10 @@ namespace FleetManager.Application.UseCase.ToUser.Register
             await repository.Add(user);
             await unitOfWork.Commit();
 
-            return new ResponseLoginJson
-            {
-                Name = user.Name,
-                Token = tokenGenerator.GenerateToken(user)
+            var token = tokenGenerator.GenerateToken(user);
 
-            };
+            return user.ToLoginResponse(token);
+           
         }
         private async Task Validate(RequestRegisterUserJson request)
         {

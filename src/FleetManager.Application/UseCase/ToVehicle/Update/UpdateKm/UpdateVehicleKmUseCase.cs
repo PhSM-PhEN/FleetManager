@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿using FleetManager.Application.Extensions;
 using FleetManager.Communication.Requests;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.Repositories;
@@ -7,7 +7,7 @@ using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToVehicle.Update.UpdateKm
 {
-    public class UpdateVehicleKmUseCase(IUnitOfWork unitOfWork, IVehicleUpdateOnlyRepository repository, IMapper mapper) : IUpdateVehicleKmUseCase
+    public class UpdateVehicleKmUseCase(IUnitOfWork unitOfWork, IVehicleUpdateOnlyRepository repository) : IUpdateVehicleKmUseCase
     {
         public async Task<ResponseVehicleJson> Execute(long id, RequestVehicleUpdateCurrentMileageJson request)
         {
@@ -26,7 +26,7 @@ namespace FleetManager.Application.UseCase.ToVehicle.Update.UpdateKm
             repository.Update(vehicle);
             await unitOfWork.Commit();
 
-            return mapper.Map<ResponseVehicleJson>(vehicle);
+            return vehicle.ToShortResponse();
         }
         private void Validate(RequestVehicleUpdateCurrentMileageJson request)
         {

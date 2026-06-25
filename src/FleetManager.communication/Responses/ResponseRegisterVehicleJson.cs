@@ -6,7 +6,7 @@
         public string LicensePlate { get; set; } = string.Empty;
         public string Brand { get; set; } = string.Empty;
         public long CurrentMileage { get; set; }
-        public int CategoryId { get; set; }
+        public long CategoryId { get; set; }
 
     }
 }

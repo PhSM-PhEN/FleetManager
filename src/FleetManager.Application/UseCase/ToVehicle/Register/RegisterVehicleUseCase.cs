@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿using FleetManager.Application.Extensions;
 using FleetManager.Communication.Requests;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.Entities;
@@ -9,7 +9,7 @@ using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToVehicle.Register
 {
-    public class RegisterVehicleUseCase(IMapper mapper,IVehicleWriteOnlyRepository vehicleWriteOnly,
+    public class RegisterVehicleUseCase(IVehicleWriteOnlyRepository vehicleWriteOnly,
             IUnitOfWork unitOfWork, ICategoryReadOnlyRepository categoryGetById) : IRegisterVehicleUseCase
     {
 
@@ -28,7 +28,7 @@ namespace FleetManager.Application.UseCase.ToVehicle.Register
 
             await unitOfWork.Commit();
 
-            return mapper.Map<ResponseRegisterVehicleJson>(vehicle);
+            return vehicle.ToRegisterResponse();
         }
         private static void Validate(RequestVehicleJson request)
         {

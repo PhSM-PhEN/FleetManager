@@ -13,7 +13,7 @@ namespace FleetManager.Domain.Entities
         public string LicensePlate { get; private set; } = string.Empty;
         public string Color { get; private set; } = string.Empty;
         public long CategoryId { get; private set; }
-        public decimal CurrentMileage { get; private set; }
+        public long CurrentMileage { get; private set; }
         public DateTime CreateAt { get; private set; } = DateTime.UtcNow;
         public bool IsActive { get; private set; } = true;
         public Category Category { get; set; } = default!;
@@ -22,7 +22,7 @@ namespace FleetManager.Domain.Entities
 
         public Vehicle(string brand, string model, int manufacturingYear, string renavam,
                        string chassisNumber, string licensePlate, string color,
-                       long categoryId, decimal currentMileage)
+                       long categoryId, long currentMileage)
         {
             Brand = brand;
             Model = model;
@@ -43,7 +43,7 @@ namespace FleetManager.Domain.Entities
             CategoryId = categoryId;
         }
 
-        public void UpdateCurrentMileage(decimal newMileage)
+        public void UpdateCurrentMileage(long newMileage)
         {
             if (newMileage < CurrentMileage)
                 throw new DomainRuleException(ResourceMessages.THE_MILEAGE_MUST_BE_HIGHER_THAN_THE_CURRENT);
