@@ -29,7 +29,7 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(typeof(ResponseListClientJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
 
-        public async Task<IActionResult> GetAll([FromServices] IGetAllClientUseCase useCase, [FromQuery] int pageNumber, [FromQuery] int pageSize)
+        public async Task<IActionResult> GetAll([FromServices] IGetAllClientUseCase useCase, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
             var response = await useCase.Execute(pageNumber, pageSize);
             

@@ -21,16 +21,23 @@ namespace FleetManager.Infrastructure.DataAccess
 
         public override async Task<int> SaveChangesAsync(CancellationToken ct = default)
         {
-            if(_httpContextAccessor.HttpContext is not null)
+             if (_httpContextAccessor.HttpContext is not null)
             {
-                var user = await _loggedUser.Get();
-                foreach(var entry in ChangeTracker.Entries<AuditableEntity>())
+                var auditableEntries = ChangeTracker.Entries<AuditableEntity>()
+                    .Where(e => e.State == EntityState.Added || e.State == EntityState.Modified)
+                    .ToList();
+
+                if (auditableEntries.Count > 0)
                 {
-                    if(entry.State == EntityState.Added)
-                        entry.Entity.SetCreatedBy(user.Id);
-                        
-                    if(entry.State == EntityState.Modified)
-                        entry.Entity.SetUpdatedBy(user.Id);
+                    var user = await _loggedUser.Get();
+                    foreach (var entry in auditableEntries)
+                    {
+                        if (entry.State == EntityState.Added)
+                            entry.Entity.SetCreatedBy(user.Id);
+
+                        if (entry.State == EntityState.Modified)
+                            entry.Entity.SetUpdatedBy(user.Id);
+                    }
                 }
             }
             return await base.SaveChangesAsync(ct);

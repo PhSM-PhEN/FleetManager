@@ -76,7 +76,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 
         var clientTeamMember = AddClient(dbContext, addressTeamMember.Id);
         var clientAdmMember = AddClient(dbContext, addressAdmMember.Id);
-
+        
 
         AddUserTeamMember(dbContext, passwordEncrypter, tokenGenerator);
         AddUserAdmin(dbContext, passwordEncrypter, tokenGenerator);

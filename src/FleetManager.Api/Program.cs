@@ -5,7 +5,6 @@ using FleetManager.Infrastructure.Extension;
 using FleetManager.Infrastructure.Migrations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,24 +24,9 @@ builder.Services.AddSwaggerGen(config =>
         Scheme = "Bearer",
         Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
     });
-    config.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                },
-                Scheme = "oauth2",
-                Name = "Bearer",
-                In = ParameterLocation.Header
 
-            },
-            new List<string>()
-        }
-    });
+    // Aplica o cadeado SOMENTE nos endpoints que têm [Authorize]
+    config.OperationFilter<FleetManager.Api.Filters.AuthorizeCheckOperationFilter>();
 });
 
 builder.Services.AddMvc(opt => opt.Filters.Add(typeof(ExceptionFilter)));
