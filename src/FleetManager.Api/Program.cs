@@ -25,7 +25,6 @@ builder.Services.AddSwaggerGen(config =>
         Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
     });
 
-    // Aplica o cadeado SOMENTE nos endpoints que têm [Authorize]
     config.OperationFilter<FleetManager.Api.Filters.AuthorizeCheckOperationFilter>();
 });
 

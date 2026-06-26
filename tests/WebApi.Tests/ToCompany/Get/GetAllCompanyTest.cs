@@ -24,8 +24,7 @@ namespace WebApi.Tests.ToCompany.Get
             var body = await result.Content.ReadAsStreamAsync();
             var responseBody = await JsonDocument.ParseAsync(body);
 
-            var expectedMessage = responseBody.RootElement.GetProperty("companies");
-            expectedMessage.EnumerateArray().ShouldNotBeEmpty();  
+            responseBody.RootElement.EnumerateArray().ShouldNotBeEmpty();
 
         }
         [Fact]
@@ -37,8 +36,7 @@ namespace WebApi.Tests.ToCompany.Get
             var body = await result.Content.ReadAsStreamAsync();
             var responseBody = await JsonDocument.ParseAsync(body);
 
-            var expectedMessage = responseBody.RootElement.GetProperty("companies");
-            expectedMessage.EnumerateArray().ShouldNotBeEmpty();  
+            responseBody.RootElement.EnumerateArray().ShouldNotBeEmpty();
 
         }
         [Fact]

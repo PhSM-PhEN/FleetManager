@@ -9,13 +9,17 @@ namespace CommonTestUtilities.Entitie
         public static Company Build(long addressId = 1)
         { 
             var faker = new Faker();
-            return new Company(
+            var company = new Company(
                 faker.Company.CompanyName(),
                 faker.Random.Replace("##.###.###/#####-##"),
                 faker.Phone.PhoneNumber(),
-                addressId              
+                addressId
             )
-            ;
+            {
+                Address = AddressBuilder.Build()
+            };
+
+            return company;
         }
         
 

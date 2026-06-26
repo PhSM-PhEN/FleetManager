@@ -25,7 +25,7 @@ namespace FleetManager.Api.Controllers
             return Created(string.Empty, response);
         }
         [HttpGet]
-        [ProducesResponseType(typeof(ResponseListCompanyJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseCompanyJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
 
         public async Task<IActionResult> GetAll([FromServices] IGetAllCompanyUseCase useCase)

@@ -27,7 +27,7 @@ namespace FleetManager.Api.Controllers
             return Created(string.Empty, response);
         }
         [HttpGet]
-        [ProducesResponseType(typeof(ResponseListAddressJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseShortAddressJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Getall([FromServices] IGetAllAddressUseCase useCase)
         {

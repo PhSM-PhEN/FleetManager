@@ -4,6 +4,7 @@ using CommonTestUtilities.Entitie;
 using CommonTestUtilities.Request;
 using FleetManager.Exception.ExceptionBase;
 using Shouldly;
+using WebApi.Tests.Resource;
 
 namespace WebApi.Tests.ToCompany.Register
 {
@@ -12,20 +13,19 @@ namespace WebApi.Tests.ToCompany.Register
         private readonly HttpClient _;
         private const string METHOD = "api/Company";
         private readonly string _adminToken;
+      
   
         public RegisterCompanyTest(CustomWebApplicationFactory customWebApplication) : base(customWebApplication)
         {
             _ = customWebApplication.CreateClient();
             _adminToken = customWebApplication.USER_ADM_MEMBER.GetToken();
-            
-  
-
         }
         [Fact]
         public async Task Success()
         {   
             
             var request =  RequestCompanyJsonBuilder.Build();
+
             var result = await DoPost(METHOD, request, _adminToken);
 
             result.StatusCode.ShouldBe(System.Net.HttpStatusCode.Created);

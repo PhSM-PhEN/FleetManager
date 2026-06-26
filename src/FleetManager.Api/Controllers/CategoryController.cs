@@ -27,7 +27,7 @@ namespace FleetManager.Api.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(ResponseListCategoryJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseCategoryJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetAll([FromServices] IGetAllCategoryUseCase useCase)
         {
@@ -37,7 +37,7 @@ namespace FleetManager.Api.Controllers
 
         }
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(ResponseListCategoryJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseCategoryJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById([FromServices] IGetByIdCategoryUseCase useCase, [FromRoute] long id)
