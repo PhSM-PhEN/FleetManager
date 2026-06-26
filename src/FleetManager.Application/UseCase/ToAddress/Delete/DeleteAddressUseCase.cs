@@ -1,25 +1,21 @@
-using System;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToAddress;
 using FleetManager.Exception.ExceptionBase;
 
-namespace FleetManager.Application.UseCase.ToAddress.Delete;
-
-public class DeleteAddressUseCase(IAddressReadOnlyRepository readRepository,IAddressWriteOnlyRepository repository, IUnitOfWork unitOfWork) : IDeleteAddressUseCase
+namespace FleetManager.Application.UseCase.ToAddress.Delete
 {
-    private readonly IAddressReadOnlyRepository _readRepoditory = readRepository;
-    private readonly IAddressWriteOnlyRepository _repository = repository;
-    private readonly IUnitOfWork _unitOfWork = unitOfWork;
-    public async Task Execute(long id)
+    public class DeleteAddressUseCase(IAddressUpdateOnlyRepository Repository,IAddressWriteOnlyRepository repository, IUnitOfWork unitOfWork) : IDeleteAddressUseCase
     {
-        var address = await _readRepoditory.GetById(id);
-        if (address is null )
+
+        public async Task Execute(long id)
         {
-            throw new NotFoundException(ResourceErrorMessages.ADDRESS_NOT_FOUND);
-        }
-        await _repository.Delete(id);
-        await _unitOfWork.Commit();
+            var address = await Repository.GetById(id)
+                ?? throw new NotFoundException(ResourceErrorMessages.ADDRESS_NOT_FOUND);
+
+            await repository.Delete(address.Id);
+            await unitOfWork.Commit();
 
         
+        }
     }
 }

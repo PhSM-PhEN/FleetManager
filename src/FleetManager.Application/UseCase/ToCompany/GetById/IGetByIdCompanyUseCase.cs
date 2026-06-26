@@ -1,9 +1,9 @@
-using System;
 using FleetManager.Communication.Responses;
 
-namespace FleetManager.Application.UseCase.ToCompany.GetById;
-
-public interface IGetByIdCompanyUseCase
+namespace FleetManager.Application.UseCase.ToCompany.GetById
 {
-    Task<ResponseCompanyJson> Execute(long id);
+    public interface IGetByIdCompanyUseCase
+    {
+        Task<ResponseCompanyJson> Execute(long id);
+    }
 }

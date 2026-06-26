@@ -1,8 +1,7 @@
-using System;
-
-namespace FleetManager.Application.UseCase.ToCompany.Delete;
-
-public interface IDeleteCompanyUseCase
+namespace FleetManager.Application.UseCase.ToCompany.Delete
 {
-    Task Execute(long id);
+    public interface IDeleteCompanyUseCase
+    {
+        Task Execute(long id);
+    }
 }

@@ -1,19 +1,18 @@
-using AutoMapper;
+using FleetManager.Application.Extensions;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.Repositories.ToRental;
 using FleetManager.Exception.ExceptionBase;
 
-namespace FleetManager.Application.UseCase.ToRental.GetById;
-
-public class GetByIdRentalUseCase(IMapper mapper, IRentalReadOnlyRepository repository) : IGetByIdRentalUseCase
+namespace FleetManager.Application.UseCase.ToRental.GetById
 {
-    public async Task<ResponseRentalInfoJson> Execute(long id)
+    public class GetByIdRentalUseCase(IRentalReadOnlyRepository repository) : IGetByIdRentalUseCase
     {
-        var rentalDetail = await repository.GetById(id);
-        if(rentalDetail == null)
+        public async Task<ResponseRentalJson> Execute(long id)
         {
-            throw new NotFoundException(ResourceErrorMessages.RENTAL_NOT_FOUND);
+            var rental = await repository.GetById(id)
+                ?? throw new NotFoundException(ResourceErrorMessages.RENTAL_NOT_FOUND);
+
+            return rental.ToDeTailResponse();
         }
-        return mapper.Map<ResponseRentalInfoJson>(rentalDetail);
     }
 }

@@ -1,33 +1,34 @@
-using AutoMapper;
+using FleetManager.Application.Extensions;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.Repositories.ToRental;
 
 
-namespace FleetManager.Application.UseCase.ToRental.GetAll;
-
-public class GetAllRentalUseCase(IRentalReadOnlyRepository repository, IMapper mapper) : IGetAllRentalUseCase
+namespace FleetManager.Application.UseCase.ToRental.GetAll
 {
-    public async Task<ResponsePaginatedJson<ResponseRentalJson>> Execute(int pageNumber, int pageSize)
+    public class GetAllRentalUseCase(IRentalReadOnlyRepository repository) : IGetAllRentalUseCase
     {
-        if (pageNumber <= 0) 
-            pageNumber = 1;
-        if (pageSize <= 0 || pageSize > 50)
-            pageSize = 10;
-
-
-        var (rental, totalcount) = await repository.GetAll(pageNumber, pageSize);
-      
-        return new ResponsePaginatedJson<ResponseRentalJson>
+        public async Task<ResponsePaginatedJson<ResponseShortRentalJson>> Execute(int pageNumber, int pageSize)
         {
-            Data = mapper.Map<List<ResponseRentalJson>>(rental),
-            PageNumber = pageNumber,
-            PageSize = pageSize,
-            TotalCount = totalcount       
+            if (pageNumber <= 0) 
+                pageNumber = 1;
+            if (pageSize <= 0 || pageSize > 50)
+                pageSize = 10;
+
+
+            var (rental, totalcount) = await repository.GetAll(pageNumber, pageSize);
+      
+            return new ResponsePaginatedJson<ResponseShortRentalJson>
+            {
+                Data = rental.ToResponse(),
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalCount = totalcount       
                 
             
-        };
-    }
-};
+            };
+        }
+    };
     
    
 
+}

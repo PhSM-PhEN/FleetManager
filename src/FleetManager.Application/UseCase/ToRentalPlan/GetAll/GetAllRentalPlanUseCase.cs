@@ -1,23 +1,18 @@
-using System;
-using AutoMapper;
+using FleetManager.Application.Extensions;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.Repositories.ToRentalPlans;
 using FleetManager.Exception.ExceptionBase;
-namespace FleetManager.Application.UseCase.ToRentalPlan.GetAll;
-
-public class GetAllRentalPlanUseCase(IMapper mapper, IRentalPlansReadOnlyRepository repository) : IGetAllRentalPlanUseCase
+namespace FleetManager.Application.UseCase.ToRentalPlan.GetAll
 {
-    public async Task<ResponseListRentalPlanJson> Execute()
+    public class GetAllRentalPlanUseCase(IRentalPlansReadOnlyRepository repository) : IGetAllRentalPlanUseCase
     {
-        var rentalPlan = await repository.GetAll();
-        if(rentalPlan.Count == 0)
+        public async Task<List<ResponseShortRentalPlansJson>> Execute()
         {
-            throw new NotFoundException("Rental plan not found.");
+            var rentalPlan = await repository.GetAll() ??
+                throw new NotFoundException(ResourceErrorMessages.RENTAL_NOT_FOUND);
+
+            return rentalPlan.ToResponse();
+
         }
-        return new ResponseListRentalPlanJson
-        {
-            RentalPlans = mapper.Map<List<ResponseShortRentalPlansJson>>(rentalPlan)
-        };
-         
     }
 }

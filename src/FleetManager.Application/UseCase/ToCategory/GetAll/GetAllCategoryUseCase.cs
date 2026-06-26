@@ -1,24 +1,18 @@
-﻿using AutoMapper;
+﻿using FleetManager.Application.Extensions;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.Repositories.ToCategory;
+using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToCategory.GetAll
 {
-    public class GetAllCategoryUseCase(IMapper mapper,
-        ICategoryReadOnlyRepository categoryReadOnly) : IGetAllCategoryUseCase
+    public class GetAllCategoryUseCase(ICategoryReadOnlyRepository categoryReadOnly) : IGetAllCategoryUseCase
     {
-        private readonly IMapper _mapper = mapper;
-        private readonly ICategoryReadOnlyRepository _categoryRepository = categoryReadOnly;
-        public async Task<ResponseListCategoryJson> Execute()
+        public async Task<List<ResponseCategoryJson>> Execute()
         {
-            var categories = await _categoryRepository.GetAll();
+            var category = await categoryReadOnly.GetAll()
+                ?? throw new NotFoundException(ResourceErrorMessages.CATEGORY_NOT_FOUND);
 
-            return new ResponseListCategoryJson 
-            {
-                Categories = _mapper.Map<List<ResponseCategoryJson>>(categories)
-            };
-
-
+            return category.ToResponse();
         }
     }
 }

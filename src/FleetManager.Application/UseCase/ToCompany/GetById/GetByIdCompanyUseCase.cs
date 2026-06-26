@@ -1,18 +1,19 @@
-using System;
-using AutoMapper;
+using FleetManager.Application.Extensions;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.Repositories.ToCompany;
+using FleetManager.Exception.ExceptionBase;
 
-namespace FleetManager.Application.UseCase.ToCompany.GetById;
-
-public class GetByIdCompanyUseCase(IMapper mapper, ICompanyReadOnlyRepository repository) : IGetByIdCompanyUseCase
+namespace FleetManager.Application.UseCase.ToCompany.GetById
 {
-    private readonly IMapper _mapper = mapper;
-    private readonly ICompanyReadOnlyRepository _repository = repository;
-    public async Task<ResponseCompanyJson> Execute(long id)
+    public class GetByIdCompanyUseCase(ICompanyReadOnlyRepository repository) : IGetByIdCompanyUseCase
     {
-        var company = await _repository.GetById(id);
 
-        return  _mapper.Map<ResponseCompanyJson>(company);
+        public async Task<ResponseCompanyJson> Execute(long id)
+        {
+            var company = await repository.GetById(id)
+                ?? throw new NotFoundException(ResourceErrorMessages.COMPANY_NOT_FOUND);
+
+            return company.ToResponse();
+        }
     }
 }

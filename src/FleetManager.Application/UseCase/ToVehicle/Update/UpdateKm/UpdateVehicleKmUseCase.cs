@@ -28,7 +28,7 @@ namespace FleetManager.Application.UseCase.ToVehicle.Update.UpdateKm
 
             return vehicle.ToShortResponse();
         }
-        private void Validate(RequestVehicleUpdateCurrentMileageJson request)
+        private static void Validate(RequestVehicleUpdateCurrentMileageJson request)
         {
             var validate = new CurrentMiliageValidator();
             var response = validate.Validate(request);

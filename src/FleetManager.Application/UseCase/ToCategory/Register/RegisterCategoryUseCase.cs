@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿using FleetManager.Application.Extensions;
 using FleetManager.Communication.Requests;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.Entities;
@@ -9,21 +9,18 @@ using FleetManager.Exception.ExceptionBase;
 namespace FleetManager.Application.UseCase.ToCategory.Register
 {
     public class RegisterCategoryUseCase(ICategoryWriteOnlyRepository categoryWriteOnly,
-        IUnitOfWork unitOfWork,
-        IMapper mapper) : IRegisterCategoryUseCase
+        IUnitOfWork unitOfWork) : IRegisterCategoryUseCase
     {
-        private readonly IMapper _mapper = mapper;
-        private readonly ICategoryWriteOnlyRepository _categoryWriteOnlyRepository = categoryWriteOnly;
-        private readonly IUnitOfWork _unitOfWork = unitOfWork;
+
         public async Task<ResponseCategoryJson> Execute(RequestCategoryJson request)
         {
             Validate(request);
 
             var category = new Category(request.Name, (Domain.Enums.TransmissionType)request.TransmissionType);
-            await _categoryWriteOnlyRepository.Add(category);
-            await _unitOfWork.Commit();
+            await categoryWriteOnly.Add(category);
+            await unitOfWork.Commit();
 
-            return _mapper.Map<ResponseCategoryJson>(category);
+            return category.ToResponse();
 
         }
         private static void Validate(RequestCategoryJson request)

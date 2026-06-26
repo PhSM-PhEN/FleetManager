@@ -1,9 +1,10 @@
 
 using FleetManager.Communication.Responses;
 
-namespace FleetManager.Application.UseCase.ToCompany.GetAll;
-
-public interface IGetAllCompanyUseCase
+namespace FleetManager.Application.UseCase.ToCompany.GetAll
 {
-    Task<ResponseListCompanyJson> Execute();
+    public interface IGetAllCompanyUseCase
+    {
+        Task<List<ResponseCompanyJson>> Execute();
+    }
 }

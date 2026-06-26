@@ -1,9 +1,9 @@
-using System;
 using FleetManager.Communication.Requests;
 
-namespace FleetManager.Application.UseCase.ToCompany.Update;
-
-public interface IUpdateCompanyUseCase
+namespace FleetManager.Application.UseCase.ToCompany.Update
 {
-    Task Execute(long id, RequestUpdateCompanyJson request);
+    public interface IUpdateCompanyUseCase
+    {
+        Task Execute(long id, RequestUpdateCompanyJson request);
+    }
 }

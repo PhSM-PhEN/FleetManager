@@ -1,4 +1,4 @@
-using AutoMapper;
+using FleetManager.Application.Extensions;
 using FleetManager.Communication.Requests;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.Entities;
@@ -6,36 +6,30 @@ using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToCompany;
 using FleetManager.Exception.ExceptionBase;
 
-namespace FleetManager.Application.UseCase.ToCompany.Register;
-
-public class RegisterCompanyUseCase(IMapper mapper, ICompanyWriteOnlyRepository repository,
-    ICompanyReadOnlyRepository readOnlyRepository,IUnitOfWork unitOfWork) : IRegisterCompanyUseCase
+namespace FleetManager.Application.UseCase.ToCompany.Register
 {
-
-    public async Task<ResponseCompanyJson> Execute(RequestCompanyJson request)
+    public class RegisterCompanyUseCase(ICompanyWriteOnlyRepository repository, IUnitOfWork unitOfWork) : IRegisterCompanyUseCase
     {
-        Validate(request);
-        var company =  new Company(request.Name, request.Cnpj, request.PhoneNumber, request.AddressId);
-        await repository.Add(company);
-        await unitOfWork.Commit();
-        
-        var response = await readOnlyRepository.GetById(company.Id);
-        if (response == null)
+
+        public async Task<ResponseCompanyJson> Execute(RequestCompanyJson request)
         {
-            throw new NotFoundException(ResourceErrorMessages.COMPANY_NOT_FOUND);
+            Validate(request);
+            var company = new Company(request.Name, request.Cnpj, request.PhoneNumber, request.AddressId);
+            await repository.Add(company);
+            await unitOfWork.Commit();
+
+            return company.ToResponse();
         }
-
-        return mapper.Map<ResponseCompanyJson>(response);
-    }
-    private static void Validate (RequestCompanyJson request)
-    {
-        var Validator = new CompanyValidator();
-        var result = Validator.Validate(request);
-
-        if(result.IsValid == false)
+        private static void Validate(RequestCompanyJson request)
         {
-            var errorMessage = result.Errors.Select(e => e.ErrorMessage).ToList();
-            throw new ErrorOnValidationException(errorMessage);
+            var Validator = new CompanyValidator();
+            var result = Validator.Validate(request);
+
+            if (result.IsValid == false)
+            {
+                var errorMessage = result.Errors.Select(e => e.ErrorMessage).ToList();
+                throw new ErrorOnValidationException(errorMessage);
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using FleetManager.Communication.Requests;
+﻿using FleetManager.Application.Extensions;
+using FleetManager.Communication.Requests;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.DomainExceptionBase;
 using FleetManager.Domain.Entities;
@@ -8,24 +9,20 @@ using FleetManager.Domain.Repositories.ToCompany;
 using FleetManager.Domain.Repositories.ToRental;
 using FleetManager.Domain.Repositories.ToRentalPlans;
 using FleetManager.Domain.Repositories.ToVehicle;
-using FleetManager.Domain.Services.LoggedUser;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToRental.Register
 {
-    public class RegisterRentalUseCase( IRentalReadOnlyRepository rentalReadOnly,
-                                        ICompanyReadOnlyRepository companyReadOnly, IVehicleReadOnlyRepository vehicleReadOnly,
-                                        IClientReadOnlyRepository clientReadOnly, IRentalWriteOnlyRepository repository, 
+    public class RegisterRentalUseCase(IRentalReadOnlyRepository rentalReadOnly, ICompanyReadOnlyRepository companyReadOnly, IVehicleReadOnlyRepository vehicleReadOnly,
+                                        IClientReadOnlyRepository clientReadOnly, IRentalWriteOnlyRepository repository,
                                         IRentalPlansReadOnlyRepository rentalPlansRead, IUnitOfWork unitOfWork) : IRegisterRentalUseCase
     {
-        public async Task<ResponseRentalJson> Execute(RequestRentJson request)
+        public async Task<ResponseShortRentalJson> Execute(RequestRentJson request)
         {
-            
+
             Validate(request);
 
-            
-
-            var (vehicle, rentalPlan, company, client) = await ValidateBusinessRules(request);
+            var rentalPlan = await ValidateBusinessRules(request);
 
             var endDate = rentalPlan.Mode == Domain.Enums.RentalMode.Monthly ?
             request.StartDate.AddDays(30) :
@@ -41,14 +38,7 @@ namespace FleetManager.Application.UseCase.ToRental.Register
             await repository.Add(rental);
             await unitOfWork.Commit();
 
-            return new ResponseRentalJson
-            {
-                Id = rental.Id,
-                TotalPrice = rental.TotalPrice,
-                CompanyName = company.Name,
-                ClientName = client.FirstAndLastName,
-                VehicleModel = vehicle.Model,
-            };
+            return rental.ToResponse();
         }
 
         private static void Validate(RequestRentJson request)
@@ -58,18 +48,18 @@ namespace FleetManager.Application.UseCase.ToRental.Register
                 throw new ErrorOnValidationException([.. result.Errors.Select(x => x.ErrorMessage)]);
         }
 
-        private async Task<(Vehicle vehicle, RentalPlan rentalPlan, Company company, Client client)> ValidateBusinessRules(RequestRentJson request)
+        private async Task<RentalPlan> ValidateBusinessRules(RequestRentJson request)
         {
-            var client = await EnsureClientExists(request.ClientId);
+            await EnsureClientExists(request.ClientId);
             var vehicle = await EnsureVehicleExists(request.VehicleId);
-            await EnsureVehicleIsAvailable(request.VehicleId); 
-            var company = await EnsureCompanyExists(request.CompanyId);
+            await EnsureVehicleIsAvailable(request.VehicleId);
+            await EnsureCompanyExists(request.CompanyId);
             var rentalPlan = await EnsureRentalPlanExists(request.RentalPlanId);
-            
+
 
             EnsureVehicleMatchesPlanTransmission(vehicle, rentalPlan);
 
-            return (vehicle, rentalPlan, company, client);
+            return (rentalPlan);
         }
 
         private async Task<Client> EnsureClientExists(long clientId)

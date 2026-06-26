@@ -2,21 +2,18 @@ using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToCompany;
 using FleetManager.Exception.ExceptionBase;
 
-namespace FleetManager.Application.UseCase.ToCompany.Delete;
-
-public class DeleteCompanyUseCase(IUnitOfWork unitOfWork, ICompanyWriteOnlyRepository repository, ICompanyReadOnlyRepository readRepository) : IDeleteCompanyUseCase
+namespace FleetManager.Application.UseCase.ToCompany.Delete
 {
-    private readonly IUnitOfWork _unitOfWork = unitOfWork;
-    private readonly ICompanyWriteOnlyRepository _repository = repository;
-    private readonly ICompanyReadOnlyRepository _readRepository = readRepository;
-    public async Task Execute(long id)
+    public class DeleteCompanyUseCase(IUnitOfWork unitOfWork, ICompanyWriteOnlyRepository repository, ICompanyReadOnlyRepository readRepository) : IDeleteCompanyUseCase
     {
-        var company = await _readRepository.GetById(id);
-        if(company is null)
+
+        public async Task Execute(long id)
         {
-            throw new NotFoundException("Company not found");
+            var company = await readRepository.GetById(id)
+                ?? throw new NotFoundException(ResourceErrorMessages.COMPANY_NOT_FOUND);
+
+            await repository.Delete(company.Id);
+            await unitOfWork.Commit();
         }
-        await _repository.Delete(company.Id);
-        await _unitOfWork.Commit();
     }
 }

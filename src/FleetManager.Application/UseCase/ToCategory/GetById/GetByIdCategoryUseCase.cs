@@ -1,19 +1,19 @@
-﻿using AutoMapper;
+﻿using FleetManager.Application.Extensions;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.Repositories.ToCategory;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToCategory.GetById
 {
-    public class GetByIdCategoryUseCase(ICategoryReadOnlyRepository readOnlyRepository, IMapper mapper) : IGetByIdCategoryUseCase
+    public class GetByIdCategoryUseCase(ICategoryReadOnlyRepository readOnlyRepository) : IGetByIdCategoryUseCase
     {
-        private readonly IMapper _mapper = mapper;
-        private readonly ICategoryReadOnlyRepository _readOnlyRepository = readOnlyRepository;
+        
         public async Task<ResponseCategoryJson> Execute(long id)
         {
-            var result = await _readOnlyRepository.GetById(id);
-            
-            return _mapper.Map<ResponseCategoryJson>(result);
+            var category = await readOnlyRepository.GetById(id) 
+                ?? throw new NotFoundException(ResourceErrorMessages.CATEGORY_NOT_FOUND);
+
+            return category.ToResponse();
         }
     }
 }

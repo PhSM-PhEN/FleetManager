@@ -6,7 +6,6 @@ namespace FleetManager.Application.UseCase.ToCategory.Delete
 {
     public class DeleteCategoryUseCase(IUnitOfWork unitOfWork, ICategoryUpdateOnlyRepository repository) : IDeleteCategoryUseCase
     {
-      
 
         public async Task Execute(long id)
         {

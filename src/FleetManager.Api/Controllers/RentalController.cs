@@ -16,7 +16,7 @@ namespace FleetManager.Api.Controllers
     public class RentalController : ControllerBase
     {
         [HttpPost]
-        [ProducesResponseType(typeof(ResponseRentalJson), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseShortRentalJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register([FromServices] IRegisterRentalUseCase useCase, [FromBody] RequestRentJson request)
         {
@@ -24,7 +24,7 @@ namespace FleetManager.Api.Controllers
             return Created(string.Empty, response);
         }
         [HttpGet]
-        [ProducesResponseType(typeof(ResponseRentalJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseShortRentalJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetAll([FromServices] IGetAllRentalUseCase useCase,
         [FromQuery] int pageNumber = 1,[FromQuery] int pageSize = 10)
@@ -34,7 +34,7 @@ namespace FleetManager.Api.Controllers
             
         }
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(ResponseRentalInfoJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseRentalJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetById([FromServices] IGetByIdRentalUseCase useCase, [FromRoute] long id)

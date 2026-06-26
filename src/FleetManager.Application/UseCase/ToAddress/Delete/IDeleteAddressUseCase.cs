@@ -1,8 +1,7 @@
-using System;
-
-namespace FleetManager.Application.UseCase.ToAddress.Delete;
-
-public interface IDeleteAddressUseCase
+namespace FleetManager.Application.UseCase.ToAddress.Delete
 {
-    Task Execute(long id);
+    public interface IDeleteAddressUseCase
+    {
+        Task Execute(long id);
+    }
 }

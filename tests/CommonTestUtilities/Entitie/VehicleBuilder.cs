@@ -17,6 +17,6 @@ public class VehicleBuilder
             faker.Random.Replace("???-####"),
             faker.Commerce.Color(),
             categoryId,
-            faker.Random.Decimal(0, 30000));
+            faker.Random.Int(0, 30000));
     }
 }

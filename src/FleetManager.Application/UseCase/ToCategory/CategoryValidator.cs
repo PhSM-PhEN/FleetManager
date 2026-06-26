@@ -6,7 +6,7 @@ namespace FleetManager.Application.UseCase.ToCategory
 {
     public class CategoryValidator : AbstractValidator<RequestCategoryJson>
     {
-        public CategoryValidator() 
+        public CategoryValidator()
         {
             RuleFor(x => x.Name)
                 .NotEmpty().WithMessage(ResourceErrorMessages.NAME_IS_REQUIRED);

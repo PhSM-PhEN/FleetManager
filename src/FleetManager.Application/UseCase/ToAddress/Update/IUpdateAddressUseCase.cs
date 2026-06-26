@@ -1,9 +1,9 @@
-using System;
 using FleetManager.Communication.Requests;
 
-namespace FleetManager.Application.UseCase.ToAddress.Update;
-
-public interface IUpdateAddressUseCase
+namespace FleetManager.Application.UseCase.ToAddress.Update
 {
-    Task Execute(long id , RequestAddressJson request);
+    public interface IUpdateAddressUseCase
+    {
+        Task Execute(long id, RequestAddressJson request);
+    }
 }

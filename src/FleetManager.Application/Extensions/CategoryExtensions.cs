@@ -16,5 +16,9 @@ namespace FleetManager.Application.Extensions
 
             };
         }
+        public static List<ResponseCategoryJson> ToResponse(this List<Category> categories)
+        {
+            return categories.Select(c => c.ToResponse()).ToList();
+        }
     }
 }

@@ -1,8 +1,9 @@
 using FleetManager.Communication.Responses;
 
-namespace FleetManager.Application.UseCase.ToClient.GetAll;
-
-public interface IGetAllClientUseCase
+namespace FleetManager.Application.UseCase.ToClient.GetAll
 {
-    Task<ResponsePaginatedJson<ResponseShortClientJson>> Execute(int pageNumber, int pageSize);
+    public interface IGetAllClientUseCase
+    {
+        Task<ResponsePaginatedJson<ResponseShortClientJson>> Execute(int pageNumber, int pageSize);
+    }
 }

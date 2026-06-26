@@ -13,12 +13,9 @@ namespace FleetManager.Application.UseCase.ToCategory.Update
         {
             Validate(request);
 
-            var category = await updateRepository.GetById(id);
+            var category = await updateRepository.GetById(id)
+                ?? throw new NotFoundException(ResourceErrorMessages.CATEGORY_NOT_FOUND);
 
-            if (category is null)
-            {
-                throw new NotFoundException(ResourceErrorMessages.CATEGORY_NOT_FOUND);
-            }
             category.Update(request.Name, (Domain.Enums.TransmissionType)request.TransmissionType);
 
             updateRepository.Update(category);

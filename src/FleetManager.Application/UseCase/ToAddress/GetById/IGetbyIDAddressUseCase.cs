@@ -1,9 +1,9 @@
-using System;
 using FleetManager.Communication.Responses;
 
-namespace FleetManager.Application.UseCase.ToAddress.GetById;
-
-public interface IGetByIdAddressUseCase
+namespace FleetManager.Application.UseCase.ToAddress.GetById
 {
-    Task<ResponseAddressJson> Execute(long id);
+    public interface IGetByIdAddressUseCase
+    {
+        Task<ResponseAddressJson> Execute(long id);
+    }
 }

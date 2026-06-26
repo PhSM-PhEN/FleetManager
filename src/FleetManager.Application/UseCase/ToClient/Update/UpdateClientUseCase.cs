@@ -5,19 +5,17 @@ using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToClient.Update
 {
-    public class UpdateClientUseCase(IClientUpdateOnlyRepository updateRepository,  IUnitOfWork unitOfWork) : IUpdateClientUseCase
+    public class UpdateClientUseCase(IClientUpdateOnlyRepository updateRepository, IUnitOfWork unitOfWork) : IUpdateClientUseCase
     {
-       
+
         public async Task Execute(long id, RequestClientJson request)
         {
             Validate(request);
-            var client = await updateRepository.GetById(id);
-            if (client == null)
-            {
-                throw new NotFoundException(ResourceErrorMessages.CLIENT_NOT_FOUND);
-            }
-            
-            client.Update(request.FirstAndLastName, request.PhoneNumber, 
+            var client = await updateRepository.GetById(id)
+                ?? throw new NotFoundException(ResourceErrorMessages.CLIENT_NOT_FOUND);
+
+
+            client.Update(request.FirstAndLastName, request.PhoneNumber,
                 request.RG, request.CnhRegisterNumber, request.CnhCategory);
 
             updateRepository.Update(client);

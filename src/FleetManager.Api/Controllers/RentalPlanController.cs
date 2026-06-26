@@ -1,4 +1,4 @@
-﻿using FleetManager.Application.UseCase.ToRentalPlan.Delete;
+﻿using FleetManager.Application.UseCase.ToRentalPlan.Disable;
 using FleetManager.Application.UseCase.ToRentalPlan.GetAll;
 using FleetManager.Application.UseCase.ToRentalPlan.GetById;
 using FleetManager.Application.UseCase.ToRentalPlan.Register;
@@ -24,16 +24,15 @@ namespace FleetManager.Api.Controllers
             return Created(string.Empty, response);
         }
         [HttpGet]
-        [ProducesResponseType(typeof(ResponseListRentalPlanJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseShortRentalJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetAll([FromServices] IGetAllRentalPlanUseCase useCase)
         {
             var respone = await useCase.Execute();
-            if(respone.RentalPlans.Count != 0)
-            {
-                return Ok(respone);
-            }
-            return NoContent();
+
+            return Ok(respone);
+
+
         }
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ResponseRentalPlanJson), StatusCodes.Status200OK)]
@@ -58,7 +57,7 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Delete( [FromRoute] int id, [FromServices] IDeleteRentalPlanUseCase useCase)
+        public async Task<IActionResult> Delete([FromRoute] int id, [FromServices] IDisableRentalPlanUseCase useCase)
         {
             await useCase.Execute(id);
             return NoContent();

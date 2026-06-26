@@ -1,6 +1,7 @@
-namespace FleetManager.Application.UseCase.ToRental.Delete;
-
-public interface IDeleteRentalUseCase
+namespace FleetManager.Application.UseCase.ToRental.Delete
 {
-    Task Execute(long id);
+    public interface IDeleteRentalUseCase
+    {
+        Task Execute(long id);
+    }
 }

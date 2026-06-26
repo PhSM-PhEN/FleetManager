@@ -1,8 +1,9 @@
 using FleetManager.Communication.Requests;
 
-namespace FleetManager.Application.UseCase.ToRental.Update;
-
-public interface IUpdateRentalUseCase
+namespace FleetManager.Application.UseCase.ToRental.Update
 {
-    Task Execute(long id, RequestUpdateRentJson request);
+    public interface IUpdateRentalUseCase
+    {
+        Task Execute(long id, RequestUpdateRentJson request);
+    }
 }

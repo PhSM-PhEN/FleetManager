@@ -4,6 +4,6 @@ namespace FleetManager.Application.UseCase.ToCategory.GetAll
 {
     public interface IGetAllCategoryUseCase
     {
-        Task<ResponseListCategoryJson> Execute();
+        Task<List<ResponseCategoryJson>> Execute();
     }
 }

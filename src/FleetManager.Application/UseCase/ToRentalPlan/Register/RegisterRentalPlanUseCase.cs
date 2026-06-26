@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿using FleetManager.Application.Extensions;
 using FleetManager.Communication.Requests;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.Entities;
@@ -8,7 +8,7 @@ using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToRentalPlan.Register
 {
-    public class RegisterRentalPlanUseCase(IRentalPlansWriteOnlyRepository repository, IUnitOfWork unitOfWork, IMapper mapper) : IRegisterRentalPlanUseCase
+    public class RegisterRentalPlanUseCase(IRentalPlansWriteOnlyRepository repository, IUnitOfWork unitOfWork) : IRegisterRentalPlanUseCase
     {
         public async Task<ResponseRentalPlanJson> Execute(RequestRentalPlansJson request)
         {
@@ -20,7 +20,7 @@ namespace FleetManager.Application.UseCase.ToRentalPlan.Register
             await repository.Add(rentalPlan);
             await unitOfWork.Commit();
 
-            return mapper.Map<ResponseRentalPlanJson>(rentalPlan);
+            return rentalPlan.ToDetailResponse();
         }
         private static void Validate(RequestRentalPlansJson request)
         {
@@ -32,8 +32,6 @@ namespace FleetManager.Application.UseCase.ToRentalPlan.Register
                 var errorMessage = result.Errors.Select(e => e.ErrorMessage).ToList(); 
                 throw new ErrorOnValidationException(errorMessage);
             }
-
-
         }
     }
 }

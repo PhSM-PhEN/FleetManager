@@ -1,17 +1,12 @@
 ﻿using FleetManager.Communication.Requests;
 using FleetManager.Exception.ExceptionBase;
 using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FleetManager.Application.UseCase.ToCompany
 {
     public class CompanyUpdateValidator : AbstractValidator<RequestUpdateCompanyJson>
     {
-        public CompanyUpdateValidator() 
+        public CompanyUpdateValidator()
         {
             RuleFor(c => c.Name).NotEmpty()
             .WithMessage(ResourceErrorMessages.NAME_IS_REQUIRED);

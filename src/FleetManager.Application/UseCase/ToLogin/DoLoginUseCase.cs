@@ -11,9 +11,6 @@ namespace FleetManager.Application.UseCase.ToLogin
     public class DoLoginUseCase(IUserReadOnlyRepository userReadOnlyRepository, IPasswordEncrypter passwordEncripter,
         IAccessTokenGenerator tokenGenerator) : IDoLoginUseCase
     {
-
-
-
         public async Task<ResponseLoginJson> Execute(RequestLoginUserJson request)
         {
             var user = await userReadOnlyRepository.GetUserByEmail(request.Email) 

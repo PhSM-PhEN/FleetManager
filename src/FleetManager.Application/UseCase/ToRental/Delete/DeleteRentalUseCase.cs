@@ -3,19 +3,18 @@ using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToRental;
 using FleetManager.Exception.ExceptionBase;
 
-namespace FleetManager.Application.UseCase.ToRental.Delete;
-
-public class DeleteRentalUseCase(IRentalWriteOnlyRepository repository, 
-IUnitOfWork unitOfWork ,IRentalUpdateOnlyRepository repositoryUpdate) : IDeleteRentalUseCase
+namespace FleetManager.Application.UseCase.ToRental.Delete
 {
-    public async Task Execute(long id)
+    public class DeleteRentalUseCase(IRentalWriteOnlyRepository repository,
+                IUnitOfWork unitOfWork, IRentalUpdateOnlyRepository repositoryUpdate) : IDeleteRentalUseCase
     {
-        var rental = await repositoryUpdate.GetById(id);
-        if(rental is null)
+        public async Task Execute(long id)
         {
-            throw new NotFoundException("rental not found");
+            var rental = await repositoryUpdate.GetById(id) 
+                ?? throw new NotFoundException(ResourceErrorMessages.RENTAL_NOT_FOUND);
+
+            await repository.Delete(rental.Id);
+            await unitOfWork.Commit();
         }
-        await repository.Delete(rental.Id);
-        await unitOfWork.Commit();
     }
 }

@@ -13,10 +13,10 @@ namespace FleetManager.Application.UseCase.ToRentalPlan
             RuleFor(rp => rp.Mode).IsInEnum().WithMessage(ResourceErrorMessages.INVALID_RENTAL_MODE);
             RuleFor(rp => rp.Transmission).IsInEnum().WithMessage(ResourceErrorMessages.INVALID_TRANSMISSION_TYPE);
             RuleFor(rp => rp.PriceRental).GreaterThan(0).WithMessage(ResourceErrorMessages.PRICE_RENTAL_MUST_BE_GREATER_THAN_ZERO);
-            RuleFor(rp => rp.TotalKmIncluded).GreaterThan(0).WithMessage("add message");
+            RuleFor(rp => rp.TotalKmIncluded).GreaterThan(0).WithMessage(ResourceErrorMessages.TOTAL_KM_MUST_BE_GREATER_THAN_OR_EQUAL_ZERO);
             RuleFor(rp => rp.PricePerKm).GreaterThan(0).WithMessage(ResourceErrorMessages.PRICE_PER_KM_MUST_BE_GREATER_THAN_ZERO);
-             
+
         }
-      
+
     }
 }

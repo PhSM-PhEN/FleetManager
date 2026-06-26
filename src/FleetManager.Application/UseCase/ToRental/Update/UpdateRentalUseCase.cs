@@ -3,37 +3,36 @@ using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToRental;
 using FleetManager.Exception.ExceptionBase;
 
-namespace FleetManager.Application.UseCase.ToRental.Update;
-
-public class UpdateRentalUseCase(IRentalUpdateOnlyRepository repository, IUnitOfWork unitOfWork) : IUpdateRentalUseCase
+namespace FleetManager.Application.UseCase.ToRental.Update
 {
-    public async Task Execute(long id, RequestUpdateRentJson request)
+    public class UpdateRentalUseCase(IRentalUpdateOnlyRepository repository, IUnitOfWork unitOfWork) : IUpdateRentalUseCase
     {
-        Validate(request);
-        var rental = await repository.GetById(id);
-        if(rental is null)
+        public async Task Execute(long id, RequestUpdateRentJson request)
         {
-            throw new NotFoundException(ResourceErrorMessages.RENTAL_NOT_FOUND);
+            Validate(request);
+            var rental = await repository.GetById(id)
+                ?? throw new NotFoundException(ResourceErrorMessages.RENTAL_NOT_FOUND);
+            
+            rental.Reschedule(request.StartDate, request.EndDate);
+
+            if (request.IncludedKm > 0)
+                rental.UpdateIncludedKm(request.IncludedKm);
+
+            repository.Update(rental);
+            await unitOfWork.Commit();
+
+
         }
-        rental.Reschedule(request.StartDate, request.EndDate);
-
-        if (request.IncludedKm > 0)
-            rental.UpdateIncludedKm(request.IncludedKm);
-
-        repository.Update(rental);
-        await unitOfWork.Commit();
-  
-        
-    }
-    private static void Validate(RequestUpdateRentJson request)
-    {
-        var Validator = new RentalUpdateValidator();
-        var result = Validator.Validate(request);
-
-        if(result.IsValid == false)
+        private static void Validate(RequestUpdateRentJson request)
         {
-            var error = result.Errors.Select(erro => erro.ErrorMessage).ToList();
-            throw new ErrorOnValidationException(error);
+            var Validator = new RentalUpdateValidator();
+            var result = Validator.Validate(request);
+
+            if (result.IsValid == false)
+            {
+                var error = result.Errors.Select(erro => erro.ErrorMessage).ToList();
+                throw new ErrorOnValidationException(error);
+            }
         }
     }
 }

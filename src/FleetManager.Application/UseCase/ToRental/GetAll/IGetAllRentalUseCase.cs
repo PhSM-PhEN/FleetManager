@@ -4,5 +4,5 @@ namespace FleetManager.Application.UseCase.ToRental.GetAll;
 
 public interface IGetAllRentalUseCase
 {
-    Task<ResponsePaginatedJson<ResponseRentalJson>> Execute(int pageNumber, int pageSize);
+    Task<ResponsePaginatedJson<ResponseShortRentalJson>> Execute(int pageNumber, int pageSize);
 }   

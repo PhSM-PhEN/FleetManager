@@ -12,7 +12,7 @@ namespace FleetManager.Application.UseCase.ToUser.GetUser
         {
             var logged = await loggedUser.Get();
             var user = await userRepository.GetUserById(logged.Id)
-                ?? throw new NotFoundException("not found msg");
+                ?? throw new NotFoundException(ResourceErrorMessages.NOT_FOUND);
                 
             return user.ToResponse();
         }

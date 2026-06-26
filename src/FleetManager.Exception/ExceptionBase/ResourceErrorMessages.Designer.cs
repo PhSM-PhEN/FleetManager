@@ -610,6 +610,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total km must be greater than or equal zero..
+        /// </summary>
+        public static string TOTAL_KM_MUST_BE_GREATER_THAN_OR_EQUAL_ZERO {
+            get {
+                return ResourceManager.GetString("TOTAL_KM_MUST_BE_GREATER_THAN_OR_EQUAL_ZERO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Total price must be greater than zero..
         /// </summary>
         public static string TOTAL_PRICE_MUST_BE_GREATER_THAN_ZERO {

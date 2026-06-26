@@ -1,29 +1,21 @@
+using FleetManager.Application.Extensions;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.Repositories.ToAddress;
 using FleetManager.Exception.ExceptionBase;
 
-namespace FleetManager.Application.UseCase.ToAddress.GetById;
-
-public class GetByIdAddressUseCase(IAddressReadOnlyRepository repository) : IGetByIdAddressUseCase
+namespace FleetManager.Application.UseCase.ToAddress.GetById
 {
-    
-    public async Task<ResponseAddressJson> Execute(long id)
+    public class GetByIdAddressUseCase(IAddressReadOnlyRepository repository) : IGetByIdAddressUseCase
     {
-        var address = await repository.GetById(id);
-        if (address == null)
-        {
-            throw new NotFoundException(ResourceErrorMessages.ADDRESS_NOT_FOUND);
-        }
 
-        return new ResponseAddressJson()
+        public async Task<ResponseAddressJson> Execute(long id)
         {
-            Id = address.Id,
-            Street = address.Street,
-            Number = address.Number,
-            City = address.City,
-            State = address.State,
-            ZipCode = address.ZipCode
-        };
-          
+            var address = await repository.GetById(id) ??
+                throw new NotFoundException(ResourceErrorMessages.ADDRESS_NOT_FOUND);
+
+
+            return address.ToResponse();
+
+        }
     }
 }

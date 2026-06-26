@@ -1,5 +1,4 @@
-﻿using FleetManager.Application.AutoMapper;
-using FleetManager.Application.UseCase.ToAddress.Delete;
+﻿using FleetManager.Application.UseCase.ToAddress.Delete;
 using FleetManager.Application.UseCase.ToAddress.GetAll;
 using FleetManager.Application.UseCase.ToAddress.GetById;
 using FleetManager.Application.UseCase.ToAddress.Register;
@@ -9,7 +8,7 @@ using FleetManager.Application.UseCase.ToCategory.GetAll;
 using FleetManager.Application.UseCase.ToCategory.GetById;
 using FleetManager.Application.UseCase.ToCategory.Register;
 using FleetManager.Application.UseCase.ToCategory.Update;
-using FleetManager.Application.UseCase.ToClient.Delete;
+using FleetManager.Application.UseCase.ToClient.Disable;
 using FleetManager.Application.UseCase.ToClient.GetAll;
 using FleetManager.Application.UseCase.ToClient.GetById;
 using FleetManager.Application.UseCase.ToClient.Register;
@@ -23,7 +22,7 @@ using FleetManager.Application.UseCase.ToLogin;
 using FleetManager.Application.UseCase.ToRental.GetAll;
 using FleetManager.Application.UseCase.ToRental.GetById;
 using FleetManager.Application.UseCase.ToRental.Register;
-using FleetManager.Application.UseCase.ToRentalPlan.Delete;
+using FleetManager.Application.UseCase.ToRentalPlan.Disable;
 using FleetManager.Application.UseCase.ToRentalPlan.GetAll;
 using FleetManager.Application.UseCase.ToRentalPlan.GetById;
 using FleetManager.Application.UseCase.ToRentalPlan.Register;
@@ -48,13 +47,10 @@ namespace FleetManager.Application.UseCase
     {
         public static void AddApplicationServices(this IServiceCollection services)
         {
-            AddAutoMapper(services);
+           
             AddUseCase(services);
         }
-        private static void AddAutoMapper(IServiceCollection services)
-        {
-            services.AddAutoMapper(config => config.AddProfile<AutoMapping>());
-        }
+       
         private static void AddUseCase(IServiceCollection services)
         {   //Category
             services.AddScoped<IRegisterCategoryUseCase, RegisterCategoryUseCase>();
@@ -91,7 +87,7 @@ namespace FleetManager.Application.UseCase
             services.AddScoped<IGetAllClientUseCase, GetAllClientUseCase>();
             services.AddScoped<IGetByIdClientUseCase, GetByIdClientUseCase>();
             services.AddScoped<IUpdateClientUseCase, UpdateClientUseCase>();
-            services.AddScoped<IDeleteClientUseCase, DeleteClientUseCase>();
+            services.AddScoped<IDisableClientUseCase, DisableClientUseCase>();
             
 
             // company
@@ -106,7 +102,7 @@ namespace FleetManager.Application.UseCase
             services.AddScoped<IGetAllRentalPlanUseCase, GetAllRentalPlanUseCase>();
             services.AddScoped<IGetByIdRentalPlanUseCase, GetByIdRentalPlanUseCase>();
             services.AddScoped<IUpdateRentalPlanUseCase, UpdateRentalPlanUseCase>();
-            services.AddScoped<IDeleteRentalPlanUseCase, DeleteRentalPlanUseCase>();
+            services.AddScoped<IDisableRentalPlanUseCase, DisableRentalPlanUseCase>();
 
             //rental
             services.AddScoped<IRegisterRentalUseCase, RegisterRentalUseCase>();

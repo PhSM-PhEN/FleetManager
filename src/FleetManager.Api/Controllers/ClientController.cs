@@ -1,4 +1,4 @@
-﻿using FleetManager.Application.UseCase.ToClient.Delete;
+﻿using FleetManager.Application.UseCase.ToClient.Disable;
 using FleetManager.Application.UseCase.ToClient.GetAll;
 using FleetManager.Application.UseCase.ToClient.GetById;
 using FleetManager.Application.UseCase.ToClient.Register;
@@ -60,7 +60,7 @@ namespace FleetManager.Api.Controllers
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Delete([FromServices] IDeleteClientUseCase useCase, [FromRoute] long id)
+        public async Task<IActionResult> Delete([FromServices] IDisableClientUseCase useCase, [FromRoute] long id)
         {
             await useCase.Execute(id);
             return NoContent();

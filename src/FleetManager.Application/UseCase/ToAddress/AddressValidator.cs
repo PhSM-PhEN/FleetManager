@@ -1,5 +1,3 @@
-using System;
-using System.Data;
 using FleetManager.Communication.Requests;
 using FleetManager.Exception.ExceptionBase;
 using FluentValidation;

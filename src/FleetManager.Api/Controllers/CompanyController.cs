@@ -18,7 +18,7 @@ namespace FleetManager.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(ResponseCompanyJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Register([FromServices] IRegisterCompanyUseCase useCase, 
+        public async Task<IActionResult> Register([FromServices] IRegisterCompanyUseCase useCase,
         [FromBody] RequestCompanyJson request)
         {
             var response = await useCase.Execute(request);
@@ -31,12 +31,10 @@ namespace FleetManager.Api.Controllers
         public async Task<IActionResult> GetAll([FromServices] IGetAllCompanyUseCase useCase)
         {
             var response = await useCase.Execute();
-            if(response.Companies.Count != 0)
-            {
-                return Ok(response);
-            }
-            return NoContent();
-            
+
+            return Ok(response);
+
+
         }
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ResponseCompanyJson), StatusCodes.Status200OK)]

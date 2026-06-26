@@ -30,7 +30,7 @@ namespace FleetManager.Application.Extensions
         }
         public static List<ResponseShortAddressJson> ToShortResponse(this List<Address> addresses)
         {
-            return addresses.Select(a => a.ToShotResponse()).ToList();
+            return  addresses.Select(a => a.ToShotResponse()).ToList();
         }
     }
 }

@@ -1,23 +1,19 @@
-using System;
-using AutoMapper;
+using FleetManager.Application.Extensions;
 using FleetManager.Communication.Responses;
 using FleetManager.Domain.Repositories.ToClient;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToClient.GetById;
 
-public class GetByIdClientUseCase(IMapper mapper, IClientReadOnlyRepository repository) : IGetByIdClientUseCase
+public class GetByIdClientUseCase(IClientReadOnlyRepository repository) : IGetByIdClientUseCase
 {
-    private readonly IMapper _mapper = mapper;
-    private readonly IClientReadOnlyRepository _repository = repository;
+
     public async Task<ResponseClientJson> Execute(long id)
     {
-        var client = await _repository.GetById(id);
-        if(client == null)
-        {
-            throw new NotFoundException(ResourceErrorMessages.CLIENT_NOT_FOUND);
-        }
-        return _mapper.Map<ResponseClientJson>(client);
-        
+        var client = await repository.GetById(id)
+            ?? throw new NotFoundException(ResourceErrorMessages.CLIENT_NOT_FOUND);
+
+        return client.ToDetailResponse();
+
     }
 }

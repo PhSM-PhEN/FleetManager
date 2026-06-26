@@ -1,9 +1,9 @@
-using System;
 using FleetManager.Communication.Responses;
 
-namespace FleetManager.Application.UseCase.ToAddress.GetAll;
-
-public interface IGetAllAddressUseCase
+namespace FleetManager.Application.UseCase.ToAddress.GetAll
 {
-    Task <ResponseListAddressJson> Execute ();
+    public interface IGetAllAddressUseCase
+    {
+        Task<List<ResponseShortAddressJson>> Execute ();
+    }
 }

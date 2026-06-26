@@ -18,9 +18,8 @@ namespace FleetManager.Application.UseCase.ToUser.Promote
 
             var logged = await loggedUser.Get();
 
-            var user = await updateRepository.GetById(logged.Id);
-            if (user is null)
-                throw new NotFoundException(ResourceMessages.USER_NOT_FOUND);
+            var user = await updateRepository.GetById(logged.Id)
+                    ?? throw new NotFoundException(ResourceMessages.USER_NOT_FOUND);
 
             user.PromoteToAdmin();
             updateRepository.Update(user);

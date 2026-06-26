@@ -20,34 +20,32 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(typeof(ResponseAddressJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register([FromServices] IRequestRegisterAddressUseCase useCase,
-         [FromBody] RequestAddressJson request )
+         [FromBody] RequestAddressJson request)
         {
             var response = await useCase.Execute(request);
 
             return Created(string.Empty, response);
         }
         [HttpGet]
-        [ProducesResponseType(typeof(ResponseListAddressJson) , StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseListAddressJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Getall([FromServices] IGetAllAddressUseCase useCase)
         {
             var response = await useCase.Execute();
-            if(response.Address.Count != 0)
-            {
-                return Ok(response);
-            }
-            return NoContent();
+
+            return Ok(response);
+
         }
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ResponseAddressJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetById( [FromServices] IGetByIdAddressUseCase useCase, [FromRoute] long id)
+        public async Task<IActionResult> GetById([FromServices] IGetByIdAddressUseCase useCase, [FromRoute] long id)
         {
             var response = await useCase.Execute(id);
             return Ok(response);
         }
-       
+
         [HttpPut]
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]

@@ -22,7 +22,6 @@
     <Folder Include="Extensions\" />
     <Folder Include="UseCase\ToRentalPlan\GetAll\" />
     <Folder Include="UseCase\ToRentalPlan\GetById\" />
-    <Folder Include="UseCase\ToRentalPlan\Delete\" />
     <Folder Include="UseCase\ToRentalPlan\Update\" />
     <Folder Include="UseCase\ToAddress\GetById\" />
     <Folder Include="UseCase\ToAddress\Delete\" />
