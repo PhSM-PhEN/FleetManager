@@ -61,8 +61,8 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         dbContext.SaveChanges();
 
 
-        var companyTeamMember = AddCompany(dbContext, addressTeamMember.Id);
-        var companyAdmMember = AddCompany(dbContext, addressAdmMember.Id);
+        var companyTeamMember = AddCompany(dbContext, 1, addressTeamMember.Id);
+        var companyAdmMember = AddCompany(dbContext, 2, addressAdmMember.Id);
 
 
         var categoryTeamMember = AddCategory(dbContext);
@@ -151,9 +151,9 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         dbContext.Clients.Add(Client);
         return Client;
     }
-    private static Company AddCompany(FleetManagerDbContext dbContext, long addressId)
+    private static Company AddCompany(FleetManagerDbContext dbContext, long companyId, long addressId)
     {
-        var company = CompanyBuilder.Build(addressId);
+        var company = CompanyBuilder.Build(companyId,companyId ,addressId);
         dbContext.Companies.Add(company);
         return company;
     }
