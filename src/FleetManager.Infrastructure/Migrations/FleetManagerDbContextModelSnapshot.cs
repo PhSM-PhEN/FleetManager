@@ -209,8 +209,8 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<decimal>("IncludedKm")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<long>("IncludedKm")
+                        .HasColumnType("bigint");
 
                     b.Property<long>("RentalPlanId")
                         .HasColumnType("bigint");
@@ -375,8 +375,8 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Property<long>("CreatedBy")
                         .HasColumnType("bigint");
 
-                    b.Property<decimal>("CurrentMileage")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<long>("CurrentMileage")
+                        .HasColumnType("bigint");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("tinyint(1)");

@@ -12,7 +12,7 @@ namespace FleetManager.Domain.Entities
         public long RentalPlanId { get; private set; }
         public RentalMode SnapshotMode { get; private set; }
         public int TotalDays { get; private set; }
-        public decimal IncludedKm { get; private set; }
+        public long IncludedKm { get; private set; }
         public decimal SnapshotPriceRental { get; private set; }
         public decimal SnapshotPricePerKm { get; private set; }
         public RentalStatus Status { get; private set; } = RentalStatus.Active;
@@ -100,7 +100,7 @@ namespace FleetManager.Domain.Entities
             RecalculateIfReady();
         }
 
-        public void UpdateIncludedKm(decimal newKm)
+        public void UpdateIncludedKm(long newKm)
         {
             if (newKm < 0)
                 throw new DomainRuleException(ResourceMessages.INCLUDED_KM_CANNOT_BE_NEGATIVE);

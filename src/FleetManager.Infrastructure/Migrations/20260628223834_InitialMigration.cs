@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -189,7 +188,7 @@ namespace FleetManager.Infrastructure.Migrations
                     Color = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CategoryId = table.Column<long>(type: "bigint", nullable: false),
-                    CurrentMileage = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    CurrentMileage = table.Column<long>(type: "bigint", nullable: false),
                     CreateAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: false),
@@ -218,11 +217,11 @@ namespace FleetManager.Infrastructure.Migrations
                     CompanyId = table.Column<long>(type: "bigint", nullable: false),
                     ClientId = table.Column<long>(type: "bigint", nullable: false),
                     VehicleId = table.Column<long>(type: "bigint", nullable: false),
-                    TotalPrice = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     RentalPlanId = table.Column<long>(type: "bigint", nullable: false),
                     SnapshotMode = table.Column<int>(type: "int", nullable: false),
                     TotalDays = table.Column<int>(type: "int", nullable: false),
-                    IncludedKm = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    IncludedKm = table.Column<long>(type: "bigint", nullable: false),
                     SnapshotPriceRental = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
                     SnapshotPricePerKm = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
