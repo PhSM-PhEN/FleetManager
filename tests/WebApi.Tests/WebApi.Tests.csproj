@@ -30,7 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ToCompany\Delete\" />
     <Folder Include="ToCompany\Register\" />
     <Folder Include="ToCompany\Update\" />
     <Folder Include="ToUser\Update\" />

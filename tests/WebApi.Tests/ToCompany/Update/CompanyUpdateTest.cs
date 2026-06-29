@@ -9,23 +9,24 @@ namespace WebApi.Tests.ToCompany.Update
         private readonly HttpClient _;
         private const string METHOD = "api/Company";
         private readonly string _teamMemberToken;
-        private readonly long _addressId;
+        private readonly long _companyId;  
+        private readonly long _addressId;   
+
         public CompanyUpdateTest(CustomWebApplicationFactory customWebApplication) : base(customWebApplication)
         {
             _ = customWebApplication.CreateClient();
             _teamMemberToken = customWebApplication.USER_TEAM_MEMBER.GetToken();
-            _addressId = customWebApplication.ADDRESS_TEAM_MEMBER.GetById();
-            
+            _companyId = customWebApplication.COMPANY_TEAM_MEMBER.GetById();   
+            _addressId = customWebApplication.ADDRESS_TEAM_MEMBER.GetById();  
         }
+
         [Fact]
         public async Task Success()
         {
-          
-            var request = RequestUpdateCompanyBuild.Build();
-            var result = await DoPut($"{METHOD}/{_addressId}", request, _teamMemberToken);
+            var request = RequestUpdateCompanyBuild.Build(_addressId);  
+            var result = await DoPut($"{METHOD}/{_companyId}", request, _teamMemberToken);  
 
             result.StatusCode.ShouldBe(HttpStatusCode.NoContent);
-
         }
     }
 }

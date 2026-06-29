@@ -9,7 +9,7 @@ namespace CommonTestUtilities.Request
         {
             return new Faker<RequestUpdateCompanyJson>()
                     .RuleFor(r => r.Name, f => f.Person.FullName)
-                    .RuleFor(r => r.PhoneNumber, f => f.Phone.PhoneNumber())
+                    .RuleFor(r => r.PhoneNumber, f => f.Phone.PhoneNumber("(##) #####-####")) 
                     .RuleFor(r => r.AddressId, _ = addressId)
                     .Generate();
         }
