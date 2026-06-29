@@ -6,6 +6,9 @@ namespace CommonTestUtilities.Entitie
 
     public class CompanyBuilder
     {
+       
+        
+
         public static Company Build(long addressId = 1)
         { 
             var faker = new Faker();

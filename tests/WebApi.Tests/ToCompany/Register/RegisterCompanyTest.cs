@@ -1,10 +1,9 @@
-using System.Net;
-using System.Text.Json;
 using CommonTestUtilities.Entitie;
 using CommonTestUtilities.Request;
 using FleetManager.Exception.ExceptionBase;
 using Shouldly;
-using WebApi.Tests.Resource;
+using System.Net;
+using System.Text.Json;
 
 namespace WebApi.Tests.ToCompany.Register
 {
