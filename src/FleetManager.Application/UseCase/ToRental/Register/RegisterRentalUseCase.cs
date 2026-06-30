@@ -59,7 +59,7 @@ namespace FleetManager.Application.UseCase.ToRental.Register
 
             EnsureVehicleMatchesPlanTransmission(vehicle, rentalPlan);
 
-            return (rentalPlan);
+            return rentalPlan;
         }
 
         private async Task<Client> EnsureClientExists(long clientId)
@@ -102,7 +102,7 @@ namespace FleetManager.Application.UseCase.ToRental.Register
         private async Task EnsureVehicleIsAvailable(long vehicleId)
         {
             var hasActiveRental = await rentalReadOnly.VehicleHasActiveRental(vehicleId);
-            if (!hasActiveRental)
+            if (hasActiveRental)
                 throw new DomainRuleException(ResourceErrorMessages.VEHICLE_NOT_AVAILABLE);
         }
     }
