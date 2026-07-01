@@ -2,7 +2,7 @@
 {
     public class RequestUpdateRentJson
     {
-        public long IncludedKm { get; set; }
+        public long ExtraKm { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
     }

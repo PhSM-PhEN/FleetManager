@@ -1,10 +1,10 @@
 ﻿using FleetManager.Domain.DomainExceptionBase;
 using FleetManager.Domain.Enums;
+
 namespace FleetManager.Domain.Entities
 {
     public class Rental : AuditableEntity
     {
-        
         public long CompanyId { get; private set; }
         public long ClientId { get; private set; }
         public long VehicleId { get; private set; }
@@ -12,7 +12,10 @@ namespace FleetManager.Domain.Entities
         public long RentalPlanId { get; private set; }
         public RentalMode SnapshotMode { get; private set; }
         public int TotalDays { get; private set; }
-        public long IncludedKm { get; private set; }
+        public long ExtraKm { get; private set; }
+        public long SnapshotKmIncluded { get; private set; }
+        public long TotalKmAllowed { get; private set; }
+
         public decimal SnapshotPriceRental { get; private set; }
         public decimal SnapshotPricePerKm { get; private set; }
         public RentalStatus Status { get; private set; } = RentalStatus.Active;
@@ -30,7 +33,7 @@ namespace FleetManager.Domain.Entities
 
         protected Rental() { }
 
-        public Rental(long companyId, long clientId, long vehicleId, 
+        public Rental(long companyId, long clientId, long vehicleId,
                       DateTime startDate, DateTime endDate)
         {
             CompanyId = companyId;
@@ -38,6 +41,23 @@ namespace FleetManager.Domain.Entities
             VehicleId = vehicleId;
             _startDate = startDate;
             _endDate = endDate;
+            RecalculateIfReady();
+        }
+
+        public void AttachPlan(RentalPlan plan)
+        {
+            if (plan is null)
+                throw new DomainRuleException(ResourceMessages.RENTAL_PLAN_CANNOT_BE_NULL);
+
+            if (!plan.IsActive)
+                throw new DomainRuleException(ResourceMessages.RENTAL_PLAN_IS_NOT_ACTIVE);
+
+            RentalPlanId = plan.Id;
+            SnapshotPriceRental = plan.PriceRental;
+            SnapshotPricePerKm = plan.PricePerKm;
+            SnapshotMode = plan.Mode;
+            SnapshotKmIncluded = plan.TotalKmIncluded; 
+
             RecalculateIfReady();
         }
 
@@ -49,6 +69,16 @@ namespace FleetManager.Domain.Entities
             _startDate = newStartDate;
             _endDate = newEndDate;
             RecalculateIfReady();
+        }
+
+        public void AddExtraKm(long km)
+        {
+            if (km < 0)
+                throw new DomainRuleException(ResourceMessages.INCLUDED_KM_CANNOT_BE_NEGATIVE);
+
+            ExtraKm = km;
+            var days = CalculateTotalDays();
+            CalculateTotalPrice(days);
         }
 
         public void Cancel()
@@ -84,32 +114,6 @@ namespace FleetManager.Domain.Entities
             CalculateTotalPrice(days);
         }
 
-        public void AttachPlan(RentalPlan plan)
-        {
-            if (plan is null)
-                throw new DomainRuleException(ResourceMessages.RENTAL_PLAN_CANNOT_BE_NULL);
-
-            if (!plan.IsActive)
-                throw new DomainRuleException(ResourceMessages.RENTAL_PLAN_IS_NOT_ACTIVE);
-
-            RentalPlanId = plan.Id;
-            SnapshotPriceRental = plan.PriceRental;
-            SnapshotPricePerKm = plan.PricePerKm;
-            SnapshotMode = plan.Mode;
-
-            RecalculateIfReady();
-        }
-
-        public void UpdateIncludedKm(long newKm)
-        {
-            if (newKm < 0)
-                throw new DomainRuleException(ResourceMessages.INCLUDED_KM_CANNOT_BE_NEGATIVE);
-
-            IncludedKm = newKm;
-            var days = CalculateTotalDays();
-            CalculateTotalPrice(days);
-        }
-
         private int CalculateTotalDays()
         {
             if (_endDate < _startDate)
@@ -121,13 +125,20 @@ namespace FleetManager.Domain.Entities
         private void CalculateTotalPrice(int days)
         {
             TotalDays = days;
-            decimal basePrice = SnapshotMode == RentalMode.Monthly
-            ? Math.Floor(days / 30m) * SnapshotPriceRental : 
-            days * SnapshotPriceRental ; 
-        
 
-            decimal kmPrice = IncludedKm > 0
-                ? IncludedKm * SnapshotPricePerKm
+
+            decimal basePrice = SnapshotMode == RentalMode.Monthly
+                ? Math.Floor(days / 30m) * SnapshotPriceRental
+                : days * SnapshotPriceRental;
+ 
+            long freeKm = SnapshotMode == RentalMode.Monthly
+                ? SnapshotKmIncluded
+                : days * SnapshotKmIncluded;
+
+            TotalKmAllowed = freeKm + ExtraKm;
+
+            decimal kmPrice = ExtraKm > 0
+                ? ExtraKm * SnapshotPricePerKm
                 : 0;
 
             TotalPrice = basePrice + kmPrice;

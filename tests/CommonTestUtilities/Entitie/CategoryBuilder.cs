@@ -6,11 +6,11 @@ namespace CommonTestUtilities.Entitie;
 
 public class CategoryBuilder
 {
-    public static Category Build()
+    public static Category Build(TransmissionType? transmissionType = null)
     {
         var faker = new Faker();
         return new Category(
             faker.PickRandom("SUV", "Hatch", "Sedan", "Pickup", "Minivan"),
-            faker.PickRandom<TransmissionType>());
+            transmissionType ?? faker.PickRandom<TransmissionType>());
     }
 }   

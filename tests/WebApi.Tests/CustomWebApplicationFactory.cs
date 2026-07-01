@@ -30,6 +30,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     public UserIdentityManager USER_ADM_MEMBER { get; private set; } = default!;
     public VehicleIdentitiyManager VEHICLE_TEAM_MEMBER { get; private set; } = default!;
     public VehicleIdentitiyManager VEHICLE_ADM_MEMBER { get; private set; } = default!;
+    public VehicleIdentitiyManager VEHICLE_AVAILABLE_TEAM_MEMBER { get; private set; } = default!;
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
@@ -61,8 +62,8 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         dbContext.SaveChanges();
 
 
-        var companyTeamMember = AddCompany(dbContext,  addressTeamMember.Id);
-        var companyAdmMember = AddCompany(dbContext,  addressAdmMember.Id);
+        var companyTeamMember = AddCompany(dbContext, addressTeamMember.Id);
+        var companyAdmMember = AddCompany(dbContext, addressAdmMember.Id);
 
 
         var categoryTeamMember = AddCategory(dbContext);
@@ -76,7 +77,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 
         var clientTeamMember = AddClient(dbContext, addressTeamMember.Id);
         var clientAdmMember = AddClient(dbContext, addressAdmMember.Id);
-        
+
 
         AddUserTeamMember(dbContext, passwordEncrypter, tokenGenerator);
         AddUserAdmin(dbContext, passwordEncrypter, tokenGenerator);
@@ -85,6 +86,12 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 
         var rentalPlanTeamMember = AddRentalPlan(dbContext);
         var rentalPlanAdmMember = AddRentalPlan(dbContext);
+        dbContext.SaveChanges();
+
+
+        var categoryAvailableTeamMember = AddCategory(dbContext, rentalPlanTeamMember.Transmission);
+        dbContext.SaveChanges();
+        var vehicleAvailableTeamMember = AddVehicle(dbContext, categoryAvailableTeamMember.Id);
         dbContext.SaveChanges();
 
 
@@ -106,6 +113,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         RENTAL_ADM_MEMBER = new RentalIdentityManager(rentalAdmMember);
         VEHICLE_TEAM_MEMBER = new VehicleIdentitiyManager(vehicleTeamMember);
         VEHICLE_ADM_MEMBER = new VehicleIdentitiyManager(vehicleAdmMember);
+        VEHICLE_AVAILABLE_TEAM_MEMBER = new VehicleIdentitiyManager(vehicleAvailableTeamMember);
     }
     private User AddUserTeamMember(FleetManagerDbContext dbContext, IPasswordEncrypter passwordEncrypter, IAccessTokenGenerator tokenGenerator)
     {
@@ -139,9 +147,9 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         dbContext.Addresses.Add(address);
         return address;
     }
-    private static Category AddCategory(FleetManagerDbContext dbContext)
+    private static Category AddCategory(FleetManagerDbContext dbContext, FleetManager.Domain.Enums.TransmissionType? transmissionType = null)
     {
-        var Category = CategoryBuilder.Build();
+        var Category = CategoryBuilder.Build(transmissionType);
         dbContext.Categories.Add(Category);
         return Category;
     }
@@ -151,7 +159,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
         dbContext.Clients.Add(Client);
         return Client;
     }
-    private static Company AddCompany(FleetManagerDbContext dbContext,  long addressId)
+    private static Company AddCompany(FleetManagerDbContext dbContext, long addressId)
     {
         var company = CompanyBuilder.Build(addressId);
         dbContext.Companies.Add(company);

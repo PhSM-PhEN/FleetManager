@@ -32,8 +32,8 @@ namespace FleetManager.Application.UseCase.ToRental.Register
 
             rental.AttachPlan(rentalPlan);
 
-            if (request.IncludedKm > 0)
-                rental.UpdateIncludedKm(request.IncludedKm);
+            if (request.ExtraKm > 0)
+                rental.AddExtraKm(request.ExtraKm);
 
             await repository.Add(rental);
             await unitOfWork.Commit();
@@ -59,7 +59,7 @@ namespace FleetManager.Application.UseCase.ToRental.Register
 
             EnsureVehicleMatchesPlanTransmission(vehicle, rentalPlan);
 
-            return rentalPlan;
+            return (rentalPlan);
         }
 
         private async Task<Client> EnsureClientExists(long clientId)

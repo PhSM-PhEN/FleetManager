@@ -212,7 +212,7 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<long>("IncludedKm")
+                    b.Property<long>("ExtraKm")
                         .HasColumnType("bigint");
 
                     b.Property<long>("RentalPlanId")

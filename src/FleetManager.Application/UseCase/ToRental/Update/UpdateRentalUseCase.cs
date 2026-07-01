@@ -12,11 +12,11 @@ namespace FleetManager.Application.UseCase.ToRental.Update
             Validate(request);
             var rental = await repository.GetById(id)
                 ?? throw new NotFoundException(ResourceErrorMessages.RENTAL_NOT_FOUND);
-            
+
             rental.Reschedule(request.StartDate, request.EndDate);
 
-            if (request.IncludedKm > 0)
-                rental.UpdateIncludedKm(request.IncludedKm);
+            if (request.ExtraKm > 0)
+                rental.AddExtraKm(request.ExtraKm);
 
             repository.Update(rental);
             await unitOfWork.Commit();

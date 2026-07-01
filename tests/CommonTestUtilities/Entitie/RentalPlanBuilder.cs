@@ -1,5 +1,4 @@
 ﻿using Bogus;
-using Bogus.DataSets;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Enums;
 
@@ -7,12 +6,12 @@ namespace CommonTestUtilities.Entitie
 {
     public class RentalPlanBuilder
     {
-        public static RentalPlan Build()
+        public static RentalPlan Build(TransmissionType? transmissionType = null)
         {
             var faker = new Faker();
             var mode = faker.PickRandom<RentalMode>();
-            var transmission = faker.PickRandom<TransmissionType>();
-            var totalIncludedKm = faker.PickRandom<decimal>(100, 200);
+            var transmission = transmissionType ?? faker.PickRandom<TransmissionType>();
+            var totalIncludedKm = faker.PickRandom<long>(100, 200);
             var modeName = mode == RentalMode.Daily ? "Daily" : "Monthly";
             var transmissionName = transmission == TransmissionType.Manual ? "Manual" : "Automatic";
 
