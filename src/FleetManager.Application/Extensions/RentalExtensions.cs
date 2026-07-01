@@ -1,10 +1,26 @@
 using FleetManager.Communication.Responses;
+using FleetManager.Communication.ToEnums;
 using FleetManager.Domain.Entities;
 
 namespace FleetManager.Application.Extensions
 {
     public static class RentalExtensions
     {
+        public static ResponseRentalRegisterJson ToRegisterResponse(this Rental rental)
+        {
+            return new ResponseRentalRegisterJson
+            {
+                Id = rental.Id,
+                StartDate = rental.StartDate,
+                EndDate = rental.EndDate,
+                TotalDays = rental.TotalDays,
+                TotalKmAllowed = rental.TotalKmAllowed,
+                ExtraKm = rental.ExtraKm,
+                TotalPrice = rental.TotalPrice,
+                Status = (RentalStatus)rental.Status
+            };
+  
+        }
         public static ResponseShortRentalJson ToResponse(this Rental rental)
         {
             return new ResponseShortRentalJson

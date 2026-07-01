@@ -41,7 +41,7 @@ namespace WebApi.Tests.ToRental.Update
         {
             var request = RequestUpdateRentJsonBuilder.Build();
 
-            var result = await DoPut($"{METHOD}/0", request, _teamMemberToken);
+            var result = await DoPut($"{METHOD}/{100}", request, _teamMemberToken);
 
             result.StatusCode.ShouldBe(HttpStatusCode.NotFound);
         }

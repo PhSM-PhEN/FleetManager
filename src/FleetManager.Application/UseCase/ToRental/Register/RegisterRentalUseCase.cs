@@ -17,7 +17,7 @@ namespace FleetManager.Application.UseCase.ToRental.Register
                                         IClientReadOnlyRepository clientReadOnly, IRentalWriteOnlyRepository repository,
                                         IRentalPlansReadOnlyRepository rentalPlansRead, IUnitOfWork unitOfWork) : IRegisterRentalUseCase
     {
-        public async Task<ResponseShortRentalJson> Execute(RequestRentJson request)
+        public async Task<ResponseRentalRegisterJson> Execute(RequestRentJson request)
         {
 
             Validate(request);
@@ -39,7 +39,7 @@ namespace FleetManager.Application.UseCase.ToRental.Register
 
             await unitOfWork.Commit();
 
-            return rental.ToResponse();
+            return rental.ToRegisterResponse();
         }
 
         private static void Validate(RequestRentJson request)

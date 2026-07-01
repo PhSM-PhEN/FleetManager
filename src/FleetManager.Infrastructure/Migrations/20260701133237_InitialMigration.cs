@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
@@ -64,9 +65,9 @@ namespace FleetManager.Infrastructure.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Mode = table.Column<int>(type: "int", nullable: false),
                     Transmission = table.Column<int>(type: "int", nullable: false),
-                    PriceRental = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
-                    TotalKmIncluded = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
-                    PricePerKm = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
+                    PriceRental = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    TotalKmIncluded = table.Column<long>(type: "bigint", nullable: false),
+                    PricePerKm = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
@@ -221,9 +222,11 @@ namespace FleetManager.Infrastructure.Migrations
                     RentalPlanId = table.Column<long>(type: "bigint", nullable: false),
                     SnapshotMode = table.Column<int>(type: "int", nullable: false),
                     TotalDays = table.Column<int>(type: "int", nullable: false),
-                    IncludedKm = table.Column<long>(type: "bigint", nullable: false),
-                    SnapshotPriceRental = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
-                    SnapshotPricePerKm = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
+                    ExtraKm = table.Column<long>(type: "bigint", nullable: false),
+                    SnapshotKmIncluded = table.Column<long>(type: "bigint", nullable: false),
+                    TotalKmAllowed = table.Column<long>(type: "bigint", nullable: false),
+                    SnapshotPriceRental = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    SnapshotPricePerKm = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),

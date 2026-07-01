@@ -96,6 +96,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Program>
 
 
         var rentalTeamMember = AddRental(dbContext, companyTeamMember.Id, clientTeamMember.Id, vehicleTeamMember.Id);
+        dbContext.SaveChanges();
         var rentalAdmMember = AddRental(dbContext, companyAdmMember.Id, clientAdmMember.Id, vehicleAdmMember.Id);
         dbContext.SaveChanges();
 

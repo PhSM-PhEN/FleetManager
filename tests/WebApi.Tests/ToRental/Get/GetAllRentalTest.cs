@@ -5,11 +5,12 @@ namespace WebApi.Tests.ToRental.Get
 {
     public class GetAllRentalTest : FleetManagerClassFixture
     {
+        private readonly HttpClient _ ;
         private const string METHOD = "api/Rental";
         private readonly string _teamMemberToken;
 
         public GetAllRentalTest(CustomWebApplicationFactory customWebApplication) : base(customWebApplication)
-        {
+        {   _ = customWebApplication.CreateClient();
             _teamMemberToken = customWebApplication.USER_TEAM_MEMBER.GetToken();
         }
 

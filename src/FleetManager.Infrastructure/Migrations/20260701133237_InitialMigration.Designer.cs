@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FleetManager.Infrastructure.Migrations
 {
     [DbContext(typeof(FleetManagerDbContext))]
-    [Migration("20260628223834_InitialMigration")]
+    [Migration("20260701133237_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -218,6 +218,9 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Property<long>("RentalPlanId")
                         .HasColumnType("bigint");
 
+                    b.Property<long>("SnapshotKmIncluded")
+                        .HasColumnType("bigint");
+
                     b.Property<int>("SnapshotMode")
                         .HasColumnType("int");
 
@@ -235,6 +238,9 @@ namespace FleetManager.Infrastructure.Migrations
 
                     b.Property<int>("TotalDays")
                         .HasColumnType("int");
+
+                    b.Property<long>("TotalKmAllowed")
+                        .HasColumnType("bigint");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(65,30)");
@@ -291,8 +297,8 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Property<decimal>("PriceRental")
                         .HasColumnType("decimal(65,30)");
 
-                    b.Property<decimal>("TotalKmIncluded")
-                        .HasColumnType("decimal(65,30)");
+                    b.Property<long>("TotalKmIncluded")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("Transmission")
                         .HasColumnType("int");

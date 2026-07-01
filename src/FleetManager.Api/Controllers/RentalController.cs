@@ -16,7 +16,7 @@ namespace FleetManager.Api.Controllers
     public class RentalController : ControllerBase
     {
         [HttpPost]
-        [ProducesResponseType(typeof(ResponseShortRentalJson), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseRentalRegisterJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register([FromServices] IRegisterRentalUseCase useCase, [FromBody] RequestRentJson request)
         {
