@@ -36,6 +36,7 @@ namespace FleetManager.Application.UseCase.ToRental.Register
                 rental.AddExtraKm(request.ExtraKm);
 
             await repository.Add(rental);
+
             await unitOfWork.Commit();
 
             return rental.ToResponse();
