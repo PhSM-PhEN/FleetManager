@@ -13,7 +13,8 @@ namespace UseCase.Tests.ToUser
         [Fact]
         public async Task Sucess()
         {
-
+              
+            
             var request = RequestRegisterUserJsonBuilder.Build();
 
             var useCase = CreateUseCase();
