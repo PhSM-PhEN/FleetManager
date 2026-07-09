@@ -56,6 +56,11 @@ namespace FleetManager.Infrastructure
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
 
 
+
+            
+            services.AddScoped<ILoggedUser, LoggedUser>();
+
+
             // unit of work
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }

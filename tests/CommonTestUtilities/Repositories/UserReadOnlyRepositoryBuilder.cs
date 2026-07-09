@@ -21,6 +21,11 @@ namespace CommonTestUtilities.Repositories
             _repository.Setup(u => u.GetUserByEmail(user.Email)).ReturnsAsync(user);
             return this;
         }
+        public UserReadOnlyRepositoryBuilder GetById(User user)
+        {
+            _repository.Setup(u => u.GetUserById(user.Id)).ReturnsAsync(user);
+            return this;
+        }
         public IUserReadOnlyRepository Build()
         {
             return _repository.Object;

@@ -185,5 +185,7 @@ namespace FleetManager.Exception.ExceptionBase {
                 return ResourceManager.GetString("UNKNOW_ERROR", resourceCulture);
             }
         }
+
+        
     }
 }

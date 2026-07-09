@@ -1,7 +1,9 @@
-﻿using FleetManager.Application.UseCase.ToUser.Register;
+﻿using FleetManager.Application.UseCase.ToUser.GetProfile;
+using FleetManager.Application.UseCase.ToUser.Register;
 using FleetManager.Communication.Request.ToUser;
 using FleetManager.Communication.Response.ToUser;
 using FleetManager.Communication.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FleetManager.Api.Controllers
@@ -17,6 +19,15 @@ namespace FleetManager.Api.Controllers
         {
             var result = await useCase.Execute(request);
             return Created(string.Empty , result);
+        }
+        [HttpGet("Profile")]
+        [Authorize]
+        [ProducesResponseType(typeof(ResponseProfileUserJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetProfile([FromServices] IGetProfileUserUseCase useCase)
+        {
+            var result = await useCase.Execute();
+            return Ok(result);
         }
     }
 }

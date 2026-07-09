@@ -18,6 +18,7 @@ namespace CommonTestUtilities.Entities
             {
                 user.PromoteToAdmin();
             }
+           
             return user;
         }
     }

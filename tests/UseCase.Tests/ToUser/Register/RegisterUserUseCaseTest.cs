@@ -6,7 +6,7 @@ using FleetManager.Application.UseCase.ToUser.Register;
 using FleetManager.Exception.ExceptionBase;
 using Shouldly;
 
-namespace UseCase.Tests.ToUser
+namespace UseCase.Tests.ToUser.Register
 {
     public class RegisterUserUseCaseTest
     {

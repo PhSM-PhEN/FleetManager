@@ -13,5 +13,13 @@ namespace FleetManager.Application.Extensions
                 Token = token
             };
         }
+        public static ResponseProfileUserJson ToProfileResponse(this User user)
+        {
+            return new ResponseProfileUserJson
+            {
+                Name = user.Name,
+                Email = user.Email
+            };
+        }
     }
 }
