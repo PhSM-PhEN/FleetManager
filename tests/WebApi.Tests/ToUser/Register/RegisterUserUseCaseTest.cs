@@ -4,7 +4,7 @@ using FleetManager.Communication.Request.ToUser;
 using FleetManager.Exception.ExceptionBase;
 using Shouldly;
 
-namespace WebApi.Tests.ToUser1
+namespace WebApi.Tests.ToUser.Register
 {
     public class RegisterUserUseCaseTest : FleetManagerClassFixture
     {

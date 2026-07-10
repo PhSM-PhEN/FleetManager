@@ -70,6 +70,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email invalid..
+        /// </summary>
+        public static string EMAIL_INVALID {
+            get {
+                return ResourceManager.GetString("EMAIL_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email is required..
         /// </summary>
         public static string EMAIL_IS_REQUIRED {
@@ -84,6 +93,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string EMAIL_OR_PASSWORD_INVALID {
             get {
                 return ResourceManager.GetString("EMAIL_OR_PASSWORD_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email required..
+        /// </summary>
+        public static string EMAIL_REQUIRED {
+            get {
+                return ResourceManager.GetString("EMAIL_REQUIRED", resourceCulture);
             }
         }
         
@@ -185,7 +203,14 @@ namespace FleetManager.Exception.ExceptionBase {
                 return ResourceManager.GetString("UNKNOW_ERROR", resourceCulture);
             }
         }
-
         
+        /// <summary>
+        ///   Looks up a localized string similar to User not found..
+        /// </summary>
+        public static string USER_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("USER_NOT_FOUND", resourceCulture);
+            }
+        }
     }
 }

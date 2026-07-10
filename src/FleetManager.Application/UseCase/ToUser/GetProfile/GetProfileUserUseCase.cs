@@ -12,7 +12,7 @@ public class GetProfileUserUseCase(IUserReadOnlyRepository repository, ILoggedUs
     {
         var logged = await loggedUser.Get();
         var user = await repository.GetUserById(logged.Id) 
-                    ?? throw new NotFoundException("GETPROFILE");
+                    ?? throw new NotFoundException(ResourceErrorMessages.USER_NOT_FOUND);
         
 
         return user.ToProfileResponse();

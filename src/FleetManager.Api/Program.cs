@@ -32,7 +32,7 @@ builder.Services.AddApplicationServices();
 builder.Services.AddHttpContextAccessor();
 
 var jwtIssuer = builder.Configuration.GetValue<string>("Settings:Jwt:Issuer") ?? "FleetManagerApi";
-var jwtAudience = builder.Configuration.GetValue<string>("Settings:Jwt:Audience") ?? "FleetManagerApi";
+var jwtAudience = builder.Configuration.GetValue<string>("Settings:Jwt:Audience") ?? "FleetManagerClients";
 
 builder.Services.AddAuthentication(config =>
 {
@@ -67,6 +67,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
