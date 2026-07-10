@@ -8,13 +8,12 @@ namespace FleetManager.Application.UseCase.ToUser.Update
     {
         public UpdateValidator()
         {
-            RuleFor(user => user.Name)
-                .NotEmpty().WithMessage(ResourceErrorMessages.NAME_IS_REQUIRED);
-            RuleFor(user => user.Email)
-                .NotEmpty().WithMessage(ResourceErrorMessages.EMAIL_REQUIRED)
-                .EmailAddress()
-                .When(user => string.IsNullOrWhiteSpace(user.Email) == false, applyConditionTo: ApplyConditionTo.CurrentValidator)
-                .WithMessage(ResourceErrorMessages.EMAIL_INVALID);
+            RuleFor(x => x.Name)
+                .NotEmpty().WithMessage(ResourceErrorMessages.NAME_IS_REQUIRED)
+                .MaximumLength(100).WithMessage(ResourceErrorMessages.NAME_CANNOT_EXCEED_100_CHARACTERS);
+            RuleFor(x => x.Email)
+                .NotEmpty().WithMessage(ResourceErrorMessages.EMAIL_IS_REQUIRED)
+                .EmailAddress().WithMessage(ResourceErrorMessages.INVALID_EMAIL_FORMAT);
 
         }
 

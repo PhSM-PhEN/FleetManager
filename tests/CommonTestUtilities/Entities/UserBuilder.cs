@@ -14,11 +14,13 @@ namespace CommonTestUtilities.Entities
             var password = faker.Internet.Password(prefix: "aA1");
 
             var user = new User(name, email, password);
+            user.Id = faker.Random.Long(1, 10000);
+
             if (role == Roles.ADMIN)
             {
                 user.PromoteToAdmin();
             }
-           
+
             return user;
         }
     }

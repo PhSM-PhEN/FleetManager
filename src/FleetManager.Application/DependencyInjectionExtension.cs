@@ -1,6 +1,7 @@
 ﻿using FleetManager.Application.UseCase.DoLogin;
 using FleetManager.Application.UseCase.ToUser.GetProfile;
 using FleetManager.Application.UseCase.ToUser.Register;
+using FleetManager.Application.UseCase.ToUser.Update;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace FleetManager.Application
@@ -16,6 +17,7 @@ namespace FleetManager.Application
         {
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
             services.AddScoped<IGetProfileUserUseCase, GetProfileUserUseCase>();
+            services.AddScoped<IUpdateProfileUserUseCase, UpdateProfileUserUseCase>();
 
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
         }

@@ -47,7 +47,7 @@ namespace FleetManager.Infrastructure.DataAccess.ToUser
         }
         public void Update(User user)
         {
-            throw new NotImplementedException();
+            dbContext.Users.Update(user);
         }
     }
 }

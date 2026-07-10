@@ -1,5 +1,6 @@
 ﻿using FleetManager.Application.UseCase.ToUser.GetProfile;
 using FleetManager.Application.UseCase.ToUser.Register;
+using FleetManager.Application.UseCase.ToUser.Update;
 using FleetManager.Communication.Request.ToUser;
 using FleetManager.Communication.Response.ToUser;
 using FleetManager.Communication.Responses;
@@ -31,6 +32,15 @@ namespace FleetManager.Api.Controllers
             var result = await useCase.Execute();
             return Ok(result);
         }
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> Update([FromServices] IUpdateProfileUserUseCase useCase,
+        [FromBody] RequestUpdateUserJson request)
+        {
+            await useCase.Execute(request);
+            return NoContent();
+        }
+
 
     }
 }
