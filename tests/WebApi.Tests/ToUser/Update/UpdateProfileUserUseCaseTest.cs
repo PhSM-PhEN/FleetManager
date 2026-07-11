@@ -13,11 +13,11 @@ namespace WebApi.Tests.ToUser.Update
         {
             _teamMemberToken = customWebApplication.USER_TEAM_MEMBER.GetToken();
         }
-        
+
         [Fact]
         public async Task Success()
         {
-            
+
             var request = RequestUpdateUserJsonBuilder.Build();
 
             var result = await DoPut(METHOD, request, _teamMemberToken);
@@ -31,8 +31,9 @@ namespace WebApi.Tests.ToUser.Update
 
             var result = await DoPut(METHOD, request);
             result.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
-            
+
         }
+
 
 
 

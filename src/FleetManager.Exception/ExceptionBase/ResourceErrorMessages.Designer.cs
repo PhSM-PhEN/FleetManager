@@ -160,11 +160,11 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password must contain an lowercase letter.
+        ///   Looks up a localized string similar to Password must contain a lowercase letter..
         /// </summary>
-        public static string PASSWORD_MUST_CONTAIN_AN_LOWERCASE_LETTER {
+        public static string PASSWORD_MUST_CONTAIN_A_LOWERCASE_LETTER {
             get {
-                return ResourceManager.GetString("PASSWORD_MUST_CONTAIN_AN_LOWERCASE_LETTER", resourceCulture);
+                return ResourceManager.GetString("PASSWORD_MUST_CONTAIN_A_LOWERCASE_LETTER", resourceCulture);
             }
         }
         
@@ -196,11 +196,20 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unknow error..
+        ///   Looks up a localized string similar to Invalid or missing token..
         /// </summary>
-        public static string UNKNOW_ERROR {
+        public static string TOKEN_INVALID_OR_MISSING {
             get {
-                return ResourceManager.GetString("UNKNOW_ERROR", resourceCulture);
+                return ResourceManager.GetString("TOKEN_INVALID_OR_MISSING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown error..
+        /// </summary>
+        public static string UNKNOWN_ERROR {
+            get {
+                return ResourceManager.GetString("UNKNOWN_ERROR", resourceCulture);
             }
         }
         

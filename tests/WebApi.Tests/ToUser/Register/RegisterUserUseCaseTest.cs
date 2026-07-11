@@ -17,12 +17,12 @@ namespace WebApi.Tests.ToUser.Register
             _client = customWebApplication.CreateClient();
             _teamMemberToken = customWebApplication.USER_TEAM_MEMBER.GetToken();
             _teamMemberEmail = customWebApplication.USER_TEAM_MEMBER.GetEmail();
-            
+
         }
         [Fact]
         public async Task Success()
         {
-          
+
             var request = RequestRegisterUserJsonBuilder.Build();
 
             var result = await DoPost(METHOD, request);
@@ -30,7 +30,7 @@ namespace WebApi.Tests.ToUser.Register
 
             var body = await result.Content.ReadAsStreamAsync();
             var responseBody = await JsonDocument.ParseAsync(body);
-            
+
             responseBody.RootElement.GetProperty("name").GetString().ShouldBe(request.Name);
             responseBody.RootElement.GetProperty("token").GetString().ShouldNotBeNullOrEmpty();
 
@@ -51,8 +51,8 @@ namespace WebApi.Tests.ToUser.Register
             var expctedMessage = ResourceErrorMessages.ResourceManager.GetString("EMAIL_ALREADY_REGISTERED");
             errorMessage.ShouldHaveSingleItem();
             errorMessage.ShouldContain(e => e.GetString()!.Equals(expctedMessage));
-        
+
         }
     }
-        
+
 }

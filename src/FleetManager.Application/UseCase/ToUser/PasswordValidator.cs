@@ -36,7 +36,7 @@ namespace FleetManager.Application.UseCase.ToUser
             }
             if (!LowerCaseLetters().IsMatch(password))
             {
-                context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, ResourceErrorMessages.PASSWORD_MUST_CONTAIN_AN_LOWERCASE_LETTER);
+                context.MessageFormatter.AppendArgument(ERROR_MESSAGE_KEY, ResourceErrorMessages.PASSWORD_MUST_CONTAIN_A_LOWERCASE_LETTER);
                 return false;
             }
             if (!Numbers().IsMatch(password))

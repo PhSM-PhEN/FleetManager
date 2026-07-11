@@ -55,7 +55,7 @@ namespace UseCase.Tests.ToUser.Update
             result.GetErrors().Count.ShouldBe(1);
             result.GetErrors().First().ToString().ShouldBe(ResourceErrorMessages.EMAIL_ALREADY_REGISTERED);     
         }
-        private UpdateProfileUserUseCase CreateUseCase(User user, string? email = null)
+        private static UpdateProfileUserUseCase CreateUseCase(User user, string? email = null)
         {
             var unitOfWork = UnitOfWorkBuilder.Build();
             var logged = LoggedUserBuilder.Build(user);

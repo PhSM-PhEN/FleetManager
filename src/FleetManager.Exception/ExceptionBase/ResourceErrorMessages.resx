@@ -150,8 +150,8 @@
   <data name="PASSWORD_IS_REQUIRED" xml:space="preserve">
     <value>Password is required.</value>
   </data>
-  <data name="PASSWORD_MUST_CONTAIN_AN_LOWERCASE_LETTER" xml:space="preserve">
-    <value>Password must contain an lowercase letter</value>
+  <data name="PASSWORD_MUST_CONTAIN_A_LOWERCASE_LETTER" xml:space="preserve">
+    <value>Password must contain a lowercase letter.</value>
   </data>
   <data name="PASSWORD_MUST_CONTAIN_AN_UPPERCASE_LETTER" xml:space="preserve">
     <value>Password must contain an uppercase letter.</value>
@@ -162,10 +162,13 @@
   <data name="THE_PASSWORD_MUST_BE_MORE_THAN_8_CHARACTERS" xml:space="preserve">
     <value>The password must be more than 8 characters.</value>
   </data>
-  <data name="UNKNOW_ERROR" xml:space="preserve">
-    <value>Unknow error.</value>
+  <data name="UNKNOWN_ERROR" xml:space="preserve">
+    <value>Unknown error.</value>
   </data>
   <data name="USER_NOT_FOUND" xml:space="preserve">
     <value>User not found.</value>
+  </data>
+  <data name="TOKEN_INVALID_OR_MISSING" xml:space="preserve">
+    <value>Invalid or missing token.</value>
   </data>
 </root>

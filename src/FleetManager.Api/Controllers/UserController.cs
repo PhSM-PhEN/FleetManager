@@ -1,4 +1,5 @@
-﻿using FleetManager.Application.UseCase.ToUser.GetProfile;
+﻿using FleetManager.Application.UseCase.ToUser.ChangePassword;
+using FleetManager.Application.UseCase.ToUser.GetProfile;
 using FleetManager.Application.UseCase.ToUser.Register;
 using FleetManager.Application.UseCase.ToUser.Update;
 using FleetManager.Communication.Request.ToUser;
@@ -36,6 +37,14 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Update([FromServices] IUpdateProfileUserUseCase useCase,
         [FromBody] RequestUpdateUserJson request)
+        {
+            await useCase.Execute(request);
+            return NoContent();
+        }
+        [HttpPut("ChangePassword")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> ChangPassword([FromServices] IChangePasswordUseCase useCase, [FromBody] RequestChangPasswordJson request)
         {
             await useCase.Execute(request);
             return NoContent();
