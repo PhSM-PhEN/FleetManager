@@ -1,4 +1,5 @@
 ﻿using FleetManager.Application.UseCase.ToUser.ChangePassword;
+using FleetManager.Application.UseCase.ToUser.Delete;
 using FleetManager.Application.UseCase.ToUser.GetProfile;
 using FleetManager.Application.UseCase.ToUser.Register;
 using FleetManager.Application.UseCase.ToUser.Update;
@@ -49,7 +50,14 @@ namespace FleetManager.Api.Controllers
             await useCase.Execute(request);
             return NoContent();
         }
-
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete([FromServices] IDeleteUserUseCase useCase)
+        {
+            await useCase.Execute();
+            return NoContent();
+        }
 
     }
 }
