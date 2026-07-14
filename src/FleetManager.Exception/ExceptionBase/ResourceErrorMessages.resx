@@ -171,4 +171,7 @@
   <data name="TOKEN_INVALID_OR_MISSING" xml:space="preserve">
     <value>Invalid or missing token.</value>
   </data>
+  <data name="ADMIN_ALREADY_EXISTS" xml:space="preserve">
+    <value>Admin already exists.</value>
+  </data>
 </root>

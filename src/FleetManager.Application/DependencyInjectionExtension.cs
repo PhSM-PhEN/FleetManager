@@ -2,6 +2,7 @@
 using FleetManager.Application.UseCase.ToUser.ChangePassword;
 using FleetManager.Application.UseCase.ToUser.Delete;
 using FleetManager.Application.UseCase.ToUser.GetProfile;
+using FleetManager.Application.UseCase.ToUser.Promote;
 using FleetManager.Application.UseCase.ToUser.Register;
 using FleetManager.Application.UseCase.ToUser.Update;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +23,7 @@ namespace FleetManager.Application
             services.AddScoped<IUpdateProfileUserUseCase, UpdateProfileUserUseCase>();
             services.AddScoped<IChangePasswordUseCase, ChangPasswordUseCase>();
             services.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
+            services.AddScoped<IPromoteUserUseCase, PromoteUserUseCase>();
 
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
         }

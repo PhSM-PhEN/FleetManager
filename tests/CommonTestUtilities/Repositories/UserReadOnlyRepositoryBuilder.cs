@@ -4,7 +4,7 @@ using Moq;
 
 namespace CommonTestUtilities.Repositories
 {
-    public class UserReadOnlyRepositoryBuilder 
+    public class UserReadOnlyRepositoryBuilder
     {
         private readonly Mock<IUserReadOnlyRepository> _repository;
 
@@ -24,6 +24,11 @@ namespace CommonTestUtilities.Repositories
         public UserReadOnlyRepositoryBuilder GetById(User user)
         {
             _repository.Setup(u => u.GetUserById(user.Id)).ReturnsAsync(user);
+            return this;
+        }
+        public UserReadOnlyRepositoryBuilder ExistsByRole(string role, bool exists)
+        {
+            _repository.Setup(u => u.ExistsByRole(role)).ReturnsAsync(exists);
             return this;
         }
         public IUserReadOnlyRepository Build()
