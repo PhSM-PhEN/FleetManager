@@ -1,6 +1,7 @@
 ﻿using FleetManager.Application.UseCase.ToUser.ChangePassword;
 using FleetManager.Application.UseCase.ToUser.Delete;
 using FleetManager.Application.UseCase.ToUser.GetProfile;
+using FleetManager.Application.UseCase.ToUser.Promote;
 using FleetManager.Application.UseCase.ToUser.Register;
 using FleetManager.Application.UseCase.ToUser.Update;
 using FleetManager.Communication.Request.ToUser;
@@ -23,10 +24,10 @@ namespace FleetManager.Api.Controllers
         public async Task<IActionResult> Register([FromServices] IRegisterUserUseCase useCase, [FromBody] RequestRegisterUserJson request)
         {
             var result = await useCase.Execute(request);
-            return Created(string.Empty , result);
+            return Created(string.Empty, result);
         }
 
-        [HttpGet("Profile")]      
+        [HttpGet("Profile")]
         [ProducesResponseType(typeof(ResponseProfileUserJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetProfile([FromServices] IGetProfileUserUseCase useCase)
@@ -54,6 +55,16 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete([FromServices] IDeleteUserUseCase useCase)
+        {
+            await useCase.Execute();
+            return NoContent();
+        }
+
+        [HttpPatch("Promote")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Promote([FromServices] IPromoteUserUseCase useCase)
         {
             await useCase.Execute();
             return NoContent();

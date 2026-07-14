@@ -35,6 +35,13 @@ namespace WebApi.Tests
             return await _httpClient.PutAsJsonAsync(requestUri, request);
         }
 
+        protected async Task<HttpResponseMessage> DoPatch(string requestUri, string token = "")
+        {
+            AuthorizeRequest(token);
+
+            return await _httpClient.PatchAsync(requestUri, null);
+        }
+
 
         private void AuthorizeRequest(string token)
         {
