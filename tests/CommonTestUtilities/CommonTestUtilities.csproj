@@ -16,4 +16,8 @@
     <ProjectReference Include="..\..\src\FleetManager.Domain\FleetManager.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Request\ToAddress\" />
+  </ItemGroup>
+
 </Project>
