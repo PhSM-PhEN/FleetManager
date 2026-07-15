@@ -16,7 +16,7 @@ namespace FleetManager.Infrastructure.DataAccess.ToAddress
 
         public async Task Delete(long id)
         {
-            var address = await dbContext.Addresses.FindAsync(id);
+            var address = await GetById(id);
             dbContext.Addresses.Remove(address!);
         }
 
