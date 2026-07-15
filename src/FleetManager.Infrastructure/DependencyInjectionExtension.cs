@@ -1,10 +1,12 @@
 ﻿using FleetManager.Domain.Repositories;
+using FleetManager.Domain.Repositories.ToAddress;
 using FleetManager.Domain.Repositories.ToUser;
 using FleetManager.Domain.Security.CryptoGraphy;
 using FleetManager.Domain.Security.Token;
 using FleetManager.Domain.Services.LoggedUser;
 using FleetManager.Exception.ExceptionBase;
 using FleetManager.Infrastructure.DataAccess;
+using FleetManager.Infrastructure.DataAccess.ToAddress;
 using FleetManager.Infrastructure.DataAccess.ToUser;
 using FleetManager.Infrastructure.Extension;
 using FleetManager.Infrastructure.Security.Token;
@@ -51,11 +53,14 @@ namespace FleetManager.Infrastructure
             });
         }
         private static void AddRepositories(IServiceCollection services)
-        {
+        {   
+            // users
             services.AddScoped<IUserReadOnlyRepository, UserRepository>();
             services.AddScoped<IUserWriteOnlyRepository, UserRepository>();
 
-
+            //address
+            services.AddScoped<IAddressReadOnlyRepository, AddressRepository>();
+            services.AddScoped<IAddressWriteOnlyRepository, AddressRepository>();
 
             
             services.AddScoped<ILoggedUser, LoggedUser>();

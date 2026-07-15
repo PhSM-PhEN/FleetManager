@@ -61,11 +61,29 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Address not found..
+        /// </summary>
+        public static string ADDRESS_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("ADDRESS_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Admin already exists..
         /// </summary>
         public static string ADMIN_ALREADY_EXISTS {
             get {
                 return ResourceManager.GetString("ADMIN_ALREADY_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City required..
+        /// </summary>
+        public static string CITY_REQUIRED {
+            get {
+                return ResourceManager.GetString("CITY_REQUIRED", resourceCulture);
             }
         }
         
@@ -160,6 +178,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Number required..
+        /// </summary>
+        public static string NUMBER_REQUIRED {
+            get {
+                return ResourceManager.GetString("NUMBER_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password is required..
         /// </summary>
         public static string PASSWORD_IS_REQUIRED {
@@ -196,6 +223,24 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to State required.
+        /// </summary>
+        public static string STATE_REQUIRED {
+            get {
+                return ResourceManager.GetString("STATE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Street required..
+        /// </summary>
+        public static string STREET_REQUIRED {
+            get {
+                return ResourceManager.GetString("STREET_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The password must be more than 8 characters..
         /// </summary>
         public static string THE_PASSWORD_MUST_BE_MORE_THAN_8_CHARACTERS {
@@ -228,6 +273,24 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string USER_NOT_FOUND {
             get {
                 return ResourceManager.GetString("USER_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zipcode invalid..
+        /// </summary>
+        public static string ZIPCODE_INVALID {
+            get {
+                return ResourceManager.GetString("ZIPCODE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zipcode required..
+        /// </summary>
+        public static string ZIPCODE_REQUIRED {
+            get {
+                return ResourceManager.GetString("ZIPCODE_REQUIRED", resourceCulture);
             }
         }
     }

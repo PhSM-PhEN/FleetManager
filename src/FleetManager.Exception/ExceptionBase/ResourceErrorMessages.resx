@@ -174,4 +174,25 @@
   <data name="ADMIN_ALREADY_EXISTS" xml:space="preserve">
     <value>Admin already exists.</value>
   </data>
+  <data name="ADDRESS_NOT_FOUND" xml:space="preserve">
+    <value>Address not found.</value>
+  </data>
+  <data name="STREET_REQUIRED" xml:space="preserve">
+    <value>Street required.</value>
+  </data>
+  <data name="NUMBER_REQUIRED" xml:space="preserve">
+    <value>Number required.</value>
+  </data>
+  <data name="CITY_REQUIRED" xml:space="preserve">
+    <value>City required.</value>
+  </data>
+  <data name="STATE_REQUIRED" xml:space="preserve">
+    <value>State required</value>
+  </data>
+  <data name="ZIPCODE_REQUIRED" xml:space="preserve">
+    <value>Zipcode required.</value>
+  </data>
+  <data name="ZIPCODE_INVALID" xml:space="preserve">
+    <value>Zipcode invalid.</value>
+  </data>
 </root>
