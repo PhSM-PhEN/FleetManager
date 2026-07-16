@@ -13,7 +13,7 @@ namespace CommonTestUtilities.Request.ToAddress
                 .RuleFor(request => request.Number,  faker => faker.Address.BuildingNumber())
                 .RuleFor(request => request.City,    faker => faker.Address.City())
                 .RuleFor(request => request.State,   faker => faker.Address.StateAbbr())
-                .RuleFor(request => request.ZipCode, faker => faker.Address.ZipCode())
+                .RuleFor(request => request.ZipCode, faker => faker.Random.Replace("#####-###"))
                 .Generate();
         }        
     }

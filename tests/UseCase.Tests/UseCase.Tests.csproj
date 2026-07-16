@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ToAddress\" />
     <Folder Include="ToUser\GetProfile\" />
     <Folder Include="ToUser\Update\" />
   </ItemGroup>

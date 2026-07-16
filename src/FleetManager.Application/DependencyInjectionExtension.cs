@@ -1,4 +1,5 @@
 ﻿using FleetManager.Application.UseCase.DoLogin;
+using FleetManager.Application.UseCase.ToAddress.Register;
 using FleetManager.Application.UseCase.ToUser.ChangePassword;
 using FleetManager.Application.UseCase.ToUser.Delete;
 using FleetManager.Application.UseCase.ToUser.GetProfile;
@@ -18,14 +19,18 @@ namespace FleetManager.Application
 
         private static void AddUseCase(IServiceCollection services)
         {
+            // user 
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
             services.AddScoped<IGetProfileUserUseCase, GetProfileUserUseCase>();
             services.AddScoped<IUpdateProfileUserUseCase, UpdateProfileUserUseCase>();
             services.AddScoped<IChangePasswordUseCase, ChangPasswordUseCase>();
             services.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
             services.AddScoped<IPromoteUserUseCase, PromoteUserUseCase>();
-
+            // login
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
+            // adress
+            services.AddScoped<IRegisterAddressUseCase, RegisterAddressUseCase>();
+
         }
     }
 }

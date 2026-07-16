@@ -15,7 +15,7 @@ namespace WebApi.Tests
     {
         public UserIdentityManager USER_ADM { get; private set; } = default!;
         public UserIdentityManager USER_TEAM_MEMBER { get; private set;  } = default!;
-
+        public AddressIdentityManager ADDRESS_TEAM_MEMBER { get ;  private set ;} = default!;
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
             builder.UseEnvironment("Test")
@@ -42,6 +42,18 @@ namespace WebApi.Tests
             AddUserAdmin(dbContext, passwordEncrypter, accesTokenGenerator);
             AddUserTeamMember(dbContext, passwordEncrypter, accesTokenGenerator);
             dbContext.SaveChanges();
+
+            AddAdress(dbContext);
+            dbContext.SaveChanges();
+            
+        }
+        private Address AddAdress(FleetManagerDbContext dbContext)
+        {
+            var address = AddressBuilder.Build(1);
+            dbContext.Addresses.Add(address);
+
+            ADDRESS_TEAM_MEMBER = new AddressIdentityManager(address);
+            return address;
         }
 
         private User AddUserTeamMember(FleetManagerDbContext dbContext, IPasswordEncrypter passwordEncrypter, IAccessTokenGenerator accessTokenGenerator)
@@ -58,6 +70,7 @@ namespace WebApi.Tests
             return user;
         }
 
+
         private User AddUserAdmin(FleetManagerDbContext dbContext, IPasswordEncrypter passwordEncrypter, IAccessTokenGenerator tokenGenerator)
         {
             var user = UserBuilder.Build();
@@ -72,5 +85,6 @@ namespace WebApi.Tests
 
             return user;
         }
+
     }
 }

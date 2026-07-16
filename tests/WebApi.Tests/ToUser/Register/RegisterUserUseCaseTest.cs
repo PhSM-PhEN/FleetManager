@@ -1,6 +1,5 @@
 using System.Text.Json;
 using CommonTestUtilities.Request.ToUser;
-using FleetManager.Communication.Request.ToUser;
 using FleetManager.Exception.ExceptionBase;
 using Shouldly;
 

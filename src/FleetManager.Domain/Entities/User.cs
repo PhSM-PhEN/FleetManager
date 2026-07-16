@@ -11,6 +11,7 @@ namespace FleetManager.Domain.Entities
         public Guid UserIdentifier { get; private set; }
         public string Role { get; private set; } = Roles.TEAM_MEMBER;
 
+        protected User() {}
         public User(string name, string email, string password)
         {
             Name = name;
