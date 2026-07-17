@@ -18,7 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="UseCase\ToAddress\Delete\" />
+    <Folder Include="UseCase\ToAddress\GetAll\" />
+    <Folder Include="UseCase\ToAddress\GetById\" />
     <Folder Include="UseCase\ToAddress\Register\" />
+    <Folder Include="UseCase\ToAddress\Update\" />
     <Folder Include="UseCase\ToUser\GetProfile\" />
   </ItemGroup>
 

@@ -5,6 +5,6 @@ namespace FleetManager.Application.UseCase.ToAddress.Register
 {
     public interface IRegisterAddressUseCase
     {
-        Task<ResponseAddressJson> Execute(RequestAddressJson request);
+        Task<ResponseShortAddressJson> Execute(RequestAddressJson request);
     }
 }

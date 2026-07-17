@@ -1,5 +1,9 @@
 ﻿using FleetManager.Application.UseCase.DoLogin;
+using FleetManager.Application.UseCase.ToAddress.Delete;
+using FleetManager.Application.UseCase.ToAddress.GetAll;
+using FleetManager.Application.UseCase.ToAddress.GetById;
 using FleetManager.Application.UseCase.ToAddress.Register;
+using FleetManager.Application.UseCase.ToAddress.Update;
 using FleetManager.Application.UseCase.ToUser.ChangePassword;
 using FleetManager.Application.UseCase.ToUser.Delete;
 using FleetManager.Application.UseCase.ToUser.GetProfile;
@@ -30,6 +34,10 @@ namespace FleetManager.Application
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
             // adress
             services.AddScoped<IRegisterAddressUseCase, RegisterAddressUseCase>();
+            services.AddScoped<IGetAllAddressUseCase, GetAllAddressUseCase>();
+            services.AddScoped<IGetByIdAddressUseCase, GetByIdAddressUseCase>();
+            services.AddScoped<IUpdateAddressUseCase, UpdateAddressUseCase>();
+            services.AddScoped<IDeleteAddressUseCase, DeleteAddressUseCase>();
 
         }
     }
