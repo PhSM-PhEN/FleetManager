@@ -18,5 +18,9 @@ namespace FleetManager.Application.Extensions
                 ZipCode = address.ZipCode,
             };
         }
+        public static List<ResponseAddressJson> ToResponse(List<Address> addresses)
+        {
+            return addresses.Select(a => a.ToResponse()).ToList();
+        }
     }
 }
