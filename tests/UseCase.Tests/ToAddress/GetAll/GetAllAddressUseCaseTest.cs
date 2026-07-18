@@ -22,6 +22,17 @@ namespace UseCase.Tests.ToAddress.GetAll
             result.PageSize.ShouldBe(10);
             result.TotalCount.ShouldBe(addresses.Count);
         }
+        [Fact]
+        public async Task Success_Calculates_TotalPages_Correctly()
+        {
+            var addresses = AddressBuilder.Collection();
+            var totalCount = 25;
+
+            var useCase = CreateUseCase(1, 10, addresses, totalCount);
+            var result = await useCase.Execute(1, 10);
+
+            result.TotalPages.ShouldBe(3); 
+        }
 
         [Fact]
         public async Task Success_Invalid_PageNumber_Defaults_To_One()
@@ -33,6 +44,7 @@ namespace UseCase.Tests.ToAddress.GetAll
 
             result.PageNumber.ShouldBe(1);
         }
+
 
         [Fact]
         public async Task Success_Invalid_PageSize_Defaults_To_Ten()
