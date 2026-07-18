@@ -3,7 +3,7 @@ using FleetManager.Application.UseCase.ToAddress;
 using FleetManager.Exception.ExceptionBase;
 using Shouldly;
 
-namespace Validator.Tests.Address
+namespace Validator.Tests.ToAddress
 {
     public class AddressValidatorTest
     {

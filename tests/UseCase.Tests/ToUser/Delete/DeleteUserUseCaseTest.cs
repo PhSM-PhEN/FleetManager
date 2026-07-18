@@ -27,7 +27,7 @@ namespace UseCase.Tests.ToUser.Delete
             var user = UserBuilder.Build();
 
             var loggedUser = LoggedUserBuilder.Build(user);
-            var repository = new UserWriteOnlyRepositoryBuilder().Build(); 
+            var repository = new UserWriteOnlyRepositoryBuilder().Build();
             var unitOfWork = UnitOfWorkBuilder.Build();
 
             var useCase = new DeleteUserUseCase(loggedUser, repository, unitOfWork);
@@ -42,7 +42,7 @@ namespace UseCase.Tests.ToUser.Delete
         {
             var loggedUser = LoggedUserBuilder.Build(user);
             var repository = new UserWriteOnlyRepositoryBuilder()
-                .GetUserById(user)  
+                .GetUserById(user)
                 .Delete(user)
                 .Build();
             var unitOfWork = UnitOfWorkBuilder.Build();
