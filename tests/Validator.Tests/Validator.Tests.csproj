@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="ToUser\" />
+    <Folder Include="ToAddress\" />
   </ItemGroup>
 
   <ItemGroup>
