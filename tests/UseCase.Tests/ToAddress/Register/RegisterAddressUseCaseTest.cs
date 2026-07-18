@@ -9,7 +9,7 @@ namespace UseCase.Tests.ToAddress.Register
     public class RegisterAddressUseCaseTest
     {
         [Fact]
-        public async Task Succes()
+        public async Task Success()
         {
             var request = RequestAddressJsonBuilder.Build();
             var useCase = CreateUseCase();
