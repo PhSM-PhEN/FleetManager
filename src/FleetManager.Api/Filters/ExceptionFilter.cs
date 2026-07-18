@@ -1,4 +1,4 @@
-﻿using FleetManager.Communication.Responses;
+﻿using FleetManager.Communication.Response;
 using FleetManager.Exception.ExceptionBase;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;

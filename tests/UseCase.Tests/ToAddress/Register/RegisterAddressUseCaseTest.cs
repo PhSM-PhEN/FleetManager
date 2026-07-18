@@ -4,7 +4,7 @@ using FleetManager.Application.UseCase.ToAddress.Register;
 using FleetManager.Exception.ExceptionBase;
 using Shouldly;
 
-namespace UseCase.Tests.ToAddress
+namespace UseCase.Tests.ToAddress.Register
 {
     public class RegisterAddressUseCaseTest
     {

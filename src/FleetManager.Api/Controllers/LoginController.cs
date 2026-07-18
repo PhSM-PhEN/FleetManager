@@ -1,7 +1,7 @@
 ﻿using FleetManager.Application.UseCase.DoLogin;
 using FleetManager.Communication.Request.ToUser;
+using FleetManager.Communication.Response;
 using FleetManager.Communication.Response.ToUser;
-using FleetManager.Communication.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
