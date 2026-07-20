@@ -88,6 +88,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CPF invalid..
+        /// </summary>
+        public static string CPF_INVALID {
+            get {
+                return ResourceManager.GetString("CPF_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email already registered..
         /// </summary>
         public static string EMAIL_ALREADY_REGISTERED {

@@ -25,6 +25,7 @@ namespace FleetManager.Domain.Entities
             City = city;
             State = state;
             ZipCode = zipCode;
+            
         }
 
     }

@@ -10,6 +10,7 @@ namespace FleetManager.Infrastructure.DataAccess
         
         public DbSet<User> Users { get; set; }
         public DbSet<Address> Addresses {get ; set ;}
+        public DbSet<Tenant> Tenants { get; set; }
         public DbSet<HistoryLog> HistoryLogs { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken ct = default)
@@ -78,10 +79,21 @@ namespace FleetManager.Infrastructure.DataAccess
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.Email)
                 .IsUnique();
+
+            modelBuilder.Entity<Tenant>()
+                .OwnsOne(t => t.DriverLicense);
+
+            modelBuilder.Entity<Tenant>()
+                .OwnsOne(t => t.Contact);
+
+            modelBuilder.Entity<Tenant>()
+                .OwnsOne(t => t.Cpf, cpf =>
+                {
+                    cpf.HasIndex(c => c.Number).IsUnique();
+                });
         }
 
 
 
-        
     }
 }

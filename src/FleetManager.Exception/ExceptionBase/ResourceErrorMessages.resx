@@ -195,4 +195,7 @@
   <data name="ZIPCODE_INVALID" xml:space="preserve">
     <value>Zipcode invalid.</value>
   </data>
+  <data name="CPF_INVALID" xml:space="preserve">
+    <value>CPF invalid.</value>
+  </data>
 </root>

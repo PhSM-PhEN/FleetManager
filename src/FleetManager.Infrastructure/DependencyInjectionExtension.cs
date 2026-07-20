@@ -1,5 +1,6 @@
 ﻿using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToAddress;
+using FleetManager.Domain.Repositories.ToTenant;
 using FleetManager.Domain.Repositories.ToUser;
 using FleetManager.Domain.Security.CryptoGraphy;
 using FleetManager.Domain.Security.Token;
@@ -7,6 +8,7 @@ using FleetManager.Domain.Services.LoggedUser;
 using FleetManager.Exception.ExceptionBase;
 using FleetManager.Infrastructure.DataAccess;
 using FleetManager.Infrastructure.DataAccess.ToAddress;
+using FleetManager.Infrastructure.DataAccess.ToTenant;
 using FleetManager.Infrastructure.DataAccess.ToUser;
 using FleetManager.Infrastructure.Extension;
 using FleetManager.Infrastructure.Security.Token;
@@ -61,7 +63,9 @@ namespace FleetManager.Infrastructure
             //address
             services.AddScoped<IAddressReadOnlyRepository, AddressRepository>();
             services.AddScoped<IAddressWriteOnlyRepository, AddressRepository>();
-
+            // tenant
+            services.AddScoped<ITenantWriteOnlyRepository, TenantRepository>();
+            services.AddScoped<ITenanteReadOnlyRepository, TenantRepository>();
             
             services.AddScoped<ILoggedUser, LoggedUser>();
 
