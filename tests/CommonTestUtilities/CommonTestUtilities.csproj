@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <Folder Include="Request\ToAddress\" />
+    <Folder Include="Request\ToTenant\" />
   </ItemGroup>
 
 </Project>
