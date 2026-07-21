@@ -4,20 +4,32 @@ using FleetManager.Communication.Response.ToRenant;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Entities.ValueObjects;
 using FleetManager.Domain.Repositories;
+using FleetManager.Domain.Repositories.ToAddress;
 using FleetManager.Domain.Repositories.ToTenant;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToTenant.Register
 {
-    public class RegisterTenantUseCase(ITenantWriteOnlyRepository repository, IUnitOfWork unitOfWork) : IRegisterTenantUseCase
+    public class RegisterTenantUseCase(ITenantWriteOnlyRepository repository,IAddressReadOnlyRepository addressReadOnly, ITenanteReadOnlyRepository tenantReadOnly , IUnitOfWork unitOfWork) : IRegisterTenantUseCase
     {
         public async Task<ResponseRegiserTenantJson> Execute(RequestTenantJson request)
         {
             Validate(request);
+
+           _ = await addressReadOnly.GetById(request.AddressId) ??
+                throw new NotFoundException(ResourceErrorMessages.ADDRESS_NOT_FOUND);
+
+
             var cpf = new Cpf(request.Cpf);
+
+            if (await tenantReadOnly.ExistByCpf(cpf.Number))
+            {
+                throw new ErrorOnValidationException(["ResourceErrorMessages.CPF_ALREADY_REGISTERED"]);
+            }
+
             var driveLicense = new DriverLicense(request.DriverLicenseNumber, request.DriverLicenseCategory);
             var contact = new Contact(request.PhoneNumber, request.Email);
-            var tenant = new Tenant(request.Name, cpf , request.Rg, driveLicense, contact, request.AddressId );
+            var tenant = new Tenant(request.Name, cpf , request.Rg, driveLicense, contact, request.AddressId);
             
             await repository.Add(tenant);
             await unitOfWork.Commit();

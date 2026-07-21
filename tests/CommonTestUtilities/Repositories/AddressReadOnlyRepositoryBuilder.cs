@@ -12,7 +12,7 @@ namespace CommonTestUtilities.Repositories
         {
             _repository = new Mock<IAddressReadOnlyRepository>();
         }
-
+    
         public AddressReadOnlyRepositoryBuilder GetAll(
             int pageNumber, int pageSize, List<Address> addresses, int totalCount)
         {

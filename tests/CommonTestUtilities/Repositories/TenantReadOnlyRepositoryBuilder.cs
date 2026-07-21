@@ -16,6 +16,11 @@ namespace CommonTestUtilities.Repositories
              _repository.Setup(t => t.GetAll(pageNumber, pageSize)).ReturnsAsync((tenants, totalCount));
              return this;
         }
+          public TenantReadOnlyRepositoryBuilder ExistByCpf(string cpf, bool exists = false)
+        {
+            _repository.Setup(t => t.ExistByCpf(cpf)).ReturnsAsync(exists);
+            return this;
+        }
         public TenantReadOnlyRepositoryBuilder GetById(Tenant? tenant, long id)
         {
             _repository.Setup(t => t.GetById(id)).ReturnsAsync(tenant);

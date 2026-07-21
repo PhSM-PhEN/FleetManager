@@ -17,7 +17,12 @@ namespace FleetManager.Infrastructure.Services.LoggedUser
 
             var name = claims.FindFirst(ClaimTypes.Name)?.Value ?? string.Empty;
             var role = claims.FindFirst(ClaimTypes.Role)?.Value ?? string.Empty;
-            var id = long.Parse(claims.FindFirst("db_id")?.Value ?? "0");
+
+            var dbIdClaim = claims.FindFirst("db_id")?.Value
+                    ?? throw new InvalidOperationException(ResourceErrorMessages.TOKEN_INVALID_OR_MISSING);
+
+            if (!long.TryParse(dbIdClaim, out var id))
+                throw new InvalidOperationException(ResourceErrorMessages.TOKEN_INVALID_OR_MISSING);
 
             var user = new User(id, Guid.Parse(identifier), name, role);
 

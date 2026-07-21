@@ -36,15 +36,8 @@ namespace FleetManager.Domain.Entities
         {
             Password = encryptedPassword;
         }
-        public void PromoteToAdmin()
-        {
-            if (Role == Roles.ADMIN)
-            {
-                
-            }
-            Role = Roles.ADMIN;
-
-        }
+        public void PromoteToAdmin() => Role = Roles.ADMIN;
+        
 
 
         public void DemoteToTeamMember() => Role = Roles.TEAM_MEMBER;

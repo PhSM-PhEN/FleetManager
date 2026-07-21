@@ -37,13 +37,13 @@ namespace FleetManager.Infrastructure.DataAccess.ToUser
             return await dbContext.Users.AsNoTracking().FirstOrDefaultAsync(user => user.Email.Equals(email));
         }
 
-        async Task<User> IUserReadOnlyRepository.GetUserById(long id)
+        async Task<User?> IUserReadOnlyRepository.GetUserById(long id)
         {
-            return await dbContext.Users.AsNoTracking().FirstAsync(user => user.Id == id);
+            return await dbContext.Users.AsNoTracking().FirstOrDefaultAsync(user => user.Id == id);
         }
-        async Task<User> IUserWriteOnlyRepository.GetUserById(long id)
+        async Task<User?> IUserWriteOnlyRepository.GetUserById(long id)
         {
-            return await dbContext.Users.FirstAsync(user => user.Id == id);
+            return await dbContext.Users.FirstOrDefaultAsync(user => user.Id == id);
         }
         public void Update(User user)
         {

@@ -6,7 +6,7 @@ namespace FleetManager.Domain.Repositories.ToUser
     {
         Task Add(User user);
         Task Delete(User user);
-        Task<User> GetUserById(long id);
+        Task<User?> GetUserById(long id);
         void Update(User user);
     }
 }

@@ -31,17 +31,22 @@ namespace FleetManager.Infrastructure.DataAccess.ToTenant
 
         public async Task<Tenant?> GetById(long id)
         {
-            return await dbContext.Tenants.AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);
+            return await dbContext.Tenants.FirstOrDefaultAsync(t => t.Id == id);
+        }
+
+        public async Task<bool> ExistByCpf(string cpf)
+        {
+            return await dbContext.Tenants.AsNoTracking().AnyAsync(t => t.Cpf.Number == cpf);
         }
 
         public void Update(Tenant tenant)
         {
-            throw new NotImplementedException();
+            dbContext.Tenants.Update(tenant);
         }
 
-        async Task<Tenant?> ITenantWriteOnlyRepository.GetById(long id)
+        async Task<Tenant?> ITenanteReadOnlyRepository.GetById(long id)
         {
-            return await dbContext.Tenants.FirstOrDefaultAsync(t => t.Id == id);
+            return await dbContext.Tenants.AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);
         }
     }
 }
