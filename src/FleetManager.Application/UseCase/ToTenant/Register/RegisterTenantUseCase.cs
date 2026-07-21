@@ -10,7 +10,9 @@ using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToTenant.Register
 {
-    public class RegisterTenantUseCase(ITenantWriteOnlyRepository repository,IAddressReadOnlyRepository addressReadOnly, ITenanteReadOnlyRepository tenantReadOnly , IUnitOfWork unitOfWork) : IRegisterTenantUseCase
+
+    public class RegisterTenantUseCase(ITenantWriteOnlyRepository repository, ITenanteReadOnlyRepository tenantReadOnly ,IAddressReadOnlyRepository addressReadOnly , IUnitOfWork unitOfWork) : IRegisterTenantUseCase
+
     {
         public async Task<ResponseRegiserTenantJson> Execute(RequestTenantJson request)
         {
