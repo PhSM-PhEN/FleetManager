@@ -198,4 +198,22 @@
   <data name="CPF_INVALID" xml:space="preserve">
     <value>CPF invalid.</value>
   </data>
+  <data name="CPF_REQUIRED" xml:space="preserve">
+    <value>CPF required.</value>
+  </data>
+  <data name="RG_REQUIRED" xml:space="preserve">
+    <value>RG required.</value>
+  </data>
+  <data name="DRIVER_LICENSE_NUMBER_REQUIRED" xml:space="preserve">
+    <value>Driver license number required.</value>
+  </data>
+  <data name="DRIVER_LICENSE_CATEGORY_REQUIRED" xml:space="preserve">
+    <value>Drive license category required.</value>
+  </data>
+  <data name="PHONE_NUMBER_REQUIRED" xml:space="preserve">
+    <value>Phone number required.</value>
+  </data>
+  <data name="ADDRESS_ID_REQUIRED" xml:space="preserve">
+    <value>Address id required.</value>
+  </data>
 </root>

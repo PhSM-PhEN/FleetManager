@@ -61,6 +61,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Address id required..
+        /// </summary>
+        public static string ADDRESS_ID_REQUIRED {
+            get {
+                return ResourceManager.GetString("ADDRESS_ID_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address not found..
         /// </summary>
         public static string ADDRESS_NOT_FOUND {
@@ -93,6 +102,33 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string CPF_INVALID {
             get {
                 return ResourceManager.GetString("CPF_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CPF required..
+        /// </summary>
+        public static string CPF_REQUIRED {
+            get {
+                return ResourceManager.GetString("CPF_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drive license category required..
+        /// </summary>
+        public static string DRIVER_LICENSE_CATEGORY_REQUIRED {
+            get {
+                return ResourceManager.GetString("DRIVER_LICENSE_CATEGORY_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Driver license number required..
+        /// </summary>
+        public static string DRIVER_LICENSE_NUMBER_REQUIRED {
+            get {
+                return ResourceManager.GetString("DRIVER_LICENSE_NUMBER_REQUIRED", resourceCulture);
             }
         }
         
@@ -228,6 +264,24 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string PASSWORD_MUST_CONTAIN_NUMBER {
             get {
                 return ResourceManager.GetString("PASSWORD_MUST_CONTAIN_NUMBER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone number required..
+        /// </summary>
+        public static string PHONE_NUMBER_REQUIRED {
+            get {
+                return ResourceManager.GetString("PHONE_NUMBER_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RG required..
+        /// </summary>
+        public static string RG_REQUIRED {
+            get {
+                return ResourceManager.GetString("RG_REQUIRED", resourceCulture);
             }
         }
         
