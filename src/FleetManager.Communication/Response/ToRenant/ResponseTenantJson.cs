@@ -1,6 +1,6 @@
 namespace FleetManager.Communication.Response.ToRenant
 {
-    public class ResponseRegiserTenantJson
+    public class ResponseTenantJson
     {
         public long Id {get ; set ;}
         public string Name {get ; set ;} = string.Empty;

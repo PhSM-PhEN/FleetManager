@@ -10,7 +10,6 @@
     <Folder Include="Request\ToAddress\" />
     <Folder Include="Request\ToTenant\" />
     <Folder Include="Response\ToAddress\" />
-    <Folder Include="Response\ToRenant\" />
   </ItemGroup>
 
 </Project>

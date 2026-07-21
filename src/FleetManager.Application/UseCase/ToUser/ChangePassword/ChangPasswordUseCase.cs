@@ -15,7 +15,9 @@ namespace FleetManager.Application.UseCase.ToUser.ChangePassword
         public async Task Execute(RequestChangPasswordJson request)
         {
             var loggedUser = await logged.Get();
-            var user = await repository.GetUserById(loggedUser.Id);
+            var user = await repository.GetUserById(loggedUser.Id)
+                        ?? throw new NotFoundException(ResourceErrorMessages.USER_NOT_FOUND);
+
             Validate(request, user);
 
             user.ChangePassword(encrypter.Encrypt(request.NewPassword));

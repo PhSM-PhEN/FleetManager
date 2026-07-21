@@ -4,12 +4,16 @@ using FleetManager.Application.UseCase.ToAddress.GetAll;
 using FleetManager.Application.UseCase.ToAddress.GetById;
 using FleetManager.Application.UseCase.ToAddress.Register;
 using FleetManager.Application.UseCase.ToAddress.Update;
+using FleetManager.Application.UseCase.ToTenant.GetAll;
+using FleetManager.Application.UseCase.ToTenant.GetById;
+using FleetManager.Application.UseCase.ToTenant.Register;
 using FleetManager.Application.UseCase.ToUser.ChangePassword;
 using FleetManager.Application.UseCase.ToUser.Delete;
 using FleetManager.Application.UseCase.ToUser.GetProfile;
 using FleetManager.Application.UseCase.ToUser.Promote;
 using FleetManager.Application.UseCase.ToUser.Register;
 using FleetManager.Application.UseCase.ToUser.Update;
+using FleetManager.Domain.Entities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace FleetManager.Application
@@ -32,12 +36,16 @@ namespace FleetManager.Application
             services.AddScoped<IPromoteUserUseCase, PromoteUserUseCase>();
             // login
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
-            // adress
+            // address
             services.AddScoped<IRegisterAddressUseCase, RegisterAddressUseCase>();
             services.AddScoped<IGetAllAddressUseCase, GetAllAddressUseCase>();
             services.AddScoped<IGetByIdAddressUseCase, GetByIdAddressUseCase>();
             services.AddScoped<IUpdateAddressUseCase, UpdateAddressUseCase>();
             services.AddScoped<IDeleteAddressUseCase, DeleteAddressUseCase>();
+            //tenant
+            services.AddScoped<IRegisterTenantUseCase, RegisterTenantUseCase>();
+            services.AddScoped<IGetAllTenantUseCase , GetAllTenantUseCase>();
+            services.AddScoped<IGetByIdTenantUseCase, GetByIdTenantUseCase>();
 
         }
     }

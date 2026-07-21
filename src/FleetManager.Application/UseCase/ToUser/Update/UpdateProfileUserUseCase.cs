@@ -13,7 +13,8 @@ namespace FleetManager.Application.UseCase.ToUser.Update
         {
             var loggedUser = await logged.Get();
 
-            var user = await repository.GetUserById(loggedUser.Id);
+            var user = await repository.GetUserById(loggedUser.Id)
+                        ?? throw new NotFoundException(ResourceErrorMessages.USER_NOT_FOUND);
             await Validate(request, user.Email);
 
             user.Update(request.Name, request.Email);

@@ -46,7 +46,9 @@ namespace FleetManager.Infrastructure.DataAccess.ToTenant
 
         async Task<Tenant?> ITenanteReadOnlyRepository.GetById(long id)
         {
-            return await dbContext.Tenants.AsNoTracking().FirstOrDefaultAsync(t => t.Id == id);
+            return await dbContext.Tenants.AsNoTracking()
+            .Include(t => t.Address)
+            .FirstOrDefaultAsync(t => t.Id == id);
         }
     }
 }
