@@ -7,10 +7,11 @@ namespace FleetManager.Infrastructure.DataAccess
 {
     public class FleetManagerDbContext(DbContextOptions dbContextOptions, IHttpContextAccessor httpContextAccessor, ILoggedUser loggedUser) : DbContext(dbContextOptions)
     {
-        
+
         public DbSet<User> Users { get; set; }
-        public DbSet<Address> Addresses {get ; set ;}
+        public DbSet<Address> Addresses { get; set; }
         public DbSet<Tenant> Tenants { get; set; }
+        public DbSet<Company> Companys { get; set; }
         public DbSet<HistoryLog> HistoryLogs { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken ct = default)
@@ -91,6 +92,9 @@ namespace FleetManager.Infrastructure.DataAccess
                 {
                     cpf.HasIndex(c => c.Number).IsUnique();
                 });
+            modelBuilder.Entity<Company>()
+                .HasIndex(c => c.Cnpj)
+                .IsUnique();
         }
 
 

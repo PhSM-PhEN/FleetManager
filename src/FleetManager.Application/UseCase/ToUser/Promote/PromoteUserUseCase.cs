@@ -20,6 +20,7 @@ namespace FleetManager.Application.UseCase.ToUser.Promote
 
             var user = await repository.GetUserById(loggedUser.Id)
                             ?? throw new NotFoundException(ResourceErrorMessages.USER_NOT_FOUND);
+
             user.PromoteToAdmin();
             repository.Update(user);
             await unitOfWork.Commit();

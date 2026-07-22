@@ -216,4 +216,19 @@
   <data name="ADDRESS_ID_REQUIRED" xml:space="preserve">
     <value>Address id required.</value>
   </data>
+  <data name="USER_ALREADY_ADMIN" xml:space="preserve">
+    <value>User already admin.</value>
+  </data>
+  <data name="CNPJ_REQUIRED" xml:space="preserve">
+    <value>CNPJ required.</value>
+  </data>
+  <data name="CNPJ_INVALID" xml:space="preserve">
+    <value>CNPJ invalid.</value>
+  </data>
+  <data name="CNPJ_ALREADY_REGISTERED" xml:space="preserve">
+    <value>CNPJ already registered.</value>
+  </data>
+  <data name="COMPANY_NOT_FOUND" xml:space="preserve">
+    <value>Company not found.</value>
+  </data>
 </root>

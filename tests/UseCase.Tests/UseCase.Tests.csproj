@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Tenant\Register\" />
+    <Folder Include="ToTenant\Register\" />
     <Folder Include="ToUser\GetProfile\" />
     <Folder Include="ToUser\Update\" />
   </ItemGroup>
