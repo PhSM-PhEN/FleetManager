@@ -12,7 +12,7 @@ namespace UseCase.Tests.ToCompany.Update
         [Fact]
         public async Task Success()
         {
-            var address = AddressBuilder.Build();
+            var address = AddressBuilder.Build(1);
             var company = CompanyBuilder.Build(addressId: address.Id);
             var request = RequestCompanyJsonBuilder.Build(address.Id);
 

@@ -12,7 +12,7 @@ namespace UseCase.Tests.ToCompany.Register
         [Fact]
         public async Task Success()
         {
-            var address = AddressBuilder.Build();
+            var address = AddressBuilder.Build(1);
             var request = RequestCompanyJsonBuilder.Build(address.Id);
 
             var useCase = CreateUseCase(address: address, cnpjExists: false);
@@ -25,7 +25,7 @@ namespace UseCase.Tests.ToCompany.Register
         [Fact]
         public async Task Error_Name_Empty()
         {
-            var address = AddressBuilder.Build();
+            var address = AddressBuilder.Build(1);
             var request = RequestCompanyJsonBuilder.Build(address.Id);
             request.Name = string.Empty;
 
@@ -50,7 +50,7 @@ namespace UseCase.Tests.ToCompany.Register
         [Fact]
         public async Task Error_Cnpj_Already_Registered()
         {
-            var address = AddressBuilder.Build();
+            var address = AddressBuilder.Build(1);
             var request = RequestCompanyJsonBuilder.Build(address.Id);
 
             var useCase = CreateUseCase(address: address, cnpjExists: true, cnpj: request.Cnpj);
