@@ -97,6 +97,42 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CNPJ already registered..
+        /// </summary>
+        public static string CNPJ_ALREADY_REGISTERED {
+            get {
+                return ResourceManager.GetString("CNPJ_ALREADY_REGISTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CNPJ invalid..
+        /// </summary>
+        public static string CNPJ_INVALID {
+            get {
+                return ResourceManager.GetString("CNPJ_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CNPJ required..
+        /// </summary>
+        public static string CNPJ_REQUIRED {
+            get {
+                return ResourceManager.GetString("CNPJ_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company not found..
+        /// </summary>
+        public static string COMPANY_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("COMPANY_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CPF invalid..
         /// </summary>
         public static string CPF_INVALID {

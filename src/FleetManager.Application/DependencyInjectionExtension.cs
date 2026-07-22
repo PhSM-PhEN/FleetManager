@@ -4,6 +4,11 @@ using FleetManager.Application.UseCase.ToAddress.GetAll;
 using FleetManager.Application.UseCase.ToAddress.GetById;
 using FleetManager.Application.UseCase.ToAddress.Register;
 using FleetManager.Application.UseCase.ToAddress.Update;
+using FleetManager.Application.UseCase.ToCompany.Delete;
+using FleetManager.Application.UseCase.ToCompany.GetAll;
+using FleetManager.Application.UseCase.ToCompany.GetById;
+using FleetManager.Application.UseCase.ToCompany.Register;
+using FleetManager.Application.UseCase.ToCompany.Update;
 using FleetManager.Application.UseCase.ToUser.ChangePassword;
 using FleetManager.Application.UseCase.ToUser.Delete;
 using FleetManager.Application.UseCase.ToUser.GetProfile;
@@ -32,12 +37,18 @@ namespace FleetManager.Application
             services.AddScoped<IPromoteUserUseCase, PromoteUserUseCase>();
             // login
             services.AddScoped<IDoLoginUseCase, DoLoginUseCase>();
-            // adress
+            // address
             services.AddScoped<IRegisterAddressUseCase, RegisterAddressUseCase>();
             services.AddScoped<IGetAllAddressUseCase, GetAllAddressUseCase>();
             services.AddScoped<IGetByIdAddressUseCase, GetByIdAddressUseCase>();
             services.AddScoped<IUpdateAddressUseCase, UpdateAddressUseCase>();
             services.AddScoped<IDeleteAddressUseCase, DeleteAddressUseCase>();
+            // company
+            services.AddScoped<IRegisterCompanyUseCase, RegisterCompanyUseCase>();
+            services.AddScoped<IGetAllCompanyUseCase, GetAllCompanyUseCase>();
+            services.AddScoped<IGetByIdCompanyUseCase, GetByIdCompanyUseCase>();
+            services.AddScoped<IUpdateCompanyUseCase, UpdateCompanyUseCase>();
+            services.AddScoped<IDeleteCompanyUseCase, DeleteCompanyUseCase>();
 
         }
     }

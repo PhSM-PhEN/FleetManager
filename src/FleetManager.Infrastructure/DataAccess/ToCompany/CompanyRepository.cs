@@ -27,8 +27,13 @@ namespace FleetManager.Infrastructure.DataAccess.ToCompany
         public async Task<Company?> GetById(long id)
         {
             return await dbContext.Companys.FirstOrDefaultAsync(comp => comp.Id == id);
-
         }
+
+        public async Task<bool> ExistByCnpj(string cnpj)
+        {
+            return await dbContext.Companys.AsNoTracking().AnyAsync(c => c.Cnpj == cnpj);
+        }
+
         async Task<Company?> ICompanyReadOnlyRepository.GetById(long id)
         {
             return await dbContext.Companys.AsNoTracking()

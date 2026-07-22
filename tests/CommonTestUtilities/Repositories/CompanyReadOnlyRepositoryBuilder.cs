@@ -24,6 +24,12 @@ namespace CommonTestUtilities.Repositories
             return this;
         }
 
+        public CompanyReadOnlyRepositoryBuilder ExistByCnpj(string cnpj, bool exists = false)
+        {
+            _repository.Setup(c => c.ExistByCnpj(cnpj)).ReturnsAsync(exists);
+            return this;
+        }
+
         public ICompanyReadOnlyRepository Build() => _repository.Object;
     }
 }
