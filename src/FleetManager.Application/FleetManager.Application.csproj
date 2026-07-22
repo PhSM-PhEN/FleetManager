@@ -24,9 +24,11 @@
     <Folder Include="UseCase\ToAddress\Register\" />
     <Folder Include="UseCase\ToAddress\Update\" />
     <Folder Include="UseCase\ToTenant\" />
+    <Folder Include="UseCase\ToTenant\Delete\" />
     <Folder Include="UseCase\ToTenant\GetAll\" />
     <Folder Include="UseCase\ToTenant\GetById\" />
     <Folder Include="UseCase\ToTenant\Register\" />
+    <Folder Include="UseCase\ToTenant\Update\" />
     <Folder Include="UseCase\ToUser\GetProfile\" />
   </ItemGroup>
 
