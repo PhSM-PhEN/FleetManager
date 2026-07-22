@@ -1,4 +1,5 @@
 ﻿using FleetManager.Domain.Enum;
+using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Domain.Entities
 {
@@ -36,8 +37,15 @@ namespace FleetManager.Domain.Entities
         {
             Password = encryptedPassword;
         }
-        public void PromoteToAdmin() => Role = Roles.ADMIN;
-        
+        public void PromoteToAdmin()
+        {
+            if (Role == Roles.ADMIN)
+            {
+                throw new ErrorOnValidationException([ResourceErrorMessages.USER_ALREADY_ADMIN]);
+            }
+            Role = Roles.ADMIN;
+
+        }
 
 
         public void DemoteToTeamMember() => Role = Roles.TEAM_MEMBER;

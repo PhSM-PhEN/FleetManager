@@ -216,4 +216,7 @@
   <data name="ADDRESS_ID_REQUIRED" xml:space="preserve">
     <value>Address id required.</value>
   </data>
+  <data name="USER_ALREADY_ADMIN" xml:space="preserve">
+    <value>User already admin.</value>
+  </data>
 </root>
