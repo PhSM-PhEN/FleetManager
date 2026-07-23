@@ -28,9 +28,9 @@ namespace FleetManager.Domain.Entities
             
         }
 
-        public void Update(Cpf cpf, Contact contact, long addressId)
+        public void Update(Contact contact, long addressId)
         {
-            Cpf = cpf;
+            
             Contact = contact;
             AddressId = addressId;
         }

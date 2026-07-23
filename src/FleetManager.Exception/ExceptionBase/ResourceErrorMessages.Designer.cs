@@ -340,6 +340,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tenant not found..
+        /// </summary>
+        public static string TENANT_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("TENANT_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The password must be more than 8 characters..
         /// </summary>
         public static string THE_PASSWORD_MUST_BE_MORE_THAN_8_CHARACTERS {

@@ -4,6 +4,6 @@ namespace FleetManager.Application.UseCase.ToTenant.GetById
 {
     public interface IGetByIdTenantUseCase
     {
-        Task<ResponseInfoTenantJson> Execute(long id);
+        Task<ResponseTenantJson> Execute(long id);
     }
 }

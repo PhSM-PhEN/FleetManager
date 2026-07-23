@@ -5,6 +5,6 @@ namespace FleetManager.Application.UseCase.ToTenant.GetAll
 {
     public interface IGetAllTenantUseCase
     {
-        Task<ResponsePaginatedJson<ResponseTenantJson>> Execute(int pageNumber, int pageSize);
+        Task<ResponsePaginatedJson<ResponseShortTenantJson>> Execute(int pageNumber, int pageSize);
     }
 }

@@ -5,6 +5,6 @@ namespace FleetManager.Application.UseCase.ToTenant.Register
 {
     public interface IRegisterTenantUseCase
     {
-        Task<ResponseTenantJson> Execute(RequestTenantJson request);
+        Task<ResponseShortTenantJson> Execute(RequestTenantJson request);
     }
 }

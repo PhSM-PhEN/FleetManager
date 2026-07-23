@@ -19,6 +19,8 @@ using FleetManager.Application.UseCase.ToUser.Promote;
 using FleetManager.Application.UseCase.ToUser.Register;
 using FleetManager.Application.UseCase.ToUser.Update;
 using Microsoft.Extensions.DependencyInjection;
+using FleetManager.Application.UseCase.ToTenant.Update;
+using FleetManager.Application.UseCase.ToTenant.Delete;
 
 namespace FleetManager.Application
 {
@@ -50,6 +52,8 @@ namespace FleetManager.Application
             services.AddScoped<IRegisterTenantUseCase, RegisterTenantUseCase>();
             services.AddScoped<IGetAllTenantUseCase , GetAllTenantUseCase>();
             services.AddScoped<IGetByIdTenantUseCase, GetByIdTenantUseCase>();
+            services.AddScoped<IUpdateTenantUseCase, UpdateTenantUseCase>();
+            services.AddScoped<IDeleteTenantUseCase, DeleteTenantUseCase>();
             // company
             services.AddScoped<IRegisterCompanyUseCase, RegisterCompanyUseCase>();
             services.AddScoped<IGetAllCompanyUseCase, GetAllCompanyUseCase>();

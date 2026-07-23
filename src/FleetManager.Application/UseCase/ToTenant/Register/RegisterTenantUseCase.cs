@@ -14,7 +14,7 @@ namespace FleetManager.Application.UseCase.ToTenant.Register
     public class RegisterTenantUseCase(ITenantWriteOnlyRepository repository, ITenanteReadOnlyRepository tenantReadOnly ,IAddressReadOnlyRepository addressReadOnly , IUnitOfWork unitOfWork) : IRegisterTenantUseCase
 
     {
-        public async Task<ResponseTenantJson> Execute(RequestTenantJson request)
+        public async Task<ResponseShortTenantJson> Execute(RequestTenantJson request)
         {
             Validate(request);
 

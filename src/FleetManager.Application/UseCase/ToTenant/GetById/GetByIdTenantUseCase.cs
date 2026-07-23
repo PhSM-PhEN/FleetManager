@@ -7,7 +7,7 @@ namespace FleetManager.Application.UseCase.ToTenant.GetById
 {
     public class GetByIdTenantUseCase(ITenanteReadOnlyRepository repository) : IGetByIdTenantUseCase
     {
-        public async Task<ResponseInfoTenantJson> Execute(long id)
+        public async Task<ResponseTenantJson> Execute(long id)
         {
             var tenant = await repository.GetById(id) ?? 
                          throw new NotFoundException("not encontred");

@@ -5,9 +5,9 @@ namespace FleetManager.Application.Extensions;
 
 public static class TenantExtensions
 {
-    public static ResponseTenantJson ToResponse(this Tenant tenant)
+    public static ResponseShortTenantJson ToResponse(this Tenant tenant)
     {
-        return  new ResponseTenantJson
+        return  new ResponseShortTenantJson
         {
             Id = tenant.Id,
             Name = tenant.Name,
@@ -15,9 +15,9 @@ public static class TenantExtensions
         };
         
     }
-    public static ResponseInfoTenantJson ToInfoResponse(this Tenant tenant)
+    public static ResponseTenantJson ToInfoResponse(this Tenant tenant)
     {
-        return new ResponseInfoTenantJson
+        return new ResponseTenantJson
         {
             Id = tenant.Id,
             Name = tenant.Name,
@@ -30,7 +30,7 @@ public static class TenantExtensions
             Address = tenant.Address.ToResponse() 
         };
     }
-    public static List<ResponseTenantJson> ToResponse(this List<Tenant> tenants)
+    public static List<ResponseShortTenantJson> ToResponse(this List<Tenant> tenants)
     {
         return tenants.Select(t => t.ToResponse()).ToList();
     }
