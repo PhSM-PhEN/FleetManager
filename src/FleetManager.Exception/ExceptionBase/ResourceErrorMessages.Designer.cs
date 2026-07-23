@@ -133,6 +133,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CPF already registered..
+        /// </summary>
+        public static string CPF_ALREADY_REGISTERED {
+            get {
+                return ResourceManager.GetString("CPF_ALREADY_REGISTERED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CPF invalid..
         /// </summary>
         public static string CPF_INVALID {
@@ -255,6 +264,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string NAME_IS_REQUIRED {
             get {
                 return ResourceManager.GetString("NAME_IS_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New password must be different..
+        /// </summary>
+        public static string NEW_PASSWORD_MUST_BE_DIFFERENT {
+            get {
+                return ResourceManager.GetString("NEW_PASSWORD_MUST_BE_DIFFERENT", resourceCulture);
             }
         }
         

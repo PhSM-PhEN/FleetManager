@@ -7,7 +7,6 @@ using FleetManager.Communication.Request.ToAddress;
 using FleetManager.Communication.Response;
 using FleetManager.Communication.Response.ToAddress;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FleetManager.Api.Controllers
@@ -29,7 +28,7 @@ namespace FleetManager.Api.Controllers
         [HttpGet]
         [ProducesResponseType(typeof(ResponseShortAddressJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> GetAll([FromServices] IGetAllAddressUseCase useCase, [FromQuery] int pageNumber = 1, int pageSize = 10)
+        public async Task<IActionResult> GetAll([FromServices] IGetAllAddressUseCase useCase, [FromQuery] int pageNumber = 1,[FromQuery] int pageSize = 10)
         {
             var response = await useCase.Execute(pageNumber, pageSize);
 

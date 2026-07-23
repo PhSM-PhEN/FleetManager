@@ -1,4 +1,3 @@
-using FleetManager.Application.UseCase.ToAddress.Delete;
 using FleetManager.Application.UseCase.ToTenant.Delete;
 using FleetManager.Application.UseCase.ToTenant.GetAll;
 using FleetManager.Application.UseCase.ToTenant.GetById;
@@ -46,9 +45,10 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public async Task Update([FromServices] IUpdateTenantUseCase useCase, [FromRoute] long id, [FromBody] RequestUpdateTenantJson request )
+        public async Task<IActionResult> Update([FromServices] IUpdateTenantUseCase useCase, [FromRoute] long id, [FromBody] RequestUpdateTenantJson request )
         {
             await useCase.Execute(id, request);
+            return NoContent();
         }
         [HttpDelete]
         [Route("{id}")]

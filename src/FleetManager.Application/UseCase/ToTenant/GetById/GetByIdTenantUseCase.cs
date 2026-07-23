@@ -10,7 +10,7 @@ namespace FleetManager.Application.UseCase.ToTenant.GetById
         public async Task<ResponseTenantJson> Execute(long id)
         {
             var tenant = await repository.GetById(id) ?? 
-                         throw new NotFoundException("not encontred");
+                         throw new NotFoundException(ResourceErrorMessages.TENANT_NOT_FOUND);
                          
             return tenant.ToInfoResponse();
         }

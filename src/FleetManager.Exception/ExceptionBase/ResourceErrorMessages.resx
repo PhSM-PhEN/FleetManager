@@ -234,4 +234,10 @@
   <data name="TENANT_NOT_FOUND" xml:space="preserve">
     <value>Tenant not found.</value>
   </data>
+  <data name="CPF_ALREADY_REGISTERED" xml:space="preserve">
+    <value>CPF already registered.</value>
+  </data>
+  <data name="NEW_PASSWORD_MUST_BE_DIFFERENT" xml:space="preserve">
+    <value>New password must be different.</value>
+  </data>
 </root>

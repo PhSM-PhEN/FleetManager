@@ -26,7 +26,7 @@ namespace FleetManager.Application.UseCase.ToTenant.Register
 
             if (await tenantReadOnly.ExistByCpf(cpf.Number))
             {
-                throw new ErrorOnValidationException(["ResourceErrorMessages.CPF_ALREADY_REGISTERED"]);
+                throw new ErrorOnValidationException([ResourceErrorMessages.CPF_ALREADY_REGISTERED]);
             }
 
             var driveLicense = new DriverLicense(request.DriverLicenseNumber, request.DriverLicenseCategory);

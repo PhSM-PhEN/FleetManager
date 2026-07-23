@@ -31,15 +31,15 @@ namespace FleetManager.Application.UseCase.ToUser.ChangePassword
         private void Validate(RequestChangPasswordJson request, User user)
         {
             var validator = new ChangPassworValidator();
-
             var result = validator.Validate(request);
 
             var passwordMach = encrypter.Verify(request.OldPassword, user.Password);
-
             if (passwordMach == false)
-            {
                 result.Errors.Add(new ValidationFailure(string.Empty, ResourceErrorMessages.EMAIL_OR_PASSWORD_INVALID));
-            }
+
+            if (encrypter.Verify(request.NewPassword, user.Password))
+                result.Errors.Add(new ValidationFailure(string.Empty, ResourceErrorMessages.NEW_PASSWORD_MUST_BE_DIFFERENT));
+
             if (result.IsValid == false)
             {
                 var errors = result.Errors.Select(e => e.ErrorMessage).ToList();
