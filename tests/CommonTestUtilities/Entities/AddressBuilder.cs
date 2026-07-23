@@ -21,7 +21,7 @@ namespace CommonTestUtilities.Entities
             return list;
         }
 
-        public static Address Build(int? id = null)
+        public static Address Build(long? id = null)
         {
             var address = new Faker<Address>()
                 .CustomInstantiator(f => new Address(

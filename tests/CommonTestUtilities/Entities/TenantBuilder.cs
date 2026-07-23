@@ -23,7 +23,7 @@ namespace CommonTestUtilities.Entities
             return list;
         }
 
-        public static Tenant Build(int? id = null, long? addressId = null)
+        public static Tenant Build(long? id = null, long? addressId = null)
         {
             var tenant = new Faker<Tenant>()
                 .CustomInstantiator(f => new Tenant(

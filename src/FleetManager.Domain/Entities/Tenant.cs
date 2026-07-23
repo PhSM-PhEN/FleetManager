@@ -13,7 +13,7 @@ namespace FleetManager.Domain.Entities
         public long AddressId { get; private set; }
 
 
-        public Address Address { get; private set; } = default!;
+        public Address Address { get; set; } = default!;
 
         protected Tenant() { }
 

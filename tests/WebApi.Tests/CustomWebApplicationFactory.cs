@@ -17,6 +17,7 @@ namespace WebApi.Tests
         public UserIdentityManager USER_TEAM_MEMBER { get; private set;  } = default!;
         public AddressIdentityManager ADDRESS_TEAM_MEMBER { get ;  private set ;} = default!;
         public TenantIdentityManager TENANT_TEAM_MEMBER { get ; private set ;} = default!;
+        public CompanyIdentityManager COMPANY_TEAM_MEMBER { get; private set; } = default!;
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
             builder.UseEnvironment("Test")
@@ -47,8 +48,16 @@ namespace WebApi.Tests
             var address = AddAddress(dbContext);
             dbContext.SaveChanges();
             AddTenant(dbContext, address.Id);
+            AddCompany(dbContext, address.Id);
             dbContext.SaveChanges();
             
+        }
+        private Company AddCompany(FleetManagerDbContext dbContext, long addressId)
+        {
+            var company = CompanyBuilder.Build(1, addressId);
+            dbContext.Companys.Add(company);
+            COMPANY_TEAM_MEMBER = new CompanyIdentityManager(company);
+            return company;
         }
         private Tenant AddTenant(FleetManagerDbContext dbContext, long addressId)
         {

@@ -30,6 +30,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ToCompany\" />
+    <Folder Include="ToCompany\Delete\" />
+    <Folder Include="ToCompany\GetAll\" />
+    <Folder Include="ToCompany\GetById\" />
+    <Folder Include="ToCompany\Register\" />
+    <Folder Include="ToCompany\Update\" />
+    <Folder Include="ToLogin\" />
+    <Folder Include="ToTenant\" />
+    <Folder Include="ToTenant\Delete\" />
+    <Folder Include="ToTenant\GetAll\" />
+    <Folder Include="ToTenant\GetById\" />
+    <Folder Include="ToTenant\Register\" />
+    <Folder Include="ToTenant\Update\" />
     <Folder Include="ToUser\Update\" />
     <Folder Include="ToAddress\Register\" />
     <Folder Include="ToAddress\GetAll\" />

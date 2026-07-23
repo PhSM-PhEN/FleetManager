@@ -22,7 +22,7 @@ namespace CommonTestUtilities.Entities
             return list;
         }
 
-        public static Company Build(int? id = null, long? addressId = null)
+        public static Company Build(long? id = null, long? addressId = null)
         {
             var company = new Faker<Company>()
                 .CustomInstantiator(f => new Company(

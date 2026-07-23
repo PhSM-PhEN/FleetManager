@@ -22,6 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ToCompany\" />
+    <Folder Include="ToTenant\" />
     <Folder Include="ToUser\" />
     <Folder Include="ToAddress\" />
   </ItemGroup>
