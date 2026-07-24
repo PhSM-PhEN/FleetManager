@@ -21,6 +21,10 @@ using FleetManager.Application.UseCase.ToUser.Update;
 using Microsoft.Extensions.DependencyInjection;
 using FleetManager.Application.UseCase.ToTenant.Update;
 using FleetManager.Application.UseCase.ToTenant.Delete;
+using FleetManager.Application.UseCase.ToVehicle.Register;
+using FleetManager.Application.UseCase.ToVehicle.GetAll;
+using FleetManager.Application.UseCase.ToVehicle.GetById;
+using FleetManager.Application.UseCase.ToVehicle.Delete;
 
 namespace FleetManager.Application
 {
@@ -60,6 +64,12 @@ namespace FleetManager.Application
             services.AddScoped<IGetByIdCompanyUseCase, GetByIdCompanyUseCase>();
             services.AddScoped<IUpdateCompanyUseCase, UpdateCompanyUseCase>();
             services.AddScoped<IDeleteCompanyUseCase, DeleteCompanyUseCase>();
+            // vehicle
+            services.AddScoped<IRegisterVehicleUseCase, RegisterVehicleUseCase>();
+            services.AddScoped<IGetAllVehicleUseCase, GetAllVehicleUseCase>();
+            services.AddScoped<IGetByIdVehicleUseCase, GetByIdVehicleUseCase>();
+            services.AddScoped<IDeleteVehicleUseCase, DeleteVehicleUseCase>();
+            
 
         }
     }

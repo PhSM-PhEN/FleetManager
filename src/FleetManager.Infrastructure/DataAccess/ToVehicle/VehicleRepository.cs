@@ -36,7 +36,9 @@ namespace FleetManager.Infrastructure.DataAccess.ToVehicle
 
         async Task<Vehicle?> IVehicleReadOnlyRepository.GetById(long id)
         {
-            return await dbContext.Vehicles.AsNoTracking().FirstOrDefaultAsync(v => v.Id == id);
+            return await dbContext.Vehicles.AsNoTracking()
+                        .Include(c => c.Company)
+                        .FirstOrDefaultAsync(v => v.Id == id);
         }
         public void Update(Vehicle vehicle)
         {

@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="Request\ToAddress\" />
     <Folder Include="Response\ToAddress\" />
+    <Folder Include="Response\ToVehicle\" />
   </ItemGroup>
 
 </Project>
