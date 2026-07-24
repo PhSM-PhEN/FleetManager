@@ -12,6 +12,8 @@ namespace FleetManager.Infrastructure.DataAccess
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<Company> Companys { get; set; }
+        public DbSet<Vehicle> Vehicles { get; set; }
+
         public DbSet<HistoryLog> HistoryLogs { get; set; }
 
         public override async Task<int> SaveChangesAsync(CancellationToken ct = default)
@@ -95,6 +97,32 @@ namespace FleetManager.Infrastructure.DataAccess
             modelBuilder.Entity<Company>()
                 .HasIndex(c => c.Cnpj)
                 .IsUnique();
+
+            modelBuilder.Entity<Vehicle>()
+        .OwnsOne(v => v.ManufacturerYear);
+
+            modelBuilder.Entity<Vehicle>()
+                .OwnsOne(v => v.Renavam, renavam =>
+                {
+                    renavam.HasIndex(r => r.Number).IsUnique();
+                });
+
+            modelBuilder.Entity<Vehicle>()
+                .OwnsOne(v => v.ChassiNumber, chassi =>
+                {
+                    chassi.HasIndex(c => c.Number).IsUnique();
+                });
+
+            modelBuilder.Entity<Vehicle>()
+                .OwnsOne(v => v.LicensePlate, plate =>
+                {
+                    plate.HasIndex(p => p.Number).IsUnique();
+                });
+
+            modelBuilder.Entity<Vehicle>()
+                .HasOne(v => v.Company)
+                .WithMany()
+                .HasForeignKey(v => v.CompanyId);   
         }
 
 

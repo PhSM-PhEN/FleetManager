@@ -88,6 +88,33 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Brand required..
+        /// </summary>
+        public static string BRAND_REQUIRED {
+            get {
+                return ResourceManager.GetString("BRAND_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cassi number invalid..
+        /// </summary>
+        public static string CHASSI_NUMBER_INVALID {
+            get {
+                return ResourceManager.GetString("CHASSI_NUMBER_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chassi number required..
+        /// </summary>
+        public static string CHASSI_NUMBER_REQUIRED {
+            get {
+                return ResourceManager.GetString("CHASSI_NUMBER_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City required..
         /// </summary>
         public static string CITY_REQUIRED {
@@ -120,6 +147,24 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string CNPJ_REQUIRED {
             get {
                 return ResourceManager.GetString("CNPJ_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Color required..
+        /// </summary>
+        public static string COLOR_REQUIRED {
+            get {
+                return ResourceManager.GetString("COLOR_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company id required..
+        /// </summary>
+        public static string COMPANY_ID_REQUIRED {
+            get {
+                return ResourceManager.GetString("COMPANY_ID_REQUIRED", resourceCulture);
             }
         }
         
@@ -223,6 +268,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fabrication year invalid..
+        /// </summary>
+        public static string FABRICATION_YEAR_INVALID {
+            get {
+                return ResourceManager.GetString("FABRICATION_YEAR_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid email format..
         /// </summary>
         public static string INVALID_EMAIL_FORMAT {
@@ -246,6 +300,78 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string JWT_NOT_CONFIGURED {
             get {
                 return ResourceManager.GetString("JWT_NOT_CONFIGURED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to License plate invalid..
+        /// </summary>
+        public static string LICENSE_PLATE_INVALID {
+            get {
+                return ResourceManager.GetString("LICENSE_PLATE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to License plate required..
+        /// </summary>
+        public static string LICENSE_PLATE_REQUIRED {
+            get {
+                return ResourceManager.GetString("LICENSE_PLATE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manufacturing year format invalid..
+        /// </summary>
+        public static string MANUFACTURING_YEAR_FORMAT_INVALID {
+            get {
+                return ResourceManager.GetString("MANUFACTURING_YEAR_FORMAT_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manufacturing year required..
+        /// </summary>
+        public static string MANUFACTURING_YEAR_REQUIRED {
+            get {
+                return ResourceManager.GetString("MANUFACTURING_YEAR_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mileage cannot decrease..
+        /// </summary>
+        public static string MILEAGE_CANNOT_DECREASE {
+            get {
+                return ResourceManager.GetString("MILEAGE_CANNOT_DECREASE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mileage invalid..
+        /// </summary>
+        public static string MILEAGE_INVALID {
+            get {
+                return ResourceManager.GetString("MILEAGE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Model required..
+        /// </summary>
+        public static string MODEL_REQUIRED {
+            get {
+                return ResourceManager.GetString("MODEL_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Model year invalid..
+        /// </summary>
+        public static string MODEL_YEAR_INVALID {
+            get {
+                return ResourceManager.GetString("MODEL_YEAR_INVALID", resourceCulture);
             }
         }
         
@@ -327,6 +453,24 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string PHONE_NUMBER_REQUIRED {
             get {
                 return ResourceManager.GetString("PHONE_NUMBER_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Renavam invalid..
+        /// </summary>
+        public static string RENAVAM_INVALID {
+            get {
+                return ResourceManager.GetString("RENAVAM_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Renavam required..
+        /// </summary>
+        public static string RENAVAM_REQUIRED {
+            get {
+                return ResourceManager.GetString("RENAVAM_REQUIRED", resourceCulture);
             }
         }
         

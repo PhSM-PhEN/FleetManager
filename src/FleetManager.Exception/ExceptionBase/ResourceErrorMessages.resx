@@ -240,4 +240,52 @@
   <data name="NEW_PASSWORD_MUST_BE_DIFFERENT" xml:space="preserve">
     <value>New password must be different.</value>
   </data>
+  <data name="LICENSE_PLATE_INVALID" xml:space="preserve">
+    <value>License plate invalid.</value>
+  </data>
+  <data name="MANUFACTURING_YEAR_FORMAT_INVALID" xml:space="preserve">
+    <value>Manufacturing year format invalid.</value>
+  </data>
+  <data name="MODEL_YEAR_INVALID" xml:space="preserve">
+    <value>Model year invalid.</value>
+  </data>
+  <data name="FABRICATION_YEAR_INVALID" xml:space="preserve">
+    <value>Fabrication year invalid.</value>
+  </data>
+  <data name="RENAVAM_INVALID" xml:space="preserve">
+    <value>Renavam invalid.</value>
+  </data>
+  <data name="CHASSI_NUMBER_INVALID" xml:space="preserve">
+    <value>Cassi number invalid.</value>
+  </data>
+  <data name="MILEAGE_CANNOT_DECREASE" xml:space="preserve">
+    <value>Mileage cannot decrease.</value>
+  </data>
+  <data name="BRAND_REQUIRED" xml:space="preserve">
+    <value>Brand required.</value>
+  </data>
+  <data name="MODEL_REQUIRED" xml:space="preserve">
+    <value>Model required.</value>
+  </data>
+  <data name="COLOR_REQUIRED" xml:space="preserve">
+    <value>Color required.</value>
+  </data>
+  <data name="MANUFACTURING_YEAR_REQUIRED" xml:space="preserve">
+    <value>Manufacturing year required.</value>
+  </data>
+  <data name="RENAVAM_REQUIRED" xml:space="preserve">
+    <value>Renavam required.</value>
+  </data>
+  <data name="CHASSI_NUMBER_REQUIRED" xml:space="preserve">
+    <value>Chassi number required.</value>
+  </data>
+  <data name="LICENSE_PLATE_REQUIRED" xml:space="preserve">
+    <value>License plate required.</value>
+  </data>
+  <data name="MILEAGE_INVALID" xml:space="preserve">
+    <value>Mileage invalid.</value>
+  </data>
+  <data name="COMPANY_ID_REQUIRED" xml:space="preserve">
+    <value>Company id required.</value>
+  </data>
 </root>
