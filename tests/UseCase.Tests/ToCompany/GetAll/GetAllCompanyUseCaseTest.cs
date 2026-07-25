@@ -11,11 +11,8 @@ namespace UseCase.Tests.ToCompany.GetAll
         public async Task Success()
         {
             var companies = CompanyBuilder.Collection();
-            var repository = new CompanyReadOnlyRepositoryBuilder()
-                .GetAll(companies)
-                .Build();
 
-            var useCase = new GetAllCompanyUseCase(repository);
+            var useCase = CreateUseCase(companies);
             var result = await useCase.Execute();
 
             result.ShouldNotBeNull();
@@ -25,15 +22,20 @@ namespace UseCase.Tests.ToCompany.GetAll
         [Fact]
         public async Task Success_Empty_List()
         {
-            var repository = new CompanyReadOnlyRepositoryBuilder()
-                .GetAll([])
-                .Build();
-
-            var useCase = new GetAllCompanyUseCase(repository);
+            var useCase = CreateUseCase([]);
             var result = await useCase.Execute();
 
             result.ShouldNotBeNull();
             result.ShouldBeEmpty();
+        }
+
+        private static GetAllCompanyUseCase CreateUseCase(List<FleetManager.Domain.Entities.Company> companies)
+        {
+            var repository = new CompanyReadOnlyRepositoryBuilder()
+                .GetAll(companies)
+                .Build();
+
+            return new GetAllCompanyUseCase(repository);
         }
     }
 }

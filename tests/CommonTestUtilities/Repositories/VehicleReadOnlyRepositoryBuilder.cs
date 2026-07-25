@@ -21,5 +21,6 @@ namespace CommonTestUtilities.Repositories
             _repository.Setup(v => v.GetById(id)).ReturnsAsync(vehicle);
             return this;
         }
+        public IVehicleReadOnlyRepository Build() => _repository.Object;
     }
 }

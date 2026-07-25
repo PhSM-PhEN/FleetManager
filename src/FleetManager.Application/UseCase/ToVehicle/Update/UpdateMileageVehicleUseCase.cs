@@ -9,6 +9,7 @@ namespace FleetManager.Application.UseCase.ToVehicle.Update
     {
         public async Task Execute(long id, RequestMileageVehicleJson request)
         {
+            Validate(request);
             var vehicle = await repository.GetById(id) ??
                           throw new NotFoundException(ResourceErrorMessages.VEHICLE_NOT_FOUND);
             vehicle.UpdateMileage(request.MileageVehicle);
@@ -16,7 +17,7 @@ namespace FleetManager.Application.UseCase.ToVehicle.Update
             await unitOfWork.Commit();
 
         }
-        private void Validate(RequestMileageVehicleJson request)
+        private static void Validate(RequestMileageVehicleJson request)
         {
             var validator = new CurrentMiliageValidator();
             var result = validator.Validate(request);

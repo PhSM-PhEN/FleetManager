@@ -11,15 +11,11 @@ namespace UseCase.Tests.ToCompany.GetById
         [Fact]
         public async Task Success()
         {
-            var address = AddressBuilder.Build();
+            var address = AddressBuilder.Build(1);
             var company = CompanyBuilder.Build(addressId: address.Id);
             company.Address = address;
 
-            var repository = new CompanyReadOnlyRepositoryBuilder()
-                .GetById(company, company.Id)
-                .Build();
-
-            var useCase = new GetByIdCompanyUseCase(repository);
+            var useCase = CreateUseCase(company);
             var result = await useCase.Execute(company.Id);
 
             result.ShouldNotBeNull();
@@ -30,15 +26,20 @@ namespace UseCase.Tests.ToCompany.GetById
         [Fact]
         public async Task Error_Company_Not_Found()
         {
-            var repository = new CompanyReadOnlyRepositoryBuilder()
-                .GetById(null, 999)
-                .Build();
-
-            var useCase = new GetByIdCompanyUseCase(repository);
+            var useCase = CreateUseCase(company: null);
             var act = async () => await useCase.Execute(999);
 
             var result = await act.ShouldThrowAsync<NotFoundException>();
             result.Message.ShouldBe(ResourceErrorMessages.COMPANY_NOT_FOUND);
+        }
+
+        private static GetByIdCompanyUseCase CreateUseCase(FleetManager.Domain.Entities.Company? company)
+        {
+            var repository = new CompanyReadOnlyRepositoryBuilder()
+                .GetById(company, company?.Id ?? 999)
+                .Build();
+
+            return new GetByIdCompanyUseCase(repository);
         }
     }
 }

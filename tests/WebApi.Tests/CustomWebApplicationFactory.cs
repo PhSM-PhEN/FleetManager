@@ -18,6 +18,7 @@ namespace WebApi.Tests
         public AddressIdentityManager ADDRESS_TEAM_MEMBER { get ;  private set ;} = default!;
         public TenantIdentityManager TENANT_TEAM_MEMBER { get ; private set ;} = default!;
         public CompanyIdentityManager COMPANY_TEAM_MEMBER { get; private set; } = default!;
+        public VehicleIdentityManager VEHICLE_TEAM_MEMBER { get; private set; } = default!;
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
             builder.UseEnvironment("Test")
@@ -48,9 +49,19 @@ namespace WebApi.Tests
             var address = AddAddress(dbContext);
             dbContext.SaveChanges();
             AddTenant(dbContext, address.Id);
-            AddCompany(dbContext, address.Id);
+            var company = AddCompany(dbContext, address.Id);
             dbContext.SaveChanges();
             
+            AddVehicle(dbContext, company.Id);
+            dbContext.SaveChanges();
+
+        }
+        private Vehicle AddVehicle(FleetManagerDbContext dbContext, long companyId)
+        {
+            var vehicle = VehicleBuilder.Build(1 , companyId);
+            dbContext.Add(vehicle);
+            VEHICLE_TEAM_MEMBER = new VehicleIdentityManager(vehicle);
+            return vehicle;
         }
         private Company AddCompany(FleetManagerDbContext dbContext, long addressId)
         {
