@@ -288,4 +288,7 @@
   <data name="COMPANY_ID_REQUIRED" xml:space="preserve">
     <value>Company id required.</value>
   </data>
+  <data name="VEHICLE_NOT_FOUND" xml:space="preserve">
+    <value>Vehicle not found.</value>
+  </data>
 </root>

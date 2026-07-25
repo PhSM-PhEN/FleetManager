@@ -6,10 +6,10 @@ namespace FleetManager.Application.UseCase.ToVehicle.Delete
 {
     public class DeleteVehicleUseCase(IVehicleWriteOnlyRepository repository, IUnitOfWork unitOfWork) : IDeleteVehicleUseCase
     {
-        public async Task Delete(long id)
+        public async Task Execute(long id)
         {
             var vehicle = await repository.GetById(id) ??
-                throw new NotFoundException("VEHICLE_NOT_FOUND");
+                throw new NotFoundException(ResourceErrorMessages.VEHICLE_NOT_FOUND);
             
             await repository.Delete(vehicle.Id);
             await unitOfWork.Commit();

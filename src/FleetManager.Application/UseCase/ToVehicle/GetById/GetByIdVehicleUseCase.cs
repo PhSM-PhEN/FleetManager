@@ -10,7 +10,7 @@ namespace FleetManager.Application.UseCase.ToVehicle.GetById
         public async Task<ResponseVehicleJson> Execute(long id)
         {
             var vehicle = await repository.GetById(id) ??
-                throw new NotFoundException("Vehicle not found");
+                throw new NotFoundException(ResourceErrorMessages.VEHICLE_NOT_FOUND);
                 
             return vehicle.ToInfoResponse();
         }

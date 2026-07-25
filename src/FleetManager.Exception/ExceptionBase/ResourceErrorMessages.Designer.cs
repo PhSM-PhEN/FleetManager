@@ -556,6 +556,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vehicle not found..
+        /// </summary>
+        public static string VEHICLE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("VEHICLE_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zipcode invalid..
         /// </summary>
         public static string ZIPCODE_INVALID {

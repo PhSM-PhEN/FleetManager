@@ -31,7 +31,6 @@
     <Folder Include="UseCase\ToVehicle\GetAll\" />
     <Folder Include="UseCase\ToVehicle\GetById\" />
     <Folder Include="UseCase\ToVehicle\Register\" />
-    <Folder Include="UseCase\ToVehicle\Update\" />
   </ItemGroup>
 
 </Project>
