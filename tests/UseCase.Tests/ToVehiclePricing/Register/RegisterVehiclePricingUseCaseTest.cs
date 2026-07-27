@@ -12,7 +12,7 @@ namespace UseCase.Tests.ToVehiclePricing.Register
         [Fact]
         public async Task Success()
         {
-            var vehicle = VehicleBuilder.Build();
+            var vehicle = VehicleBuilder.Build(1);
             var request = RequestVehiclePricingJsonBuilder.Build(vehicle.Id);
 
             var useCase = CreateUseCase(vehicle, existingPricing: null);
@@ -52,7 +52,7 @@ namespace UseCase.Tests.ToVehiclePricing.Register
         [Fact]
         public async Task Error_Pricing_Already_Exists()
         {
-            var vehicle = VehicleBuilder.Build();
+            var vehicle = VehicleBuilder.Build(1);
             var existingPricing = VehiclePricingBuilder.Build(vehicleId: vehicle.Id);
             var request = RequestVehiclePricingJsonBuilder.Build(vehicle.Id);
 

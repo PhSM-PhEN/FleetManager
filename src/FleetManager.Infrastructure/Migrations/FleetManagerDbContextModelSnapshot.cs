@@ -222,6 +222,100 @@ namespace FleetManager.Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("FleetManager.Domain.Entities.Vehicle", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Brand")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Color")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<long>("CompanyId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<long>("CreatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("CurrentMileage")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Model")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<long?>("UpdateBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("Vehicles");
+                });
+
+            modelBuilder.Entity("FleetManager.Domain.Entities.VehiclePricing", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<long>("CreatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("DailyPrice")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<decimal>("ExcessMileageRate")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<long>("MileagePerDay")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("MileagePerMonthly")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("MonthlyPrice")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<long?>("UpdateBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<long>("VehicleId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VehicleId")
+                        .IsUnique();
+
+                    b.ToTable("VehiclePricings");
+                });
+
             modelBuilder.Entity("FleetManager.Domain.Entities.Company", b =>
                 {
                     b.HasOne("FleetManager.Domain.Entities.Address", "Address")
@@ -312,6 +406,122 @@ namespace FleetManager.Infrastructure.Migrations
 
                     b.Navigation("DriverLicense")
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("FleetManager.Domain.Entities.Vehicle", b =>
+                {
+                    b.HasOne("FleetManager.Domain.Entities.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.OwnsOne("FleetManager.Domain.Entities.ValueObjects.ChassiNumber", "ChassiNumber", b1 =>
+                        {
+                            b1.Property<long>("VehicleId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Number")
+                                .IsRequired()
+                                .HasColumnType("varchar(255)");
+
+                            b1.HasKey("VehicleId");
+
+                            b1.HasIndex("Number")
+                                .IsUnique();
+
+                            b1.ToTable("Vehicles");
+
+                            b1.WithOwner()
+                                .HasForeignKey("VehicleId");
+                        });
+
+                    b.OwnsOne("FleetManager.Domain.Entities.ValueObjects.LicensePlate", "LicensePlate", b1 =>
+                        {
+                            b1.Property<long>("VehicleId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<bool>("IsMercosul")
+                                .HasColumnType("tinyint(1)");
+
+                            b1.Property<string>("Number")
+                                .IsRequired()
+                                .HasColumnType("varchar(255)");
+
+                            b1.HasKey("VehicleId");
+
+                            b1.HasIndex("Number")
+                                .IsUnique();
+
+                            b1.ToTable("Vehicles");
+
+                            b1.WithOwner()
+                                .HasForeignKey("VehicleId");
+                        });
+
+                    b.OwnsOne("FleetManager.Domain.Entities.ValueObjects.ManufacturingYear", "ManufacturerYear", b1 =>
+                        {
+                            b1.Property<long>("VehicleId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<int>("FabricationYear")
+                                .HasColumnType("int");
+
+                            b1.Property<int>("ModelYear")
+                                .HasColumnType("int");
+
+                            b1.HasKey("VehicleId");
+
+                            b1.ToTable("Vehicles");
+
+                            b1.WithOwner()
+                                .HasForeignKey("VehicleId");
+                        });
+
+                    b.OwnsOne("FleetManager.Domain.Entities.ValueObjects.Renavam", "Renavam", b1 =>
+                        {
+                            b1.Property<long>("VehicleId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Number")
+                                .IsRequired()
+                                .HasColumnType("varchar(255)");
+
+                            b1.HasKey("VehicleId");
+
+                            b1.HasIndex("Number")
+                                .IsUnique();
+
+                            b1.ToTable("Vehicles");
+
+                            b1.WithOwner()
+                                .HasForeignKey("VehicleId");
+                        });
+
+                    b.Navigation("ChassiNumber")
+                        .IsRequired();
+
+                    b.Navigation("Company");
+
+                    b.Navigation("LicensePlate")
+                        .IsRequired();
+
+                    b.Navigation("ManufacturerYear")
+                        .IsRequired();
+
+                    b.Navigation("Renavam")
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("FleetManager.Domain.Entities.VehiclePricing", b =>
+                {
+                    b.HasOne("FleetManager.Domain.Entities.Vehicle", "Vehicle")
+                        .WithOne()
+                        .HasForeignKey("FleetManager.Domain.Entities.VehiclePricing", "VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Vehicle");
                 });
 #pragma warning restore 612, 618
         }
