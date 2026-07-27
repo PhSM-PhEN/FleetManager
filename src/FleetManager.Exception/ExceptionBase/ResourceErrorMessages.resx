@@ -321,10 +321,10 @@
   <data name="MILEAGE_PER_MONTHLY_INVALID" xml:space="preserve">
     <value>Mileage per month must be greater than zero.</value>
   </data>
-  <data name="VEHICLE_PRICING_NOT_FOUND" xml:space="preserve">
-    <value>Vehicle pricing not found.</value>
+  <data name="RENTAL_PLAN_NOT_FOUND" xml:space="preserve">
+    <value>Rental plan not found.</value>
   </data>
-  <data name="VEHICLE_PRICING_ALREADY_EXISTS" xml:space="preserve">
-    <value>This vehicle already has a pricing table registered.</value>
+  <data name="RENTAL_PLAN_ALREADY_EXISTS" xml:space="preserve">
+    <value>Rental plan already  registered.</value>
   </data>
 </root>

@@ -3,12 +3,12 @@ using FleetManager.Domain.Entities;
 
 namespace CommonTestUtilities.Entities
 {
-    public class VehiclePricingBuilder
+    public class RentalPlanBuilder
     {
-        public static VehiclePricing Build(int? id = null)
+        public static RentalPlan Build(int? id = null)
         {
-            var pricing = new Faker<VehiclePricing>()
-                .CustomInstantiator(f => new VehiclePricing(
+            var rentalPlan = new Faker<RentalPlan>()
+                .CustomInstantiator(f => new RentalPlan(
                     f.PickRandom("suv","hacth", "sedan"),
                     f.Random.Decimal(100, 400),
                     f.Random.Decimal(2500, 6000),
@@ -19,9 +19,9 @@ namespace CommonTestUtilities.Entities
                 .Generate();
 
             if (id.HasValue)
-                pricing.Id = id.Value;
+                rentalPlan.Id = id.Value;
 
-            return pricing;
+            return rentalPlan;
         }
     }
 }

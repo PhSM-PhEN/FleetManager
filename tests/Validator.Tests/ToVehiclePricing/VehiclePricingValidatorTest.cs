@@ -10,8 +10,8 @@ namespace Validator.Tests.ToVehiclePricing
         [Fact]
         public void Success()
         {
-            var validator = new VehiclePricingValidator();
-            var request = RequestVehiclePricingJsonBuilder.Build();
+            var validator = new RentalPlanValidator();
+            var request = RequestRentalPlanJsonBuilder.Build();
 
             var result = validator.Validate(request);
 
@@ -25,8 +25,8 @@ namespace Validator.Tests.ToVehiclePricing
         [InlineData(-10)]
         public void Error_DailyPrice_Not_Greater_Than_Zero(decimal dailyPrice)
         {
-            var validator = new VehiclePricingValidator();
-            var request = RequestVehiclePricingJsonBuilder.Build();
+            var validator = new RentalPlanValidator();
+            var request = RequestRentalPlanJsonBuilder.Build();
             request.DailyPrice = dailyPrice;
 
             var result = validator.Validate(request);
@@ -40,8 +40,8 @@ namespace Validator.Tests.ToVehiclePricing
         [InlineData(-10)]
         public void Error_MonthlyPrice_Not_Greater_Than_Zero(decimal monthlyPrice)
         {
-            var validator = new VehiclePricingValidator();
-            var request = RequestVehiclePricingJsonBuilder.Build();
+            var validator = new RentalPlanValidator();
+            var request = RequestRentalPlanJsonBuilder.Build();
             request.MonthlyPrice = monthlyPrice;
 
             var result = validator.Validate(request);
@@ -53,8 +53,8 @@ namespace Validator.Tests.ToVehiclePricing
         [Fact]
         public void Error_ExcessMileageRate_Negative()
         {
-            var validator = new VehiclePricingValidator();
-            var request = RequestVehiclePricingJsonBuilder.Build();
+            var validator = new RentalPlanValidator();
+            var request = RequestRentalPlanJsonBuilder.Build();
             request.ExcessMileageRate = -1;
 
             var result = validator.Validate(request);
@@ -66,8 +66,8 @@ namespace Validator.Tests.ToVehiclePricing
         [Fact]
         public void Success_ExcessMileageRate_Zero()
         {
-            var validator = new VehiclePricingValidator();
-            var request = RequestVehiclePricingJsonBuilder.Build();
+            var validator = new RentalPlanValidator();
+            var request = RequestRentalPlanJsonBuilder.Build();
             request.ExcessMileageRate = 0;
 
             var result = validator.Validate(request);
@@ -80,8 +80,8 @@ namespace Validator.Tests.ToVehiclePricing
         [InlineData(-100)]
         public void Error_MileagePerDay_Not_Greater_Than_Zero(long mileagePerDay)
         {
-            var validator = new VehiclePricingValidator();
-            var request = RequestVehiclePricingJsonBuilder.Build();
+            var validator = new RentalPlanValidator();
+            var request = RequestRentalPlanJsonBuilder.Build();
             request.MileagePerDay = mileagePerDay;
 
             var result = validator.Validate(request);
@@ -95,8 +95,8 @@ namespace Validator.Tests.ToVehiclePricing
         [InlineData(-100)]
         public void Error_MileagePerMonthly_Not_Greater_Than_Zero(long mileagePerMonthly)
         {
-            var validator = new VehiclePricingValidator();
-            var request = RequestVehiclePricingJsonBuilder.Build();
+            var validator = new RentalPlanValidator();
+            var request = RequestRentalPlanJsonBuilder.Build();
             request.MileagePerMonthly = mileagePerMonthly;
 
             var result = validator.Validate(request);

@@ -17,7 +17,7 @@ namespace FleetManager.Domain.Entities
         public long CompanyId { get; private set; }
         public long VehiclePricingId {get ; private set;}
         public Company Company { get;  set; } = default!;
-        public VehiclePricing VehiclePricing {get ; set ;} = default!;
+        public RentalPlan VehiclePricing {get ; set ;} = default!;
 
         protected Vehicle() { }
 

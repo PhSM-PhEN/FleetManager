@@ -1,6 +1,6 @@
-namespace FleetManager.Communication.Response.ToVehiclePricing
+namespace FleetManager.Communication.Response.ToRentalPlan
 {
-    public class ResponseVehiclePricingJson
+    public class ResponseRentalPlanJson
     {
         public long Id { get; set; }
         public string Name { get; set; } = string.Empty;

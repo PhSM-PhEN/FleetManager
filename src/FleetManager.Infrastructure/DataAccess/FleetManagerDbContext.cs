@@ -13,7 +13,7 @@ namespace FleetManager.Infrastructure.DataAccess
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<Company> Companys { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
-        public DbSet<VehiclePricing> VehiclePricings { get; set; }
+        public DbSet<RentalPlan> RentalPlans { get; set; }
 
         public DbSet<HistoryLog> HistoryLogs { get; set; }
 

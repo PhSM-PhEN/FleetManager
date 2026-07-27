@@ -2,7 +2,7 @@
 
 namespace FleetManager.Domain.Entities
 {
-    public class VehiclePricing : AudiTableEntity
+    public class RentalPlan : AudiTableEntity
     {
         public string Name { get; private set; } = string.Empty;
         public decimal DailyPrice { get; private set; }
@@ -13,9 +13,9 @@ namespace FleetManager.Domain.Entities
 
         public Collection<Vehicle> Vehicles { get; set; } = default!;
 
-        protected VehiclePricing() { }
+        protected RentalPlan() { }
 
-        public VehiclePricing(string name, decimal dailyPrice, decimal monthlyPrice, decimal excessMileageRate, long mileagePerDay, long mileagePerMonthly)
+        public RentalPlan(string name, decimal dailyPrice, decimal monthlyPrice, decimal excessMileageRate, long mileagePerDay, long mileagePerMonthly)
         {
             Name = name;
             DailyPrice = dailyPrice;

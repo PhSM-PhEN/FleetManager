@@ -1,13 +1,13 @@
 using FleetManager.Application.Extensions;
 using FleetManager.Communication.Response;
-using FleetManager.Communication.Response.ToVehiclePricing;
-using FleetManager.Domain.Repositories.ToVehiclePricing;
+using FleetManager.Communication.Response.ToRentalPlan;
+using FleetManager.Domain.Repositories.ToRentalPlan;
 
 namespace FleetManager.Application.UseCase.ToVehiclePricing.GetAll
 {
-    public class GetAllVehiclePricing(IVehiclePricingReadOnlyRepository repository) : IGetAllVehiclePricing
+    public class GetAllVehiclePricing(IRentalPlanReadOnlyRepository repository) : IGetAllVehiclePricing
     {
-        public async Task<ResponsePaginatedJson<ResponseVehiclePricingJson>> Execute(int pageNumber, int pageSize)
+        public async Task<ResponsePaginatedJson<ResponseRentalPlanJson>> Execute(int pageNumber, int pageSize)
         {
             if(pageNumber <= 0)
                 pageNumber = 1;
@@ -16,7 +16,7 @@ namespace FleetManager.Application.UseCase.ToVehiclePricing.GetAll
 
             var (vehiclePricing, totalCount) = await repository.GetAll(pageNumber, pageSize);
 
-            return new ResponsePaginatedJson<ResponseVehiclePricingJson>
+            return new ResponsePaginatedJson<ResponseRentalPlanJson>
             {
                 Data = vehiclePricing.ToResponse(),
                 PageNumber = pageNumber,

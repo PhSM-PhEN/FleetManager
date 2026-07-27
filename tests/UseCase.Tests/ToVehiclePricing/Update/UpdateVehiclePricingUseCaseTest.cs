@@ -13,50 +13,50 @@ namespace UseCase.Tests.ToVehiclePricing.Update
         [Fact]
         public async Task Success()
         {
-            var pricing = VehiclePricingBuilder.Build(1);
-            var request = RequestVehiclePricingJsonBuilder.Build();
+            var rentalPlan = RentalPlanBuilder.Build(1);
+            var request = RequestRentalPlanJsonBuilder.Build();
 
-            var useCase = CreateUseCase(pricing);
-            await useCase.Execute(pricing.Id, request);
+            var useCase = CreateUseCase(rentalPlan);
+            await useCase.Execute(rentalPlan.Id, request);
 
-            pricing.DailyPrice.ShouldBe(request.DailyPrice);
-            pricing.MonthlyPrice.ShouldBe(request.MonthlyPrice);
-            pricing.ExcessMileageRate.ShouldBe(request.ExcessMileageRate);
-            pricing.MileagePerDay.ShouldBe(request.MileagePerDay);
-            pricing.MileagePerMonthly.ShouldBe(request.MileagePerMonthly);
+            rentalPlan.DailyPrice.ShouldBe(request.DailyPrice);
+            rentalPlan.MonthlyPrice.ShouldBe(request.MonthlyPrice);
+            rentalPlan.ExcessMileageRate.ShouldBe(request.ExcessMileageRate);
+            rentalPlan.MileagePerDay.ShouldBe(request.MileagePerDay);
+            rentalPlan.MileagePerMonthly.ShouldBe(request.MileagePerMonthly);
         }
 
         [Fact]
         public async Task Error_Pricing_Not_Found()
         {
-            var pricing = VehiclePricingBuilder.Build(1);
-            var request = RequestVehiclePricingJsonBuilder.Build();
+            var rentalPlan = RentalPlanBuilder.Build(1);
+            var request = RequestRentalPlanJsonBuilder.Build();
 
-            var useCase = CreateUseCase(pricing);
+            var useCase = CreateUseCase(rentalPlan);
             var act = async () => await useCase.Execute(999, request);
 
             var result = await act.ShouldThrowAsync<NotFoundException>();
-            result.Message.ShouldBe(ResourceErrorMessages.VEHICLE_PRICING_NOT_FOUND);
+            result.Message.ShouldBe(ResourceErrorMessages.RENTAL_PLAN_NOT_FOUND);
         }
 
         [Fact]
         public async Task Error_MonthlyPrice_Zero()
         {
-            var pricing = VehiclePricingBuilder.Build();
-            var request = RequestVehiclePricingJsonBuilder.Build();
+            var rentalPlan = RentalPlanBuilder.Build();
+            var request = RequestRentalPlanJsonBuilder.Build();
             request.MonthlyPrice = 0;
 
-            var useCase = CreateUseCase(pricing);
-            var act = async () => await useCase.Execute(pricing.Id, request);
+            var useCase = CreateUseCase(rentalPlan);
+            var act = async () => await useCase.Execute(rentalPlan.Id, request);
 
             var result = await act.ShouldThrowAsync<ErrorOnValidationException>();
             result.GetErrors().ShouldContain(ResourceErrorMessages.MONTHLY_PRICE_INVALID);
         }
 
-        private static UpdateVehiclePricingUseCase CreateUseCase(VehiclePricing pricing)
+        private static UpdateVehiclePricingUseCase CreateUseCase(RentalPlan rentalPlan)
         {
             var repository = new VehiclePricingWriteOnlyRepositoryBuilder()
-                .GetById(pricing)
+                .GetById(rentalPlan)
                 .Build();
 
             var unitOfWork = UnitOfWorkBuilder.Build();

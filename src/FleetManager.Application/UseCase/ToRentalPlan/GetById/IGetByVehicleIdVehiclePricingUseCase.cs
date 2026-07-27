@@ -1,9 +1,9 @@
-using FleetManager.Communication.Response.ToVehiclePricing;
+using FleetManager.Communication.Response.ToRentalPlan;
 
 namespace FleetManager.Application.UseCase.ToVehiclePricing.GetByVehicleId
 {
     public interface IGetByVehicleIdVehiclePricingUseCase
     {
-        Task<ResponseVehiclePricingJson> Execute(long id);
+        Task<ResponseRentalPlanJson> Execute(long id);
     }
 }

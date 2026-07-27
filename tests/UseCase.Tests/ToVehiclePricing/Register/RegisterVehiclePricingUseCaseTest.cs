@@ -13,8 +13,8 @@ namespace UseCase.Tests.ToVehiclePricing.Register
         [Fact]
         public async Task Success()
         {
-            var vehiclePricing = VehiclePricingBuilder.Build(1);
-            var request = RequestVehiclePricingJsonBuilder.Build();
+            var vehiclePricing = RentalPlanBuilder.Build(1);
+            var request = RequestRentalPlanJsonBuilder.Build();
 
             var useCase = CreateUseCase(vehiclePricing);
             var result = await useCase.Execute(request);
@@ -27,8 +27,8 @@ namespace UseCase.Tests.ToVehiclePricing.Register
         [Fact]
         public async Task Error_DailyPrice_Zero()
         {
-            var vehiclePricing = VehiclePricingBuilder.Build(1);
-            var request = RequestVehiclePricingJsonBuilder.Build();
+            var vehiclePricing = RentalPlanBuilder.Build(1);
+            var request = RequestRentalPlanJsonBuilder.Build();
             request.DailyPrice = 0;
 
             var useCase = CreateUseCase(vehiclePricing);
@@ -39,14 +39,14 @@ namespace UseCase.Tests.ToVehiclePricing.Register
         }
 
 
-        private static RegisterVehiclePricingUseCase CreateUseCase(VehiclePricing vehiclePricing)
+        private static RegisterRentalPlanUseCase CreateUseCase(RentalPlan vehiclePricing)
         {
             var writeRepository = new VehiclePricingWriteOnlyRepositoryBuilder()
                 .Add(vehiclePricing)
                 .Build();
             var unitOfWork = UnitOfWorkBuilder.Build();
 
-            return new RegisterVehiclePricingUseCase(writeRepository, unitOfWork);
+            return new RegisterRentalPlanUseCase(writeRepository, unitOfWork);
         }
     }
 }

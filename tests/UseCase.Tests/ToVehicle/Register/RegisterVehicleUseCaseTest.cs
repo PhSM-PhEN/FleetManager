@@ -131,14 +131,14 @@ namespace UseCase.Tests.ToVehicle.Register
         private static RegisterVehicleUseCase CreateUseCase(FleetManager.Domain.Entities.Company? company)
         {
             var writeRepository = new VehicleWriteOnlyRepositoryBuilder().Build();
-
+            var rentalPlanRepository = new RentalPlanReadOnlyRepositoryBuilder().Build();
             var companyRepository = new CompanyReadOnlyRepositoryBuilder()
                 .GetById(company, company?.Id ?? 999)
                 .Build();
 
             var unitOfWork = UnitOfWorkBuilder.Build();
 
-            return new RegisterVehicleUseCase(writeRepository, companyRepository, unitOfWork);
+            return new RegisterVehicleUseCase(writeRepository, companyRepository, rentalPlanRepository, unitOfWork);
         }
     }
 }

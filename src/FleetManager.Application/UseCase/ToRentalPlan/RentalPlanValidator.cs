@@ -1,12 +1,12 @@
-using FleetManager.Communication.Request.ToVehiclePricing;
+using FleetManager.Communication.Request.ToRentalPlan;
 using FleetManager.Exception.ExceptionBase;
 using FluentValidation;
 
 namespace FleetManager.Application.UseCase.ToVehiclePricing
 {
-    public class VehiclePricingValidator : AbstractValidator<RequestVehiclePricingJson>
+    public class RentalPlanValidator : AbstractValidator<RequestRentalPlanJson>
     {
-        public VehiclePricingValidator()
+        public RentalPlanValidator()
         {
             RuleFor(x => x.Name).NotEmpty().WithMessage(ResourceErrorMessages.NAME_IS_REQUIRED);
             RuleFor(x => x.DailyPrice).GreaterThan(0).WithMessage(ResourceErrorMessages.DAILY_PRICE_INVALID);

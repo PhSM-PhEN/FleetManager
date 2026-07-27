@@ -1,13 +1,13 @@
 using Bogus;
-using FleetManager.Communication.Request.ToVehiclePricing;
+using FleetManager.Communication.Request.ToRentalPlan;
 
 namespace CommonTestUtilities.Request.ToVehiclePricing
 {
-    public class RequestVehiclePricingJsonBuilder
+    public class RequestRentalPlanJsonBuilder
     {
-        public static RequestVehiclePricingJson Build()
+        public static RequestRentalPlanJson Build()
         {
-            return new Faker<RequestVehiclePricingJson>()
+            return new Faker<RequestRentalPlanJson>()
                 .RuleFor(request => request.Name, f => f.PickRandom("suv", "hacth", "sedan") )
                 .RuleFor(request => request.DailyPrice, f => f.Random.Decimal(100, 400))
                 .RuleFor(request => request.MonthlyPrice, f => f.Random.Decimal(2500, 6000))

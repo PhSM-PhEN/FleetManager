@@ -1,6 +1,6 @@
-namespace FleetManager.Communication.Request.ToVehiclePricing
+namespace FleetManager.Communication.Request.ToRentalPlan
 {
-    public class RequestVehiclePricingJson
+    public class RequestRentalPlanJson
     {
         public string Name {get ; set ;} = string.Empty;
         public decimal DailyPrice { get; set; }

@@ -1,36 +1,36 @@
 using FleetManager.Domain.Entities;
-using FleetManager.Domain.Repositories.ToVehiclePricing;
+using FleetManager.Domain.Repositories.ToRentalPlan;
 using Moq;
 
 namespace CommonTestUtilities.Repositories
 {
     public class VehiclePricingWriteOnlyRepositoryBuilder
     {
-        private readonly Mock<IVehiclePricingWriteOnlyRepository> _repository;
+        private readonly Mock<IRentalPlanWriteOnlyRepository> _repository;
 
         public VehiclePricingWriteOnlyRepositoryBuilder()
         {
-            _repository = new Mock<IVehiclePricingWriteOnlyRepository>();
+            _repository = new Mock<IRentalPlanWriteOnlyRepository>();
         }
 
-        public VehiclePricingWriteOnlyRepositoryBuilder Add(VehiclePricing pricing)
+        public VehiclePricingWriteOnlyRepositoryBuilder Add(RentalPlan rentalPlan)
         {
-            _repository.Setup(p => p.Add(pricing)).Returns(Task.CompletedTask);
+            _repository.Setup(p => p.Add(rentalPlan)).Returns(Task.CompletedTask);
             return this;
         }
 
-        public VehiclePricingWriteOnlyRepositoryBuilder GetById(VehiclePricing pricing)
+        public VehiclePricingWriteOnlyRepositoryBuilder GetById(RentalPlan rentalPlan)
         {
-            _repository.Setup(p => p.GetById(pricing.Id)).ReturnsAsync(pricing);
+            _repository.Setup(p => p.GetById(rentalPlan.Id)).ReturnsAsync(rentalPlan);
             return this;
         }
 
-        public VehiclePricingWriteOnlyRepositoryBuilder Update(VehiclePricing pricing)
+        public VehiclePricingWriteOnlyRepositoryBuilder Update(RentalPlan rentalPlan)
         {
-            _repository.Setup(p => p.Update(pricing));
+            _repository.Setup(p => p.Update(rentalPlan));
             return this;
         }
 
-        public IVehiclePricingWriteOnlyRepository Build() => _repository.Object;
+        public IRentalPlanWriteOnlyRepository Build() => _repository.Object;
     }
 }

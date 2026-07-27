@@ -1,23 +1,22 @@
 using FleetManager.Application.Extensions;
-using FleetManager.Communication.Request.ToVehiclePricing;
-using FleetManager.Communication.Response.ToVehiclePricing;
+using FleetManager.Communication.Request.ToRentalPlan;
+using FleetManager.Communication.Response.ToRentalPlan;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories;
-using FleetManager.Domain.Repositories.ToVehicle;
-using FleetManager.Domain.Repositories.ToVehiclePricing;
+using FleetManager.Domain.Repositories.ToRentalPlan;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToVehiclePricing.Register
 {
-    public class RegisterVehiclePricingUseCase(
-        IVehiclePricingWriteOnlyRepository repository,
-        IUnitOfWork unitOfWork) : IRegisterVehiclePricingUseCase
+    public class RegisterRentalPlanUseCase(
+        IRentalPlanWriteOnlyRepository repository,
+        IUnitOfWork unitOfWork) : IRegisterRentalPlanUseCase
     {
-        public async Task<ResponseVehiclePricingJson> Execute(RequestVehiclePricingJson request)
+        public async Task<ResponseRentalPlanJson> Execute(RequestRentalPlanJson request)
         {
             Validate(request);
 
-            var pricing = new VehiclePricing(
+            var rentalPlan = new RentalPlan(
                 request.Name,
                 request.DailyPrice,
                 request.MonthlyPrice,
@@ -25,15 +24,15 @@ namespace FleetManager.Application.UseCase.ToVehiclePricing.Register
                 request.MileagePerDay,
                 request.MileagePerMonthly);
 
-            await repository.Add(pricing);
+            await repository.Add(rentalPlan);
             await unitOfWork.Commit();
 
-            return pricing.ToResponse();
+            return rentalPlan.ToResponse();
         }
 
-        private static void Validate(RequestVehiclePricingJson request)
+        private static void Validate(RequestRentalPlanJson request)
         {
-            var validator = new VehiclePricingValidator();
+            var validator = new RentalPlanValidator();
             var result = validator.Validate(request);
 
             if (result.IsValid == false)

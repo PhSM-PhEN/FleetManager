@@ -74,10 +74,10 @@ namespace FleetManager.Application
             services.AddScoped<IGetByIdVehicleUseCase, GetByIdVehicleUseCase>();
             services.AddScoped<IUpdateMileageVehicleUseCase, UpdateMileageVehicleUseCase>();
             services.AddScoped<IDeleteVehicleUseCase, DeleteVehicleUseCase>();
-            // vehicle pricing
-            services.AddScoped<IRegisterVehiclePricingUseCase, RegisterVehiclePricingUseCase>();
-            services.AddScoped<IUpdateVehiclePricingUseCase, UpdateVehiclePricingUseCase>();
-            services.AddScoped<IGetByVehicleIdVehiclePricingUseCase, GetByVehicleIdVehiclePricingUseCase>();
+            // rental plan
+            services.AddScoped<IRegisterRentalPlanUseCase, RegisterRentalPlanUseCase>();
+            services.AddScoped<IUpdateRentalPlanUseCase, UpdateVehiclePricingUseCase>();
+            services.AddScoped<IGetByVehicleIdVehiclePricingUseCase, GetByIdRentalPlanUseCase>();
 
         }
     }

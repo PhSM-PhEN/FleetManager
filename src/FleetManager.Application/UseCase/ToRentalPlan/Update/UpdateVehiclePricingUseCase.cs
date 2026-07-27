@@ -1,35 +1,35 @@
-using FleetManager.Communication.Request.ToVehiclePricing;
+using FleetManager.Communication.Request.ToRentalPlan;
 using FleetManager.Domain.Repositories;
-using FleetManager.Domain.Repositories.ToVehiclePricing;
+using FleetManager.Domain.Repositories.ToRentalPlan;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToVehiclePricing.Update
 {
     public class UpdateVehiclePricingUseCase(
-        IVehiclePricingWriteOnlyRepository repository,
-        IUnitOfWork unitOfWork) : IUpdateVehiclePricingUseCase
+        IRentalPlanWriteOnlyRepository repository,
+        IUnitOfWork unitOfWork) : IUpdateRentalPlanUseCase
     {
-        public async Task Execute(long vehicleId, RequestVehiclePricingJson request)
+        public async Task Execute(long vehicleId, RequestRentalPlanJson request)
         {
             Validate(request);
 
-            var pricing = await repository.GetById(vehicleId) ??
-                throw new NotFoundException(ResourceErrorMessages.VEHICLE_PRICING_NOT_FOUND);
+            var rentalPlan = await repository.GetById(vehicleId) ??
+                throw new NotFoundException(ResourceErrorMessages.RENTAL_PLAN_NOT_FOUND);
 
-            pricing.Update(
+            rentalPlan.Update(
                 request.DailyPrice,
                 request.MonthlyPrice,
                 request.ExcessMileageRate,
                 request.MileagePerDay,
                 request.MileagePerMonthly);
 
-            repository.Update(pricing);
+            repository.Update(rentalPlan);
             await unitOfWork.Commit();
         }
 
-        private static void Validate(RequestVehiclePricingJson request)
+        private static void Validate(RequestRentalPlanJson request)
         {
-            var validator = new VehiclePricingValidator();
+            var validator = new RentalPlanValidator();
             var result = validator.Validate(request);
 
             if (result.IsValid == false)
