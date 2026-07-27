@@ -2,7 +2,7 @@ namespace FleetManager.Communication.Request.ToVehiclePricing
 {
     public class RequestVehiclePricingJson
     {
-        public long VehicleId { get; set; }
+       
         public decimal DailyPrice { get; set; }
         public decimal MonthlyPrice { get; set; }
         public decimal ExcessMileageRate { get; set; }
