@@ -70,6 +70,78 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vehicle id is required..
+        /// </summary>
+        public static string VEHICLE_ID_REQUIRED {
+            get {
+                return ResourceManager.GetString("VEHICLE_ID_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Daily price must be greater than zero..
+        /// </summary>
+        public static string DAILY_PRICE_INVALID {
+            get {
+                return ResourceManager.GetString("DAILY_PRICE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monthly price must be greater than zero..
+        /// </summary>
+        public static string MONTHLY_PRICE_INVALID {
+            get {
+                return ResourceManager.GetString("MONTHLY_PRICE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Excess mileage rate must be greater than or equal to zero..
+        /// </summary>
+        public static string EXCESS_MILEAGE_RATE_INVALID {
+            get {
+                return ResourceManager.GetString("EXCESS_MILEAGE_RATE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mileage per day must be greater than zero..
+        /// </summary>
+        public static string MILEAGE_PER_DAY_INVALID {
+            get {
+                return ResourceManager.GetString("MILEAGE_PER_DAY_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mileage per month must be greater than zero..
+        /// </summary>
+        public static string MILEAGE_PER_MONTHLY_INVALID {
+            get {
+                return ResourceManager.GetString("MILEAGE_PER_MONTHLY_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vehicle pricing not found..
+        /// </summary>
+        public static string VEHICLE_PRICING_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("VEHICLE_PRICING_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This vehicle already has a pricing table registered..
+        /// </summary>
+        public static string VEHICLE_PRICING_ALREADY_EXISTS {
+            get {
+                return ResourceManager.GetString("VEHICLE_PRICING_ALREADY_EXISTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address id required..
         /// </summary>
         public static string ADDRESS_ID_REQUIRED {

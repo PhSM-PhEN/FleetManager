@@ -13,6 +13,7 @@ namespace FleetManager.Infrastructure.DataAccess
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<Company> Companys { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
+        public DbSet<VehiclePricing> VehiclePricings { get; set; }
 
         public DbSet<HistoryLog> HistoryLogs { get; set; }
 
@@ -122,7 +123,16 @@ namespace FleetManager.Infrastructure.DataAccess
             modelBuilder.Entity<Vehicle>()
                 .HasOne(v => v.Company)
                 .WithMany()
-                .HasForeignKey(v => v.CompanyId);   
+                .HasForeignKey(v => v.CompanyId);
+
+            modelBuilder.Entity<VehiclePricing>()
+                .HasIndex(p => p.VehicleId)
+                .IsUnique();
+
+            modelBuilder.Entity<VehiclePricing>()
+                .HasOne(p => p.Vehicle)
+                .WithOne()
+                .HasForeignKey<VehiclePricing>(p => p.VehicleId);
         }
 
 

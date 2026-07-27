@@ -26,6 +26,9 @@ using FleetManager.Application.UseCase.ToVehicle.GetAll;
 using FleetManager.Application.UseCase.ToVehicle.GetById;
 using FleetManager.Application.UseCase.ToVehicle.Delete;
 using FleetManager.Application.UseCase.ToVehicle.Update;
+using FleetManager.Application.UseCase.ToVehiclePricing.Register;
+using FleetManager.Application.UseCase.ToVehiclePricing.Update;
+using FleetManager.Application.UseCase.ToVehiclePricing.GetByVehicleId;
 
 namespace FleetManager.Application
 {
@@ -71,7 +74,10 @@ namespace FleetManager.Application
             services.AddScoped<IGetByIdVehicleUseCase, GetByIdVehicleUseCase>();
             services.AddScoped<IUpdateMileageVehicleUseCase, UpdateMileageVehicleUseCase>();
             services.AddScoped<IDeleteVehicleUseCase, DeleteVehicleUseCase>();
-            
+            // vehicle pricing
+            services.AddScoped<IRegisterVehiclePricingUseCase, RegisterVehiclePricingUseCase>();
+            services.AddScoped<IUpdateVehiclePricingUseCase, UpdateVehiclePricingUseCase>();
+            services.AddScoped<IGetByVehicleIdVehiclePricingUseCase, GetByVehicleIdVehiclePricingUseCase>();
 
         }
     }

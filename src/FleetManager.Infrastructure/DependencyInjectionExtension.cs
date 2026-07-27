@@ -4,6 +4,7 @@ using FleetManager.Domain.Repositories.ToCompany;
 using FleetManager.Domain.Repositories.ToTenant;
 using FleetManager.Domain.Repositories.ToUser;
 using FleetManager.Domain.Repositories.ToVehicle;
+using FleetManager.Domain.Repositories.ToVehiclePricing;
 using FleetManager.Domain.Security.CryptoGraphy;
 using FleetManager.Domain.Security.Token;
 using FleetManager.Domain.Services.LoggedUser;
@@ -14,6 +15,7 @@ using FleetManager.Infrastructure.DataAccess.ToCompany;
 using FleetManager.Infrastructure.DataAccess.ToTenant;
 using FleetManager.Infrastructure.DataAccess.ToUser;
 using FleetManager.Infrastructure.DataAccess.ToVehicle;
+using FleetManager.Infrastructure.DataAccess.ToVehiclePricing;
 using FleetManager.Infrastructure.Extension;
 using FleetManager.Infrastructure.Security.Token;
 using FleetManager.Infrastructure.Services.LoggedUser;
@@ -76,6 +78,9 @@ namespace FleetManager.Infrastructure
             //vehicle
             services.AddScoped<IVehicleReadOnlyRepository, VehicleRepository>();
             services.AddScoped<IVehicleWriteOnlyRepository, VehicleRepository>();
+            //vehicle pricing
+            services.AddScoped<IVehiclePricingReadOnlyRepository, VehiclePricingRepository>();
+            services.AddScoped<IVehiclePricingWriteOnlyRepository, VehiclePricingRepository>();
             
             services.AddScoped<ILoggedUser, LoggedUser>();
 

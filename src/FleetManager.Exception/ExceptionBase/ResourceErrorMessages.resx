@@ -303,4 +303,28 @@
   <data name="ADDITIONAL_MILEAGE_MUST_BE_POSITIVE" xml:space="preserve">
     <value>Additional mileage must be positive.</value>
   </data>
+  <data name="VEHICLE_ID_REQUIRED" xml:space="preserve">
+    <value>Vehicle id is required.</value>
+  </data>
+  <data name="DAILY_PRICE_INVALID" xml:space="preserve">
+    <value>Daily price must be greater than zero.</value>
+  </data>
+  <data name="MONTHLY_PRICE_INVALID" xml:space="preserve">
+    <value>Monthly price must be greater than zero.</value>
+  </data>
+  <data name="EXCESS_MILEAGE_RATE_INVALID" xml:space="preserve">
+    <value>Excess mileage rate must be greater than or equal to zero.</value>
+  </data>
+  <data name="MILEAGE_PER_DAY_INVALID" xml:space="preserve">
+    <value>Mileage per day must be greater than zero.</value>
+  </data>
+  <data name="MILEAGE_PER_MONTHLY_INVALID" xml:space="preserve">
+    <value>Mileage per month must be greater than zero.</value>
+  </data>
+  <data name="VEHICLE_PRICING_NOT_FOUND" xml:space="preserve">
+    <value>Vehicle pricing not found.</value>
+  </data>
+  <data name="VEHICLE_PRICING_ALREADY_EXISTS" xml:space="preserve">
+    <value>This vehicle already has a pricing table registered.</value>
+  </data>
 </root>
