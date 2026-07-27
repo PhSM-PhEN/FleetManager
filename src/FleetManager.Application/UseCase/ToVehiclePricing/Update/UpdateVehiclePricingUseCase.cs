@@ -13,7 +13,7 @@ namespace FleetManager.Application.UseCase.ToVehiclePricing.Update
         {
             Validate(request);
 
-            var pricing = await repository.GetByVehicleId(vehicleId) ??
+            var pricing = await repository.GetById(vehicleId) ??
                 throw new NotFoundException(ResourceErrorMessages.VEHICLE_PRICING_NOT_FOUND);
 
             pricing.Update(

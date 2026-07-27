@@ -19,9 +19,9 @@ namespace CommonTestUtilities.Repositories
             return this;
         }
 
-        public VehiclePricingWriteOnlyRepositoryBuilder GetByVehicleId(VehiclePricing pricing)
+        public VehiclePricingWriteOnlyRepositoryBuilder GetById(VehiclePricing pricing)
         {
-            _repository.Setup(p => p.GetByVehicleId(pricing.Id)).ReturnsAsync(pricing);
+            _repository.Setup(p => p.GetById(pricing.Id)).ReturnsAsync(pricing);
             return this;
         }
 

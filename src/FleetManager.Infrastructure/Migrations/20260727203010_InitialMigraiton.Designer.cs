@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FleetManager.Infrastructure.Migrations
 {
     [DbContext(typeof(FleetManagerDbContext))]
-    [Migration("20260727051455_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20260727203010_InitialMigraiton")]
+    partial class InitialMigraiton
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -266,9 +266,14 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<long>("VehiclePricingId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
+
+                    b.HasIndex("VehiclePricingId");
 
                     b.ToTable("Vehicles");
                 });
@@ -302,19 +307,17 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Property<decimal>("MonthlyPrice")
                         .HasColumnType("decimal(65,30)");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<long?>("UpdateBy")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<long>("VehicleId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("VehicleId")
-                        .IsUnique();
 
                     b.ToTable("VehiclePricings");
                 });
@@ -419,6 +422,12 @@ namespace FleetManager.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("FleetManager.Domain.Entities.VehiclePricing", "VehiclePricing")
+                        .WithMany("Vehicles")
+                        .HasForeignKey("VehiclePricingId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.OwnsOne("FleetManager.Domain.Entities.ValueObjects.ChassiNumber", "ChassiNumber", b1 =>
                         {
                             b1.Property<long>("VehicleId")
@@ -514,17 +523,13 @@ namespace FleetManager.Infrastructure.Migrations
 
                     b.Navigation("Renavam")
                         .IsRequired();
+
+                    b.Navigation("VehiclePricing");
                 });
 
             modelBuilder.Entity("FleetManager.Domain.Entities.VehiclePricing", b =>
                 {
-                    b.HasOne("FleetManager.Domain.Entities.Vehicle", "Vehicle")
-                        .WithOne()
-                        .HasForeignKey("FleetManager.Domain.Entities.VehiclePricing", "VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Vehicle");
+                    b.Navigation("Vehicles");
                 });
 #pragma warning restore 612, 618
         }

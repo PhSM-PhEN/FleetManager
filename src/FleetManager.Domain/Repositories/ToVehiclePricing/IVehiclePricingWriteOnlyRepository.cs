@@ -5,7 +5,7 @@ namespace FleetManager.Domain.Repositories.ToVehiclePricing
     public interface IVehiclePricingWriteOnlyRepository
     {
         Task Add(VehiclePricing vehiclePricing);
-        Task<VehiclePricing?> GetByVehicleId(long vehicleId);
+        Task<VehiclePricing?> GetById(long vehicleId);
         void Update(VehiclePricing vehiclePricing);
     }
 }

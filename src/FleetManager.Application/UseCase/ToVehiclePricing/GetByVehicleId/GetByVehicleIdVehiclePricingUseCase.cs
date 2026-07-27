@@ -9,7 +9,7 @@ namespace FleetManager.Application.UseCase.ToVehiclePricing.GetByVehicleId
     {
         public async Task<ResponseVehiclePricingJson> Execute(long id)
         {
-            var pricing = await repository.GetByVehicleId(id) ??
+            var pricing = await repository.GetById(id) ??
                 throw new NotFoundException(ResourceErrorMessages.VEHICLE_PRICING_NOT_FOUND);
 
             return pricing.ToResponse();

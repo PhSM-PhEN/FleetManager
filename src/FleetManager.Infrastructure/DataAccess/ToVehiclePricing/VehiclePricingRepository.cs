@@ -11,13 +11,13 @@ namespace FleetManager.Infrastructure.DataAccess.ToVehiclePricing
             await dbContext.VehiclePricings.AddAsync(vehiclePricing);
         }
 
-        public async Task<VehiclePricing?> GetByVehicleId(long vehicleId)
+        public async Task<VehiclePricing?> GetById(long vehicleId)
         {
             return await dbContext.VehiclePricings
                 .FirstOrDefaultAsync(p => p.Id == vehicleId);
         }
 
-        async Task<VehiclePricing?> IVehiclePricingReadOnlyRepository.GetByVehicleId(long vehicleId)
+        async Task<VehiclePricing?> IVehiclePricingReadOnlyRepository.GetById(long vehicleId)
         {
             return await dbContext.VehiclePricings.AsNoTracking()
                 .FirstOrDefaultAsync(p => p.Id == vehicleId);

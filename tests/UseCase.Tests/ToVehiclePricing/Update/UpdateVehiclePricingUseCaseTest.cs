@@ -56,7 +56,7 @@ namespace UseCase.Tests.ToVehiclePricing.Update
         private static UpdateVehiclePricingUseCase CreateUseCase(VehiclePricing pricing)
         {
             var repository = new VehiclePricingWriteOnlyRepositoryBuilder()
-                .GetByVehicleId(pricing)
+                .GetById(pricing)
                 .Build();
 
             var unitOfWork = UnitOfWorkBuilder.Build();

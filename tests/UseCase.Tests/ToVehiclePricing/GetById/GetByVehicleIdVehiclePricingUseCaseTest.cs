@@ -7,7 +7,7 @@ using Shouldly;
 
 namespace UseCase.Tests.ToVehiclePricing.GetByVehicleId
 {
-    public class GetByVehicleIdVehiclePricingUseCaseTest
+    public class GetByIdVehiclePricingUseCaseTest
     {
         [Fact]
         public async Task Success()
@@ -37,7 +37,7 @@ namespace UseCase.Tests.ToVehiclePricing.GetByVehicleId
         private static GetByVehicleIdVehiclePricingUseCase CreateUseCase(VehiclePricing vehiclePricing)
         {
             var repository = new VehiclePricingReadOnlyRepositoryBuilder()
-                .GetByVehicleId(vehiclePricing)
+                .GetById(vehiclePricing)
                 .Build();
 
             return new GetByVehicleIdVehiclePricingUseCase(repository);

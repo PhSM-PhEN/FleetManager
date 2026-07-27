@@ -13,9 +13,9 @@ namespace CommonTestUtilities.Repositories
             _repository = new Mock<IVehiclePricingReadOnlyRepository>();
         }
 
-        public VehiclePricingReadOnlyRepositoryBuilder GetByVehicleId(VehiclePricing pricing)
+        public VehiclePricingReadOnlyRepositoryBuilder GetById(VehiclePricing pricing)
         {
-            _repository.Setup(p => p.GetByVehicleId(pricing.Id)).ReturnsAsync(pricing);
+            _repository.Setup(p => p.GetById(pricing.Id)).ReturnsAsync(pricing);
             return this;
         }
 
