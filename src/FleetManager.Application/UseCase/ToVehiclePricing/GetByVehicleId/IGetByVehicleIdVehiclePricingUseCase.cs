@@ -4,6 +4,6 @@ namespace FleetManager.Application.UseCase.ToVehiclePricing.GetByVehicleId
 {
     public interface IGetByVehicleIdVehiclePricingUseCase
     {
-        Task<ResponseVehiclePricingJson> Execute(long vehicleId);
+        Task<ResponseVehiclePricingJson> Execute(long id);
     }
 }

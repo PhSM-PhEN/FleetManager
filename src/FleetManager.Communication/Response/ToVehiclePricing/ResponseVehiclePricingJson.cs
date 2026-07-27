@@ -3,7 +3,7 @@ namespace FleetManager.Communication.Response.ToVehiclePricing
     public class ResponseVehiclePricingJson
     {
         public long Id { get; set; }
-        public long VehicleId { get; set; }
+        public string Name { get; set; } = string.Empty;
         public decimal DailyPrice { get; set; }
         public decimal MonthlyPrice { get; set; }
         public decimal ExcessMileageRate { get; set; }

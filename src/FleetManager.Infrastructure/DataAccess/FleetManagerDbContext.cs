@@ -125,14 +125,8 @@ namespace FleetManager.Infrastructure.DataAccess
                 .WithMany()
                 .HasForeignKey(v => v.CompanyId);
 
-            modelBuilder.Entity<VehiclePricing>()
-                .HasIndex(p => p.VehicleId)
-                .IsUnique();
-
-            modelBuilder.Entity<VehiclePricing>()
-                .HasOne(p => p.Vehicle)
-                .WithOne()
-                .HasForeignKey<VehiclePricing>(p => p.VehicleId);
+         
+           
         }
 
 

@@ -11,22 +11,14 @@ namespace FleetManager.Application.UseCase.ToVehiclePricing.Register
 {
     public class RegisterVehiclePricingUseCase(
         IVehiclePricingWriteOnlyRepository repository,
-        IVehicleReadOnlyRepository vehicleRepository,
         IUnitOfWork unitOfWork) : IRegisterVehiclePricingUseCase
     {
         public async Task<ResponseVehiclePricingJson> Execute(RequestVehiclePricingJson request)
         {
             Validate(request);
 
-            _ = await vehicleRepository.GetById(request.VehicleId) ??
-                throw new NotFoundException(ResourceErrorMessages.VEHICLE_NOT_FOUND);
-
-            var existingPricing = await repository.GetByVehicleId(request.VehicleId);
-            if (existingPricing is not null)
-                throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_PRICING_ALREADY_EXISTS);
-
             var pricing = new VehiclePricing(
-                request.VehicleId,
+                request.Name,
                 request.DailyPrice,
                 request.MonthlyPrice,
                 request.ExcessMileageRate,

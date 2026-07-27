@@ -10,13 +10,17 @@ namespace FleetManager.Application.Extensions
             return new ResponseVehiclePricingJson
             {
                 Id = pricing.Id,
-                VehicleId = pricing.VehicleId,
+                Name = pricing.Name,
                 DailyPrice = pricing.DailyPrice,
                 MonthlyPrice = pricing.MonthlyPrice,
                 ExcessMileageRate = pricing.ExcessMileageRate,
                 MileagePerDay = pricing.MileagePerDay,
                 MileagePerMonthly = pricing.MileagePerMonthly
             };
+        }
+        public static List<ResponseVehiclePricingJson> ToResponse(this List<VehiclePricing> pricing)
+        {
+            return pricing.Select(p => p.ToResponse()).ToList();
         }
     }
 }

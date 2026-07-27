@@ -7,9 +7,9 @@ namespace FleetManager.Application.UseCase.ToVehiclePricing.GetByVehicleId
 {
     public class GetByVehicleIdVehiclePricingUseCase(IVehiclePricingReadOnlyRepository repository) : IGetByVehicleIdVehiclePricingUseCase
     {
-        public async Task<ResponseVehiclePricingJson> Execute(long vehicleId)
+        public async Task<ResponseVehiclePricingJson> Execute(long id)
         {
-            var pricing = await repository.GetByVehicleId(vehicleId) ??
+            var pricing = await repository.GetByVehicleId(id) ??
                 throw new NotFoundException(ResourceErrorMessages.VEHICLE_PRICING_NOT_FOUND);
 
             return pricing.ToResponse();

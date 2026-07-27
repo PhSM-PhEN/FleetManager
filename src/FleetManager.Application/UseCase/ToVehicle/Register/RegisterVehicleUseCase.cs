@@ -28,7 +28,8 @@ namespace FleetManager.Application.UseCase.ToVehicle.Register
                 new ChassiNumber(request.ChassiNumber),
                 new LicensePlate(request.LicensePlate),
                 request.CurrentMileage,
-                request.CompanyId
+                request.CompanyId,
+                request.VehiclePricingId
             );
 
             await repository.Add(vehicle);

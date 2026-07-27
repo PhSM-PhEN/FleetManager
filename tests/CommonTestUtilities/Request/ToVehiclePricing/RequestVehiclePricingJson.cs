@@ -5,10 +5,10 @@ namespace CommonTestUtilities.Request.ToVehiclePricing
 {
     public class RequestVehiclePricingJsonBuilder
     {
-        public static RequestVehiclePricingJson Build(long vehicleId)
+        public static RequestVehiclePricingJson Build()
         {
             return new Faker<RequestVehiclePricingJson>()
-                .RuleFor(request => request.VehicleId, _ => vehicleId)
+                .RuleFor(request => request.Name, f => f.PickRandom("suv", "hacth", "sedan") )
                 .RuleFor(request => request.DailyPrice, f => f.Random.Decimal(100, 400))
                 .RuleFor(request => request.MonthlyPrice, f => f.Random.Decimal(2500, 6000))
                 .RuleFor(request => request.ExcessMileageRate, f => f.Random.Decimal(0.5m, 2m))

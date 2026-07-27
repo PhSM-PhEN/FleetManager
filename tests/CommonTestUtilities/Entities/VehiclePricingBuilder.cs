@@ -5,11 +5,11 @@ namespace CommonTestUtilities.Entities
 {
     public class VehiclePricingBuilder
     {
-        public static VehiclePricing Build(int? id = null, long? vehicleId = null)
+        public static VehiclePricing Build(int? id = null)
         {
             var pricing = new Faker<VehiclePricing>()
                 .CustomInstantiator(f => new VehiclePricing(
-                    vehicleId ?? f.Random.Long(1, 1000),
+                    f.PickRandom("suv","hacth", "sedan"),
                     f.Random.Decimal(100, 400),
                     f.Random.Decimal(2500, 6000),
                     f.Random.Decimal(0.5m, 2m),
