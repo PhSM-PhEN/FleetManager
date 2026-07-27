@@ -291,4 +291,16 @@
   <data name="VEHICLE_NOT_FOUND" xml:space="preserve">
     <value>Vehicle not found.</value>
   </data>
+  <data name="CONTRACT_NOT_ACTIVE" xml:space="preserve">
+    <value>Contract not active.</value>
+  </data>
+  <data name="END_MILEAGE_CANNOT_BE_LESS_THAN_START" xml:space="preserve">
+    <value>End mileage cannot be less than start.</value>
+  </data>
+  <data name="RENEWAL_MUST_BE_REQUESTED_BEFORE_DUE_DATE" xml:space="preserve">
+    <value>Renewal must be requested before due date.</value>
+  </data>
+  <data name="ADDITIONAL_MILEAGE_MUST_BE_POSITIVE" xml:space="preserve">
+    <value>Additional mileage must be positive.</value>
+  </data>
 </root>

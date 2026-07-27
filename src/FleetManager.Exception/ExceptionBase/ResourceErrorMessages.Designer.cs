@@ -61,6 +61,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Additional mileage must be positive..
+        /// </summary>
+        public static string ADDITIONAL_MILEAGE_MUST_BE_POSITIVE {
+            get {
+                return ResourceManager.GetString("ADDITIONAL_MILEAGE_MUST_BE_POSITIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address id required..
         /// </summary>
         public static string ADDRESS_ID_REQUIRED {
@@ -178,6 +187,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contract not active..
+        /// </summary>
+        public static string CONTRACT_NOT_ACTIVE {
+            get {
+                return ResourceManager.GetString("CONTRACT_NOT_ACTIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CPF already registered..
         /// </summary>
         public static string CPF_ALREADY_REGISTERED {
@@ -264,6 +282,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string EMAIL_REQUIRED {
             get {
                 return ResourceManager.GetString("EMAIL_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End mileage cannot be less than start..
+        /// </summary>
+        public static string END_MILEAGE_CANNOT_BE_LESS_THAN_START {
+            get {
+                return ResourceManager.GetString("END_MILEAGE_CANNOT_BE_LESS_THAN_START", resourceCulture);
             }
         }
         
@@ -471,6 +498,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string RENAVAM_REQUIRED {
             get {
                 return ResourceManager.GetString("RENAVAM_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Renewal must be requested before due date..
+        /// </summary>
+        public static string RENEWAL_MUST_BE_REQUESTED_BEFORE_DUE_DATE {
+            get {
+                return ResourceManager.GetString("RENEWAL_MUST_BE_REQUESTED_BEFORE_DUE_DATE", resourceCulture);
             }
         }
         
