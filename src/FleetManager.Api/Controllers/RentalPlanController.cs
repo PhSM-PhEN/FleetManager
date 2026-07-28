@@ -1,3 +1,5 @@
+using FleetManager.Application.UseCase.ToRentalPlan.Delete;
+using FleetManager.Application.UseCase.ToRentalPlan.GetAll;
 using FleetManager.Application.UseCase.ToRentalPlan.GetById;
 using FleetManager.Application.UseCase.ToRentalPlan.Register;
 using FleetManager.Application.UseCase.ToRentalPlan.Update;
@@ -25,6 +27,14 @@ namespace FleetManager.Api.Controllers
             return Created(string.Empty, response);
         }
 
+        [HttpGet]
+        [ProducesResponseType(typeof(ResponsePaginatedJson<ResponseRentalPlanJson>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetAll([FromServices] IGetAllRentalPlanUseCase useCase, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            var response = await useCase.Execute(pageNumber, pageSize);
+            return Ok(response);
+        }
+
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ResponseRentalPlanJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
@@ -41,6 +51,15 @@ namespace FleetManager.Api.Controllers
         public async Task<IActionResult> Update([FromServices] IUpdateRentalPlanUseCase useCase, [FromRoute] long id, [FromBody] RequestRentalPlanJson request)
         {
             await useCase.Execute(id, request);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete([FromServices] IDeleteRentalPlanUseCase useCase, [FromRoute] long id)
+        {
+            await useCase.Execute(id);
             return NoContent();
         }
     }

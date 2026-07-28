@@ -59,7 +59,7 @@ namespace WebApi.Tests
             dbContext.SaveChanges();
 
         }
-        private RentalPlan AddRentalPlan(FleetManagerDbContext dbContext)
+        private RentalPlan  AddRentalPlan(FleetManagerDbContext dbContext)
         {
             var rentalPlan = RentalPlanBuilder.Build();
             dbContext.Add(rentalPlan);

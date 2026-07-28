@@ -5,6 +5,24 @@ namespace CommonTestUtilities.Entities
 {
     public class RentalPlanBuilder
     {
+        public static List<RentalPlan> Collection(uint count = 3)
+        {
+            var list = new List<RentalPlan>();
+            if (count == 0)
+                count = 1;
+            var rentalPlanId = 1;
+
+            for (var i = 0; i < count; i++)
+            {
+                var rentalPlan = Build();
+                rentalPlan.Id = rentalPlanId++;
+
+                list.Add(rentalPlan);
+            }
+
+            return list;
+        }
+
         public static RentalPlan Build(long? id = null)
         {
             var rentalPlan = new Faker<RentalPlan>()

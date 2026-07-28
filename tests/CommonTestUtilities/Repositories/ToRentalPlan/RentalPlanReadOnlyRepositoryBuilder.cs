@@ -19,6 +19,12 @@ namespace CommonTestUtilities.Repositories.ToRentalPlan
             return this;
         }
 
+        public RentalPlanReadOnlyRepositoryBuilder GetAll(List<RentalPlan> rentalPlans, int pageNumber, int pageSize, int totalCount)
+        {
+            _repository.Setup(p => p.GetAll(pageNumber, pageSize)).ReturnsAsync((rentalPlans, totalCount));
+            return this;
+        }
+
         public IRentalPlanReadOnlyRepository Build() => _repository.Object;
     }
 }
