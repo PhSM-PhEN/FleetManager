@@ -14,11 +14,11 @@ namespace FleetManager.Application.UseCase.ToRentalPlan.GetAll
             if( pageSize <= 0)
                 pageSize = 10;
 
-            var (vehiclePricing, totalCount) = await repository.GetAll(pageNumber, pageSize);
+            var (rentalPlan, totalCount) = await repository.GetAll(pageNumber, pageSize);
 
             return new ResponsePaginatedJson<ResponseRentalPlanJson>
             {
-                Data = vehiclePricing.ToResponse(),
+                Data = rentalPlan.ToResponse(),
                 PageNumber = pageNumber,
                 PageSize = pageSize,
                 TotalCount = totalCount

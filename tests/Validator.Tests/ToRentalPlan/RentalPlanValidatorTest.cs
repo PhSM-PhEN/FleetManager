@@ -3,9 +3,9 @@ using FleetManager.Application.UseCase.ToRentalPlan;
 using FleetManager.Exception.ExceptionBase;
 using Shouldly;
 
-namespace Validator.Tests.ToVehiclePricing
+namespace Validator.Tests.ToRentalPlan
 {
-    public class VehiclePricingValidatorTest
+    public class RentalPlanValidatorTest
     {
         [Fact]
         public void Success()

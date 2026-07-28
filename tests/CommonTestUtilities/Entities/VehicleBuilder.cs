@@ -6,7 +6,7 @@ namespace CommonTestUtilities.Entities
 {
     public class VehicleBuilder
     {
-        public static List<Vehicle> Collection(uint count = 3, long? companyId = null, long? vehiclePricingId = null)
+        public static List<Vehicle> Collection(uint count = 3, long? companyId = null, long? rentalPlan = null)
         {
             var list = new List<Vehicle>();
             if (count == 0)
@@ -15,7 +15,7 @@ namespace CommonTestUtilities.Entities
 
             for (var i = 0; i < count; i++)
             {
-                var vehicle = Build(companyId: companyId, vehiclePricingId: vehiclePricingId);
+                var vehicle = Build(companyId: companyId, rentalPlan: rentalPlan);
                 vehicle.Id = vehicleId++;
                 
                 list.Add(vehicle);
@@ -24,7 +24,7 @@ namespace CommonTestUtilities.Entities
             return list;
         }
 
-        public static Vehicle Build(int? id = null, long? companyId = null ,long? vehiclePricingId = null)
+        public static Vehicle Build(int? id = null, long? companyId = null ,long? rentalPlan = null)
         {
             var vehicle = new Faker<Vehicle>()
                 .CustomInstantiator(f => new Vehicle(
@@ -37,7 +37,7 @@ namespace CommonTestUtilities.Entities
                     BuildMercosulPlate(f),
                     f.Random.Long(0, 200_000),
                     companyId ?? f.Random.Long(1, 1000),
-                    vehiclePricingId ?? f.Random.Long(1, 1000)
+                    rentalPlan ?? f.Random.Long(1, 1000)
                     
                     
                     
