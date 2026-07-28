@@ -5,7 +5,7 @@ namespace CommonTestUtilities.Entities
 {
     public class RentalPlanBuilder
     {
-        public static RentalPlan Build(int? id = null)
+        public static RentalPlan Build(long? id = null)
         {
             var rentalPlan = new Faker<RentalPlan>()
                 .CustomInstantiator(f => new RentalPlan(

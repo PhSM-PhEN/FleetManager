@@ -24,7 +24,7 @@ namespace CommonTestUtilities.Entities
             return list;
         }
 
-        public static Vehicle Build(int? id = null, long? companyId = null ,long? rentalPlan = null)
+        public static Vehicle Build(long? id = null, long? companyId = null ,long? rentalPlan = null)
         {
             var vehicle = new Faker<Vehicle>()
                 .CustomInstantiator(f => new Vehicle(

@@ -30,6 +30,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="RentalPlan\GetAll\" />
+    <Folder Include="RentalPlan\GetById\" />
+    <Folder Include="RentalPlan\Delete\" />
+    <Folder Include="RentalPlan\Update\" />
+    <Folder Include="RentalPlan\Register\" />
     <Folder Include="ToCompany\" />
     <Folder Include="ToCompany\Delete\" />
     <Folder Include="ToCompany\GetAll\" />

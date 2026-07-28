@@ -5,6 +5,7 @@ using CommonTestUtilities.Repositories.ToRentalPlan;
 using CommonTestUtilities.Repositories.ToVehicle;
 using CommonTestUtilities.Request.ToVehicle;
 using FleetManager.Application.UseCase.ToVehicle.Register;
+using FleetManager.Domain.Entities;
 using FleetManager.Exception.ExceptionBase;
 using Shouldly;
 
@@ -16,6 +17,7 @@ namespace UseCase.Tests.ToVehicle.Register
         public async Task Success()
         {
             var company = CompanyBuilder.Build(1, 1);
+            var rentalPlan = RentalPlanBuilder.Build(1);
             var request = RequestVehicleJsonBuilder.Build(company.Id);
 
             var useCase = CreateUseCase(company: company);
@@ -131,7 +133,7 @@ namespace UseCase.Tests.ToVehicle.Register
             await act.ShouldThrowAsync<ErrorOnValidationException>();
         }
 
-        private static RegisterVehicleUseCase CreateUseCase(FleetManager.Domain.Entities.Company? company)
+        private static RegisterVehicleUseCase CreateUseCase(Company? company)
         {
             var writeRepository = new VehicleWriteOnlyRepositoryBuilder().Build();
             var rentalPlanRepository = new RentalPlanReadOnlyRepositoryBuilder().Build();
