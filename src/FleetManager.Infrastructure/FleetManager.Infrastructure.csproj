@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <Folder Include="DataAccess\ToAddress\" />
+    <Folder Include="DataAccess\ToContract\" />
   </ItemGroup>
 
 </Project>

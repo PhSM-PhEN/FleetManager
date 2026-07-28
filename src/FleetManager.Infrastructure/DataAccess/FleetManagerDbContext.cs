@@ -14,6 +14,7 @@ namespace FleetManager.Infrastructure.DataAccess
         public DbSet<Company> Companys { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<RentalPlan> RentalPlans { get; set; }
+        public DbSet<Contract> Contracts {get ; set ;}
 
         public DbSet<HistoryLog> HistoryLogs { get; set; }
 
@@ -130,7 +131,12 @@ namespace FleetManager.Infrastructure.DataAccess
                 .WithMany(p => p.Vehicles)
                 .HasForeignKey(v => v.RentalPlanId)
                 .OnDelete(DeleteBehavior.Restrict);
-           
+            
+            
+                
+
+
+
         }
 
 

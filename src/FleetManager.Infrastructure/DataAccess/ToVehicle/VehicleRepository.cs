@@ -38,6 +38,7 @@ namespace FleetManager.Infrastructure.DataAccess.ToVehicle
         {
             return await dbContext.Vehicles.AsNoTracking()
                         .Include(c => c.Company)
+                        .Include(rp => rp.RentalPlan)
                         .FirstOrDefaultAsync(v => v.Id == id);
         }
         public void Update(Vehicle vehicle)

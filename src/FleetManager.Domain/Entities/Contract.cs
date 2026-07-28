@@ -5,13 +5,12 @@ namespace FleetManager.Domain.Entities
 {
     public class Contract : AudiTableEntity
     {
-        public long VehicleId { get; private set; }
-        public long TenantId { get; private set; }
-        public RentalType RentalType { get; private set; }
+        public long VehicleId { get; private set; } // qual veiculo
+        public long TenantId { get; private set; } // para quem 
+        public RentalType RentalType { get; private set; } //tipo
 
-        public long StartMileage { get; private set; }
+        public long StartMileage { get; private set; } // odometro atual
         public long SnapshotMileageAllowed { get; private set; }
-
         public decimal SnapshotPriceDailyRate { get; private set; }
         public decimal SnapshotPriceMonthlyRate { get; private set; }
         public decimal AgreedExcessMileageRate { get; private set; }
