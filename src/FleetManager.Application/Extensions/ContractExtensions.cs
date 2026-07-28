@@ -14,9 +14,6 @@ namespace FleetManager.Application.Extensions
                 PickupDateTime = contract.PickupDateTime,
                 ReturnDueDateTime = contract.ReturnDueDateTime,
                 TotalDays = contract.TotalDays,
-                MileageAllowance = contract.SnapshotMileageAllowed,
-                BaseRentalAmount = contract.BaseRentalAmount,
-                AdditionalKilometersAmount = contract.AdditionalKilometersAmount,
                 TotalAmount = contract.TotalAmount,
                 Tenant = contract.Tenant.ToResponse(),
                 Vehicle = contract.Vehicle.ToResponse()

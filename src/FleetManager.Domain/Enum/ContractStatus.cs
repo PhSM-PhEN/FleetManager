@@ -5,6 +5,8 @@
         Active = 1,
         Finished = 2,
         Cancelled = 3,
-        Overdue = 4
+        Overdue = 4,
+        Renewed = 5
+        
     }
 }
