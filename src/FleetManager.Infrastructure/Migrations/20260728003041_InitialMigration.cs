@@ -203,7 +203,7 @@ namespace FleetManager.Infrastructure.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     LicensePlate_IsMercosul = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     CompanyId = table.Column<long>(type: "bigint", nullable: false),
-                    VehiclePricingId = table.Column<long>(type: "bigint", nullable: false),
+                    RentalPlanId = table.Column<long>(type: "bigint", nullable: false),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     UpdateBy = table.Column<long>(type: "bigint", nullable: true),
@@ -219,8 +219,8 @@ namespace FleetManager.Infrastructure.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Vehicles_RentalPlans_VehiclePricingId",
-                        column: x => x.VehiclePricingId,
+                        name: "FK_Vehicles_RentalPlans_RentalPlanId",
+                        column: x => x.RentalPlanId,
                         principalTable: "RentalPlans",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -279,7 +279,7 @@ namespace FleetManager.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vehicles_VehiclePricingId",
+                name: "IX_Vehicles_RentalPlanId",
                 table: "Vehicles",
                 column: "RentalPlanId");
         }

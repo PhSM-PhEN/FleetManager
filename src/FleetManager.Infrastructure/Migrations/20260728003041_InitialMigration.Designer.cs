@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FleetManager.Infrastructure.Migrations
 {
     [DbContext(typeof(FleetManagerDbContext))]
-    [Migration("20260727235752_InitialMigration")]
+    [Migration("20260728003041_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -304,14 +304,14 @@ namespace FleetManager.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<long>("RentalPlanId")
+                        .HasColumnType("bigint");
+
                     b.Property<long?>("UpdateBy")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<long>("RentalPlanId")
-                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
