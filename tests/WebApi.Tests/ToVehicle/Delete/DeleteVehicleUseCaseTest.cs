@@ -20,7 +20,7 @@ namespace WebApi.Tests.ToVehicle.Delete
         [Fact]
         public async Task Success()
         {
-            var request = RequestVehicleJsonBuilder.Build(_companyId);
+            var request = RequestVehicleJsonBuilder.Build(_companyId );
             var registerResult = await DoPost(METHOD, request, _teamMemberToken);
 
             var body = await registerResult.Content.ReadAsStreamAsync();

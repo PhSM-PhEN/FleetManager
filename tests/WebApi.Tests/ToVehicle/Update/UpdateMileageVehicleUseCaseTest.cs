@@ -11,11 +11,13 @@ namespace WebApi.Tests.ToVehicle.Update
         private const string METHOD = "api/Vehicle";
         private readonly string _teamMemberToken;
         private readonly long _companyId;
+        private readonly long _rentalPlanId;   // 🔧 novo campo
 
         public UpdateMileageVehicleUseCaseTest(CustomWebApplicationFactory customWebApplication) : base(customWebApplication)
         {
             _teamMemberToken = customWebApplication.USER_TEAM_MEMBER.GetToken();
             _companyId = customWebApplication.COMPANY_TEAM_MEMBER.GetById();
+            _rentalPlanId = customWebApplication.RENTAL_PLAN_TEAM_MEMBER.GetById();   // 🔧
         }
 
         [Fact]
@@ -66,7 +68,7 @@ namespace WebApi.Tests.ToVehicle.Update
 
         private async Task<long> RegisterVehicle(long? currentMileage = null)
         {
-            var request = RequestVehicleJsonBuilder.Build(_companyId);
+            var request = RequestVehicleJsonBuilder.Build(_companyId, _rentalPlanId);   // 🔧
             if (currentMileage.HasValue)
                 request.CurrentMileage = currentMileage.Value;
 

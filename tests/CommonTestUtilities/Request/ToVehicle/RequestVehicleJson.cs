@@ -5,7 +5,7 @@ namespace CommonTestUtilities.Request.ToVehicle
 {
     public class RequestVehicleJsonBuilder
     {
-        public static RequestVehicleJson Build(long companyId)
+        public static RequestVehicleJson Build(long companyId, long rentalPlanId = 1)
         {
             var faker = new Faker();
 
@@ -19,6 +19,7 @@ namespace CommonTestUtilities.Request.ToVehicle
                 .RuleFor(request => request.LicensePlate, f => BuildMercosulPlate(f))
                 .RuleFor(request => request.CurrentMileage, f => f.Random.Long(0, 200_000))
                 .RuleFor(request => request.CompanyId, _ => companyId)
+                .RuleFor(request => request.RentalPlanId, _ => rentalPlanId)   // 🔧 adicionado
                 .Generate();
         }
 

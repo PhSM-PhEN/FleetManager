@@ -72,9 +72,9 @@ namespace FleetManager.Infrastructure.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    DailyPrice = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    MonthlyPrice = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
-                    ExcessMileageRate = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    DailyPrice = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
+                    MonthlyPrice = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
+                    ExcessMileageRate = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
                     MileagePerDay = table.Column<long>(type: "bigint", nullable: false),
                     MileagePerMonthly = table.Column<long>(type: "bigint", nullable: false),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: false),
