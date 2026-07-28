@@ -3,9 +3,9 @@ using FleetManager.Communication.Response.ToRentalPlan;
 using FleetManager.Domain.Repositories.ToRentalPlan;
 using FleetManager.Exception.ExceptionBase;
 
-namespace FleetManager.Application.UseCase.ToVehiclePricing.GetByVehicleId
+namespace FleetManager.Application.UseCase.ToRentalPlan.GetById
 {
-    public class GetByIdRentalPlanUseCase(IRentalPlanReadOnlyRepository repository) : IGetByVehicleIdVehiclePricingUseCase
+    public class GetByIdRentalPlanUseCase(IRentalPlanReadOnlyRepository repository) : IGetByRentalPlanUseCase
     {
         public async Task<ResponseRentalPlanJson> Execute(long id)
         {

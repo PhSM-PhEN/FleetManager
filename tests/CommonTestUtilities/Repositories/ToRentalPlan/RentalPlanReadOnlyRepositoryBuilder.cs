@@ -2,7 +2,7 @@ using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories.ToRentalPlan;
 using Moq;
 
-namespace CommonTestUtilities.Repositories
+namespace CommonTestUtilities.Repositories.ToRentalPlan
 {
     public class RentalPlanReadOnlyRepositoryBuilder
     {

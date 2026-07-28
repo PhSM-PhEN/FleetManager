@@ -1,5 +1,7 @@
 using CommonTestUtilities.Entities;
 using CommonTestUtilities.Repositories;
+using CommonTestUtilities.Repositories.ToAddress;
+using CommonTestUtilities.Repositories.ToTenant;
 using CommonTestUtilities.Request.ToTenant;
 using FleetManager.Application.UseCase.ToTenant.Register;
 using FleetManager.Domain.Entities;
@@ -73,6 +75,7 @@ namespace UseCase.Tests.ToTenant.Register
             var readRepository = readRepositoryBuilder.Build();
 
             var addressReadOnly = new AddressReadOnlyRepositoryBuilder()
+
                 .GetById(address?.Id ?? 999, address)
                 .Build();
 

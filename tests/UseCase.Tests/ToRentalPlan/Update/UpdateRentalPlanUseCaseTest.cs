@@ -1,14 +1,15 @@
 using CommonTestUtilities.Entities;
 using CommonTestUtilities.Repositories;
-using CommonTestUtilities.Request.ToVehiclePricing;
-using FleetManager.Application.UseCase.ToVehiclePricing.Update;
+using CommonTestUtilities.Repositories.ToRentalPlan;
+using CommonTestUtilities.Request.ToRentalPlan;
+using FleetManager.Application.UseCase.ToRentalPlan.Update;
 using FleetManager.Domain.Entities;
 using FleetManager.Exception.ExceptionBase;
 using Shouldly;
 
-namespace UseCase.Tests.ToVehiclePricing.Update
+namespace UseCase.Tests.ToRentalPlan.Update
 {
-    public class UpdateVehiclePricingUseCaseTest
+    public class UpdateRentalPlanUseCaseTest
     {
         [Fact]
         public async Task Success()
@@ -53,15 +54,15 @@ namespace UseCase.Tests.ToVehiclePricing.Update
             result.GetErrors().ShouldContain(ResourceErrorMessages.MONTHLY_PRICE_INVALID);
         }
 
-        private static UpdateVehiclePricingUseCase CreateUseCase(RentalPlan rentalPlan)
+        private static UpdateRentalPlanUseCase CreateUseCase(RentalPlan rentalPlan)
         {
-            var repository = new VehiclePricingWriteOnlyRepositoryBuilder()
+            var repository = new RentalPlanWriteOnlyRepositoryBuilder()
                 .GetById(rentalPlan)
                 .Build();
 
             var unitOfWork = UnitOfWorkBuilder.Build();
 
-            return new UpdateVehiclePricingUseCase(repository, unitOfWork);
+            return new UpdateRentalPlanUseCase(repository, unitOfWork);
         }
     }
 }

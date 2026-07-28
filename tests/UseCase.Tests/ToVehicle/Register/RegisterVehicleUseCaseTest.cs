@@ -1,5 +1,8 @@
 ﻿using CommonTestUtilities.Entities;
 using CommonTestUtilities.Repositories;
+using CommonTestUtilities.Repositories.ToCompany;
+using CommonTestUtilities.Repositories.ToRentalPlan;
+using CommonTestUtilities.Repositories.ToVehicle;
 using CommonTestUtilities.Request.ToVehicle;
 using FleetManager.Application.UseCase.ToVehicle.Register;
 using FleetManager.Exception.ExceptionBase;

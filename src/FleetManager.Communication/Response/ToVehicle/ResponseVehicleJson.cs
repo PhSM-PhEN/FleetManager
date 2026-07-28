@@ -1,4 +1,5 @@
 using FleetManager.Communication.Response.ToCompany;
+using FleetManager.Communication.Response.ToRentalPlan;
 
 namespace FleetManager.Communication.Response.ToVehicle
 {
@@ -14,5 +15,6 @@ namespace FleetManager.Communication.Response.ToVehicle
         public string LicensePlate { get; set; } = string.Empty;
         public long CurrentMileage { get; set; }
         public ResponseShortCompanyJson Company { get; set; } = default!;
+        public ResponseRentalPlanJson RentalPlan { get; set; } = default!;
     }
 }

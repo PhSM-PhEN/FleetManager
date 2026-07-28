@@ -281,7 +281,7 @@ namespace FleetManager.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Vehicles_VehiclePricingId",
                 table: "Vehicles",
-                column: "VehiclePricingId");
+                column: "RentalPlanId");
         }
 
         /// <inheritdoc />

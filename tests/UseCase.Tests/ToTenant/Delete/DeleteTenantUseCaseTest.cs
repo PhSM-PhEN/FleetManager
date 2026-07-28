@@ -1,5 +1,6 @@
 using CommonTestUtilities.Entities;
 using CommonTestUtilities.Repositories;
+using CommonTestUtilities.Repositories.ToTenant;
 using FleetManager.Application.UseCase.ToTenant.Delete;
 using FleetManager.Domain.Entities;
 using FleetManager.Exception.ExceptionBase;

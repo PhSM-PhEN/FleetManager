@@ -1,6 +1,6 @@
 using CommonTestUtilities.Entities;
 using CommonTestUtilities.LoggedUser;
-using CommonTestUtilities.Repositories;
+using CommonTestUtilities.Repositories.ToUser;
 using FleetManager.Application.UseCase.ToUser.GetProfile;
 using FleetManager.Domain.Entities;
 using Shouldly;

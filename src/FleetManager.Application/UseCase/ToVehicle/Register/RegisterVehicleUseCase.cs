@@ -18,7 +18,7 @@ namespace FleetManager.Application.UseCase.ToVehicle.Register
             Validate(request);
             _ = await companyRepository.GetById(request.CompanyId) ??
                 throw new NotFoundException(ResourceErrorMessages.COMPANY_NOT_FOUND);
-            _ = await rentalPlanRepository.GetById(request.VehiclePricingId) ??
+            _ = await rentalPlanRepository.GetById(request.RentalPlanId) ??
                 throw new NotFoundException(ResourceErrorMessages.RENTAL_PLAN_NOT_FOUND);
             var manufacturingYear = ManufacturingYear.Parse(request.ManufacturingYear);
 
@@ -32,7 +32,7 @@ namespace FleetManager.Application.UseCase.ToVehicle.Register
                 new LicensePlate(request.LicensePlate),
                 request.CurrentMileage,
                 request.CompanyId,
-                request.VehiclePricingId
+                request.RentalPlanId
             );
 
             await repository.Add(vehicle);

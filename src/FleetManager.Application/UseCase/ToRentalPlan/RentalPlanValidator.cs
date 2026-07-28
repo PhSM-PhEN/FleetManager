@@ -2,7 +2,7 @@ using FleetManager.Communication.Request.ToRentalPlan;
 using FleetManager.Exception.ExceptionBase;
 using FluentValidation;
 
-namespace FleetManager.Application.UseCase.ToVehiclePricing
+namespace FleetManager.Application.UseCase.ToRentalPlan
 {
     public class RentalPlanValidator : AbstractValidator<RequestRentalPlanJson>
     {

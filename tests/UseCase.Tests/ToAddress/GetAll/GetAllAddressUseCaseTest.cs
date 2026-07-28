@@ -1,5 +1,5 @@
 using CommonTestUtilities.Entities;
-using CommonTestUtilities.Repositories;
+using CommonTestUtilities.Repositories.ToAddress;
 using FleetManager.Application.UseCase.ToAddress.GetAll;
 using FleetManager.Domain.Entities;
 using Shouldly;

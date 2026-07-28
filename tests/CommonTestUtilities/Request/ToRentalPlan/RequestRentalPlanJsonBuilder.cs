@@ -1,7 +1,7 @@
 using Bogus;
 using FleetManager.Communication.Request.ToRentalPlan;
 
-namespace CommonTestUtilities.Request.ToVehiclePricing
+namespace CommonTestUtilities.Request.ToRentalPlan
 {
     public class RequestRentalPlanJsonBuilder
     {

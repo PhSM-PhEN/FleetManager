@@ -3,9 +3,9 @@ using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToRentalPlan;
 using FleetManager.Exception.ExceptionBase;
 
-namespace FleetManager.Application.UseCase.ToVehiclePricing.Update
+namespace FleetManager.Application.UseCase.ToRentalPlan.Update
 {
-    public class UpdateVehiclePricingUseCase(
+    public class UpdateRentalPlanUseCase(
         IRentalPlanWriteOnlyRepository repository,
         IUnitOfWork unitOfWork) : IUpdateRentalPlanUseCase
     {

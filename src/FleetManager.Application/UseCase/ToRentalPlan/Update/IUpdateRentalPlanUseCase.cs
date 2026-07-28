@@ -1,6 +1,6 @@
 using FleetManager.Communication.Request.ToRentalPlan;
 
-namespace FleetManager.Application.UseCase.ToVehiclePricing.Update
+namespace FleetManager.Application.UseCase.ToRentalPlan.Update
 {
     public interface IUpdateRentalPlanUseCase
     {

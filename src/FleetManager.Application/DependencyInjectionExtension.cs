@@ -4,31 +4,31 @@ using FleetManager.Application.UseCase.ToAddress.GetAll;
 using FleetManager.Application.UseCase.ToAddress.GetById;
 using FleetManager.Application.UseCase.ToAddress.Register;
 using FleetManager.Application.UseCase.ToAddress.Update;
-using FleetManager.Application.UseCase.ToTenant.GetAll;
-using FleetManager.Application.UseCase.ToTenant.GetById;
-using FleetManager.Application.UseCase.ToTenant.Register;
 using FleetManager.Application.UseCase.ToCompany.Delete;
 using FleetManager.Application.UseCase.ToCompany.GetAll;
 using FleetManager.Application.UseCase.ToCompany.GetById;
 using FleetManager.Application.UseCase.ToCompany.Register;
 using FleetManager.Application.UseCase.ToCompany.Update;
+using FleetManager.Application.UseCase.ToRentalPlan.GetById;
+using FleetManager.Application.UseCase.ToRentalPlan.Register;
+using FleetManager.Application.UseCase.ToRentalPlan.Update;
+using FleetManager.Application.UseCase.ToTenant.Delete;
+using FleetManager.Application.UseCase.ToTenant.GetAll;
+using FleetManager.Application.UseCase.ToTenant.GetById;
+using FleetManager.Application.UseCase.ToTenant.Register;
+using FleetManager.Application.UseCase.ToTenant.Update;
 using FleetManager.Application.UseCase.ToUser.ChangePassword;
 using FleetManager.Application.UseCase.ToUser.Delete;
 using FleetManager.Application.UseCase.ToUser.GetProfile;
 using FleetManager.Application.UseCase.ToUser.Promote;
 using FleetManager.Application.UseCase.ToUser.Register;
 using FleetManager.Application.UseCase.ToUser.Update;
-using Microsoft.Extensions.DependencyInjection;
-using FleetManager.Application.UseCase.ToTenant.Update;
-using FleetManager.Application.UseCase.ToTenant.Delete;
-using FleetManager.Application.UseCase.ToVehicle.Register;
+using FleetManager.Application.UseCase.ToVehicle.Delete;
 using FleetManager.Application.UseCase.ToVehicle.GetAll;
 using FleetManager.Application.UseCase.ToVehicle.GetById;
-using FleetManager.Application.UseCase.ToVehicle.Delete;
+using FleetManager.Application.UseCase.ToVehicle.Register;
 using FleetManager.Application.UseCase.ToVehicle.Update;
-using FleetManager.Application.UseCase.ToVehiclePricing.Register;
-using FleetManager.Application.UseCase.ToVehiclePricing.Update;
-using FleetManager.Application.UseCase.ToVehiclePricing.GetByVehicleId;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace FleetManager.Application
 {
@@ -76,8 +76,8 @@ namespace FleetManager.Application
             services.AddScoped<IDeleteVehicleUseCase, DeleteVehicleUseCase>();
             // rental plan
             services.AddScoped<IRegisterRentalPlanUseCase, RegisterRentalPlanUseCase>();
-            services.AddScoped<IUpdateRentalPlanUseCase, UpdateVehiclePricingUseCase>();
-            services.AddScoped<IGetByVehicleIdVehiclePricingUseCase, GetByIdRentalPlanUseCase>();
+            services.AddScoped<IUpdateRentalPlanUseCase, UpdateRentalPlanUseCase>();
+            services.AddScoped<IGetByRentalPlanUseCase, GetByIdRentalPlanUseCase>();
 
         }
     }

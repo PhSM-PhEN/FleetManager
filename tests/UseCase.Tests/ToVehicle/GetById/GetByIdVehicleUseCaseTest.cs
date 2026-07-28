@@ -1,5 +1,5 @@
 ﻿using CommonTestUtilities.Entities;
-using CommonTestUtilities.Repositories;
+using CommonTestUtilities.Repositories.ToVehicle;
 using FleetManager.Application.UseCase.ToVehicle.GetById;
 using FleetManager.Exception.ExceptionBase;
 using Shouldly;

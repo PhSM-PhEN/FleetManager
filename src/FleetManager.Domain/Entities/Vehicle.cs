@@ -15,14 +15,14 @@ namespace FleetManager.Domain.Entities
         public ChassiNumber ChassiNumber { get; private set; } = default!;
         public LicensePlate LicensePlate { get; private set; } = default!;
         public long CompanyId { get; private set; }
-        public long VehiclePricingId {get ; private set;}
+        public long RentalPlanId {get ; private set;}
         public Company Company { get;  set; } = default!;
-        public RentalPlan VehiclePricing {get ; set ;} = default!;
+        public RentalPlan RentalPlan {get ; set ;} = default!;
 
         protected Vehicle() { }
 
         public Vehicle(string brand, string model, string color, ManufacturingYear manufacturing, Renavam renavam,
-                       ChassiNumber chassiNumber, LicensePlate licensePlate, long currentMileage, long companyId, long vehiclePricing)
+                       ChassiNumber chassiNumber, LicensePlate licensePlate, long currentMileage, long companyId, long rentalPlanId)
         {
             Brand = brand;
             Model = model;
@@ -33,7 +33,7 @@ namespace FleetManager.Domain.Entities
             LicensePlate = licensePlate;
             CurrentMileage = currentMileage;
             CompanyId = companyId;
-            VehiclePricingId = vehiclePricing;
+            RentalPlanId = rentalPlanId;
         }
         public void UpdateMileage(long newMileage)
         {

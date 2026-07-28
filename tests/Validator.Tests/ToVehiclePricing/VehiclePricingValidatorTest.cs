@@ -1,5 +1,5 @@
-using CommonTestUtilities.Request.ToVehiclePricing;
-using FleetManager.Application.UseCase.ToVehiclePricing;
+using CommonTestUtilities.Request.ToRentalPlan;
+using FleetManager.Application.UseCase.ToRentalPlan;
 using FleetManager.Exception.ExceptionBase;
 using Shouldly;
 

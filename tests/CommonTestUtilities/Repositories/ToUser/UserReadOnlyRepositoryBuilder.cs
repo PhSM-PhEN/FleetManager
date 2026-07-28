@@ -2,7 +2,7 @@
 using FleetManager.Domain.Repositories.ToUser;
 using Moq;
 
-namespace CommonTestUtilities.Repositories
+namespace CommonTestUtilities.Repositories.ToUser
 {
     public class UserReadOnlyRepositoryBuilder
     {

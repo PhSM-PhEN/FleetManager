@@ -2,7 +2,7 @@
 using FleetManager.Domain.Repositories.ToCompany;
 using Moq;
 
-namespace CommonTestUtilities.Repositories
+namespace CommonTestUtilities.Repositories.ToCompany
 {
     public class CompanyWriteOnlyRepositoryBuilder
     {

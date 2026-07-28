@@ -1,5 +1,5 @@
 using CommonTestUtilities.Entities;
-using CommonTestUtilities.Repositories;
+using CommonTestUtilities.Repositories.ToAddress;
 using FleetManager.Application.UseCase.ToAddress.GetById;
 using FleetManager.Domain.Entities;
 using FleetManager.Exception.ExceptionBase;

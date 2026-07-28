@@ -11,6 +11,6 @@
         public string LicensePlate { get; set; } = string.Empty;
         public long CurrentMileage { get; set; }
         public long CompanyId { get; set; }
-        public long VehiclePricingId {get ; set ;}
+        public long RentalPlanId {get ; set ;}
     }
 }

@@ -1,14 +1,15 @@
 using CommonTestUtilities.Entities;
 using CommonTestUtilities.Repositories;
-using CommonTestUtilities.Request.ToVehiclePricing;
-using FleetManager.Application.UseCase.ToVehiclePricing.Register;
+using CommonTestUtilities.Repositories.ToRentalPlan;
+using CommonTestUtilities.Request.ToRentalPlan;
+using FleetManager.Application.UseCase.ToRentalPlan.Register;
 using FleetManager.Domain.Entities;
 using FleetManager.Exception.ExceptionBase;
 using Shouldly;
 
-namespace UseCase.Tests.ToVehiclePricing.Register
+namespace UseCase.Tests.ToRentalPlan.Register
 {
-    public class RegisterVehiclePricingUseCaseTest
+    public class RegisterRentalPlanUseCaseTest
     {
         [Fact]
         public async Task Success()
@@ -41,7 +42,7 @@ namespace UseCase.Tests.ToVehiclePricing.Register
 
         private static RegisterRentalPlanUseCase CreateUseCase(RentalPlan vehiclePricing)
         {
-            var writeRepository = new VehiclePricingWriteOnlyRepositoryBuilder()
+            var writeRepository = new RentalPlanWriteOnlyRepositoryBuilder()
                 .Add(vehiclePricing)
                 .Build();
             var unitOfWork = UnitOfWorkBuilder.Build();

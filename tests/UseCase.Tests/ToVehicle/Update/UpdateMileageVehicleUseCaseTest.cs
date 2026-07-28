@@ -1,5 +1,6 @@
 ﻿using CommonTestUtilities.Entities;
 using CommonTestUtilities.Repositories;
+using CommonTestUtilities.Repositories.ToVehicle;
 using FleetManager.Application.UseCase.ToVehicle.Update;
 using FleetManager.Communication.Request.ToVehicle;
 using FleetManager.Exception.ExceptionBase;

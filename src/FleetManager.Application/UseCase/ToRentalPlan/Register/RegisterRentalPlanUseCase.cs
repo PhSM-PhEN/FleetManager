@@ -6,7 +6,7 @@ using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToRentalPlan;
 using FleetManager.Exception.ExceptionBase;
 
-namespace FleetManager.Application.UseCase.ToVehiclePricing.Register
+namespace FleetManager.Application.UseCase.ToRentalPlan.Register
 {
     public class RegisterRentalPlanUseCase(
         IRentalPlanWriteOnlyRepository repository,

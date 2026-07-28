@@ -1,5 +1,7 @@
 using CommonTestUtilities.Entities;
 using CommonTestUtilities.Repositories;
+using CommonTestUtilities.Repositories.ToAddress;
+using CommonTestUtilities.Repositories.ToTenant;
 using CommonTestUtilities.Request.ToTenant;
 using FleetManager.Application.UseCase.ToTenant.Update;
 using FleetManager.Domain.Entities;

@@ -2,7 +2,7 @@ using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories.ToAddress;
 using Moq;
 
-namespace CommonTestUtilities.Repositories
+namespace CommonTestUtilities.Repositories.ToAddress
 {
     public class AddressReadOnlyRepositoryBuilder
     {

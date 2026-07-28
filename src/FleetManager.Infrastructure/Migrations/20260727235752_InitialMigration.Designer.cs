@@ -310,14 +310,14 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<long>("VehiclePricingId")
+                    b.Property<long>("RentalPlanId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CompanyId");
 
-                    b.HasIndex("VehiclePricingId");
+                    b.HasIndex("RentalPlanId");
 
                     b.ToTable("Vehicles");
                 });
@@ -422,9 +422,9 @@ namespace FleetManager.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("FleetManager.Domain.Entities.RentalPlan", "VehiclePricing")
+                    b.HasOne("FleetManager.Domain.Entities.RentalPlan", "RentalPlan")
                         .WithMany("Vehicles")
-                        .HasForeignKey("VehiclePricingId")
+                        .HasForeignKey("RentalPlanId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
@@ -524,7 +524,7 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Navigation("Renavam")
                         .IsRequired();
 
-                    b.Navigation("VehiclePricing");
+                    b.Navigation("RentalPlan");
                 });
 
             modelBuilder.Entity("FleetManager.Domain.Entities.RentalPlan", b =>

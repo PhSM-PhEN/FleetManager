@@ -1,6 +1,6 @@
-using FleetManager.Application.UseCase.ToVehiclePricing.GetByVehicleId;
-using FleetManager.Application.UseCase.ToVehiclePricing.Register;
-using FleetManager.Application.UseCase.ToVehiclePricing.Update;
+using FleetManager.Application.UseCase.ToRentalPlan.GetById;
+using FleetManager.Application.UseCase.ToRentalPlan.Register;
+using FleetManager.Application.UseCase.ToRentalPlan.Update;
 using FleetManager.Communication.Request.ToRentalPlan;
 using FleetManager.Communication.Response;
 using FleetManager.Communication.Response.ToRentalPlan;
@@ -25,22 +25,22 @@ namespace FleetManager.Api.Controllers
             return Created(string.Empty, response);
         }
 
-        [HttpGet("{vehicleId}")]
+        [HttpGet("{id}")]
         [ProducesResponseType(typeof(ResponseRentalPlanJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetByVehicleId([FromServices] IGetByVehicleIdVehiclePricingUseCase useCase, [FromRoute] long vehicleId)
+        public async Task<IActionResult> GetByVehicleId([FromServices] IGetByRentalPlanUseCase useCase, [FromRoute] long id)
         {
-            var response = await useCase.Execute(vehicleId);
+            var response = await useCase.Execute(id);
             return Ok(response);
         }
 
-        [HttpPut("{vehicleId}")]
+        [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Update([FromServices] IUpdateRentalPlanUseCase useCase, [FromRoute] long vehicleId, [FromBody] RequestRentalPlanJson request)
+        public async Task<IActionResult> Update([FromServices] IUpdateRentalPlanUseCase useCase, [FromRoute] long id, [FromBody] RequestRentalPlanJson request)
         {
-            await useCase.Execute(vehicleId, request);
+            await useCase.Execute(id, request);
             return NoContent();
         }
     }

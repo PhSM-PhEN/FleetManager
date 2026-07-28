@@ -2,7 +2,7 @@
 using FleetManager.Domain.Repositories.ToVehicle;
 using Moq;
 
-namespace CommonTestUtilities.Repositories
+namespace CommonTestUtilities.Repositories.ToVehicle
 {
     public class VehicleReadOnlyRepositoryBuilder
     {

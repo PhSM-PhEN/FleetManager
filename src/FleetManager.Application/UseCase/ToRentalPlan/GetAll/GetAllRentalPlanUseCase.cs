@@ -3,9 +3,9 @@ using FleetManager.Communication.Response;
 using FleetManager.Communication.Response.ToRentalPlan;
 using FleetManager.Domain.Repositories.ToRentalPlan;
 
-namespace FleetManager.Application.UseCase.ToVehiclePricing.GetAll
+namespace FleetManager.Application.UseCase.ToRentalPlan.GetAll
 {
-    public class GetAllVehiclePricing(IRentalPlanReadOnlyRepository repository) : IGetAllVehiclePricing
+    public class GetAllRentalPlanUseCase(IRentalPlanReadOnlyRepository repository) : IGetAllRentalPlanUseCase
     {
         public async Task<ResponsePaginatedJson<ResponseRentalPlanJson>> Execute(int pageNumber, int pageSize)
         {

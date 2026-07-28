@@ -1,6 +1,7 @@
 ﻿using CommonTestUtilities.Entities;
 using CommonTestUtilities.LoggedUser;
 using CommonTestUtilities.Repositories;
+using CommonTestUtilities.Repositories.ToUser;
 using FleetManager.Application.UseCase.ToUser.Promote;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Enum;

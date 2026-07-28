@@ -1,11 +1,11 @@
 using CommonTestUtilities.Entities;
-using CommonTestUtilities.Repositories;
-using FleetManager.Application.UseCase.ToVehiclePricing.GetByVehicleId;
+using CommonTestUtilities.Repositories.ToRentalPlan;
+using FleetManager.Application.UseCase.ToRentalPlan.GetById;
 using FleetManager.Domain.Entities;
 using FleetManager.Exception.ExceptionBase;
 using Shouldly;
 
-namespace UseCase.Tests.ToVehiclePricing.GetById
+namespace UseCase.Tests.ToRentalPlan.GetById
 {
     public class GetByIdRentalPlanUseCaseTests
     {

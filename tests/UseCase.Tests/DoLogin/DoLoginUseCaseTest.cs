@@ -1,6 +1,6 @@
 using CommonTestUtilities.Cryptography;
 using CommonTestUtilities.Entities;
-using CommonTestUtilities.Repositories;
+using CommonTestUtilities.Repositories.ToUser;
 using CommonTestUtilities.Request.ToUser;
 using CommonTestUtilities.Token;
 using FleetManager.Application.UseCase.DoLogin;
