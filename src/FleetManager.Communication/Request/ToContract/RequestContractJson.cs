@@ -8,6 +8,6 @@
         public string RentalType { get; set; } = string.Empty; // "Daily" ou "Monthly"
         public DateTime PickupDateTime { get; set; }
         public DateTime? ReturnDueDateTime { get; set; }        // obrigatório só se RentalType = Daily
-        public long? AdditionalKilometers { get; set; }         // km extra além da franquia do plano, opcional
+        public long? MileageContracted { get; set; }         // km extra além da franquia do plano, opcional
     }
 }
