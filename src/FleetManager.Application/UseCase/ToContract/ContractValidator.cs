@@ -12,6 +12,9 @@ namespace FleetManager.Application.UseCase.ToContract
             RuleFor(x => x.TenantId).GreaterThan(0).WithMessage(ResourceErrorMessages.TENANT_ID_REQUIRED);
             RuleFor(x => x.RentalPlanId).GreaterThan(0).WithMessage(ResourceErrorMessages.RENTAL_PLAN_ID_REQUIRED);
 
+            RuleFor(x => x.MileageContracted).GreaterThanOrEqualTo(0).WithMessage(ResourceErrorMessages.MILEAGE_CONTRACTED_INVALID);
+            RuleFor(x => x.TotalAmount).GreaterThanOrEqualTo(0).WithMessage(ResourceErrorMessages.TOTAL_AMOUNT_INVALID);
+
             RuleFor(x => x.RentalType)
                 .Must(value => value == "Daily" || value == "Monthly")
                 .WithMessage(ResourceErrorMessages.RENTAL_TYPE_INVALID);

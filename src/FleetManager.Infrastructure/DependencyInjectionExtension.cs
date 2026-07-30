@@ -1,6 +1,7 @@
 ﻿using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToAddress;
 using FleetManager.Domain.Repositories.ToCompany;
+using FleetManager.Domain.Repositories.ToContract;
 using FleetManager.Domain.Repositories.ToRentalPlan;
 using FleetManager.Domain.Repositories.ToTenant;
 using FleetManager.Domain.Repositories.ToUser;
@@ -12,6 +13,7 @@ using FleetManager.Exception.ExceptionBase;
 using FleetManager.Infrastructure.DataAccess;
 using FleetManager.Infrastructure.DataAccess.ToAddress;
 using FleetManager.Infrastructure.DataAccess.ToCompany;
+using FleetManager.Infrastructure.DataAccess.ToContract;
 using FleetManager.Infrastructure.DataAccess.ToRentalPlan;
 using FleetManager.Infrastructure.DataAccess.ToTenant;
 using FleetManager.Infrastructure.DataAccess.ToUser;
@@ -81,6 +83,9 @@ namespace FleetManager.Infrastructure
             //rental plan
             services.AddScoped<IRentalPlanReadOnlyRepository, RentalPlanRepository>();
             services.AddScoped<IRentalPlanWriteOnlyRepository, RentalPlanRepository>();
+            //contract
+            services.AddScoped<IContractReadOnlyRepository, ContractRepository>();
+            services.AddScoped<IContractWriteOnlyRepository, ContractRepository>();
             // logged user
             services.AddScoped<ILoggedUser, LoggedUser>();
 

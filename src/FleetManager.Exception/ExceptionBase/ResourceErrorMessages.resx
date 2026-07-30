@@ -345,4 +345,10 @@
   <data name="VEHICLE_ALREADY_RENTED" xml:space="preserve">
     <value>Vehicle already rented.</value>
   </data>
+  <data name="MILEAGE_CONTRACTED_INVALID" xml:space="preserve">
+    <value>Mileage Contracted invalid.</value>
+  </data>
+  <data name="TOTAL_AMOUNT_INVALID" xml:space="preserve">
+    <value>Total amount invalid.</value>
+  </data>
 </root>

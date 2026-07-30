@@ -394,6 +394,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mileage Contracted invalid..
+        /// </summary>
+        public static string MILEAGE_CONTRACTED_INVALID {
+            get {
+                return ResourceManager.GetString("MILEAGE_CONTRACTED_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mileage invalid..
         /// </summary>
         public static string MILEAGE_INVALID {
@@ -669,6 +678,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string TOKEN_INVALID_OR_MISSING {
             get {
                 return ResourceManager.GetString("TOKEN_INVALID_OR_MISSING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total amount invalid..
+        /// </summary>
+        public static string TOTAL_AMOUNT_INVALID {
+            get {
+                return ResourceManager.GetString("TOTAL_AMOUNT_INVALID", resourceCulture);
             }
         }
         

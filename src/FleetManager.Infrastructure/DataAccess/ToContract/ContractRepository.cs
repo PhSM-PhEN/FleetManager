@@ -1,4 +1,5 @@
 using FleetManager.Domain.Entities;
+using FleetManager.Domain.Enum;
 using FleetManager.Domain.Repositories.ToContract;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,7 +43,8 @@ namespace FleetManager.Infrastructure.DataAccess.ToContract
 
         public async Task<bool> HasActiveContract(long vehicleId)
         {
-            return await dbContext.Contracts.AnyAsync(c => c.VehicleId == vehicleId);
+            return await dbContext.Contracts.AnyAsync(c => c.VehicleId == vehicleId &&
+                (c.ContractStatus == ContractStatus.Active || c.ContractStatus == ContractStatus.Overdue));
         }
 
         public void Update(Contract contract)
