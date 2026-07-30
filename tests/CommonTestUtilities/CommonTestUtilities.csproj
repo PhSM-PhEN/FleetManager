@@ -17,7 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Repositories\ToContract\" />
     <Folder Include="Request\ToAddress\" />
+    <Folder Include="Request\ToContract\" />
     <Folder Include="Request\ToTenant\" />
   </ItemGroup>
 

@@ -1,3 +1,4 @@
+
 namespace FleetManager.Communication.Response.ToContract
 {
     public class ResponseShortContractJson
@@ -7,5 +8,6 @@ namespace FleetManager.Communication.Response.ToContract
         public DateTime ReturnDueDateTime { get; set; }
         public int TotalDays { get; set; }
         public decimal TotalAmount { get; set; }
+        public string ContractStatus { get; set; } = string.Empty;
     }
 }

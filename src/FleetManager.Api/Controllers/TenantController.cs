@@ -25,7 +25,7 @@ namespace FleetManager.Api.Controllers
             return Created(string.Empty, response);
         }
         [HttpGet]
-        [ProducesResponseType(typeof(ResponseShortTenantJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponsePaginatedJson<ResponseShortTenantJson>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetAll([FromServices] IGetAllTenantUseCase useCase, [FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {

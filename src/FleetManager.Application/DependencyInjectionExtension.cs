@@ -9,6 +9,8 @@ using FleetManager.Application.UseCase.ToCompany.GetAll;
 using FleetManager.Application.UseCase.ToCompany.GetById;
 using FleetManager.Application.UseCase.ToCompany.Register;
 using FleetManager.Application.UseCase.ToCompany.Update;
+using FleetManager.Application.UseCase.ToContract.GetAll;
+using FleetManager.Application.UseCase.ToContract.GetById;
 using FleetManager.Application.UseCase.ToContract.Register;
 using FleetManager.Application.UseCase.ToRentalPlan.Delete;
 using FleetManager.Application.UseCase.ToRentalPlan.GetAll;
@@ -85,6 +87,8 @@ namespace FleetManager.Application
             services.AddScoped<IDeleteRentalPlanUseCase, DeleteRentalPlanUseCase>();
             // contract
             services.AddScoped<IRegisterContractUseCase, RegisterContractUseCase>();
+            services.AddScoped<IGetByIdContractUseCase, GetByIdContractUseCase>();
+            services.AddScoped<IGetAllContractUseCase, GetAllContractUseCase>();
 
 
         }

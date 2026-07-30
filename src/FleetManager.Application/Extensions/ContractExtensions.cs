@@ -1,5 +1,6 @@
 using FleetManager.Communication.Response.ToContract;
 using FleetManager.Domain.Entities;
+using FleetManager.Domain.EnumExtensions;
 
 namespace FleetManager.Application.Extensions
 {
@@ -13,7 +14,9 @@ namespace FleetManager.Application.Extensions
                 PickupDateTime = contract.PickupDateTime,
                 ReturnDueDateTime = contract.ReturnDueDateTime,
                 TotalDays = contract.TotalDays,
-                TotalAmount = contract.TotalAmount
+                TotalAmount = contract.TotalAmount,
+                ContractStatus = contract.ContractStatus.ContractStatusToString()
+                
             };
         }
         public static ResponseContractJson ToInfoResponse(this Contract contract)
@@ -21,13 +24,24 @@ namespace FleetManager.Application.Extensions
             return new ResponseContractJson
             {
                 Id = contract.Id,
-                RentalType =  contract.RentalType.ToString(),
+                RentalType =  contract.RentalType.RentalTypeToString(),
+                ContractStatus = contract.ContractStatus.ContractStatusToString(),
                 PickupDateTime = contract.PickupDateTime,
                 ReturnDueDateTime = contract.ReturnDueDateTime,
+                ActualReturnDateTime = contract.ActualReturnDateTime,
                 TotalDays = contract.TotalDays,
+                StartMileage = contract.StartMileage,
+                EndMileage = contract.EndMileage,
+                MileageContracted = contract.MileageContracted,
+                SnapshotPriceDailyRate = contract.SnapshotPriceDailyRate,
+                SnapshotPriceMonthlyRate = contract.SnapshotPriceMonthlyRate,
+                SnapshotPricePerExtraMileage = contract.SnapshotPricePerExtraMileage,
                 TotalAmount = contract.TotalAmount,
                 Tenant = contract.Tenant.ToResponse(),
-                Vehicle = contract.Vehicle.ToResponse()
+                Vehicle = contract.Vehicle.ToResponse(),
+                
+                
+
 
             };
         }
