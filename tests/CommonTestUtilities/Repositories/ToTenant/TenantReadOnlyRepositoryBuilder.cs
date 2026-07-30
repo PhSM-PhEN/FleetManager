@@ -6,10 +6,10 @@ namespace CommonTestUtilities.Repositories.ToTenant
 {
     public class TenantReadOnlyRepositoryBuilder
     {
-        private readonly Mock<ITenanteReadOnlyRepository> _repository;
+        private readonly Mock<ITenantReadOnlyRepository> _repository;
         public TenantReadOnlyRepositoryBuilder()
         {
-            _repository = new Mock<ITenanteReadOnlyRepository>();
+            _repository = new Mock<ITenantReadOnlyRepository>();
         }
         public TenantReadOnlyRepositoryBuilder GetAll(List<Tenant> tenants, int totalCount, int pageNumber, int pageSize)
         {
@@ -26,6 +26,6 @@ namespace CommonTestUtilities.Repositories.ToTenant
             _repository.Setup(t => t.GetById(id)).ReturnsAsync(tenant);
             return this;
         }
-        public ITenanteReadOnlyRepository Build() => _repository.Object;
+        public ITenantReadOnlyRepository Build() => _repository.Object;
     }
 }

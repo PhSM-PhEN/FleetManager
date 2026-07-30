@@ -2,7 +2,7 @@
 
 namespace FleetManager.Domain.Repositories.ToTenant
 {
-    public interface ITenanteReadOnlyRepository
+    public interface ITenantReadOnlyRepository
     {
         Task<(List<Tenant>, int totalCount)> GetAll(int pageNumber, int pageSize);
         Task<Tenant?> GetById(long id);

@@ -5,7 +5,7 @@ using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToTenant.GetById
 {
-    public class GetByIdTenantUseCase(ITenanteReadOnlyRepository repository) : IGetByIdTenantUseCase
+    public class GetByIdTenantUseCase(ITenantReadOnlyRepository repository) : IGetByIdTenantUseCase
     {
         public async Task<ResponseTenantJson> Execute(long id)
         {

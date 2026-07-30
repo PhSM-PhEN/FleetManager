@@ -71,7 +71,7 @@ namespace FleetManager.Infrastructure
             services.AddScoped<IAddressWriteOnlyRepository, AddressRepository>();
             // tenant
             services.AddScoped<ITenantWriteOnlyRepository, TenantRepository>();
-            services.AddScoped<ITenanteReadOnlyRepository, TenantRepository>();
+            services.AddScoped<ITenantReadOnlyRepository, TenantRepository>();
             // company
             services.AddScoped<ICompanyReadOnlyRepository, CompanyRepository>();
             services.AddScoped<ICompanyWriteOnlyRepository, CompanyRepository>();

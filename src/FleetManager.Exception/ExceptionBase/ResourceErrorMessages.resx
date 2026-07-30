@@ -327,4 +327,22 @@
   <data name="RENTAL_PLAN_ALREADY_EXISTS" xml:space="preserve">
     <value>Rental plan already  registered.</value>
   </data>
+  <data name="TENANT_ID_REQUIRED" xml:space="preserve">
+    <value>Tenant id required.</value>
+  </data>
+  <data name="RENTAL_PLAN_ID_REQUIRED" xml:space="preserve">
+    <value>Rental plan id required.</value>
+  </data>
+  <data name="RENTAL_TYPE_INVALID" xml:space="preserve">
+    <value>Rental type invalid.</value>
+  </data>
+  <data name="RETURN_DUE_DATE_REQUIRED" xml:space="preserve">
+    <value>Return due date required.</value>
+  </data>
+  <data name="RETURN_DUE_DATE_MUST_BE_AFTER_PICKUP" xml:space="preserve">
+    <value>Return due date must be after pickup</value>
+  </data>
+  <data name="VEHICLE_ALREADY_RENTED" xml:space="preserve">
+    <value>Vehicle already rented.</value>
+  </data>
 </root>

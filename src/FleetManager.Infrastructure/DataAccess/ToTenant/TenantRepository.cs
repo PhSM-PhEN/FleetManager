@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FleetManager.Infrastructure.DataAccess.ToTenant
 {
-    internal class TenantRepository(FleetManagerDbContext dbContext) : ITenantWriteOnlyRepository, ITenanteReadOnlyRepository
+    internal class TenantRepository(FleetManagerDbContext dbContext) : ITenantWriteOnlyRepository, ITenantReadOnlyRepository
     {
         public async Task Add(Tenant tenant)
         {
@@ -44,7 +44,7 @@ namespace FleetManager.Infrastructure.DataAccess.ToTenant
             dbContext.Tenants.Update(tenant);
         }
 
-        async Task<Tenant?> ITenanteReadOnlyRepository.GetById(long id)
+        async Task<Tenant?> ITenantReadOnlyRepository.GetById(long id)
         {
             return await dbContext.Tenants.AsNoTracking()
             .Include(t => t.Address)

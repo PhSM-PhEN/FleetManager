@@ -8,5 +8,6 @@ namespace FleetManager.Domain.Repositories.ToContract
         Task<Contract?> GetById(long id);
         Task Delete(long id);
         void Update(Contract contract);
+        Task<bool> HasActiveContract(long vehicleId);
     }
 }

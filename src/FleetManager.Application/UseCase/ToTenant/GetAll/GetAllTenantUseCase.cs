@@ -5,7 +5,7 @@ using FleetManager.Domain.Repositories.ToTenant;
 
 namespace FleetManager.Application.UseCase.ToTenant.GetAll
 {
-    public class GetAllTenantUseCase(ITenanteReadOnlyRepository repository) : IGetAllTenantUseCase
+    public class GetAllTenantUseCase(ITenantReadOnlyRepository repository) : IGetAllTenantUseCase
     {
         public async Task<ResponsePaginatedJson<ResponseShortTenantJson>> Execute(int pageNumber, int pageSize)
         {

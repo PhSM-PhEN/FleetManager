@@ -11,7 +11,7 @@ using FleetManager.Exception.ExceptionBase;
 namespace FleetManager.Application.UseCase.ToTenant.Register
 {
 
-    public class RegisterTenantUseCase(ITenantWriteOnlyRepository repository, ITenanteReadOnlyRepository tenantReadOnly ,IAddressReadOnlyRepository addressReadOnly , IUnitOfWork unitOfWork) : IRegisterTenantUseCase
+    public class RegisterTenantUseCase(ITenantWriteOnlyRepository repository, ITenantReadOnlyRepository tenantReadOnly ,IAddressReadOnlyRepository addressReadOnly , IUnitOfWork unitOfWork) : IRegisterTenantUseCase
 
     {
         public async Task<ResponseShortTenantJson> Execute(RequestTenantJson request)

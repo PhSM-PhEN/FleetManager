@@ -565,11 +565,47 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rental plan id required..
+        /// </summary>
+        public static string RENTAL_PLAN_ID_REQUIRED {
+            get {
+                return ResourceManager.GetString("RENTAL_PLAN_ID_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rental plan not found..
         /// </summary>
         public static string RENTAL_PLAN_NOT_FOUND {
             get {
                 return ResourceManager.GetString("RENTAL_PLAN_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rental type invalid..
+        /// </summary>
+        public static string RENTAL_TYPE_INVALID {
+            get {
+                return ResourceManager.GetString("RENTAL_TYPE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Return due date must be after pickup.
+        /// </summary>
+        public static string RETURN_DUE_DATE_MUST_BE_AFTER_PICKUP {
+            get {
+                return ResourceManager.GetString("RETURN_DUE_DATE_MUST_BE_AFTER_PICKUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Return due date required..
+        /// </summary>
+        public static string RETURN_DUE_DATE_REQUIRED {
+            get {
+                return ResourceManager.GetString("RETURN_DUE_DATE_REQUIRED", resourceCulture);
             }
         }
         
@@ -597,6 +633,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string STREET_REQUIRED {
             get {
                 return ResourceManager.GetString("STREET_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tenant id required..
+        /// </summary>
+        public static string TENANT_ID_REQUIRED {
+            get {
+                return ResourceManager.GetString("TENANT_ID_REQUIRED", resourceCulture);
             }
         }
         
@@ -651,6 +696,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string USER_NOT_FOUND {
             get {
                 return ResourceManager.GetString("USER_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vehicle already rented..
+        /// </summary>
+        public static string VEHICLE_ALREADY_RENTED {
+            get {
+                return ResourceManager.GetString("VEHICLE_ALREADY_RENTED", resourceCulture);
             }
         }
         
