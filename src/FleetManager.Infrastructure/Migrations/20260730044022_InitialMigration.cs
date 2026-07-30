@@ -72,9 +72,9 @@ namespace FleetManager.Infrastructure.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    DailyPrice = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
-                    MonthlyPrice = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
-                    ExcessMileageRate = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
+                    DailyPrice = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    MonthlyPrice = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    ExcessMileageRate = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     MileagePerDay = table.Column<long>(type: "bigint", nullable: false),
                     MileagePerMonthly = table.Column<long>(type: "bigint", nullable: false),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: false),
@@ -227,6 +227,57 @@ namespace FleetManager.Infrastructure.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "Contracts",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    VehicleId = table.Column<long>(type: "bigint", nullable: false),
+                    TenantId = table.Column<long>(type: "bigint", nullable: false),
+                    RentalPlanId = table.Column<long>(type: "bigint", nullable: false),
+                    RentalType = table.Column<int>(type: "int", nullable: false),
+                    StartMileage = table.Column<long>(type: "bigint", nullable: false),
+                    EndMileage = table.Column<long>(type: "bigint", nullable: false),
+                    MileageContracted = table.Column<long>(type: "bigint", nullable: false),
+                    SnapshotPriceDailyRate = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    SnapshotPriceMonthlyRate = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    SnapshotPricePerExtraMileage = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    TotalAmount = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    TotalDays = table.Column<int>(type: "int", nullable: false),
+                    PickupDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    ReturnDueDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    ContractStatus = table.Column<int>(type: "int", nullable: false),
+                    ActualReturnDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdateBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Contracts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Contracts_RentalPlans_RentalPlanId",
+                        column: x => x.RentalPlanId,
+                        principalTable: "RentalPlans",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Contracts_Tenants_TenantId",
+                        column: x => x.TenantId,
+                        principalTable: "Tenants",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Contracts_Vehicles_VehicleId",
+                        column: x => x.VehicleId,
+                        principalTable: "Vehicles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Companys_AddressId",
                 table: "Companys",
@@ -237,6 +288,21 @@ namespace FleetManager.Infrastructure.Migrations
                 table: "Companys",
                 column: "Cnpj",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Contracts_RentalPlanId",
+                table: "Contracts",
+                column: "RentalPlanId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Contracts_TenantId",
+                table: "Contracts",
+                column: "TenantId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Contracts_VehicleId",
+                table: "Contracts",
+                column: "VehicleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tenants_AddressId",
@@ -288,13 +354,16 @@ namespace FleetManager.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Contracts");
+
+            migrationBuilder.DropTable(
                 name: "HistoryLogs");
 
             migrationBuilder.DropTable(
-                name: "Tenants");
+                name: "Users");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Tenants");
 
             migrationBuilder.DropTable(
                 name: "Vehicles");
