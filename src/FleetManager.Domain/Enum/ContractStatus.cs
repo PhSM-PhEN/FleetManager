@@ -2,11 +2,11 @@
 {
     public enum ContractStatus
     {
-        Active = 1,
-        Finished = 2,
-        Cancelled = 3,
-        Overdue = 4,
-        Renewed = 5
-        
+        Reserved = 1,
+        Active = 2,
+        Finished = 3,
+        Cancelled = 4,
+        Overdue = 5,
+        Renewed = 6
     }
 }

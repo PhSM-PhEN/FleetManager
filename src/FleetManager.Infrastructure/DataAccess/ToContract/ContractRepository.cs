@@ -45,7 +45,7 @@ namespace FleetManager.Infrastructure.DataAccess.ToContract
         public async Task<bool> HasActiveContract(long vehicleId)
         {
             return await dbContext.Contracts.AnyAsync(c => c.VehicleId == vehicleId &&
-                (c.ContractStatus == ContractStatus.Active || c.ContractStatus == ContractStatus.Overdue));
+                ( c.ContractStatus == ContractStatus.Reserved || c.ContractStatus == ContractStatus.Active || c.ContractStatus == ContractStatus.Overdue));
         }
 
         public void Update(Contract contract)

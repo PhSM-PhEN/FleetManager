@@ -8,6 +8,7 @@ namespace FleetManager.Domain.EnumExtensions
         {
             return status switch
             {
+                ContractStatus.Reserved => "Reserved",
                 ContractStatus.Active => "Acive",
                 ContractStatus.Cancelled => "Cancelled",
                 ContractStatus.Finished => "Finished",

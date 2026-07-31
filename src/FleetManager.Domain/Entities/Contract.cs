@@ -23,7 +23,7 @@ namespace FleetManager.Domain.Entities
         public DateTime PickupDateTime { get => _pickupDateTime; private set => _pickupDateTime = value; }
         public DateTime ReturnDueDateTime { get => _returnDueDateTime; private set => _returnDueDateTime = value; }
 
-        public ContractStatus ContractStatus { get; private set; } = ContractStatus.Active;
+        public ContractStatus ContractStatus { get; private set; } = ContractStatus.Reserved;
         public DateTime? ActualReturnDateTime { get; private set; }
 
         public Vehicle Vehicle { get; set; } = default!;
@@ -32,42 +32,38 @@ namespace FleetManager.Domain.Entities
 
         protected Contract() { }
 
-        // Usado no registro original — sempre tira o snapshot do RentalPlan vigente no momento.
         public Contract(long vehicleId, long tenantId, RentalPlan rentalPlan, RentalType rentalType, long startMileage,
                         long mileageContracted, decimal totalAmount, int totalDays, DateTime pickupDateTime, DateTime returnDueDateTime)
-                        
-            : this(vehicleId, tenantId, rentalPlan.Id, rentalType, startMileage, mileageContracted, totalAmount, totalDays,
-                   pickupDateTime, returnDueDateTime, rentalPlan.DailyPrice, rentalPlan.MonthlyPrice, rentalPlan.ExcessMileageRate)
-        {
-        }
-
-        // Construtor interno — recebe os valores de snapshot já decididos por fora (usado pela renovação também).
-        private Contract(long vehicleId, long tenantId, long rentalPlanId, RentalType rentalType, long startMileage,
-                        long mileageContracted, decimal totalAmount, int totalDays, DateTime pickupDateTime, DateTime returnDueDateTime,
-                        decimal snapshotDailyRate, decimal snapshotMonthlyRate, decimal snapshotExcessRate)
         {
             VehicleId = vehicleId;
             TenantId = tenantId;
-            RentalPlanId = rentalPlanId;
-            RentalType = rentalType;
             StartMileage = startMileage;
-            MileageContracted = mileageContracted;
-            EndMileage = CalculateEndMileage(startMileage, mileageContracted);
-            TotalAmount = totalAmount;
-            TotalDays = totalDays;
-            _pickupDateTime = pickupDateTime;
-            _returnDueDateTime = returnDueDateTime;
-            SnapshotPriceDailyRate = snapshotDailyRate;
-            SnapshotPriceMonthlyRate = snapshotMonthlyRate;
-            SnapshotPricePerExtraMileage = snapshotExcessRate;
+            ApplyTerms(rentalPlan, rentalType, mileageContracted, totalAmount, totalDays, pickupDateTime, returnDueDateTime);
         }
 
         public void Cancel()
         {
-            if (ContractStatus != ContractStatus.Active)
+            if (ContractStatus != ContractStatus.Active && ContractStatus != ContractStatus.Reserved)
                 throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_NOT_ACTIVE);
 
             ContractStatus = ContractStatus.Cancelled;
+        }
+
+        public void Confirm()
+        {
+            if (ContractStatus != ContractStatus.Reserved)
+                throw new BusinessRuleException("ResourceErrorMessages.CONTRACT_NOT_RESERVED");
+
+            ContractStatus = ContractStatus.Active;
+        }
+
+        public void Update(RentalPlan rentalPlan, RentalType rentalType, long mileageContracted, decimal totalAmount,
+                        int totalDays, DateTime pickupDateTime, DateTime returnDueDateTime)
+        {
+            if (ContractStatus != ContractStatus.Reserved)
+                throw new BusinessRuleException("ResourceErrorMessages.CONTRACT_NOT_EDITABLE");
+
+            ApplyTerms(rentalPlan, rentalType, mileageContracted, totalAmount, totalDays, pickupDateTime, returnDueDateTime);
         }
 
         public void Complete(DateTime actualReturnDateTime)
@@ -87,8 +83,6 @@ namespace FleetManager.Domain.Entities
             ContractStatus = ContractStatus.Overdue;
         }
 
-        // Gera um NOVO contrato a partir de um vigente, em vez de alterar o atual.
-        // newRentalPlan/mileageContractedOverride nulos = repete o que já estava congelado no anterior.
         public static Contract Renew(Contract previousContract, RentalPlan? newRentalPlan, long? mileageContractedOverride)
         {
             if (previousContract.ContractStatus != ContractStatus.Active)
@@ -98,23 +92,20 @@ namespace FleetManager.Domain.Entities
                 throw new BusinessRuleException(ResourceErrorMessages.RENEWAL_MUST_BE_REQUESTED_BEFORE_DUE_DATE);
 
             var mileageContracted = mileageContractedOverride ?? previousContract.MileageContracted;
-            var pickupDateTime = previousContract.ReturnDueDateTime;               // começa onde o anterior deveria terminar
+            var pickupDateTime = previousContract.ReturnDueDateTime;
             var returnDueDateTime = pickupDateTime.AddDays(previousContract.TotalDays);
-            var startMileage = previousContract.EndMileage;                        // idem, pro km
+            var startMileage = previousContract.EndMileage;
 
-            var dailyRate = newRentalPlan?.DailyPrice ?? previousContract.SnapshotPriceDailyRate;
-            var monthlyRate = newRentalPlan?.MonthlyPrice ?? previousContract.SnapshotPriceMonthlyRate;
-            var excessRate = newRentalPlan?.ExcessMileageRate ?? previousContract.SnapshotPricePerExtraMileage;
-            var rentalPlanId = newRentalPlan?.Id ?? previousContract.RentalPlanId;
+            var plan = newRentalPlan ?? previousContract.RentalPlan;
 
             var totalAmount = previousContract.RentalType == RentalType.Daily
-                ? dailyRate * previousContract.TotalDays
-                : monthlyRate;
+                ? (newRentalPlan?.DailyPrice ?? previousContract.SnapshotPriceDailyRate) * previousContract.TotalDays
+                : (newRentalPlan?.MonthlyPrice ?? previousContract.SnapshotPriceMonthlyRate);
 
-            var renewed = new Contract(previousContract.VehicleId, previousContract.TenantId, rentalPlanId, previousContract.RentalType,
-                startMileage, mileageContracted, totalAmount, previousContract.TotalDays, pickupDateTime, returnDueDateTime,
-                dailyRate, monthlyRate, excessRate);
+            var renewed = new Contract(previousContract.VehicleId, previousContract.TenantId, plan, previousContract.RentalType,
+                startMileage, mileageContracted, totalAmount, previousContract.TotalDays, pickupDateTime, returnDueDateTime);
 
+            renewed.Confirm(); // uma renovação já nasce confirmada — não faz sentido reservar de novo o que já estava rodando
             previousContract.MarkAsRenewed();
 
             return renewed;
@@ -123,6 +114,22 @@ namespace FleetManager.Domain.Entities
         private void MarkAsRenewed()
         {
             ContractStatus = ContractStatus.Renewed;
+        }
+
+        private void ApplyTerms(RentalPlan rentalPlan, RentalType rentalType, long mileageContracted, decimal totalAmount,
+                        int totalDays, DateTime pickupDateTime, DateTime returnDueDateTime)
+        {
+            RentalPlanId = rentalPlan.Id;
+            RentalType = rentalType;
+            MileageContracted = mileageContracted;
+            EndMileage = CalculateEndMileage(StartMileage, mileageContracted);
+            TotalAmount = totalAmount;
+            TotalDays = totalDays;
+            _pickupDateTime = pickupDateTime;
+            _returnDueDateTime = returnDueDateTime;
+            SnapshotPriceDailyRate = rentalPlan.DailyPrice;
+            SnapshotPriceMonthlyRate = rentalPlan.MonthlyPrice;
+            SnapshotPricePerExtraMileage = rentalPlan.ExcessMileageRate;
         }
 
         private static long CalculateEndMileage(long startMileage, long mileageContracted)
