@@ -745,6 +745,33 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contract not found..
+        /// </summary>
+        public static string CONTRACT_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("CONTRACT_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contract is not reserved..
+        /// </summary>
+        public static string CONTRACT_NOT_RESERVED {
+            get {
+                return ResourceManager.GetString("CONTRACT_NOT_RESERVED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contract can only be edited while reserved..
+        /// </summary>
+        public static string CONTRACT_NOT_EDITABLE {
+            get {
+                return ResourceManager.GetString("CONTRACT_NOT_EDITABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Zipcode invalid..
         /// </summary>
         public static string ZIPCODE_INVALID {

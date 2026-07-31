@@ -52,7 +52,6 @@ namespace CommonTestUtilities.Entities
                         startMileage,
                         mileageContracted,
                         totalAmount,
-                        totalDays,
                         pickupDateTime,
                         returnDueDateTime);
                 })

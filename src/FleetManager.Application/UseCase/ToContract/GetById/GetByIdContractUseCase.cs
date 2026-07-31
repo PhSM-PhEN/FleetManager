@@ -10,7 +10,7 @@ namespace FleetManager.Application.UseCase.ToContract.GetById
         public async Task<ResponseContractJson> Execute(long id)
         {
             var contract = await repository.GetById(id) ??
-                throw new NotFoundException("Criar resource notfound");
+                throw new NotFoundException(ResourceErrorMessages.CONTRACT_NOT_FOUND);
                 
             return contract.ToInfoResponse();
         }

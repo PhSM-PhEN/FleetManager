@@ -33,7 +33,7 @@ namespace FleetManager.Application.UseCase.ToContract.Register
 
             var rentalType = Enum.Parse<RentalType>(request.RentalType);
 
-            var (totalDays, returnDueDateTime) = CalculatePeriod(rentalType, request.PickupDateTime, request.ReturnDueDateTime);
+            var (totalDays, _) = Contract.CalculatePeriod(rentalType, request.PickupDateTime, request.ReturnDueDateTime);
 
             var mileageContracted = GetMileageContracted(request.MileageContracted, rentalType, rentalPlan, totalDays);
             var totalAmount = GetTotalAmount(request.TotalAmount, rentalType, rentalPlan, totalDays);
@@ -45,9 +45,8 @@ namespace FleetManager.Application.UseCase.ToContract.Register
                                         vehicle.CurrentMileage,
                                         mileageContracted,
                                         totalAmount,
-                                        totalDays,
                                         request.PickupDateTime,
-                                        returnDueDateTime);
+                                        request.ReturnDueDateTime);
 
             await contractRepository.Add(contract);
             await unitOfWork.Commit();
@@ -73,18 +72,6 @@ namespace FleetManager.Application.UseCase.ToContract.Register
             return rentalType == RentalType.Daily
                 ? rentalPlan.DailyPrice * totalDays
                 : rentalPlan.MonthlyPrice;
-        }
-
-        private static (int totalDays, DateTime returnDueDateTime) CalculatePeriod(RentalType rentalType, DateTime pickupDateTime, DateTime? returnDueDateTime)
-        {
-            if (rentalType == RentalType.Daily)
-            {
-                var returnDue = returnDueDateTime!.Value;
-                return ((returnDue - pickupDateTime).Days, returnDue);
-            }
-
-            var monthlyReturnDue = pickupDateTime.AddDays(30);
-            return (30, monthlyReturnDue);
         }
 
         private async Task<Vehicle> EnsureVehicleExist(long id)

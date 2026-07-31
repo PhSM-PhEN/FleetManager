@@ -33,12 +33,12 @@ namespace FleetManager.Domain.Entities
         protected Contract() { }
 
         public Contract(long vehicleId, long tenantId, RentalPlan rentalPlan, RentalType rentalType, long startMileage,
-                        long mileageContracted, decimal totalAmount, int totalDays, DateTime pickupDateTime, DateTime returnDueDateTime)
+                        long mileageContracted, decimal totalAmount, DateTime pickupDateTime, DateTime? returnDueDateTime)
         {
             VehicleId = vehicleId;
             TenantId = tenantId;
             StartMileage = startMileage;
-            ApplyTerms(rentalPlan, rentalType, mileageContracted, totalAmount, totalDays, pickupDateTime, returnDueDateTime);
+            ApplyTerms(rentalPlan, rentalType, mileageContracted, totalAmount, pickupDateTime, returnDueDateTime);
         }
 
         public void Cancel()
@@ -52,18 +52,18 @@ namespace FleetManager.Domain.Entities
         public void Confirm()
         {
             if (ContractStatus != ContractStatus.Reserved)
-                throw new BusinessRuleException("ResourceErrorMessages.CONTRACT_NOT_RESERVED");
+                throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_NOT_RESERVED);
 
             ContractStatus = ContractStatus.Active;
         }
 
         public void Update(RentalPlan rentalPlan, RentalType rentalType, long mileageContracted, decimal totalAmount,
-                        int totalDays, DateTime pickupDateTime, DateTime returnDueDateTime)
+                        DateTime pickupDateTime, DateTime? returnDueDateTime)
         {
             if (ContractStatus != ContractStatus.Reserved)
-                throw new BusinessRuleException("ResourceErrorMessages.CONTRACT_NOT_EDITABLE");
+                throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_NOT_EDITABLE);
 
-            ApplyTerms(rentalPlan, rentalType, mileageContracted, totalAmount, totalDays, pickupDateTime, returnDueDateTime);
+            ApplyTerms(rentalPlan, rentalType, mileageContracted, totalAmount, pickupDateTime, returnDueDateTime);
         }
 
         public void Complete(DateTime actualReturnDateTime)
@@ -103,7 +103,7 @@ namespace FleetManager.Domain.Entities
                 : (newRentalPlan?.MonthlyPrice ?? previousContract.SnapshotPriceMonthlyRate);
 
             var renewed = new Contract(previousContract.VehicleId, previousContract.TenantId, plan, previousContract.RentalType,
-                startMileage, mileageContracted, totalAmount, previousContract.TotalDays, pickupDateTime, returnDueDateTime);
+                startMileage, mileageContracted, totalAmount, pickupDateTime, returnDueDateTime);
 
             renewed.Confirm(); // uma renovação já nasce confirmada — não faz sentido reservar de novo o que já estava rodando
             previousContract.MarkAsRenewed();
@@ -117,8 +117,10 @@ namespace FleetManager.Domain.Entities
         }
 
         private void ApplyTerms(RentalPlan rentalPlan, RentalType rentalType, long mileageContracted, decimal totalAmount,
-                        int totalDays, DateTime pickupDateTime, DateTime returnDueDateTime)
+                        DateTime pickupDateTime, DateTime? returnDueDateTime)
         {
+            var (totalDays, dueDateTime) = CalculatePeriod(rentalType, pickupDateTime, returnDueDateTime);
+
             RentalPlanId = rentalPlan.Id;
             RentalType = rentalType;
             MileageContracted = mileageContracted;
@@ -126,10 +128,35 @@ namespace FleetManager.Domain.Entities
             TotalAmount = totalAmount;
             TotalDays = totalDays;
             _pickupDateTime = pickupDateTime;
-            _returnDueDateTime = returnDueDateTime;
+            _returnDueDateTime = dueDateTime;
             SnapshotPriceDailyRate = rentalPlan.DailyPrice;
             SnapshotPriceMonthlyRate = rentalPlan.MonthlyPrice;
             SnapshotPricePerExtraMileage = rentalPlan.ExcessMileageRate;
+        }
+
+        /// <summary>
+        /// Fonte única de verdade sobre quantos dias um contrato dura e qual a data de devolução prevista.
+        /// Diária: exige returnDueDateTime informado pelo solicitante (>= pickup).
+        /// Mensal: ignora returnDueDateTime informado e sempre fecha em 30 dias corridos.
+        /// Exposto como público/estático para os use cases poderem usar o mesmo cálculo (ex.: para
+        /// derivar km/valor padrão do plano) sem duplicar a regra — o Contract nunca recebe totalDays pronto.
+        /// </summary>
+        public static (int TotalDays, DateTime ReturnDueDateTime) CalculatePeriod(RentalType rentalType, DateTime pickupDateTime, DateTime? returnDueDateTime)
+        {
+            if (rentalType == RentalType.Daily)
+            {
+                if (!returnDueDateTime.HasValue)
+                    throw new BusinessRuleException(ResourceErrorMessages.RETURN_DUE_DATE_REQUIRED);
+
+                var returnDue = returnDueDateTime.Value;
+
+                if (returnDue <= pickupDateTime)
+                    throw new BusinessRuleException(ResourceErrorMessages.RETURN_DUE_DATE_MUST_BE_AFTER_PICKUP);
+
+                return ((returnDue - pickupDateTime).Days, returnDue);
+            }
+
+            return (30, pickupDateTime.AddDays(30));
         }
 
         private static long CalculateEndMileage(long startMileage, long mileageContracted)

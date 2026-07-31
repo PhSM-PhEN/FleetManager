@@ -31,7 +31,9 @@ namespace FleetManager.Infrastructure.DataAccess.ToContract
 
         public async Task<Contract?> GetById(long id)
         {
-            return await dbContext.Contracts.FirstOrDefaultAsync(c => c.Id == id);
+            return await dbContext.Contracts
+                        .Include(rp => rp.RentalPlan)
+                        .FirstOrDefaultAsync(c => c.Id == id);
         }
         async Task<Contract?> IContractReadOnlyRepository.GetById(long id)
         {

@@ -10,38 +10,30 @@ namespace FleetManager.Application.UseCase.ToContract.Update
     {
         public async Task Execute(long id, RequestUpdateContractJson request)
         {
-            
-            var contract = await repository.GetById(id) ?? 
-                throw new NotFoundException("");
-            var totalDays = CalculatePeriod(contract.RentalType ,request.PickupDateTime, request.ReturnDueDateTime);
-            contract.Update(contract.RentalPlan, contract.RentalType , request.MileageContracted,
-                            request.TotalAmount, totalDays , request.PickupDateTime, request.ReturnDueDateTime);
+            Validate(request);
+
+            var contract = await repository.GetById(id) ??
+                throw new NotFoundException(ResourceErrorMessages.CONTRACT_NOT_FOUND);
+
+            var rentalType = Enum.Parse<RentalType>(request.RentalType);
+
+            contract.Update(contract.RentalPlan, rentalType, request.MileageContracted,
+                            request.TotalAmount, request.PickupDateTime, request.ReturnDueDateTime);
 
             repository.Update(contract);
             await unitOfWork.Commit();
-
         }
-        private static (int totalDays, DateTime returnDueDateTime) CalculatePeriod(RentalType rentalType, DateTime pickupDateTime, DateTime? returnDueDateTime)
-        {
-            if (rentalType == RentalType.Daily)
-            {
-                var returnDue = returnDueDateTime!.Value;
-                return ((returnDue - pickupDateTime).Days, returnDue);
-            }
 
-            var monthlyReturnDue = pickupDateTime.AddDays(30);
-            return (30, monthlyReturnDue);
-        }
         private static void Validate(RequestUpdateContractJson request)
         {
-            var validator = new UpdateContractValidator();
-            var resuslt = validator.Validate(request);
+            var validator =  new UpdateContractValidator();
+            var result = validator.Validate(request);
 
-            if (resuslt.IsValid == false)
+            if (result.IsValid == false)
             {
-                var error = resuslt.Errors.Select(error => error.ErrorMessage).ToList();
-                
-                throw new ErrorOnValidationException(error);
+                var errors = result.Errors.Select(error => error.ErrorMessage).ToList();
+
+                throw new ErrorOnValidationException(errors);
             }
         }
     }
