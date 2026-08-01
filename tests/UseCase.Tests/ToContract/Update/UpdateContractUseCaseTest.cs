@@ -22,6 +22,8 @@ namespace UseCase.Tests.ToContract.Update
             await useCase.Execute(contract.Id, request);
 
             contract.RentalType.ShouldBe(Enum.Parse<RentalType>(request.RentalType));
+            contract.MileageContracted.ShouldBe(request.MileageContracted);
+            contract.TotalAmount.ShouldBe(request.TotalAmount);
         }
 
         [Fact]

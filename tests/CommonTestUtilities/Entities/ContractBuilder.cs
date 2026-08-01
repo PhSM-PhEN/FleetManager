@@ -60,12 +60,20 @@ namespace CommonTestUtilities.Entities
             if (id.HasValue)
                 contract.Id = id.Value;
 
-            if (status == ContractStatus.Cancelled)
+            if (status == ContractStatus.Active)
+                contract.Confirm();
+            else if (status == ContractStatus.Cancelled)
                 contract.Cancel();
             else if (status == ContractStatus.Finished)
+            {
+                contract.Confirm();
                 contract.Complete(DateTime.UtcNow);
+            }
             else if (status == ContractStatus.Overdue)
+            {
+                contract.Confirm();
                 contract.MarkAsOverdue();
+            }
 
             return contract;
         }

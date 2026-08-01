@@ -8,7 +8,7 @@ namespace FleetManager.Domain.EnumExtensions
         {
             return rentalType switch
             {
-                RentalType.Daily => "Dayly",
+                RentalType.Daily => "Daily",
                 RentalType.Monthly => "Monthly",
                 _=> string.Empty
             };

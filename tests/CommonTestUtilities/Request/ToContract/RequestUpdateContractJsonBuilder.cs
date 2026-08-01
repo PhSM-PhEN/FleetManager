@@ -11,8 +11,8 @@ namespace CommonTestUtilities.Request.ToContract
 
             return new Faker<RequestUpdateContractJson>()
                 .RuleFor(request => request.RentalType, _ => rentalType)
-                .RuleFor(request => request.MileageContracted, _ => 0) // 0 = usa o valor do plano
-                .RuleFor(request => request.TotalAmount, _ => 0)       // 0 = usa o valor do plano
+                .RuleFor(request => request.MileageContracted, f => f.Random.Long(100, 5_000))
+                .RuleFor(request => request.TotalAmount, f => f.Random.Decimal(100, 5_000))
                 .RuleFor(request => request.PickupDateTime, _ => pickupDateTime)
                 .RuleFor(request => request.ReturnDueDateTime, f => rentalType == "Daily" ? pickupDateTime.AddDays(f.Random.Int(1, 30)) : null)
                 .Generate();
