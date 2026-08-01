@@ -20,6 +20,7 @@ namespace WebApi.Tests
         public CompanyIdentityManager COMPANY_TEAM_MEMBER { get; private set; } = default!;
         public VehicleIdentityManager VEHICLE_TEAM_MEMBER { get; private set; } = default!;
         public RentalPlanIdentityManager RENTAL_PLAN_TEAM_MEMBER { get; private set; } = default!;
+        public ContractIdentityManager CONTRACT_TEAM_MEMBER { get; private set; } = default!;
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
             builder.UseEnvironment("Test")
@@ -55,9 +56,26 @@ namespace WebApi.Tests
             
             var rentalPlan = AddRentalPlan(dbContext);
 
-            AddVehicle(dbContext, company.Id, rentalPlan.Id);
+            var vehicle = AddVehicle(dbContext, company.Id, rentalPlan.Id);
             dbContext.SaveChanges();
 
+            // Veiculo dedicado ao contrato semeado: o veiculo exposto em VEHICLE_TEAM_MEMBER
+            // precisa continuar livre (sem contrato ativo) para os testes de registro de contrato.
+            var contractVehicle = VehicleBuilder.Build(2, company.Id, rentalPlan.Id);
+            dbContext.Add(contractVehicle);
+            dbContext.SaveChanges();
+
+            AddContract(dbContext, contractVehicle.Id, TENANT_TEAM_MEMBER.GetById(), rentalPlan);
+            dbContext.SaveChanges();
+
+        }
+        private Contract AddContract(FleetManagerDbContext dbContext, long vehicleId, long tenantId, RentalPlan rentalPlan)
+        {
+            var contract = ContractBuilder.Build(vehicleId: vehicleId, tenantId: tenantId, rentalPlan: rentalPlan,
+                status: FleetManager.Domain.Enum.ContractStatus.Reserved);
+            dbContext.Contracts.Add(contract);
+            CONTRACT_TEAM_MEMBER = new ContractIdentityManager(contract);
+            return contract;
         }
         private RentalPlan  AddRentalPlan(FleetManagerDbContext dbContext)
         {
