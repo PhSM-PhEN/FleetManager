@@ -153,7 +153,13 @@ namespace FleetManager.Domain.Entities
                 if (returnDue <= pickupDateTime)
                     throw new BusinessRuleException(ResourceErrorMessages.RETURN_DUE_DATE_MUST_BE_AFTER_PICKUP);
 
-                return ((returnDue - pickupDateTime).Days, returnDue);
+                // Cada dia é um bloco de 24h exatas a partir do horário da retirada (ex.: saiu hoje 10:30,
+                // só fecha o 1º dia amanhã 10:30). TimeSpan.Days truncava a parte de horas (ex.: 23h virava
+                // 0 dias); aqui qualquer fração de 24h conta como um dia cheio a mais (mínimo de 1 dia).
+                var totalHours = (returnDue - pickupDateTime).TotalHours;
+                var totalDays = (int)Math.Ceiling(totalHours / 24);
+
+                return (totalDays, returnDue);
             }
 
             return (30, pickupDateTime.AddDays(30));

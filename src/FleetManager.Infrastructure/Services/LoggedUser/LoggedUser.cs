@@ -13,16 +13,16 @@ namespace FleetManager.Infrastructure.Services.LoggedUser
             var claims = httpContextAccessor.HttpContext!.User;
 
             var identifier = claims.FindFirst(ClaimTypes.Sid)?.Value
-                    ?? throw new InvalidOperationException(ResourceErrorMessages.TOKEN_INVALID_OR_MISSING);
+                    ?? throw new UnauthorizedException(ResourceErrorMessages.TOKEN_INVALID_OR_MISSING);
 
             var name = claims.FindFirst(ClaimTypes.Name)?.Value ?? string.Empty;
             var role = claims.FindFirst(ClaimTypes.Role)?.Value ?? string.Empty;
 
             var dbIdClaim = claims.FindFirst("db_id")?.Value
-                    ?? throw new InvalidOperationException(ResourceErrorMessages.TOKEN_INVALID_OR_MISSING);
+                    ?? throw new UnauthorizedException(ResourceErrorMessages.TOKEN_INVALID_OR_MISSING);
 
             if (!long.TryParse(dbIdClaim, out var id))
-                throw new InvalidOperationException(ResourceErrorMessages.TOKEN_INVALID_OR_MISSING);
+                throw new UnauthorizedException(ResourceErrorMessages.TOKEN_INVALID_OR_MISSING);
 
             var user = new User(id, Guid.Parse(identifier), name, role);
 

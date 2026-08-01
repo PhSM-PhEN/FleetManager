@@ -13,8 +13,8 @@ namespace FleetManager.Infrastructure.DataAccess.ToCompany
 
         public async Task Delete(long id)
         {
-            var result = await dbContext.Companys.FindAsync(id);
-            dbContext.Companys.Remove(result!);
+            var company = await GetById(id);
+            dbContext.Companys.Remove(company!);
         }
 
         public async Task<List<Company>> GetAll()

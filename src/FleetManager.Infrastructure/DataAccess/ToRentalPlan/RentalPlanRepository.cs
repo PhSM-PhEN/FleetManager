@@ -41,7 +41,7 @@ namespace FleetManager.Infrastructure.DataAccess.ToRentalPlan
 
         public async Task Delete(long id)
         {
-            var rentalPlan = await dbContext.RentalPlans.FindAsync(id);
+            var rentalPlan = await GetById(id);
 
             dbContext.Remove(rentalPlan!);
         }

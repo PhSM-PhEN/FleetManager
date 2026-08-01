@@ -18,7 +18,7 @@ namespace FleetManager.Infrastructure.DataAccess.ToUser
 
         public async Task Delete(User user)
         {
-            var userToDelete = await dbContext.Users.FindAsync(user.Id);
+            var userToDelete = await dbContext.Users.FirstOrDefaultAsync(u => u.Id == user.Id);
             dbContext.Users.Remove(userToDelete!);
         }
 

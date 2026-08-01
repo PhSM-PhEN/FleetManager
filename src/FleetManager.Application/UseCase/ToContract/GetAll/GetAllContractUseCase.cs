@@ -13,7 +13,7 @@ namespace FleetManager.Application.UseCase.ToContract.GetAll
             {
                 pageNumber = 1;
             }
-            if(pageSize <= 0)
+            if(pageSize <= 0 || pageSize > 50)
             {
                 pageSize = 10;
             }

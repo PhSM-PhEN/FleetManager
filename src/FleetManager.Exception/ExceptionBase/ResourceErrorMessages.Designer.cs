@@ -250,6 +250,24 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Driver license number is invalid..
+        /// </summary>
+        public static string DRIVER_LICENSE_NUMBER_INVALID {
+            get {
+                return ResourceManager.GetString("DRIVER_LICENSE_NUMBER_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Driver license category is invalid..
+        /// </summary>
+        public static string DRIVER_LICENSE_CATEGORY_INVALID {
+            get {
+                return ResourceManager.GetString("DRIVER_LICENSE_CATEGORY_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email already registered..
         /// </summary>
         public static string EMAIL_ALREADY_REGISTERED {
