@@ -59,8 +59,7 @@ namespace WebApi.Tests
             var vehicle = AddVehicle(dbContext, company.Id, rentalPlan.Id);
             dbContext.SaveChanges();
 
-            // Veiculo dedicado ao contrato semeado: o veiculo exposto em VEHICLE_TEAM_MEMBER
-            // precisa continuar livre (sem contrato ativo) para os testes de registro de contrato.
+            
             var contractVehicle = VehicleBuilder.Build(2, company.Id, rentalPlan.Id);
             dbContext.Add(contractVehicle);
             dbContext.SaveChanges();

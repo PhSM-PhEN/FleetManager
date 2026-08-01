@@ -9,6 +9,7 @@ using FleetManager.Application.UseCase.ToCompany.GetAll;
 using FleetManager.Application.UseCase.ToCompany.GetById;
 using FleetManager.Application.UseCase.ToCompany.Register;
 using FleetManager.Application.UseCase.ToCompany.Update;
+using FleetManager.Application.UseCase.ToContract.Delete;
 using FleetManager.Application.UseCase.ToContract.GetAll;
 using FleetManager.Application.UseCase.ToContract.GetById;
 using FleetManager.Application.UseCase.ToContract.Register;
@@ -91,6 +92,7 @@ namespace FleetManager.Application
             services.AddScoped<IGetByIdContractUseCase, GetByIdContractUseCase>();
             services.AddScoped<IGetAllContractUseCase, GetAllContractUseCase>();
             services.AddScoped<IUpdateContractUseCase, UpdateContractUseCase>();
+            services.AddScoped<IDeleteContractUseCase, DeleteContractUseCase>();
 
 
         }
