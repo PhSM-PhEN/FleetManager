@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FleetManager.Infrastructure.Migrations
 {
     [DbContext(typeof(FleetManagerDbContext))]
-    [Migration("20260730044022_InitialMigration")]
+    [Migration("20260802015730_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -112,7 +112,7 @@ namespace FleetManager.Infrastructure.Migrations
                     b.HasIndex("Cnpj")
                         .IsUnique();
 
-                    b.ToTable("Companys");
+                    b.ToTable("Companys", (string)null);
                 });
 
             modelBuilder.Entity("FleetManager.Domain.Entities.Contract", b =>

@@ -10,7 +10,7 @@ namespace Validator.Tests.ToVehicle
         [Fact]
         public void Success()
         {
-            var validator = new CurrentMiliageValidator();
+            var validator = new CurrentMileageValidator();
             var request = new RequestMileageVehicleJson { MileageVehicle = 50_000 };
 
             var result = validator.Validate(request);
@@ -21,7 +21,7 @@ namespace Validator.Tests.ToVehicle
         [Fact]
         public void Success_Mileage_Zero()
         {
-            var validator = new CurrentMiliageValidator();
+            var validator = new CurrentMileageValidator();
             var request = new RequestMileageVehicleJson { MileageVehicle = 0 };
 
             var result = validator.Validate(request);
@@ -34,7 +34,7 @@ namespace Validator.Tests.ToVehicle
         [InlineData(-1000)]
         public void Error_Mileage_Negative(long mileage)
         {
-            var validator = new CurrentMiliageValidator();
+            var validator = new CurrentMileageValidator();
             var request = new RequestMileageVehicleJson { MileageVehicle = mileage };
 
             var result = validator.Validate(request);

@@ -109,7 +109,7 @@ namespace FleetManager.Infrastructure.Migrations
                     b.HasIndex("Cnpj")
                         .IsUnique();
 
-                    b.ToTable("Companys");
+                    b.ToTable("Companys", (string)null);
                 });
 
             modelBuilder.Entity("FleetManager.Domain.Entities.Contract", b =>

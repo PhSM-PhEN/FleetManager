@@ -52,7 +52,7 @@ namespace FleetManager.Application
             services.AddScoped<IRegisterUserUseCase, RegisterUserUseCase>();
             services.AddScoped<IGetProfileUserUseCase, GetProfileUserUseCase>();
             services.AddScoped<IUpdateProfileUserUseCase, UpdateProfileUserUseCase>();
-            services.AddScoped<IChangePasswordUseCase, ChangPasswordUseCase>();
+            services.AddScoped<IChangePasswordUseCase, ChangePasswordUseCase>();
             services.AddScoped<IDeleteUserUseCase, DeleteUserUseCase>();
             services.AddScoped<IPromoteUserUseCase, PromoteUserUseCase>();
             // login

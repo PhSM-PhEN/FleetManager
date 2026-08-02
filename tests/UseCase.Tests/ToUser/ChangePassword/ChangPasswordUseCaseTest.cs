@@ -16,7 +16,7 @@ namespace UseCase.Tests.ToUser.ChangePassword
         public async Task Success()
         {
             
-            var request = RequestChangPasswordJsonBuilder.Build();
+            var request = RequestChangePasswordJsonBuilder.Build();
             var user = UserBuilder.Build();
             var useCase = CreateUseCase(user, request.OldPassword);
 
@@ -25,7 +25,7 @@ namespace UseCase.Tests.ToUser.ChangePassword
 
         }
 
-        private ChangPasswordUseCase CreateUseCase(User user, string? password = null)
+        private ChangePasswordUseCase CreateUseCase(User user, string? password = null)
         {
             var unitOfWork = UnitOfWorkBuilder.Build();
             var logged = LoggedUserBuilder.Build(user);
@@ -36,7 +36,7 @@ namespace UseCase.Tests.ToUser.ChangePassword
                .Update(user)
                .Build();
 
-            return new ChangPasswordUseCase(logged, encrypter, repository,  unitOfWork);
+            return new ChangePasswordUseCase(logged, encrypter, repository,  unitOfWork);
 
         }
     }
