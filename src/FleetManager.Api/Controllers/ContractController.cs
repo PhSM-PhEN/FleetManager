@@ -1,6 +1,9 @@
-﻿using FleetManager.Application.UseCase.ToContract.Delete;
+﻿using FleetManager.Application.UseCase.ToContract.Activate;
+using FleetManager.Application.UseCase.ToContract.Cancel;
+using FleetManager.Application.UseCase.ToContract.Delete;
 using FleetManager.Application.UseCase.ToContract.GetAll;
 using FleetManager.Application.UseCase.ToContract.GetById;
+using FleetManager.Application.UseCase.ToContract.Preview;
 using FleetManager.Application.UseCase.ToContract.Register;
 using FleetManager.Application.UseCase.ToContract.Update;
 using FleetManager.Communication.Request.ToContract;
@@ -24,6 +27,15 @@ namespace FleetManager.Api.Controllers
         {
             var response = await useCase.Execute(request);
             return Created(string.Empty, response);
+        }
+
+        [HttpPost("Preview")]
+        [ProducesResponseType(typeof(ResponseContractJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Preview([FromServices] IPreviewContractUseCase useCase, [FromBody] RequestContractJson request)
+        {
+            var response = await useCase.Execute(request);
+            return Ok(response);
         }
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ResponseContractJson), StatusCodes.Status200OK)]
@@ -55,6 +67,26 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete([FromServices] IDeleteContractUseCase useCase, [FromRoute] long id)
+        {
+            await useCase.Execute(id);
+            return NoContent();
+        }
+
+        [HttpPatch("{id}/Cancel")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Cancel([FromServices] ICancelContractUseCase useCase, [FromRoute] long id)
+        {
+            await useCase.Execute(id);
+            return NoContent();
+        }
+
+        [HttpPatch("{id}/Activate")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Activate([FromServices] IActivateContractUseCase useCase, [FromRoute] long id)
         {
             await useCase.Execute(id);
             return NoContent();

@@ -3,24 +3,27 @@ using FleetManager.Communication.Request.ToContract;
 using FleetManager.Communication.Response.ToContract;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Enum;
-using FleetManager.Domain.Repositories;
+using FleetManager.Domain.EnumExtensions;
 using FleetManager.Domain.Repositories.ToContract;
 using FleetManager.Domain.Repositories.ToRentalPlan;
 using FleetManager.Domain.Repositories.ToTenant;
 using FleetManager.Domain.Repositories.ToVehicle;
 using FleetManager.Exception.ExceptionBase;
 
-namespace FleetManager.Application.UseCase.ToContract.Register
-namespace FleetManager.Application.UseCase.ToContract.Register
+namespace FleetManager.Application.UseCase.ToContract.Preview
 {
-    public class RegisterContractUseCase(
+    /// <summary>
+    /// Roda exatamente a mesma regra de cálculo do RegisterContractUseCase (dias, km contratada,
+    /// valor total), mas sem persistir nada — usado pra pré-preencher a tela antes do usuário
+    /// confirmar o registro do contrato.
+    /// </summary>
+    public class PreviewContractUseCase(
         IVehicleReadOnlyRepository vehicleRepository,
         ITenantReadOnlyRepository tenantRepository,
         IRentalPlanReadOnlyRepository rentalPlanRepository,
-        IContractWriteOnlyRepository contractRepository,
-        IUnitOfWork unitOfWork) : IRegisterContractUseCase
+        IContractWriteOnlyRepository contractRepository) : IPreviewContractUseCase
     {
-        public async Task<ResponseShortContractJson> Execute(RequestContractJson request)
+        public async Task<ResponseContractJson> Execute(RequestContractJson request)
         {
             Validate(request);
 
@@ -34,25 +37,31 @@ namespace FleetManager.Application.UseCase.ToContract.Register
 
             var rentalType = Enum.Parse<RentalType>(request.RentalType);
 
-            var (totalDays, _) = Contract.CalculatePeriod(rentalType, request.PickupDateTime, request.ReturnDueDateTime);
+            var (totalDays, returnDueDateTime) = Contract.CalculatePeriod(rentalType, request.PickupDateTime, request.ReturnDueDateTime);
 
             var mileageContracted = ContractTermsCalculator.GetMileageContracted(request.MileageContracted, rentalType, rentalPlan, totalDays);
             var totalAmount = ContractTermsCalculator.GetTotalAmount(request.TotalAmount, rentalType, rentalPlan, totalDays);
 
-            var contract = new Contract(vehicle.Id,
-                                        tenant.Id,
-                                        rentalPlan,
-                                        rentalType,
-                                        vehicle.CurrentMileage,
-                                        mileageContracted,
-                                        totalAmount,
-                                        request.PickupDateTime,
-                                        request.ReturnDueDateTime);
-
-            await contractRepository.Add(contract);
-            await unitOfWork.Commit();
-
-            return contract.ToResponse();
+            return new ResponseContractJson
+            {
+                Id = null,
+                RentalType = rentalType.RentalTypeToString(),
+                ContractStatus = ContractStatus.Reserved.ContractStatusToString(),
+                PickupDateTime = request.PickupDateTime,
+                ReturnDueDateTime = returnDueDateTime,
+                ActualReturnDateTime = null,
+                TotalDays = totalDays,
+                StartMileage = vehicle.CurrentMileage,
+                EndMileage = vehicle.CurrentMileage + mileageContracted,
+                MileageContracted = mileageContracted,
+                SnapshotPriceDailyRate = rentalPlan.DailyPrice,
+                SnapshotPriceMonthlyRate = rentalPlan.MonthlyPrice,
+                SnapshotPricePerExtraMileage = rentalPlan.ExcessMileageRate,
+                TotalAmount = totalAmount,
+                Vehicle = vehicle.ToResponse(),
+                Tenant = tenant.ToResponse(),
+                RentalPlan = rentalPlan.ToResponse()
+            };
         }
 
         private async Task<Vehicle> EnsureVehicleExist(long id)
