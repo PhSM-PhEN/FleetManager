@@ -51,7 +51,7 @@ namespace WebApi.Tests.ToContract.Cancel
             firstCancel.StatusCode.ShouldBe(HttpStatusCode.NoContent);
 
             var result = await DoPatch($"{METHOD}/{_seededContractId}/Cancel", _teamMemberToken);
-            result.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+            result.StatusCode.ShouldBe(HttpStatusCode.Conflict);
         }
 
         [Fact]

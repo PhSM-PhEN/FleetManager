@@ -23,6 +23,7 @@ namespace FleetManager.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(ResponseShortContractJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status409Conflict)]
         public async Task<IActionResult> Register([FromServices] IRegisterContractUseCase useCase, [FromBody] RequestContractJson request)
         {
             var response = await useCase.Execute(request);
@@ -32,6 +33,7 @@ namespace FleetManager.Api.Controllers
         [HttpPost("Preview")]
         [ProducesResponseType(typeof(ResponseContractJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status409Conflict)]
         public async Task<IActionResult> Preview([FromServices] IPreviewContractUseCase useCase, [FromBody] RequestContractJson request)
         {
             var response = await useCase.Execute(request);
@@ -74,7 +76,7 @@ namespace FleetManager.Api.Controllers
 
         [HttpPatch("{id}/Cancel")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status409Conflict)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Cancel([FromServices] ICancelContractUseCase useCase, [FromRoute] long id)
         {
@@ -84,7 +86,7 @@ namespace FleetManager.Api.Controllers
 
         [HttpPatch("{id}/Activate")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status409Conflict)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Activate([FromServices] IActivateContractUseCase useCase, [FromRoute] long id)
         {

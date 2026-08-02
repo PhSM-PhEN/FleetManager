@@ -50,7 +50,7 @@ namespace WebApi.Tests.ToContract.Activate
             firstActivate.StatusCode.ShouldBe(HttpStatusCode.NoContent);
 
             var result = await DoPatch($"{METHOD}/{contractId}/Activate", _teamMemberToken);
-            result.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+            result.StatusCode.ShouldBe(HttpStatusCode.Conflict);
         }
 
         [Fact]
