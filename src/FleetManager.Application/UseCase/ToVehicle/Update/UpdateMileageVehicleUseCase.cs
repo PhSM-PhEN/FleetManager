@@ -19,7 +19,7 @@ namespace FleetManager.Application.UseCase.ToVehicle.Update
         }
         private static void Validate(RequestMileageVehicleJson request)
         {
-            var validator = new CurrentMiliageValidator();
+            var validator = new CurrentMileageValidator();
             var result = validator.Validate(request);
 
             if (result.IsValid == false)

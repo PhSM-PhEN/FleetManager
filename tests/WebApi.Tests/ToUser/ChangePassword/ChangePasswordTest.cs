@@ -3,7 +3,7 @@ using FleetManager.Communication.Request.ToUser;
 using Shouldly;
 using System.Net;
 
-namespace WebApi.Tests.ToUser.ChangPassword
+namespace WebApi.Tests.ToUser.ChangePassword
 {
     public class ChangePasswordTest : FleetManagerClassFixture
     {
@@ -21,7 +21,7 @@ namespace WebApi.Tests.ToUser.ChangPassword
         [Fact]
         public async Task Success()
         {
-            var request = RequestChangPasswordJsonBuilder.Build();
+            var request = RequestChangePasswordJsonBuilder.Build();
             request.OldPassword = _password;
 
             var response = await DoPut(METHOD, request: request, token: _token);

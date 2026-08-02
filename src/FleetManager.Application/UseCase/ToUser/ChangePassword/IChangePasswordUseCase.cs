@@ -4,6 +4,6 @@ namespace FleetManager.Application.UseCase.ToUser.ChangePassword
 {
     public interface IChangePasswordUseCase
     {
-        Task Execute(RequestChangPasswordJson request);
+        Task Execute(RequestChangePasswordJson request);
     }
 }

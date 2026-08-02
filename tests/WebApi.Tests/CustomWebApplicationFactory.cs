@@ -93,7 +93,7 @@ namespace WebApi.Tests
         private Company AddCompany(FleetManagerDbContext dbContext, long addressId)
         {
             var company = CompanyBuilder.Build(1, addressId);
-            dbContext.Companys.Add(company);
+            dbContext.Companies.Add(company);
             COMPANY_TEAM_MEMBER = new CompanyIdentityManager(company);
             return company;
         }

@@ -52,7 +52,7 @@ namespace UseCase.Tests.ToVehicle.Update
         [Fact]
         public async Task Error_Mileage_Invalid_Negative()
         {
-            // Este teste cobre a regra do CurrentMiliageValidator (MileageVehicle >= 0).
+            // Este teste cobre a regra do CurrentMileageValidator (MileageVehicle >= 0).
             // Se falhar, é sinal de que o Validate(request) não está sendo chamado
             // dentro do Execute do UpdateMileageVehicleUseCase.
             var vehicle = VehicleBuilder.Build(companyId: 1);

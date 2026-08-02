@@ -1,4 +1,5 @@
-﻿using FleetManager.Application.UseCase.ToContract.GetAll;
+﻿using FleetManager.Application.UseCase.ToContract.Delete;
+using FleetManager.Application.UseCase.ToContract.GetAll;
 using FleetManager.Application.UseCase.ToContract.GetById;
 using FleetManager.Application.UseCase.ToContract.Register;
 using FleetManager.Application.UseCase.ToContract.Update;
@@ -47,6 +48,15 @@ namespace FleetManager.Api.Controllers
         public async Task<IActionResult> Update([FromServices] IUpdateContractUseCase useCase, [FromRoute] long id, [FromBody] RequestUpdateContractJson request)
         {
             await useCase.Execute(id, request);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete([FromServices] IDeleteContractUseCase useCase, [FromRoute] long id)
+        {
+            await useCase.Execute(id);
             return NoContent();
         }
     }

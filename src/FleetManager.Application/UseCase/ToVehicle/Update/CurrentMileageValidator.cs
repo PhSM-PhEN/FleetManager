@@ -4,9 +4,9 @@ using FluentValidation;
 
 namespace FleetManager.Application.UseCase.ToVehicle.Update
 {
-    public class CurrentMiliageValidator : AbstractValidator<RequestMileageVehicleJson>
+    public class CurrentMileageValidator : AbstractValidator<RequestMileageVehicleJson>
     {
-        public CurrentMiliageValidator()
+        public CurrentMileageValidator()
         {
             RuleFor(v => v.MileageVehicle)
                 .GreaterThanOrEqualTo(0)

@@ -11,7 +11,7 @@ namespace FleetManager.Infrastructure.DataAccess
         public DbSet<User> Users { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Tenant> Tenants { get; set; }
-        public DbSet<Company> Companys { get; set; }
+        public DbSet<Company> Companies { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<RentalPlan> RentalPlans { get; set; }
         public DbSet<Contract> Contracts { get; set; }
@@ -96,6 +96,9 @@ namespace FleetManager.Infrastructure.DataAccess
                 {
                     cpf.HasIndex(c => c.Number).IsUnique();
                 });
+            modelBuilder.Entity<Company>()
+                .ToTable("Companys");
+
             modelBuilder.Entity<Company>()
                 .HasIndex(c => c.Cnpj)
                 .IsUnique();

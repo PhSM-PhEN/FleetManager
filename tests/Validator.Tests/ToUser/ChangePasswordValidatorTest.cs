@@ -4,13 +4,13 @@ using Shouldly;
 
 namespace Validator.Tests.ToUser
 {
-    public class ChangPassworValidatorTest
+    public class ChangePasswordValidatorTest
     {
         [Fact]
         public void Success()
         {
-            var validator = new ChangPassworValidator();
-            var request = RequestChangPasswordJsonBuilder.Build();
+            var validator = new ChangePasswordValidator();
+            var request = RequestChangePasswordJsonBuilder.Build();
 
             var result = validator.Validate(request);
 
@@ -25,8 +25,8 @@ namespace Validator.Tests.ToUser
         [InlineData("NoNumbersHere")]
         public void Error_NewPassword_Invalid(string newPassword)
         {
-            var validator = new ChangPassworValidator();
-            var request = RequestChangPasswordJsonBuilder.Build();
+            var validator = new ChangePasswordValidator();
+            var request = RequestChangePasswordJsonBuilder.Build();
             request.NewPassword = newPassword;
 
             var result = validator.Validate(request);

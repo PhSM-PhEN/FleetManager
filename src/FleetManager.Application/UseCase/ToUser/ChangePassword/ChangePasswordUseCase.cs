@@ -9,10 +9,10 @@ using FluentValidation.Results;
 
 namespace FleetManager.Application.UseCase.ToUser.ChangePassword
 {
-    public class ChangPasswordUseCase(ILoggedUser logged, IPasswordEncrypter encrypter,
+    public class ChangePasswordUseCase(ILoggedUser logged, IPasswordEncrypter encrypter,
         IUserWriteOnlyRepository repository, IUnitOfWork unitOfWork) : IChangePasswordUseCase
     {
-        public async Task Execute(RequestChangPasswordJson request)
+        public async Task Execute(RequestChangePasswordJson request)
         {
             var loggedUser = await logged.Get();
             var user = await repository.GetUserById(loggedUser.Id)
@@ -28,9 +28,9 @@ namespace FleetManager.Application.UseCase.ToUser.ChangePassword
 
         }
 
-        private void Validate(RequestChangPasswordJson request, User user)
+        private void Validate(RequestChangePasswordJson request, User user)
         {
-            var validator = new ChangPassworValidator();
+            var validator = new ChangePasswordValidator();
             var result = validator.Validate(request);
 
             var passwordMach = encrypter.Verify(request.OldPassword, user.Password);

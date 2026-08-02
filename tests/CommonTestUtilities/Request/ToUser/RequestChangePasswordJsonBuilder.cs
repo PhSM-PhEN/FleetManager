@@ -3,12 +3,12 @@ using FleetManager.Communication.Request.ToUser;
 
 namespace CommonTestUtilities.Request.ToUser
 {
-    public class RequestChangPasswordJsonBuilder
+    public class RequestChangePasswordJsonBuilder
     {
 
-        public static RequestChangPasswordJson Build()
+        public static RequestChangePasswordJson Build()
         {
-            return new Faker<RequestChangPasswordJson>()
+            return new Faker<RequestChangePasswordJson>()
                 .RuleFor(user => user.OldPassword, faker => faker.Internet.Password(prefix: "aA1"))
                 .RuleFor(user => user.NewPassword, faker => faker.Internet.Password(prefix: "aA1"));
                 

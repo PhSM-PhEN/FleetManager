@@ -1,5 +1,6 @@
 using FleetManager.Api.Filters;
 using FleetManager.Application;
+using FleetManager.Exception.ExceptionBase;
 using FleetManager.Infrastructure;
 using FleetManager.Infrastructure.Extension;
 using FleetManager.Infrastructure.Migrations;
@@ -50,7 +51,8 @@ builder.Services.AddAuthentication(config =>
         ClockSkew = new TimeSpan(0),
         IssuerSigningKey = new SymmetricSecurityKey(
            System.Text.Encoding.UTF8
-           .GetBytes(builder.Configuration.GetValue<string>("Settings:Jwt:SigningKey")!))
+           .GetBytes(builder.Configuration.GetValue<string>("Settings:Jwt:SigningKey")
+                ?? throw new InvalidOperationException(ResourceErrorMessages.JWT_NOT_CONFIGURED)))
     };
 });
 

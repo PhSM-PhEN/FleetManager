@@ -46,7 +46,7 @@ namespace FleetManager.Api.Controllers
         [HttpPut("ChangePassword")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> ChangPassword([FromServices] IChangePasswordUseCase useCase, [FromBody] RequestChangPasswordJson request)
+        public async Task<IActionResult> ChangePassword([FromServices] IChangePasswordUseCase useCase, [FromBody] RequestChangePasswordJson request)
         {
             await useCase.Execute(request);
             return NoContent();
