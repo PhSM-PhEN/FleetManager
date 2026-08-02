@@ -11,7 +11,6 @@ using FleetManager.Domain.Repositories.ToVehicle;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToContract.Register
-namespace FleetManager.Application.UseCase.ToContract.Register
 {
     public class RegisterContractUseCase(
         IVehicleReadOnlyRepository vehicleRepository,
