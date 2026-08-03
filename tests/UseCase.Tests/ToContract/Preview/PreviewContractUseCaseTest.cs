@@ -126,6 +126,9 @@ namespace UseCase.Tests.ToContract.Preview
                 vehicle.Company.Address = AddressBuilder.Build(1);
             }
 
+            if (tenant is not null)
+                tenant.Address = AddressBuilder.Build(1);
+
             var vehicleRepositoryBuilder = new VehicleReadOnlyRepositoryBuilder();
             if (vehicle is not null)
                 vehicleRepositoryBuilder.GetById(vehicle.Id, vehicle);
