@@ -40,5 +40,19 @@ namespace FleetManager.Application.Extensions
         {
             return vehicles.Select(v => v.ToResponse()).ToList();
         }
+
+        // Exclusivo pro retorno do Register: não depende de Company/RentalPlan estarem
+        // carregados pelo EF (o que não acontece logo após o Add), evita o NRE que a versão
+        // com ToResponse()/Company causava ali.
+        public static ResponseVehicleRegisteredJson ToShortResponse(this Vehicle vehicle)
+        {
+            return new ResponseVehicleRegisteredJson
+            {
+                Id = vehicle.Id,
+                LicensePlate = vehicle.LicensePlate.Number,
+                Model = vehicle.Model,
+                CurrentMileage = vehicle.CurrentMileage
+            };
+        }
     }
 }

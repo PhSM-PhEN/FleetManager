@@ -5,6 +5,6 @@ namespace FleetManager.Application.UseCase.ToVehicle.Register
 {
     public interface IRegisterVehicleUseCase
     {
-        Task<ResponseShortVehicleJson> Execute(RequestVehicleJson request);
+        Task<ResponseVehicleRegisteredJson> Execute(RequestVehicleJson request);
     }
 }

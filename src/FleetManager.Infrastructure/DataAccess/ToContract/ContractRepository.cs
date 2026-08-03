@@ -39,7 +39,10 @@ namespace FleetManager.Infrastructure.DataAccess.ToContract
         {
             return await dbContext.Contracts.AsNoTracking()
                         .Include(t => t.Tenant)
+                            .ThenInclude(t => t.Address)
                         .Include(v => v.Vehicle)
+                            .ThenInclude(v => v.Company)
+                                .ThenInclude(c => c.Address)
                         .Include(rp => rp.RentalPlan)
                         .FirstOrDefaultAsync(c => c.Id == id);
         }

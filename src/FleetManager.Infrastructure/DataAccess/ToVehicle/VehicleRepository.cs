@@ -19,7 +19,9 @@ namespace FleetManager.Infrastructure.DataAccess.ToVehicle
 
         public async Task<(List<Vehicle>, int totalCount)> GetAll(int pageNumber, int pageSize)
         {
-            var query = dbContext.Vehicles.AsNoTracking();
+            var query = dbContext.Vehicles.AsNoTracking()
+                        .Include(v => v.Company)
+                            .ThenInclude(c => c.Address);
             var totalCount = await query.CountAsync();
             var vehicle = await query
                     .Skip((pageNumber - 1) * pageSize)
@@ -38,6 +40,7 @@ namespace FleetManager.Infrastructure.DataAccess.ToVehicle
         {
             return await dbContext.Vehicles.AsNoTracking()
                         .Include(c => c.Company)
+                            .ThenInclude(c => c.Address)
                         .Include(rp => rp.RentalPlan)
                         .FirstOrDefaultAsync(v => v.Id == id);
         }

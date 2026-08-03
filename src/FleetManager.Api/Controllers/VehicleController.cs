@@ -17,7 +17,7 @@ namespace FleetManager.Api.Controllers
     public class VehicleController : ControllerBase
     {
         [HttpPost]
-        [ProducesResponseType(typeof(ResponseShortVehicleJson), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseVehicleRegisteredJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register([FromServices] IRegisterVehicleUseCase useCase, [FromBody] RequestVehicleJson request)
         {

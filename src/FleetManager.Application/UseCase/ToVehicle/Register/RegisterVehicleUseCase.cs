@@ -13,7 +13,7 @@ namespace FleetManager.Application.UseCase.ToVehicle.Register
 {
     public class RegisterVehicleUseCase(IVehicleWriteOnlyRepository repository, ICompanyReadOnlyRepository companyRepository, IRentalPlanReadOnlyRepository rentalPlanRepository, IUnitOfWork unitOfWork) : IRegisterVehicleUseCase
     {
-        public async Task<ResponseShortVehicleJson> Execute(RequestVehicleJson request)
+        public async Task<ResponseVehicleRegisteredJson> Execute(RequestVehicleJson request)
         {
             Validate(request);
             _ = await companyRepository.GetById(request.CompanyId) ??
@@ -38,7 +38,7 @@ namespace FleetManager.Application.UseCase.ToVehicle.Register
             await repository.Add(vehicle);
             await unitOfWork.Commit();
 
-            return vehicle.ToResponse();
+            return vehicle.ToShortResponse();
         }
         private static void Validate(RequestVehicleJson request)
         {
