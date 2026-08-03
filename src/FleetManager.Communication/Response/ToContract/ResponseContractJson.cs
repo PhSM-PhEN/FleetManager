@@ -21,7 +21,7 @@ namespace FleetManager.Communication.Response.ToContract
         public decimal SnapshotPricePerExtraMileage { get; set; }
         public decimal TotalAmount { get; set; }
         public ResponseShortVehicleJson Vehicle { get; set; } = new();
-        public ResponseShortTenantJson Tenant { get; set; } = new();
+        public ResponseTenantJson Tenant { get; set; } = new();
         public ResponseRentalPlanJson RentalPlan { get; set; } = new();
     }
 }

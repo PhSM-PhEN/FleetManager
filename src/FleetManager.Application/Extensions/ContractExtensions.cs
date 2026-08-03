@@ -11,11 +11,12 @@ namespace FleetManager.Application.Extensions
             return new ResponseShortContractJson
             {
                 Id = contract.Id,
+                ContractStatus = contract.ContractStatus.ContractStatusToString(),
                 PickupDateTime = contract.PickupDateTime,
                 ReturnDueDateTime = contract.ReturnDueDateTime,
                 TotalDays = contract.TotalDays,
                 TotalAmount = contract.TotalAmount,
-                ContractStatus = contract.ContractStatus.ContractStatusToString()
+                
                 
             };
         }
@@ -37,7 +38,7 @@ namespace FleetManager.Application.Extensions
                 SnapshotPriceMonthlyRate = contract.SnapshotPriceMonthlyRate,
                 SnapshotPricePerExtraMileage = contract.SnapshotPricePerExtraMileage,
                 TotalAmount = contract.TotalAmount,
-                Tenant = contract.Tenant.ToResponse(),
+                Tenant = contract.Tenant.ToInfoResponse(),
                 Vehicle = contract.Vehicle.ToResponse(),
                 
                 

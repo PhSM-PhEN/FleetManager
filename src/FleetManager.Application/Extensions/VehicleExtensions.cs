@@ -10,9 +10,14 @@ namespace FleetManager.Application.Extensions
             return new ResponseShortVehicleJson
             {
                 Id = vehicle.Id,
+                Brand = vehicle.Brand,
                 Model = vehicle.Model,
+                Color = vehicle.Color,
+                ManufacturingYear = vehicle.ManufacturerYear.ToString(),
+                ChassiNumber = vehicle.ChassiNumber.Number,
                 LicensePlate = vehicle.LicensePlate.Number,
-                CurrentMileage = vehicle.CurrentMileage
+                CurrentMileage = vehicle.CurrentMileage,
+                Company = vehicle.Company.ToResponse()
             };
         }
         public static ResponseVehicleJson ToInfoResponse(this Vehicle vehicle)
@@ -28,7 +33,7 @@ namespace FleetManager.Application.Extensions
                 ChassiNumber = vehicle.ChassiNumber.Number,
                 LicensePlate = vehicle.LicensePlate.Number,
                 CurrentMileage = vehicle.CurrentMileage,
-                Company = vehicle.Company.ToShortResponse()
+                Company = vehicle.Company.ToResponse()
             };
         }
         public static List<ResponseShortVehicleJson> ToResponse(this List<Vehicle> vehicles)

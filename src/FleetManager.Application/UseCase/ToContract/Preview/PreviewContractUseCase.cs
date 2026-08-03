@@ -59,7 +59,7 @@ namespace FleetManager.Application.UseCase.ToContract.Preview
                 SnapshotPricePerExtraMileage = rentalPlan.ExcessMileageRate,
                 TotalAmount = totalAmount,
                 Vehicle = vehicle.ToResponse(),
-                Tenant = tenant.ToResponse(),
+                Tenant = tenant.ToInfoResponse(),
                 RentalPlan = rentalPlan.ToResponse()
             };
         }

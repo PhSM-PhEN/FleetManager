@@ -14,7 +14,7 @@ namespace FleetManager.Communication.Response.ToVehicle
         public string ChassiNumber { get; set; } = string.Empty;
         public string LicensePlate { get; set; } = string.Empty;
         public long CurrentMileage { get; set; }
-        public ResponseShortCompanyJson Company { get; set; } = default!;
+        public ResponseCompanyJson Company { get; set; } = default!;
         public ResponseRentalPlanJson RentalPlan { get; set; } = default!;
     }
 }
