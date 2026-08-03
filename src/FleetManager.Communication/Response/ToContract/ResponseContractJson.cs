@@ -1,6 +1,5 @@
 ﻿using FleetManager.Communication.Response.ToRenant;
 using FleetManager.Communication.Response.ToVehicle;
-using FleetManager.Communication.Response.ToRentalPlan;
 
 namespace FleetManager.Communication.Response.ToContract
 {
@@ -22,6 +21,5 @@ namespace FleetManager.Communication.Response.ToContract
         public decimal TotalAmount { get; set; }
         public ResponseShortVehicleJson Vehicle { get; set; } = new();
         public ResponseTenantJson Tenant { get; set; } = new();
-        public ResponseRentalPlanJson RentalPlan { get; set; } = new();
     }
 }

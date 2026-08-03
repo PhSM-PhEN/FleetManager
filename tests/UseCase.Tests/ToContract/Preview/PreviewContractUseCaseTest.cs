@@ -29,7 +29,6 @@ namespace UseCase.Tests.ToContract.Preview
             result.ContractStatus.ShouldNotBeNullOrEmpty();
             result.Vehicle.ShouldNotBeNull();
             result.Tenant.ShouldNotBeNull();
-            result.RentalPlan.ShouldNotBeNull();
         }
 
         [Fact]
@@ -121,6 +120,12 @@ namespace UseCase.Tests.ToContract.Preview
 
         private static PreviewContractUseCase CreateUseCase(Vehicle? vehicle, Tenant? tenant, RentalPlan? rentalPlan, bool hasActiveContract)
         {
+            if (vehicle is not null)
+            {
+                vehicle.Company = CompanyBuilder.Build(id: vehicle.CompanyId);
+                vehicle.Company.Address = AddressBuilder.Build(1);
+            }
+
             var vehicleRepositoryBuilder = new VehicleReadOnlyRepositoryBuilder();
             if (vehicle is not null)
                 vehicleRepositoryBuilder.GetById(vehicle.Id, vehicle);

@@ -12,6 +12,7 @@ namespace UseCase.Tests.ToVehicle.GetById
         public async Task Success()
         {
             var company = CompanyBuilder.Build();
+            company.Address = AddressBuilder.Build(1);
             var vehicle = VehicleBuilder.Build(companyId: company.Id);
             vehicle.Company = company;
 

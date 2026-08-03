@@ -40,6 +40,8 @@ namespace UseCase.Tests.ToContract.GetById
         {
             var contract = ContractBuilder.Build(id);
             contract.Vehicle = VehicleBuilder.Build(1);
+            contract.Vehicle.Company = CompanyBuilder.Build(id: contract.Vehicle.CompanyId);
+            contract.Vehicle.Company.Address = AddressBuilder.Build(1);
             contract.Tenant = TenantBuilder.Build(1);
             contract.Tenant.Address = AddressBuilder.Build(1);
 

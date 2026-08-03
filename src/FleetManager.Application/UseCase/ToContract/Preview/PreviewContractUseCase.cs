@@ -60,7 +60,6 @@ namespace FleetManager.Application.UseCase.ToContract.Preview
                 TotalAmount = totalAmount,
                 Vehicle = vehicle.ToResponse(),
                 Tenant = tenant.ToInfoResponse(),
-                RentalPlan = rentalPlan.ToResponse()
             };
         }
 
