@@ -745,6 +745,24 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vehicle is not available for rent..
+        /// </summary>
+        public static string VEHICLE_NOT_AVAILABLE {
+            get {
+                return ResourceManager.GetString("VEHICLE_NOT_AVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tenant is not available to rent a vehicle..
+        /// </summary>
+        public static string TENANT_NOT_AVAILABLE {
+            get {
+                return ResourceManager.GetString("TENANT_NOT_AVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vehicle id is required..
         /// </summary>
         public static string VEHICLE_ID_REQUIRED {

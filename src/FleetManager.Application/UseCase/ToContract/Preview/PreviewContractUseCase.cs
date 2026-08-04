@@ -1,65 +1,55 @@
-using FleetManager.Application.Extensions;
 using FleetManager.Communication.Request.ToContract;
 using FleetManager.Communication.Response.ToContract;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Enum;
-using FleetManager.Domain.EnumExtensions;
 using FleetManager.Domain.Repositories.ToContract;
-using FleetManager.Domain.Repositories.ToRentalPlan;
 using FleetManager.Domain.Repositories.ToTenant;
 using FleetManager.Domain.Repositories.ToVehicle;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToContract.Preview
 {
-    /// <summary>
-    /// Roda exatamente a mesma regra de cálculo do RegisterContractUseCase (dias, km contratada,
-    /// valor total), mas sem persistir nada — usado pra pré-preencher a tela antes do usuário
-    /// confirmar o registro do contrato.
-    /// </summary>
+
     public class PreviewContractUseCase(
         IVehicleReadOnlyRepository vehicleRepository,
         ITenantReadOnlyRepository tenantRepository,
-        IRentalPlanReadOnlyRepository rentalPlanRepository,
         IContractWriteOnlyRepository contractRepository) : IPreviewContractUseCase
     {
-        public async Task<ResponseContractJson> Execute(RequestContractJson request)
+        public async Task<ResponsePreviewContractJson> Execute(RequestPreviewContractJson request)
         {
             Validate(request);
 
             var vehicle = await EnsureVehicleExist(request.VehicleId);
-            var tenant = await EnsureTenantExist(request.TenantId);
-            var rentalPlan = await EnsureRentalPlanExist(request.RentalPlanId);
+            if (!vehicle.IsActive)
+                throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_NOT_AVAILABLE);
 
             var hasActiveContract = await contractRepository.HasActiveContract(request.VehicleId);
             if (hasActiveContract)
                 throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_ALREADY_RENTED);
 
+            var tenant = await EnsureTenantExist(request.TenantId);
+            if (!tenant.IsActive)
+                throw new BusinessRuleException(ResourceErrorMessages.TENANT_NOT_AVAILABLE);
+
+            var rentalPlan = vehicle.RentalPlan;
             var rentalType = Enum.Parse<RentalType>(request.RentalType);
 
             var (totalDays, returnDueDateTime) = Contract.CalculatePeriod(rentalType, request.PickupDateTime, request.ReturnDueDateTime);
 
-            var mileageContracted = ContractTermsCalculator.GetMileageContracted(request.MileageContracted, rentalType, rentalPlan, totalDays);
-            var totalAmount = ContractTermsCalculator.GetTotalAmount(request.TotalAmount, rentalType, rentalPlan, totalDays);
+            var mileageContracted = ContractTermsCalculator.GetMileageContracted(0, rentalType, rentalPlan, totalDays);
+            var totalAmount = ContractTermsCalculator.GetTotalAmount(0, rentalType, rentalPlan, totalDays);
 
-            return new ResponseContractJson
+            return new ResponsePreviewContractJson
             {
-                Id = null,
-                RentalType = rentalType.RentalTypeToString(),
-                ContractStatus = ContractStatus.Reserved.ContractStatusToString(),
+                VehicleId = vehicle.Id,
+                TenantId = tenant.Id,
+                RentalPlanId = rentalPlan.Id,
+                RentalType = request.RentalType,
                 PickupDateTime = request.PickupDateTime,
                 ReturnDueDateTime = returnDueDateTime,
-                ActualReturnDateTime = null,
                 TotalDays = totalDays,
-                StartMileage = vehicle.CurrentMileage,
-                EndMileage = vehicle.CurrentMileage + mileageContracted,
                 MileageContracted = mileageContracted,
-                SnapshotPriceDailyRate = rentalPlan.DailyPrice,
-                SnapshotPriceMonthlyRate = rentalPlan.MonthlyPrice,
-                SnapshotPricePerExtraMileage = rentalPlan.ExcessMileageRate,
-                TotalAmount = totalAmount,
-                Vehicle = vehicle.ToResponse(),
-                Tenant = tenant.ToInfoResponse(),
+                TotalAmount = totalAmount
             };
         }
 
@@ -75,15 +65,9 @@ namespace FleetManager.Application.UseCase.ToContract.Preview
                 throw new NotFoundException(ResourceErrorMessages.TENANT_NOT_FOUND);
         }
 
-        private async Task<RentalPlan> EnsureRentalPlanExist(long id)
+        private static void Validate(RequestPreviewContractJson request)
         {
-            return await rentalPlanRepository.GetById(id) ??
-                throw new NotFoundException(ResourceErrorMessages.RENTAL_PLAN_NOT_FOUND);
-        }
-
-        private static void Validate(RequestContractJson request)
-        {
-            var validator = new ContractValidator();
+            var validator = new PreviewContractValidator();
             var result = validator.Validate(request);
 
             if (result.IsValid == false)

@@ -360,6 +360,12 @@
   <data name="VEHICLE_ALREADY_RENTED" xml:space="preserve">
     <value>Vehicle already rented.</value>
   </data>
+  <data name="VEHICLE_NOT_AVAILABLE" xml:space="preserve">
+    <value>Vehicle is not available for rent.</value>
+  </data>
+  <data name="TENANT_NOT_AVAILABLE" xml:space="preserve">
+    <value>Tenant is not available to rent a vehicle.</value>
+  </data>
   <data name="MILEAGE_CONTRACTED_INVALID" xml:space="preserve">
     <value>Mileage Contracted invalid.</value>
   </data>

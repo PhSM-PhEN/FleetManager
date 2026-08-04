@@ -31,10 +31,11 @@ namespace FleetManager.Api.Controllers
         }
 
         [HttpPost("Preview")]
-        [ProducesResponseType(typeof(ResponseContractJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponsePreviewContractJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status409Conflict)]
-        public async Task<IActionResult> Preview([FromServices] IPreviewContractUseCase useCase, [FromBody] RequestContractJson request)
+        public async Task<IActionResult> Preview([FromServices] IPreviewContractUseCase useCase, [FromBody] RequestPreviewContractJson request)
         {
             var response = await useCase.Execute(request);
             return Ok(response);

@@ -5,6 +5,6 @@ namespace FleetManager.Application.UseCase.ToContract.Preview
 {
     public interface IPreviewContractUseCase
     {
-        Task<ResponseContractJson> Execute(RequestContractJson request);
+        Task<ResponsePreviewContractJson> Execute(RequestPreviewContractJson request);
     }
 }

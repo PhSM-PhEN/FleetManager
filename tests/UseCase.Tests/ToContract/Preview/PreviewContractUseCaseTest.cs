@@ -1,6 +1,5 @@
 using CommonTestUtilities.Entities;
 using CommonTestUtilities.Repositories.ToContract;
-using CommonTestUtilities.Repositories.ToRentalPlan;
 using CommonTestUtilities.Repositories.ToTenant;
 using CommonTestUtilities.Repositories.ToVehicle;
 using CommonTestUtilities.Request.ToContract;
@@ -17,42 +16,45 @@ namespace UseCase.Tests.ToContract.Preview
         public async Task Success_Daily()
         {
             var vehicle = VehicleBuilder.Build(1);
+            vehicle.RentalPlan = RentalPlanBuilder.Build(1);
             var tenant = TenantBuilder.Build(1);
-            var rentalPlan = RentalPlanBuilder.Build(1);
-            var request = RequestContractJsonBuilder.Build(vehicle.Id, tenant.Id, rentalPlan.Id, "Daily");
+            var request = RequestPreviewContractJsonBuilder.Build(vehicle.Id, tenant.Id, "Daily");
 
-            var useCase = CreateUseCase(vehicle, tenant, rentalPlan, hasActiveContract: false);
+            var useCase = CreateUseCase(vehicle, tenant, hasActiveContract: false);
             var result = await useCase.Execute(request);
 
             result.ShouldNotBeNull();
-            result.Id.ShouldBeNull();
-            result.ContractStatus.ShouldNotBeNullOrEmpty();
-            result.Vehicle.ShouldNotBeNull();
-            result.Tenant.ShouldNotBeNull();
+            result.VehicleId.ShouldBe(vehicle.Id);
+            result.TenantId.ShouldBe(tenant.Id);
+            result.RentalPlanId.ShouldBe(vehicle.RentalPlan.Id);
+            result.TotalDays.ShouldBeGreaterThan(0);
+            result.TotalAmount.ShouldBeGreaterThan(0);
+            result.MileageContracted.ShouldBeGreaterThan(0);
         }
 
         [Fact]
         public async Task Success_Monthly()
         {
             var vehicle = VehicleBuilder.Build(1);
+            vehicle.RentalPlan = RentalPlanBuilder.Build(1);
             var tenant = TenantBuilder.Build(1);
-            var rentalPlan = RentalPlanBuilder.Build(1);
-            var request = RequestContractJsonBuilder.Build(vehicle.Id, tenant.Id, rentalPlan.Id, "Monthly");
+            var request = RequestPreviewContractJsonBuilder.Build(vehicle.Id, tenant.Id, "Monthly");
 
-            var useCase = CreateUseCase(vehicle, tenant, rentalPlan, hasActiveContract: false);
+            var useCase = CreateUseCase(vehicle, tenant, hasActiveContract: false);
             var result = await useCase.Execute(request);
 
             result.TotalDays.ShouldBe(30);
+            result.TotalAmount.ShouldBe(vehicle.RentalPlan.MonthlyPrice);
+            result.MileageContracted.ShouldBe(vehicle.RentalPlan.MileagePerMonthly);
         }
 
         [Fact]
         public async Task Error_Vehicle_Not_Found()
         {
             var tenant = TenantBuilder.Build(1);
-            var rentalPlan = RentalPlanBuilder.Build(1);
-            var request = RequestContractJsonBuilder.Build(999, tenant.Id, rentalPlan.Id);
+            var request = RequestPreviewContractJsonBuilder.Build(999, tenant.Id);
 
-            var useCase = CreateUseCase(vehicle: null, tenant, rentalPlan, hasActiveContract: false);
+            var useCase = CreateUseCase(vehicle: null, tenant, hasActiveContract: false);
             var act = async () => await useCase.Execute(request);
 
             var result = await act.ShouldThrowAsync<NotFoundException>();
@@ -60,42 +62,30 @@ namespace UseCase.Tests.ToContract.Preview
         }
 
         [Fact]
-        public async Task Error_Tenant_Not_Found()
+        public async Task Error_Vehicle_Not_Active()
         {
             var vehicle = VehicleBuilder.Build(1);
-            var rentalPlan = RentalPlanBuilder.Build(1);
-            var request = RequestContractJsonBuilder.Build(vehicle.Id, 999, rentalPlan.Id);
-
-            var useCase = CreateUseCase(vehicle, tenant: null, rentalPlan, hasActiveContract: false);
-            var act = async () => await useCase.Execute(request);
-
-            var result = await act.ShouldThrowAsync<NotFoundException>();
-            result.Message.ShouldBe(ResourceErrorMessages.TENANT_NOT_FOUND);
-        }
-
-        [Fact]
-        public async Task Error_RentalPlan_Not_Found()
-        {
-            var vehicle = VehicleBuilder.Build(1);
+            vehicle.RentalPlan = RentalPlanBuilder.Build(1);
+            vehicle.Desactivate();
             var tenant = TenantBuilder.Build(1);
-            var request = RequestContractJsonBuilder.Build(vehicle.Id, tenant.Id, 999);
+            var request = RequestPreviewContractJsonBuilder.Build(vehicle.Id, tenant.Id);
 
-            var useCase = CreateUseCase(vehicle, tenant, rentalPlan: null, hasActiveContract: false);
+            var useCase = CreateUseCase(vehicle, tenant, hasActiveContract: false);
             var act = async () => await useCase.Execute(request);
 
-            var result = await act.ShouldThrowAsync<NotFoundException>();
-            result.Message.ShouldBe(ResourceErrorMessages.RENTAL_PLAN_NOT_FOUND);
+            var result = await act.ShouldThrowAsync<BusinessRuleException>();
+            result.Message.ShouldBe(ResourceErrorMessages.VEHICLE_NOT_AVAILABLE);
         }
 
         [Fact]
         public async Task Error_Vehicle_Already_Rented()
         {
             var vehicle = VehicleBuilder.Build(1);
+            vehicle.RentalPlan = RentalPlanBuilder.Build(1);
             var tenant = TenantBuilder.Build(1);
-            var rentalPlan = RentalPlanBuilder.Build(1);
-            var request = RequestContractJsonBuilder.Build(vehicle.Id, tenant.Id, rentalPlan.Id);
+            var request = RequestPreviewContractJsonBuilder.Build(vehicle.Id, tenant.Id);
 
-            var useCase = CreateUseCase(vehicle, tenant, rentalPlan, hasActiveContract: true);
+            var useCase = CreateUseCase(vehicle, tenant, hasActiveContract: true);
             var act = async () => await useCase.Execute(request);
 
             var result = await act.ShouldThrowAsync<BusinessRuleException>();
@@ -103,32 +93,53 @@ namespace UseCase.Tests.ToContract.Preview
         }
 
         [Fact]
+        public async Task Error_Tenant_Not_Found()
+        {
+            var vehicle = VehicleBuilder.Build(1);
+            vehicle.RentalPlan = RentalPlanBuilder.Build(1);
+            var request = RequestPreviewContractJsonBuilder.Build(vehicle.Id, 999);
+
+            var useCase = CreateUseCase(vehicle, tenant: null, hasActiveContract: false);
+            var act = async () => await useCase.Execute(request);
+
+            var result = await act.ShouldThrowAsync<NotFoundException>();
+            result.Message.ShouldBe(ResourceErrorMessages.TENANT_NOT_FOUND);
+        }
+
+        [Fact]
+        public async Task Error_Tenant_Not_Active()
+        {
+            var vehicle = VehicleBuilder.Build(1);
+            vehicle.RentalPlan = RentalPlanBuilder.Build(1);
+            var tenant = TenantBuilder.Build(1);
+            tenant.Disable();
+            var request = RequestPreviewContractJsonBuilder.Build(vehicle.Id, tenant.Id);
+
+            var useCase = CreateUseCase(vehicle, tenant, hasActiveContract: false);
+            var act = async () => await useCase.Execute(request);
+
+            var result = await act.ShouldThrowAsync<BusinessRuleException>();
+            result.Message.ShouldBe(ResourceErrorMessages.TENANT_NOT_AVAILABLE);
+        }
+
+        [Fact]
         public async Task Error_RentalType_Invalid()
         {
             var vehicle = VehicleBuilder.Build(1);
+            vehicle.RentalPlan = RentalPlanBuilder.Build(1);
             var tenant = TenantBuilder.Build(1);
-            var rentalPlan = RentalPlanBuilder.Build(1);
-            var request = RequestContractJsonBuilder.Build(vehicle.Id, tenant.Id, rentalPlan.Id);
+            var request = RequestPreviewContractJsonBuilder.Build(vehicle.Id, tenant.Id);
             request.RentalType = "Weekly";
 
-            var useCase = CreateUseCase(vehicle, tenant, rentalPlan, hasActiveContract: false);
+            var useCase = CreateUseCase(vehicle, tenant, hasActiveContract: false);
             var act = async () => await useCase.Execute(request);
 
             var result = await act.ShouldThrowAsync<ErrorOnValidationException>();
             result.GetErrors().ShouldContain(ResourceErrorMessages.RENTAL_TYPE_INVALID);
         }
 
-        private static PreviewContractUseCase CreateUseCase(Vehicle? vehicle, Tenant? tenant, RentalPlan? rentalPlan, bool hasActiveContract)
+        private static PreviewContractUseCase CreateUseCase(Vehicle? vehicle, Tenant? tenant, bool hasActiveContract)
         {
-            if (vehicle is not null)
-            {
-                vehicle.Company = CompanyBuilder.Build(id: vehicle.CompanyId);
-                vehicle.Company.Address = AddressBuilder.Build(1);
-            }
-
-            if (tenant is not null)
-                tenant.Address = AddressBuilder.Build(1);
-
             var vehicleRepositoryBuilder = new VehicleReadOnlyRepositoryBuilder();
             if (vehicle is not null)
                 vehicleRepositoryBuilder.GetById(vehicle.Id, vehicle);
@@ -137,19 +148,14 @@ namespace UseCase.Tests.ToContract.Preview
             if (tenant is not null)
                 tenantRepositoryBuilder.GetById(tenant, tenant.Id);
 
-            var rentalPlanRepositoryBuilder = new RentalPlanReadOnlyRepositoryBuilder();
-            if (rentalPlan is not null)
-                rentalPlanRepositoryBuilder.GetById(rentalPlan);
-
             var contractRepository = new ContractWriteOnlyRepositoryBuilder()
                 .HasActiveContract(vehicle?.Id ?? 0, hasActiveContract)
                 .Build();
 
             var vehicleRepository = vehicleRepositoryBuilder.Build();
             var tenantRepository = tenantRepositoryBuilder.Build();
-            var rentalPlanRepository = rentalPlanRepositoryBuilder.Build();
 
-            return new PreviewContractUseCase(vehicleRepository, tenantRepository, rentalPlanRepository, contractRepository);
+            return new PreviewContractUseCase(vehicleRepository, tenantRepository, contractRepository);
         }
     }
 }
