@@ -33,7 +33,7 @@ namespace FleetManager.Infrastructure.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UpdateBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
@@ -72,14 +72,14 @@ namespace FleetManager.Infrastructure.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    DailyPrice = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
-                    MonthlyPrice = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
-                    ExcessMileageRate = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
+                    DailyPrice = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    MonthlyPrice = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    ExcessMileageRate = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     MileagePerDay = table.Column<long>(type: "bigint", nullable: false),
                     MileagePerMonthly = table.Column<long>(type: "bigint", nullable: false),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UpdateBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
@@ -102,7 +102,8 @@ namespace FleetManager.Infrastructure.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     UserIdentifier = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
                     Role = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    AdminSlot = table.Column<int>(type: "int", nullable: true, computedColumnSql: "CASE WHEN `Role` = 'Admin' THEN 1 ELSE NULL END", stored: true)
                 },
                 constraints: table =>
                 {
@@ -111,7 +112,7 @@ namespace FleetManager.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Companys",
+                name: "Companies",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -125,14 +126,14 @@ namespace FleetManager.Infrastructure.Migrations
                     AddressId = table.Column<long>(type: "bigint", nullable: false),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UpdateBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Companys", x => x.Id);
+                    table.PrimaryKey("PK_Companies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Companys_Addresses_AddressId",
+                        name: "FK_Companies_Addresses_AddressId",
                         column: x => x.AddressId,
                         principalTable: "Addresses",
                         principalColumn: "Id",
@@ -164,7 +165,7 @@ namespace FleetManager.Infrastructure.Migrations
                     AddressId = table.Column<long>(type: "bigint", nullable: false),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UpdateBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
@@ -193,8 +194,8 @@ namespace FleetManager.Infrastructure.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CurrentMileage = table.Column<long>(type: "bigint", nullable: false),
                     IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    ManufacturerYear_FabricationYear = table.Column<int>(type: "int", nullable: false),
-                    ManufacturerYear_ModelYear = table.Column<int>(type: "int", nullable: false),
+                    ManufacturingYear_FabricationYear = table.Column<int>(type: "int", nullable: false),
+                    ManufacturingYear_ModelYear = table.Column<int>(type: "int", nullable: false),
                     Renavam_Number = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ChassiNumber_Number = table.Column<string>(type: "varchar(255)", nullable: false)
@@ -206,16 +207,16 @@ namespace FleetManager.Infrastructure.Migrations
                     RentalPlanId = table.Column<long>(type: "bigint", nullable: false),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UpdateBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Vehicles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Vehicles_Companys_CompanyId",
+                        name: "FK_Vehicles_Companies_CompanyId",
                         column: x => x.CompanyId,
-                        principalTable: "Companys",
+                        principalTable: "Companies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -240,9 +241,9 @@ namespace FleetManager.Infrastructure.Migrations
                     StartMileage = table.Column<long>(type: "bigint", nullable: false),
                     EndMileage = table.Column<long>(type: "bigint", nullable: false),
                     MileageContracted = table.Column<long>(type: "bigint", nullable: false),
-                    SnapshotPriceDailyRate = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
-                    SnapshotPriceMonthlyRate = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
-                    SnapshotPricePerExtraMileage = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
+                    SnapshotPriceDailyRate = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    SnapshotPriceMonthlyRate = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    SnapshotPricePerExtraMileage = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     TotalAmount = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     TotalDays = table.Column<int>(type: "int", nullable: false),
                     PickupDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
@@ -251,7 +252,7 @@ namespace FleetManager.Infrastructure.Migrations
                     ActualReturnDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UpdateBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
                 },
                 constraints: table =>
@@ -279,13 +280,13 @@ namespace FleetManager.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Companys_AddressId",
-                table: "Companys",
+                name: "IX_Companies_AddressId",
+                table: "Companies",
                 column: "AddressId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Companys_Cnpj",
-                table: "Companys",
+                name: "IX_Companies_Cnpj",
+                table: "Companies",
                 column: "Cnpj",
                 unique: true);
 
@@ -319,6 +320,12 @@ namespace FleetManager.Infrastructure.Migrations
                 name: "IX_Users_Email",
                 table: "Users",
                 column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "UX_Users_SingleAdmin",
+                table: "Users",
+                column: "AdminSlot",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -369,7 +376,7 @@ namespace FleetManager.Infrastructure.Migrations
                 name: "Vehicles");
 
             migrationBuilder.DropTable(
-                name: "Companys");
+                name: "Companies");
 
             migrationBuilder.DropTable(
                 name: "RentalPlans");

@@ -31,11 +31,10 @@ namespace UseCase.Tests.ToRentalPlan.Delete
 
         private static DeleteRentalPlanUseCase CreateUseCase(RentalPlan? rentalPlan)
         {
-            var repositoryBuilder = new RentalPlanWriteOnlyRepositoryBuilder()
-                .Delete(rentalPlan?.Id ?? 999);
+            var repositoryBuilder = new RentalPlanWriteOnlyRepositoryBuilder();
 
             if (rentalPlan is not null)
-                repositoryBuilder.GetById(rentalPlan);
+                repositoryBuilder.GetById(rentalPlan).Delete(rentalPlan);
 
             var repository = repositoryBuilder.Build();
             var unitOfWork = UnitOfWorkBuilder.Build();

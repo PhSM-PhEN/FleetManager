@@ -30,10 +30,13 @@ namespace UseCase.Tests.ToVehicle.Delete
 
         private static DeleteVehicleUseCase CreateUseCase(FleetManager.Domain.Entities.Vehicle? vehicle)
         {
-            var repository = new VehicleWriteOnlyRepositoryBuilder()
-                .GetById(vehicle?.Id ?? 999, vehicle!)
-                .Delete(vehicle?.Id ?? 999)
-                .Build();
+            var repositoryBuilder = new VehicleWriteOnlyRepositoryBuilder()
+                .GetById(vehicle?.Id ?? 999, vehicle!);
+
+            if (vehicle is not null)
+                repositoryBuilder.Delete(vehicle);
+
+            var repository = repositoryBuilder.Build();
 
             var unitOfWork = UnitOfWorkBuilder.Build();
 

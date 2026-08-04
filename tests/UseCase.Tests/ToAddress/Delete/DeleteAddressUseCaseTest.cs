@@ -39,7 +39,7 @@ namespace UseCase.Tests.ToAddress.Delete
         {
             var repository = new AddressWriteOnlyRepositoryBuilder()
                 .GetById(address.Id, address)
-                .Delete(address.Id)
+                .Delete(address)
                 .Build();
             var unitOfWork = UnitOfWorkBuilder.Build();
 

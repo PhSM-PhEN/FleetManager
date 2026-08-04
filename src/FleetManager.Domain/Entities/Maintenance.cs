@@ -22,6 +22,7 @@ namespace FleetManager.Domain.Entities
         public void Open()
         {
             Status = "Open";
+            RegisterHistoryEvent("Opened");
         }
     }
 }

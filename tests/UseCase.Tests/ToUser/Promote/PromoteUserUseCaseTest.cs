@@ -6,6 +6,7 @@ using FleetManager.Application.UseCase.ToUser.Promote;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Enum;
 using FleetManager.Exception.ExceptionBase;
+using Microsoft.EntityFrameworkCore;
 using Shouldly;
 
 namespace UseCase.Tests.ToUser.Promote
@@ -35,6 +36,30 @@ namespace UseCase.Tests.ToUser.Promote
                 .ExistsByRole(Roles.ADMIN, exists: true)
                 .Build();
             var unitOfWork = UnitOfWorkBuilder.Build();
+
+            var useCase = new PromoteUserUseCase(writeRepository, readRepository, loggedUser, unitOfWork);
+            var act = async () => { await useCase.Execute(); };
+
+            var exception = await act.ShouldThrowAsync<ErrorOnValidationException>();
+            exception.GetErrors().ShouldContain(ResourceErrorMessages.ADMIN_ALREADY_EXISTS);
+        }
+
+        [Fact]
+        public async Task Error_Admin_Already_Exists_On_Concurrent_Promote()
+        {
+            // Simula a race condition: duas requisicoes passam pelo ExistsByRole (ambas veem
+            // false) e so a constraint unica do banco, disparada no commit, barra a segunda.
+            var user = UserBuilder.Build();
+
+            var loggedUser = LoggedUserBuilder.Build(user);
+            var writeRepository = new UserWriteOnlyRepositoryBuilder()
+                .GetUserById(user)
+                .Update(user)
+                .Build();
+            var readRepository = new UserReadOnlyRepositoryBuilder()
+                .ExistsByRole(Roles.ADMIN, exists: false)
+                .Build();
+            var unitOfWork = UnitOfWorkBuilder.BuildThrowingOnCommit(new DbUpdateException());
 
             var useCase = new PromoteUserUseCase(writeRepository, readRepository, loggedUser, unitOfWork);
             var act = async () => { await useCase.Execute(); };

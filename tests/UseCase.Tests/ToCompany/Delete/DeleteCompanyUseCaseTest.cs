@@ -30,10 +30,13 @@ namespace UseCase.Tests.ToCompany.Delete
 
         private static DeleteCompanyUseCase CreateUseCase(FleetManager.Domain.Entities.Company? company)
         {
-            var repository = new CompanyWriteOnlyRepositoryBuilder()
-                .GetById(company, company?.Id ?? 999)
-                .Delete(company?.Id ?? 999)
-                .Build();
+            var repositoryBuilder = new CompanyWriteOnlyRepositoryBuilder()
+                .GetById(company, company?.Id ?? 999);
+
+            if (company is not null)
+                repositoryBuilder.Delete(company);
+
+            var repository = repositoryBuilder.Build();
 
             var unitOfWork = UnitOfWorkBuilder.Build();
 

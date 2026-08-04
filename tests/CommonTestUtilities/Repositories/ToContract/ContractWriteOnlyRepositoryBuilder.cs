@@ -31,9 +31,9 @@ namespace CommonTestUtilities.Repositories.ToContract
             return this;
         }
 
-        public ContractWriteOnlyRepositoryBuilder Delete(long id)
+        public ContractWriteOnlyRepositoryBuilder Delete(Contract contract)
         {
-            _repository.Setup(c => c.Delete(id)).Returns(Task.CompletedTask);
+            _repository.Setup(c => c.Delete(contract)).Returns(Task.CompletedTask);
             return this;
         }
 

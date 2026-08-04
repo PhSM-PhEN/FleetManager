@@ -8,11 +8,13 @@ namespace WebApi.Tests.ToCompany.GetById
     public class GetByIdCompanyUseCaseTest : FleetManagerClassFixture
     {
         private const string METHOD = "api/Company";
+        private readonly string _adminToken;
         private readonly string _teamMemberToken;
         private readonly long _companyId;
 
         public GetByIdCompanyUseCaseTest(CustomWebApplicationFactory customWebApplication) : base(customWebApplication)
         {
+            _adminToken = customWebApplication.USER_ADM.GetToken();
             _teamMemberToken = customWebApplication.USER_TEAM_MEMBER.GetToken();
             _companyId = customWebApplication.COMPANY_TEAM_MEMBER.GetById();
         }
@@ -20,7 +22,7 @@ namespace WebApi.Tests.ToCompany.GetById
         [Fact]
         public async Task Success()
         {
-            var result = await DoGet($"{METHOD}/{_companyId}", _teamMemberToken);
+            var result = await DoGet($"{METHOD}/{_companyId}", _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.OK);
 
             var body = await result.Content.ReadAsStreamAsync();
@@ -32,7 +34,7 @@ namespace WebApi.Tests.ToCompany.GetById
         [Fact]
         public async Task Error_Company_Not_Found()
         {
-            var result = await DoGet($"{METHOD}/0", _teamMemberToken);
+            var result = await DoGet($"{METHOD}/0", _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.NotFound);
 
             var body = await result.Content.ReadAsStreamAsync();
@@ -49,6 +51,13 @@ namespace WebApi.Tests.ToCompany.GetById
         {
             var result = await DoGet($"{METHOD}/{_companyId}");
             result.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
+        }
+
+        [Fact]
+        public async Task Error_Forbidden_For_Team_Member()
+        {
+            var result = await DoGet($"{METHOD}/{_companyId}", _teamMemberToken);
+            result.StatusCode.ShouldBe(HttpStatusCode.Forbidden);
         }
     }
 }

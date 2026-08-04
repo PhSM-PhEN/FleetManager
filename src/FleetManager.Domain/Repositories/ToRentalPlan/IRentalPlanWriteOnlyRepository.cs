@@ -7,6 +7,6 @@ namespace FleetManager.Domain.Repositories.ToRentalPlan
         Task Add(RentalPlan rentalPlan);
         Task<RentalPlan?> GetById(long id);
         void Update(RentalPlan rentalPlan);
-        Task Delete(long id);
+        Task Delete(RentalPlan rentalPlan);
     }
 }

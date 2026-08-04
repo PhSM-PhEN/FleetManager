@@ -6,7 +6,7 @@ namespace FleetManager.Domain.Repositories.ToTenant
     {
         Task Add(Tenant tenant);
         Task<Tenant?> GetById(long id);     
-        Task Delete(long id);
+        Task Delete(Tenant tenant);
         void Update(Tenant tenant);
 
     }

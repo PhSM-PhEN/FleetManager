@@ -11,7 +11,7 @@ namespace FleetManager.Application.UseCase.ToCompany.Delete
             var company = await repository.GetById(id) ??
                 throw new NotFoundException(ResourceErrorMessages.COMPANY_NOT_FOUND);
 
-            await repository.Delete(company.Id);
+            await repository.Delete(company);
             await unitOfWork.Commit();
         }
     }

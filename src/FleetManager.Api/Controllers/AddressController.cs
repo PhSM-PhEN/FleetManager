@@ -6,6 +6,7 @@ using FleetManager.Application.UseCase.ToAddress.Update;
 using FleetManager.Communication.Request.ToAddress;
 using FleetManager.Communication.Response;
 using FleetManager.Communication.Response.ToAddress;
+using FleetManager.Domain.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -55,6 +56,7 @@ namespace FleetManager.Api.Controllers
         }
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = Roles.ADMIN)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete([FromServices] IDeleteAddressUseCase useCase, [FromRoute] long id)

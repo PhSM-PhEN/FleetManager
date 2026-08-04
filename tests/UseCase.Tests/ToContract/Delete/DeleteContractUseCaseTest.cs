@@ -31,11 +31,10 @@ namespace UseCase.Tests.ToContract.Delete
 
         private static DeleteContractUseCase CreateUseCase(Contract? contract)
         {
-            var repositoryBuilder = new ContractWriteOnlyRepositoryBuilder()
-                .Delete(contract?.Id ?? 999);
+            var repositoryBuilder = new ContractWriteOnlyRepositoryBuilder();
 
             if (contract is not null)
-                repositoryBuilder.GetById(contract.Id, contract);
+                repositoryBuilder.GetById(contract.Id, contract).Delete(contract);
 
             var repository = repositoryBuilder.Build();
             var unitOfWork = UnitOfWorkBuilder.Build();

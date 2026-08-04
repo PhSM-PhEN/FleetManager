@@ -8,11 +8,13 @@ namespace WebApi.Tests.ToTenant.Delete
     public class DeleteTenantUseCaseTest : FleetManagerClassFixture
     {
         private const string METHOD = "api/Tenant";
+        private readonly string _adminToken;
         private readonly string _teamMemberToken;
         private readonly long _addressId;
 
         public DeleteTenantUseCaseTest(CustomWebApplicationFactory customWebApplication) : base(customWebApplication)
         {
+            _adminToken = customWebApplication.USER_ADM.GetToken();
             _teamMemberToken = customWebApplication.USER_TEAM_MEMBER.GetToken();
             _addressId = customWebApplication.ADDRESS_TEAM_MEMBER.GetById();
         }
@@ -27,14 +29,14 @@ namespace WebApi.Tests.ToTenant.Delete
             var responseBody = await JsonDocument.ParseAsync(body);
             var tenantId = responseBody.RootElement.GetProperty("id").GetInt64();
 
-            var result = await DoDelete($"{METHOD}/{tenantId}", _teamMemberToken);
+            var result = await DoDelete($"{METHOD}/{tenantId}", _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.NoContent);
         }
 
         [Fact]
         public async Task Error_Tenant_Not_Found()
         {
-            var result = await DoDelete($"{METHOD}/0", _teamMemberToken);
+            var result = await DoDelete($"{METHOD}/0", _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.NotFound);
         }
 
@@ -43,6 +45,13 @@ namespace WebApi.Tests.ToTenant.Delete
         {
             var result = await DoDelete($"{METHOD}/1");
             result.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
+        }
+
+        [Fact]
+        public async Task Error_Forbidden_For_Team_Member()
+        {
+            var result = await DoDelete($"{METHOD}/1", _teamMemberToken);
+            result.StatusCode.ShouldBe(HttpStatusCode.Forbidden);
         }
     }
 }

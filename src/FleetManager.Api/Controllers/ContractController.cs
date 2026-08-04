@@ -9,6 +9,7 @@ using FleetManager.Application.UseCase.ToContract.Update;
 using FleetManager.Communication.Request.ToContract;
 using FleetManager.Communication.Response;
 using FleetManager.Communication.Response.ToContract;
+using FleetManager.Domain.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -67,6 +68,7 @@ namespace FleetManager.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = Roles.ADMIN)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete([FromServices] IDeleteContractUseCase useCase, [FromRoute] long id)

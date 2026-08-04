@@ -39,11 +39,10 @@ namespace FleetManager.Infrastructure.DataAccess.ToRentalPlan
             return (rentalPlan, totalCount);
         }
 
-        public async Task Delete(long id)
+        public Task Delete(RentalPlan rentalPlan)
         {
-            var rentalPlan = await GetById(id);
-
-            dbContext.Remove(rentalPlan!);
+            dbContext.Remove(rentalPlan);
+            return Task.CompletedTask;
         }
     }
 }

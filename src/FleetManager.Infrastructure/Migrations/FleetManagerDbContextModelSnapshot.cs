@@ -52,11 +52,11 @@ namespace FleetManager.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<long?>("UpdateBy")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("ZipCode")
                         .IsRequired()
@@ -96,11 +96,11 @@ namespace FleetManager.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<long?>("UpdateBy")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -109,7 +109,7 @@ namespace FleetManager.Infrastructure.Migrations
                     b.HasIndex("Cnpj")
                         .IsUnique();
 
-                    b.ToTable("Companys", (string)null);
+                    b.ToTable("Companies", (string)null);
                 });
 
             modelBuilder.Entity("FleetManager.Domain.Entities.Contract", b =>
@@ -166,16 +166,16 @@ namespace FleetManager.Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<decimal>("TotalAmount")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(65,3)");
 
                     b.Property<int>("TotalDays")
                         .HasColumnType("int");
 
-                    b.Property<long?>("UpdateBy")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
 
                     b.Property<long>("VehicleId")
                         .HasColumnType("bigint");
@@ -240,10 +240,10 @@ namespace FleetManager.Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<decimal>("DailyPrice")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(65,3)");
 
                     b.Property<decimal>("ExcessMileageRate")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(65,3)");
 
                     b.Property<long>("MileagePerDay")
                         .HasColumnType("bigint");
@@ -252,17 +252,17 @@ namespace FleetManager.Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<decimal>("MonthlyPrice")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("decimal(65,3)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<long?>("UpdateBy")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -297,11 +297,11 @@ namespace FleetManager.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<long?>("UpdateBy")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -317,6 +317,11 @@ namespace FleetManager.Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<int?>("AdminSlot")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("int")
+                        .HasComputedColumnSql("CASE WHEN `Role` = 'Admin' THEN 1 ELSE NULL END", true);
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -338,6 +343,10 @@ namespace FleetManager.Infrastructure.Migrations
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AdminSlot")
+                        .IsUnique()
+                        .HasDatabaseName("UX_Users_SingleAdmin");
 
                     b.HasIndex("Email")
                         .IsUnique();
@@ -383,11 +392,11 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Property<long>("RentalPlanId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("UpdateBy")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -574,7 +583,7 @@ namespace FleetManager.Infrastructure.Migrations
                                 .HasForeignKey("VehicleId");
                         });
 
-                    b.OwnsOne("FleetManager.Domain.Entities.ValueObjects.ManufacturingYear", "ManufacturerYear", b1 =>
+                    b.OwnsOne("FleetManager.Domain.Entities.ValueObjects.ManufacturingYear", "ManufacturingYear", b1 =>
                         {
                             b1.Property<long>("VehicleId")
                                 .HasColumnType("bigint");
@@ -621,7 +630,7 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Navigation("LicensePlate")
                         .IsRequired();
 
-                    b.Navigation("ManufacturerYear")
+                    b.Navigation("ManufacturingYear")
                         .IsRequired();
 
                     b.Navigation("Renavam")

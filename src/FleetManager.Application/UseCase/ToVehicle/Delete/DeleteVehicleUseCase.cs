@@ -11,7 +11,7 @@ namespace FleetManager.Application.UseCase.ToVehicle.Delete
             var vehicle = await repository.GetById(id) ??
                 throw new NotFoundException(ResourceErrorMessages.VEHICLE_NOT_FOUND);
             
-            await repository.Delete(vehicle.Id);
+            await repository.Delete(vehicle);
             await unitOfWork.Commit();
         }
     }

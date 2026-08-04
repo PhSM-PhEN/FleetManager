@@ -9,10 +9,12 @@ namespace WebApi.Tests.ToAddress.Delete
     public class DeleteAddressUseCaseTest : FleetManagerClassFixture
     {
         private const string METHOD = "api/Address";
+        private readonly string _adminToken;
         private readonly string _teamMemberToken;
 
         public DeleteAddressUseCaseTest(CustomWebApplicationFactory customWebApplication) : base(customWebApplication)
         {
+            _adminToken = customWebApplication.USER_ADM.GetToken();
             _teamMemberToken = customWebApplication.USER_TEAM_MEMBER.GetToken();
         }
 
@@ -26,14 +28,14 @@ namespace WebApi.Tests.ToAddress.Delete
             var responseBody = await JsonDocument.ParseAsync(body);
             var addressId = responseBody.RootElement.GetProperty("id").GetInt64();
 
-            var result = await DoDelete($"{METHOD}/{addressId}", _teamMemberToken);
+            var result = await DoDelete($"{METHOD}/{addressId}", _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.NoContent);
         }
 
         [Fact]
         public async Task Error_Address_Not_Found()
         {
-            var result = await DoDelete($"{METHOD}/0", _teamMemberToken);
+            var result = await DoDelete($"{METHOD}/0", _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.NotFound);
 
             var body = await result.Content.ReadAsStreamAsync();
@@ -50,6 +52,13 @@ namespace WebApi.Tests.ToAddress.Delete
         {
             var result = await DoDelete($"{METHOD}/1");
             result.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
+        }
+
+        [Fact]
+        public async Task Error_Forbidden_For_Team_Member()
+        {
+            var result = await DoDelete($"{METHOD}/1", _teamMemberToken);
+            result.StatusCode.ShouldBe(HttpStatusCode.Forbidden);
         }
     }
 }

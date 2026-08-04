@@ -34,7 +34,7 @@ namespace FleetManager.Api.Filters
         }
         private void ThrowUnknownError(ExceptionContext context)
         {
-            _logger.LogError(context.Exception, "Erro não tratado ao processar {Method} {Path}",
+            _logger.LogError(context.Exception, "Unhandled error while processing {Method} {Path}",
                 context.HttpContext.Request.Method, context.HttpContext.Request.Path);
 
             var errorResponse = new ResponseErrorJson(ResourceErrorMessages.UNKNOWN_ERROR);

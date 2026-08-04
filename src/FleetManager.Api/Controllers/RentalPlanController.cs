@@ -6,6 +6,7 @@ using FleetManager.Application.UseCase.ToRentalPlan.Update;
 using FleetManager.Communication.Request.ToRentalPlan;
 using FleetManager.Communication.Response;
 using FleetManager.Communication.Response.ToRentalPlan;
+using FleetManager.Domain.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,7 +17,9 @@ namespace FleetManager.Api.Controllers
     [Authorize]
     public class RentalPlanController : ControllerBase
     {
+        // Planos definem os preços/km padrão usados no cálculo do contrato — só Admin cria/edita/remove.
         [HttpPost]
+        [Authorize(Roles = Roles.ADMIN)]
         [ProducesResponseType(typeof(ResponseRentalPlanJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
@@ -45,6 +48,7 @@ namespace FleetManager.Api.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = Roles.ADMIN)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
@@ -55,6 +59,7 @@ namespace FleetManager.Api.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = Roles.ADMIN)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete([FromServices] IDeleteRentalPlanUseCase useCase, [FromRoute] long id)

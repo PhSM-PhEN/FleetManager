@@ -16,9 +16,9 @@ namespace CommonTestUtilities.Repositories.ToVehicle
             _repository.Setup(v => v.Add(vehicle)).Returns(Task.CompletedTask);
             return this;
         }
-        public VehicleWriteOnlyRepositoryBuilder Delete(long id)
+        public VehicleWriteOnlyRepositoryBuilder Delete(Vehicle vehicle)
         {
-            _repository.Setup(v => v.Delete(id)).Returns(Task.CompletedTask);
+            _repository.Setup(v => v.Delete(vehicle)).Returns(Task.CompletedTask);
             return this;
         }
         public VehicleWriteOnlyRepositoryBuilder GetById(long id, Vehicle vehicle)

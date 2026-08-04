@@ -8,6 +8,7 @@ namespace WebApi.Tests.ToContract.Delete
     public class DeleteContractUseCaseTest : FleetManagerClassFixture
     {
         private const string METHOD = "api/Contract";
+        private readonly string _adminToken;
         private readonly string _teamMemberToken;
         private readonly long _vehicleId;
         private readonly long _tenantId;
@@ -15,6 +16,7 @@ namespace WebApi.Tests.ToContract.Delete
 
         public DeleteContractUseCaseTest(CustomWebApplicationFactory customWebApplication) : base(customWebApplication)
         {
+            _adminToken = customWebApplication.USER_ADM.GetToken();
             _teamMemberToken = customWebApplication.USER_TEAM_MEMBER.GetToken();
             _vehicleId = customWebApplication.VEHICLE_TEAM_MEMBER.GetById();
             _tenantId = customWebApplication.TENANT_TEAM_MEMBER.GetById();
@@ -24,8 +26,8 @@ namespace WebApi.Tests.ToContract.Delete
         [Fact]
         public async Task Success()
         {
-            // Registra um contrato próprio (veículo sem contrato ativo) para não interferir
-            // no contrato semeado pela fábrica (CONTRACT_TEAM_MEMBER), que outros testes usam.
+            // Registra um contrato proprio (veiculo sem contrato ativo) para nao interferir
+            // no contrato semeado pela fabrica (CONTRACT_TEAM_MEMBER), que outros testes usam.
             var request = RequestContractJsonBuilder.Build(_vehicleId, _tenantId, _rentalPlanId);
             var registerResult = await DoPost(METHOD, request, _teamMemberToken);
 
@@ -33,14 +35,14 @@ namespace WebApi.Tests.ToContract.Delete
             var responseBody = await JsonDocument.ParseAsync(body);
             var contractId = responseBody.RootElement.GetProperty("id").GetInt64();
 
-            var result = await DoDelete($"{METHOD}/{contractId}", _teamMemberToken);
+            var result = await DoDelete($"{METHOD}/{contractId}", _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.NoContent);
         }
 
         [Fact]
         public async Task Error_Contract_Not_Found()
         {
-            var result = await DoDelete($"{METHOD}/0", _teamMemberToken);
+            var result = await DoDelete($"{METHOD}/0", _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.NotFound);
         }
 
@@ -49,6 +51,13 @@ namespace WebApi.Tests.ToContract.Delete
         {
             var result = await DoDelete($"{METHOD}/1");
             result.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
+        }
+
+        [Fact]
+        public async Task Error_Forbidden_For_Team_Member()
+        {
+            var result = await DoDelete($"{METHOD}/1", _teamMemberToken);
+            result.StatusCode.ShouldBe(HttpStatusCode.Forbidden);
         }
     }
 }

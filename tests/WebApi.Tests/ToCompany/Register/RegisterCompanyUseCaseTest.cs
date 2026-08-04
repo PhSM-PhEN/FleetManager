@@ -9,11 +9,13 @@ namespace WebApi.Tests.ToCompany.Register
     public class RegisterCompanyUseCaseTest : FleetManagerClassFixture
     {
         private const string METHOD = "api/Company";
+        private readonly string _adminToken;
         private readonly string _teamMemberToken;
         private readonly long _addressId;
 
         public RegisterCompanyUseCaseTest(CustomWebApplicationFactory customWebApplication) : base(customWebApplication)
         {
+            _adminToken = customWebApplication.USER_ADM.GetToken();
             _teamMemberToken = customWebApplication.USER_TEAM_MEMBER.GetToken();
             _addressId = customWebApplication.ADDRESS_TEAM_MEMBER.GetById();
         }
@@ -23,7 +25,7 @@ namespace WebApi.Tests.ToCompany.Register
         {
             var request = RequestCompanyJsonBuilder.Build(_addressId);
 
-            var result = await DoPost(METHOD, request, _teamMemberToken);
+            var result = await DoPost(METHOD, request, _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.Created);
 
             var body = await result.Content.ReadAsStreamAsync();
@@ -38,7 +40,7 @@ namespace WebApi.Tests.ToCompany.Register
             var request = RequestCompanyJsonBuilder.Build(_addressId);
             request.Name = string.Empty;
 
-            var result = await DoPost(METHOD, request, _teamMemberToken);
+            var result = await DoPost(METHOD, request, _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
 
             var body = await result.Content.ReadAsStreamAsync();
@@ -55,7 +57,7 @@ namespace WebApi.Tests.ToCompany.Register
         {
             var request = RequestCompanyJsonBuilder.Build(999);
 
-            var result = await DoPost(METHOD, request, _teamMemberToken);
+            var result = await DoPost(METHOD, request, _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.NotFound);
         }
 
@@ -66,6 +68,15 @@ namespace WebApi.Tests.ToCompany.Register
 
             var result = await DoPost(METHOD, request);
             result.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
+        }
+
+        [Fact]
+        public async Task Error_Forbidden_For_Team_Member()
+        {
+            var request = RequestCompanyJsonBuilder.Build(_addressId);
+
+            var result = await DoPost(METHOD, request, _teamMemberToken);
+            result.StatusCode.ShouldBe(HttpStatusCode.Forbidden);
         }
     }
 }

@@ -12,10 +12,10 @@ namespace FleetManager.Infrastructure.DataAccess.ToTenant
 
         }
 
-        public async Task Delete(long id)
+        public Task Delete(Tenant tenant)
         {
-            var tenant = await GetById(id);
-            dbContext.Tenants.Remove(tenant!);
+            dbContext.Tenants.Remove(tenant);
+            return Task.CompletedTask;
         }
 
         public async Task<(List<Tenant>, int totalCount)> GetAll(int pageNumber, int pageSize)

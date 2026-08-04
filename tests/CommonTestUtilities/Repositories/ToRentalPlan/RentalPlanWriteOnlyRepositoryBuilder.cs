@@ -31,9 +31,9 @@ namespace CommonTestUtilities.Repositories.ToRentalPlan
             return this;
         }
 
-        public RentalPlanWriteOnlyRepositoryBuilder Delete(long id)
+        public RentalPlanWriteOnlyRepositoryBuilder Delete(RentalPlan rentalPlan)
         {
-            _repository.Setup(p => p.Delete(id)).Returns(Task.CompletedTask);
+            _repository.Setup(p => p.Delete(rentalPlan)).Returns(Task.CompletedTask);
             return this;
         }
 

@@ -6,15 +6,17 @@ using FleetManager.Application.UseCase.ToCompany.Update;
 using FleetManager.Communication.Request.ToCompany;
 using FleetManager.Communication.Response;
 using FleetManager.Communication.Response.ToCompany;
+using FleetManager.Domain.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FleetManager.Api.Controllers
 {
+    // Company é a entidade estrutural do sistema (dona da frota) — só Admin gerencia.
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = Roles.ADMIN)]
     public class CompanyController : ControllerBase
     {
         [HttpPost]

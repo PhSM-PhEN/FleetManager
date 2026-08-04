@@ -6,7 +6,7 @@ namespace FleetManager.Domain.Repositories.ToContract
     {
         Task Add(Contract contract);
         Task<Contract?> GetById(long id);
-        Task Delete(long id);
+        Task Delete(Contract contract);
         void Update(Contract contract);
         Task<bool> HasActiveContract(long vehicleId);
     }

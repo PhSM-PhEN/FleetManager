@@ -8,33 +8,35 @@ namespace WebApi.Tests.ToRentalPlan.Delete
     public class DeleteRentalPlanUseCaseTest : FleetManagerClassFixture
     {
         private const string METHOD = "api/RentalPlan";
+        private readonly string _adminToken;
         private readonly string _teamMemberToken;
 
         public DeleteRentalPlanUseCaseTest(CustomWebApplicationFactory customWebApplication) : base(customWebApplication)
         {
+            _adminToken = customWebApplication.USER_ADM.GetToken();
             _teamMemberToken = customWebApplication.USER_TEAM_MEMBER.GetToken();
         }
 
         [Fact]
         public async Task Success()
         {
-            // Registra um plano próprio (sem veículos vinculados) para não interferir
-            // no plano semeado pela fábrica (RENTAL_PLAN_TEAM_MEMBER), que outros testes usam.
+            // Registra um plano proprio (sem veiculos vinculados) para nao interferir
+            // no plano semeado pela fabrica (RENTAL_PLAN_TEAM_MEMBER), que outros testes usam.
             var request = RequestRentalPlanJsonBuilder.Build();
-            var registerResult = await DoPost(METHOD, request, _teamMemberToken);
+            var registerResult = await DoPost(METHOD, request, _adminToken);
 
             var body = await registerResult.Content.ReadAsStreamAsync();
             var responseBody = await JsonDocument.ParseAsync(body);
             var rentalPlanId = responseBody.RootElement.GetProperty("id").GetInt64();
 
-            var result = await DoDelete($"{METHOD}/{rentalPlanId}", _teamMemberToken);
+            var result = await DoDelete($"{METHOD}/{rentalPlanId}", _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.NoContent);
         }
 
         [Fact]
         public async Task Error_RentalPlan_Not_Found()
         {
-            var result = await DoDelete($"{METHOD}/0", _teamMemberToken);
+            var result = await DoDelete($"{METHOD}/0", _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.NotFound);
         }
 
@@ -43,6 +45,13 @@ namespace WebApi.Tests.ToRentalPlan.Delete
         {
             var result = await DoDelete($"{METHOD}/1");
             result.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
+        }
+
+        [Fact]
+        public async Task Error_Forbidden_For_Team_Member()
+        {
+            var result = await DoDelete($"{METHOD}/1", _teamMemberToken);
+            result.StatusCode.ShouldBe(HttpStatusCode.Forbidden);
         }
     }
 }

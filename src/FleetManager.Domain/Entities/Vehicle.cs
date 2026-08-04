@@ -41,10 +41,20 @@ namespace FleetManager.Domain.Entities
                 throw new ErrorOnValidationException([ResourceErrorMessages.MILEAGE_CANNOT_DECREASE]);
 
             CurrentMileage = newMileage;
+            RegisterHistoryEvent("MileageUpdated");
         }
 
 
-        public void Activate() => IsActive = true;
-        public void Deactivate() => IsActive = false;
+        public void Activate()
+        {
+            IsActive = true;
+            RegisterHistoryEvent("Activated");
+        }
+
+        public void Deactivate()
+        {
+            IsActive = false;
+            RegisterHistoryEvent("Deactivated");
+        }
     }
 }

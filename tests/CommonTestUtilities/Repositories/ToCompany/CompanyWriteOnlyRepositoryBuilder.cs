@@ -18,9 +18,9 @@ namespace CommonTestUtilities.Repositories.ToCompany
             return this;
         }
 
-        public CompanyWriteOnlyRepositoryBuilder Delete(long id)
+        public CompanyWriteOnlyRepositoryBuilder Delete(Company company)
         {
-            _repository.Setup(c => c.Delete(id)).Returns(Task.CompletedTask);
+            _repository.Setup(c => c.Delete(company)).Returns(Task.CompletedTask);
             return this;
         }
 

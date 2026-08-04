@@ -85,6 +85,20 @@ namespace FleetManager.Infrastructure.DataAccess
                 .HasIndex(u => u.Email)
                 .IsUnique();
 
+            // MySQL nao suporta indice unico parcial/filtrado. O truque padrao e criar uma
+            // coluna computada que so tem valor quando Role = Admin (NULL nos demais casos) e
+            // colocar um indice unico nela — MySQL permite varios NULLs num indice unico, entao
+            // isso garante "no maximo 1 Admin" no nivel do banco, fechando a race condition do
+            // PromoteUserUseCase (check-then-act entre ExistsByRole e o commit).
+            modelBuilder.Entity<User>()
+                .Property<int?>("AdminSlot")
+                .HasComputedColumnSql("CASE WHEN `Role` = 'Admin' THEN 1 ELSE NULL END", stored: true);
+
+            modelBuilder.Entity<User>()
+                .HasIndex("AdminSlot")
+                .IsUnique()
+                .HasDatabaseName("UX_Users_SingleAdmin");
+
             modelBuilder.Entity<Tenant>()
                 .OwnsOne(t => t.DriverLicense);
 

@@ -17,9 +17,9 @@ namespace CommonTestUtilities.Repositories.ToTenant
             _repository.Setup(t => t.Add(tenant)).Returns(Task.CompletedTask);
             return this;
         }
-        public TenantWriteOnlyRepositoryBuilder Delete(long id)
+        public TenantWriteOnlyRepositoryBuilder Delete(Tenant tenant)
         {
-            _repository.Setup(t => t.Delete(id)).Returns(Task.CompletedTask);
+            _repository.Setup(t => t.Delete(tenant)).Returns(Task.CompletedTask);
             return this;
         }
         public TenantWriteOnlyRepositoryBuilder GetById(Tenant? tenant, long id)

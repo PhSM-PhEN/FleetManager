@@ -9,10 +9,12 @@ namespace WebApi.Tests.ToRentalPlan.Register
     public class RegisterRentalPlanUseCaseTest : FleetManagerClassFixture
     {
         private const string METHOD = "api/RentalPlan";
+        private readonly string _adminToken;
         private readonly string _teamMemberToken;
 
         public RegisterRentalPlanUseCaseTest(CustomWebApplicationFactory customWebApplication) : base(customWebApplication)
         {
+            _adminToken = customWebApplication.USER_ADM.GetToken();
             _teamMemberToken = customWebApplication.USER_TEAM_MEMBER.GetToken();
         }
 
@@ -21,7 +23,7 @@ namespace WebApi.Tests.ToRentalPlan.Register
         {
             var request = RequestRentalPlanJsonBuilder.Build();
 
-            var result = await DoPost(METHOD, request, _teamMemberToken);
+            var result = await DoPost(METHOD, request, _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.Created);
 
             var body = await result.Content.ReadAsStreamAsync();
@@ -36,7 +38,7 @@ namespace WebApi.Tests.ToRentalPlan.Register
             var request = RequestRentalPlanJsonBuilder.Build();
             request.Name = string.Empty;
 
-            var result = await DoPost(METHOD, request, _teamMemberToken);
+            var result = await DoPost(METHOD, request, _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
 
             var body = await result.Content.ReadAsStreamAsync();
@@ -54,7 +56,7 @@ namespace WebApi.Tests.ToRentalPlan.Register
             var request = RequestRentalPlanJsonBuilder.Build();
             request.DailyPrice = 0;
 
-            var result = await DoPost(METHOD, request, _teamMemberToken);
+            var result = await DoPost(METHOD, request, _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
 
             var body = await result.Content.ReadAsStreamAsync();
@@ -73,6 +75,15 @@ namespace WebApi.Tests.ToRentalPlan.Register
 
             var result = await DoPost(METHOD, request);
             result.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
+        }
+
+        [Fact]
+        public async Task Error_Forbidden_For_Team_Member()
+        {
+            var request = RequestRentalPlanJsonBuilder.Build();
+
+            var result = await DoPost(METHOD, request, _teamMemberToken);
+            result.StatusCode.ShouldBe(HttpStatusCode.Forbidden);
         }
     }
 }

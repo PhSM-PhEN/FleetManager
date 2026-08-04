@@ -31,10 +31,13 @@ namespace UseCase.Tests.ToTenant.Delete
 
         private static DeleteTenantUseCase CreateUseCase(Tenant? tenant)
         {
-            var repository = new TenantWriteOnlyRepositoryBuilder()
-                .GetById(tenant, tenant?.Id ?? 999)
-                .Delete(tenant?.Id ?? 999)
-                .Build();
+            var repositoryBuilder = new TenantWriteOnlyRepositoryBuilder()
+                .GetById(tenant, tenant?.Id ?? 999);
+
+            if (tenant is not null)
+                repositoryBuilder.Delete(tenant);
+
+            var repository = repositoryBuilder.Build();
 
             var unitOfWork = UnitOfWorkBuilder.Build();
 

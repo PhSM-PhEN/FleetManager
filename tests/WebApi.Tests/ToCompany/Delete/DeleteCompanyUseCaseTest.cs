@@ -9,11 +9,13 @@ namespace WebApi.Tests.ToCompany.Delete
     public class DeleteCompanyUseCaseTest : FleetManagerClassFixture
     {
         private const string METHOD = "api/Company";
+        private readonly string _adminToken;
         private readonly string _teamMemberToken;
         private readonly long _addressId;
 
         public DeleteCompanyUseCaseTest(CustomWebApplicationFactory customWebApplication) : base(customWebApplication)
         {
+            _adminToken = customWebApplication.USER_ADM.GetToken();
             _teamMemberToken = customWebApplication.USER_TEAM_MEMBER.GetToken();
             _addressId = customWebApplication.ADDRESS_TEAM_MEMBER.GetById();
         }
@@ -22,20 +24,20 @@ namespace WebApi.Tests.ToCompany.Delete
         public async Task Success()
         {
             var request = RequestCompanyJsonBuilder.Build(_addressId);
-            var registerResult = await DoPost(METHOD, request, _teamMemberToken);
+            var registerResult = await DoPost(METHOD, request, _adminToken);
 
             var body = await registerResult.Content.ReadAsStreamAsync();
             var responseBody = await JsonDocument.ParseAsync(body);
             var companyId = responseBody.RootElement.GetProperty("id").GetInt64();
 
-            var result = await DoDelete($"{METHOD}/{companyId}", _teamMemberToken);
+            var result = await DoDelete($"{METHOD}/{companyId}", _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.NoContent);
         }
 
         [Fact]
         public async Task Error_Company_Not_Found()
         {
-            var result = await DoDelete($"{METHOD}/0", _teamMemberToken);
+            var result = await DoDelete($"{METHOD}/0", _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.NotFound);
         }
 
@@ -44,6 +46,20 @@ namespace WebApi.Tests.ToCompany.Delete
         {
             var result = await DoDelete($"{METHOD}/1");
             result.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
+        }
+
+        [Fact]
+        public async Task Error_Forbidden_For_Team_Member()
+        {
+            var request = RequestCompanyJsonBuilder.Build(_addressId);
+            var registerResult = await DoPost(METHOD, request, _adminToken);
+
+            var body = await registerResult.Content.ReadAsStreamAsync();
+            var responseBody = await JsonDocument.ParseAsync(body);
+            var companyId = responseBody.RootElement.GetProperty("id").GetInt64();
+
+            var result = await DoDelete($"{METHOD}/{companyId}", _teamMemberToken);
+            result.StatusCode.ShouldBe(HttpStatusCode.Forbidden);
         }
     }
 }

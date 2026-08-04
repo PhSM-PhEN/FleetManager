@@ -10,7 +10,7 @@ namespace FleetManager.Application.UseCase.ToTenant.Delete
         {
             var tenant = await repository.GetById(id) ??
                 throw new NotFoundException(ResourceErrorMessages.TENANT_NOT_FOUND);
-            await repository.Delete(tenant.Id);
+            await repository.Delete(tenant);
             await unitOfWork.Commit();
         }
     }

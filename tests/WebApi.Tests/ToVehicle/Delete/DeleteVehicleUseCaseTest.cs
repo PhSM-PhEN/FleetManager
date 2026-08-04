@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using System.Text.Json;
 using CommonTestUtilities.Request.ToVehicle;
 using Shouldly;
@@ -8,12 +8,14 @@ namespace WebApi.Tests.ToVehicle.Delete
     public class DeleteVehicleUseCaseTest : FleetManagerClassFixture
     {
         private const string METHOD = "api/Vehicle";
+        private readonly string _adminToken;
         private readonly string _teamMemberToken;
         private readonly long _companyId;
         private readonly long _rentalPlanId;
 
         public DeleteVehicleUseCaseTest(CustomWebApplicationFactory customWebApplication) : base(customWebApplication)
         {
+            _adminToken = customWebApplication.USER_ADM.GetToken();
             _teamMemberToken = customWebApplication.USER_TEAM_MEMBER.GetToken();
             _companyId = customWebApplication.COMPANY_TEAM_MEMBER.GetById();
             _rentalPlanId = customWebApplication.RENTAL_PLAN_TEAM_MEMBER.GetById();
@@ -29,14 +31,14 @@ namespace WebApi.Tests.ToVehicle.Delete
             var responseBody = await JsonDocument.ParseAsync(body);
             var vehicleId = responseBody.RootElement.GetProperty("id").GetInt64();
 
-            var result = await DoDelete($"{METHOD}/{vehicleId}", _teamMemberToken);
+            var result = await DoDelete($"{METHOD}/{vehicleId}", _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.NoContent);
         }
 
         [Fact]
         public async Task Error_Vehicle_Not_Found()
         {
-            var result = await DoDelete($"{METHOD}/0", _teamMemberToken);
+            var result = await DoDelete($"{METHOD}/0", _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.NotFound);
         }
 
@@ -45,6 +47,13 @@ namespace WebApi.Tests.ToVehicle.Delete
         {
             var result = await DoDelete($"{METHOD}/1");
             result.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
+        }
+
+        [Fact]
+        public async Task Error_Forbidden_For_Team_Member()
+        {
+            var result = await DoDelete($"{METHOD}/1", _teamMemberToken);
+            result.StatusCode.ShouldBe(HttpStatusCode.Forbidden);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace FleetManager.Application.UseCase.ToContract.Delete
             var contract = await repository.GetById(id) ??
                 throw new NotFoundException(ResourceErrorMessages.CONTRACT_NOT_FOUND);
 
-            await repository.Delete(contract.Id);
+            await repository.Delete(contract);
             await unitOfWork.Commit();
         }
     }

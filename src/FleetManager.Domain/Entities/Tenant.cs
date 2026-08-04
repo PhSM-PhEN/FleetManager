@@ -34,7 +34,16 @@ namespace FleetManager.Domain.Entities
             Contact = contact;
             AddressId = addressId;
         }
-        public void Disable() => IsActive = false;
-        public void Activate() => IsActive = true;
+        public void Disable()
+        {
+            IsActive = false;
+            RegisterHistoryEvent("Disabled");
+        }
+
+        public void Activate()
+        {
+            IsActive = true;
+            RegisterHistoryEvent("Activated");
+        }
     }
 }

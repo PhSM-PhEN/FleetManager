@@ -47,6 +47,7 @@ namespace FleetManager.Domain.Entities
                 throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_NOT_ACTIVE);
 
             ContractStatus = ContractStatus.Cancelled;
+            RegisterHistoryEvent("Cancelled");
         }
 
         public void Confirm()
@@ -55,6 +56,7 @@ namespace FleetManager.Domain.Entities
                 throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_NOT_RESERVED);
 
             ContractStatus = ContractStatus.Active;
+            RegisterHistoryEvent("Activated");
         }
 
         public void Update(RentalPlan rentalPlan, RentalType rentalType, long mileageContracted, decimal totalAmount,
@@ -73,6 +75,7 @@ namespace FleetManager.Domain.Entities
 
             ActualReturnDateTime = actualReturnDateTime;
             ContractStatus = ContractStatus.Finished;
+            RegisterHistoryEvent("Completed");
         }
 
         public void MarkAsOverdue()
@@ -81,6 +84,7 @@ namespace FleetManager.Domain.Entities
                 throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_NOT_ACTIVE);
 
             ContractStatus = ContractStatus.Overdue;
+            RegisterHistoryEvent("MarkedAsOverdue");
         }
 
         public static Contract Renew(Contract previousContract, RentalPlan? newRentalPlan, long? mileageContractedOverride)
@@ -114,6 +118,7 @@ namespace FleetManager.Domain.Entities
         private void MarkAsRenewed()
         {
             ContractStatus = ContractStatus.Renewed;
+            RegisterHistoryEvent("Renewed");
         }
 
         private void ApplyTerms(RentalPlan rentalPlan, RentalType rentalType, long mileageContracted, decimal totalAmount,

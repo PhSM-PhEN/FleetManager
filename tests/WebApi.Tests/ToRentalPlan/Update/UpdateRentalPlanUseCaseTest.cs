@@ -9,11 +9,13 @@ namespace WebApi.Tests.ToRentalPlan.Update
     public class UpdateRentalPlanUseCaseTest : FleetManagerClassFixture
     {
         private const string METHOD = "api/RentalPlan";
+        private readonly string _adminToken;
         private readonly string _teamMemberToken;
         private readonly long _rentalPlanId;
 
         public UpdateRentalPlanUseCaseTest(CustomWebApplicationFactory customWebApplication) : base(customWebApplication)
         {
+            _adminToken = customWebApplication.USER_ADM.GetToken();
             _teamMemberToken = customWebApplication.USER_TEAM_MEMBER.GetToken();
             _rentalPlanId = customWebApplication.RENTAL_PLAN_TEAM_MEMBER.GetById();
         }
@@ -23,7 +25,7 @@ namespace WebApi.Tests.ToRentalPlan.Update
         {
             var request = RequestRentalPlanJsonBuilder.Build();
 
-            var result = await DoPut($"{METHOD}/{_rentalPlanId}", request, _teamMemberToken);
+            var result = await DoPut($"{METHOD}/{_rentalPlanId}", request, _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.NoContent);
         }
 
@@ -32,7 +34,7 @@ namespace WebApi.Tests.ToRentalPlan.Update
         {
             var request = RequestRentalPlanJsonBuilder.Build();
 
-            var result = await DoPut($"{METHOD}/0", request, _teamMemberToken);
+            var result = await DoPut($"{METHOD}/0", request, _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.NotFound);
         }
 
@@ -42,7 +44,7 @@ namespace WebApi.Tests.ToRentalPlan.Update
             var request = RequestRentalPlanJsonBuilder.Build();
             request.MonthlyPrice = 0;
 
-            var result = await DoPut($"{METHOD}/{_rentalPlanId}", request, _teamMemberToken);
+            var result = await DoPut($"{METHOD}/{_rentalPlanId}", request, _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
 
             var body = await result.Content.ReadAsStreamAsync();
@@ -61,6 +63,15 @@ namespace WebApi.Tests.ToRentalPlan.Update
 
             var result = await DoPut($"{METHOD}/{_rentalPlanId}", request);
             result.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
+        }
+
+        [Fact]
+        public async Task Error_Forbidden_For_Team_Member()
+        {
+            var request = RequestRentalPlanJsonBuilder.Build();
+
+            var result = await DoPut($"{METHOD}/{_rentalPlanId}", request, _teamMemberToken);
+            result.StatusCode.ShouldBe(HttpStatusCode.Forbidden);
         }
     }
 }

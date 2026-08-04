@@ -12,7 +12,7 @@ namespace FleetManager.Application.UseCase.ToAddress.Delete
             var address = await repository.GetById(id) ??
                          throw new NotFoundException(ResourceErrorMessages.ADDRESS_NOT_FOUND);
             
-            await repository.Delete(address.Id);
+            await repository.Delete(address);
             await unitOfWork.Commit();
                 
         }

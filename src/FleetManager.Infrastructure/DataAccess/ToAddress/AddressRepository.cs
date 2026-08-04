@@ -14,10 +14,10 @@ namespace FleetManager.Infrastructure.DataAccess.ToAddress
             await dbContext.Addresses.AddAsync(address);
         }
 
-        public async Task Delete(long id)
+        public Task Delete(Address address)
         {
-            var address = await GetById(id);
-            dbContext.Addresses.Remove(address!);
+            dbContext.Addresses.Remove(address);
+            return Task.CompletedTask;
         }
 
         public async Task<(List<Address>, int totalCount)> GetAll(int pageNumber, int pageSize)

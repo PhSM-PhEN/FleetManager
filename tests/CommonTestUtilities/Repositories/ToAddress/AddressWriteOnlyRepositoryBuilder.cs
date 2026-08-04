@@ -19,9 +19,9 @@ namespace CommonTestUtilities.Repositories.ToAddress
             return this;
         }
 
-        public AddressWriteOnlyRepositoryBuilder Delete(long id)
+        public AddressWriteOnlyRepositoryBuilder Delete(Address address)
         {
-            _repository.Setup(a => a.Delete(id)).Returns(Task.CompletedTask);
+            _repository.Setup(a => a.Delete(address)).Returns(Task.CompletedTask);
             return this;
         }
 

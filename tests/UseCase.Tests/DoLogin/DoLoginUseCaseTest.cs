@@ -7,6 +7,7 @@ using FleetManager.Application.UseCase.DoLogin;
 using FleetManager.Communication.Request.ToUser;
 using FleetManager.Domain.Entities;
 using FleetManager.Exception.ExceptionBase;
+using Microsoft.Extensions.Logging.Abstractions;
 using Shouldly;
 
 namespace UseCase.Tests.DoLogin
@@ -70,7 +71,7 @@ namespace UseCase.Tests.DoLogin
             var passwordEncrypter = passwordEncrypterBuilder.Build();
             var tokenGenerator = JwtTokenGeneratorBuilder.Build();
 
-            return new DoLoginUseCase(readRepository, passwordEncrypter, tokenGenerator);
+            return new DoLoginUseCase(readRepository, passwordEncrypter, tokenGenerator, NullLogger<DoLoginUseCase>.Instance);
         }
     }
 }
