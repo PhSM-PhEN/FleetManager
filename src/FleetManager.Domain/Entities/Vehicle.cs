@@ -16,8 +16,8 @@ namespace FleetManager.Domain.Entities
         public LicensePlate LicensePlate { get; private set; } = default!;
         public long CompanyId { get; private set; }
         public long RentalPlanId {get ; private set;}
-        public Company Company { get;  set; } = default!;
-        public RentalPlan RentalPlan {get ; set ;} = default!;
+        public Company Company { get; internal set; } = default!;
+        public RentalPlan RentalPlan { get; internal set; } = default!;
 
         protected Vehicle() { }
 

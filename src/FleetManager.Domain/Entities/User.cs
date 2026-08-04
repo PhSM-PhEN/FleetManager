@@ -1,11 +1,11 @@
-﻿using FleetManager.Domain.Enum;
+using FleetManager.Domain.Enum;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Domain.Entities
 {
     public class User
     {
-        public long Id { get; set; }
+        public long Id { get; internal set; }
         public string Name { get; private set; } = string.Empty;
         public string Email { get; private set; } = string.Empty;
         public string Password { get; private set; } = string.Empty;

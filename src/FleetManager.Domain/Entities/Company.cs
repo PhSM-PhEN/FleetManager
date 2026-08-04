@@ -5,8 +5,8 @@ namespace FleetManager.Domain.Entities
         public string Name { get; private set; } = string.Empty;
         public string Cnpj { get; private set; } = string.Empty;
         public string PhoneNumber { get; private set; } = string.Empty;
-        public long AddressId { get; set; }
-        public Address Address { get; set; } = default!;
+        public long AddressId { get; private set; }
+        public Address Address { get; internal set; } = default!;
 
         protected Company() { }
 

@@ -26,9 +26,9 @@ namespace FleetManager.Domain.Entities
         public ContractStatus ContractStatus { get; private set; } = ContractStatus.Reserved;
         public DateTime? ActualReturnDateTime { get; private set; }
 
-        public Vehicle Vehicle { get; set; } = default!;
-        public Tenant Tenant { get; set; } = default!;
-        public RentalPlan RentalPlan { get; set; } = default!;
+        public Vehicle Vehicle { get; internal set; } = default!;
+        public Tenant Tenant { get; internal set; } = default!;
+        public RentalPlan RentalPlan { get; internal set; } = default!;
 
         protected Contract() { }
 

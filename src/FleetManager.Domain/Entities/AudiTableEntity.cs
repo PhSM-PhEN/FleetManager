@@ -2,7 +2,7 @@ namespace FleetManager.Domain.Entities
 {
     public class AuditableEntity
     {
-        public long Id { get; set; }
+        public long Id { get; internal set; }
         public long CreatedBy { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public long? UpdatedBy { get; private set; }
