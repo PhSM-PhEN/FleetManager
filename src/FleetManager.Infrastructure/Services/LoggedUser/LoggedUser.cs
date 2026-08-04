@@ -1,8 +1,8 @@
-﻿using FleetManager.Domain.Entities;
+using System.Security.Claims;
+using FleetManager.Domain.Entities;
 using FleetManager.Domain.Services.LoggedUser;
 using FleetManager.Exception.ExceptionBase;
 using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
 
 namespace FleetManager.Infrastructure.Services.LoggedUser
 {

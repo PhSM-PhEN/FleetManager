@@ -16,8 +16,8 @@ namespace FleetManager.Application.Extensions
                 ReturnDueDateTime = contract.ReturnDueDateTime,
                 TotalDays = contract.TotalDays,
                 TotalAmount = contract.TotalAmount,
-                
-                
+
+
             };
         }
         public static ResponseContractJson ToInfoResponse(this Contract contract)
@@ -25,7 +25,7 @@ namespace FleetManager.Application.Extensions
             return new ResponseContractJson
             {
                 Id = contract.Id,
-                RentalType =  contract.RentalType.RentalTypeToString(),
+                RentalType = contract.RentalType.RentalTypeToString(),
                 ContractStatus = contract.ContractStatus.ContractStatusToString(),
                 PickupDateTime = contract.PickupDateTime,
                 ReturnDueDateTime = contract.ReturnDueDateTime,
@@ -40,8 +40,8 @@ namespace FleetManager.Application.Extensions
                 TotalAmount = contract.TotalAmount,
                 Tenant = contract.Tenant.ToInfoResponse(),
                 Vehicle = contract.Vehicle.ToResponse(),
-                
-                
+
+
 
 
             };
