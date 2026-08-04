@@ -1,4 +1,4 @@
-﻿using FleetManager.Domain.Repositories;
+using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToAddress;
 using FleetManager.Domain.Repositories.ToCompany;
 using FleetManager.Domain.Repositories.ToContract;
@@ -36,7 +36,7 @@ namespace FleetManager.Infrastructure
             AddToken(services, configuration);
             AddRepositories(services);
 
-            if (configuration.IsTestEnviromment() == false)
+            if (configuration.IsTestEnvironment() == false)
             {
                 AddDataContext(services, configuration);
             }
@@ -86,8 +86,6 @@ namespace FleetManager.Infrastructure
             //contract
             services.AddScoped<IContractReadOnlyRepository, ContractRepository>();
             services.AddScoped<IContractWriteOnlyRepository, ContractRepository>();
-            // logged user
-            services.AddScoped<ILoggedUser, LoggedUser>();
 
 
             // unit of work

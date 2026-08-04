@@ -1,4 +1,4 @@
-﻿using FleetManager.Domain.Entities;
+using FleetManager.Domain.Entities;
 using FleetManager.Domain.Services.LoggedUser;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -20,12 +20,12 @@ namespace FleetManager.Infrastructure.DataAccess
 
         public override async Task<int> SaveChangesAsync(CancellationToken ct = default)
         {
-            var pendingHistory = new List<(AudiTableEntity entity, string action)>();
+            var pendingHistory = new List<(AuditableEntity entity, string action)>();
 
             if (httpContextAccessor.HttpContext is not null)
             {
 
-                var auditableEntries = ChangeTracker.Entries<AudiTableEntity>()
+                var auditableEntries = ChangeTracker.Entries<AuditableEntity>()
                         .Where(e => e.State == EntityState.Added
                         || e.State == EntityState.Modified
                         || e.State == EntityState.Deleted)
@@ -97,14 +97,14 @@ namespace FleetManager.Infrastructure.DataAccess
                     cpf.HasIndex(c => c.Number).IsUnique();
                 });
             modelBuilder.Entity<Company>()
-                .ToTable("Companys");
+                .ToTable("Companies");
 
             modelBuilder.Entity<Company>()
                 .HasIndex(c => c.Cnpj)
                 .IsUnique();
 
             modelBuilder.Entity<Vehicle>()
-        .OwnsOne(v => v.ManufacturerYear);
+        .OwnsOne(v => v.ManufacturingYear);
 
             modelBuilder.Entity<Vehicle>()
                 .OwnsOne(v => v.Renavam, renavam =>

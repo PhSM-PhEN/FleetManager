@@ -1,16 +1,16 @@
-﻿using FleetManager.Domain.Entities.ValueObjects;
+using FleetManager.Domain.Entities.ValueObjects;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Domain.Entities
 {
-    public class Vehicle : AudiTableEntity
+    public class Vehicle : AuditableEntity
     {
         public string Brand { get; private set; } = string.Empty;
         public string Model { get; private set; } = string.Empty;
         public string Color { get; private set; } = string.Empty;
         public long CurrentMileage {  get; private set; }
         public bool IsActive { get; private set; } = true;
-        public ManufacturingYear ManufacturerYear { get; private set; } = default!;
+        public ManufacturingYear ManufacturingYear { get; private set; } = default!;
         public Renavam Renavam { get; private set; } = default!;
         public ChassiNumber ChassiNumber { get; private set; } = default!;
         public LicensePlate LicensePlate { get; private set; } = default!;
@@ -27,7 +27,7 @@ namespace FleetManager.Domain.Entities
             Brand = brand;
             Model = model;
             Color = color;
-            ManufacturerYear = manufacturing;
+            ManufacturingYear = manufacturing;
             Renavam = renavam;
             ChassiNumber = chassiNumber;
             LicensePlate = licensePlate;
@@ -45,6 +45,6 @@ namespace FleetManager.Domain.Entities
 
 
         public void Activate() => IsActive = true;
-        public void Desactivate() => IsActive = false;
+        public void Deactivate() => IsActive = false;
     }
 }

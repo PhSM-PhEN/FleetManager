@@ -1,8 +1,8 @@
-﻿using FleetManager.Domain.Entities.ValueObjects;
+using FleetManager.Domain.Entities.ValueObjects;
 
 namespace FleetManager.Domain.Entities
 {
-    public class Tenant : AudiTableEntity
+    public class Tenant : AuditableEntity
     {
         public string Name { get; private set; } = string.Empty;
         public Cpf Cpf { get; private set; } = default!;

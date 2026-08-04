@@ -1,11 +1,11 @@
-﻿namespace FleetManager.Domain.Entities
+namespace FleetManager.Domain.Entities
 {
-    public class AudiTableEntity
+    public class AuditableEntity
     {
         public long Id { get; set; }
         public long CreatedBy { get; private set; }
         public DateTime CreatedAt { get; private set; }
-        public long? UpdateBy { get; private set; } 
+        public long? UpdatedBy { get; private set; }
         public DateTime? UpdatedAt { get; private set; }
 
         private string? _lastAction;
@@ -19,9 +19,10 @@
             CreatedBy = userId;
             CreatedAt = DateTime.UtcNow;
         }
+
         public void SetUpdatedBy(long userId)
         {
-            UpdateBy = userId;
+            UpdatedBy = userId;
             UpdatedAt = DateTime.UtcNow;
         }
     }

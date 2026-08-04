@@ -1,6 +1,6 @@
 namespace FleetManager.Domain.Entities
 {
-    public class Charge : AudiTableEntity
+    public class Charge : AuditableEntity
     {
         public long ContractId {get ; private set ; }
         public string Description {get ; private set ;} = string.Empty;

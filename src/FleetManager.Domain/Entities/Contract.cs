@@ -1,9 +1,9 @@
-﻿using FleetManager.Domain.Enum;
+using FleetManager.Domain.Enum;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Domain.Entities
 {
-    public class Contract : AudiTableEntity
+    public class Contract : AuditableEntity
     {
         public long VehicleId { get; private set; }
         public long TenantId { get; private set; }

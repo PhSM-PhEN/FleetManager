@@ -1,8 +1,8 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 
 namespace FleetManager.Domain.Entities
 {
-    public class RentalPlan : AudiTableEntity
+    public class RentalPlan : AuditableEntity
     {
         public string Name { get; private set; } = string.Empty;
         public decimal DailyPrice { get; private set; }
