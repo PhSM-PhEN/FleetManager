@@ -27,6 +27,7 @@ namespace FleetManager.Application.UseCase.ToContract.Register
             var tenant = await EnsureTenantExist(request.TenantId);
             var rentalPlan = await EnsureRentalPlanExist(request.RentalPlanId);
 
+            
             var hasActiveContract = await contractRepository.HasActiveContract(request.VehicleId);
             if (hasActiveContract)
                 throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_ALREADY_RENTED);
@@ -56,8 +57,13 @@ namespace FleetManager.Application.UseCase.ToContract.Register
 
         private async Task<Vehicle> EnsureVehicleExist(long id)
         {
-            return await vehicleRepository.GetById(id) ??
+            var vehicle = await vehicleRepository.GetById(id) ??
                 throw new NotFoundException(ResourceErrorMessages.VEHICLE_NOT_FOUND);
+
+            if (vehicle.IsBlockedForMaintenance)
+                throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_BLOCKED_FOR_MAINTENANCE);
+
+            return vehicle;
         }
 
         private async Task<Tenant> EnsureTenantExist(long id)

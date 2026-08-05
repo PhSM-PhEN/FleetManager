@@ -15,6 +15,7 @@ namespace FleetManager.Infrastructure.DataAccess
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<RentalPlan> RentalPlans { get; set; }
         public DbSet<Contract> Contracts { get; set; }
+        public DbSet<Maintenance> Maintenances { get; set; }
 
         public DbSet<HistoryLog> HistoryLogs { get; set; }
 
@@ -85,11 +86,7 @@ namespace FleetManager.Infrastructure.DataAccess
                 .HasIndex(u => u.Email)
                 .IsUnique();
 
-            // MySQL nao suporta indice unico parcial/filtrado. O truque padrao e criar uma
-            // coluna computada que so tem valor quando Role = Admin (NULL nos demais casos) e
-            // colocar um indice unico nela — MySQL permite varios NULLs num indice unico, entao
-            // isso garante "no maximo 1 Admin" no nivel do banco, fechando a race condition do
-            // PromoteUserUseCase (check-then-act entre ExistsByRole e o commit).
+
             modelBuilder.Entity<User>()
                 .Property<int?>("AdminSlot")
                 .HasComputedColumnSql("CASE WHEN `Role` = 'Admin' THEN 1 ELSE NULL END", stored: true);
@@ -166,6 +163,14 @@ namespace FleetManager.Infrastructure.DataAccess
                 .WithMany()
                 .HasForeignKey(c => c.RentalPlanId)
                 .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Maintenance>()
+                .HasOne(m => m.Vehicle)
+                .WithMany()
+                .HasForeignKey(m => m.VehicleId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+
+
 
 
 

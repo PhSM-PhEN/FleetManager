@@ -372,4 +372,19 @@
   <data name="TOTAL_AMOUNT_INVALID" xml:space="preserve">
     <value>Total amount invalid.</value>
   </data>
+  <data name="MAINTENANCE_IS_ALREADY_CLOSED" xml:space="preserve">
+    <value>Maintenance is already closed.</value>
+  </data>
+  <data name="VEHICLE_ALREADY_BLOCKED_FOR_MAINTENANCE" xml:space="preserve">
+    <value>Vehicle already bloked for maintenance.</value>
+  </data>
+  <data name="VEHICLE_NOT_BLOCKED_FOR_MAINTENANCE" xml:space="preserve">
+    <value>Vehicle not blocked for maintenance.</value>
+  </data>
+  <data name="VEHICLE_BLOCKED_FOR_MAINTENANCE" xml:space="preserve">
+    <value>Vehicle blocked for maintenance.</value>
+  </data>
+  <data name="INCIDENT_REPORT_ALREADY_RESOLVED" xml:space="preserve">
+    <value>Incident report already resolved.</value>
+  </data>
 </root>

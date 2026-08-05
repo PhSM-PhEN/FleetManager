@@ -196,6 +196,33 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contract can only be edited while reserved..
+        /// </summary>
+        public static string CONTRACT_NOT_EDITABLE {
+            get {
+                return ResourceManager.GetString("CONTRACT_NOT_EDITABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contract not found..
+        /// </summary>
+        public static string CONTRACT_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("CONTRACT_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contract is not reserved..
+        /// </summary>
+        public static string CONTRACT_NOT_RESERVED {
+            get {
+                return ResourceManager.GetString("CONTRACT_NOT_RESERVED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CPF already registered..
         /// </summary>
         public static string CPF_ALREADY_REGISTERED {
@@ -232,20 +259,20 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Driver license category is invalid..
+        /// </summary>
+        public static string DRIVER_LICENSE_CATEGORY_INVALID {
+            get {
+                return ResourceManager.GetString("DRIVER_LICENSE_CATEGORY_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Drive license category required..
         /// </summary>
         public static string DRIVER_LICENSE_CATEGORY_REQUIRED {
             get {
                 return ResourceManager.GetString("DRIVER_LICENSE_CATEGORY_REQUIRED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Driver license number required..
-        /// </summary>
-        public static string DRIVER_LICENSE_NUMBER_REQUIRED {
-            get {
-                return ResourceManager.GetString("DRIVER_LICENSE_NUMBER_REQUIRED", resourceCulture);
             }
         }
         
@@ -259,11 +286,11 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Driver license category is invalid..
+        ///   Looks up a localized string similar to Driver license number required..
         /// </summary>
-        public static string DRIVER_LICENSE_CATEGORY_INVALID {
+        public static string DRIVER_LICENSE_NUMBER_REQUIRED {
             get {
-                return ResourceManager.GetString("DRIVER_LICENSE_CATEGORY_INVALID", resourceCulture);
+                return ResourceManager.GetString("DRIVER_LICENSE_NUMBER_REQUIRED", resourceCulture);
             }
         }
         
@@ -340,6 +367,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Incident report already resolved..
+        /// </summary>
+        public static string INCIDENT_REPORT_ALREADY_RESOLVED {
+            get {
+                return ResourceManager.GetString("INCIDENT_REPORT_ALREADY_RESOLVED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid email format..
         /// </summary>
         public static string INVALID_EMAIL_FORMAT {
@@ -381,6 +417,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string LICENSE_PLATE_REQUIRED {
             get {
                 return ResourceManager.GetString("LICENSE_PLATE_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maintenance is already closed..
+        /// </summary>
+        public static string MAINTENANCE_IS_ALREADY_CLOSED {
+            get {
+                return ResourceManager.GetString("MAINTENANCE_IS_ALREADY_CLOSED", resourceCulture);
             }
         }
         
@@ -673,6 +718,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tenant is not available to rent a vehicle..
+        /// </summary>
+        public static string TENANT_NOT_AVAILABLE {
+            get {
+                return ResourceManager.GetString("TENANT_NOT_AVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tenant not found..
         /// </summary>
         public static string TENANT_NOT_FOUND {
@@ -736,6 +790,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vehicle already bloked for maintenance..
+        /// </summary>
+        public static string VEHICLE_ALREADY_BLOCKED_FOR_MAINTENANCE {
+            get {
+                return ResourceManager.GetString("VEHICLE_ALREADY_BLOCKED_FOR_MAINTENANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vehicle already rented..
         /// </summary>
         public static string VEHICLE_ALREADY_RENTED {
@@ -745,20 +808,11 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Vehicle is not available for rent..
+        ///   Looks up a localized string similar to Vehicle blocked for maintenance..
         /// </summary>
-        public static string VEHICLE_NOT_AVAILABLE {
+        public static string VEHICLE_BLOCKED_FOR_MAINTENANCE {
             get {
-                return ResourceManager.GetString("VEHICLE_NOT_AVAILABLE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tenant is not available to rent a vehicle..
-        /// </summary>
-        public static string TENANT_NOT_AVAILABLE {
-            get {
-                return ResourceManager.GetString("TENANT_NOT_AVAILABLE", resourceCulture);
+                return ResourceManager.GetString("VEHICLE_BLOCKED_FOR_MAINTENANCE", resourceCulture);
             }
         }
         
@@ -772,38 +826,29 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vehicle is not available for rent..
+        /// </summary>
+        public static string VEHICLE_NOT_AVAILABLE {
+            get {
+                return ResourceManager.GetString("VEHICLE_NOT_AVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vehicle not blocked for maintenance..
+        /// </summary>
+        public static string VEHICLE_NOT_BLOCKED_FOR_MAINTENANCE {
+            get {
+                return ResourceManager.GetString("VEHICLE_NOT_BLOCKED_FOR_MAINTENANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vehicle not found..
         /// </summary>
         public static string VEHICLE_NOT_FOUND {
             get {
                 return ResourceManager.GetString("VEHICLE_NOT_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Contract not found..
-        /// </summary>
-        public static string CONTRACT_NOT_FOUND {
-            get {
-                return ResourceManager.GetString("CONTRACT_NOT_FOUND", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Contract is not reserved..
-        /// </summary>
-        public static string CONTRACT_NOT_RESERVED {
-            get {
-                return ResourceManager.GetString("CONTRACT_NOT_RESERVED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Contract can only be edited while reserved..
-        /// </summary>
-        public static string CONTRACT_NOT_EDITABLE {
-            get {
-                return ResourceManager.GetString("CONTRACT_NOT_EDITABLE", resourceCulture);
             }
         }
         

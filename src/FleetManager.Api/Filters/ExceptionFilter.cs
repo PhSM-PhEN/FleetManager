@@ -21,25 +21,30 @@ namespace FleetManager.Api.Filters
             {
                 HandleException(context, fleetEx.StatusCode, fleetEx.GetErrors());
             }
-            
             else
             {
                 ThrowUnknownError(context);
             }
         }
+
         private static void HandleException(ExceptionContext context, int statusCode, List<string> errors)
         {
-            context.HttpContext.Response.StatusCode = statusCode;
-            context.Result = new ObjectResult(new ResponseErrorJson(errors));
+            context.Result = new ObjectResult(new ResponseErrorJson(errors))
+            {
+                StatusCode = statusCode
+            };
         }
+
         private void ThrowUnknownError(ExceptionContext context)
         {
             _logger.LogError(context.Exception, "Unhandled error while processing {Method} {Path}",
                 context.HttpContext.Request.Method, context.HttpContext.Request.Path);
 
             var errorResponse = new ResponseErrorJson(ResourceErrorMessages.UNKNOWN_ERROR);
-            context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
-            context.Result = new ObjectResult(errorResponse);
+            context.Result = new ObjectResult(errorResponse)
+            {
+                StatusCode = StatusCodes.Status500InternalServerError
+            };
         }
     }
 }
