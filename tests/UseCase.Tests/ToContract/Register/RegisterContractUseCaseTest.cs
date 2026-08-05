@@ -116,6 +116,22 @@ namespace UseCase.Tests.ToContract.Register
             var result = await act.ShouldThrowAsync<ErrorOnValidationException>();
             result.GetErrors().ShouldContain(ResourceErrorMessages.VEHICLE_ID_REQUIRED);
         }
+        [Fact]
+        public async Task Error_Vehicle_Blocked_For_Maintenance()
+        {
+            var vehicle = VehicleBuilder.Build(1);
+            vehicle.BlockForIncident(1); // chama o metodo publico direto, sem precisar mexer no builder
+
+            var tenant = TenantBuilder.Build(1);
+            var rentalPlan = RentalPlanBuilder.Build(1);
+            var request = RequestContractJsonBuilder.Build(vehicle.Id, tenant.Id, rentalPlan.Id);
+
+            var useCase = CreateUseCase(vehicle, tenant, rentalPlan, hasActiveContract: false);
+            var act = async () => await useCase.Execute(request);
+
+            var result = await act.ShouldThrowAsync<BusinessRuleException>();
+            result.Message.ShouldBe(ResourceErrorMessages.VEHICLE_BLOCKED_FOR_MAINTENANCE);
+        }
 
         private static RegisterContractUseCase CreateUseCase(Vehicle? vehicle, Tenant? tenant, RentalPlan? rentalPlan, bool hasActiveContract)
         {
