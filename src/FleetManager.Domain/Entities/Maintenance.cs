@@ -24,7 +24,7 @@ namespace FleetManager.Domain.Entities
             ProblemDescription = problemDescription;
             ScheduledAt = DateTime.UtcNow.Date;
             Status = MaintenanceStatus.Scheduled;
-            RegisterHistoryEvent("Scheuled");
+            RegisterHistoryEvent("Scheduled");
         }
 
         public void Close()

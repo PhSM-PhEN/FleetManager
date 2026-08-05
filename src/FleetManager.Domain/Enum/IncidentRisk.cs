@@ -3,6 +3,6 @@
     public enum IncidentRisk
     {
         Low = 1,
-        High = 3
+        High = 2
     }
 }

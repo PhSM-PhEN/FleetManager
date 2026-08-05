@@ -19,8 +19,8 @@ namespace FleetManager.Domain.Entities
         public Company Company { get; internal set; } = default!;
         public RentalPlan RentalPlan { get; internal set; } = default!;
 
-        public long? BlockingIncidentRiskId { get; private set; }
-        public bool IsBlockedForMaintenance => BlockingIncidentRiskId is not null;
+        public long? BlockingIncidentReportId { get; private set; }
+        public bool IsBlockedForMaintenance => BlockingIncidentReportId is not null;
 
         protected Vehicle() { }
 
@@ -47,20 +47,19 @@ namespace FleetManager.Domain.Entities
             RegisterHistoryEvent("MileageUpdated");
         }
 
-        public void BlockForMaintenance(long maintenanceId)
+        public void BlockForIncident(long incidentReportId)
         {
             if (IsBlockedForMaintenance)
                 throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_ALREADY_BLOCKED_FOR_MAINTENANCE);
 
-
-            BlockingIncidentRiskId = maintenanceId;
+            BlockingIncidentReportId = incidentReportId;
             RegisterHistoryEvent("BlockedForMaintenance");
         }
-        public void UnblockFromMaintenance()
+        public void UnblockFromIncident()
         {
             if (!IsBlockedForMaintenance)
                 throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_NOT_BLOCKED_FOR_MAINTENANCE);
-            BlockingIncidentRiskId = null;
+            BlockingIncidentReportId = null;
             RegisterHistoryEvent("UnblockedFromMaintenance");
         }
         public void Activate()
