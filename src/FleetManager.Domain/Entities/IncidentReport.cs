@@ -6,22 +6,27 @@ namespace FleetManager.Domain.Entities
     public class IncidentReport : AuditableEntity
     {
         public long ContractId {get ; private set ;}
+        public long VehicleId {get ; private set ;}
         public string Description {get ; private set ;} = string.Empty;
         public IncidentReportStatus Status {get ; private set ;}
         public IncidentRisk IncidentRisk { get; private set; }         
         public DateTime ReportedAt {get ; private set ;} 
+        public Guid IncidentRportIdentifier { get ; private set ;}
 
         public Contract Contract {get ; private set ;} = default!;
+        public Vehicle Vehicle {get ; private set ; } = default!;
 
         protected IncidentReport() { }
 
-        public IncidentReport(long contractId, string description, IncidentRisk incidentRisk)
+        public IncidentReport(long contractId , long vehicleId, string description, IncidentRisk incidentRisk)
         {
             ContractId = contractId;
+            VehicleId = vehicleId;
             Description = description;
             IncidentRisk = incidentRisk;
             Status = IncidentReportStatus.Reported;
             ReportedAt = DateTime.UtcNow;
+            IncidentRportIdentifier = Guid.NewGuid();
             RegisterHistoryEvent("Reported");
         }
 

@@ -23,6 +23,7 @@
   <ItemGroup>
     <Folder Include="DataAccess\ToAddress\" />
     <Folder Include="DataAccess\ToContract\" />
+    <Folder Include="DataAccess\ToIncidentReport\" />
   </ItemGroup>
 
 </Project>

@@ -28,6 +28,8 @@
     <Folder Include="UseCase\ToContract\Delete\" />
     <Folder Include="UseCase\ToContract\Update\" />
     <Folder Include="UseCase\ToContract\Register\" />
+    <Folder Include="UseCase\ToIncidentReport\" />
+    <Folder Include="UseCase\ToIncidentReport\Register\" />
     <Folder Include="UseCase\ToTenant\GetAll\" />
     <Folder Include="UseCase\ToTenant\GetById\" />
     <Folder Include="UseCase\ToTenant\Register\" />
