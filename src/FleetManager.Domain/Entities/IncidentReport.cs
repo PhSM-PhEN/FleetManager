@@ -11,7 +11,7 @@ namespace FleetManager.Domain.Entities
         public IncidentReportStatus Status {get ; private set ;}
         public IncidentRisk IncidentRisk { get; private set; }         
         public DateTime ReportedAt {get ; private set ;} 
-        public Guid IncidentRportIdentifier { get ; private set ;}
+        public Guid IncidentReportIdentifier { get ; private set ;}
 
         public Contract Contract {get ; private set ;} = default!;
         public Vehicle Vehicle {get ; private set ; } = default!;
@@ -26,7 +26,7 @@ namespace FleetManager.Domain.Entities
             IncidentRisk = incidentRisk;
             Status = IncidentReportStatus.Reported;
             ReportedAt = DateTime.UtcNow;
-            IncidentRportIdentifier = Guid.NewGuid();
+            IncidentReportIdentifier = Guid.NewGuid();
             RegisterHistoryEvent("Reported");
         }
 

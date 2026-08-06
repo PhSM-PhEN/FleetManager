@@ -108,15 +108,13 @@ namespace FleetManager.Infrastructure.DataAccess
                 {
                     cpf.HasIndex(c => c.Number).IsUnique();
                 });
-            modelBuilder.Entity<Company>()
-                .ToTable("Companies");
 
             modelBuilder.Entity<Company>()
                 .HasIndex(c => c.Cnpj)
                 .IsUnique();
 
             modelBuilder.Entity<Vehicle>()
-        .OwnsOne(v => v.ManufacturingYear);
+                .OwnsOne(v => v.ManufacturingYear);
 
             modelBuilder.Entity<Vehicle>()
                 .OwnsOne(v => v.Renavam, renavam =>
@@ -139,8 +137,9 @@ namespace FleetManager.Infrastructure.DataAccess
             modelBuilder.Entity<Vehicle>()
                 .HasOne(v => v.Company)
                 .WithMany()
-                .HasForeignKey(v => v.CompanyId);
-
+                .HasForeignKey(v => v.CompanyId)
+                .OnDelete(DeleteBehavior.Restrict);
+            
             modelBuilder.Entity<Vehicle>()
                 .HasOne(v => v.RentalPlan)
                 .WithMany(p => p.Vehicles)
@@ -180,6 +179,19 @@ namespace FleetManager.Infrastructure.DataAccess
                 .HasOne(i => i.Contract)
                 .WithMany()
                 .HasForeignKey(i => i.ContractId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<IncidentReport>()
+                .HasOne(i => i.Vehicle)
+                .WithMany()
+                .HasForeignKey(i => i.VehicleId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Vehicle>()
+                .HasOne(v => v.BlockingIncidentReport)
+                .WithMany()
+                .HasForeignKey("BlockingIncidentReportId")
+                .IsRequired(false)
                 .OnDelete(DeleteBehavior.Restrict);
 
 
