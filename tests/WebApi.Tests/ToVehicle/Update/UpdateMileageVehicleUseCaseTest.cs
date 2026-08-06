@@ -46,7 +46,7 @@ namespace WebApi.Tests.ToVehicle.Update
             var request = new { MileageVehicle = 1_000 };
 
             var result = await DoPut($"{METHOD}/{vehicleId}", request, _teamMemberToken);
-            result.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+            result.StatusCode.ShouldBe(HttpStatusCode.Conflict);
 
             var body = await result.Content.ReadAsStreamAsync();
             var responseBody = await JsonDocument.ParseAsync(body);

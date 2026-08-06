@@ -45,7 +45,7 @@ namespace UseCase.Tests.ToVehicle.Update
             var useCase = CreateUseCase(vehicle);
             var act = async () => await useCase.Execute(vehicle.Id, request);
 
-            var result = await act.ShouldThrowAsync<ErrorOnValidationException>();
+            var result = await act.ShouldThrowAsync<BusinessRuleException>();
             result.GetErrors().ShouldContain(ResourceErrorMessages.MILEAGE_CANNOT_DECREASE);
         }
 
