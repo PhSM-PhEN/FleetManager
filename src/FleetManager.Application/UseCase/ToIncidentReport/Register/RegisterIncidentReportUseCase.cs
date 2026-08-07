@@ -16,6 +16,7 @@ namespace FleetManager.Application.UseCase.ToIncidentReport.Register
     {
         public async Task<ResponseIncidentReportJson> Execute(RequestIncidentReportJson request)
         {
+            Validate(request);
             var vehicle = await EnsureVehicleExist(request.VehicleId);
             var contract = await EnsureContractExist(request.ContractId);
             var incidentRisk = Enum.Parse<IncidentRisk>(request.IncidentRisk);
@@ -35,6 +36,17 @@ namespace FleetManager.Application.UseCase.ToIncidentReport.Register
             await unitOfWork.Commit();
             return incidentReport.ToResponse();
 
+        }
+        private void Validate (RequestIncidentReportJson request)
+        {
+            var validator = new IncidentReportValidator();
+            var result = validator.Validate(request);
+
+            if(result.IsValid == false)
+            {
+                var errors = result.Errors.Select(errors => errors.ErrorMessage).ToList();
+                throw new ErrorOnValidationException(errors);
+            }
         }
         private async Task<Vehicle> EnsureVehicleExist(long id)
         {

@@ -11,6 +11,7 @@ namespace FleetManager.Application.Extensions
             return new ResponseIncidentReportJson
             {
                 Id = report.Id,
+                VehicleId = report.VehicleId,
                 ContractId = report.ContractId,
                 Status = report.Status.ToString(),
                 IncidentRisk = report.IncidentRisk.ToString(),
@@ -18,7 +19,7 @@ namespace FleetManager.Application.Extensions
             
             };
         }
-        public static List<ResponseIncidentReportJson> ToResposne(this List<IncidentReport> reports)
+        public static List<ResponseIncidentReportJson> ToResponse(this List<IncidentReport> reports)
         {
             return [.. reports.Select(ir => ir.ToResponse())];
         }
