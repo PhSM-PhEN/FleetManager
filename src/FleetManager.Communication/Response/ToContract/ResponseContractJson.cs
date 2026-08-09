@@ -5,7 +5,7 @@ namespace FleetManager.Communication.Response.ToContract
 {
     public class ResponseContractJson
     {
-        public long? Id { get; set; }                   // nulo na prévia, preenchido no registro
+        public long Id { get; set; }                  
         public string RentalType { get; set; } = string.Empty;
         public string ContractStatus { get; set; } = string.Empty;
         public DateTime PickupDateTime { get; set; }

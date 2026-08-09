@@ -5,6 +5,6 @@ namespace FleetManager.Application.UseCase.ToIncidentReport.Register
 {
     public interface IRegisterIncidentReportUseCase
     {
-        Task<ResponseIncidentReportJson> Execute(RequestIncidentReportJson request);
+        Task<ResponseShortIncidentReportJson> Execute(RequestIncidentReportJson request);
     }
 }

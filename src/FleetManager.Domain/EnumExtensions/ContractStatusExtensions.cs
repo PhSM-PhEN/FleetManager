@@ -1,4 +1,5 @@
 using FleetManager.Domain.Enum;
+using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Domain.EnumExtensions
 {
@@ -8,12 +9,12 @@ namespace FleetManager.Domain.EnumExtensions
         {
             return status switch
             {
-                ContractStatus.Reserved => "Reserved",
-                ContractStatus.Active => "Active",
-                ContractStatus.Cancelled => "Cancelled",
-                ContractStatus.Finished => "Finished",
-                ContractStatus.Overdue => "Overdue",
-                ContractStatus.Renewed => "Renewed",
+                ContractStatus.Reserved => ResourceExtensionsMessages.RESERVED,
+                ContractStatus.Active => ResourceExtensionsMessages.ACTIVE,
+                ContractStatus.Cancelled => ResourceExtensionsMessages.CANCELLED,
+                ContractStatus.Finished => ResourceExtensionsMessages.FINISHED,
+                ContractStatus.Overdue => ResourceExtensionsMessages.OVERDUE,
+                ContractStatus.Renewed => ResourceExtensionsMessages.RENEWED,
                 _ => string.Empty
             };
         }

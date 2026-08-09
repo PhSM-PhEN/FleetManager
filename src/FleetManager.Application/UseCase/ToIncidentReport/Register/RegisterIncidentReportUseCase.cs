@@ -14,7 +14,7 @@ namespace FleetManager.Application.UseCase.ToIncidentReport.Register
     public class RegisterIncidentReportUseCase(IIncidentReportWriteOnlyRepository repository, IUnitOfWork unitOfWork,
     IVehicleWriteOnlyRepository vehicleWriteOnly, IContractReadOnlyRepository contractReadOnly) : IRegisterIncidentReportUseCase
     {
-        public async Task<ResponseIncidentReportJson> Execute(RequestIncidentReportJson request)
+        public async Task<ResponseShortIncidentReportJson> Execute(RequestIncidentReportJson request)
         {
             Validate(request);
             var vehicle = await EnsureVehicleExist(request.VehicleId);
@@ -37,7 +37,7 @@ namespace FleetManager.Application.UseCase.ToIncidentReport.Register
             return incidentReport.ToResponse();
 
         }
-        private void Validate (RequestIncidentReportJson request)
+        private static void Validate (RequestIncidentReportJson request)
         {
             var validator = new IncidentReportValidator();
             var result = validator.Validate(request);

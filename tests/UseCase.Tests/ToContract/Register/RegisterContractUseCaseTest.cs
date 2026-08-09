@@ -120,7 +120,8 @@ namespace UseCase.Tests.ToContract.Register
         public async Task Error_Vehicle_Blocked_For_Maintenance()
         {
             var vehicle = VehicleBuilder.Build(1);
-            vehicle.BlockForIncident(1); // chama o metodo publico direto, sem precisar mexer no builder
+            var incidentReport = IncidentReportBuilder.Build(vehicleId: vehicle.Id);
+            vehicle.BlockForIncident(incidentReport); 
 
             var tenant = TenantBuilder.Build(1);
             var rentalPlan = RentalPlanBuilder.Build(1);

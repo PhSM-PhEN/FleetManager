@@ -1,4 +1,5 @@
 using FleetManager.Domain.Enum;
+using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Domain.EnumExtensions
 {
@@ -8,8 +9,8 @@ namespace FleetManager.Domain.EnumExtensions
         {
             return rentalType switch
             {
-                RentalType.Daily => "Daily",
-                RentalType.Monthly => "Monthly",
+                RentalType.Daily => ResourceExtensionsMessages.DAILY,
+                RentalType.Monthly => ResourceExtensionsMessages.MONTHLY,
                 _=> string.Empty
             };
 

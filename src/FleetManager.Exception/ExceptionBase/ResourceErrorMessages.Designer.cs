@@ -187,6 +187,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contract is required..
+        /// </summary>
+        public static string CONTRACT_IS_REQUIRED {
+            get {
+                return ResourceManager.GetString("CONTRACT_IS_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contract not active..
         /// </summary>
         public static string CONTRACT_NOT_ACTIVE {
@@ -255,6 +264,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string DAILY_PRICE_INVALID {
             get {
                 return ResourceManager.GetString("DAILY_PRICE_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description is required..
+        /// </summary>
+        public static string DESCRIPTION_IS_REQUIRED {
+            get {
+                return ResourceManager.GetString("DESCRIPTION_IS_REQUIRED", resourceCulture);
             }
         }
         
@@ -372,6 +390,24 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string INCIDENT_REPORT_ALREADY_RESOLVED {
             get {
                 return ResourceManager.GetString("INCIDENT_REPORT_ALREADY_RESOLVED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incident report not found..
+        /// </summary>
+        public static string INCIDENT_REPORT_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("INCIDENT_REPORT_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to incident risk invalid..
+        /// </summary>
+        public static string INCIDENT_RISK_INVALID {
+            get {
+                return ResourceManager.GetString("INCIDENT_RISK_INVALID", resourceCulture);
             }
         }
         
@@ -822,6 +858,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string VEHICLE_ID_REQUIRED {
             get {
                 return ResourceManager.GetString("VEHICLE_ID_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vehicle is required..
+        /// </summary>
+        public static string VEHICLE_IS_REQUIRED {
+            get {
+                return ResourceManager.GetString("VEHICLE_IS_REQUIRED", resourceCulture);
             }
         }
         

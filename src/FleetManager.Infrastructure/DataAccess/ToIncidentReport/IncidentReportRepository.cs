@@ -29,7 +29,10 @@ namespace FleetManager.Infrastructure.DataAccess.ToIncidentReport
         }
         async Task<IncidentReport?> IIncidentReportReadOnlyRepository.GetById(long id)
         {
-            return await dbContext.IncidentReports.AsNoTracking().FirstOrDefaultAsync(ir => ir.Id == id);
+            return await dbContext.IncidentReports.AsNoTracking()
+                            .Include(c => c.Contract)
+                            .Include(v => v.Vehicle)
+                            .FirstOrDefaultAsync(ir => ir.Id == id);
         }
         public async Task<IncidentReport?> GetById(long id)
         {

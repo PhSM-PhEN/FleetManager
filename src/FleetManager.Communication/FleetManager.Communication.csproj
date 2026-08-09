@@ -9,10 +9,7 @@
   <ItemGroup>
     <Folder Include="Request\ToAddress\" />
     <Folder Include="Request\ToIncidentReport\" />
-    <Folder Include="Request\ToMaintenace\" />
     <Folder Include="Response\ToAddress\" />
-    <Folder Include="Response\ToIncidentReport\" />
-    <Folder Include="Response\ToMaintenance\" />
     <Folder Include="Response\ToVehicle\" />
   </ItemGroup>
 

@@ -6,9 +6,9 @@ namespace FleetManager.Application.Extensions
     public static class IncidentReportExtensions
     {
 
-        public static ResponseIncidentReportJson ToResponse(this IncidentReport report)
+        public static ResponseShortIncidentReportJson ToResponse(this IncidentReport report)
         {
-            return new ResponseIncidentReportJson
+            return new ResponseShortIncidentReportJson
             {
                 Id = report.Id,
                 VehicleId = report.VehicleId,
@@ -19,7 +19,21 @@ namespace FleetManager.Application.Extensions
             
             };
         }
-        public static List<ResponseIncidentReportJson> ToResponse(this List<IncidentReport> reports)
+        public static ResponseIncidentReportJson ToInfoResponse(this IncidentReport report)
+        {
+            return new ResponseIncidentReportJson
+            {
+                Id = report.Id,
+                Description = report.Description,
+                Status = report.Status.ToString(),
+                IncidentRisk = report.IncidentRisk.ToString(),
+                ReportedAt = report.ReportedAt,
+                Contract = report.Contract.ToInfoResponse(),
+                Vehicle = report.Vehicle.ToInfoResponse()
+
+            };
+        }
+        public static List<ResponseShortIncidentReportJson> ToResponse(this List<IncidentReport> reports)
         {
             return [.. reports.Select(ir => ir.ToResponse())];
         }

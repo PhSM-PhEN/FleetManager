@@ -7,7 +7,7 @@ namespace FleetManager.Application.UseCase.ToIncidentReport.GetAll
 {
     public class GetAllIncidentReportUseCase(IIncidentReportReadOnlyRepository repository) : IGetAllIncidentReportUseCase
     {
-        public async Task<ResponsePaginatedJson<ResponseIncidentReportJson>> Execute(int pageNumber, int pageSize)
+        public async Task<ResponsePaginatedJson<ResponseShortIncidentReportJson>> Execute(int pageNumber, int pageSize)
         {
             if(pageNumber >= 0)
                 pageNumber = 1;
@@ -16,7 +16,7 @@ namespace FleetManager.Application.UseCase.ToIncidentReport.GetAll
 
              var (incidentReport, TotalCount ) = await repository.GetAll(pageNumber, pageSize);
 
-            return new ResponsePaginatedJson<ResponseIncidentReportJson>
+            return new ResponsePaginatedJson<ResponseShortIncidentReportJson>
             {
                 Data = incidentReport.ToResponse(),
                 PageNumber = pageNumber,

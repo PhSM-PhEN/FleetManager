@@ -387,4 +387,19 @@
   <data name="INCIDENT_REPORT_ALREADY_RESOLVED" xml:space="preserve">
     <value>Incident report already resolved.</value>
   </data>
+  <data name="CONTRACT_IS_REQUIRED" xml:space="preserve">
+    <value>Contract is required.</value>
+  </data>
+  <data name="VEHICLE_IS_REQUIRED" xml:space="preserve">
+    <value>Vehicle is required.</value>
+  </data>
+  <data name="DESCRIPTION_IS_REQUIRED" xml:space="preserve">
+    <value>Description is required.</value>
+  </data>
+  <data name="INCIDENT_RISK_INVALID" xml:space="preserve">
+    <value>incident risk invalid.</value>
+  </data>
+  <data name="INCIDENT_REPORT_NOT_FOUND" xml:space="preserve">
+    <value>Incident report not found.</value>
+  </data>
 </root>

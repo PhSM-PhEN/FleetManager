@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="EnumExtensions\" />
     <Folder Include="Repositories\ToAddress\" />
     <Folder Include="Repositories\ToContract\" />
     <Folder Include="Repositories\ToIncidentReport\" />
