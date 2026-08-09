@@ -6,6 +6,7 @@ using FleetManager.Application.UseCase.ToContract.GetAll;
 using FleetManager.Application.UseCase.ToContract.GetById;
 using FleetManager.Application.UseCase.ToContract.Preview;
 using FleetManager.Application.UseCase.ToContract.Register;
+using FleetManager.Application.UseCase.ToContract.Renew;
 using FleetManager.Application.UseCase.ToContract.Update;
 using FleetManager.Communication.Request.ToContract;
 using FleetManager.Communication.Response;
@@ -107,6 +108,16 @@ namespace FleetManager.Api.Controllers
         {
             await useCase.Execute(id, request);
             return NoContent();
+        }
+        [HttpPost("{id}/Renew")]
+        [ProducesResponseType(typeof(ResponseShortContractJson), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status409Conflict)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Renew([FromServices] IRenewContractUseCase useCase, [FromRoute] long id, [FromBody] RequestRenewContractJson request)
+        {
+            var response = await useCase.Execute(id, request);
+            return Created(string.Empty, response);
         }
     }
 }

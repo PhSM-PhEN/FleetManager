@@ -14,9 +14,9 @@ namespace WebApi.Tests
     public class CustomWebApplicationFactory : WebApplicationFactory<Program>
     {
         public UserIdentityManager USER_ADM { get; private set; } = default!;
-        public UserIdentityManager USER_TEAM_MEMBER { get; private set;  } = default!;
-        public AddressIdentityManager ADDRESS_TEAM_MEMBER { get ;  private set ;} = default!;
-        public TenantIdentityManager TENANT_TEAM_MEMBER { get ; private set ;} = default!;
+        public UserIdentityManager USER_TEAM_MEMBER { get; private set; } = default!;
+        public AddressIdentityManager ADDRESS_TEAM_MEMBER { get; private set; } = default!;
+        public TenantIdentityManager TENANT_TEAM_MEMBER { get; private set; } = default!;
         public CompanyIdentityManager COMPANY_TEAM_MEMBER { get; private set; } = default!;
         public VehicleIdentityManager VEHICLE_TEAM_MEMBER { get; private set; } = default!;
         public RentalPlanIdentityManager RENTAL_PLAN_TEAM_MEMBER { get; private set; } = default!;
@@ -53,13 +53,13 @@ namespace WebApi.Tests
             AddTenant(dbContext, address.Id);
             var company = AddCompany(dbContext, address.Id);
             dbContext.SaveChanges();
-            
+
             var rentalPlan = AddRentalPlan(dbContext);
 
             var vehicle = AddVehicle(dbContext, company.Id, rentalPlan.Id);
             dbContext.SaveChanges();
 
-            
+
             var contractVehicle = VehicleBuilder.Build(2, company.Id, rentalPlan.Id);
             dbContext.Add(contractVehicle);
             dbContext.SaveChanges();
@@ -76,7 +76,7 @@ namespace WebApi.Tests
             CONTRACT_TEAM_MEMBER = new ContractIdentityManager(contract);
             return contract;
         }
-        private RentalPlan  AddRentalPlan(FleetManagerDbContext dbContext)
+        private RentalPlan AddRentalPlan(FleetManagerDbContext dbContext)
         {
             var rentalPlan = RentalPlanBuilder.Build();
             dbContext.Add(rentalPlan);
@@ -85,7 +85,7 @@ namespace WebApi.Tests
         }
         private Vehicle AddVehicle(FleetManagerDbContext dbContext, long companyId, long rentalPlanId)
         {
-            var vehicle = VehicleBuilder.Build(1 , companyId, rentalPlanId);
+            var vehicle = VehicleBuilder.Build(1, companyId, rentalPlanId);
             dbContext.Add(vehicle);
             VEHICLE_TEAM_MEMBER = new VehicleIdentityManager(vehicle);
             return vehicle;

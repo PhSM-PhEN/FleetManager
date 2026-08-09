@@ -97,7 +97,7 @@ namespace FleetManager.Domain.Entities
             RegisterHistoryEvent("MarkedAsOverdue");
         }
 
-        public static Contract Renew(Contract previousContract, RentalPlan? newRentalPlan, long? mileageContractedOverride)
+        public static Contract Renew(Contract previousContract, RentalPlan currentRentalPlan, long? mileageContractedOverride)
         {
             if (previousContract.ContractStatus != ContractStatus.Active)
                 throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_NOT_ACTIVE);
@@ -110,16 +110,18 @@ namespace FleetManager.Domain.Entities
             var returnDueDateTime = pickupDateTime.AddDays(previousContract.TotalDays);
             var startMileage = previousContract.EndMileage;
 
-            var plan = newRentalPlan ?? previousContract.RentalPlan;
+            // Só usa o preço ATUAL do plano se o plano realmente mudou; se é o mesmo plano de
+            // antes, mantém o preço congelado (snapshot) da assinatura original do contrato.
+            var planChanged = currentRentalPlan.Id != previousContract.RentalPlanId;
 
             var totalAmount = previousContract.RentalType == RentalType.Daily
-                ? (newRentalPlan?.DailyPrice ?? previousContract.SnapshotPriceDailyRate) * previousContract.TotalDays
-                : (newRentalPlan?.MonthlyPrice ?? previousContract.SnapshotPriceMonthlyRate);
+                ? (planChanged ? currentRentalPlan.DailyPrice : previousContract.SnapshotPriceDailyRate) * previousContract.TotalDays
+                : (planChanged ? currentRentalPlan.MonthlyPrice : previousContract.SnapshotPriceMonthlyRate);
 
-            var renewed = new Contract(previousContract.VehicleId, previousContract.TenantId, plan, previousContract.RentalType,
+            var renewed = new Contract(previousContract.VehicleId, previousContract.TenantId, currentRentalPlan, previousContract.RentalType,
                 startMileage, mileageContracted, totalAmount, pickupDateTime, returnDueDateTime);
 
-            renewed.Confirm(); // uma renovação já nasce confirmada — não faz sentido reservar de novo o que já estava rodando
+            renewed.Confirm();
             previousContract.MarkAsRenewed();
 
             return renewed;
@@ -132,7 +134,7 @@ namespace FleetManager.Domain.Entities
         }
 
         private void ApplyTerms(RentalPlan rentalPlan, RentalType rentalType, long mileageContracted, decimal totalAmount,
-                        DateTime pickupDateTime, DateTime? returnDueDateTime)
+                DateTime pickupDateTime, DateTime? returnDueDateTime)
         {
             var (totalDays, dueDateTime) = CalculatePeriod(rentalType, pickupDateTime, returnDueDateTime);
 
