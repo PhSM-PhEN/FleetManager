@@ -1,5 +1,6 @@
 ﻿using FleetManager.Application.UseCase.ToContract.Activate;
 using FleetManager.Application.UseCase.ToContract.Cancel;
+using FleetManager.Application.UseCase.ToContract.Complete;
 using FleetManager.Application.UseCase.ToContract.Delete;
 using FleetManager.Application.UseCase.ToContract.GetAll;
 using FleetManager.Application.UseCase.ToContract.GetById;
@@ -94,6 +95,17 @@ namespace FleetManager.Api.Controllers
         public async Task<IActionResult> Activate([FromServices] IActivateContractUseCase useCase, [FromRoute] long id)
         {
             await useCase.Execute(id);
+            return NoContent();
+        }
+
+        [HttpPatch("{id}/Complete")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status409Conflict)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Complete([FromServices] ICompleteContractUseCase useCase, [FromRoute] long id, [FromBody] RequestCompleteContractJson request)
+        {
+            await useCase.Execute(id, request);
             return NoContent();
         }
     }

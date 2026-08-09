@@ -67,7 +67,7 @@ namespace CommonTestUtilities.Entities
             else if (status == ContractStatus.Finished)
             {
                 contract.Confirm();
-                contract.Complete(DateTime.UtcNow);
+                contract.Complete(DateTime.UtcNow, contract.EndMileage);
             }
             else if (status == ContractStatus.Overdue)
             {

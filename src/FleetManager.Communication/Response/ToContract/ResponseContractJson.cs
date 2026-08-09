@@ -14,6 +14,8 @@ namespace FleetManager.Communication.Response.ToContract
         public int TotalDays { get; set; }
         public long StartMileage { get; set; }
         public long EndMileage { get; set; }
+        public long? FinalMileage { get; set; }
+        public decimal? ExcessMileageFee { get; set; }
         public long MileageContracted { get; set; }
         public decimal SnapshotPriceDailyRate { get; set; }
         public decimal SnapshotPriceMonthlyRate { get; set; }

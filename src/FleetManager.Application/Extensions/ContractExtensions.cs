@@ -33,6 +33,8 @@ namespace FleetManager.Application.Extensions
                 TotalDays = contract.TotalDays,
                 StartMileage = contract.StartMileage,
                 EndMileage = contract.EndMileage,
+                FinalMileage = contract.FinalMileage,
+                ExcessMileageFee = contract.ExcessMileageFee,
                 MileageContracted = contract.MileageContracted,
                 SnapshotPriceDailyRate = contract.SnapshotPriceDailyRate,
                 SnapshotPriceMonthlyRate = contract.SnapshotPriceMonthlyRate,

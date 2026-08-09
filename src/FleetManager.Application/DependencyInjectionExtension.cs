@@ -11,6 +11,7 @@ using FleetManager.Application.UseCase.ToCompany.Register;
 using FleetManager.Application.UseCase.ToCompany.Update;
 using FleetManager.Application.UseCase.ToContract.Activate;
 using FleetManager.Application.UseCase.ToContract.Cancel;
+using FleetManager.Application.UseCase.ToContract.Complete;
 using FleetManager.Application.UseCase.ToContract.Delete;
 using FleetManager.Application.UseCase.ToContract.GetAll;
 using FleetManager.Application.UseCase.ToContract.GetById;
@@ -104,6 +105,7 @@ namespace FleetManager.Application
             services.AddScoped<IPreviewContractUseCase, PreviewContractUseCase>();
             services.AddScoped<ICancelContractUseCase, CancelContractUseCase>();
             services.AddScoped<IActivateContractUseCase, ActivateContractUseCase>();
+            services.AddScoped<ICompleteContractUseCase, CompleteContractUseCase>();
             // incident report
             services.AddScoped<IRegisterIncidentReportUseCase, RegisterIncidentReportUseCase>();
             services.AddScoped<IGetAllIncidentReportUseCase, GetAllIncidentReportUseCase>();

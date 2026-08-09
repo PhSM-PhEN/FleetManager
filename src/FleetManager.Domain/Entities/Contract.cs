@@ -17,6 +17,8 @@ namespace FleetManager.Domain.Entities
         public decimal SnapshotPricePerExtraMileage { get; private set; }
         public decimal TotalAmount { get; private set; }
         public int TotalDays { get; private set; }
+        public long? FinalMileage { get; private set; }
+        public decimal? ExcessMileageFee { get; private set; }
 
         private DateTime _pickupDateTime;
         private DateTime _returnDueDateTime;
@@ -68,11 +70,19 @@ namespace FleetManager.Domain.Entities
             ApplyTerms(rentalPlan, rentalType, mileageContracted, totalAmount, pickupDateTime, returnDueDateTime);
         }
 
-        public void Complete(DateTime actualReturnDateTime)
+        public void Complete(DateTime actualReturnDateTime, long finalMileage)
         {
             if (ContractStatus != ContractStatus.Active && ContractStatus != ContractStatus.Overdue)
                 throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_NOT_ACTIVE);
 
+            if (finalMileage < StartMileage)
+                throw new BusinessRuleException(ResourceErrorMessages.END_MILEAGE_CANNOT_BE_LESS_THAN_START);
+
+            var mileageDriven = finalMileage - StartMileage;
+            var excessMileage = Math.Max(0, mileageDriven - MileageContracted);
+
+            FinalMileage = finalMileage;
+            ExcessMileageFee = excessMileage * SnapshotPricePerExtraMileage;
             ActualReturnDateTime = actualReturnDateTime;
             ContractStatus = ContractStatus.Finished;
             RegisterHistoryEvent("Completed");

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FleetManager.Infrastructure.Migrations
 {
     [DbContext(typeof(FleetManagerDbContext))]
-    [Migration("20260804184252_InitialMigration")]
+    [Migration("20260809044102_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -112,7 +112,7 @@ namespace FleetManager.Infrastructure.Migrations
                     b.HasIndex("Cnpj")
                         .IsUnique();
 
-                    b.ToTable("Companies", (string)null);
+                    b.ToTable("Companies");
                 });
 
             modelBuilder.Entity("FleetManager.Domain.Entities.Contract", b =>
@@ -136,6 +136,12 @@ namespace FleetManager.Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<long>("EndMileage")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal?>("ExcessMileageFee")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<long?>("FinalMileage")
                         .HasColumnType("bigint");
 
                     b.Property<long>("MileageContracted")
@@ -226,6 +232,105 @@ namespace FleetManager.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("HistoryLogs");
+                });
+
+            modelBuilder.Entity("FleetManager.Domain.Entities.IncidentReport", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<long>("ContractId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<long>("CreatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<Guid>("IncidentReportIdentifier")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("IncidentRisk")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ReportedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("VehicleId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContractId");
+
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("IncidentReports");
+                });
+
+            modelBuilder.Entity("FleetManager.Domain.Entities.Maintenance", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<long>("CreatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("IncidentReportId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ProblemDescription")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("ScheduledAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("VehicleId")
+                        .HasColumnType("bigint");
+
+                    b.Property<decimal>("WorkshopBudget")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IncidentReportId");
+
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("Maintenances");
                 });
 
             modelBuilder.Entity("FleetManager.Domain.Entities.RentalPlan", b =>
@@ -365,6 +470,9 @@ namespace FleetManager.Infrastructure.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<long?>("BlockingIncidentReportId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Brand")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -402,6 +510,8 @@ namespace FleetManager.Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BlockingIncidentReportId");
 
                     b.HasIndex("CompanyId");
 
@@ -444,6 +554,43 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Navigation("RentalPlan");
 
                     b.Navigation("Tenant");
+
+                    b.Navigation("Vehicle");
+                });
+
+            modelBuilder.Entity("FleetManager.Domain.Entities.IncidentReport", b =>
+                {
+                    b.HasOne("FleetManager.Domain.Entities.Contract", "Contract")
+                        .WithMany()
+                        .HasForeignKey("ContractId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("FleetManager.Domain.Entities.Vehicle", "Vehicle")
+                        .WithMany()
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Contract");
+
+                    b.Navigation("Vehicle");
+                });
+
+            modelBuilder.Entity("FleetManager.Domain.Entities.Maintenance", b =>
+                {
+                    b.HasOne("FleetManager.Domain.Entities.IncidentReport", "IncidentReport")
+                        .WithMany()
+                        .HasForeignKey("IncidentReportId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("FleetManager.Domain.Entities.Vehicle", "Vehicle")
+                        .WithMany()
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("IncidentReport");
 
                     b.Navigation("Vehicle");
                 });
@@ -531,10 +678,15 @@ namespace FleetManager.Infrastructure.Migrations
 
             modelBuilder.Entity("FleetManager.Domain.Entities.Vehicle", b =>
                 {
+                    b.HasOne("FleetManager.Domain.Entities.IncidentReport", "BlockingIncidentReport")
+                        .WithMany()
+                        .HasForeignKey("BlockingIncidentReportId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("FleetManager.Domain.Entities.Company", "Company")
                         .WithMany()
                         .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("FleetManager.Domain.Entities.RentalPlan", "RentalPlan")
@@ -624,6 +776,8 @@ namespace FleetManager.Infrastructure.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("VehicleId");
                         });
+
+                    b.Navigation("BlockingIncidentReport");
 
                     b.Navigation("ChassiNumber")
                         .IsRequired();

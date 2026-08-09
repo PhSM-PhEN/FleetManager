@@ -181,54 +181,6 @@ namespace FleetManager.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Vehicles",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Brand = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Model = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Color = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CurrentMileage = table.Column<long>(type: "bigint", nullable: false),
-                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    ManufacturingYear_FabricationYear = table.Column<int>(type: "int", nullable: false),
-                    ManufacturingYear_ModelYear = table.Column<int>(type: "int", nullable: false),
-                    Renavam_Number = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ChassiNumber_Number = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    LicensePlate_Number = table.Column<string>(type: "varchar(255)", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    LicensePlate_IsMercosul = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    CompanyId = table.Column<long>(type: "bigint", nullable: false),
-                    RentalPlanId = table.Column<long>(type: "bigint", nullable: false),
-                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Vehicles", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Vehicles_Companies_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "Companies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Vehicles_RentalPlans_RentalPlanId",
-                        column: x => x.RentalPlanId,
-                        principalTable: "RentalPlans",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "Contracts",
                 columns: table => new
                 {
@@ -246,6 +198,8 @@ namespace FleetManager.Infrastructure.Migrations
                     SnapshotPricePerExtraMileage = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     TotalAmount = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     TotalDays = table.Column<int>(type: "int", nullable: false),
+                    FinalMileage = table.Column<long>(type: "bigint", nullable: true),
+                    ExcessMileageFee = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
                     PickupDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ReturnDueDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ContractStatus = table.Column<int>(type: "int", nullable: false),
@@ -270,8 +224,124 @@ namespace FleetManager.Infrastructure.Migrations
                         principalTable: "Tenants",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "IncidentReports",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ContractId = table.Column<long>(type: "bigint", nullable: false),
+                    VehicleId = table.Column<long>(type: "bigint", nullable: false),
+                    Description = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    IncidentRisk = table.Column<int>(type: "int", nullable: false),
+                    ReportedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    IncidentReportIdentifier = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IncidentReports", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Contracts_Vehicles_VehicleId",
+                        name: "FK_IncidentReports_Contracts_ContractId",
+                        column: x => x.ContractId,
+                        principalTable: "Contracts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Vehicles",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Brand = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Model = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Color = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CurrentMileage = table.Column<long>(type: "bigint", nullable: false),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ManufacturingYear_FabricationYear = table.Column<int>(type: "int", nullable: false),
+                    ManufacturingYear_ModelYear = table.Column<int>(type: "int", nullable: false),
+                    Renavam_Number = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ChassiNumber_Number = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LicensePlate_Number = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    LicensePlate_IsMercosul = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    CompanyId = table.Column<long>(type: "bigint", nullable: false),
+                    RentalPlanId = table.Column<long>(type: "bigint", nullable: false),
+                    BlockingIncidentReportId = table.Column<long>(type: "bigint", nullable: true),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Vehicles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Vehicles_Companies_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Companies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Vehicles_IncidentReports_BlockingIncidentReportId",
+                        column: x => x.BlockingIncidentReportId,
+                        principalTable: "IncidentReports",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Vehicles_RentalPlans_RentalPlanId",
+                        column: x => x.RentalPlanId,
+                        principalTable: "RentalPlans",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Maintenances",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    VehicleId = table.Column<long>(type: "bigint", nullable: false),
+                    IncidentReportId = table.Column<long>(type: "bigint", nullable: true),
+                    ScheduledAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    WorkshopBudget = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    ProblemDescription = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Maintenances", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Maintenances_IncidentReports_IncidentReportId",
+                        column: x => x.IncidentReportId,
+                        principalTable: "IncidentReports",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Maintenances_Vehicles_VehicleId",
                         column: x => x.VehicleId,
                         principalTable: "Vehicles",
                         principalColumn: "Id",
@@ -306,6 +376,26 @@ namespace FleetManager.Infrastructure.Migrations
                 column: "VehicleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_IncidentReports_ContractId",
+                table: "IncidentReports",
+                column: "ContractId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_IncidentReports_VehicleId",
+                table: "IncidentReports",
+                column: "VehicleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Maintenances_IncidentReportId",
+                table: "Maintenances",
+                column: "IncidentReportId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Maintenances_VehicleId",
+                table: "Maintenances",
+                column: "VehicleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tenants_AddressId",
                 table: "Tenants",
                 column: "AddressId");
@@ -327,6 +417,11 @@ namespace FleetManager.Infrastructure.Migrations
                 table: "Users",
                 column: "AdminSlot",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vehicles_BlockingIncidentReportId",
+                table: "Vehicles",
+                column: "BlockingIncidentReportId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Vehicles_ChassiNumber_Number",
@@ -355,19 +450,69 @@ namespace FleetManager.Infrastructure.Migrations
                 name: "IX_Vehicles_RentalPlanId",
                 table: "Vehicles",
                 column: "RentalPlanId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Contracts_Vehicles_VehicleId",
+                table: "Contracts",
+                column: "VehicleId",
+                principalTable: "Vehicles",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_IncidentReports_Vehicles_VehicleId",
+                table: "IncidentReports",
+                column: "VehicleId",
+                principalTable: "Vehicles",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Contracts");
+            migrationBuilder.DropForeignKey(
+                name: "FK_Companies_Addresses_AddressId",
+                table: "Companies");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Tenants_Addresses_AddressId",
+                table: "Tenants");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Contracts_RentalPlans_RentalPlanId",
+                table: "Contracts");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Vehicles_RentalPlans_RentalPlanId",
+                table: "Vehicles");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Contracts_Tenants_TenantId",
+                table: "Contracts");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Contracts_Vehicles_VehicleId",
+                table: "Contracts");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_IncidentReports_Vehicles_VehicleId",
+                table: "IncidentReports");
 
             migrationBuilder.DropTable(
                 name: "HistoryLogs");
 
             migrationBuilder.DropTable(
+                name: "Maintenances");
+
+            migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Addresses");
+
+            migrationBuilder.DropTable(
+                name: "RentalPlans");
 
             migrationBuilder.DropTable(
                 name: "Tenants");
@@ -379,10 +524,10 @@ namespace FleetManager.Infrastructure.Migrations
                 name: "Companies");
 
             migrationBuilder.DropTable(
-                name: "RentalPlans");
+                name: "IncidentReports");
 
             migrationBuilder.DropTable(
-                name: "Addresses");
+                name: "Contracts");
         }
     }
 }
