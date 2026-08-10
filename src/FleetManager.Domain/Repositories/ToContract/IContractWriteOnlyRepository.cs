@@ -9,5 +9,6 @@ namespace FleetManager.Domain.Repositories.ToContract
         Task Delete(Contract contract);
         void Update(Contract contract);
         Task<bool> HasActiveContract(long vehicleId);
+        Task<List<Contract>> GetActiveContractsPastDueDate(DateTime referenceDateTime);
     }
 }

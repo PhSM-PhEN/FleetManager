@@ -1,6 +1,7 @@
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToAddress;
 using FleetManager.Domain.Repositories.ToCompany;
+using FleetManager.Domain.Repositories.ToCharge;
 using FleetManager.Domain.Repositories.ToContract;
 using FleetManager.Domain.Repositories.ToIncidentReport;
 using FleetManager.Domain.Repositories.ToRentalPlan;
@@ -13,6 +14,7 @@ using FleetManager.Domain.Services.LoggedUser;
 using FleetManager.Exception.ExceptionBase;
 using FleetManager.Infrastructure.DataAccess;
 using FleetManager.Infrastructure.DataAccess.ToAddress;
+using FleetManager.Infrastructure.DataAccess.ToCharge;
 using FleetManager.Infrastructure.DataAccess.ToCompany;
 using FleetManager.Infrastructure.DataAccess.ToContract;
 using FleetManager.Infrastructure.DataAccess.ToIncidentReport;
@@ -91,6 +93,9 @@ namespace FleetManager.Infrastructure
             //incident report
             services.AddScoped<IIncidentReportReadOnlyRepository, IncidentReportRepository>();
             services.AddScoped<IIncidentReportWriteOnlyRepository, IncidentReportRepository>();
+            //charge
+            services.AddScoped<IChargeReadOnlyRepository, ChargeRepository>();
+            services.AddScoped<IChargeWriteOnlyRepository, ChargeRepository>();
 
 
             // unit of work

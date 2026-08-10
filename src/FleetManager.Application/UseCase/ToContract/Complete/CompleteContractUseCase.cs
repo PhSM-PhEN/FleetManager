@@ -1,5 +1,7 @@
 using FleetManager.Communication.Request.ToContract;
+using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories;
+using FleetManager.Domain.Repositories.ToCharge;
 using FleetManager.Domain.Repositories.ToContract;
 using FleetManager.Domain.Repositories.ToVehicle;
 using FleetManager.Exception.ExceptionBase;
@@ -8,6 +10,7 @@ namespace FleetManager.Application.UseCase.ToContract.Complete
 {
     public class CompleteContractUseCase(
         IContractWriteOnlyRepository contractRepository,
+        IChargeWriteOnlyRepository chargeRepository,
         IVehicleWriteOnlyRepository vehicleRepository,
         IUnitOfWork unitOfWork) : ICompleteContractUseCase
     {
@@ -28,6 +31,12 @@ namespace FleetManager.Application.UseCase.ToContract.Complete
 
             contractRepository.Update(contract);
             vehicleRepository.Update(vehicle);
+
+            if (contract.LateFee is > 0)
+            {
+                var lateFeeCharge = Charge.ForLateFee(contract);
+                await chargeRepository.Add(lateFeeCharge);
+            }
 
             await unitOfWork.Commit();
         }

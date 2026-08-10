@@ -1,3 +1,5 @@
+using FleetManager.Exception.ExceptionBase;
+
 namespace FleetManager.Domain.Entities
 {
     public class Charge : AuditableEntity
@@ -8,5 +10,22 @@ namespace FleetManager.Domain.Entities
         public Contract Contract {get ; private set ;} = default!;
       
         protected Charge() { }
+
+        public Charge(long contractId, string description, decimal amount)
+        {
+            ContractId = contractId;
+            Description = description;
+            Amount = amount;
+        }
+
+        public static Charge ForLateFee(Contract contract)
+        {
+            if (contract.LateFee is null || contract.LateFee <= 0)
+                throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_HAS_NO_LATE_FEE);
+
+            var description = string.Format(ResourceExtensionsMessages.LATE_FEE_CHARGE_DESCRIPTION, contract.DaysLate);
+
+            return new Charge(contract.Id, description, contract.LateFee.Value);
+        }
     }
 }

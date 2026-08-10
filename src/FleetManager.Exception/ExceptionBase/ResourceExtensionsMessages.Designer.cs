@@ -167,5 +167,14 @@ namespace FleetManager.Exception.ExceptionBase {
                 return ResourceManager.GetString("RESOLVED", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Late return fee ({0} day(s) late).
+        /// </summary>
+        public static string LATE_FEE_CHARGE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("LATE_FEE_CHARGE_DESCRIPTION", resourceCulture);
+            }
+        }
     }
 }

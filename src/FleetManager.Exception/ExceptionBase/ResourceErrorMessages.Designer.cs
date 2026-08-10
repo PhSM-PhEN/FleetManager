@@ -205,6 +205,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contract has no late fee to charge..
+        /// </summary>
+        public static string CONTRACT_HAS_NO_LATE_FEE {
+            get {
+                return ResourceManager.GetString("CONTRACT_HAS_NO_LATE_FEE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contract can only be edited while reserved..
         /// </summary>
         public static string CONTRACT_NOT_EDITABLE {

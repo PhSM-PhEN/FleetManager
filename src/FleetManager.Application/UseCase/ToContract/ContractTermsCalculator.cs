@@ -1,5 +1,6 @@
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Enum;
+using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToContract
 {
@@ -22,12 +23,20 @@ namespace FleetManager.Application.UseCase.ToContract
 
         public static decimal GetTotalAmount(decimal totalAmount, RentalType rentalType, RentalPlan rentalPlan, int totalDays)
         {
-            if (totalAmount > 0)
-                return totalAmount;
-
-            return rentalType == RentalType.Daily
+           
+            var amount =  rentalType == RentalType.Daily
                 ? rentalPlan.DailyPrice * totalDays
                 : rentalPlan.MonthlyPrice;
+            if(totalAmount > 0 && totalAmount < ( amount / 2))
+            {
+                throw new BusinessRuleException("Valor de desconto excede o permitido");
+            }
+            else
+            {
+                amount = totalAmount;
+            }
+
+            return amount;
         }
     }
 }

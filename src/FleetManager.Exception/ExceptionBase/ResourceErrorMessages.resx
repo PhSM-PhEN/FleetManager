@@ -300,6 +300,9 @@
   <data name="CONTRACT_NOT_ACTIVE" xml:space="preserve">
     <value>Contract not active.</value>
   </data>
+  <data name="CONTRACT_HAS_NO_LATE_FEE" xml:space="preserve">
+    <value>Contract has no late fee to charge.</value>
+  </data>
   <data name="CONTRACT_NOT_FOUND" xml:space="preserve">
     <value>Contract not found.</value>
   </data>

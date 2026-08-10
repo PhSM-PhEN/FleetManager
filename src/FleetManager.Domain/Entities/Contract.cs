@@ -19,6 +19,8 @@ namespace FleetManager.Domain.Entities
         public int TotalDays { get; private set; }
         public long? FinalMileage { get; private set; }
         public decimal? ExcessMileageFee { get; private set; }
+        public int DaysLate { get; private set; }
+        public decimal? LateFee { get; private set; }
 
         private DateTime _pickupDateTime;
         private DateTime _returnDueDateTime;
@@ -83,6 +85,10 @@ namespace FleetManager.Domain.Entities
 
             FinalMileage = finalMileage;
             ExcessMileageFee = excessMileage * SnapshotPricePerExtraMileage;
+
+            DaysLate = CalculateDaysLate(ReturnDueDateTime, actualReturnDateTime);
+            LateFee = DaysLate * SnapshotPriceDailyRate;
+
             ActualReturnDateTime = actualReturnDateTime;
             ContractStatus = ContractStatus.Finished;
             RegisterHistoryEvent("Completed");
@@ -95,6 +101,32 @@ namespace FleetManager.Domain.Entities
 
             ContractStatus = ContractStatus.Overdue;
             RegisterHistoryEvent("MarkedAsOverdue");
+        }
+
+        /// <summary>
+        /// Um contrato está "em atraso" quando passou da data/hora prevista de devolução
+        /// (ReturnDueDateTime) e ainda não foi encerrado. Usado tanto pela rotina que marca
+        /// contratos como Overdue quanto por qualquer consulta que precise saber o status real
+        /// sem esperar o job rodar.
+        /// </summary>
+        public bool IsPastDueDate(DateTime referenceDateTime)
+        {
+            return (ContractStatus == ContractStatus.Active || ContractStatus == ContractStatus.Overdue)
+                && referenceDateTime > ReturnDueDateTime;
+        }
+
+        /// <summary>
+        /// Quantos dias de atraso existem entre a devolução prevista e a devolução real (ou "agora",
+        /// para um contrato ainda em aberto). Qualquer fração de dia já iniciada conta como um dia
+        /// cheio de multa (mesma regra de arredondamento usada em CalculatePeriod), e nunca é negativo.
+        /// </summary>
+        public static int CalculateDaysLate(DateTime returnDueDateTime, DateTime referenceDateTime)
+        {
+            if (referenceDateTime <= returnDueDateTime)
+                return 0;
+
+            var lateHours = (referenceDateTime - returnDueDateTime).TotalHours;
+            return (int)Math.Ceiling(lateHours / 24);
         }
 
         public static Contract Renew(Contract previousContract, RentalPlan currentRentalPlan, long? mileageContractedOverride)

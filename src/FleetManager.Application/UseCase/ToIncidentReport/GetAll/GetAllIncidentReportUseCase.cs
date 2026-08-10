@@ -9,9 +9,9 @@ namespace FleetManager.Application.UseCase.ToIncidentReport.GetAll
     {
         public async Task<ResponsePaginatedJson<ResponseShortIncidentReportJson>> Execute(int pageNumber, int pageSize)
         {
-            if(pageNumber >= 0)
+            if(pageNumber <= 0)
                 pageNumber = 1;
-            if(pageSize >= 0)
+            if(pageSize <= 0)
                 pageSize = 10;
 
              var (incidentReport, TotalCount ) = await repository.GetAll(pageNumber, pageSize);

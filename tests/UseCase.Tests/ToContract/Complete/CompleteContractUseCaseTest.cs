@@ -1,5 +1,6 @@
 using CommonTestUtilities.Entities;
 using CommonTestUtilities.Repositories;
+using CommonTestUtilities.Repositories.ToCharge;
 using CommonTestUtilities.Repositories.ToContract;
 using CommonTestUtilities.Repositories.ToVehicle;
 using CommonTestUtilities.Request.ToContract;
@@ -7,6 +8,7 @@ using FleetManager.Application.UseCase.ToContract.Complete;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Enum;
 using FleetManager.Exception.ExceptionBase;
+using Moq;
 using Shouldly;
 
 namespace UseCase.Tests.ToContract.Complete
@@ -22,7 +24,7 @@ namespace UseCase.Tests.ToContract.Complete
             var finalMileage = Math.Max(contract.StartMileage + contract.MileageContracted, vehicle.CurrentMileage);
             var request = RequestCompleteContractJsonBuilder.Build(finalMileage);
 
-            var useCase = CreateUseCase(contract, vehicle);
+            var useCase = CreateUseCase(contract, vehicle, out _);
 
             await useCase.Execute(contract.Id, request);
 
@@ -43,7 +45,7 @@ namespace UseCase.Tests.ToContract.Complete
             var finalMileage = baseline + 100;
             var request = RequestCompleteContractJsonBuilder.Build(finalMileage);
 
-            var useCase = CreateUseCase(contract, vehicle);
+            var useCase = CreateUseCase(contract, vehicle, out _);
 
             await useCase.Execute(contract.Id, request);
 
@@ -53,9 +55,50 @@ namespace UseCase.Tests.ToContract.Complete
         }
 
         [Fact]
+        public async Task Success_Charges_Late_Fee_When_Returned_After_Due_Date()
+        {
+            var contract = ContractBuilder.Build(1, vehicleId: 10, status: ContractStatus.Active);
+            var vehicle = VehicleBuilder.Build(10);
+
+            var finalMileage = Math.Max(contract.StartMileage + contract.MileageContracted, vehicle.CurrentMileage);
+            var request = RequestCompleteContractJsonBuilder.Build(finalMileage);
+            // devolução 3 dias e meio depois do previsto -> conta como 4 dias de atraso (fração conta como dia cheio)
+            request.ActualReturnDateTime = contract.ReturnDueDateTime.AddDays(3).AddHours(12);
+
+            var useCase = CreateUseCase(contract, vehicle, out var chargeRepositoryMock);
+
+            await useCase.Execute(contract.Id, request);
+
+            contract.DaysLate.ShouldBe(4);
+            contract.LateFee.ShouldBe(4 * contract.SnapshotPriceDailyRate);
+            chargeRepositoryMock.Verify(c => c.Add(It.Is<Charge>(charge =>
+                charge.ContractId == contract.Id &&
+                charge.Amount == contract.LateFee)), Times.Once);
+        }
+
+        [Fact]
+        public async Task Success_Does_Not_Charge_Late_Fee_When_Returned_On_Time()
+        {
+            var contract = ContractBuilder.Build(1, vehicleId: 10, status: ContractStatus.Active);
+            var vehicle = VehicleBuilder.Build(10);
+
+            var finalMileage = Math.Max(contract.StartMileage + contract.MileageContracted, vehicle.CurrentMileage);
+            var request = RequestCompleteContractJsonBuilder.Build(finalMileage);
+            request.ActualReturnDateTime = contract.ReturnDueDateTime;
+
+            var useCase = CreateUseCase(contract, vehicle, out var chargeRepositoryMock);
+
+            await useCase.Execute(contract.Id, request);
+
+            contract.DaysLate.ShouldBe(0);
+            contract.LateFee.ShouldBe(0);
+            chargeRepositoryMock.Verify(c => c.Add(It.IsAny<Charge>()), Times.Never);
+        }
+
+        [Fact]
         public async Task Error_Contract_Not_Found()
         {
-            var useCase = CreateUseCase(contract: null, vehicle: null);
+            var useCase = CreateUseCase(contract: null, vehicle: null, out _);
             var request = RequestCompleteContractJsonBuilder.Build(1000);
 
             var act = async () => await useCase.Execute(999, request);
@@ -71,7 +114,7 @@ namespace UseCase.Tests.ToContract.Complete
             var vehicle = VehicleBuilder.Build(10);
             var request = RequestCompleteContractJsonBuilder.Build(contract.StartMileage + contract.MileageContracted);
 
-            var useCase = CreateUseCase(contract, vehicle);
+            var useCase = CreateUseCase(contract, vehicle, out _);
             var act = async () => await useCase.Execute(contract.Id, request);
 
             var result = await act.ShouldThrowAsync<BusinessRuleException>();
@@ -85,7 +128,7 @@ namespace UseCase.Tests.ToContract.Complete
             var vehicle = VehicleBuilder.Build(10);
             var request = RequestCompleteContractJsonBuilder.Build(contract.StartMileage - 1);
 
-            var useCase = CreateUseCase(contract, vehicle);
+            var useCase = CreateUseCase(contract, vehicle, out _);
             var act = async () => await useCase.Execute(contract.Id, request);
 
             var result = await act.ShouldThrowAsync<BusinessRuleException>();
@@ -99,17 +142,18 @@ namespace UseCase.Tests.ToContract.Complete
             var vehicle = VehicleBuilder.Build(10);
             var request = RequestCompleteContractJsonBuilder.Build(-1);
 
-            var useCase = CreateUseCase(contract, vehicle);
+            var useCase = CreateUseCase(contract, vehicle, out _);
             var act = async () => await useCase.Execute(contract.Id, request);
 
             var result = await act.ShouldThrowAsync<ErrorOnValidationException>();
             result.GetErrors().ShouldContain(ResourceErrorMessages.MILEAGE_INVALID);
         }
 
-        private static CompleteContractUseCase CreateUseCase(Contract? contract, Vehicle? vehicle)
+        private static CompleteContractUseCase CreateUseCase(Contract? contract, Vehicle? vehicle, out Mock<FleetManager.Domain.Repositories.ToCharge.IChargeWriteOnlyRepository> chargeRepositoryMock)
         {
             var contractRepositoryBuilder = new ContractWriteOnlyRepositoryBuilder();
             var vehicleRepositoryBuilder = new VehicleWriteOnlyRepositoryBuilder();
+            var chargeRepositoryBuilder = new ChargeWriteOnlyRepositoryBuilder().Add();
 
             if (contract is not null)
             {
@@ -129,9 +173,11 @@ namespace UseCase.Tests.ToContract.Complete
 
             var contractRepository = contractRepositoryBuilder.Build();
             var vehicleRepository = vehicleRepositoryBuilder.Build();
+            chargeRepositoryMock = chargeRepositoryBuilder.BuildMock();
             var unitOfWork = UnitOfWorkBuilder.Build();
 
-            return new CompleteContractUseCase(contractRepository, vehicleRepository, unitOfWork);
+            return new CompleteContractUseCase(contractRepository, chargeRepositoryMock.Object, vehicleRepository, unitOfWork);
         }
     }
 }
+

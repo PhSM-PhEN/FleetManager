@@ -13,6 +13,7 @@ using FleetManager.Application.UseCase.ToContract.Activate;
 using FleetManager.Application.UseCase.ToContract.Cancel;
 using FleetManager.Application.UseCase.ToContract.Complete;
 using FleetManager.Application.UseCase.ToContract.Delete;
+using FleetManager.Application.UseCase.ToContract.DetectOverdue;
 using FleetManager.Application.UseCase.ToContract.GetAll;
 using FleetManager.Application.UseCase.ToContract.GetById;
 using FleetManager.Application.UseCase.ToContract.Preview;
@@ -108,6 +109,7 @@ namespace FleetManager.Application
             services.AddScoped<IActivateContractUseCase, ActivateContractUseCase>();
             services.AddScoped<ICompleteContractUseCase, CompleteContractUseCase>();
             services.AddScoped<IRenewContractUseCase, RenewContractUseCase>();
+            services.AddScoped<IDetectOverdueContractsUseCase, DetectOverdueContractsUseCase>();
             // incident report
             services.AddScoped<IRegisterIncidentReportUseCase, RegisterIncidentReportUseCase>();
             services.AddScoped<IGetAllIncidentReportUseCase, GetAllIncidentReportUseCase>();

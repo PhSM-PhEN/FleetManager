@@ -43,6 +43,12 @@ namespace CommonTestUtilities.Repositories.ToContract
             return this;
         }
 
+        public ContractWriteOnlyRepositoryBuilder GetActiveContractsPastDueDate(List<Contract> contracts)
+        {
+            _repository.Setup(c => c.GetActiveContractsPastDueDate(It.IsAny<DateTime>())).ReturnsAsync(contracts);
+            return this;
+        }
+
         public IContractWriteOnlyRepository Build() => _repository.Object;
     }
 }

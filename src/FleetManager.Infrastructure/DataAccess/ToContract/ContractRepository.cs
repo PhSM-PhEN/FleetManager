@@ -57,5 +57,12 @@ namespace FleetManager.Infrastructure.DataAccess.ToContract
         {
             dbContext.Contracts.Update(contract);
         }
+
+        public async Task<List<Contract>> GetActiveContractsPastDueDate(DateTime referenceDateTime)
+        {
+            return await dbContext.Contracts
+                .Where(c => c.ContractStatus == ContractStatus.Active && c.ReturnDueDateTime < referenceDateTime)
+                .ToListAsync();
+        }
     }
 }

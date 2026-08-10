@@ -2,6 +2,7 @@
 using FleetManager.Application.UseCase.ToContract.Cancel;
 using FleetManager.Application.UseCase.ToContract.Complete;
 using FleetManager.Application.UseCase.ToContract.Delete;
+using FleetManager.Application.UseCase.ToContract.DetectOverdue;
 using FleetManager.Application.UseCase.ToContract.GetAll;
 using FleetManager.Application.UseCase.ToContract.GetById;
 using FleetManager.Application.UseCase.ToContract.Preview;
@@ -14,7 +15,6 @@ using FleetManager.Communication.Response.ToContract;
 using FleetManager.Domain.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace FleetManager.Api.Controllers
 {
@@ -109,6 +109,15 @@ namespace FleetManager.Api.Controllers
             await useCase.Execute(id, request);
             return NoContent();
         }
+        [HttpPost("DetectOverdue")]
+        [Authorize(Roles = Roles.ADMIN)]
+        [ProducesResponseType(typeof(ResponseDetectOverdueContractsJson), StatusCodes.Status200OK)]
+        public async Task<IActionResult> DetectOverdue([FromServices] IDetectOverdueContractsUseCase useCase)
+        {
+            var totalMarked = await useCase.Execute();
+            return Ok(new ResponseDetectOverdueContractsJson { TotalContractsMarkedAsOverdue = totalMarked });
+        }
+
         [HttpPost("{id}/Renew")]
         [ProducesResponseType(typeof(ResponseShortContractJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]

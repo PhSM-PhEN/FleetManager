@@ -153,4 +153,7 @@
   <data name="RESOLVED" xml:space="preserve">
     <value>Resolved</value>
   </data>
+  <data name="LATE_FEE_CHARGE_DESCRIPTION" xml:space="preserve">
+    <value>Late return fee ({0} day(s) late)</value>
+  </data>
 </root>
