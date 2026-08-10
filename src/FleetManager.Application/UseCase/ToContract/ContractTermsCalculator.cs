@@ -23,20 +23,19 @@ namespace FleetManager.Application.UseCase.ToContract
 
         public static decimal GetTotalAmount(decimal totalAmount, RentalType rentalType, RentalPlan rentalPlan, int totalDays)
         {
-           
-            var amount =  rentalType == RentalType.Daily
+            var amount = rentalType == RentalType.Daily
                 ? rentalPlan.DailyPrice * totalDays
                 : rentalPlan.MonthlyPrice;
-            if(totalAmount > 0 && totalAmount < ( amount / 2))
-            {
-                throw new BusinessRuleException("Valor de desconto excede o permitido");
-            }
-            else
-            {
-                amount = totalAmount;
-            }
 
-            return amount;
+            // totalAmount <= 0 é o sentinela "sem desconto informado" -> usa o valor padrão do plano.
+            if (totalAmount <= 0)
+                return amount;
+
+            // totalAmount > 0: é um desconto explícito, só é aceito até a metade do valor padrão.
+            if (totalAmount < amount / 2)
+                throw new BusinessRuleException(ResourceErrorMessages.TOTAL_AMOUNT_DISCOUNT_EXCEEDS_LIMIT);
+
+            return totalAmount;
         }
     }
 }

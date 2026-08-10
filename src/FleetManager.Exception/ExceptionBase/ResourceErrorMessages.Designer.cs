@@ -214,6 +214,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Discount amount exceeds the allowed limit..
+        /// </summary>
+        public static string TOTAL_AMOUNT_DISCOUNT_EXCEEDS_LIMIT {
+            get {
+                return ResourceManager.GetString("TOTAL_AMOUNT_DISCOUNT_EXCEEDS_LIMIT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contract can only be edited while reserved..
         /// </summary>
         public static string CONTRACT_NOT_EDITABLE {
