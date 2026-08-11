@@ -101,14 +101,14 @@ namespace FleetManager.Api.Controllers
         }
 
         [HttpPatch("{id}/Complete")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseCompleteContractJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status409Conflict)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Complete([FromServices] ICompleteContractUseCase useCase, [FromRoute] long id, [FromBody] RequestCompleteContractJson request)
         {
-            await useCase.Execute(id, request);
-            return NoContent();
+            var response = await useCase.Execute(id, request);
+            return Ok(response);
         }
         [HttpPost("DetectOverdue")]
         [Authorize(Roles = Roles.ADMIN)]

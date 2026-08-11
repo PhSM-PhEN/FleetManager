@@ -303,6 +303,9 @@
   <data name="CONTRACT_HAS_NO_LATE_FEE" xml:space="preserve">
     <value>Contract has no late fee to charge.</value>
   </data>
+  <data name="RENEWAL_NOT_ALLOWED_PAST_MAX_OVERDUE_DAYS" xml:space="preserve">
+    <value>Renewal is not allowed after 3 days overdue. The vehicle must be returned and the late fee paid.</value>
+  </data>
   <data name="TOTAL_AMOUNT_DISCOUNT_EXCEEDS_LIMIT" xml:space="preserve">
     <value>Discount amount exceeds the allowed limit.</value>
   </data>

@@ -214,6 +214,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Renewal is not allowed after 3 days overdue. The vehicle must be returned and the late fee paid..
+        /// </summary>
+        public static string RENEWAL_NOT_ALLOWED_PAST_MAX_OVERDUE_DAYS {
+            get {
+                return ResourceManager.GetString("RENEWAL_NOT_ALLOWED_PAST_MAX_OVERDUE_DAYS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Discount amount exceeds the allowed limit..
         /// </summary>
         public static string TOTAL_AMOUNT_DISCOUNT_EXCEEDS_LIMIT {

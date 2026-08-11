@@ -1,9 +1,10 @@
 using FleetManager.Communication.Request.ToContract;
+using FleetManager.Communication.Response.ToContract;
 
 namespace FleetManager.Application.UseCase.ToContract.Complete
 {
     public interface ICompleteContractUseCase
     {
-        Task Execute(long id, RequestCompleteContractJson request);
+        Task<ResponseCompleteContractJson> Execute(long id, RequestCompleteContractJson request);
     }
 }

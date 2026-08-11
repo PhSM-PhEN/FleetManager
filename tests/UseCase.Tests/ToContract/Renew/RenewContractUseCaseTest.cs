@@ -49,6 +49,57 @@ namespace UseCase.Tests.ToContract.Renew
         }
 
         [Fact]
+        public async Task Success_Renews_Overdue_Contract_Keeping_Original_Due_Date_As_Pickup()
+        {
+            var plan = RentalPlanBuilder.Build(1);
+            var contract = ContractBuilder.Build(1, vehicleId: 10, tenantId: 20, rentalPlan: plan, status: ContractStatus.Overdue);
+            var request = RequestRenewContractJsonBuilder.Build();
+
+            var useCase = CreateUseCase(contract, existingPlan: plan, newPlan: null);
+
+            var response = await useCase.Execute(contract.Id, request);
+
+            contract.ContractStatus.ShouldBe(ContractStatus.Renewed);
+            response.ContractStatus.ShouldBe(ContractStatus.Active.ContractStatusToString());
+            // Mesmo atrasado (renovação processada depois do vencimento), a nova contagem começa
+            // exatamente no antigo ReturnDueDateTime, não no momento em que a renovação foi feita.
+            // A multa por atraso não é cobrada aqui — só existe se o carro for devolvido (Complete).
+            response.PickupDateTime.ShouldBe(contract.ReturnDueDateTime);
+        }
+
+        [Fact]
+        public async Task Success_Renews_Overdue_Contract_Within_Max_Overdue_Days()
+        {
+            var plan = RentalPlanBuilder.Build(1);
+            // 71h de atraso -> arredonda para 3 dias (limite máximo ainda permitido).
+            var contract = BuildOverdueContract(plan, hoursLate: 71);
+            var request = RequestRenewContractJsonBuilder.Build();
+
+            var useCase = CreateUseCase(contract, existingPlan: plan, newPlan: null);
+
+            var response = await useCase.Execute(contract.Id, request);
+
+            contract.ContractStatus.ShouldBe(ContractStatus.Renewed);
+            response.ContractStatus.ShouldBe(ContractStatus.Active.ContractStatusToString());
+        }
+
+        [Fact]
+        public async Task Error_Renew_Blocked_When_Overdue_Past_Max_Days()
+        {
+            var plan = RentalPlanBuilder.Build(1);
+            // 73h de atraso -> arredonda para 4 dias, acima do limite de 3.
+            var contract = BuildOverdueContract(plan, hoursLate: 73);
+            var request = RequestRenewContractJsonBuilder.Build();
+
+            var useCase = CreateUseCase(contract, existingPlan: plan, newPlan: null);
+            var act = async () => await useCase.Execute(contract.Id, request);
+
+            var result = await act.ShouldThrowAsync<BusinessRuleException>();
+            result.Message.ShouldBe(ResourceErrorMessages.RENEWAL_NOT_ALLOWED_PAST_MAX_OVERDUE_DAYS);
+            contract.ContractStatus.ShouldBe(ContractStatus.Overdue);
+        }
+
+        [Fact]
         public async Task Error_Contract_Not_Found()
         {
             var useCase = CreateUseCase(contract: null, existingPlan: null, newPlan: null);
@@ -100,6 +151,33 @@ namespace UseCase.Tests.ToContract.Renew
 
             var result = await act.ShouldThrowAsync<ErrorOnValidationException>();
             result.GetErrors().ShouldContain(ResourceErrorMessages.MILEAGE_CONTRACTED_INVALID);
+        }
+
+        private static Contract BuildOverdueContract(RentalPlan plan, double hoursLate)
+        {
+            // Contrato Daily construído diretamente (sem o ContractBuilder, que gera datas aleatórias
+            // sempre no futuro) para controlar exatamente há quantas horas ele venceu.
+            var returnDueDateTime = DateTime.UtcNow.AddHours(-hoursLate);
+            var pickupDateTime = returnDueDateTime.AddDays(-5);
+
+            var contract = new Contract(
+                vehicleId: 10,
+                tenantId: 20,
+                rentalPlan: plan,
+                rentalType: RentalType.Daily,
+                startMileage: 0,
+                mileageContracted: plan.MileagePerDay * 5,
+                totalAmount: plan.DailyPrice * 5,
+                pickupDateTime: pickupDateTime,
+                returnDueDateTime: returnDueDateTime)
+            {
+                Id = 1
+            };
+
+            contract.Confirm();
+            contract.MarkAsOverdue();
+
+            return contract;
         }
 
         private static RenewContractUseCase CreateUseCase(Contract? contract, RentalPlan? existingPlan, RentalPlan? newPlan)

@@ -48,6 +48,19 @@ namespace FleetManager.Application.Extensions
 
             };
         }
+        public static ResponseCompleteContractJson ToCompleteResponse(this Contract contract)
+        {
+            return new ResponseCompleteContractJson
+            {
+                ContractId = contract.Id,
+                ActualReturnDateTime = contract.ActualReturnDateTime!.Value,
+                FinalMileage = contract.FinalMileage!.Value,
+                ExcessMileageFee = contract.ExcessMileageFee,
+                DaysLate = contract.DaysLate,
+                LateFee = contract.LateFee,
+                TotalCharged = (contract.ExcessMileageFee ?? 0) + (contract.LateFee ?? 0)
+            };
+        }
         public static List<ResponseShortContractJson> ToResponse(this List<Contract> contracts)
         {
             return contracts.Select(c => c.ToResponse()).ToList();

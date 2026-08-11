@@ -5,6 +5,12 @@ namespace FleetManager.Domain.Entities
 {
     public class Contract : AuditableEntity
     {
+        /// <summary>
+        /// Prazo máximo de atraso (em dias) a partir do qual não é mais permitido renovar:
+        /// o cliente é obrigado a devolver o veículo e quitar a multa (Complete) em vez de continuar com ele.
+        /// </summary>
+        private const int MaxOverdueDaysAllowedForRenewal = 3;
+
         public long VehicleId { get; private set; }
         public long TenantId { get; private set; }
         public long RentalPlanId { get; private set; }
@@ -131,14 +137,24 @@ namespace FleetManager.Domain.Entities
 
         public static Contract Renew(Contract previousContract, RentalPlan currentRentalPlan, long? mileageContractedOverride)
         {
-            if (previousContract.ContractStatus != ContractStatus.Active)
+            if (previousContract.ContractStatus != ContractStatus.Active && previousContract.ContractStatus != ContractStatus.Overdue)
                 throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_NOT_ACTIVE);
 
-            if (DateTime.UtcNow >= previousContract.ReturnDueDateTime)
-                throw new BusinessRuleException(ResourceErrorMessages.RENEWAL_MUST_BE_REQUESTED_BEFORE_DUE_DATE);
+            if (previousContract.ContractStatus == ContractStatus.Overdue)
+            {
+                var daysLate = CalculateDaysLate(previousContract.ReturnDueDateTime, DateTime.UtcNow);
+                if (daysLate > MaxOverdueDaysAllowedForRenewal)
+                    throw new BusinessRuleException(ResourceErrorMessages.RENEWAL_NOT_ALLOWED_PAST_MAX_OVERDUE_DAYS);
+            }
+
+            // A nova contagem sempre começa no vencimento original (mesmo se o contrato já está
+            // atrasado e a renovação só foi registrada depois disso) — o período contratado é
+            // contínuo e não depende de quando o operador processou a renovação. Os dias entre o
+            // vencimento e o registro da renovação não são cobrados aqui: a multa por atraso só
+            // existe se o carro for de fato devolvido atrasado (Contract.Complete), nunca na renovação.
+            var pickupDateTime = previousContract.ReturnDueDateTime;
 
             var mileageContracted = mileageContractedOverride ?? previousContract.MileageContracted;
-            var pickupDateTime = previousContract.ReturnDueDateTime;
             var returnDueDateTime = pickupDateTime.AddDays(previousContract.TotalDays);
             var startMileage = previousContract.EndMileage;
 

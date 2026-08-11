@@ -32,7 +32,7 @@ namespace WebApi.Tests.ToContract.Complete
             var request = RequestCompleteContractJsonBuilder.Build(_vehicleCurrentMileage + 100);
             var result = await DoPatch($"{METHOD}/{contractId}/Complete", request, _teamMemberToken);
 
-            result.StatusCode.ShouldBe(HttpStatusCode.NoContent);
+            result.StatusCode.ShouldBe(HttpStatusCode.OK);
         }
 
         [Fact]
