@@ -1,8 +1,8 @@
 ﻿using FleetManager.Application.UseCase.ToContract.Activate;
 using FleetManager.Application.UseCase.ToContract.Cancel;
-using FleetManager.Application.UseCase.ToContract.Complete;
 using FleetManager.Application.UseCase.ToContract.Delete;
 using FleetManager.Application.UseCase.ToContract.DetectOverdue;
+using FleetManager.Application.UseCase.ToContract.FinishUp;
 using FleetManager.Application.UseCase.ToContract.GetAll;
 using FleetManager.Application.UseCase.ToContract.GetById;
 using FleetManager.Application.UseCase.ToContract.Preview;
@@ -100,12 +100,12 @@ namespace FleetManager.Api.Controllers
             return NoContent();
         }
 
-        [HttpPatch("{id}/Complete")]
-        [ProducesResponseType(typeof(ResponseCompleteContractJson), StatusCodes.Status200OK)]
+        [HttpPatch("{id}/FinishUp")]
+        [ProducesResponseType(typeof(ResponseFinishUpContractJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status409Conflict)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Complete([FromServices] ICompleteContractUseCase useCase, [FromRoute] long id, [FromBody] RequestCompleteContractJson request)
+        public async Task<IActionResult> FinishUp([FromServices] IFinishUpContractUseCase useCase, [FromRoute] long id, [FromBody] RequestFinishUpContractJson request)
         {
             var response = await useCase.Execute(id, request);
             return Ok(response);

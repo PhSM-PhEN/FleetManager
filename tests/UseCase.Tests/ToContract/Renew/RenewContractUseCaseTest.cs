@@ -63,7 +63,7 @@ namespace UseCase.Tests.ToContract.Renew
             response.ContractStatus.ShouldBe(ContractStatus.Active.ContractStatusToString());
             // Mesmo atrasado (renovação processada depois do vencimento), a nova contagem começa
             // exatamente no antigo ReturnDueDateTime, não no momento em que a renovação foi feita.
-            // A multa por atraso não é cobrada aqui — só existe se o carro for devolvido (Complete).
+            // A multa por atraso não é cobrada aqui — só existe se o carro for devolvido (finish up).
             response.PickupDateTime.ShouldBe(contract.ReturnDueDateTime);
         }
 

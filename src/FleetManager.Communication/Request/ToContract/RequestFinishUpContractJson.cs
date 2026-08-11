@@ -1,8 +1,7 @@
 namespace FleetManager.Communication.Request.ToContract
 {
-    public class RequestCompleteContractJson
+    public class RequestFinishUpContractJson
     {
-        public DateTime? ActualReturnDateTime { get; set; }
         public long FinalMileage { get; set; }
     }
 }

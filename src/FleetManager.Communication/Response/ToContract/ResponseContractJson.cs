@@ -13,7 +13,7 @@ namespace FleetManager.Communication.Response.ToContract
         public DateTime? ActualReturnDateTime { get; set; }
         public int TotalDays { get; set; }
         public long StartMileage { get; set; }
-        public long EndMileage { get; set; }
+        public long ExpectedEndMileage { get; set; }
         public long? FinalMileage { get; set; }
         public decimal? ExcessMileageFee { get; set; }
         public long MileageContracted { get; set; }

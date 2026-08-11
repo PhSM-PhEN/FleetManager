@@ -32,7 +32,7 @@ namespace FleetManager.Application.Extensions
                 ActualReturnDateTime = contract.ActualReturnDateTime,
                 TotalDays = contract.TotalDays,
                 StartMileage = contract.StartMileage,
-                EndMileage = contract.EndMileage,
+                ExpectedEndMileage = contract.ExpectedEndMileage,
                 FinalMileage = contract.FinalMileage,
                 ExcessMileageFee = contract.ExcessMileageFee,
                 MileageContracted = contract.MileageContracted,
@@ -48,9 +48,9 @@ namespace FleetManager.Application.Extensions
 
             };
         }
-        public static ResponseCompleteContractJson ToCompleteResponse(this Contract contract)
+        public static ResponseFinishUpContractJson ToFinishUpResponse(this Contract contract)
         {
-            return new ResponseCompleteContractJson
+            return new ResponseFinishUpContractJson
             {
                 ContractId = contract.Id,
                 ActualReturnDateTime = contract.ActualReturnDateTime!.Value,

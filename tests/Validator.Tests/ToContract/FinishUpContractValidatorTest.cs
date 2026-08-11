@@ -1,17 +1,17 @@
 using CommonTestUtilities.Request.ToContract;
-using FleetManager.Application.UseCase.ToContract.Complete;
+using FleetManager.Application.UseCase.ToContract.FinishUp;
 using FleetManager.Exception.ExceptionBase;
 using Shouldly;
 
 namespace Validator.Tests.ToContract
 {
-    public class CompleteContractValidatorTest
+    public class FinishUpContractValidatorTest
     {
         [Fact]
         public void Success()
         {
-            var validator = new CompleteContractValidator();
-            var request = RequestCompleteContractJsonBuilder.Build(1000);
+            var validator = new FinishUpContractValidator();
+            var request = RequestFinishUpContractJsonBuilder.Build(1000);
 
             var result = validator.Validate(request);
 
@@ -21,8 +21,8 @@ namespace Validator.Tests.ToContract
         [Fact]
         public void Error_FinalMileage_Negative()
         {
-            var validator = new CompleteContractValidator();
-            var request = RequestCompleteContractJsonBuilder.Build(-1);
+            var validator = new FinishUpContractValidator();
+            var request = RequestFinishUpContractJsonBuilder.Build(-1);
 
             var result = validator.Validate(request);
 

@@ -7,7 +7,7 @@ namespace FleetManager.Domain.Entities
     {
         /// <summary>
         /// Prazo máximo de atraso (em dias) a partir do qual não é mais permitido renovar:
-        /// o cliente é obrigado a devolver o veículo e quitar a multa (Complete) em vez de continuar com ele.
+        /// o cliente é obrigado a devolver o veículo e quitar a multa (finish up) em vez de continuar com ele.
         /// </summary>
         private const int MaxOverdueDaysAllowedForRenewal = 3;
 
@@ -16,7 +16,7 @@ namespace FleetManager.Domain.Entities
         public long RentalPlanId { get; private set; }
         public RentalType RentalType { get; private set; }
         public long StartMileage { get; private set; }
-        public long EndMileage { get; private set; }
+        public long ExpectedEndMileage { get; private set; }
         public long MileageContracted { get; private set; }
         public decimal SnapshotPriceDailyRate { get; private set; }
         public decimal SnapshotPriceMonthlyRate { get; private set; }
@@ -78,7 +78,7 @@ namespace FleetManager.Domain.Entities
             ApplyTerms(rentalPlan, rentalType, mileageContracted, totalAmount, pickupDateTime, returnDueDateTime);
         }
 
-        public void Complete(DateTime actualReturnDateTime, long finalMileage)
+        public void FinishUp(DateTime actualReturnDateTime, long finalMileage)
         {
             if (ContractStatus != ContractStatus.Active && ContractStatus != ContractStatus.Overdue)
                 throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_NOT_ACTIVE);
@@ -97,7 +97,7 @@ namespace FleetManager.Domain.Entities
 
             ActualReturnDateTime = actualReturnDateTime;
             ContractStatus = ContractStatus.Finished;
-            RegisterHistoryEvent("Completed");
+            RegisterHistoryEvent("Finish_up");
         }
 
         public void MarkAsOverdue()
@@ -151,12 +151,12 @@ namespace FleetManager.Domain.Entities
             // atrasado e a renovação só foi registrada depois disso) — o período contratado é
             // contínuo e não depende de quando o operador processou a renovação. Os dias entre o
             // vencimento e o registro da renovação não são cobrados aqui: a multa por atraso só
-            // existe se o carro for de fato devolvido atrasado (Contract.Complete), nunca na renovação.
+            // existe se o carro for de fato devolvido atrasado (Contract.FinishUp), nunca na renovação.
             var pickupDateTime = previousContract.ReturnDueDateTime;
 
             var mileageContracted = mileageContractedOverride ?? previousContract.MileageContracted;
             var returnDueDateTime = pickupDateTime.AddDays(previousContract.TotalDays);
-            var startMileage = previousContract.EndMileage;
+            var startMileage = previousContract.ExpectedEndMileage;
 
             // Só usa o preço ATUAL do plano se o plano realmente mudou; se é o mesmo plano de
             // antes, mantém o preço congelado (snapshot) da assinatura original do contrato.
@@ -189,7 +189,7 @@ namespace FleetManager.Domain.Entities
             RentalPlanId = rentalPlan.Id;
             RentalType = rentalType;
             MileageContracted = mileageContracted;
-            EndMileage = CalculateEndMileage(StartMileage, mileageContracted);
+            ExpectedEndMileage = CalculateEndMileage(StartMileage, mileageContracted);
             TotalAmount = totalAmount;
             TotalDays = totalDays;
             _pickupDateTime = pickupDateTime;

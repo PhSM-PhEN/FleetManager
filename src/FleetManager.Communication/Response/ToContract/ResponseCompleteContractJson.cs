@@ -1,6 +1,6 @@
 namespace FleetManager.Communication.Response.ToContract
 {
-    public class ResponseCompleteContractJson
+    public class ResponseFinishUpContractJson
     {
         public long ContractId { get; set; }
         public DateTime ActualReturnDateTime { get; set; }

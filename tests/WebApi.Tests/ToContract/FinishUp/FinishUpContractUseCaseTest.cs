@@ -2,9 +2,9 @@ using System.Net;
 using CommonTestUtilities.Request.ToContract;
 using Shouldly;
 
-namespace WebApi.Tests.ToContract.Complete
+namespace WebApi.Tests.ToContract.FinishUp
 {
-    public class CompleteContractUseCaseTest : FleetManagerClassFixture
+    public class FinishUpContractUseCaseTest : FleetManagerClassFixture
     {
         private const string METHOD = "api/Contract";
         private readonly string _teamMemberToken;
@@ -14,7 +14,7 @@ namespace WebApi.Tests.ToContract.Complete
         private readonly long _vehicleCurrentMileage;
         private readonly long _seededContractId;
 
-        public CompleteContractUseCaseTest(CustomWebApplicationFactory customWebApplication) : base(customWebApplication)
+        public FinishUpContractUseCaseTest(CustomWebApplicationFactory customWebApplication) : base(customWebApplication)
         {
             _teamMemberToken = customWebApplication.USER_TEAM_MEMBER.GetToken();
             _vehicleId = customWebApplication.VEHICLE_TEAM_MEMBER.GetById();
@@ -29,8 +29,8 @@ namespace WebApi.Tests.ToContract.Complete
         {
             var contractId = await RegisterAndActivateContract();
 
-            var request = RequestCompleteContractJsonBuilder.Build(_vehicleCurrentMileage + 100);
-            var result = await DoPatch($"{METHOD}/{contractId}/Complete", request, _teamMemberToken);
+            var request = RequestFinishUpContractJsonBuilder.Build(_vehicleCurrentMileage + 100);
+            var result = await DoPatch($"{METHOD}/{contractId}/FinishUp", request, _teamMemberToken);
 
             result.StatusCode.ShouldBe(HttpStatusCode.OK);
         }
@@ -38,8 +38,8 @@ namespace WebApi.Tests.ToContract.Complete
         [Fact]
         public async Task Error_Contract_Not_Found()
         {
-            var request = RequestCompleteContractJsonBuilder.Build(_vehicleCurrentMileage + 100);
-            var result = await DoPatch($"{METHOD}/0/Complete", request, _teamMemberToken);
+            var request = RequestFinishUpContractJsonBuilder.Build(_vehicleCurrentMileage + 100);
+            var result = await DoPatch($"{METHOD}/0/FinishUp", request, _teamMemberToken);
 
             result.StatusCode.ShouldBe(HttpStatusCode.NotFound);
         }
@@ -47,9 +47,9 @@ namespace WebApi.Tests.ToContract.Complete
         [Fact]
         public async Task Error_Contract_Not_Active()
         {
-            // Contrato semeado está Reserved: Complete só é permitido para Active/Overdue.
-            var request = RequestCompleteContractJsonBuilder.Build(_vehicleCurrentMileage + 100);
-            var result = await DoPatch($"{METHOD}/{_seededContractId}/Complete", request, _teamMemberToken);
+            // Contrato semeado está Reserved: finish up só é permitido para Active/Overdue.
+            var request = RequestFinishUpContractJsonBuilder.Build(_vehicleCurrentMileage + 100);
+            var result = await DoPatch($"{METHOD}/{_seededContractId}/FinishUp", request, _teamMemberToken);
 
             result.StatusCode.ShouldBe(HttpStatusCode.Conflict);
         }
@@ -59,8 +59,8 @@ namespace WebApi.Tests.ToContract.Complete
         {
             var contractId = await RegisterAndActivateContract();
 
-            var request = RequestCompleteContractJsonBuilder.Build(-1);
-            var result = await DoPatch($"{METHOD}/{contractId}/Complete", request, _teamMemberToken);
+            var request = RequestFinishUpContractJsonBuilder.Build(-1);
+            var result = await DoPatch($"{METHOD}/{contractId}/FinishUp", request, _teamMemberToken);
 
             result.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
         }
@@ -68,8 +68,8 @@ namespace WebApi.Tests.ToContract.Complete
         [Fact]
         public async Task Error_Without_Token()
         {
-            var request = RequestCompleteContractJsonBuilder.Build(_vehicleCurrentMileage + 100);
-            var result = await DoPatch($"{METHOD}/1/Complete", request);
+            var request = RequestFinishUpContractJsonBuilder.Build(_vehicleCurrentMileage + 100);
+            var result = await DoPatch($"{METHOD}/1/FinishUp", request);
 
             result.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
         }

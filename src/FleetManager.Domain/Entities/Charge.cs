@@ -27,5 +27,13 @@ namespace FleetManager.Domain.Entities
 
             return new Charge(contract.Id, description, contract.LateFee.Value);
         }
+        public static Charge ForExcedMileageFee(Contract contract)
+        {
+            if(contract.ExcessMileageFee is null || contract.ExcessMileageFee < 0)
+                throw new BusinessRuleException("");
+
+            var description = $"Excess mileage {contract.ExcessMileageFee}";
+            return new Charge(contract.Id, description ,contract.ExcessMileageFee.Value);
+        }
     }
 }

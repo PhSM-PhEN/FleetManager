@@ -2,11 +2,11 @@ using FleetManager.Communication.Request.ToContract;
 using FleetManager.Exception.ExceptionBase;
 using FluentValidation;
 
-namespace FleetManager.Application.UseCase.ToContract.Complete
+namespace FleetManager.Application.UseCase.ToContract.FinishUp
 {
-    public class CompleteContractValidator : AbstractValidator<RequestCompleteContractJson>
+    public class FinishUpContractValidator : AbstractValidator<RequestFinishUpContractJson>
     {
-        public CompleteContractValidator()
+        public FinishUpContractValidator()
         {
             RuleFor(x => x.FinalMileage).GreaterThanOrEqualTo(0).WithMessage(ResourceErrorMessages.MILEAGE_INVALID);
         }
