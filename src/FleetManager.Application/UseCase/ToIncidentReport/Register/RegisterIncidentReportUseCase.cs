@@ -28,7 +28,7 @@ namespace FleetManager.Application.UseCase.ToIncidentReport.Register
             if(incidentReport.IncidentRisk == IncidentRisk.High)
             {
                 vehicle.BlockForIncident(incidentReport);
-                await vehicleWriteOnly.Add(vehicle);
+                vehicleWriteOnly.Update(vehicle);
                 
             }
             
