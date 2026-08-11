@@ -156,4 +156,7 @@
   <data name="LATE_FEE_CHARGE_DESCRIPTION" xml:space="preserve">
     <value>Late return fee ({0} day(s) late)</value>
   </data>
+  <data name="EXCESS_MILEAGE_CHARGE_DESCRIPTION" xml:space="preserve">
+    <value>Excess mileage fee ({0} km over contract)</value>
+  </data>
 </root>

@@ -27,13 +27,15 @@ namespace FleetManager.Domain.Entities
 
             return new Charge(contract.Id, description, contract.LateFee.Value);
         }
-        public static Charge ForExcedMileageFee(Contract contract)
+        public static Charge ForExceededMileageFee(Contract contract)
         {
-            if(contract.ExcessMileageFee is null || contract.ExcessMileageFee < 0)
-                throw new BusinessRuleException("");
+            if (contract.ExcessMileageFee is null || contract.ExcessMileageFee <= 0)
+                throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_HAS_NO_EXCESS_MILEAGE_FEE);
 
-            var description = $"Excess mileage {contract.ExcessMileageFee}";
-            return new Charge(contract.Id, description ,contract.ExcessMileageFee.Value);
+            var excessMileage = Math.Max(0, (contract.FinalMileage ?? 0) - contract.StartMileage - contract.MileageContracted);
+            var description = string.Format(ResourceExtensionsMessages.EXCESS_MILEAGE_CHARGE_DESCRIPTION, excessMileage);
+
+            return new Charge(contract.Id, description, contract.ExcessMileageFee.Value);
         }
     }
 }

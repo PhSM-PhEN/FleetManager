@@ -176,5 +176,14 @@ namespace FleetManager.Exception.ExceptionBase {
                 return ResourceManager.GetString("LATE_FEE_CHARGE_DESCRIPTION", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Excess mileage fee ({0} km over contract).
+        /// </summary>
+        public static string EXCESS_MILEAGE_CHARGE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("EXCESS_MILEAGE_CHARGE_DESCRIPTION", resourceCulture);
+            }
+        }
     }
 }

@@ -214,6 +214,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contract has no excess mileage fee to charge..
+        /// </summary>
+        public static string CONTRACT_HAS_NO_EXCESS_MILEAGE_FEE {
+            get {
+                return ResourceManager.GetString("CONTRACT_HAS_NO_EXCESS_MILEAGE_FEE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Renewal is not allowed after 3 days overdue. The vehicle must be returned and the late fee paid..
         /// </summary>
         public static string RENEWAL_NOT_ALLOWED_PAST_MAX_OVERDUE_DAYS {

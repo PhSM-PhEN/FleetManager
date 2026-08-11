@@ -35,7 +35,7 @@ namespace FleetManager.Application.UseCase.ToContract.FinishUp
 
             if (contract.ExcessMileageFee is > 0)
             {
-                var excessMileageCharge = Charge.ForExcedMileageFee(contract);
+                var excessMileageCharge = Charge.ForExceededMileageFee(contract);
                 await chargeRepository.Add(excessMileageCharge);
             }
 
