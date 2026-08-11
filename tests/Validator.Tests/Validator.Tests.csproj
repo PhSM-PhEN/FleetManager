@@ -22,12 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ToCompany\" />
-    <Folder Include="ToTenant\" />
-    <Folder Include="ToAddress\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\src\FleetManager.Api\FleetManager.Api.csproj" />
     <ProjectReference Include="..\..\src\FleetManager.Communication\FleetManager.Communication.csproj" />
     <ProjectReference Include="..\CommonTestUtilities\CommonTestUtilities.csproj" />

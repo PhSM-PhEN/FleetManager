@@ -25,7 +25,8 @@ namespace CommonTestUtilities.Entities
         }
 
         public static Contract Build(long? id = null, long? vehicleId = null, long? tenantId = null, RentalPlan? rentalPlan = null,
-            RentalType? rentalType = null, ContractStatus status = ContractStatus.Active)
+            RentalType? rentalType = null, ContractStatus status = ContractStatus.Active,
+            DateTime? pickupDateTime = null, DateTime? returnDueDateTime = null)
         {
             var plan = rentalPlan ?? RentalPlanBuilder.Build(id: 1);
 
@@ -41,8 +42,8 @@ namespace CommonTestUtilities.Entities
                     var totalAmount = type == RentalType.Daily
                         ? plan.DailyPrice * totalDays
                         : plan.MonthlyPrice;
-                    var pickupDateTime = f.Date.Soon();
-                    var returnDueDateTime = pickupDateTime.AddDays(totalDays);
+                    var pickup = pickupDateTime ?? f.Date.Soon();
+                    var returnDue = returnDueDateTime ?? pickup.AddDays(totalDays);
 
                     return new Contract(
                         vehicleId ?? f.Random.Long(1, 1000),
@@ -52,8 +53,8 @@ namespace CommonTestUtilities.Entities
                         startMileage,
                         mileageContracted,
                         totalAmount,
-                        pickupDateTime,
-                        returnDueDateTime);
+                        pickup,
+                        returnDue);
                 })
                 .Generate();
 

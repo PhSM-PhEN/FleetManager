@@ -26,15 +26,4 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DoLogin\" />
-    <Folder Include="ToTenant\Delete\" />
-    <Folder Include="ToTenant\GetAll\" />
-    <Folder Include="ToTenant\GetById\" />
-    <Folder Include="ToTenant\Register\" />
-    <Folder Include="ToTenant\Update\" />
-    <Folder Include="ToUser\GetProfile\" />
-    <Folder Include="ToUser\Update\" />
-  </ItemGroup>
-
 </Project>

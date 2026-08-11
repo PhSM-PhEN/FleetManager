@@ -20,10 +20,4 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.19.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DataAccess\ToAddress\" />
-    <Folder Include="DataAccess\ToContract\" />
-    <Folder Include="DataAccess\ToIncidentReport\" />
-  </ItemGroup>
-
 </Project>

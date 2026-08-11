@@ -17,27 +17,4 @@
 		<PackageReference Include="FluentValidation" Version="12.1.1" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="UseCase\ToAddress\Delete\" />
-		<Folder Include="UseCase\ToAddress\GetAll\" />
-		<Folder Include="UseCase\ToAddress\GetById\" />
-		<Folder Include="UseCase\ToAddress\Register\" />
-		<Folder Include="UseCase\ToAddress\Update\" />
-		<Folder Include="UseCase\ToContract\GetAll\" />
-		<Folder Include="UseCase\ToContract\GetById\" />
-		<Folder Include="UseCase\ToContract\Delete\" />
-		<Folder Include="UseCase\ToContract\Update\" />
-		<Folder Include="UseCase\ToContract\Register\" />
-		<Folder Include="UseCase\ToIncidentReport\GetAll\" />
-		<Folder Include="UseCase\ToIncidentReport\Register\" />
-		<Folder Include="UseCase\ToTenant\GetAll\" />
-		<Folder Include="UseCase\ToTenant\GetById\" />
-		<Folder Include="UseCase\ToTenant\Register\" />
-		<Folder Include="UseCase\ToUser\GetProfile\" />
-		<Folder Include="UseCase\ToVehicle\Delete\" />
-		<Folder Include="UseCase\ToVehicle\GetAll\" />
-		<Folder Include="UseCase\ToVehicle\GetById\" />
-		<Folder Include="UseCase\ToVehicle\Register\" />
-	</ItemGroup>
-
 </Project>

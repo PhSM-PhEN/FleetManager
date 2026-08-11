@@ -26,19 +26,17 @@ namespace FleetManager.Application.UseCase.ToContract.FinishUp
                 throw new NotFoundException(ResourceErrorMessages.VEHICLE_NOT_FOUND);
 
             var actualReturnDateTime = DateTime.UtcNow;
-            
-
 
             contract.FinishUp(actualReturnDateTime, request.FinalMileage);
             vehicle.UpdateMileage(request.FinalMileage);
 
             vehicleWrite.Update(vehicle);
             contractRepository.Update(contract);
-            if(contract.ExcessMileageFee != null)
+
+            if (contract.ExcessMileageFee is > 0)
             {
-                var excessMileage = Charge.ForLateFee(contract);
-                await chargeRepository.Add(excessMileage);
-                
+                var excessMileageCharge = Charge.ForExcedMileageFee(contract);
+                await chargeRepository.Add(excessMileageCharge);
             }
 
             if (contract.LateFee is > 0)
@@ -46,7 +44,6 @@ namespace FleetManager.Application.UseCase.ToContract.FinishUp
                 var lateFeeCharge = Charge.ForLateFee(contract);
                 await chargeRepository.Add(lateFeeCharge);
             }
-
 
             await unitOfWork.Commit();
             return contract.ToFinishUpResponse();

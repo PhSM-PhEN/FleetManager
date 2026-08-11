@@ -2,19 +2,20 @@ using CommonTestUtilities.Entities;
 using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Repositories.ToCharge;
 using CommonTestUtilities.Repositories.ToContract;
+using CommonTestUtilities.Repositories.ToVehicle;
 using CommonTestUtilities.Request.ToContract;
 using FleetManager.Application.UseCase.ToContract.FinishUp;
-using FleetManager.Application.UseCase.ToVehicle.Update;
-using FleetManager.Communication.Request.ToVehicle;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Enum;
+using FleetManager.Domain.Repositories.ToCharge;
+using FleetManager.Domain.Repositories.ToVehicle;
 using FleetManager.Exception.ExceptionBase;
 using Moq;
 using Shouldly;
 
 namespace UseCase.Tests.ToContract.FinishUp
 {
-    public class CompleteContractUseCaseTest
+    public class FinishUpContractUseCaseTest
     {
         [Fact]
         public async Task Success()
@@ -23,7 +24,7 @@ namespace UseCase.Tests.ToContract.FinishUp
             var finalMileage = contract.StartMileage + contract.MileageContracted;
             var request = RequestFinishUpContractJsonBuilder.Build(finalMileage);
 
-            var useCase = CreateUseCase(contract, out _, out var updateMileageMock);
+            var useCase = CreateUseCase(contract, out _, out var vehicleRepositoryMock);
 
             var response = await useCase.Execute(contract.Id, request);
 
@@ -32,10 +33,10 @@ namespace UseCase.Tests.ToContract.FinishUp
             response.ContractId.ShouldBe(contract.Id);
             response.FinalMileage.ShouldBe(finalMileage);
 
-            // Complete não mexe no Vehicle diretamente: apenas aciona o caso de uso de
-            // quilometragem, passando a km final informada na devolução.
-            updateMileageMock.Verify(u => u.Execute(contract.VehicleId,
-                It.Is<RequestMileageVehicleJson>(r => r.MileageVehicle == finalMileage)), Times.Once);
+            // FinishUp mexe direto na entidade Vehicle: atualiza a quilometragem atual
+            // e persiste via IVehicleWriteOnlyRepository (não existe mais use case dedicado pra isso).
+            vehicleRepositoryMock.Verify(v => v.Update(
+                It.Is<Vehicle>(veh => veh.CurrentMileage == finalMileage)), Times.Once);
         }
 
         [Fact]
@@ -59,11 +60,13 @@ namespace UseCase.Tests.ToContract.FinishUp
         [Fact]
         public async Task Success_Charges_Late_Fee_When_Returned_After_Due_Date()
         {
-            var contract = ContractBuilder.Build(1, vehicleId: 10, status: ContractStatus.Active);
+            // devolução prevista há 3 dias e meio -> conta como 4 dias de atraso (fração conta como dia cheio)
+            var returnDueDateTime = DateTime.UtcNow.AddDays(-3).AddHours(-13);
+            var pickupDateTime = returnDueDateTime.AddDays(-10);
+            var contract = ContractBuilder.Build(1, vehicleId: 10, status: ContractStatus.Active,
+                rentalType: RentalType.Daily, pickupDateTime: pickupDateTime, returnDueDateTime: returnDueDateTime);
             var finalMileage = contract.StartMileage + contract.MileageContracted;
             var request = RequestFinishUpContractJsonBuilder.Build(finalMileage);
-            // devolução 3 dias e meio depois do previsto -> conta como 4 dias de atraso (fração conta como dia cheio)
-            request.ActualReturnDateTime = contract.ReturnDueDateTime.AddDays(3).AddHours(12);
 
             var useCase = CreateUseCase(contract, out var chargeRepositoryMock, out _);
 
@@ -85,7 +88,7 @@ namespace UseCase.Tests.ToContract.FinishUp
             var contract = ContractBuilder.Build(1, vehicleId: 10, status: ContractStatus.Active);
             var finalMileage = contract.StartMileage + contract.MileageContracted;
             var request = RequestFinishUpContractJsonBuilder.Build(finalMileage);
-            request.ActualReturnDateTime = contract.ReturnDueDateTime;
+            
 
             var useCase = CreateUseCase(contract, out var chargeRepositoryMock, out _);
 
@@ -150,16 +153,21 @@ namespace UseCase.Tests.ToContract.FinishUp
 
         private static FinishUpContractUseCase CreateUseCase(
             Contract? contract,
-            out Mock<FleetManager.Domain.Repositories.ToCharge.IChargeWriteOnlyRepository> chargeRepositoryMock,
-            out Mock<IUpdateMileageVehicleUseCase> updateMileageMock)
+            out Mock<IChargeWriteOnlyRepository> chargeRepositoryMock,
+            out Mock<IVehicleWriteOnlyRepository> vehicleRepositoryMock)
         {
             var contractRepositoryBuilder = new ContractWriteOnlyRepositoryBuilder();
             var chargeRepositoryBuilder = new ChargeWriteOnlyRepositoryBuilder().Add();
+            var vehicleRepositoryBuilder = new VehicleWriteOnlyRepositoryBuilder();
 
             if (contract is not null)
             {
                 contractRepositoryBuilder.GetById(contract.Id, contract);
                 contractRepositoryBuilder.Update(contract);
+
+                var vehicle = VehicleBuilder.Build(id: contract.VehicleId);
+                vehicleRepositoryBuilder.GetById(contract.VehicleId, vehicle);
+                vehicleRepositoryBuilder.Update(vehicle);
             }
             else
             {
@@ -169,16 +177,11 @@ namespace UseCase.Tests.ToContract.FinishUp
             var contractRepository = contractRepositoryBuilder.Build();
             chargeRepositoryMock = chargeRepositoryBuilder.BuildMock();
 
-            // CompleteContractUseCase não fala mais com o repositório de Vehicle: ele delega pro
-            // caso de uso de atualização de km, que aqui é apenas mockado (sem lógica própria).
-            updateMileageMock = new Mock<IUpdateMileageVehicleUseCase>();
-            updateMileageMock
-                .Setup(u => u.Execute(It.IsAny<long>(), It.IsAny<RequestMileageVehicleJson>()))
-                .Returns(Task.CompletedTask);
+            var vehicleRepository = vehicleRepositoryBuilder.Build();
+            vehicleRepositoryMock = Mock.Get(vehicleRepository);
 
-            var unitOfWork = UnitOfWorkBuilder.Build();
-
-            return new CompleteContractUseCase(contractRepository, chargeRepositoryMock.Object, updateMileageMock.Object, unitOfWork);
+            return new FinishUpContractUseCase(
+                contractRepository, chargeRepositoryMock.Object, vehicleRepository, UnitOfWorkBuilder.Build());
         }
     }
 }
