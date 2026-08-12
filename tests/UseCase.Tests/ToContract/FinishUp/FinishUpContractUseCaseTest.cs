@@ -83,6 +83,33 @@ namespace UseCase.Tests.ToContract.FinishUp
         }
 
         [Fact]
+        public async Task Success_Charges_Late_Fee_And_Excess_Mileage_Fee_Together()
+        {
+            // devolução prevista há 3 dias e meio -> 4 dias de atraso, e também acima da km contratada.
+            var returnDueDateTime = DateTime.UtcNow.AddDays(-3).AddHours(-13);
+            var pickupDateTime = returnDueDateTime.AddDays(-10);
+            var contract = ContractBuilder.Build(1, vehicleId: 10, status: ContractStatus.Active,
+                rentalType: RentalType.Daily, pickupDateTime: pickupDateTime, returnDueDateTime: returnDueDateTime);
+            var finalMileage = contract.StartMileage + contract.MileageContracted + 100;
+            var request = RequestFinishUpContractJsonBuilder.Build(finalMileage);
+
+            var useCase = CreateUseCase(contract, out var chargeRepositoryMock, out _);
+
+            var response = await useCase.Execute(contract.Id, request);
+
+            contract.DaysLate.ShouldBe(4);
+            contract.LateFee!.Value.ShouldBeGreaterThan(0);
+            contract.ExcessMileageFee!.Value.ShouldBeGreaterThan(0);
+            response.TotalCharged.ShouldBe(contract.LateFee!.Value + contract.ExcessMileageFee!.Value);
+
+            chargeRepositoryMock.Verify(c => c.Add(It.Is<Charge>(charge =>
+                charge.ContractId == contract.Id && charge.Amount == contract.LateFee)), Times.Once);
+            chargeRepositoryMock.Verify(c => c.Add(It.Is<Charge>(charge =>
+                charge.ContractId == contract.Id && charge.Amount == contract.ExcessMileageFee)), Times.Once);
+            chargeRepositoryMock.Verify(c => c.Add(It.IsAny<Charge>()), Times.Exactly(2));
+        }
+
+        [Fact]
         public async Task Success_Does_Not_Charge_Late_Fee_When_Returned_On_Time()
         {
             var contract = ContractBuilder.Build(1, vehicleId: 10, status: ContractStatus.Active);

@@ -181,6 +181,27 @@ namespace FleetManager.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "Charges",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ContractId = table.Column<long>(type: "bigint", nullable: false),
+                    Description = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Amount = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Charges", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Contracts",
                 columns: table => new
                 {
@@ -191,7 +212,7 @@ namespace FleetManager.Infrastructure.Migrations
                     RentalPlanId = table.Column<long>(type: "bigint", nullable: false),
                     RentalType = table.Column<int>(type: "int", nullable: false),
                     StartMileage = table.Column<long>(type: "bigint", nullable: false),
-                    EndMileage = table.Column<long>(type: "bigint", nullable: false),
+                    ExpectedEndMileage = table.Column<long>(type: "bigint", nullable: false),
                     MileageContracted = table.Column<long>(type: "bigint", nullable: false),
                     SnapshotPriceDailyRate = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     SnapshotPriceMonthlyRate = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
@@ -200,6 +221,8 @@ namespace FleetManager.Infrastructure.Migrations
                     TotalDays = table.Column<int>(type: "int", nullable: false),
                     FinalMileage = table.Column<long>(type: "bigint", nullable: true),
                     ExcessMileageFee = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
+                    DaysLate = table.Column<int>(type: "int", nullable: false),
+                    LateFee = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
                     PickupDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ReturnDueDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ContractStatus = table.Column<int>(type: "int", nullable: false),
@@ -350,6 +373,11 @@ namespace FleetManager.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Charges_ContractId",
+                table: "Charges",
+                column: "ContractId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Companies_AddressId",
                 table: "Companies",
                 column: "AddressId");
@@ -452,6 +480,14 @@ namespace FleetManager.Infrastructure.Migrations
                 column: "RentalPlanId");
 
             migrationBuilder.AddForeignKey(
+                name: "FK_Charges_Contracts_ContractId",
+                table: "Charges",
+                column: "ContractId",
+                principalTable: "Contracts",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
                 name: "FK_Contracts_Vehicles_VehicleId",
                 table: "Contracts",
                 column: "VehicleId",
@@ -472,32 +508,23 @@ namespace FleetManager.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
+                name: "FK_IncidentReports_Contracts_ContractId",
+                table: "IncidentReports");
+
+            migrationBuilder.DropForeignKey(
                 name: "FK_Companies_Addresses_AddressId",
                 table: "Companies");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Tenants_Addresses_AddressId",
-                table: "Tenants");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Contracts_RentalPlans_RentalPlanId",
-                table: "Contracts");
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Vehicles_RentalPlans_RentalPlanId",
                 table: "Vehicles");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_Contracts_Tenants_TenantId",
-                table: "Contracts");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Contracts_Vehicles_VehicleId",
-                table: "Contracts");
-
-            migrationBuilder.DropForeignKey(
                 name: "FK_IncidentReports_Vehicles_VehicleId",
                 table: "IncidentReports");
+
+            migrationBuilder.DropTable(
+                name: "Charges");
 
             migrationBuilder.DropTable(
                 name: "HistoryLogs");
@@ -509,13 +536,16 @@ namespace FleetManager.Infrastructure.Migrations
                 name: "Users");
 
             migrationBuilder.DropTable(
+                name: "Contracts");
+
+            migrationBuilder.DropTable(
+                name: "Tenants");
+
+            migrationBuilder.DropTable(
                 name: "Addresses");
 
             migrationBuilder.DropTable(
                 name: "RentalPlans");
-
-            migrationBuilder.DropTable(
-                name: "Tenants");
 
             migrationBuilder.DropTable(
                 name: "Vehicles");
@@ -525,9 +555,6 @@ namespace FleetManager.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "IncidentReports");
-
-            migrationBuilder.DropTable(
-                name: "Contracts");
         }
     }
 }

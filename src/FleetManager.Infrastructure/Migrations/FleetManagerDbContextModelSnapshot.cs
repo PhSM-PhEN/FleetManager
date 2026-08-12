@@ -67,6 +67,43 @@ namespace FleetManager.Infrastructure.Migrations
                     b.ToTable("Addresses");
                 });
 
+            modelBuilder.Entity("FleetManager.Domain.Entities.Charge", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.Property<long>("ContractId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<long>("CreatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContractId");
+
+                    b.ToTable("Charges");
+                });
+
             modelBuilder.Entity("FleetManager.Domain.Entities.Company", b =>
                 {
                     b.Property<long>("Id")
@@ -132,14 +169,20 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Property<long>("CreatedBy")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("EndMileage")
-                        .HasColumnType("bigint");
+                    b.Property<int>("DaysLate")
+                        .HasColumnType("int");
 
                     b.Property<decimal?>("ExcessMileageFee")
                         .HasColumnType("decimal(65,30)");
 
+                    b.Property<long>("ExpectedEndMileage")
+                        .HasColumnType("bigint");
+
                     b.Property<long?>("FinalMileage")
                         .HasColumnType("bigint");
+
+                    b.Property<decimal?>("LateFee")
+                        .HasColumnType("decimal(65,30)");
 
                     b.Property<long>("MileageContracted")
                         .HasColumnType("bigint");
@@ -515,6 +558,17 @@ namespace FleetManager.Infrastructure.Migrations
                     b.HasIndex("RentalPlanId");
 
                     b.ToTable("Vehicles");
+                });
+
+            modelBuilder.Entity("FleetManager.Domain.Entities.Charge", b =>
+                {
+                    b.HasOne("FleetManager.Domain.Entities.Contract", "Contract")
+                        .WithMany()
+                        .HasForeignKey("ContractId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Contract");
                 });
 
             modelBuilder.Entity("FleetManager.Domain.Entities.Company", b =>

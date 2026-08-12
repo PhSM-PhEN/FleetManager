@@ -75,6 +75,11 @@ namespace CommonTestUtilities.Entities
                 contract.Confirm();
                 contract.MarkAsOverdue();
             }
+            else if (status == ContractStatus.Renewed)
+            {
+                contract.Confirm();
+                Contract.Renew(contract, plan, null);
+            }
 
             return contract;
         }
