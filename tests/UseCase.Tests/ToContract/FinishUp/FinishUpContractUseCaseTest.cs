@@ -17,6 +17,19 @@ namespace UseCase.Tests.ToContract.FinishUp
 {
     public class FinishUpContractUseCaseTest
     {
+        // 5.4 (Incident) — Garantia estrutural: um incidente aberto NUNCA pode impedir o
+        // FinishUp, porque essa use case nem tem acesso a repositório de IncidentReport.
+        [Fact]
+        public void Constructor_Does_Not_Depend_On_Any_IncidentReport_Repository()
+        {
+            var constructor = typeof(FinishUpContractUseCase).GetConstructors().Single();
+
+            var dependsOnIncidentReport = constructor.GetParameters()
+                .Any(p => p.ParameterType.Name.Contains("IncidentReport"));
+
+            dependsOnIncidentReport.ShouldBeFalse();
+        }
+
         [Fact]
         public async Task Success()
         {

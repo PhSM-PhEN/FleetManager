@@ -80,6 +80,25 @@ namespace UseCase.Tests.Entities
             contract.ContractStatus.ShouldBe(ContractStatus.Overdue);
         }
 
+        // 3.1 — Reforço em nível de domínio: MarkAsOverdue só pode partir de Active. Isso é o
+        // que garante, na raiz, que Overdue/Finished/Cancelled/Renewed "permanecem" como estão
+        // mesmo que a rotina de detecção seja chamada de forma indevida sobre eles.
+        [Theory]
+        [InlineData(ContractStatus.Reserved)]
+        [InlineData(ContractStatus.Overdue)]
+        [InlineData(ContractStatus.Finished)]
+        [InlineData(ContractStatus.Cancelled)]
+        [InlineData(ContractStatus.Renewed)]
+        public void DetectOverdue_Error_When_Status_Is_Not_Active(ContractStatus status)
+        {
+            var contract = ContractBuilder.Build(1, status: status);
+
+            var exception = Should.Throw<BusinessRuleException>(() => contract.MarkAsOverdue());
+
+            exception.Message.ShouldBe(ResourceErrorMessages.CONTRACT_NOT_ACTIVE);
+            contract.ContractStatus.ShouldBe(status);
+        }
+
         [Fact]
         public void Overdue_Renew_Within_Limit_Results_In_New_Contract()
         {
