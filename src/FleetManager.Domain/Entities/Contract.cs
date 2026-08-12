@@ -169,6 +169,17 @@ namespace FleetManager.Domain.Entities
             var renewed = new Contract(previousContract.VehicleId, previousContract.TenantId, currentRentalPlan, previousContract.RentalType,
                 startMileage, mileageContracted, totalAmount, pickupDateTime, returnDueDateTime);
 
+            if (!planChanged)
+            {
+                // Mesmo plano: o snapshot de preços do contrato renovado também precisa ficar
+                // congelado com o preço que valia no contrato anterior — não o preço atual do
+                // plano, que pode ter sido reajustado entre um contrato e outro. Sem isso o
+                // TotalAmount (congelado) ficava inconsistente com o próprio snapshot do contrato.
+                renewed.SnapshotPriceDailyRate = previousContract.SnapshotPriceDailyRate;
+                renewed.SnapshotPriceMonthlyRate = previousContract.SnapshotPriceMonthlyRate;
+                renewed.SnapshotPricePerExtraMileage = previousContract.SnapshotPricePerExtraMileage;
+            }
+
             renewed.Confirm();
             previousContract.MarkAsRenewed();
 
