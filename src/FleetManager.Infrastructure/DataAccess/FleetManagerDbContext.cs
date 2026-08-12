@@ -164,6 +164,22 @@ namespace FleetManager.Infrastructure.DataAccess
                 .WithMany()
                 .HasForeignKey(c => c.RentalPlanId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // Concorrência no Register: dois requests simultâneos pro mesmo veículo não podem
+            // resultar em dois contratos "ativos" (Reserved/Active/Overdue). A checagem em memória
+            // (HasActiveContract) sozinha não impede a corrida entre o check e o commit — quem
+            // garante isso de verdade é essa constraint única no banco, avaliada atomicamente pelo
+            // MySQL. Contratos Finished/Cancelled/Renewed geram NULL, que não conflita entre si.
+            // 1 = Reserved, 2 = Active, 5 = Overdue (ContractStatus enum) — mesmos status usados
+            // em ContractRepository.HasActiveContract.
+            modelBuilder.Entity<Contract>()
+                .Property<long?>("ActiveVehicleId")
+                .HasComputedColumnSql("CASE WHEN `ContractStatus` IN (1, 2, 5) THEN `VehicleId` ELSE NULL END", stored: true);
+
+            modelBuilder.Entity<Contract>()
+                .HasIndex("ActiveVehicleId")
+                .IsUnique()
+                .HasDatabaseName("UX_Contracts_ActiveVehicle");
             modelBuilder.Entity<Maintenance>()
                 .HasOne(m => m.Vehicle)
                 .WithMany()
