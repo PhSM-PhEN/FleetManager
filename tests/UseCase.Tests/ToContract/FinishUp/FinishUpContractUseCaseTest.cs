@@ -165,7 +165,7 @@ namespace UseCase.Tests.ToContract.FinishUp
                 contractRepositoryBuilder.GetById(contract.Id, contract);
                 contractRepositoryBuilder.Update(contract);
 
-                var vehicle = VehicleBuilder.Build(id: contract.VehicleId);
+                var vehicle = VehicleBuilder.Build(id: contract.VehicleId, currentMileage: contract.StartMileage);
                 vehicleRepositoryBuilder.GetById(contract.VehicleId, vehicle);
                 vehicleRepositoryBuilder.Update(vehicle);
             }

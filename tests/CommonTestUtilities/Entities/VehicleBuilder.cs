@@ -24,7 +24,7 @@ namespace CommonTestUtilities.Entities
             return list;
         }
 
-        public static Vehicle Build(long? id = null, long? companyId = null ,long? rentalPlan = null)
+        public static Vehicle Build(long? id = null, long? companyId = null, long? rentalPlan = null, long? currentMileage = null)
         {
             var vehicle = new Faker<Vehicle>()
                 .CustomInstantiator(f => new Vehicle(
@@ -35,7 +35,7 @@ namespace CommonTestUtilities.Entities
                     BuildValidRenavam(f),
                     new ChassiNumber(f.Random.String2(17, "ABCDEFGHJKLMNPRSTUVWXYZ0123456789")),
                     BuildMercosulPlate(f),
-                    f.Random.Long(0, 200_000),
+                    currentMileage ?? f.Random.Long(0, 200_000),
                     companyId ?? f.Random.Long(1, 1000),
                     rentalPlan ?? f.Random.Long(1, 1000)
                     
