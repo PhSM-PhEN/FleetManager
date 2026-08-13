@@ -7,10 +7,6 @@ namespace FleetManager.Infrastructure.DataAccess
 {
     internal class UnitOfWork(FleetManagerDbContext dbContext) : IUnitOfWork
     {
-        // Constraints únicas que existem só pra impedir corrida de concorrência (não são erros
-        // de validação do usuário) e o erro de negócio correspondente pra cada uma. Centralizado
-        // aqui porque é o único ponto em que uma violação de índice do MySQL realmente aparece
-        // (SaveChangesAsync), então não faz sentido a camada de Application conhecer MySqlConnector.
         private static readonly Dictionary<string, string> ConcurrencyConstraintMessages = new()
         {
             ["UX_Contracts_ActiveVehicle"] = ResourceErrorMessages.VEHICLE_ALREADY_RENTED
@@ -18,12 +14,25 @@ namespace FleetManager.Infrastructure.DataAccess
 
         public async Task Commit()
         {
+
+            var useTransaction = dbContext.Database.IsRelational();
+
+            var transaction = useTransaction
+                ? await dbContext.Database.BeginTransactionAsync()
+                : null;
+
             try
             {
                 await dbContext.SaveChangesAsync();
+
+                if (transaction is not null)
+                    await transaction.CommitAsync();
             }
             catch (DbUpdateException ex) when (ex.InnerException is MySqlException { Number: 1062 } mySqlException)
             {
+                if (transaction is not null)
+                    await transaction.RollbackAsync();
+
                 var constraint = ConcurrencyConstraintMessages.Keys
                     .FirstOrDefault(key => mySqlException.Message.Contains(key));
 
@@ -31,6 +40,18 @@ namespace FleetManager.Infrastructure.DataAccess
                     throw;
 
                 throw new BusinessRuleException(ConcurrencyConstraintMessages[constraint]);
+            }
+            catch
+            {
+                if (transaction is not null)
+                    await transaction.RollbackAsync();
+
+                throw;
+            }
+            finally
+            {
+                if (transaction is not null)
+                    await transaction.DisposeAsync();
             }
         }
     }

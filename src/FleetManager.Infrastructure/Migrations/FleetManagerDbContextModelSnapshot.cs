@@ -157,6 +157,11 @@ namespace FleetManager.Infrastructure.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<long?>("ActiveVehicleId")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("bigint")
+                        .HasComputedColumnSql("CASE WHEN `ContractStatus` IN (1, 2, 5) THEN `VehicleId` ELSE NULL END", true);
+
                     b.Property<DateTime?>("ActualReturnDateTime")
                         .HasColumnType("datetime(6)");
 
@@ -231,6 +236,10 @@ namespace FleetManager.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ActiveVehicleId")
+                        .IsUnique()
+                        .HasDatabaseName("UX_Contracts_ActiveVehicle");
+
                     b.HasIndex("RentalPlanId");
 
                     b.HasIndex("TenantId");
@@ -294,9 +303,6 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<Guid>("IncidentReportIdentifier")
-                        .HasColumnType("char(36)");
 
                     b.Property<int>("IncidentRisk")
                         .HasColumnType("int");
