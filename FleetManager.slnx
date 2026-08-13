@@ -9,6 +9,7 @@
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/CommonTestUtilities/CommonTestUtilities.csproj" />
+    <Project Path="tests/Domain.Tests/Domain.Tests.csproj" Id="2adae3c5-4514-4922-8e9d-fcf57683af40" />
     <Project Path="tests/UseCase.Tests/UseCase.Tests.csproj" />
     <Project Path="tests/Validator.Tests/Validator.Tests.csproj" />
     <Project Path="tests/WebApi.Tests/WebApi.Tests.csproj" />
