@@ -9,8 +9,6 @@ using FleetManager.Domain.Repositories.ToRentalPlan;
 using FleetManager.Domain.Repositories.ToTenant;
 using FleetManager.Domain.Repositories.ToVehicle;
 using FleetManager.Exception.ExceptionBase;
-using Microsoft.EntityFrameworkCore;
-using MySqlConnector;
 
 namespace FleetManager.Application.UseCase.ToContract.Register
 {
@@ -52,19 +50,7 @@ namespace FleetManager.Application.UseCase.ToContract.Register
                                         request.PickupDateTime, request.ReturnDueDateTime);
 
             await contractRepository.Add(contract);
-
-            try
-            {
-                await unitOfWork.Commit();
-            }
-            catch (DbUpdateException ex) when (ex.InnerException is MySqlException { Number: 1062 })
-            {
-                // A checagem de HasActiveContract acima é só o caminho feliz: sob concorrência,
-                // dois requests podem passar por ela antes de qualquer um commitar. Quem garante
-                // a regra de verdade é a constraint única UX_Contracts_ActiveVehicle no banco -
-                // se ela disparar aqui, é exatamente o mesmo caso de negócio de "veículo já alugado".
-                throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_ALREADY_RENTED);
-            }
+            await unitOfWork.Commit();
 
             return contract.ToResponse();
         }
