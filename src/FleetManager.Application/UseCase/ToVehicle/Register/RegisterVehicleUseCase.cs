@@ -13,7 +13,7 @@ namespace FleetManager.Application.UseCase.ToVehicle.Register
 {
     public class RegisterVehicleUseCase(IVehicleWriteOnlyRepository repository, ICompanyReadOnlyRepository companyRepository, IRentalPlanReadOnlyRepository rentalPlanRepository, IUnitOfWork unitOfWork) : IRegisterVehicleUseCase
     {
-        public async Task<ResponseVehicleRegisteredJson> Execute(RequestVehicleJson request)
+        public async Task<ResponseRegisterVehicleJson> Execute(RequestVehicleJson request)
         {
             Validate(request);
             _ = await companyRepository.GetById(request.CompanyId) ??

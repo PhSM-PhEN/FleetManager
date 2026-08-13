@@ -8,7 +8,7 @@ namespace FleetManager.Domain.Entities
         public long VehicleId { get; private set; }
         public long? IncidentReportId { get; private set; }
         public DateTime ScheduledAt { get; private set; } 
-        public decimal WorkshopBudget { get; private set; }
+        public decimal? WorkshopBudget { get; private set; }
         public string ProblemDescription { get; private set; } = string.Empty;
         public MaintenanceStatus Status { get; private set; } 
         public Vehicle Vehicle { get; private set; } = default!;
@@ -16,25 +16,31 @@ namespace FleetManager.Domain.Entities
 
         protected Maintenance() { }
 
-        public Maintenance(long vehicleId, long? incidentReportId, decimal workshopBudget, string problemDescription)
+        public Maintenance(long vehicleId, long? incidentReportId, DateTime scheduledAt)
         {
             VehicleId = vehicleId;
             IncidentReportId = incidentReportId;
-            WorkshopBudget = workshopBudget;
-            ProblemDescription = problemDescription;
-            ScheduledAt = DateTime.UtcNow.Date;
+            ScheduledAt = scheduledAt;
             Status = MaintenanceStatus.Scheduled;
             RegisterHistoryEvent("Scheduled");
         }
 
-        public void Close()
+        public void Close(string problemDescription, decimal workshopBudget)
         {
             if(Status == MaintenanceStatus.Closed)
             {
                 throw new BusinessRuleException(ResourceErrorMessages.MAINTENANCE_IS_ALREADY_CLOSED);
             }
+            ProblemDescription = problemDescription;
+            if(workshopBudget <= 0)
+            {
+                throw new BusinessRuleException("Custo da manutençao nao informado");
+            }
+                
+            WorkshopBudget = workshopBudget;
             Status = MaintenanceStatus.Closed;
             RegisterHistoryEvent("Closed");
         }
+        
     }
 }

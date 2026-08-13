@@ -34,9 +34,10 @@ namespace FleetManager.Infrastructure.DataAccess.ToMaintenance
         }
         async Task<Maintenance?> IMaintenanceReadOnlyRepository.GetById(long id)
         {
-            return await dbContext.Maintenances.AsNoTracking().
-                         Include(v => v.Vehicle)
-                         .FirstOrDefaultAsync(m => m.Id == id);
+            return await dbContext.Maintenances.AsNoTracking()
+                        .Include(v => v.Vehicle)
+                        .Include(ir => ir.IncidentReport)
+                        .FirstOrDefaultAsync(m => m.Id == id);
         }
 
         public void Update(Maintenance maintenance)

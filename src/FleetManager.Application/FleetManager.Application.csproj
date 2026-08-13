@@ -17,4 +17,12 @@
 		<PackageReference Include="FluentValidation" Version="12.1.1" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="UseCase\ToMaintenance\" />
+	  <Folder Include="UseCase\ToMaintenance\Delete\" />
+	  <Folder Include="UseCase\ToMaintenance\GetAll\" />
+	  <Folder Include="UseCase\ToMaintenance\GetById\" />
+	  <Folder Include="UseCase\ToMaintenance\Register\" />
+	</ItemGroup>
+
 </Project>
