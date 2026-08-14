@@ -12,9 +12,9 @@ namespace FleetManager.Application.UseCase.ToMaintenance.Register
     public class RegisterMaintenanceUseCase
         (IMaintenanceWriteOnlyRepository repository,
         IVehicleReadOnlyRepository vehicleRepository,
-        IUnitOfWork unitOfWork) : IRegisterMaintenaceUseCase
+        IUnitOfWork unitOfWork) : IRegisterMaintenanceUseCase
     {
-        public async Task<ResponseRegisterMaintenanceJson> Execute(RequestMaintenanceJson request)
+        public async Task<ResponseShortMaintenanceJson> Execute(RequestMaintenanceJson request)
         {
             Validate(request);
             _ = await vehicleRepository.GetById(request.VehicleId) ??
@@ -25,7 +25,7 @@ namespace FleetManager.Application.UseCase.ToMaintenance.Register
             await repository.Add(maintenance);
             await unitOfWork.Commit();
 
-            return maintenance.ToRegisterResponse();
+            return maintenance.ToResponse();
         }
         private static void Validate(RequestMaintenanceJson request)
         {

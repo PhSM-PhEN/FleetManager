@@ -10,7 +10,7 @@ namespace FleetManager.Application.UseCase.ToMaintenance.GetById
         public async Task<ResposneMaintenanceJson> Execute(long id)
         {
             var maintenace = await repository.GetById(id) ?? 
-                throw new NotFoundException("manutançao nao encontrada");
+                throw new NotFoundException(ResourceErrorMessages.MAINTENANCE_NOT_FOUND);
 
             return maintenace.ToInfoResponse();
         }

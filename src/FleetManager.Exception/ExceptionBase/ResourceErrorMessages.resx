@@ -414,4 +414,19 @@
   <data name="INCIDENT_REPORT_NOT_FOUND" xml:space="preserve">
     <value>Incident report not found.</value>
   </data>
+  <data name="MAINTENANCE_NOT_FOUND" xml:space="preserve">
+    <value>Maintenance not found.</value>
+  </data>
+  <data name="MAINTENANCE_ID_REQUIRED" xml:space="preserve">
+    <value>Maintenance id required.</value>
+  </data>
+  <data name="INCIDENT_REPORT_ID_REQUIRED" xml:space="preserve">
+    <value>Incident report id required.</value>
+  </data>
+  <data name="SCHEDULED_AT_CANNOT_BE_IN_THE_PAST" xml:space="preserve">
+    <value>Scheduled at cannot be in the past.</value>
+  </data>
+  <data name="INCIDENT_REPORT_ID_INVALID" xml:space="preserve">
+    <value>Incident report id invalid.</value>
+  </data>
 </root>

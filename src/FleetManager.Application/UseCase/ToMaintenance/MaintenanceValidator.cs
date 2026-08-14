@@ -9,8 +9,8 @@ namespace FleetManager.Application.UseCase.ToMaintenance
         public MaintenanceValidator()
         {
             RuleFor(m => m.VehicleId).GreaterThan(0).WithMessage(ResourceErrorMessages.VEHICLE_ID_REQUIRED);
-            RuleFor(m => m.IncidentReportId).GreaterThanOrEqualTo(0).WithMessage("Id invalid");
-            RuleFor(m => m.ScheduledAt).NotNull().GreaterThanOrEqualTo(DateTime.UtcNow).WithMessage("Data nao desve estar no passado");
+            RuleFor(m => m.IncidentReportId).GreaterThanOrEqualTo(0).WithMessage(ResourceErrorMessages.INCIDENT_REPORT_ID_INVALID);
+            RuleFor(m => m.ScheduledAt).NotNull().GreaterThanOrEqualTo(DateTime.UtcNow).WithMessage(ResourceErrorMessages.SCHEDULED_AT_CANNOT_BE_IN_THE_PAST);
         }
     }
 }

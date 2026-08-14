@@ -187,6 +187,24 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contract has no excess mileage fee to charge..
+        /// </summary>
+        public static string CONTRACT_HAS_NO_EXCESS_MILEAGE_FEE {
+            get {
+                return ResourceManager.GetString("CONTRACT_HAS_NO_EXCESS_MILEAGE_FEE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contract has no late fee to charge..
+        /// </summary>
+        public static string CONTRACT_HAS_NO_LATE_FEE {
+            get {
+                return ResourceManager.GetString("CONTRACT_HAS_NO_LATE_FEE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contract is required..
         /// </summary>
         public static string CONTRACT_IS_REQUIRED {
@@ -201,42 +219,6 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string CONTRACT_NOT_ACTIVE {
             get {
                 return ResourceManager.GetString("CONTRACT_NOT_ACTIVE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Contract has no late fee to charge..
-        /// </summary>
-        public static string CONTRACT_HAS_NO_LATE_FEE {
-            get {
-                return ResourceManager.GetString("CONTRACT_HAS_NO_LATE_FEE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Contract has no excess mileage fee to charge..
-        /// </summary>
-        public static string CONTRACT_HAS_NO_EXCESS_MILEAGE_FEE {
-            get {
-                return ResourceManager.GetString("CONTRACT_HAS_NO_EXCESS_MILEAGE_FEE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Renewal is not allowed after 3 days overdue. The vehicle must be returned and the late fee paid..
-        /// </summary>
-        public static string RENEWAL_NOT_ALLOWED_PAST_MAX_OVERDUE_DAYS {
-            get {
-                return ResourceManager.GetString("RENEWAL_NOT_ALLOWED_PAST_MAX_OVERDUE_DAYS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Discount amount exceeds the allowed limit..
-        /// </summary>
-        public static string TOTAL_AMOUNT_DISCOUNT_EXCEEDS_LIMIT {
-            get {
-                return ResourceManager.GetString("TOTAL_AMOUNT_DISCOUNT_EXCEEDS_LIMIT", resourceCulture);
             }
         }
         
@@ -430,6 +412,24 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Incident report id invalid..
+        /// </summary>
+        public static string INCIDENT_REPORT_ID_INVALID {
+            get {
+                return ResourceManager.GetString("INCIDENT_REPORT_ID_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incident report id required..
+        /// </summary>
+        public static string INCIDENT_REPORT_ID_REQUIRED {
+            get {
+                return ResourceManager.GetString("INCIDENT_REPORT_ID_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Incident report not found..
         /// </summary>
         public static string INCIDENT_REPORT_NOT_FOUND {
@@ -493,11 +493,29 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maintenance id required..
+        /// </summary>
+        public static string MAINTENANCE_ID_REQUIRED {
+            get {
+                return ResourceManager.GetString("MAINTENANCE_ID_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maintenance is already closed..
         /// </summary>
         public static string MAINTENANCE_IS_ALREADY_CLOSED {
             get {
                 return ResourceManager.GetString("MAINTENANCE_IS_ALREADY_CLOSED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maintenance not found..
+        /// </summary>
+        public static string MAINTENANCE_NOT_FOUND {
+            get {
+                return ResourceManager.GetString("MAINTENANCE_NOT_FOUND", resourceCulture);
             }
         }
         
@@ -700,6 +718,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Renewal is not allowed after 3 days overdue. The vehicle must be returned and the late fee paid..
+        /// </summary>
+        public static string RENEWAL_NOT_ALLOWED_PAST_MAX_OVERDUE_DAYS {
+            get {
+                return ResourceManager.GetString("RENEWAL_NOT_ALLOWED_PAST_MAX_OVERDUE_DAYS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rental plan already  registered..
         /// </summary>
         public static string RENTAL_PLAN_ALREADY_EXISTS {
@@ -763,6 +790,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Scheduled at cannot be in the past..
+        /// </summary>
+        public static string SCHEDULED_AT_CANNOT_BE_IN_THE_PAST {
+            get {
+                return ResourceManager.GetString("SCHEDULED_AT_CANNOT_BE_IN_THE_PAST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to State required.
         /// </summary>
         public static string STATE_REQUIRED {
@@ -822,6 +858,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string TOKEN_INVALID_OR_MISSING {
             get {
                 return ResourceManager.GetString("TOKEN_INVALID_OR_MISSING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Discount amount exceeds the allowed limit..
+        /// </summary>
+        public static string TOTAL_AMOUNT_DISCOUNT_EXCEEDS_LIMIT {
+            get {
+                return ResourceManager.GetString("TOTAL_AMOUNT_DISCOUNT_EXCEEDS_LIMIT", resourceCulture);
             }
         }
         

@@ -3,8 +3,8 @@ using FleetManager.Communication.Response.ToMaintenance;
 
 namespace FleetManager.Application.UseCase.ToMaintenance.Register
 {
-    public interface IRegisterMaintenaceUseCase
+    public interface IRegisterMaintenanceUseCase
     {
-        Task<ResponseRegisterMaintenanceJson> Execute(RequestMaintenanceJson request);
+        Task<ResponseShortMaintenanceJson> Execute(RequestMaintenanceJson request);
     }
 }

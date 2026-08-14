@@ -5,9 +5,9 @@ namespace FleetManager.Application.Extensions
 {
     public static class MaintenanceExtensions
     {
-        public static ResponseRegisterMaintenanceJson ToRegisterResponse(this Maintenance maintenance)
+        public static ResponseShortMaintenanceJson ToResponse(this Maintenance maintenance)
         {
-            return new ResponseRegisterMaintenanceJson
+            return new ResponseShortMaintenanceJson
             {   Id = maintenance.Id,
                 VehicleId = maintenance.VehicleId,
                 IncidentReportId = maintenance.Id,
@@ -23,6 +23,10 @@ namespace FleetManager.Application.Extensions
                 IncidentReport = maintenance.IncidentReport.ToResponse(),
                 ScheduledAt = maintenance.ScheduledAt
             };
+        }
+        public static List<ResponseShortMaintenanceJson> ToResponse(this List<Maintenance> maintenances)
+        {
+            return maintenances.Select(m => m.ToResponse()).ToList();
         }
     }
 }

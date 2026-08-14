@@ -28,6 +28,8 @@ using FleetManager.Infrastructure.Services.LoggedUser;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using FleetManager.Infrastructure.DataAccess.ToMaintenance;
+using FleetManager.Domain.Repositories.ToMaintenance;
 
 namespace FleetManager.Infrastructure
 {
@@ -96,6 +98,9 @@ namespace FleetManager.Infrastructure
             //charge
             services.AddScoped<IChargeReadOnlyRepository, ChargeRepository>();
             services.AddScoped<IChargeWriteOnlyRepository, ChargeRepository>();
+            // maintenance
+            services.AddScoped<IMaintenanceReadOnlyRepository, MaintenanceRepository>();   
+            services.AddScoped<IMaintenanceWriteOnlyRepository, MaintenanceRepository>();
 
 
             // unit of work
