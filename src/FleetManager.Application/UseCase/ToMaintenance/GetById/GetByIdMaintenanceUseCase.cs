@@ -7,7 +7,7 @@ namespace FleetManager.Application.UseCase.ToMaintenance.GetById
 {
     public class GetByIdMaintenanceUseCase(IMaintenanceReadOnlyRepository repository) : IGetByIdMaintenanceUseCase
     {
-        public async Task<ResposneMaintenanceJson> Execute(long id)
+        public async Task<ResponseMaintenanceJson> Execute(long id)
         {
             var maintenace = await repository.GetById(id) ?? 
                 throw new NotFoundException(ResourceErrorMessages.MAINTENANCE_NOT_FOUND);

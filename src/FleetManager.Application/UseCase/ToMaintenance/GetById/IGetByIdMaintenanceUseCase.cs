@@ -4,6 +4,6 @@ namespace FleetManager.Application.UseCase.ToMaintenance.GetById
 {
     public interface IGetByIdMaintenanceUseCase
     {
-        Task<ResposneMaintenanceJson> Execute(long id);
+        Task<ResponseMaintenanceJson> Execute(long id);
     }
 }

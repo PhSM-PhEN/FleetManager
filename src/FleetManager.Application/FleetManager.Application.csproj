@@ -20,7 +20,6 @@
 	<ItemGroup>
 	  <Folder Include="UseCase\ToMaintenance\Delete\" />
 	  <Folder Include="UseCase\ToMaintenance\GetById\" />
-	  <Folder Include="UseCase\ToMaintenance\Register\" />
 	</ItemGroup>
 
 </Project>

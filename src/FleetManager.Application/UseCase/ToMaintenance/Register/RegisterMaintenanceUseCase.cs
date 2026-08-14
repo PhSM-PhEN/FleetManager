@@ -1,5 +1,5 @@
 using FleetManager.Application.Extensions;
-using FleetManager.Communication.Request.ToMaintenace;
+using FleetManager.Communication.Request.ToMaintenance;
 using FleetManager.Communication.Response.ToMaintenance;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories;

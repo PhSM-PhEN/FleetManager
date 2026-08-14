@@ -429,4 +429,7 @@
   <data name="INCIDENT_REPORT_ID_INVALID" xml:space="preserve">
     <value>Incident report id invalid.</value>
   </data>
+  <data name="MAINTENANCE_WORKSHOP_BUDGET_REQUIRED" xml:space="preserve">
+    <value>Maintenance workshop budget required.</value>
+  </data>
 </root>

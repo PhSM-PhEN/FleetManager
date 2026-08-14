@@ -1,4 +1,4 @@
-﻿namespace FleetManager.Communication.Request.ToMaintenace
+﻿namespace FleetManager.Communication.Request.ToMaintenance
 {
     public class RequestMaintenanceJson
     {

@@ -88,6 +88,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Excess mileage fee ({0} km over contract).
+        /// </summary>
+        public static string EXCESS_MILEAGE_CHARGE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("EXCESS_MILEAGE_CHARGE_DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Finished.
         /// </summary>
         public static string FINISHED {
@@ -102,6 +111,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string HIGH {
             get {
                 return ResourceManager.GetString("HIGH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Late return fee ({0} day(s) late).
+        /// </summary>
+        public static string LATE_FEE_CHARGE_DESCRIPTION {
+            get {
+                return ResourceManager.GetString("LATE_FEE_CHARGE_DESCRIPTION", resourceCulture);
             }
         }
         
@@ -165,24 +183,6 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string RESOLVED {
             get {
                 return ResourceManager.GetString("RESOLVED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Late return fee ({0} day(s) late).
-        /// </summary>
-        public static string LATE_FEE_CHARGE_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("LATE_FEE_CHARGE_DESCRIPTION", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Excess mileage fee ({0} km over contract).
-        /// </summary>
-        public static string EXCESS_MILEAGE_CHARGE_DESCRIPTION {
-            get {
-                return ResourceManager.GetString("EXCESS_MILEAGE_CHARGE_DESCRIPTION", resourceCulture);
             }
         }
     }

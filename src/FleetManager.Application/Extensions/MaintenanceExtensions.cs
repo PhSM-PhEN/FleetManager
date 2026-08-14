@@ -10,17 +10,17 @@ namespace FleetManager.Application.Extensions
             return new ResponseShortMaintenanceJson
             {   Id = maintenance.Id,
                 VehicleId = maintenance.VehicleId,
-                IncidentReportId = maintenance.Id,
+                IncidentReportId = maintenance.IncidentReport?.Id,
                 ScheduledAt = maintenance.ScheduledAt
             };
         }
-        public static ResposneMaintenanceJson ToInfoResponse(this Maintenance maintenance)
+        public static ResponseMaintenanceJson ToInfoResponse(this Maintenance maintenance)
         {
-            return new ResposneMaintenanceJson
+            return new ResponseMaintenanceJson
             {
                 Id = maintenance.Id,
                 Vehicle = maintenance.Vehicle.ToShortResponse(),
-                IncidentReport = maintenance.IncidentReport.ToResponse(),
+                IncidentReport = maintenance.IncidentReport?.ToResponse(),
                 ScheduledAt = maintenance.ScheduledAt
             };
         }

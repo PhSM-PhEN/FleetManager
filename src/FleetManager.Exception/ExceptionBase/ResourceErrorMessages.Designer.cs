@@ -520,6 +520,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maintenance workshop budget required..
+        /// </summary>
+        public static string MAINTENANCE_WORKSHOP_BUDGET_REQUIRED {
+            get {
+                return ResourceManager.GetString("MAINTENANCE_WORKSHOP_BUDGET_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manufacturing year format invalid..
         /// </summary>
         public static string MANUFACTURING_YEAR_FORMAT_INVALID {

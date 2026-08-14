@@ -34,7 +34,7 @@ namespace FleetManager.Domain.Entities
             ProblemDescription = problemDescription;
             if(workshopBudget <= 0)
             {
-                throw new BusinessRuleException("Custo da manutençao nao informado");
+                throw new BusinessRuleException(ResourceErrorMessages.MAINTENANCE_WORKSHOP_BUDGET_REQUIRED);
             }
                 
             WorkshopBudget = workshopBudget;
