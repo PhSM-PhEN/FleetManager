@@ -25,6 +25,8 @@ using FleetManager.Application.UseCase.ToIncidentReport.GetAll;
 using FleetManager.Application.UseCase.ToIncidentReport.GetById;
 using FleetManager.Application.UseCase.ToIncidentReport.Register;
 using FleetManager.Application.UseCase.ToIncidentReport.Resolve;
+using FleetManager.Application.UseCase.ToMaintenance.Close;
+using FleetManager.Application.UseCase.ToMaintenance.Delete;
 using FleetManager.Application.UseCase.ToMaintenance.GetAll;
 using FleetManager.Application.UseCase.ToMaintenance.GetById;
 using FleetManager.Application.UseCase.ToMaintenance.Register;
@@ -123,6 +125,8 @@ namespace FleetManager.Application
             services.AddScoped<IRegisterMaintenanceUseCase, RegisterMaintenanceUseCase>();
             services.AddScoped<IGetByIdMaintenanceUseCase, GetByIdMaintenanceUseCase>();
             services.AddScoped<IGetAllMaintenanceUseCase, GetAllMaintenanceUseCase>();
+            services.AddScoped<IDeleteMaintenanceUseCase, DeleteMaintenanceUseCase>();
+            services.AddScoped<ICloseMaintenanceUseCase, CloseMaintenanceUseCase>();
 
 
         }

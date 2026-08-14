@@ -18,6 +18,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="UseCase\ToMaintenance\Close\" />
 	  <Folder Include="UseCase\ToMaintenance\Delete\" />
 	  <Folder Include="UseCase\ToMaintenance\GetById\" />
 	</ItemGroup>

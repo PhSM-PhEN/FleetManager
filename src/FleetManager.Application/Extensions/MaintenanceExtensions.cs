@@ -19,9 +19,14 @@ namespace FleetManager.Application.Extensions
             return new ResponseMaintenanceJson
             {
                 Id = maintenance.Id,
+                ScheduledAt = maintenance.ScheduledAt,
+                WorkshopBudget = maintenance.WorkshopBudget,
+                ProblemDescription = maintenance.ProblemDescription,
+                Status = maintenance.Status.ToString(), // adicionar o metodo de extençao para o maintence status depois 
                 Vehicle = maintenance.Vehicle.ToShortResponse(),
                 IncidentReport = maintenance.IncidentReport?.ToResponse(),
-                ScheduledAt = maintenance.ScheduledAt
+                
+
             };
         }
         public static List<ResponseShortMaintenanceJson> ToResponse(this List<Maintenance> maintenances)
