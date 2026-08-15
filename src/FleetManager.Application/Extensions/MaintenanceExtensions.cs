@@ -14,6 +14,20 @@ namespace FleetManager.Application.Extensions
                 ScheduledAt = maintenance.ScheduledAt
             };
         }
+        public static ResponseCloseMaintenanceJson ToCloseResponse(this Maintenance maintenance)
+        {
+            return new ResponseCloseMaintenanceJson
+            {
+                Id = maintenance.Id,
+                ScheduledAt = maintenance.ScheduledAt,
+                WorkshopBudget = maintenance.WorkshopBudget,
+                ProblemDescription = maintenance.ProblemDescription,
+                Status = maintenance.Status.ToString(), // adicionar o metodo de extençao para o maintence status depois 
+                VehicleId = maintenance.VehicleId,
+                IncidentReportId = maintenance.IncidentReportId,
+
+            };
+        }
         public static ResponseMaintenanceJson ToInfoResponse(this Maintenance maintenance)
         {
             return new ResponseMaintenanceJson
@@ -24,9 +38,7 @@ namespace FleetManager.Application.Extensions
                 ProblemDescription = maintenance.ProblemDescription,
                 Status = maintenance.Status.ToString(), // adicionar o metodo de extençao para o maintence status depois 
                 Vehicle = maintenance.Vehicle.ToShortResponse(),
-                IncidentReport = maintenance.IncidentReport?.ToResponse(),
-                
-
+                IncidentReport = maintenance.IncidentReport?.ToResponse()
             };
         }
         public static List<ResponseShortMaintenanceJson> ToResponse(this List<Maintenance> maintenances)

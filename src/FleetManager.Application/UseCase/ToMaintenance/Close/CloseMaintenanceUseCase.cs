@@ -10,7 +10,7 @@ namespace FleetManager.Application.UseCase.ToMaintenance.Close
     public class CloseMaintenanceUseCase(IMaintenanceWriteOnlyRepository repository,
         IUnitOfWork unitOfWork) : ICloseMaintenanceUseCase
     {
-        public async Task<ResponseMaintenanceJson> Execute(long id, RequestClosedMaintenanceJson request)
+        public async Task<ResponseCloseMaintenanceJson> Execute(long id, RequestClosedMaintenanceJson request)
         {
             var maintenance = await repository.GetById(id) ?? 
                 throw new NotFoundException(ResourceErrorMessages.MAINTENANCE_NOT_FOUND);
@@ -19,7 +19,7 @@ namespace FleetManager.Application.UseCase.ToMaintenance.Close
             repository.Update(maintenance);
             await unitOfWork.Commit();
 
-            return maintenance.ToInfoResponse();
+            return maintenance.ToCloseResponse();
         }
     }
 }

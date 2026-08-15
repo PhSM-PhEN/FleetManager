@@ -5,6 +5,6 @@ namespace FleetManager.Application.UseCase.ToMaintenance.Close
 {
     public interface ICloseMaintenanceUseCase
     {
-        Task<ResponseMaintenanceJson> Execute(long id, RequestClosedMaintenanceJson request);
+        Task<ResponseCloseMaintenanceJson> Execute(long id, RequestClosedMaintenanceJson request);
     }
 }

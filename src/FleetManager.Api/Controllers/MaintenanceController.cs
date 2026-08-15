@@ -34,7 +34,7 @@ namespace FleetManager.Api.Controllers
             return Ok(response);
         }
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(ResponseMaintenanceJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseCloseMaintenanceJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetById([FromServices] IGetByIdMaintenanceUseCase useCase, [FromRoute] long id)
         {
@@ -51,7 +51,7 @@ namespace FleetManager.Api.Controllers
             return NoContent();
         }
         [HttpPatch("{id}/Close")]
-        [ProducesResponseType(typeof(ResponseMaintenanceJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseCloseMaintenanceJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status409Conflict)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Close([FromServices] ICloseMaintenanceUseCase useCase, [FromRoute]long id, [FromBody] RequestClosedMaintenanceJson request)
