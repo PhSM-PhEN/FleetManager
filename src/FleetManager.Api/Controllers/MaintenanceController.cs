@@ -34,7 +34,7 @@ namespace FleetManager.Api.Controllers
             return Ok(response);
         }
         [HttpGet("{id}")]
-        [ProducesResponseType(typeof(ResponseCloseMaintenanceJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseMaintenanceJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetById([FromServices] IGetByIdMaintenanceUseCase useCase, [FromRoute] long id)
         {
