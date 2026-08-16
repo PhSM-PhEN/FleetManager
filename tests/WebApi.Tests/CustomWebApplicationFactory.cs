@@ -21,6 +21,7 @@ namespace WebApi.Tests
         public VehicleIdentityManager VEHICLE_TEAM_MEMBER { get; private set; } = default!;
         public RentalPlanIdentityManager RENTAL_PLAN_TEAM_MEMBER { get; private set; } = default!;
         public ContractIdentityManager CONTRACT_TEAM_MEMBER { get; private set; } = default!;
+        public MaintenanceIdentityManager MAINTENANCE_TEAM_MEMBER { get; private set; } = default!;
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
             builder.UseEnvironment("Test")
@@ -67,6 +68,16 @@ namespace WebApi.Tests
             AddContract(dbContext, contractVehicle.Id, TENANT_TEAM_MEMBER.GetById(), rentalPlan);
             dbContext.SaveChanges();
 
+            AddMaintenance(dbContext, vehicle.Id);
+            dbContext.SaveChanges();
+
+        }
+        private Maintenance AddMaintenance(FleetManagerDbContext dbContext, long vehicleId)
+        {
+            var maintenance = MaintenanceBuilder.Build(vehicleId: vehicleId);
+            dbContext.Add(maintenance);
+            MAINTENANCE_TEAM_MEMBER = new MaintenanceIdentityManager(maintenance);
+            return maintenance;
         }
         private Contract AddContract(FleetManagerDbContext dbContext, long vehicleId, long tenantId, RentalPlan rentalPlan)
         {

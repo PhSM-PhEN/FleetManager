@@ -10,7 +10,7 @@ namespace FleetManager.Domain.EnumExtensions
             return status switch
             {
                 MaintenanceStatus.Scheduled => ResourceExtensionsMessages.SCHEDULED,
-                MaintenanceStatus.Closed => ResourceExtensionsMessages.CLOSE,
+                MaintenanceStatus.Closed => ResourceExtensionsMessages.CLOSED,
                 _ => string.Empty,
             };
         }

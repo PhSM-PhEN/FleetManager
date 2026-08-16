@@ -79,11 +79,11 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Close.
+        ///   Looks up a localized string similar to Closed.
         /// </summary>
-        public static string CLOSE {
+        public static string CLOSED {
             get {
-                return ResourceManager.GetString("CLOSE", resourceCulture);
+                return ResourceManager.GetString("CLOSED", resourceCulture);
             }
         }
         
