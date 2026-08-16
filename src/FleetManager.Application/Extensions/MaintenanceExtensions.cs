@@ -1,5 +1,6 @@
 using FleetManager.Communication.Response.ToMaintenance;
 using FleetManager.Domain.Entities;
+using FleetManager.Domain.EnumExtensions;
 
 namespace FleetManager.Application.Extensions
 {
@@ -22,7 +23,7 @@ namespace FleetManager.Application.Extensions
                 ScheduledAt = maintenance.ScheduledAt,
                 WorkshopBudget = maintenance.WorkshopBudget,
                 ProblemDescription = maintenance.ProblemDescription,
-                Status = maintenance.Status.ToString(), // adicionar o metodo de extençao para o maintence status depois 
+                Status = maintenance.Status.ToMaintenanceString(), 
                 VehicleId = maintenance.VehicleId,
                 IncidentReportId = maintenance.IncidentReportId,
 
@@ -36,7 +37,7 @@ namespace FleetManager.Application.Extensions
                 ScheduledAt = maintenance.ScheduledAt,
                 WorkshopBudget = maintenance.WorkshopBudget,
                 ProblemDescription = maintenance.ProblemDescription,
-                Status = maintenance.Status.ToString(), // adicionar o metodo de extençao para o maintence status depois 
+                Status = maintenance.Status.ToMaintenanceString(), 
                 Vehicle = maintenance.Vehicle.ToShortResponse(),
                 IncidentReport = maintenance.IncidentReport?.ToResponse()
             };

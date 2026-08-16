@@ -79,6 +79,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string CLOSE {
+            get {
+                return ResourceManager.GetString("CLOSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Daily.
         /// </summary>
         public static string DAILY {
@@ -183,6 +192,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string RESOLVED {
             get {
                 return ResourceManager.GetString("RESOLVED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scheduled.
+        /// </summary>
+        public static string SCHEDULED {
+            get {
+                return ResourceManager.GetString("SCHEDULED", resourceCulture);
             }
         }
     }

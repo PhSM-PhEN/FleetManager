@@ -159,4 +159,10 @@
   <data name="EXCESS_MILEAGE_CHARGE_DESCRIPTION" xml:space="preserve">
     <value>Excess mileage fee ({0} km over contract)</value>
   </data>
+  <data name="CLOSE" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="SCHEDULED" xml:space="preserve">
+    <value>Scheduled</value>
+  </data>
 </root>
