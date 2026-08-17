@@ -95,4 +95,4 @@ namespace CommonTestUtilities.Entities
             return (char)(checkDigit + '0');
         }
     }
-}
+}

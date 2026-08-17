@@ -84,4 +84,4 @@ namespace CommonTestUtilities.Entities
             return contract;
         }
     }
-}
+}

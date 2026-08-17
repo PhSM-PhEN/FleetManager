@@ -32,4 +32,4 @@ namespace FleetManager.Application.Extensions
             return companies.Select(c => c.ToShortResponse()).ToList();
         }
     }
-}
+}

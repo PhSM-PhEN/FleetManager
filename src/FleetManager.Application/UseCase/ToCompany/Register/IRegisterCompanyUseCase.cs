@@ -7,4 +7,4 @@ namespace FleetManager.Application.UseCase.ToCompany.Register
     {
         Task<ResponseShortCompanyJson> Execute(RequestCompanyJson request);
     }
-}
+}

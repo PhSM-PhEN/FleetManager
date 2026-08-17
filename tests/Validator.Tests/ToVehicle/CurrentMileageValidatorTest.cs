@@ -43,4 +43,4 @@ namespace Validator.Tests.ToVehicle
             result.Errors.ShouldContain(e => e.ErrorMessage.Equals(ResourceErrorMessages.MILEAGE_INVALID));
         }
     }
-}
+}

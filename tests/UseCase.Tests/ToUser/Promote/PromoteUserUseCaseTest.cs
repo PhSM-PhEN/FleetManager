@@ -102,4 +102,4 @@ namespace UseCase.Tests.ToUser.Promote
             return new PromoteUserUseCase(writeRepository, readRepository, loggedUser, unitOfWork);
         }
     }
-}
+}

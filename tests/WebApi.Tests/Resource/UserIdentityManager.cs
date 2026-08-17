@@ -11,4 +11,4 @@ namespace WebApi.Tests.Resource
         public string GetToken() => token;
 
     }
-}
+}

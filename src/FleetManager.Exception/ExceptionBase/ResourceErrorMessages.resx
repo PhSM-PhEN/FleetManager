@@ -378,6 +378,18 @@
   <data name="TENANT_NOT_AVAILABLE" xml:space="preserve">
     <value>Tenant is not available to rent a vehicle.</value>
   </data>
+  <data name="VEHICLE_ALREADY_ACTIVE" xml:space="preserve">
+    <value>Vehicle is already active.</value>
+  </data>
+  <data name="VEHICLE_ALREADY_DEACTIVATED" xml:space="preserve">
+    <value>Vehicle is already deactivated.</value>
+  </data>
+  <data name="TENANT_ALREADY_ACTIVE" xml:space="preserve">
+    <value>Tenant is already active.</value>
+  </data>
+  <data name="TENANT_ALREADY_DEACTIVATED" xml:space="preserve">
+    <value>Tenant is already deactivated.</value>
+  </data>
   <data name="MILEAGE_CONTRACTED_INVALID" xml:space="preserve">
     <value>Mileage Contracted invalid.</value>
   </data>

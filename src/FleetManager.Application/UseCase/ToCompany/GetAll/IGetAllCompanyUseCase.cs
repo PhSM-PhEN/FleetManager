@@ -6,4 +6,4 @@ namespace FleetManager.Application.UseCase.ToCompany.GetAll
     {
         Task<List<ResponseShortCompanyJson>> Execute();
     }
-}
+}

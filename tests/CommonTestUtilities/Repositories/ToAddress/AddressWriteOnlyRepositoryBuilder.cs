@@ -39,4 +39,4 @@ namespace CommonTestUtilities.Repositories.ToAddress
 
         public IAddressWriteOnlyRepository Build() => _repository.Object;
     }
-}
+}

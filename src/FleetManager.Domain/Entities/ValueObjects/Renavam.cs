@@ -59,4 +59,4 @@ namespace FleetManager.Domain.Entities.ValueObjects
             return (char)(checkDigit + '0');
         }
     }
-}
+}

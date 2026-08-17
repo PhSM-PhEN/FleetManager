@@ -38,4 +38,4 @@ namespace UseCase.Tests.ToCompany.GetAll
             return new GetAllCompanyUseCase(repository);
         }
     }
-}
+}

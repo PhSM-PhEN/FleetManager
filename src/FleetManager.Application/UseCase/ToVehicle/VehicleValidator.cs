@@ -19,4 +19,4 @@ namespace FleetManager.Application.UseCase.ToVehicle
             RuleFor(x => x.CompanyId).GreaterThan(0).WithMessage(ResourceErrorMessages.COMPANY_ID_REQUIRED);
         }
     }
-}
+}

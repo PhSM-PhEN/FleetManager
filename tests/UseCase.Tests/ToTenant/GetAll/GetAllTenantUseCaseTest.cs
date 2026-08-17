@@ -54,4 +54,4 @@ namespace UseCase.Tests.ToTenant.GetAll
             return new GetAllTenantUseCase(repository);
         }
     }
-}
+}

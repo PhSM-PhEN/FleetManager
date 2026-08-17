@@ -51,4 +51,4 @@ namespace WebApi.Tests.ToTenant.GetById
             result.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
         }
     }
-}
+}

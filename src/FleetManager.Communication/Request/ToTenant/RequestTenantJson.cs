@@ -11,4 +11,4 @@ namespace FleetManager.Communication.Request.ToTenant
         public string? Email { get; set; }
         public long AddressId { get; set; }
     }
-}
+}

@@ -66,4 +66,4 @@ namespace UseCase.Tests.ToCompany.Update
             return new UpdateCompanyUseCase(repository, addressReadOnly, unitOfWork);
         }
     }
-}
+}

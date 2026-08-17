@@ -68,4 +68,4 @@ namespace CommonTestUtilities.Request.ToVehicle
             return (char)(checkDigit + '0');
         }
     }
-}
+}

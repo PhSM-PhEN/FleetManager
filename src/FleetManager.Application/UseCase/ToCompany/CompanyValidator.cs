@@ -19,4 +19,4 @@ public class CompanyValidator : AbstractValidator<RequestCompanyJson>
 
         RuleFor(x => x.AddressId).GreaterThan(0).WithMessage(ResourceErrorMessages.ADDRESS_ID_REQUIRED);
     }
-}
+}

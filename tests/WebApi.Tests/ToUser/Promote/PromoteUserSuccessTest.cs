@@ -31,4 +31,4 @@ namespace WebApi.Tests.ToUser.Promote
             promoteResult.StatusCode.ShouldBe(HttpStatusCode.NoContent);
         }
     }
-}
+}

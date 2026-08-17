@@ -15,4 +15,4 @@ namespace FleetManager.Application.UseCase.ToCompany.GetById
             return company.ToResponse();
         }
     }
-}
+}

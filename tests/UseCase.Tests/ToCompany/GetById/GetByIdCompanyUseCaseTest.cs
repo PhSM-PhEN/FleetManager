@@ -42,4 +42,4 @@ namespace UseCase.Tests.ToCompany.GetById
             return new GetByIdCompanyUseCase(repository);
         }
     }
-}
+}

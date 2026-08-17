@@ -134,6 +134,40 @@ namespace UseCase.Tests.ToContract.Register
             result.Message.ShouldBe(ResourceErrorMessages.VEHICLE_BLOCKED_FOR_MAINTENANCE);
         }
 
+        [Fact]
+        public async Task Error_Vehicle_Not_Active()
+        {
+            var vehicle = VehicleBuilder.Build(1);
+            vehicle.Deactivate();
+
+            var tenant = TenantBuilder.Build(1);
+            var rentalPlan = RentalPlanBuilder.Build(1);
+            var request = RequestContractJsonBuilder.Build(vehicle.Id, tenant.Id, rentalPlan.Id);
+
+            var useCase = CreateUseCase(vehicle, tenant, rentalPlan, hasActiveContract: false);
+            var act = async () => await useCase.Execute(request);
+
+            var result = await act.ShouldThrowAsync<BusinessRuleException>();
+            result.Message.ShouldBe(ResourceErrorMessages.VEHICLE_NOT_AVAILABLE);
+        }
+
+        [Fact]
+        public async Task Error_Tenant_Not_Active()
+        {
+            var vehicle = VehicleBuilder.Build(1);
+            var tenant = TenantBuilder.Build(1);
+            tenant.Deactivate();
+
+            var rentalPlan = RentalPlanBuilder.Build(1);
+            var request = RequestContractJsonBuilder.Build(vehicle.Id, tenant.Id, rentalPlan.Id);
+
+            var useCase = CreateUseCase(vehicle, tenant, rentalPlan, hasActiveContract: false);
+            var act = async () => await useCase.Execute(request);
+
+            var result = await act.ShouldThrowAsync<BusinessRuleException>();
+            result.Message.ShouldBe(ResourceErrorMessages.TENANT_NOT_AVAILABLE);
+        }
+
         private static RegisterContractUseCase CreateUseCase(Vehicle? vehicle, Tenant? tenant, RentalPlan? rentalPlan, bool hasActiveContract)
         {
             var vehicleRepositoryBuilder = new VehicleReadOnlyRepositoryBuilder();
@@ -160,4 +194,4 @@ namespace UseCase.Tests.ToContract.Register
             return new RegisterContractUseCase(vehicleRepository, tenantRepository, rentalPlanRepository, contractRepository, unitOfWork);
         }
     }
-}
+}

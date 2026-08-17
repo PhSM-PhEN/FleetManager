@@ -83,4 +83,4 @@ namespace UseCase.Tests.ToCompany.Register
             return new RegisterCompanyUseCase(writeRepository, readRepository, addressReadOnly, unitOfWork);
         }
     }
-}
+}

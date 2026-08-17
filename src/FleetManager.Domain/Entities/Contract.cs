@@ -246,4 +246,4 @@ namespace FleetManager.Domain.Entities
             return startMileage + mileageContracted;
         }
     }
-}
+}

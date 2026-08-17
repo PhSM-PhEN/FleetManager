@@ -5,4 +5,4 @@ namespace FleetManager.Application.UseCase.ToCompany.Delete
     {
         Task Execute(long id);
     }
-}
+}

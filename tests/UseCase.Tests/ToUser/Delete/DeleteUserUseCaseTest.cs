@@ -51,4 +51,4 @@ namespace UseCase.Tests.ToUser.Delete
             return new DeleteUserUseCase(loggedUser, repository, unitOfWork);
         }
     }
-}
+}

@@ -13,4 +13,4 @@ namespace FleetManager.Application.UseCase.ToCompany.GetAll
             return companies.ToShortResponse();
         }
     }
-}
+}

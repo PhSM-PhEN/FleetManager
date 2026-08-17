@@ -94,4 +94,4 @@ namespace Validator.Tests.ToCompany
             result.Errors.ShouldContain(e => e.ErrorMessage.Equals(ResourceErrorMessages.ADDRESS_ID_REQUIRED));
         }
     }
-}
+}

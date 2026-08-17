@@ -66,7 +66,7 @@ namespace UseCase.Tests.ToContract.Preview
         {
             var vehicle = VehicleBuilder.Build(1);
             vehicle.RentalPlan = RentalPlanBuilder.Build(1);
-            vehicle.Desactivate();
+            vehicle.Deactivate();
             var tenant = TenantBuilder.Build(1);
             var request = RequestPreviewContractJsonBuilder.Build(vehicle.Id, tenant.Id);
 
@@ -112,7 +112,7 @@ namespace UseCase.Tests.ToContract.Preview
             var vehicle = VehicleBuilder.Build(1);
             vehicle.RentalPlan = RentalPlanBuilder.Build(1);
             var tenant = TenantBuilder.Build(1);
-            tenant.Desactive();
+            tenant.Deactivate();
             var request = RequestPreviewContractJsonBuilder.Build(vehicle.Id, tenant.Id);
 
             var useCase = CreateUseCase(vehicle, tenant, hasActiveContract: false);

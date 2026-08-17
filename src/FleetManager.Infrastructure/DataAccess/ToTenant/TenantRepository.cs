@@ -51,4 +51,4 @@ namespace FleetManager.Infrastructure.DataAccess.ToTenant
             .FirstOrDefaultAsync(t => t.Id == id);
         }
     }
-}
+}

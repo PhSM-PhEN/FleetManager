@@ -74,4 +74,4 @@ namespace UseCase.Tests.DoLogin
             return new DoLoginUseCase(readRepository, passwordEncrypter, tokenGenerator, NullLogger<DoLoginUseCase>.Instance);
         }
     }
-}
+}

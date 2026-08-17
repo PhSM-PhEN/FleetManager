@@ -40,4 +40,4 @@ namespace FleetManager.Application.UseCase.ToCompany.Update
             }
         }
     }
-}
+}

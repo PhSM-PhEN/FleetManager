@@ -43,4 +43,4 @@ namespace UseCase.Tests.ToTenant.GetById
             return new GetByIdTenantUseCase(repository);
         }
     }
-}
+}

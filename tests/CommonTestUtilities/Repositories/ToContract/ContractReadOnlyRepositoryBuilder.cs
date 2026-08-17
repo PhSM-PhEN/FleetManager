@@ -27,4 +27,4 @@ namespace CommonTestUtilities.Repositories.ToContract
 
         public IContractReadOnlyRepository Build() => _repository.Object;
     }
-}
+}

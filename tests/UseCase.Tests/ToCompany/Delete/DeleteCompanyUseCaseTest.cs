@@ -43,4 +43,4 @@ namespace UseCase.Tests.ToCompany.Delete
             return new DeleteCompanyUseCase(repository, unitOfWork);
         }
     }
-}
+}

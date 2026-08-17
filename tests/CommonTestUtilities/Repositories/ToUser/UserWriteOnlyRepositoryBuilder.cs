@@ -42,4 +42,4 @@ namespace CommonTestUtilities.Repositories.ToUser
             return _repository.Object;
         }
     }
-}
+}

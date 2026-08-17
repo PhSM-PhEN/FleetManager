@@ -1,18 +1,17 @@
-
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToVehicle;
 using FleetManager.Exception.ExceptionBase;
 
-namespace FleetManager.Application.UseCase.ToVehicle.Active
+namespace FleetManager.Application.UseCase.ToVehicle.Deactivate
 {
-    public class ActiveVehicleUseCase(IVehicleWriteOnlyRepository repository, IUnitOfWork unitOfWork) : IActiveVehicleUseCase
+    public class DeactivateVehicleUseCase(IVehicleWriteOnlyRepository repository, IUnitOfWork unitOfWork) : IDeactivateVehicleUseCase
     {
         public async Task Execute(long id)
         {
             var vehicle = await repository.GetById(id) ?? throw new NotFoundException(ResourceErrorMessages.VEHICLE_NOT_FOUND);
-            vehicle.Activate();
-            repository.Update(vehicle);
+            vehicle.Deactivate();
 
+            repository.Update(vehicle);
             await unitOfWork.Commit();
         }
     }

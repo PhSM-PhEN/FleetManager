@@ -41,4 +41,4 @@ namespace FleetManager.Domain.Entities.ValueObjects
 
         public override string ToString() => $"{FabricationYear}/{ModelYear}";
     }
-}
+}

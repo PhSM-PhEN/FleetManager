@@ -171,4 +171,4 @@ namespace Validator.Tests.ToVehicle
             result.Errors.ShouldContain(e => e.ErrorMessage.Equals(ResourceErrorMessages.COMPANY_ID_REQUIRED));
         }
     }
-}
+}

@@ -27,4 +27,4 @@ namespace FleetManager.Domain.Entities.ValueObjects
             return (value ?? string.Empty).Trim().ToUpperInvariant();
         }
     }
-}
+}

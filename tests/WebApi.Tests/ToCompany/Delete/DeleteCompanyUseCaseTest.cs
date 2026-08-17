@@ -62,4 +62,4 @@ namespace WebApi.Tests.ToCompany.Delete
             result.StatusCode.ShouldBe(HttpStatusCode.Forbidden);
         }
     }
-}
+}

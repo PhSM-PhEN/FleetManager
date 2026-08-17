@@ -33,4 +33,4 @@ namespace UseCase.Tests.ToUser.GetProfile
             return new GetProfileUserUseCase(repository, loggedUser);
         }
     }
-}
+}

@@ -38,4 +38,4 @@ namespace CommonTestUtilities.Repositories.ToCompany
 
         public ICompanyWriteOnlyRepository Build() => _repository.Object;
     }
-}
+}

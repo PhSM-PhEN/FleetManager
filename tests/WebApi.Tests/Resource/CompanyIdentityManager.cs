@@ -6,4 +6,4 @@ namespace WebApi.Tests.Resource
     {
         public long GetById() => company.Id;
     }
-}
+}

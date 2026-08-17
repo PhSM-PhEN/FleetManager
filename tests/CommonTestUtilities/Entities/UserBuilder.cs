@@ -24,4 +24,4 @@ namespace CommonTestUtilities.Entities
             return user;
         }
     }
-}
+}

@@ -19,4 +19,4 @@ namespace FleetManager.Application.UseCase.ToContract.Renew
                 .WithMessage(ResourceErrorMessages.RENTAL_PLAN_ID_REQUIRED);
         }
     }
-}
+}

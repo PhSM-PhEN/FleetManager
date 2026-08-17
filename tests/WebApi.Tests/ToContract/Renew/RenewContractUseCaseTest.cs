@@ -97,4 +97,4 @@ namespace WebApi.Tests.ToContract.Renew
             return responseBody.RootElement.GetProperty("id").GetInt64();
         }
     }
-}
+}

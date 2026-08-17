@@ -51,4 +51,4 @@ namespace CommonTestUtilities.Repositories.ToContract
 
         public IContractWriteOnlyRepository Build() => _repository.Object;
     }
-}
+}

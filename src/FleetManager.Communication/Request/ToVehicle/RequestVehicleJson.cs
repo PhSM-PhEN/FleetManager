@@ -13,4 +13,4 @@
         public long CompanyId { get; set; }
         public long RentalPlanId {get ; set ;}
     }
-}
+}

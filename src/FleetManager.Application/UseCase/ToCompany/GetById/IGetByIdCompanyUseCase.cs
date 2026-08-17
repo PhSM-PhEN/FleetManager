@@ -6,4 +6,4 @@ namespace FleetManager.Application.UseCase.ToCompany.GetById
     {
         Task<ResponseCompanyJson> Execute(long id);
     }
-}
+}

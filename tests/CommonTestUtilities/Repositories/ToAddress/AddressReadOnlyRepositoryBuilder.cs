@@ -34,4 +34,4 @@ namespace CommonTestUtilities.Repositories.ToAddress
 
         public IAddressReadOnlyRepository Build() => _repository.Object;
     }
-}
+}

@@ -970,6 +970,42 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vehicle is already active..
+        /// </summary>
+        public static string VEHICLE_ALREADY_ACTIVE {
+            get {
+                return ResourceManager.GetString("VEHICLE_ALREADY_ACTIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vehicle is already deactivated..
+        /// </summary>
+        public static string VEHICLE_ALREADY_DEACTIVATED {
+            get {
+                return ResourceManager.GetString("VEHICLE_ALREADY_DEACTIVATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tenant is already active..
+        /// </summary>
+        public static string TENANT_ALREADY_ACTIVE {
+            get {
+                return ResourceManager.GetString("TENANT_ALREADY_ACTIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tenant is already deactivated..
+        /// </summary>
+        public static string TENANT_ALREADY_DEACTIVATED {
+            get {
+                return ResourceManager.GetString("TENANT_ALREADY_DEACTIVATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vehicle not blocked for maintenance..
         /// </summary>
         public static string VEHICLE_NOT_BLOCKED_FOR_MAINTENANCE {

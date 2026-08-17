@@ -7,4 +7,4 @@
         public string PhoneNumber { get; set; } = string.Empty;
         public long AddressId { get; set; }
     }
-}
+}

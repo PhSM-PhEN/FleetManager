@@ -24,4 +24,4 @@ namespace FleetManager.Communication.Response.ToContract
         public ResponseShortVehicleJson Vehicle { get; set; } = new();
         public ResponseTenantJson Tenant { get; set; } = new();
     }
-}
+}

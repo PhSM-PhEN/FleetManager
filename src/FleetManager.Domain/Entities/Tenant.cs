@@ -35,22 +35,20 @@ namespace FleetManager.Domain.Entities
             Contact = contact;
             AddressId = addressId;
         }
-        public void Desactive()
+        public void Deactivate()
         {
-            if(IsActive == false)
-            {
-                throw new BusinessRuleException("ResourceErrorMessages.TENANT_ALREADY_DESACTIVE");
-            }
+            if (!IsActive)
+                throw new BusinessRuleException(ResourceErrorMessages.TENANT_ALREADY_DEACTIVATED);
+
             IsActive = false;
             RegisterHistoryEvent("Disabled");
         }
 
         public void Activate()
         {
-            if(IsActive == true)
-            {
-                throw new BusinessRuleException("ResourceErrorMessages.TENANT_ALREADY_ACTIVE");
-            }
+            if (IsActive)
+                throw new BusinessRuleException(ResourceErrorMessages.TENANT_ALREADY_ACTIVE);
+
             IsActive = true;
             RegisterHistoryEvent("Activated");
         }

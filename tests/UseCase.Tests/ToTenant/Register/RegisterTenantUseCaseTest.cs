@@ -84,4 +84,4 @@ namespace UseCase.Tests.ToTenant.Register
             return new RegisterTenantUseCase(writeRepository, readRepository, addressReadOnly, unitOfWork);
         }
     }
-}
+}

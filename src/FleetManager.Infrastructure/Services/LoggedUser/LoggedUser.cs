@@ -29,4 +29,4 @@ namespace FleetManager.Infrastructure.Services.LoggedUser
             return Task.FromResult(user);
         }
     }
-}
+}

@@ -34,4 +34,4 @@ namespace Validator.Tests.ToUser
             result.IsValid.ShouldBeFalse();
         }
     }
-}
+}

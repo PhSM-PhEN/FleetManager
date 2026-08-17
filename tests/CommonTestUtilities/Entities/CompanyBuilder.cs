@@ -39,4 +39,4 @@ namespace CommonTestUtilities.Entities
             return company;
         }
     }
-}
+}

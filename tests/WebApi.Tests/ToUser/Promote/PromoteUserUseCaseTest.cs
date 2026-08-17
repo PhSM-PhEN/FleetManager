@@ -29,4 +29,4 @@ namespace WebApi.Tests.ToUser.Promote
             result.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
         }
     }
-}
+}

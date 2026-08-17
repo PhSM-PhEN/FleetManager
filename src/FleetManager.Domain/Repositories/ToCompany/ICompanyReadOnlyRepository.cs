@@ -8,4 +8,4 @@ namespace FleetManager.Domain.Repositories.ToCompany
         Task<Company?> GetById(long id);
         Task<bool> ExistByCnpj(string cnpj);
     }
-}
+}

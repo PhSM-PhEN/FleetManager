@@ -16,4 +16,4 @@ namespace CommonTestUtilities.Request.ToCompany
                 .Generate();
         }
     }
-}
+}

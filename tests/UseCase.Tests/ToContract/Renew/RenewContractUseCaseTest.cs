@@ -210,4 +210,4 @@ namespace UseCase.Tests.ToContract.Renew
             return new RenewContractUseCase(contractRepository, rentalPlanRepository, unitOfWork);
         }
     }
-}
+}

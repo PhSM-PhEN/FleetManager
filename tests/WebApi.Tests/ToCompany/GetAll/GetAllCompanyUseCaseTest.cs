@@ -42,4 +42,4 @@ namespace WebApi.Tests.ToCompany.GetAll
             result.StatusCode.ShouldBe(HttpStatusCode.Forbidden);
         }
     }
-}
+}

@@ -45,4 +45,4 @@ namespace FleetManager.Infrastructure.DataAccess.ToCompany
             dbContext.Companies.Update(company);
         }
     }
-}
+}

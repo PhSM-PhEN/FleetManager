@@ -32,4 +32,4 @@ namespace CommonTestUtilities.Repositories.ToCompany
 
         public ICompanyReadOnlyRepository Build() => _repository.Object;
     }
-}
+}

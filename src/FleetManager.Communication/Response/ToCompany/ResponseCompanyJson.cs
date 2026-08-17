@@ -10,4 +10,4 @@ namespace FleetManager.Communication.Response.ToCompany
         public string PhoneNumber { get; set; } = string.Empty;
         public ResponseAddressJson Address { get; set; } = new();
     }
-}
+}

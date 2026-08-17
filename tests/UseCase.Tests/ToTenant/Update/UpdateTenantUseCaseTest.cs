@@ -85,4 +85,4 @@ namespace UseCase.Tests.ToTenant.Update
             return new UpdateTenantUseCase(repository, addressReadOnly, unitOfWork);
         }
     }
-}
+}

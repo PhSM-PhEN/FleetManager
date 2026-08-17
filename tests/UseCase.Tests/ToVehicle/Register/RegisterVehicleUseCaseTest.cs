@@ -172,4 +172,4 @@ namespace UseCase.Tests.ToVehicle.Register
             return new RegisterVehicleUseCase(writeRepository, companyRepository, rentalPlanRepository, unitOfWork);
         }
     }
-}
+}
