@@ -1,4 +1,5 @@
 using FleetManager.Domain.Entities.ValueObjects;
+using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Domain.Entities
 {
@@ -34,14 +35,22 @@ namespace FleetManager.Domain.Entities
             Contact = contact;
             AddressId = addressId;
         }
-        public void Disable()
+        public void Desactive()
         {
+            if(IsActive == false)
+            {
+                throw new BusinessRuleException("ResourceErrorMessages.TENANT_ALREADY_DESACTIVE");
+            }
             IsActive = false;
             RegisterHistoryEvent("Disabled");
         }
 
         public void Activate()
         {
+            if(IsActive == true)
+            {
+                throw new BusinessRuleException("ResourceErrorMessages.TENANT_ALREADY_ACTIVE");
+            }
             IsActive = true;
             RegisterHistoryEvent("Activated");
         }

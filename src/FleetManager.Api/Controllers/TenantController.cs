@@ -1,4 +1,6 @@
+using FleetManager.Application.UseCase.ToTenant.Active;
 using FleetManager.Application.UseCase.ToTenant.Delete;
+using FleetManager.Application.UseCase.ToTenant.Desactive;
 using FleetManager.Application.UseCase.ToTenant.GetAll;
 using FleetManager.Application.UseCase.ToTenant.GetById;
 using FleetManager.Application.UseCase.ToTenant.Register;
@@ -57,6 +59,27 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete([FromServices] IDeleteTenantUseCase useCase, [FromRoute] long id)
+        {
+            await useCase.Execute(id);
+            return NoContent();
+        }
+        [HttpPatch("{id}/Active")]
+        [Authorize(Roles = Roles.ADMIN)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status409Conflict)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Active([FromServices] IActiveTenantUseCse useCase, [FromRoute] long id)
+        {
+            await useCase.Execute(id);
+            return NoContent();
+        }
+
+        [HttpPatch("{id}/Desactive")]
+        [Authorize(Roles = Roles.ADMIN)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status409Conflict)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Desactive([FromServices] IDesactiveTenantUseCase useCase, [FromRoute]long id)
         {
             await useCase.Execute(id);
             return NoContent();

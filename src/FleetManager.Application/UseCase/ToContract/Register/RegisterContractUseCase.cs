@@ -29,7 +29,9 @@ namespace FleetManager.Application.UseCase.ToContract.Register
 
             if (vehicle.IsBlockedForMaintenance)
                 throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_BLOCKED_FOR_MAINTENANCE);
-
+            if (!vehicle.IsActive)
+                throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_NOT_AVAILABLE);
+                
             var hasActiveContract = await contractRepository.HasActiveContract(request.VehicleId);
             if (hasActiveContract)
                 throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_ALREADY_RENTED);

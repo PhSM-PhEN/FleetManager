@@ -64,12 +64,20 @@ namespace FleetManager.Domain.Entities
         }
         public void Activate()
         {
+            if(IsActive == true)
+            {
+                throw new BusinessRuleException("ResourceErrorMessages.VEHICLE_ALREADY_ACTIVATED");
+            }
             IsActive = true;
             RegisterHistoryEvent("Activated");
         }
 
-        public void Deactivate()
+        public void Desactivate()
         {
+            if(IsActive == false)
+            {
+                throw new BusinessRuleException("ResourceErrorMessages.VEHICLE_ALREADY_DESACTIVED");
+            }
             IsActive = false;
             RegisterHistoryEvent("Deactivated");
         }

@@ -21,6 +21,10 @@
 	  <Folder Include="UseCase\ToMaintenance\Close\" />
 	  <Folder Include="UseCase\ToMaintenance\Delete\" />
 	  <Folder Include="UseCase\ToMaintenance\GetById\" />
+	  <Folder Include="UseCase\ToTenant\Active\" />
+	  <Folder Include="UseCase\ToTenant\Desactive\" />
+	  <Folder Include="UseCase\ToVehicle\Active\" />
+	  <Folder Include="UseCase\ToVehicle\Desactive\" />
 	</ItemGroup>
 
 </Project>

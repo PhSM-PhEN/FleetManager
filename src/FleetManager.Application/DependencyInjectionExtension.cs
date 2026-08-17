@@ -35,7 +35,9 @@ using FleetManager.Application.UseCase.ToRentalPlan.GetAll;
 using FleetManager.Application.UseCase.ToRentalPlan.GetById;
 using FleetManager.Application.UseCase.ToRentalPlan.Register;
 using FleetManager.Application.UseCase.ToRentalPlan.Update;
+using FleetManager.Application.UseCase.ToTenant.Active;
 using FleetManager.Application.UseCase.ToTenant.Delete;
+using FleetManager.Application.UseCase.ToTenant.Desactive;
 using FleetManager.Application.UseCase.ToTenant.GetAll;
 using FleetManager.Application.UseCase.ToTenant.GetById;
 using FleetManager.Application.UseCase.ToTenant.Register;
@@ -46,7 +48,9 @@ using FleetManager.Application.UseCase.ToUser.GetProfile;
 using FleetManager.Application.UseCase.ToUser.Promote;
 using FleetManager.Application.UseCase.ToUser.Register;
 using FleetManager.Application.UseCase.ToUser.Update;
+using FleetManager.Application.UseCase.ToVehicle.Active;
 using FleetManager.Application.UseCase.ToVehicle.Delete;
+using FleetManager.Application.UseCase.ToVehicle.Desactive;
 using FleetManager.Application.UseCase.ToVehicle.GetAll;
 using FleetManager.Application.UseCase.ToVehicle.GetById;
 using FleetManager.Application.UseCase.ToVehicle.Register;
@@ -85,6 +89,8 @@ namespace FleetManager.Application
             services.AddScoped<IGetByIdTenantUseCase, GetByIdTenantUseCase>();
             services.AddScoped<IUpdateTenantUseCase, UpdateTenantUseCase>();
             services.AddScoped<IDeleteTenantUseCase, DeleteTenantUseCase>();
+            services.AddScoped<IActiveTenantUseCse, ActiveTenantUseCase>();
+            services.AddScoped<IDesactiveTenantUseCase, DesactiveTenantUseCase>();
             // company
             services.AddScoped<IRegisterCompanyUseCase, RegisterCompanyUseCase>();
             services.AddScoped<IGetAllCompanyUseCase, GetAllCompanyUseCase>();
@@ -97,6 +103,8 @@ namespace FleetManager.Application
             services.AddScoped<IGetByIdVehicleUseCase, GetByIdVehicleUseCase>();
             services.AddScoped<IUpdateMileageVehicleUseCase, UpdateMileageVehicleUseCase>();
             services.AddScoped<IDeleteVehicleUseCase, DeleteVehicleUseCase>();
+            services.AddScoped<IActiveVehicleUseCase, ActiveVehicleUseCase>();
+            services.AddScoped<IDesactiveVehicleUsCase, DesactiveVehicleUseCase>();
             // rental plan
             services.AddScoped<IRegisterRentalPlanUseCase, RegisterRentalPlanUseCase>();
             services.AddScoped<IUpdateRentalPlanUseCase, UpdateRentalPlanUseCase>();
