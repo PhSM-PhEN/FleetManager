@@ -2,9 +2,12 @@ using FleetManager.Api.Filters;
 using FleetManager.Application;
 using FleetManager.Exception.ExceptionBase;
 using FleetManager.Infrastructure;
+using FleetManager.Infrastructure.DataAccess;
 using FleetManager.Infrastructure.Extension;
 using FleetManager.Infrastructure.Migrations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -57,8 +60,20 @@ builder.Services.AddAuthentication(config =>
 });
 
 
+builder.Services.AddHealthChecks().AddDbContextCheck<FleetManagerDbContext>();
 
 var app = builder.Build();
+
+app.MapHealthChecks("/Health", new HealthCheckOptions
+{
+    AllowCachingResponses = false,
+    ResultStatusCodes =
+    {
+        [HealthStatus.Healthy] = StatusCodes.Status200OK,
+        [HealthStatus.Unhealthy] = StatusCodes.Status503ServiceUnavailable,
+
+    }
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
