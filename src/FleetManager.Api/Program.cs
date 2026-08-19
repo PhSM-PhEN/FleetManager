@@ -58,7 +58,16 @@ builder.Services.AddAuthentication(config =>
                 ?? throw new InvalidOperationException(ResourceErrorMessages.JWT_NOT_CONFIGURED)))
     };
 });
-
+builder.Services.AddCors(option =>
+{
+    option.AddPolicy("Frontend" , Policy =>
+    {
+        Policy
+            .WithOrigins("http://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 builder.Services.AddHealthChecks().AddDbContextCheck<FleetManagerDbContext>();
 
@@ -83,6 +92,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("Frontend");
 
 app.UseAuthentication();
 app.UseAuthorization();
