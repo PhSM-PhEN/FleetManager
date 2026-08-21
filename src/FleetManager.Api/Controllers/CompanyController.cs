@@ -8,7 +8,6 @@ using FleetManager.Communication.Response;
 using FleetManager.Communication.Response.ToCompany;
 using FleetManager.Domain.Enum;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FleetManager.Api.Controllers
@@ -32,7 +31,6 @@ namespace FleetManager.Api.Controllers
         }
 
         [HttpGet]
-        
         [ProducesResponseType(typeof(List<ResponseShortCompanyJson>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAll([FromServices] IGetAllCompanyUseCase useCase)
         {
