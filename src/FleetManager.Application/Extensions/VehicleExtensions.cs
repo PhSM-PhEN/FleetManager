@@ -17,6 +17,7 @@ namespace FleetManager.Application.Extensions
                 ChassiNumber = vehicle.ChassiNumber.Number,
                 LicensePlate = vehicle.LicensePlate.Number,
                 CurrentMileage = vehicle.CurrentMileage,
+                IsActive = vehicle.IsActive,
                 Company = vehicle.Company.ToResponse()
             };
         }
@@ -33,7 +34,10 @@ namespace FleetManager.Application.Extensions
                 ChassiNumber = vehicle.ChassiNumber.Number,
                 LicensePlate = vehicle.LicensePlate.Number,
                 CurrentMileage = vehicle.CurrentMileage,
-                Company = vehicle.Company.ToResponse()
+                IsActive = vehicle.IsActive,
+                Company = vehicle.Company.ToResponse(),
+                RentalPlan = vehicle.RentalPlan.ToResponse()
+            
             };
         }
         public static List<ResponseShortVehicleJson> ToResponse(this List<Vehicle> vehicles)
