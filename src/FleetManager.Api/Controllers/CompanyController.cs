@@ -16,10 +16,12 @@ namespace FleetManager.Api.Controllers
     // Company é a entidade estrutural do sistema (dona da frota) — só Admin gerencia.
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = Roles.ADMIN)]
+    [Authorize]
+    
     public class CompanyController : ControllerBase
     {
         [HttpPost]
+        [Authorize(Roles = Roles.ADMIN)]
         [ProducesResponseType(typeof(ResponseShortCompanyJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register([FromServices] IRegisterCompanyUseCase usecase,
@@ -30,6 +32,7 @@ namespace FleetManager.Api.Controllers
         }
 
         [HttpGet]
+        
         [ProducesResponseType(typeof(List<ResponseShortCompanyJson>), StatusCodes.Status200OK)]
         public async Task<IActionResult> GetAll([FromServices] IGetAllCompanyUseCase useCase)
         {
@@ -49,6 +52,7 @@ namespace FleetManager.Api.Controllers
 
         [HttpPut]
         [Route("{id}")]
+        [Authorize(Roles = Roles.ADMIN)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
@@ -60,6 +64,7 @@ namespace FleetManager.Api.Controllers
 
         [HttpDelete]
         [Route("{id}")]
+        [Authorize(Roles = Roles.ADMIN)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete([FromServices] IDeleteCompanyUseCase useCase, [FromRoute] long id)
@@ -68,4 +73,4 @@ namespace FleetManager.Api.Controllers
             return NoContent();
         }
     }
-}
+}
