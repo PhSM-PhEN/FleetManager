@@ -10,6 +10,7 @@ namespace FleetManager.Application.UseCase.ToContract.Preview
         {
             RuleFor(x => x.VehicleId).GreaterThan(0).WithMessage(ResourceErrorMessages.VEHICLE_ID_REQUIRED);
             RuleFor(x => x.TenantId).GreaterThan(0).WithMessage(ResourceErrorMessages.TENANT_ID_REQUIRED);
+            RuleFor(x => x.DesiredExcessMileage).GreaterThanOrEqualTo(0).WithMessage(ResourceErrorMessages.ADDITIONAL_MILEAGE_MUST_BE_POSITIVE);
 
             RuleFor(x => x.RentalType)
                 .Must(value => value == "Daily" || value == "Monthly")

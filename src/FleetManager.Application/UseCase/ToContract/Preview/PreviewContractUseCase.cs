@@ -36,9 +36,9 @@ namespace FleetManager.Application.UseCase.ToContract.Preview
 
             var (totalDays, returnDueDateTime) = Contract.CalculatePeriod(rentalType, request.PickupDateTime, request.ReturnDueDateTime);
 
-            var mileageContracted = ContractTermsCalculator.GetMileageContracted(0, rentalType, rentalPlan, totalDays);
-            var totalAmount = ContractTermsCalculator.GetTotalAmount(0, rentalType, rentalPlan, totalDays);
-
+            var mileageContracted = ContractTermsCalculator.GetMileageContracted(request.DesiredExcessMileage, rentalType, rentalPlan, totalDays);
+            var totalAmount = ContractTermsCalculator.GetTotalAmount(request.DesiredExcessMileage, rentalType, rentalPlan, totalDays);
+            
             return new ResponsePreviewContractJson
             {
                 VehicleId = vehicle.Id,

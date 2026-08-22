@@ -40,19 +40,14 @@ namespace FleetManager.Application.UseCase.ToContract.Register
 
 
             var rentalType = Enum.Parse<RentalType>(request.RentalType);
-
             var (totalDays, _) = Contract.CalculatePeriod(rentalType, request.PickupDateTime, request.ReturnDueDateTime);
 
-            var mileageContracted = ContractTermsCalculator.GetMileageContracted(request.MileageContracted, rentalType, rentalPlan, totalDays);
-            var totalAmount = ContractTermsCalculator.GetTotalAmount(request.TotalAmount, rentalType, rentalPlan, totalDays);
+            var contract = new Contract(vehicle.Id, tenant.Id, rentalPlan,
+                            rentalType, vehicle.CurrentMileage,
+                            request.MileageContracted, request.TotalAmount,
+                            request.PickupDateTime, request.ReturnDueDateTime);
 
             
-
-            var contract = new Contract(vehicle.Id, tenant.Id, rentalPlan,
-                                        rentalType, vehicle.CurrentMileage,
-                                        mileageContracted, totalAmount,
-                                        request.PickupDateTime, request.ReturnDueDateTime);
-
             await contractRepository.Add(contract);
             await unitOfWork.Commit();
 
@@ -90,4 +85,4 @@ namespace FleetManager.Application.UseCase.ToContract.Register
             }
         }
     }
-}
+}
