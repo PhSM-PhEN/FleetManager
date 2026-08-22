@@ -1,6 +1,6 @@
 using FleetManager.Communication.Response.ToAddress;
 
-namespace FleetManager.Communication.Response.ToRenant
+namespace FleetManager.Communication.Response.ToTenant
 {
     public class ResponseTenantJson
     {
@@ -12,6 +12,7 @@ namespace FleetManager.Communication.Response.ToRenant
         public string DriverLicenseCategory { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
         public string? Email { get; set; }
+        public bool IsActive { get; set; }
         public ResponseAddressJson Address { get; set; } = new();
     }
 

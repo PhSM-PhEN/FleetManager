@@ -7,7 +7,7 @@ using FleetManager.Application.UseCase.ToTenant.Register;
 using FleetManager.Application.UseCase.ToTenant.Update;
 using FleetManager.Communication.Request.ToTenant;
 using FleetManager.Communication.Response;
-using FleetManager.Communication.Response.ToRenant;
+using FleetManager.Communication.Response.ToTenant;
 using FleetManager.Domain.Enum;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

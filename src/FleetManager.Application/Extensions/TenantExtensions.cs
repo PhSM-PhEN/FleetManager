@@ -1,4 +1,4 @@
-using FleetManager.Communication.Response.ToRenant;
+using FleetManager.Communication.Response.ToTenant;
 using FleetManager.Domain.Entities;
 
 namespace FleetManager.Application.Extensions;
@@ -11,7 +11,8 @@ public static class TenantExtensions
         {
             Id = tenant.Id,
             Name = tenant.Name,
-            PhoneNumber = tenant.Contact.PhoneNumber
+            PhoneNumber = tenant.Contact.PhoneNumber,
+            IsActive = tenant.IsActive
         };
         
     }
@@ -27,6 +28,7 @@ public static class TenantExtensions
             DriverLicenseCategory = tenant.DriverLicense.Category,
             PhoneNumber = tenant.Contact.PhoneNumber,
             Email = tenant.Contact.Email,
+            IsActive = tenant.IsActive,
             Address = tenant.Address.ToResponse() 
         };
     }

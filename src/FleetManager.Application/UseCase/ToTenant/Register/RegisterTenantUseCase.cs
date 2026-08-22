@@ -1,6 +1,6 @@
 using FleetManager.Application.Extensions;
 using FleetManager.Communication.Request.ToTenant;
-using FleetManager.Communication.Response.ToRenant;
+using FleetManager.Communication.Response.ToTenant;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Entities.ValueObjects;
 using FleetManager.Domain.Repositories;
