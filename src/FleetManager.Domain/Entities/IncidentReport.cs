@@ -29,7 +29,6 @@ namespace FleetManager.Domain.Entities
           
             RegisterHistoryEvent("Reported");
         }
-
         public void Resolve()
         {
             if (Status == IncidentReportStatus.Resolved)

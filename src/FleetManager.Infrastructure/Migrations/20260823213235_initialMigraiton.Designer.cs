@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FleetManager.Infrastructure.Migrations
 {
     [DbContext(typeof(FleetManagerDbContext))]
-    [Migration("20260813040306_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20260823213235_initialMigraiton")]
+    partial class initialMigraiton
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.28")
+                .HasAnnotation("ProductVersion", "8.0.30")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
@@ -352,7 +352,6 @@ namespace FleetManager.Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("ProblemDescription")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("ScheduledAt")
@@ -370,7 +369,7 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Property<long>("VehicleId")
                         .HasColumnType("bigint");
 
-                    b.Property<decimal>("WorkshopBudget")
+                    b.Property<decimal?>("WorkshopBudget")
                         .HasColumnType("decimal(65,30)");
 
                     b.HasKey("Id");

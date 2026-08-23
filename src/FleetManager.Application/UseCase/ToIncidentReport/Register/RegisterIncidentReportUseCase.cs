@@ -6,34 +6,41 @@ using FleetManager.Domain.Enum;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToContract;
 using FleetManager.Domain.Repositories.ToIncidentReport;
+using FleetManager.Domain.Repositories.ToMaintenance;
 using FleetManager.Domain.Repositories.ToVehicle;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToIncidentReport.Register
 {
     public class RegisterIncidentReportUseCase(IIncidentReportWriteOnlyRepository repository, IUnitOfWork unitOfWork,
-    IVehicleWriteOnlyRepository vehicleWriteOnly, IContractReadOnlyRepository contractReadOnly) : IRegisterIncidentReportUseCase
+    IVehicleWriteOnlyRepository vehicleWriteOnly, IContractReadOnlyRepository contractReadOnly, IMaintenanceWriteOnlyRepository maintenanceWriteOnly) : IRegisterIncidentReportUseCase
     {
         public async Task<ResponseShortIncidentReportJson> Execute(RequestIncidentReportJson request)
         {
             Validate(request);
-            var vehicle = await EnsureVehicleExist(request.VehicleId);
+            
             var contract = await EnsureContractExist(request.ContractId);
+            var vehicle = await EnsureVehicleExist(contract.VehicleId);
             var incidentRisk = Enum.Parse<IncidentRisk>(request.IncidentRisk);
-
             var incidentReport = new IncidentReport(contract.Id, vehicle.Id, request.Description, incidentRisk);
-           
-           
+            
 
-            if(incidentReport.IncidentRisk == IncidentRisk.High)
+
+            if (incidentReport.IncidentRisk == IncidentRisk.High)
             {
                 vehicle.BlockForIncident(incidentReport);
                 vehicleWriteOnly.Update(vehicle);
                 
             }
-            
             await repository.Add(incidentReport);
+
+            var maintenance = new Maintenance(vehicle.Id, incidentReport, DateTime.UtcNow);
+            await maintenanceWriteOnly.Add(maintenance);
+
             await unitOfWork.Commit();
+
+            
+           
             return incidentReport.ToResponse();
 
         }

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FleetManager.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMigration : Migration
+    public partial class initialMigraiton : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -72,9 +72,9 @@ namespace FleetManager.Infrastructure.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    DailyPrice = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
-                    MonthlyPrice = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
-                    ExcessMileageRate = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
+                    DailyPrice = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    MonthlyPrice = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    ExcessMileageRate = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     MileagePerDay = table.Column<long>(type: "bigint", nullable: false),
                     MileagePerMonthly = table.Column<long>(type: "bigint", nullable: false),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: false),
@@ -214,15 +214,15 @@ namespace FleetManager.Infrastructure.Migrations
                     StartMileage = table.Column<long>(type: "bigint", nullable: false),
                     ExpectedEndMileage = table.Column<long>(type: "bigint", nullable: false),
                     MileageContracted = table.Column<long>(type: "bigint", nullable: false),
-                    SnapshotPriceDailyRate = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
-                    SnapshotPriceMonthlyRate = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
-                    SnapshotPricePerExtraMileage = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
-                    TotalAmount = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
+                    SnapshotPriceDailyRate = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    SnapshotPriceMonthlyRate = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    SnapshotPricePerExtraMileage = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    TotalAmount = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     TotalDays = table.Column<int>(type: "int", nullable: false),
                     FinalMileage = table.Column<long>(type: "bigint", nullable: true),
-                    ExcessMileageFee = table.Column<decimal>(type: "decimal(65,3)", nullable: true),
+                    ExcessMileageFee = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
                     DaysLate = table.Column<int>(type: "int", nullable: false),
-                    LateFee = table.Column<decimal>(type: "decimal(65,3)", nullable: true),
+                    LateFee = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
                     PickupDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ReturnDueDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ContractStatus = table.Column<int>(type: "int", nullable: false),
@@ -345,8 +345,8 @@ namespace FleetManager.Infrastructure.Migrations
                     VehicleId = table.Column<long>(type: "bigint", nullable: false),
                     IncidentReportId = table.Column<long>(type: "bigint", nullable: true),
                     ScheduledAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    WorkshopBudget = table.Column<decimal>(type: "decimal(65,3)", nullable: false),
-                    ProblemDescription = table.Column<string>(type: "longtext", nullable: false)
+                    WorkshopBudget = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
+                    ProblemDescription = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Status = table.Column<int>(type: "int", nullable: false),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: false),

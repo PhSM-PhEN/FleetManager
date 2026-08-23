@@ -21,7 +21,8 @@ namespace FleetManager.Infrastructure.DataAccess.ToVehicle
         {
             var query = dbContext.Vehicles.AsNoTracking()
                         .Include(v => v.Company)
-                            .ThenInclude(c => c.Address);
+                            .ThenInclude(c => c.Address)
+                            .Include(v => v.BlockingIncidentReport);
             var totalCount = await query.CountAsync();
             var vehicle = await query
                     .Skip((pageNumber - 1) * pageSize)
@@ -33,7 +34,9 @@ namespace FleetManager.Infrastructure.DataAccess.ToVehicle
 
         public async Task<Vehicle?> GetById(long id)
         {
-            return await dbContext.Vehicles.FirstOrDefaultAsync(v => v.Id == id);
+            return await dbContext.Vehicles
+                .Include(v => v.BlockingIncidentReport)
+                .FirstOrDefaultAsync(v => v.Id == id);
         }
 
         async Task<Vehicle?> IVehicleReadOnlyRepository.GetById(long id)
@@ -42,6 +45,7 @@ namespace FleetManager.Infrastructure.DataAccess.ToVehicle
                         .Include(c => c.Company)
                             .ThenInclude(c => c.Address)
                         .Include(rp => rp.RentalPlan)
+                        .Include(v => v.BlockingIncidentReport)
                         .FirstOrDefaultAsync(v => v.Id == id);
         }
         public void Update(Vehicle vehicle)

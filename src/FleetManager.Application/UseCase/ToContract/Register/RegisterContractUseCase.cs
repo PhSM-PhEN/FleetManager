@@ -27,8 +27,9 @@ namespace FleetManager.Application.UseCase.ToContract.Register
             var tenant = await EnsureTenantExist(request.TenantId);
             var rentalPlan = await EnsureRentalPlanExist(request.RentalPlanId);
 
-            if (vehicle.IsBlockedForMaintenance)
+            if (vehicle.IsBlockedForMaintenance is not false)
                 throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_BLOCKED_FOR_MAINTENANCE);
+
             if (!vehicle.IsActive)
                 throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_NOT_AVAILABLE);
             if (!tenant.IsActive)
@@ -42,12 +43,16 @@ namespace FleetManager.Application.UseCase.ToContract.Register
             var rentalType = Enum.Parse<RentalType>(request.RentalType);
             var (totalDays, _) = Contract.CalculatePeriod(rentalType, request.PickupDateTime, request.ReturnDueDateTime);
 
+            var excessMileage = ContractTermsCalculator.DeriveExcessMileage(request.MileageContracted, rentalType, rentalPlan, totalDays);
+            var referenceAmount = ContractTermsCalculator.GetTotalAmount(excessMileage, rentalType, rentalPlan, totalDays);
+            ContractTermsCalculator.ValidateTotalAmount(request.TotalAmount, referenceAmount);
+
             var contract = new Contract(vehicle.Id, tenant.Id, rentalPlan,
                             rentalType, vehicle.CurrentMileage,
                             request.MileageContracted, request.TotalAmount,
                             request.PickupDateTime, request.ReturnDueDateTime);
 
-            
+
             await contractRepository.Add(contract);
             await unitOfWork.Commit();
 

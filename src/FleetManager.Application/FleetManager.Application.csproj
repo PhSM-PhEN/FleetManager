@@ -7,6 +7,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="UseCase\ToTenant\Active\**" />
+	  <Compile Remove="UseCase\ToTenant\Desactive\**" />
+	  <EmbeddedResource Remove="UseCase\ToTenant\Active\**" />
+	  <EmbeddedResource Remove="UseCase\ToTenant\Desactive\**" />
+	  <None Remove="UseCase\ToTenant\Active\**" />
+	  <None Remove="UseCase\ToTenant\Desactive\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\FleetManager.Communication\FleetManager.Communication.csproj" />
 		<ProjectReference Include="..\FleetManager.Domain\FleetManager.Domain.csproj" />
 		<ProjectReference Include="..\FleetManager.Exception\FleetManager.Exception.csproj" />
@@ -21,8 +30,6 @@
 	  <Folder Include="UseCase\ToMaintenance\Close\" />
 	  <Folder Include="UseCase\ToMaintenance\Delete\" />
 	  <Folder Include="UseCase\ToMaintenance\GetById\" />
-	  <Folder Include="UseCase\ToTenant\Active\" />
-	  <Folder Include="UseCase\ToTenant\Desactive\" />
 	  <Folder Include="UseCase\ToVehicle\Active\" />
 	  <Folder Include="UseCase\ToVehicle\Desactive\" />
 	</ItemGroup>

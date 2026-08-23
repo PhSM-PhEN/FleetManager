@@ -22,6 +22,8 @@ namespace FleetManager.Application.UseCase.ToContract.Preview
             var vehicle = await EnsureVehicleExist(request.VehicleId);
             if (!vehicle.IsActive)
                 throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_NOT_AVAILABLE);
+            if (vehicle.IsBlockedForMaintenance is not false)
+                throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_BLOCKED_FOR_MAINTENANCE);
 
             var hasActiveContract = await contractRepository.HasActiveContract(request.VehicleId);
             if (hasActiveContract)

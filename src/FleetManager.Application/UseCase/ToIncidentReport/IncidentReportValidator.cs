@@ -10,7 +10,6 @@ namespace FleetManager.Application.UseCase.ToIncidentReport
         public IncidentReportValidator()
         {
             RuleFor(ir => ir.ContractId).NotEmpty().WithMessage(ResourceErrorMessages.CONTRACT_IS_REQUIRED);
-            RuleFor(ir => ir.VehicleId).NotEmpty().WithMessage(ResourceErrorMessages.VEHICLE_IS_REQUIRED);
             RuleFor(ir => ir.Description).NotEmpty().NotNull().WithMessage(ResourceErrorMessages.DESCRIPTION_IS_REQUIRED);
             RuleFor(ir => ir.IncidentRisk).IsEnumName(typeof(IncidentRisk), caseSensitive: false).WithMessage(ResourceErrorMessages.INCIDENT_RISK_INVALID);
         }

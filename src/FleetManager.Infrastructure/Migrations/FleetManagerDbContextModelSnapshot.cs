@@ -17,7 +17,7 @@ namespace FleetManager.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.28")
+                .HasAnnotation("ProductVersion", "8.0.30")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
@@ -349,7 +349,6 @@ namespace FleetManager.Infrastructure.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<string>("ProblemDescription")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime>("ScheduledAt")
@@ -367,7 +366,7 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Property<long>("VehicleId")
                         .HasColumnType("bigint");
 
-                    b.Property<decimal>("WorkshopBudget")
+                    b.Property<decimal?>("WorkshopBudget")
                         .HasColumnType("decimal(65,30)");
 
                     b.HasKey("Id");
