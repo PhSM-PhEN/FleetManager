@@ -6,6 +6,7 @@ namespace FleetManager.Communication.Response.ToMaintenance
     public class ResponseMaintenanceJson
     {
         public long Id { get; set; }
+        public string ServiceCenter {get ; set ;} = string.Empty;
         public DateTime ScheduledAt { get; set; }
         public decimal? WorkshopBudget { get; set; }
         public string? ProblemDescription { get; set; } = string.Empty;

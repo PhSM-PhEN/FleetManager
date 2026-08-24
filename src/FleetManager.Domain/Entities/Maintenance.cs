@@ -7,6 +7,7 @@ namespace FleetManager.Domain.Entities
     {
         public long VehicleId { get; private set; }
         public long? IncidentReportId { get; private set; }
+        public string ServiceCenter { get ; private set ;} = string.Empty;
         public DateTime ScheduledAt { get; private set; } 
         public decimal? WorkshopBudget { get; private set; }
         public string? ProblemDescription { get; private set; } = string.Empty;
@@ -16,13 +17,22 @@ namespace FleetManager.Domain.Entities
 
         protected Maintenance() { }
 
-        public Maintenance(long vehicleId, IncidentReport? incidentReport, DateTime scheduledAt)
+        public Maintenance(long vehicleId, string serviceCenter, IncidentReport? incidentReport, DateTime scheduledAt)
         {
             VehicleId = vehicleId;
+            ServiceCenter = serviceCenter;
             IncidentReport = incidentReport;
             ScheduledAt = scheduledAt;
             Status = MaintenanceStatus.Scheduled;
             RegisterHistoryEvent("Scheduled");
+        }
+        private void Scheduled(DateTime scheduledAt)
+        {
+            if(scheduledAt < ScheduledAt)
+            {
+                throw new BusinessRuleException(ResourceErrorMessages.SCHEDULED_AT_CANNOT_BE_IN_THE_PAST);
+            }
+            ScheduledAt = scheduledAt;
         }
 
         public void Close(string problemDescription, decimal workshopBudget)

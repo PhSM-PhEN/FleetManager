@@ -27,7 +27,7 @@ namespace FleetManager.Application.UseCase.ToMaintenance.Register
                     throw new NotFoundException(ResourceErrorMessages.INCIDENT_REPORT_NOT_FOUND)
                 : null;
 
-            var maintenance = new Maintenance(request.VehicleId, incidentReport, request.ScheduledAt);
+            var maintenance = new Maintenance(request.VehicleId, request.ServiceCenter ,incidentReport, request.ScheduledAt);
             
             await repository.Add(maintenance);
             await unitOfWork.Commit();

@@ -12,6 +12,7 @@ namespace FleetManager.Application.Extensions
             {   Id = maintenance.Id,
                 VehicleId = maintenance.VehicleId,
                 IncidentReportId = maintenance.IncidentReportId,
+                ServiceCenter = maintenance.ServiceCenter,
                 ScheduledAt = maintenance.ScheduledAt
             };
         }
@@ -21,6 +22,7 @@ namespace FleetManager.Application.Extensions
             {
                 Id = maintenance.Id,
                 ScheduledAt = maintenance.ScheduledAt,
+                ServiceCenter = maintenance.ServiceCenter,
                 WorkshopBudget = maintenance.WorkshopBudget,
                 ProblemDescription = maintenance.ProblemDescription,
                 Status = maintenance.Status.ToMaintenanceString(), 
@@ -35,6 +37,7 @@ namespace FleetManager.Application.Extensions
             {
                 Id = maintenance.Id,
                 ScheduledAt = maintenance.ScheduledAt,
+                ServiceCenter = maintenance.ServiceCenter,
                 WorkshopBudget = maintenance.WorkshopBudget,
                 ProblemDescription = maintenance.ProblemDescription,
                 Status = maintenance.Status.ToMaintenanceString(), 
