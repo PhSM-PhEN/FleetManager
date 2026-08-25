@@ -17,7 +17,7 @@ namespace FleetManager.Application.Extensions
                 ChassiNumber = vehicle.ChassiNumber.Number,
                 LicensePlate = vehicle.LicensePlate.Number,
                 CurrentMileage = vehicle.CurrentMileage,
-                IsActive = vehicle.IsActive,
+
                 Company = vehicle.Company.ToResponse()
             };
         }
@@ -34,7 +34,6 @@ namespace FleetManager.Application.Extensions
                 ChassiNumber = vehicle.ChassiNumber.Number,
                 LicensePlate = vehicle.LicensePlate.Number,
                 CurrentMileage = vehicle.CurrentMileage,
-                IsActive = vehicle.IsActive,
                 Company = vehicle.Company.ToResponse(),
                 RentalPlan = vehicle.RentalPlan.ToResponse()
             
@@ -45,9 +44,6 @@ namespace FleetManager.Application.Extensions
             return vehicles.Select(v => v.ToResponse()).ToList();
         }
 
-        // Exclusivo pro retorno do Register: não depende de Company/RentalPlan estarem
-        // carregados pelo EF (o que não acontece logo após o Add), evita o NRE que a versão
-        // com ToResponse()/Company causava ali.
         public static ResponseRegisterVehicleJson ToShortResponse(this Vehicle vehicle)
         {
             return new ResponseRegisterVehicleJson

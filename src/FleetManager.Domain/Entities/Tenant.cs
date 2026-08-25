@@ -1,4 +1,6 @@
 using FleetManager.Domain.Entities.ValueObjects;
+using FleetManager.Domain.Enum;
+using FleetManager.Domain.EnumExtensions;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Domain.Entities
@@ -10,12 +12,13 @@ namespace FleetManager.Domain.Entities
         public string RG { get; private set; } = string.Empty;
         public DriverLicense DriverLicense { get; private set; } = default!;
         public Contact Contact { get; private set; } = default!;
-        public bool IsActive { get; private set; } = true;
+        public TenantStatus Status { get; private set; }
+
         public long AddressId { get; private set; }
 
 
         public Address Address { get; internal set; } = default!;
-
+        public TenantStatus GetStatus {get => Status ;}
         protected Tenant() { }
 
         public Tenant(string name, Cpf cpf, string rg, DriverLicense driverLicense, Contact contact, long addressId)
@@ -26,6 +29,8 @@ namespace FleetManager.Domain.Entities
             DriverLicense = driverLicense;
             Contact = contact;
             AddressId = addressId;
+            Status = TenantStatus.Available;
+            
             
         }
 
@@ -37,19 +42,19 @@ namespace FleetManager.Domain.Entities
         }
         public void Deactivate()
         {
-            if (!IsActive)
+            if (Status == TenantStatus.Deactivate)
                 throw new BusinessRuleException(ResourceErrorMessages.TENANT_ALREADY_DEACTIVATED);
 
-            IsActive = false;
+            Status = TenantStatus.Deactivate;
             RegisterHistoryEvent("Disabled");
         }
 
         public void Activate()
         {
-            if (IsActive)
+            if (Status == TenantStatus.Available)
                 throw new BusinessRuleException(ResourceErrorMessages.TENANT_ALREADY_ACTIVE);
 
-            IsActive = true;
+            Status = TenantStatus.Available;
             RegisterHistoryEvent("Activated");
         }
     }

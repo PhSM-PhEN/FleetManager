@@ -16,7 +16,6 @@ using FleetManager.Application.UseCase.ToContract.DetectOverdue;
 using FleetManager.Application.UseCase.ToContract.FinishUp;
 using FleetManager.Application.UseCase.ToContract.GetAll;
 using FleetManager.Application.UseCase.ToContract.GetById;
-using FleetManager.Application.UseCase.ToContract.Preview;
 using FleetManager.Application.UseCase.ToContract.Register;
 using FleetManager.Application.UseCase.ToContract.Renew;
 using FleetManager.Application.UseCase.ToContract.Update;
@@ -117,7 +116,6 @@ namespace FleetManager.Application
             services.AddScoped<IGetAllContractUseCase, GetAllContractUseCase>();
             services.AddScoped<IUpdateContractUseCase, UpdateContractUseCase>();
             services.AddScoped<IDeleteContractUseCase, DeleteContractUseCase>();
-            services.AddScoped<IPreviewContractUseCase, PreviewContractUseCase>();
             services.AddScoped<ICancelContractUseCase, CancelContractUseCase>();
             services.AddScoped<IActivateContractUseCase, ActivateContractUseCase>();
             services.AddScoped<IFinishUpContractUseCase, FinishUpContractUseCase>();

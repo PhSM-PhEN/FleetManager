@@ -9,5 +9,6 @@ namespace FleetManager.Communication.Response.ToContract
         public int TotalDays { get; set; }
         public decimal TotalAmount { get; set; }
         public string ContractStatus { get; set; } = string.Empty;
+        
     }
 }

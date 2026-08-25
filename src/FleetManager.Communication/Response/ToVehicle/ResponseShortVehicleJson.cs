@@ -14,5 +14,6 @@ namespace FleetManager.Communication.Response.ToVehicle
         public long CurrentMileage { get; set; }
         public bool IsActive {get ;set ;}
         public ResponseCompanyJson Company { get; set; } = new();
+        public ResponseEnumStatusJson Enum {get ; set ;} = new();
     }   
 }

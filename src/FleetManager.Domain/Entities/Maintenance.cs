@@ -26,6 +26,13 @@ namespace FleetManager.Domain.Entities
             Status = MaintenanceStatus.Scheduled;
             RegisterHistoryEvent("Scheduled");
         }
+        public Maintenance(long vehicleId, IncidentReport? incidentReport, DateTime scheduledAt)
+        {
+            VehicleId = vehicleId;
+            IncidentReport = incidentReport;
+            ScheduledAt = scheduledAt;
+            RegisterHistoryEvent("Reported");
+        }
         private void Scheduled(DateTime scheduledAt)
         {
             if(scheduledAt < ScheduledAt)

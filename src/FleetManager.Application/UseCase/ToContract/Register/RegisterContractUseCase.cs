@@ -3,6 +3,7 @@ using FleetManager.Communication.Request.ToContract;
 using FleetManager.Communication.Response.ToContract;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Enum;
+using FleetManager.Domain.EnumExtensions;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToContract;
 using FleetManager.Domain.Repositories.ToRentalPlan;
@@ -26,18 +27,10 @@ namespace FleetManager.Application.UseCase.ToContract.Register
             var vehicle = await EnsureVehicleExist(request.VehicleId);
             var tenant = await EnsureTenantExist(request.TenantId);
             var rentalPlan = await EnsureRentalPlanExist(request.RentalPlanId);
-
-            if (vehicle.IsBlockedForMaintenance is not false)
-                throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_BLOCKED_FOR_MAINTENANCE);
-
-            if (!vehicle.IsActive)
-                throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_NOT_AVAILABLE);
-            if (!tenant.IsActive)
-                throw new BusinessRuleException(ResourceErrorMessages.TENANT_NOT_AVAILABLE);
-
-            var hasActiveContract = await contractRepository.HasActiveContract(request.VehicleId);
-            if (hasActiveContract)
-                throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_ALREADY_RENTED);
+            var vehicleStatus = vehicle.GetStatus;
+            var tenantStatus = tenant.GetStatus;
+            EnsureTenantEstatusIsValid(tenantStatus);
+            EnsureVehicleStatusIsValid(vehicleStatus);
 
 
             var rentalType = Enum.Parse<RentalType>(request.RentalType);
@@ -76,6 +69,22 @@ namespace FleetManager.Application.UseCase.ToContract.Register
         {
             return await rentalPlanRepository.GetById(id) ??
                 throw new NotFoundException(ResourceErrorMessages.RENTAL_PLAN_NOT_FOUND);
+        }
+        private static void EnsureVehicleStatusIsValid(VehicleStatus status)
+        {
+            if (status == VehicleStatus.Deactivate)
+                throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_NOT_AVAILABLE);
+            if (status == VehicleStatus.BlockedForMaintenance)
+                throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_BLOCKED_FOR_MAINTENANCE);
+            if (status ==VehicleStatus.Rented)
+                throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_ALREADY_RENTED);
+        }
+        private static void EnsureTenantEstatusIsValid(TenantStatus status)
+        {
+            if (status == TenantStatus.Deactivate)
+                throw new BusinessRuleException(ResourceErrorMessages.TENANT_NOT_AVAILABLE);
+            if(status ==TenantStatus.Delinquent)
+                throw new BusinessRuleException("ResourceErrorMessages.TENANT_IS_DELINQUENT");
         }
 
         private static void Validate(RequestContractJson request)

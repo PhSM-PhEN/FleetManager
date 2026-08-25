@@ -16,6 +16,7 @@ namespace FleetManager.Application.Extensions
                 ReturnDueDateTime = contract.ReturnDueDateTime,
                 TotalDays = contract.TotalDays,
                 TotalAmount = contract.TotalAmount,
+                
 
 
             };

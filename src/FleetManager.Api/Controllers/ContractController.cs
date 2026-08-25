@@ -5,7 +5,6 @@ using FleetManager.Application.UseCase.ToContract.DetectOverdue;
 using FleetManager.Application.UseCase.ToContract.FinishUp;
 using FleetManager.Application.UseCase.ToContract.GetAll;
 using FleetManager.Application.UseCase.ToContract.GetById;
-using FleetManager.Application.UseCase.ToContract.Preview;
 using FleetManager.Application.UseCase.ToContract.Register;
 using FleetManager.Application.UseCase.ToContract.Renew;
 using FleetManager.Application.UseCase.ToContract.Update;
@@ -38,11 +37,6 @@ namespace FleetManager.Api.Controllers
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status409Conflict)]
-        public async Task<IActionResult> Preview([FromServices] IPreviewContractUseCase useCase, [FromBody] RequestPreviewContractJson request)
-        {
-            var response = await useCase.Execute(request);
-            return Ok(response);
-        }
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ResponseContractJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
