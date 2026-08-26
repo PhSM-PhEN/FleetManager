@@ -20,7 +20,7 @@ namespace FleetManager.Application.Extensions
         }
         public static List<ResponseRentalPlanJson> ToResponse(this List<RentalPlan> rentalPlan)
         {
-            return rentalPlan.Select(p => p.ToResponse()).ToList();
+            return [.. rentalPlan.Select(p => p.ToResponse())];
         }
     }
 }
