@@ -113,6 +113,11 @@ app.Run();
 async Task MigrateDataBase()
 {
     await using var scope = app.Services.CreateAsyncScope();
-    await DataBaseMigration.MigrateDataBase(scope.ServiceProvider);
+    var serviceProvider = scope.ServiceProvider;
+
+    await DataBaseMigration.MigrateDataBase(serviceProvider);
+
+    var dbContext = serviceProvider.GetRequiredService<FleetManagerDbContext>();
+    await ContractTemplateSeeder.SeedDefaultTemplates(dbContext);
 }
 public partial class Program { } // Needed for integration tests

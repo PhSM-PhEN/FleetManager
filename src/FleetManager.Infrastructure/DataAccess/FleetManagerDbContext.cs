@@ -18,6 +18,8 @@ namespace FleetManager.Infrastructure.DataAccess
         public DbSet<Maintenance> Maintenances { get; set; }
         public DbSet<IncidentReport> IncidentReports { get; set; }
         public DbSet<Charge> Charges { get; set; }
+        public DbSet<ContractTemplate> ContractTemplates { get; set; }
+        public DbSet<ContractDocument> ContractDocuments { get; set; }
 
         public DbSet<HistoryLog> HistoryLogs { get; set; }
 
@@ -174,7 +176,7 @@ namespace FleetManager.Infrastructure.DataAccess
             // em ContractRepository.HasActiveContract.
             modelBuilder.Entity<Contract>()
                 .Property<long?>("ActiveVehicleId")
-                .HasComputedColumnSql("CASE WHEN `ContractStatus` IN (1, 2, 5) THEN `VehicleId` ELSE NULL END", stored: true);
+                .HasComputedColumnSql("CASE WHEN `Status` IN (1, 2, 5) THEN `VehicleId` ELSE NULL END", stored: true);
 
             modelBuilder.Entity<Contract>()
                 .HasIndex("ActiveVehicleId")
@@ -215,6 +217,23 @@ namespace FleetManager.Infrastructure.DataAccess
                 .WithMany()
                 .HasForeignKey("CurrentIncidentReportId")
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ContractDocument>()
+                .HasOne(d => d.Contract)
+                .WithMany()
+                .HasForeignKey(d => d.ContractId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Garante no máximo um ContractTemplate ativo por vez a nível de banco também
+            // (a regra em código já impede isso no ActivateContractTemplateUseCase).
+            modelBuilder.Entity<ContractTemplate>()
+                .Property<bool?>("ActiveFlag")
+                .HasComputedColumnSql("CASE WHEN `IsActive` = 1 THEN 1 ELSE NULL END", stored: true);
+
+            modelBuilder.Entity<ContractTemplate>()
+                .HasIndex("ActiveFlag")
+                .IsUnique()
+                .HasDatabaseName("UX_ContractTemplates_SingleActive");
 
 
 

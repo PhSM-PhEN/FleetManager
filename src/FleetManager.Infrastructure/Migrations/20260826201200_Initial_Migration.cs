@@ -43,6 +43,30 @@ namespace FleetManager.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "ContractTemplates",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Version = table.Column<int>(type: "int", nullable: false),
+                    Content = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ActiveFlag = table.Column<bool>(type: "tinyint(1)", nullable: true, computedColumnSql: "CASE WHEN `IsActive` = 1 THEN 1 ELSE NULL END", stored: true),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContractTemplates", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "HistoryLogs",
                 columns: table => new
                 {
@@ -205,6 +229,29 @@ namespace FleetManager.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "ContractDocuments",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ContractId = table.Column<long>(type: "bigint", nullable: false),
+                    ContractTemplateId = table.Column<long>(type: "bigint", nullable: false),
+                    ContractTemplateVersion = table.Column<int>(type: "int", nullable: false),
+                    Content = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    GeneratedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    CreatedBy = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContractDocuments", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Contracts",
                 columns: table => new
                 {
@@ -230,7 +277,7 @@ namespace FleetManager.Infrastructure.Migrations
                     PickupDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ReturnDueDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ActualReturnDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    ActiveVehicleId = table.Column<long>(type: "bigint", nullable: true, computedColumnSql: "CASE WHEN `ContractStatus` IN (1, 2, 5) THEN `VehicleId` ELSE NULL END", stored: true),
+                    ActiveVehicleId = table.Column<long>(type: "bigint", nullable: true, computedColumnSql: "CASE WHEN `Status` IN (1, 2, 5) THEN `VehicleId` ELSE NULL END", stored: true),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
@@ -395,6 +442,11 @@ namespace FleetManager.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_ContractDocuments_ContractId",
+                table: "ContractDocuments",
+                column: "ContractId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Contracts_RentalPlanId",
                 table: "Contracts",
                 column: "RentalPlanId");
@@ -413,6 +465,12 @@ namespace FleetManager.Infrastructure.Migrations
                 name: "UX_Contracts_ActiveVehicle",
                 table: "Contracts",
                 column: "ActiveVehicleId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "UX_ContractTemplates_SingleActive",
+                table: "ContractTemplates",
+                column: "ActiveFlag",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -500,6 +558,14 @@ namespace FleetManager.Infrastructure.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
+                name: "FK_ContractDocuments_Contracts_ContractId",
+                table: "ContractDocuments",
+                column: "ContractId",
+                principalTable: "Contracts",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
                 name: "FK_Contracts_Vehicles_VehicleId",
                 table: "Contracts",
                 column: "VehicleId",
@@ -537,6 +603,12 @@ namespace FleetManager.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Charges");
+
+            migrationBuilder.DropTable(
+                name: "ContractDocuments");
+
+            migrationBuilder.DropTable(
+                name: "ContractTemplates");
 
             migrationBuilder.DropTable(
                 name: "HistoryLogs");

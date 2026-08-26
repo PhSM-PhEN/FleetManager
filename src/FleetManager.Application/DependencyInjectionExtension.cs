@@ -18,7 +18,13 @@ using FleetManager.Application.UseCase.ToContract.GetAll;
 using FleetManager.Application.UseCase.ToContract.GetById;
 using FleetManager.Application.UseCase.ToContract.Register;
 using FleetManager.Application.UseCase.ToContract.Renew;
+using FleetManager.Application.UseCase.ToContract.GenerateDocument;
 using FleetManager.Application.UseCase.ToContract.Update;
+using FleetManager.Application.UseCase.ToContractTemplate.Activate;
+using FleetManager.Application.UseCase.ToContractTemplate.GetAll;
+using FleetManager.Application.UseCase.ToContractTemplate.GetById;
+using FleetManager.Application.UseCase.ToContractTemplate.Register;
+using FleetManager.Application.UseCase.ToContractTemplate.Update;
 using FleetManager.Application.UseCase.ToIncidentReport.Delete;
 using FleetManager.Application.UseCase.ToIncidentReport.GetAll;
 using FleetManager.Application.UseCase.ToIncidentReport.GetById;
@@ -121,6 +127,13 @@ namespace FleetManager.Application
             services.AddScoped<IFinishUpContractUseCase, FinishUpContractUseCase>();
             services.AddScoped<IRenewContractUseCase, RenewContractUseCase>();
             services.AddScoped<IDetectOverdueContractsUseCase, DetectOverdueContractsUseCase>();
+            services.AddScoped<IGenerateContractDocumentUseCase, GenerateContractDocumentUseCase>();
+            // contract template
+            services.AddScoped<IRegisterContractTemplateUseCase, RegisterContractTemplateUseCase>();
+            services.AddScoped<IUpdateContractTemplateUseCase, UpdateContractTemplateUseCase>();
+            services.AddScoped<IActivateContractTemplateUseCase, ActivateContractTemplateUseCase>();
+            services.AddScoped<IGetAllContractTemplateUseCase, GetAllContractTemplateUseCase>();
+            services.AddScoped<IGetByIdContractTemplateUseCase, GetByIdContractTemplateUseCase>();
             // incident report
             services.AddScoped<IRegisterIncidentReportUseCase, RegisterIncidentReportUseCase>();
             services.AddScoped<IGetAllIncidentReportUseCase, GetAllIncidentReportUseCase>();

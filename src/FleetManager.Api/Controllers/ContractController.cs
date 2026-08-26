@@ -3,6 +3,7 @@ using FleetManager.Application.UseCase.ToContract.Cancel;
 using FleetManager.Application.UseCase.ToContract.Delete;
 using FleetManager.Application.UseCase.ToContract.DetectOverdue;
 using FleetManager.Application.UseCase.ToContract.FinishUp;
+using FleetManager.Application.UseCase.ToContract.GenerateDocument;
 using FleetManager.Application.UseCase.ToContract.GetAll;
 using FleetManager.Application.UseCase.ToContract.GetById;
 using FleetManager.Application.UseCase.ToContract.Register;
@@ -105,6 +106,17 @@ namespace FleetManager.Api.Controllers
         {
             var totalMarked = await useCase.Execute();
             return Ok(new ResponseDetectOverdueContractsJson { TotalContractsMarkedAsOverdue = totalMarked });
+        }
+
+        // Gera (e congela) o texto do contrato a partir do ContractTemplate ativo no momento.
+        [HttpPost("{id}/Document")]
+        [ProducesResponseType(typeof(ResponseContractDocumentJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status409Conflict)]
+        public async Task<IActionResult> GenerateDocument([FromServices] IGenerateContractDocumentUseCase useCase, [FromRoute] long id)
+        {
+            var response = await useCase.Execute(id);
+            return Ok(response);
         }
 
         [HttpPost("{id}/Renew")]

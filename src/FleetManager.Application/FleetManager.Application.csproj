@@ -27,6 +27,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="UseCase\ToContractTemplate\Activate\" />
+	  <Folder Include="UseCase\ToContractTemplate\GetAll\" />
+	  <Folder Include="UseCase\ToContractTemplate\GetById\" />
+	  <Folder Include="UseCase\ToContractTemplate\Register\" />
+	  <Folder Include="UseCase\ToContractTemplate\Update\" />
+	  <Folder Include="UseCase\ToContract\GenerateDocument\" />
 	  <Folder Include="UseCase\ToMaintenance\Close\" />
 	  <Folder Include="UseCase\ToMaintenance\Delete\" />
 	  <Folder Include="UseCase\ToMaintenance\GetById\" />

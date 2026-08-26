@@ -3,6 +3,8 @@ using FleetManager.Domain.Repositories.ToAddress;
 using FleetManager.Domain.Repositories.ToCompany;
 using FleetManager.Domain.Repositories.ToCharge;
 using FleetManager.Domain.Repositories.ToContract;
+using FleetManager.Domain.Repositories.ToContractDocument;
+using FleetManager.Domain.Repositories.ToContractTemplate;
 using FleetManager.Domain.Repositories.ToIncidentReport;
 using FleetManager.Domain.Repositories.ToRentalPlan;
 using FleetManager.Domain.Repositories.ToTenant;
@@ -17,6 +19,8 @@ using FleetManager.Infrastructure.DataAccess.ToAddress;
 using FleetManager.Infrastructure.DataAccess.ToCharge;
 using FleetManager.Infrastructure.DataAccess.ToCompany;
 using FleetManager.Infrastructure.DataAccess.ToContract;
+using FleetManager.Infrastructure.DataAccess.ToContractDocument;
+using FleetManager.Infrastructure.DataAccess.ToContractTemplate;
 using FleetManager.Infrastructure.DataAccess.ToIncidentReport;
 using FleetManager.Infrastructure.DataAccess.ToRentalPlan;
 using FleetManager.Infrastructure.DataAccess.ToTenant;
@@ -102,6 +106,12 @@ namespace FleetManager.Infrastructure
             services.AddScoped<IMaintenanceReadOnlyRepository, MaintenanceRepository>();   
             services.AddScoped<IMaintenanceWriteOnlyRepository, MaintenanceRepository>();
 
+            // contract tamplate
+            services.AddScoped<IContractTemplateReadOnlyRepository, ContractTemplateRepository>();
+            services.AddScoped<IContractTemplateWriteOnlyRepository, ContractTemplateRepository>();
+
+            // contract document
+            services.AddScoped<IContractDocumentWriteOnlyRepository, ContractDocumentRepository>();
 
             // unit of work
             services.AddScoped<IUnitOfWork, UnitOfWork>();

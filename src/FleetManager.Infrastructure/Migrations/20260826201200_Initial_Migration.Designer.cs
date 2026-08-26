@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FleetManager.Infrastructure.Migrations
 {
     [DbContext(typeof(FleetManagerDbContext))]
-    [Migration("20260826063212_Initial_Migration")]
+    [Migration("20260826201200_Initial_Migration")]
     partial class Initial_Migration
     {
         /// <inheritdoc />
@@ -169,7 +169,7 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Property<long?>("ActiveVehicleId")
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("bigint")
-                        .HasComputedColumnSql("CASE WHEN `ContractStatus` IN (1, 2, 5) THEN `VehicleId` ELSE NULL END", true);
+                        .HasComputedColumnSql("CASE WHEN `Status` IN (1, 2, 5) THEN `VehicleId` ELSE NULL END", true);
 
                     b.Property<DateTime?>("ActualReturnDateTime")
                         .HasColumnType("datetime(6)");
@@ -256,6 +256,97 @@ namespace FleetManager.Infrastructure.Migrations
                     b.HasIndex("VehicleId");
 
                     b.ToTable("Contracts");
+                });
+
+            modelBuilder.Entity("FleetManager.Domain.Entities.ContractDocument", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<long>("ContractId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("ContractTemplateId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("ContractTemplateVersion")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<long>("CreatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("GeneratedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContractId");
+
+                    b.ToTable("ContractDocuments");
+                });
+
+            modelBuilder.Entity("FleetManager.Domain.Entities.ContractTemplate", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<bool?>("ActiveFlag")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("tinyint(1)")
+                        .HasComputedColumnSql("CASE WHEN `IsActive` = 1 THEN 1 ELSE NULL END", true);
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<long>("CreatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<long?>("UpdatedBy")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Version")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActiveFlag")
+                        .IsUnique()
+                        .HasDatabaseName("UX_ContractTemplates_SingleActive");
+
+                    b.ToTable("ContractTemplates");
                 });
 
             modelBuilder.Entity("FleetManager.Domain.Entities.HistoryLog", b =>
@@ -631,6 +722,17 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Navigation("Tenant");
 
                     b.Navigation("Vehicle");
+                });
+
+            modelBuilder.Entity("FleetManager.Domain.Entities.ContractDocument", b =>
+                {
+                    b.HasOne("FleetManager.Domain.Entities.Contract", "Contract")
+                        .WithMany()
+                        .HasForeignKey("ContractId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Contract");
                 });
 
             modelBuilder.Entity("FleetManager.Domain.Entities.IncidentReport", b =>
