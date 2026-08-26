@@ -140,7 +140,7 @@ namespace FleetManager.Infrastructure.DataAccess
                 .WithMany()
                 .HasForeignKey(v => v.CompanyId)
                 .OnDelete(DeleteBehavior.Restrict);
-            
+
             modelBuilder.Entity<Vehicle>()
                 .HasOne(v => v.RentalPlan)
                 .WithMany(p => p.Vehicles)
@@ -210,7 +210,12 @@ namespace FleetManager.Infrastructure.DataAccess
                 .HasForeignKey(c => c.ContractId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-   
+            modelBuilder.Entity<Vehicle>()
+                .HasOne(v => v.IncidentReport)
+                .WithMany()
+                .HasForeignKey("CurrentIncidentReportId")
+                .OnDelete(DeleteBehavior.Restrict);
+
 
 
 

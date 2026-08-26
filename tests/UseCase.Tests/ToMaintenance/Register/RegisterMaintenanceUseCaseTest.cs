@@ -1,5 +1,6 @@
 ﻿using CommonTestUtilities.Entities;
 using CommonTestUtilities.Repositories;
+using CommonTestUtilities.Repositories.ToIncidentReport;
 using CommonTestUtilities.Repositories.ToMaintenance;
 using CommonTestUtilities.Repositories.ToVehicle;
 using CommonTestUtilities.Request.ToMaintenance;
@@ -99,9 +100,11 @@ namespace UseCase.Tests.ToMaintenance.Register
                 vehicleRepositoryBuilder.GetById(vehicle.Id, vehicle);
             var vehicleRepository = vehicleRepositoryBuilder.Build();
 
+            var incidentReportRepository = new IncidentReportReadOnlyRepositoryBuilder().Build();
+
             var unitOfWork = UnitOfWorkBuilder.Build();
 
-            return new RegisterMaintenanceUseCase(writeRepository, vehicleRepository, unitOfWork);
+            return new RegisterMaintenanceUseCase(writeRepository, vehicleRepository, incidentReportRepository, unitOfWork);
         }
     }
 }

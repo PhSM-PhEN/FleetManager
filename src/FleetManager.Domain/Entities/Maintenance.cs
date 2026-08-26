@@ -22,6 +22,7 @@ namespace FleetManager.Domain.Entities
             VehicleId = vehicleId;
             ServiceCenter = serviceCenter;
             IncidentReport = incidentReport;
+            IncidentReportId = incidentReport?.Id;
             ScheduledAt = scheduledAt;
             Status = MaintenanceStatus.Scheduled;
             RegisterHistoryEvent("Scheduled");
@@ -30,8 +31,10 @@ namespace FleetManager.Domain.Entities
         {
             VehicleId = vehicleId;
             IncidentReport = incidentReport;
+            IncidentReportId = incidentReport?.Id;
             ScheduledAt = scheduledAt;
-            RegisterHistoryEvent("Reported");
+            Status = MaintenanceStatus.Scheduled;
+            RegisterHistoryEvent("Scheduled");
         }
         private void Scheduled(DateTime scheduledAt)
         {

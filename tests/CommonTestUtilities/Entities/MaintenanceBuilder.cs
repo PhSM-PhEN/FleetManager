@@ -25,10 +25,14 @@ namespace CommonTestUtilities.Entities
 
         public static Maintenance Build(long? id = null, long? vehicleId = null, long? incidentReportId = null, DateTime? scheduledAt = null)
         {
+            var incidentReport = incidentReportId.HasValue
+                ? IncidentReportBuilder.Build(id: incidentReportId.Value)
+                : null;
+
             var maintenance = new Faker<Maintenance>()
                 .CustomInstantiator(f => new Maintenance(
                     vehicleId ?? f.Random.Long(1, 1000),
-                    incidentReportId,
+                    incidentReport,
                     scheduledAt ?? DateTime.UtcNow.AddDays(f.Random.Int(1, 30))
                 ))
                 .Generate();

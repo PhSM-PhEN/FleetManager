@@ -2,6 +2,7 @@ using CommonTestUtilities.Entities;
 using CommonTestUtilities.Repositories;
 using CommonTestUtilities.Repositories.ToContract;
 using CommonTestUtilities.Repositories.ToIncidentReport;
+using CommonTestUtilities.Repositories.ToMaintenance;
 using CommonTestUtilities.Repositories.ToVehicle;
 using FleetManager.Application.UseCase.ToIncidentReport.Register;
 using FleetManager.Communication.Request.ToIncidentReport;
@@ -145,9 +146,10 @@ namespace UseCase.Tests.ToIncidentReport.Register
             var vehicleRepository = vehicleRepositoryBuilder.Build();
             vehicleRepositoryMock = Mock.Get(vehicleRepository);
             var contractRepository = contractRepositoryBuilder.Build();
+            var maintenanceWriteOnly = new MaintenanceWriteOnlyRepositoryBuilder().Build();
             var unitOfWork = UnitOfWorkBuilder.Build();
 
-            return new RegisterIncidentReportUseCase(incidentReportRepository, unitOfWork, vehicleRepository, contractRepository);
+            return new RegisterIncidentReportUseCase(incidentReportRepository, unitOfWork, vehicleRepository, contractRepository, maintenanceWriteOnly);
         }
     }
 }

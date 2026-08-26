@@ -15,7 +15,7 @@ namespace UseCase.Tests.ToMaintenance.GetById
         {
             var vehicle = VehicleBuilder.Build(1);
             var incidentReport = IncidentReportBuilder.Build(1);
-            var maintenance = MaintenanceBuilder.Build(1, vehicleId: vehicle.Id, incidentReportId: incidentReport.Id)
+            var maintenance = MaintenanceBuilder.Build(1, vehicleId: vehicle.Id)
                 .WithVehicle(vehicle)
                 .WithIncidentReport(incidentReport);
 

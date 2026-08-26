@@ -42,4 +42,4 @@ namespace CommonTestUtilities.Entities
             return incidentReport;
         }
     }
-}
+}

@@ -22,7 +22,7 @@ namespace UseCase.Tests.ToContract.Register
             var rentalPlan = RentalPlanBuilder.Build(1);
             var request = RequestContractJsonBuilder.Build(vehicle.Id, tenant.Id, rentalPlan.Id, "Daily");
 
-            var useCase = CreateUseCase(vehicle, tenant, rentalPlan, hasActiveContract: false);
+            var useCase = CreateUseCase(vehicle, tenant, rentalPlan);
             var result = await useCase.Execute(request);
 
             result.ShouldNotBeNull();
@@ -37,7 +37,7 @@ namespace UseCase.Tests.ToContract.Register
             var rentalPlan = RentalPlanBuilder.Build(1);
             var request = RequestContractJsonBuilder.Build(vehicle.Id, tenant.Id, rentalPlan.Id, "Monthly");
 
-            var useCase = CreateUseCase(vehicle, tenant, rentalPlan, hasActiveContract: false);
+            var useCase = CreateUseCase(vehicle, tenant, rentalPlan );
             var result = await useCase.Execute(request);
 
             result.ShouldNotBeNull();
@@ -51,7 +51,7 @@ namespace UseCase.Tests.ToContract.Register
             var rentalPlan = RentalPlanBuilder.Build(1);
             var request = RequestContractJsonBuilder.Build(999, tenant.Id, rentalPlan.Id);
 
-            var useCase = CreateUseCase(vehicle: null, tenant, rentalPlan, hasActiveContract: false);
+            var useCase = CreateUseCase(vehicle: null, tenant, rentalPlan );
             var act = async () => await useCase.Execute(request);
 
             var result = await act.ShouldThrowAsync<NotFoundException>();
@@ -65,7 +65,7 @@ namespace UseCase.Tests.ToContract.Register
             var rentalPlan = RentalPlanBuilder.Build(1);
             var request = RequestContractJsonBuilder.Build(vehicle.Id, 999, rentalPlan.Id);
 
-            var useCase = CreateUseCase(vehicle, tenant: null, rentalPlan, hasActiveContract: false);
+            var useCase = CreateUseCase(vehicle, tenant: null, rentalPlan);
             var act = async () => await useCase.Execute(request);
 
             var result = await act.ShouldThrowAsync<NotFoundException>();
@@ -79,7 +79,7 @@ namespace UseCase.Tests.ToContract.Register
             var tenant = TenantBuilder.Build(1);
             var request = RequestContractJsonBuilder.Build(vehicle.Id, tenant.Id, 999);
 
-            var useCase = CreateUseCase(vehicle, tenant, rentalPlan: null, hasActiveContract: false);
+            var useCase = CreateUseCase(vehicle, tenant, rentalPlan: null);
             var act = async () => await useCase.Execute(request);
 
             var result = await act.ShouldThrowAsync<NotFoundException>();
@@ -94,7 +94,7 @@ namespace UseCase.Tests.ToContract.Register
             var rentalPlan = RentalPlanBuilder.Build(1);
             var request = RequestContractJsonBuilder.Build(vehicle.Id, tenant.Id, rentalPlan.Id);
 
-            var useCase = CreateUseCase(vehicle, tenant, rentalPlan, hasActiveContract: true);
+            var useCase = CreateUseCase(vehicle, tenant, rentalPlan);
             var act = async () => await useCase.Execute(request);
 
             var result = await act.ShouldThrowAsync<BusinessRuleException>();
@@ -110,7 +110,7 @@ namespace UseCase.Tests.ToContract.Register
             var request = RequestContractJsonBuilder.Build(vehicle.Id, tenant.Id, rentalPlan.Id);
             request.VehicleId = 0;
 
-            var useCase = CreateUseCase(vehicle, tenant, rentalPlan, hasActiveContract: false);
+            var useCase = CreateUseCase(vehicle, tenant, rentalPlan);
             var act = async () => await useCase.Execute(request);
 
             var result = await act.ShouldThrowAsync<ErrorOnValidationException>();
@@ -127,7 +127,7 @@ namespace UseCase.Tests.ToContract.Register
             var rentalPlan = RentalPlanBuilder.Build(1);
             var request = RequestContractJsonBuilder.Build(vehicle.Id, tenant.Id, rentalPlan.Id);
 
-            var useCase = CreateUseCase(vehicle, tenant, rentalPlan, hasActiveContract: false);
+            var useCase = CreateUseCase(vehicle, tenant, rentalPlan);
             var act = async () => await useCase.Execute(request);
 
             var result = await act.ShouldThrowAsync<BusinessRuleException>();
@@ -144,7 +144,7 @@ namespace UseCase.Tests.ToContract.Register
             var rentalPlan = RentalPlanBuilder.Build(1);
             var request = RequestContractJsonBuilder.Build(vehicle.Id, tenant.Id, rentalPlan.Id);
 
-            var useCase = CreateUseCase(vehicle, tenant, rentalPlan, hasActiveContract: false);
+            var useCase = CreateUseCase(vehicle, tenant, rentalPlan);
             var act = async () => await useCase.Execute(request);
 
             var result = await act.ShouldThrowAsync<BusinessRuleException>();
@@ -161,14 +161,14 @@ namespace UseCase.Tests.ToContract.Register
             var rentalPlan = RentalPlanBuilder.Build(1);
             var request = RequestContractJsonBuilder.Build(vehicle.Id, tenant.Id, rentalPlan.Id);
 
-            var useCase = CreateUseCase(vehicle, tenant, rentalPlan, hasActiveContract: false);
+            var useCase = CreateUseCase(vehicle, tenant, rentalPlan);
             var act = async () => await useCase.Execute(request);
 
             var result = await act.ShouldThrowAsync<BusinessRuleException>();
             result.Message.ShouldBe(ResourceErrorMessages.TENANT_NOT_AVAILABLE);
         }
 
-        private static RegisterContractUseCase CreateUseCase(Vehicle? vehicle, Tenant? tenant, RentalPlan? rentalPlan, bool hasActiveContract)
+        private static RegisterContractUseCase CreateUseCase(Vehicle? vehicle, Tenant? tenant, RentalPlan? rentalPlan)
         {
             var vehicleRepositoryBuilder = new VehicleReadOnlyRepositoryBuilder();
             if (vehicle is not null)
@@ -182,16 +182,13 @@ namespace UseCase.Tests.ToContract.Register
             if (rentalPlan is not null)
                 rentalPlanRepositoryBuilder.GetById(rentalPlan);
 
-            var contractRepository = new ContractWriteOnlyRepositoryBuilder()
-                .HasActiveContract(vehicle?.Id ?? 0, hasActiveContract)
-                .Build();
-
             var vehicleRepository = vehicleRepositoryBuilder.Build();
             var tenantRepository = tenantRepositoryBuilder.Build();
             var rentalPlanRepository = rentalPlanRepositoryBuilder.Build();
+            var contractRepository = new ContractWriteOnlyRepositoryBuilder().Build();
             var unitOfWork = UnitOfWorkBuilder.Build();
 
-            return new RegisterContractUseCase(vehicleRepository, tenantRepository, rentalPlanRepository, contractRepository, unitOfWork);
+            return new RegisterContractUseCase(vehicleRepository, tenantRepository, rentalPlanRepository, contractRepository,unitOfWork);
         }
     }
 }
