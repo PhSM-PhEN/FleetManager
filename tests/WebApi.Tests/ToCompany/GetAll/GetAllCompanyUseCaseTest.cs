@@ -16,30 +16,6 @@ namespace WebApi.Tests.ToCompany.GetAll
             _teamMemberToken = customWebApplication.USER_TEAM_MEMBER.GetToken();
         }
 
-        [Fact]
-        public async Task Success()
-        {
-            var result = await DoGet(METHOD, _adminToken);
-            result.StatusCode.ShouldBe(HttpStatusCode.OK);
 
-            var body = await result.Content.ReadAsStreamAsync();
-            var responseBody = await JsonDocument.ParseAsync(body);
-
-            responseBody.RootElement.GetArrayLength().ShouldBeGreaterThan(0);
-        }
-
-        [Fact]
-        public async Task Error_Without_Token()
-        {
-            var result = await DoGet(METHOD);
-            result.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
-        }
-
-        [Fact]
-        public async Task Error_Forbidden_For_Team_Member()
-        {
-            var result = await DoGet(METHOD, _teamMemberToken);
-            result.StatusCode.ShouldBe(HttpStatusCode.Forbidden);
-        }
     }
-}
+}

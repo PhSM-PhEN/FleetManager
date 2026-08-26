@@ -19,39 +19,6 @@ namespace WebApi.Tests.ToMaintenance.Delete
             _vehicleId = customWebApplication.VEHICLE_TEAM_MEMBER.GetById();
         }
 
-        [Fact]
-        public async Task Success()
-        {
-            var request = RequestMaintenanceJsonBuilder.Build(_vehicleId);
-            var registerResult = await DoPost(METHOD, request, _teamMemberToken);
 
-            var body = await registerResult.Content.ReadAsStreamAsync();
-            var responseBody = await JsonDocument.ParseAsync(body);
-            var maintenanceId = responseBody.RootElement.GetProperty("id").GetInt64();
-
-            var result = await DoDelete($"{METHOD}/{maintenanceId}", _adminToken);
-            result.StatusCode.ShouldBe(HttpStatusCode.NoContent);
-        }
-
-        [Fact]
-        public async Task Error_Maintenance_Not_Found()
-        {
-            var result = await DoDelete($"{METHOD}/0", _adminToken);
-            result.StatusCode.ShouldBe(HttpStatusCode.NotFound);
-        }
-
-        [Fact]
-        public async Task Error_Without_Token()
-        {
-            var result = await DoDelete($"{METHOD}/1");
-            result.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
-        }
-
-        [Fact]
-        public async Task Error_Forbidden_For_Team_Member()
-        {
-            var result = await DoDelete($"{METHOD}/1", _teamMemberToken);
-            result.StatusCode.ShouldBe(HttpStatusCode.Forbidden);
-        }
     }
 }

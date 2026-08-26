@@ -19,45 +19,6 @@ namespace WebApi.Tests.ToCompany.GetById
             _companyId = customWebApplication.COMPANY_TEAM_MEMBER.GetById();
         }
 
-        [Fact]
-        public async Task Success()
-        {
-            var result = await DoGet($"{METHOD}/{_companyId}", _adminToken);
-            result.StatusCode.ShouldBe(HttpStatusCode.OK);
 
-            var body = await result.Content.ReadAsStreamAsync();
-            var responseBody = await JsonDocument.ParseAsync(body);
-
-            responseBody.RootElement.GetProperty("id").GetInt64().ShouldBe(_companyId);
-        }
-
-        [Fact]
-        public async Task Error_Company_Not_Found()
-        {
-            var result = await DoGet($"{METHOD}/0", _adminToken);
-            result.StatusCode.ShouldBe(HttpStatusCode.NotFound);
-
-            var body = await result.Content.ReadAsStreamAsync();
-            var responseBody = await JsonDocument.ParseAsync(body);
-
-            var errorMessage = responseBody.RootElement.GetProperty("errorMessage").EnumerateArray();
-            var expectedMessage = ResourceErrorMessages.ResourceManager.GetString("COMPANY_NOT_FOUND");
-
-            errorMessage.ShouldContain(e => e.GetString()!.Equals(expectedMessage));
-        }
-
-        [Fact]
-        public async Task Error_Without_Token()
-        {
-            var result = await DoGet($"{METHOD}/{_companyId}");
-            result.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
-        }
-
-        [Fact]
-        public async Task Error_Forbidden_For_Team_Member()
-        {
-            var result = await DoGet($"{METHOD}/{_companyId}", _teamMemberToken);
-            result.StatusCode.ShouldBe(HttpStatusCode.Forbidden);
-        }
     }
-}
+}

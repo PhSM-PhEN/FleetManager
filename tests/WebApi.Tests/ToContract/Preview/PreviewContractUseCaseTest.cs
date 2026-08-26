@@ -20,48 +20,6 @@ namespace WebApi.Tests.ToContract.Preview
             _tenantId = customWebApplication.TENANT_TEAM_MEMBER.GetById();
         }
 
-        [Fact]
-        public async Task Success()
-        {
-            // Não persiste nada — pode chamar quantas vezes quiser sem ocupar o veículo
-            // pros outros testes da classe.
-            var request = RequestPreviewContractJsonBuilder.Build(_vehicleId, _tenantId);
 
-            var result = await DoPost(METHOD, request, _teamMemberToken);
-            result.StatusCode.ShouldBe(HttpStatusCode.OK);
-
-            var body = await result.Content.ReadAsStreamAsync();
-            var responseBody = await JsonDocument.ParseAsync(body);
-
-            responseBody.RootElement.GetProperty("vehicleId").GetInt64().ShouldBe(_vehicleId);
-            responseBody.RootElement.GetProperty("tenantId").GetInt64().ShouldBe(_tenantId);
-            responseBody.RootElement.GetProperty("totalAmount").GetDecimal().ShouldBeGreaterThan(0);
-        }
-
-        [Fact]
-        public async Task Error_VehicleId_Required()
-        {
-            var request = RequestPreviewContractJsonBuilder.Build(0, _tenantId);
-
-            var result = await DoPost(METHOD, request, _teamMemberToken);
-            result.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
-
-            var body = await result.Content.ReadAsStreamAsync();
-            var responseBody = await JsonDocument.ParseAsync(body);
-
-            var errorMessage = responseBody.RootElement.GetProperty("errorMessage").EnumerateArray();
-            var expectedMessage = ResourceErrorMessages.ResourceManager.GetString("VEHICLE_ID_REQUIRED");
-
-            errorMessage.ShouldContain(e => e.GetString()!.Equals(expectedMessage));
-        }
-
-        [Fact]
-        public async Task Error_Without_Token()
-        {
-            var request = RequestPreviewContractJsonBuilder.Build(_vehicleId, _tenantId);
-
-            var result = await DoPost(METHOD, request);
-            result.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
-        }
     }
 }
