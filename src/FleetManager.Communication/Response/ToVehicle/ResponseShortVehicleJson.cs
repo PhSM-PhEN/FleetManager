@@ -12,8 +12,7 @@ namespace FleetManager.Communication.Response.ToVehicle
         public string ChassiNumber { get; set; } = string.Empty;
         public string LicensePlate {get ; set ;} = string.Empty;
         public long CurrentMileage { get; set; }
-        public bool IsActive {get ;set ;}
         public ResponseCompanyJson Company { get; set; } = new();
-        public ResponseEnumStatusJson Enum {get ; set ;} = new();
+        public ResponseEnumStatusJson Status { get; set; } = new();
     }   
 }

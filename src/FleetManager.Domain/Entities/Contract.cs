@@ -15,6 +15,7 @@ namespace FleetManager.Domain.Entities
         public long TenantId { get; private set; }
         public long RentalPlanId { get; private set; }
         public RentalType RentalType { get; private set; }
+        public ContractStatus Status { get; private set; }
         public long StartMileage { get; private set; }
         public long ExpectedEndMileage { get; private set; }
         public long MileageContracted { get; private set; }
@@ -33,7 +34,7 @@ namespace FleetManager.Domain.Entities
         public DateTime PickupDateTime { get => _pickupDateTime; private set => _pickupDateTime = value; }
         public DateTime ReturnDueDateTime { get => _returnDueDateTime; private set => _returnDueDateTime = value; }
 
-        public ContractStatus ContractStatus { get; private set; } = ContractStatus.Reserved;
+         
         public DateTime? ActualReturnDateTime { get; private set; }
 
         public Vehicle Vehicle { get; internal set; } = default!;
@@ -48,31 +49,32 @@ namespace FleetManager.Domain.Entities
             VehicleId = vehicleId;
             TenantId = tenantId;
             StartMileage = startMileage;
+            Status = ContractStatus.Reserved;
             ApplyTerms(rentalPlan, rentalType, mileageContracted, totalAmount, pickupDateTime, returnDueDateTime);
         }
 
         public void Cancel()
         {
-            if (ContractStatus != ContractStatus.Active && ContractStatus != ContractStatus.Reserved)
+            if (Status != ContractStatus.Active && Status != ContractStatus.Reserved)
                 throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_NOT_ACTIVE);
 
-            ContractStatus = ContractStatus.Cancelled;
+            Status = ContractStatus.Cancelled;
             RegisterHistoryEvent("Cancelled");
         }
 
         public void Confirm()
         {
-            if (ContractStatus != ContractStatus.Reserved)
+            if (Status != ContractStatus.Reserved)
                 throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_NOT_RESERVED);
 
-            ContractStatus = ContractStatus.Active;
+            Status = ContractStatus.Active;
             RegisterHistoryEvent("Activated");
         }
 
         public void Update(RentalPlan rentalPlan, RentalType rentalType, long mileageContracted, decimal totalAmount,
                         DateTime pickupDateTime, DateTime? returnDueDateTime)
         {
-            if (ContractStatus != ContractStatus.Reserved)
+            if (Status  != ContractStatus.Reserved)
                 throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_NOT_EDITABLE);
 
             ApplyTerms(rentalPlan, rentalType, mileageContracted, totalAmount, pickupDateTime, returnDueDateTime);
@@ -80,7 +82,7 @@ namespace FleetManager.Domain.Entities
 
         public void FinishUp(DateTime actualReturnDateTime, long finalMileage)
         {
-            if (ContractStatus != ContractStatus.Active && ContractStatus != ContractStatus.Overdue)
+            if (Status != ContractStatus.Active && Status != ContractStatus.Overdue)
                 throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_NOT_ACTIVE);
 
             if (finalMileage < StartMileage)
@@ -96,16 +98,16 @@ namespace FleetManager.Domain.Entities
             LateFee = DaysLate * SnapshotPriceDailyRate;
 
             ActualReturnDateTime = actualReturnDateTime;
-            ContractStatus = ContractStatus.Finished;
+            Status = ContractStatus.Finished;
             RegisterHistoryEvent("Finish_up");
         }
 
         public void MarkAsOverdue()
         {
-            if (ContractStatus != ContractStatus.Active)
+            if (Status != ContractStatus.Active)
                 throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_NOT_ACTIVE);
 
-            ContractStatus = ContractStatus.Overdue;
+            Status  = ContractStatus.Overdue;
             RegisterHistoryEvent("MarkedAsOverdue");
         }
 
@@ -117,7 +119,7 @@ namespace FleetManager.Domain.Entities
         /// </summary>
         public bool IsPastDueDate(DateTime referenceDateTime)
         {
-            return (ContractStatus == ContractStatus.Active || ContractStatus == ContractStatus.Overdue)
+            return (Status == ContractStatus.Active || Status == ContractStatus.Overdue)
                 && referenceDateTime > ReturnDueDateTime;
         }
 
@@ -137,10 +139,10 @@ namespace FleetManager.Domain.Entities
 
         public static Contract Renew(Contract previousContract, RentalPlan currentRentalPlan, long? mileageContractedOverride)
         {
-            if (previousContract.ContractStatus != ContractStatus.Active && previousContract.ContractStatus != ContractStatus.Overdue)
+            if (previousContract.Status != ContractStatus.Active && previousContract.Status != ContractStatus.Overdue)
                 throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_NOT_ACTIVE);
 
-            if (previousContract.ContractStatus == ContractStatus.Overdue)
+            if (previousContract.Status == ContractStatus.Overdue)
             {
                 var daysLate = CalculateDaysLate(previousContract.ReturnDueDateTime, DateTime.UtcNow);
                 if (daysLate > MaxOverdueDaysAllowedForRenewal)
@@ -188,7 +190,7 @@ namespace FleetManager.Domain.Entities
 
         private void MarkAsRenewed()
         {
-            ContractStatus = ContractStatus.Renewed;
+            Status = ContractStatus.Renewed;
             RegisterHistoryEvent("Renewed");
         }
 
@@ -246,4 +248,4 @@ namespace FleetManager.Domain.Entities
             return startMileage + mileageContracted;
         }
     }
-}
+}

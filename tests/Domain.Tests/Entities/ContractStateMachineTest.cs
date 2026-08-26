@@ -34,7 +34,7 @@ namespace Domain.Tests.Entities
 
             contract.Confirm();
 
-            contract.ContractStatus.ShouldBe(ContractStatus.Active);
+            contract.Status.ShouldBe(ContractStatus.Active);
         }
 
         [Fact]
@@ -44,7 +44,7 @@ namespace Domain.Tests.Entities
 
             contract.Cancel();
 
-            contract.ContractStatus.ShouldBe(ContractStatus.Cancelled);
+            contract.Status.ShouldBe(ContractStatus.Cancelled);
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace Domain.Tests.Entities
 
             contract.Cancel();
 
-            contract.ContractStatus.ShouldBe(ContractStatus.Cancelled);
+            contract.Status.ShouldBe(ContractStatus.Cancelled);
         }
 
         [Fact]
@@ -65,8 +65,8 @@ namespace Domain.Tests.Entities
 
             var renewedContract = Contract.Renew(contract, rentalPlan, null);
 
-            contract.ContractStatus.ShouldBe(ContractStatus.Renewed);
-            renewedContract.ContractStatus.ShouldBe(ContractStatus.Active);
+            contract.Status.ShouldBe(ContractStatus.Renewed);
+            renewedContract.Status.ShouldBe(ContractStatus.Active);
             renewedContract.StartMileage.ShouldBe(contract.ExpectedEndMileage);
         }
 
@@ -77,7 +77,7 @@ namespace Domain.Tests.Entities
 
             contract.MarkAsOverdue();
 
-            contract.ContractStatus.ShouldBe(ContractStatus.Overdue);
+            contract.Status.ShouldBe(ContractStatus.Overdue);
         }
 
         // 3.1 — Reforço em nível de domínio: MarkAsOverdue só pode partir de Active. Isso é o
@@ -96,7 +96,7 @@ namespace Domain.Tests.Entities
             var exception = Should.Throw<BusinessRuleException>(() => contract.MarkAsOverdue());
 
             exception.Message.ShouldBe(ResourceErrorMessages.CONTRACT_NOT_ACTIVE);
-            contract.ContractStatus.ShouldBe(status);
+            contract.Status.ShouldBe(status);
         }
 
         [Fact]
@@ -111,8 +111,8 @@ namespace Domain.Tests.Entities
 
             var renewedContract = Contract.Renew(contract, rentalPlan, null);
 
-            contract.ContractStatus.ShouldBe(ContractStatus.Renewed);
-            renewedContract.ContractStatus.ShouldBe(ContractStatus.Active);
+            contract.Status.ShouldBe(ContractStatus.Renewed);
+            renewedContract.Status.ShouldBe(ContractStatus.Active);
         }
 
         [Fact]
@@ -129,7 +129,7 @@ namespace Domain.Tests.Entities
                 () => Contract.Renew(contract, rentalPlan, null));
 
             exception.Message.ShouldBe(ResourceErrorMessages.RENEWAL_NOT_ALLOWED_PAST_MAX_OVERDUE_DAYS);
-            contract.ContractStatus.ShouldBe(ContractStatus.Overdue);
+            contract.Status.ShouldBe(ContractStatus.Overdue);
         }
 
         [Fact]

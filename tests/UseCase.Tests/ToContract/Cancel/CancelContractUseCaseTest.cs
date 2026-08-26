@@ -19,7 +19,7 @@ namespace UseCase.Tests.ToContract.Cancel
 
             await useCase.Execute(contract.Id);
 
-            contract.ContractStatus.ShouldBe(ContractStatus.Cancelled);
+            contract.Status.ShouldBe(ContractStatus.Cancelled);
         }
 
         [Fact]
@@ -30,7 +30,7 @@ namespace UseCase.Tests.ToContract.Cancel
 
             await useCase.Execute(contract.Id);
 
-            contract.ContractStatus.ShouldBe(ContractStatus.Cancelled);
+            contract.Status.ShouldBe(ContractStatus.Cancelled);
         }
 
         [Fact]

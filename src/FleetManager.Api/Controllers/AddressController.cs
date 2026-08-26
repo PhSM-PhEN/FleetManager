@@ -18,7 +18,7 @@ namespace FleetManager.Api.Controllers
     public class AddressController : ControllerBase
     {
         [HttpPost]
-        [ProducesResponseType(typeof(ResponseShortAddressJson), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(ResponseAddressJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> Register([FromServices] IRegisterAddressUseCase usecase,
         [FromBody] RequestAddressJson request)
@@ -27,7 +27,7 @@ namespace FleetManager.Api.Controllers
             return Created(string.Empty, response);
         }
         [HttpGet]
-        [ProducesResponseType(typeof(ResponseShortAddressJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseAddressJson), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> GetAll([FromServices] IGetAllAddressUseCase useCase, [FromQuery] int pageNumber = 1,[FromQuery] int pageSize = 10)
         {

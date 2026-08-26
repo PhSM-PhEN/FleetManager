@@ -9,5 +9,6 @@ namespace FleetManager.Communication.Response.ToCompany
         public string Cnpj { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
         public ResponseAddressJson Address { get; set; } = new();
+        public ResponseEnumStatusJson Status { get; set; } = new();
     }
-}
+}

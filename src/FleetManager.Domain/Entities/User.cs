@@ -11,6 +11,7 @@ namespace FleetManager.Domain.Entities
         public string Password { get; private set; } = string.Empty;
         public Guid UserIdentifier { get; private set; }
         public string Role { get; private set; } = Roles.TEAM_MEMBER;
+        public UserStatus Status { get; private set; }
 
         protected User() {}
         public User(string name, string email, string password)
@@ -19,6 +20,7 @@ namespace FleetManager.Domain.Entities
             Email = email;
             ChangePassword(password);
             UserIdentifier = Guid.NewGuid();
+            Status = UserStatus.Active;
         }
         internal User(long id, Guid identifier, string name, string role)
         {
@@ -26,6 +28,7 @@ namespace FleetManager.Domain.Entities
             UserIdentifier = identifier;
             Name = name;
             Role = role;
+            Status = UserStatus.Active;
         }
         public void Update(string name, string email)
         {

@@ -21,8 +21,8 @@ namespace UseCase.Tests.ToContract.DetectOverdue
             var totalMarked = await useCase.Execute();
 
             totalMarked.ShouldBe(2);
-            overdueContract1.ContractStatus.ShouldBe(ContractStatus.Overdue);
-            overdueContract2.ContractStatus.ShouldBe(ContractStatus.Overdue);
+            overdueContract1.Status.ShouldBe(ContractStatus.Overdue);
+            overdueContract2.Status.ShouldBe(ContractStatus.Overdue);
         }
 
         [Fact]

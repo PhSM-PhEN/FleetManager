@@ -1,3 +1,4 @@
+using FleetManager.Domain.Enum;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Domain.Entities
@@ -7,6 +8,7 @@ namespace FleetManager.Domain.Entities
         public long ContractId {get ; private set ; }
         public string Description {get ; private set ;} = string.Empty;
         public decimal Amount {get ; private set ;}
+        public ChargeStatus Status {get ; private set ; }
         public Contract Contract {get ; private set ;} = default!;
       
         protected Charge() { }
@@ -16,15 +18,27 @@ namespace FleetManager.Domain.Entities
             ContractId = contractId;
             Description = description;
             Amount = amount;
+            Status = ChargeStatus.Pending;
         }
-
+        public void MarkAsPaid()
+        {
+            Status = ChargeStatus.Paid;
+        }
+        public void MarkAsOverdue()
+        {
+            Status = ChargeStatus.Overdue;
+        }
+        public void MarkAsCancelled()
+        {
+            Status = ChargeStatus.Cancelled;
+        }
+       
         public static Charge ForLateFee(Contract contract)
         {
             if (contract.LateFee is null || contract.LateFee <= 0)
                 throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_HAS_NO_LATE_FEE);
 
             var description = string.Format(ResourceExtensionsMessages.LATE_FEE_CHARGE_DESCRIPTION, contract.DaysLate);
-
             return new Charge(contract.Id, description, contract.LateFee.Value);
         }
         public static Charge ForExceededMileageFee(Contract contract)

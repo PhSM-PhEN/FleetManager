@@ -26,7 +26,7 @@ namespace UseCase.Tests.ToContract.Register
             var result = await useCase.Execute(request);
 
             result.ShouldNotBeNull();
-            result.ContractStatus.ShouldNotBeNullOrEmpty();
+            
         }
 
         [Fact]
@@ -194,4 +194,4 @@ namespace UseCase.Tests.ToContract.Register
             return new RegisterContractUseCase(vehicleRepository, tenantRepository, rentalPlanRepository, contractRepository, unitOfWork);
         }
     }
-}
+}

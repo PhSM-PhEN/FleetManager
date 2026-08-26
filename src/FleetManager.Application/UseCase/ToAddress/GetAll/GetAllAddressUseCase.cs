@@ -8,7 +8,7 @@ namespace FleetManager.Application.UseCase.ToAddress.GetAll
 {
     public class GetAllAddressUseCase(IAddressReadOnlyRepository repository) : IGetAllAddressUseCase
     {
-        public async Task<ResponsePaginatedJson<ResponseShortAddressJson>> Execute(int pageNumber, int pageSize)
+        public async Task<ResponsePaginatedJson<ResponseAddressJson>> Execute(int pageNumber, int pageSize)
         {
             if(pageNumber <= 0) pageNumber = 1;
             if(pageSize <= 0 || pageSize > 50) pageSize = 10;
@@ -16,9 +16,9 @@ namespace FleetManager.Application.UseCase.ToAddress.GetAll
             var (addres , totalCount) = await repository.GetAll(pageNumber, pageSize);
 
 
-            return new ResponsePaginatedJson<ResponseShortAddressJson>
+            return new ResponsePaginatedJson<ResponseAddressJson>
             {
-                Data = addres.ToShortResponse(),
+                Data = addres.ToResponse(),
                 PageNumber = pageNumber,
                 PageSize = pageSize,
                 TotalCount = totalCount,

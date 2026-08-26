@@ -32,11 +32,6 @@ namespace FleetManager.Api.Controllers
             return Created(string.Empty, response);
         }
 
-        [HttpPost("Preview")]
-        [ProducesResponseType(typeof(ResponsePreviewContractJson), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status409Conflict)]
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ResponseContractJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]

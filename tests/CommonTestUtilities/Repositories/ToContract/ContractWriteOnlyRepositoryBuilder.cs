@@ -37,12 +37,6 @@ namespace CommonTestUtilities.Repositories.ToContract
             return this;
         }
 
-        public ContractWriteOnlyRepositoryBuilder HasActiveContract(long vehicleId, bool hasActive)
-        {
-            _repository.Setup(c => c.HasActiveContract(vehicleId)).ReturnsAsync(hasActive);
-            return this;
-        }
-
         public ContractWriteOnlyRepositoryBuilder GetActiveContractsPastDueDate(List<Contract> contracts)
         {
             _repository.Setup(c => c.GetActiveContractsPastDueDate(It.IsAny<DateTime>())).ReturnsAsync(contracts);
@@ -51,4 +45,4 @@ namespace CommonTestUtilities.Repositories.ToContract
 
         public IContractWriteOnlyRepository Build() => _repository.Object;
     }
-}
+}

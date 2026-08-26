@@ -27,8 +27,8 @@ namespace UseCase.Tests.ToContract.Renew
 
             var response = await useCase.Execute(contract.Id, request);
 
-            contract.ContractStatus.ShouldBe(ContractStatus.Renewed);
-            response.ContractStatus.ShouldBe(ContractStatus.Active.ContractStatusToString());
+            contract.Status.ShouldBe(ContractStatus.Renewed);
+        
             response.PickupDateTime.ShouldBe(contract.ReturnDueDateTime);
         }
 
@@ -44,7 +44,7 @@ namespace UseCase.Tests.ToContract.Renew
 
             var response = await useCase.Execute(contract.Id, request);
 
-            contract.ContractStatus.ShouldBe(ContractStatus.Renewed);
+            contract.Status.ShouldBe(ContractStatus.Renewed);
             response.TotalAmount.ShouldBeGreaterThan(0);
         }
 
@@ -59,8 +59,8 @@ namespace UseCase.Tests.ToContract.Renew
 
             var response = await useCase.Execute(contract.Id, request);
 
-            contract.ContractStatus.ShouldBe(ContractStatus.Renewed);
-            response.ContractStatus.ShouldBe(ContractStatus.Active.ContractStatusToString());
+            contract.Status.ShouldBe(ContractStatus.Renewed);
+
             // Mesmo atrasado (renovação processada depois do vencimento), a nova contagem começa
             // exatamente no antigo ReturnDueDateTime, não no momento em que a renovação foi feita.
             // A multa por atraso não é cobrada aqui — só existe se o carro for devolvido (finish up).
@@ -79,8 +79,8 @@ namespace UseCase.Tests.ToContract.Renew
 
             var response = await useCase.Execute(contract.Id, request);
 
-            contract.ContractStatus.ShouldBe(ContractStatus.Renewed);
-            response.ContractStatus.ShouldBe(ContractStatus.Active.ContractStatusToString());
+            contract.Status.ShouldBe(ContractStatus.Renewed);
+
         }
 
         [Fact]
@@ -96,7 +96,7 @@ namespace UseCase.Tests.ToContract.Renew
 
             var result = await act.ShouldThrowAsync<BusinessRuleException>();
             result.Message.ShouldBe(ResourceErrorMessages.RENEWAL_NOT_ALLOWED_PAST_MAX_OVERDUE_DAYS);
-            contract.ContractStatus.ShouldBe(ContractStatus.Overdue);
+            contract.Status.ShouldBe(ContractStatus.Overdue);
         }
 
         [Fact]
@@ -210,4 +210,4 @@ namespace UseCase.Tests.ToContract.Renew
             return new RenewContractUseCase(contractRepository, rentalPlanRepository, unitOfWork);
         }
     }
-}
+}

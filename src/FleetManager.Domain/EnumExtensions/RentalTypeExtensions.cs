@@ -1,17 +1,18 @@
 using FleetManager.Domain.Enum;
 using FleetManager.Exception.ExceptionBase;
+using System.Net.NetworkInformation;
 
 namespace FleetManager.Domain.EnumExtensions
 {
     public static class RentalTypeExtensions
     {
-        public static string RentalTypeToString(this RentalType rentalType)
+        public static string ToStringStatus(this RentalType status)
         {
-            return rentalType switch
+            return status switch
             {
                 RentalType.Daily => ResourceExtensionsMessages.DAILY,
                 RentalType.Monthly => ResourceExtensionsMessages.MONTHLY,
-                _=> string.Empty
+                _ => throw new ArgumentOutOfRangeException(nameof(status), status, null)
             };
 
         }

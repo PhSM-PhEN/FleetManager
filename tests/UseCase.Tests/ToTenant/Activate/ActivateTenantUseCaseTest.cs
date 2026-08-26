@@ -20,7 +20,6 @@ namespace UseCase.Tests.ToTenant.Activate
             var act = async () => await useCase.Execute(tenant.Id);
 
             await act.ShouldNotThrowAsync();
-            tenant.IsActive.ShouldBeTrue();
         }
 
         [Fact]

@@ -1,4 +1,5 @@
-﻿using FleetManager.Communication.Response.ToUser;
+﻿using FleetManager.Communication.Response;
+using FleetManager.Communication.Response.ToUser;
 using FleetManager.Domain.Entities;
 
 namespace FleetManager.Application.Extensions
@@ -18,7 +19,12 @@ namespace FleetManager.Application.Extensions
             return new ResponseProfileUserJson
             {
                 Name = user.Name,
-                Email = user.Email
+                Email = user.Email,
+                Status = new ResponseEnumStatusJson
+                {
+                    Id = (int)user.Status,
+                    Label = user.Status.ToString()
+                },
             };
         }
     }

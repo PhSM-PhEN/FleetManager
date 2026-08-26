@@ -10,7 +10,7 @@ namespace FleetManager.Application.UseCase.ToAddress.Register
 {
     public class RegisterAddressUseCase(IAddressWriteOnlyRepository repository, IUnitOfWork unitOfWork) : IRegisterAddressUseCase
     {
-        public async Task<ResponseShortAddressJson> Execute(RequestAddressJson request)
+        public async Task<ResponseAddressJson> Execute(RequestAddressJson request)
         {
             Validate(request);
 
@@ -18,7 +18,7 @@ namespace FleetManager.Application.UseCase.ToAddress.Register
             await repository.Add(address);
             await unitOfWork.Commit();
 
-            return address.ToShortResponse();
+            return address.ToResponse();
         }
         private static void Validate(RequestAddressJson request)
         {
@@ -26,7 +26,7 @@ namespace FleetManager.Application.UseCase.ToAddress.Register
             
             var result = validator.Validate(request);
             
-            if (result.IsValid == false)
+            if (result.IsValid == false)    
             {
                 var error = result.Errors.Select(e => e.ErrorMessage).ToList();
                 throw new ErrorOnValidationException(error);

@@ -1,4 +1,5 @@
-﻿using FleetManager.Communication.Response.ToCompany;
+﻿using FleetManager.Communication.Response;
+using FleetManager.Communication.Response.ToCompany;
 using FleetManager.Domain.Entities;
 
 namespace FleetManager.Application.Extensions
@@ -13,9 +14,17 @@ namespace FleetManager.Application.Extensions
                 Name = company.Name,
                 Cnpj = company.Cnpj,
                 PhoneNumber = company.PhoneNumber,
-                Address = company.Address.ToResponse()
+                Address = company.Address.ToResponse(),
+                Status = new ResponseEnumStatusJson
+                {
+                    Id = (int)company.Status,
+                    Label = company.Status.ToString()
+                }
             };
         }
+         
+
+        
 
         public static ResponseShortCompanyJson ToShortResponse(this Company company)
         {
@@ -23,13 +32,19 @@ namespace FleetManager.Application.Extensions
             {
                 Id = company.Id,
                 Name = company.Name,
-                Cnpj = company.Cnpj
+                Cnpj = company.Cnpj,
+                Status = new ResponseEnumStatusJson
+                {
+                    Id = (int)company.Status,
+                    Label = company.Status.ToString()
+                }
+
             };
         }
 
         public static List<ResponseShortCompanyJson> ToShortResponse(this List<Company> companies)
         {
-            return companies.Select(c => c.ToShortResponse()).ToList();
+            return [.. companies.Select(c => c.ToShortResponse())];
         }
     }
-}
+}

@@ -41,7 +41,7 @@ namespace UseCase.Tests.ToContract.FinishUp
 
             var response = await useCase.Execute(contract.Id, request);
 
-            contract.ContractStatus.ShouldBe(ContractStatus.Finished);
+            contract.Status.ShouldBe(ContractStatus.Finished);
             contract.FinalMileage.ShouldBe(finalMileage);
             response.ContractId.ShouldBe(contract.Id);
             response.FinalMileage.ShouldBe(finalMileage);

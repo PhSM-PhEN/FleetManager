@@ -10,7 +10,7 @@ namespace FleetManager.Communication.Response.ToMaintenance
         public DateTime ScheduledAt { get; set; }
         public decimal? WorkshopBudget { get; set; }
         public string? ProblemDescription { get; set; } = string.Empty;
-        public string Status { get; set; } = string.Empty;
+        public ResponseEnumStatusJson Status { get; set; } = new();
         public ResponseRegisterVehicleJson Vehicle { get; set; } = new();
         public ResponseShortIncidentReportJson? IncidentReport { get; set; } = new();
     }

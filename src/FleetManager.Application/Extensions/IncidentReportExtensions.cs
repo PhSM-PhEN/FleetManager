@@ -1,5 +1,7 @@
+using FleetManager.Communication.Response;
 using FleetManager.Communication.Response.ToIncidentReport;
 using FleetManager.Domain.Entities;
+using FleetManager.Domain.EnumExtensions;
 
 namespace FleetManager.Application.Extensions
 {
@@ -13,10 +15,14 @@ namespace FleetManager.Application.Extensions
                 Id = report.Id,
                 VehicleId = report.VehicleId,
                 ContractId = report.ContractId,
-                Status = report.Status.ToString(),
-                IncidentRisk = report.IncidentRisk.ToString(),
-                ReportedAt  = report.ReportedAt
-            
+                IncidentRisk = report.IncidentRisk.ToStringStatus(),
+                ReportedAt = report.ReportedAt,
+                Status = new ResponseEnumStatusJson
+                {
+                    Id = (int)report.Status,
+                    Label = report.Status.ToStringStatus(),
+                }
+
             };
         }
         public static ResponseIncidentReportJson ToInfoResponse(this IncidentReport report)
@@ -25,11 +31,16 @@ namespace FleetManager.Application.Extensions
             {
                 Id = report.Id,
                 Description = report.Description,
-                Status = report.Status.ToString(),
-                IncidentRisk = report.IncidentRisk.ToString(),
+                IncidentRisk = report.IncidentRisk.ToStringStatus(),
                 ReportedAt = report.ReportedAt,
                 Contract = report.Contract.ToInfoResponse(),
-                Vehicle = report.Vehicle.ToInfoResponse()
+                Vehicle = report.Vehicle.ToInfoResponse(),
+                Status = new ResponseEnumStatusJson
+                {
+                    Id = (int)report.Status,
+                    Label = report.Status.ToStringStatus(),
+                }
+
 
             };
         }

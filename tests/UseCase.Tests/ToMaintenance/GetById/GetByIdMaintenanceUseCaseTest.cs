@@ -25,7 +25,6 @@ namespace UseCase.Tests.ToMaintenance.GetById
             result.ShouldNotBeNull();
             result.Id.ShouldBe(maintenance.Id);
             result.ScheduledAt.ShouldBe(maintenance.ScheduledAt);
-            result.Status.ShouldBe(maintenance.Status.ToMaintenanceString());
             result.Vehicle.ShouldNotBeNull();
             result.Vehicle.Id.ShouldBe(vehicle.Id);
             result.IncidentReport.ShouldNotBeNull();

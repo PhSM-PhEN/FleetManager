@@ -9,8 +9,8 @@ namespace FleetManager.Communication.Response.ToIncidentReport
         public string Description { get; set; } = string.Empty; 
         public ResponseContractJson Contract { get; set; } = new();
         public ResponseVehicleJson Vehicle { get; set; } = new();
-        public string Status { get; set; } = string.Empty;
         public string IncidentRisk { get; set; } = string.Empty;
         public DateTime ReportedAt { get; set; }
+        public ResponseEnumStatusJson Status { get; set; } = new();
     }
 }

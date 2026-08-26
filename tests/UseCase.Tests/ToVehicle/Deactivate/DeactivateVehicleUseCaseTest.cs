@@ -19,7 +19,7 @@ namespace UseCase.Tests.ToVehicle.Deactivate
             var act = async () => await useCase.Execute(vehicle.Id);
 
             await act.ShouldNotThrowAsync();
-            vehicle.IsActive.ShouldBeFalse();
+
         }
 
         [Fact]

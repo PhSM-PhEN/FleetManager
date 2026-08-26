@@ -1,3 +1,5 @@
+using FleetManager.Domain.Enum;
+
 namespace FleetManager.Domain.Entities
 {
     public class Company : AuditableEntity
@@ -7,6 +9,7 @@ namespace FleetManager.Domain.Entities
         public string PhoneNumber { get; private set; } = string.Empty;
         public long AddressId { get; private set; }
         public Address Address { get; internal set; } = default!;
+        public CompanyStatus Status { get; private set; }
 
         protected Company() { }
 
@@ -16,6 +19,7 @@ namespace FleetManager.Domain.Entities
             Cnpj = cnpj;
             PhoneNumber = phoneNumber;
             AddressId = addressId;
+            Status = CompanyStatus.Available;
         }
 
         public void Update(string name, string phoneNumber, long addressId)

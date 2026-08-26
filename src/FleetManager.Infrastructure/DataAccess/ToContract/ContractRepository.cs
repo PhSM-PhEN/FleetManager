@@ -47,12 +47,6 @@ namespace FleetManager.Infrastructure.DataAccess.ToContract
                         .FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public async Task<bool> HasActiveContract(long vehicleId)
-        {
-            return await dbContext.Contracts.AnyAsync(c => c.VehicleId == vehicleId &&
-                ( c.ContractStatus == ContractStatus.Reserved || c.ContractStatus == ContractStatus.Active || c.ContractStatus == ContractStatus.Overdue));
-        }
-
         public void Update(Contract contract)
         {
             dbContext.Contracts.Update(contract);
@@ -61,7 +55,7 @@ namespace FleetManager.Infrastructure.DataAccess.ToContract
         public async Task<List<Contract>> GetActiveContractsPastDueDate(DateTime referenceDateTime)
         {
             return await dbContext.Contracts
-                .Where(c => c.ContractStatus == ContractStatus.Active && c.ReturnDueDateTime < referenceDateTime)
+                .Where(c => c.Status == ContractStatus.Active && c.ReturnDueDateTime < referenceDateTime)
                 .ToListAsync();
         }
     }

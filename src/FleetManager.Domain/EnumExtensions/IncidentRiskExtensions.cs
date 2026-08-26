@@ -5,13 +5,13 @@ namespace FleetManager.Domain.EnumExtensions
 {
     public static class IncidentRiskExtensions
     {
-        public static string IncidentRiskToString(this IncidentRisk risk)
+        public static string ToStringStatus(this IncidentRisk status)
         {
-            return risk switch
+            return status switch
             {
                 IncidentRisk.Low => ResourceExtensionsMessages.LOW,
                 IncidentRisk.High => ResourceExtensionsMessages.HIGH,
-                _ => string.Empty
+                _ => throw new ArgumentOutOfRangeException(nameof(status), status, null)
             };
         }
     }

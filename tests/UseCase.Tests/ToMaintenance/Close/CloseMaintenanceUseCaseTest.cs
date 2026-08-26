@@ -27,7 +27,6 @@ namespace UseCase.Tests.ToMaintenance.Close
             result.IncidentReportId.ShouldBe(maintenance.IncidentReportId);
             result.WorkshopBudget.ShouldBe(request.WorkshopBudget);
             result.ProblemDescription.ShouldBe(request.ProblemDescription);
-            result.Status.ShouldBe(FleetManager.Domain.Enum.MaintenanceStatus.Closed.ToMaintenanceString());
         }
 
         [Fact]

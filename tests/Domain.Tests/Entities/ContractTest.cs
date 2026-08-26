@@ -18,7 +18,7 @@ namespace Domain.Tests.Entities
 
             contract.FinishUp(DateTime.UtcNow, contract.StartMileage);
 
-            contract.ContractStatus.ShouldBe(ContractStatus.Finished);
+            contract.Status.ShouldBe(ContractStatus.Finished);
         }
 
         // 1.1 — Estados a partir dos quais o FinishUp NÃO pode acontecer.

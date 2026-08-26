@@ -8,7 +8,7 @@ namespace FleetManager.Communication.Response.ToContract
         public DateTime ReturnDueDateTime { get; set; }
         public int TotalDays { get; set; }
         public decimal TotalAmount { get; set; }
-        public string ContractStatus { get; set; } = string.Empty;
-        
+        public ResponseEnumStatusJson Status { get; set; } = new();
+
     }
 }

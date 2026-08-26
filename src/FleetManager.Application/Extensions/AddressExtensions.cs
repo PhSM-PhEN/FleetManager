@@ -5,15 +5,7 @@ namespace FleetManager.Application.Extensions
 {
     public static class AddressExtensions
     {
-        public static ResponseShortAddressJson ToShortResponse(this Address address)
-        {
-            return new ResponseShortAddressJson
-            {
-                Id = address.Id,
-                Street = address.Street,
-                ZipCode = address.ZipCode
-            };
-        }
+
         public static ResponseAddressJson ToResponse(this Address address)
         {
             return new ResponseAddressJson
@@ -26,9 +18,9 @@ namespace FleetManager.Application.Extensions
                 ZipCode = address.ZipCode,
             };
         }
-        public static List<ResponseShortAddressJson> ToShortResponse(this List<Address> addresses)
+        public static List<ResponseAddressJson> ToResponse(this List<Address> addresses)
         {
-            return addresses.Select(a => a.ToShortResponse()).ToList();
+            return [.. addresses.Select(a => a.ToResponse())];
         }
     }
 }

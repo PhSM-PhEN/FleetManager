@@ -27,7 +27,6 @@ namespace UseCase.Tests.ToIncidentReport.Resolve
             await useCase.Execute(incident.Id);
 
             incident.Status.ShouldBe(IncidentReportStatus.Resolved);
-            vehicle.IsBlockedForMaintenance.ShouldBeFalse();
         }
 
         // Risco Low nunca bloqueou o veículo (ver RegisterIncidentReportUseCaseTest), então
@@ -43,7 +42,6 @@ namespace UseCase.Tests.ToIncidentReport.Resolve
             await useCase.Execute(incident.Id);
 
             incident.Status.ShouldBe(IncidentReportStatus.Resolved);
-            vehicle.IsBlockedForMaintenance.ShouldBeFalse();
             vehicleRepositoryMock.Verify(v => v.GetById(It.IsAny<long>()), Times.Never);
             vehicleRepositoryMock.Verify(v => v.Update(It.IsAny<Vehicle>()), Times.Never);
         }

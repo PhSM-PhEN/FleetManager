@@ -1,3 +1,4 @@
+using FleetManager.Communication.Response;
 using FleetManager.Communication.Response.ToContract;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.EnumExtensions;
@@ -11,12 +12,16 @@ namespace FleetManager.Application.Extensions
             return new ResponseShortContractJson
             {
                 Id = contract.Id,
-                ContractStatus = contract.ContractStatus.ContractStatusToString(),
                 PickupDateTime = contract.PickupDateTime,
                 ReturnDueDateTime = contract.ReturnDueDateTime,
                 TotalDays = contract.TotalDays,
                 TotalAmount = contract.TotalAmount,
-                
+                Status = new ResponseEnumStatusJson
+                {
+                    Id = (int)contract.Status,
+                    Label = contract.Status.ToStringStatus()
+                }
+
 
 
             };
@@ -26,8 +31,8 @@ namespace FleetManager.Application.Extensions
             return new ResponseContractJson
             {
                 Id = contract.Id,
-                RentalType = contract.RentalType.RentalTypeToString(),
-                ContractStatus = contract.ContractStatus.ContractStatusToString(),
+                RentalType = contract.RentalType.ToStringStatus(),
+               
                 PickupDateTime = contract.PickupDateTime,
                 ReturnDueDateTime = contract.ReturnDueDateTime,
                 ActualReturnDateTime = contract.ActualReturnDateTime,
@@ -43,6 +48,11 @@ namespace FleetManager.Application.Extensions
                 TotalAmount = contract.TotalAmount,
                 Tenant = contract.Tenant.ToInfoResponse(),
                 Vehicle = contract.Vehicle.ToResponse(),
+                Status = new ResponseEnumStatusJson
+                {
+                    Id = (int)contract.Status,
+                    Label = contract.Status.ToStringStatus()
+                },
 
 
 
@@ -59,12 +69,17 @@ namespace FleetManager.Application.Extensions
                 ExcessMileageFee = contract.ExcessMileageFee,
                 DaysLate = contract.DaysLate,
                 LateFee = contract.LateFee,
-                TotalCharged = (contract.ExcessMileageFee ?? 0) + (contract.LateFee ?? 0)
+                TotalCharged = (contract.ExcessMileageFee ?? 0) + (contract.LateFee ?? 0),
+                 Status = new ResponseEnumStatusJson
+                 {
+                     Id = (int)contract.Status,
+                     Label = contract.Status.ToStringStatus()
+                 }
             };
         }
         public static List<ResponseShortContractJson> ToResponse(this List<Contract> contracts)
         {
-            return contracts.Select(c => c.ToResponse()).ToList();
+            return [.. contracts.Select(c => c.ToResponse())];
         }
     }
 }

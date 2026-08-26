@@ -1,16 +1,18 @@
+using FleetManager.Exception.ExceptionBase;
+
 namespace FleetManager.Domain.EnumExtensions
 {
     public static class TenantStatusExtension
     {
-        public static string TenantStatusToString(this TenantStatus tenantStatus)
+        public static string ToStringStatus(this TenantStatus status)
         {
-            return tenantStatus switch
+            return status switch
             {
-               TenantStatus.Available => "Available" ,
-               TenantStatus.Rented => "Rented",
-               TenantStatus.Delinquent => "Delinquent",
-               TenantStatus.Deactivate => "Deactivate",
-               _ => throw new ArgumentOutOfRangeException(nameof(tenantStatus), tenantStatus, null)
+               TenantStatus.Available => ResourceExtensionsMessages.AVAILABLE,
+               TenantStatus.Rented => ResourceExtensionsMessages.RENTED,
+               TenantStatus.Delinquent => ResourceExtensionsMessages.DELINQUENT,
+               TenantStatus.Deactivate => ResourceExtensionsMessages.DEACTIVATE,
+               _ => throw new ArgumentOutOfRangeException(nameof(status), status, null)
             };
         }
         

@@ -11,4 +11,4 @@ namespace FleetManager.Exception.ExceptionBase
             return [Message];
         }
     }
-}
+}

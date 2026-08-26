@@ -19,7 +19,7 @@ namespace UseCase.Tests.ToContract.Activate
 
             await useCase.Execute(contract.Id);
 
-            contract.ContractStatus.ShouldBe(ContractStatus.Active);
+            contract.Status.ShouldBe(ContractStatus.Active);
         }
 
         [Fact]

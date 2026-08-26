@@ -165,4 +165,31 @@
   <data name="SCHEDULED" xml:space="preserve">
     <value>Scheduled</value>
   </data>
+  <data name="AVAILABLE" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="RENTED" xml:space="preserve">
+    <value>Rented</value>
+  </data>
+  <data name="MAINTENANCE" xml:space="preserve">
+    <value>Maintenance</value>
+  </data>
+  <data name="DELINQUENT" xml:space="preserve">
+    <value>Delinquent</value>
+  </data>
+  <data name="DEACTIVATE" xml:space="preserve">
+    <value>Deactivate</value>
+  </data>
+  <data name="PENDING" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="PAID" xml:space="preserve">
+    <value>Paid</value>
+  </data>
+  <data name="UNAVAILABLE" xml:space="preserve">
+    <value>Unavailable</value>
+  </data>
+  <data name="INACTIVE" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
 </root>

@@ -67,8 +67,7 @@ namespace UseCase.Tests.ToIncidentReport.Register
             var useCase = CreateUseCase(vehicle, contract, out var vehicleRepositoryMock);
 
             var response = await useCase.Execute(request);
-
-            vehicle.IsBlockedForMaintenance.ShouldBeTrue();
+ 
             response.IncidentRisk.ShouldBe("High");
             vehicleRepositoryMock.Verify(v => v.Update(vehicle), Times.Once);
         }
@@ -85,7 +84,7 @@ namespace UseCase.Tests.ToIncidentReport.Register
 
             var response = await useCase.Execute(request);
 
-            vehicle.IsBlockedForMaintenance.ShouldBeFalse();
+ 
             response.IncidentRisk.ShouldBe("Low");
             vehicleRepositoryMock.Verify(v => v.Update(It.IsAny<Vehicle>()), Times.Never);
         }
@@ -111,7 +110,7 @@ namespace UseCase.Tests.ToIncidentReport.Register
             return new RequestIncidentReportJson
             {
                 ContractId = contractId,
-                VehicleId = vehicleId,
+                //VehicleId = vehicleId,
                 Description = "Risco identificado durante a vistoria",
                 IncidentRisk = incidentRisk
             };

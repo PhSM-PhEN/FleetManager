@@ -23,5 +23,6 @@ namespace FleetManager.Communication.Response.ToContract
         public decimal TotalAmount { get; set; }
         public ResponseShortVehicleJson Vehicle { get; set; } = new();
         public ResponseTenantJson Tenant { get; set; } = new();
+        public ResponseEnumStatusJson Status { get; set; } = new();
     }
 }

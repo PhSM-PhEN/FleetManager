@@ -12,7 +12,7 @@ namespace FleetManager.Communication.Response.ToTenant
         public string DriverLicenseCategory { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
         public string? Email { get; set; }
-        public bool IsActive { get; set; }
+        public ResponseEnumStatusJson Status { get; set; } = new();
         public ResponseAddressJson Address { get; set; } = new();
     }
 

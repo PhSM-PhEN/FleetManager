@@ -5,7 +5,7 @@ namespace FleetManager.Domain.EnumExtensions
 {
     public static class ContractStatusExtensions
     {
-        public static string ContractStatusToString(this ContractStatus status)
+        public static string ToStringStatus(this ContractStatus status)
         {
             return status switch
             {
@@ -15,7 +15,7 @@ namespace FleetManager.Domain.EnumExtensions
                 ContractStatus.Finished => ResourceExtensionsMessages.FINISHED,
                 ContractStatus.Overdue => ResourceExtensionsMessages.OVERDUE,
                 ContractStatus.Renewed => ResourceExtensionsMessages.RENEWED,
-                _ => string.Empty
+                _ => throw new ArgumentOutOfRangeException(nameof(status), status, null)
             };
         }
     }

@@ -70,6 +70,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Available.
+        /// </summary>
+        public static string AVAILABLE {
+            get {
+                return ResourceManager.GetString("AVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancelled.
         /// </summary>
         public static string CANCELLED {
@@ -93,6 +102,24 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string DAILY {
             get {
                 return ResourceManager.GetString("DAILY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deactivate.
+        /// </summary>
+        public static string DEACTIVATE {
+            get {
+                return ResourceManager.GetString("DEACTIVATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delinquent.
+        /// </summary>
+        public static string DELINQUENT {
+            get {
+                return ResourceManager.GetString("DELINQUENT", resourceCulture);
             }
         }
         
@@ -124,6 +151,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Inactive.
+        /// </summary>
+        public static string INACTIVE {
+            get {
+                return ResourceManager.GetString("INACTIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Late return fee ({0} day(s) late).
         /// </summary>
         public static string LATE_FEE_CHARGE_DESCRIPTION {
@@ -138,6 +174,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string LOW {
             get {
                 return ResourceManager.GetString("LOW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maintenance.
+        /// </summary>
+        public static string MAINTENANCE {
+            get {
+                return ResourceManager.GetString("MAINTENANCE", resourceCulture);
             }
         }
         
@@ -160,11 +205,38 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Paid.
+        /// </summary>
+        public static string PAID {
+            get {
+                return ResourceManager.GetString("PAID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pending.
+        /// </summary>
+        public static string PENDING {
+            get {
+                return ResourceManager.GetString("PENDING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Renewed.
         /// </summary>
         public static string RENEWED {
             get {
                 return ResourceManager.GetString("RENEWED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rented.
+        /// </summary>
+        public static string RENTED {
+            get {
+                return ResourceManager.GetString("RENTED", resourceCulture);
             }
         }
         
@@ -201,6 +273,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string SCHEDULED {
             get {
                 return ResourceManager.GetString("SCHEDULED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unavailable.
+        /// </summary>
+        public static string UNAVAILABLE {
+            get {
+                return ResourceManager.GetString("UNAVAILABLE", resourceCulture);
             }
         }
     }

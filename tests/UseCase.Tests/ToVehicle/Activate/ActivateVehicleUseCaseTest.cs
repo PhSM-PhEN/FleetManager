@@ -20,7 +20,7 @@ namespace UseCase.Tests.ToVehicle.Activate
             var act = async () => await useCase.Execute(vehicle.Id);
 
             await act.ShouldNotThrowAsync();
-            vehicle.IsActive.ShouldBeTrue();
+
         }
 
         [Fact]

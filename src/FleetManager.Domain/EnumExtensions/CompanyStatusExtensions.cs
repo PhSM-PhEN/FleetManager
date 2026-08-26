@@ -3,14 +3,14 @@ using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Domain.EnumExtensions
 {
-    public static class MaintenanceStatusExtensions
+    public static class CompanyStatusExtensions
     {
-        public static string ToStringStatus(this MaintenanceStatus status)
+        public static string ToDisplayString(this CompanyStatus status)
         {
             return status switch
             {
-                MaintenanceStatus.Scheduled => ResourceExtensionsMessages.SCHEDULED,
-                MaintenanceStatus.Closed => ResourceExtensionsMessages.CLOSED,
+                CompanyStatus.Available => ResourceExtensionsMessages.AVAILABLE,
+                CompanyStatus.Unavailable => ResourceExtensionsMessages.UNAVAILABLE,
                 _ => throw new ArgumentOutOfRangeException(nameof(status), status, null)
             };
         }

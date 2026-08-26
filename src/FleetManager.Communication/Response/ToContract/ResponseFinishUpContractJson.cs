@@ -9,5 +9,6 @@ namespace FleetManager.Communication.Response.ToContract
         public int DaysLate { get; set; }
         public decimal? LateFee { get; set; }
         public decimal TotalCharged { get; set; }
+        public ResponseEnumStatusJson Status { get; set; } = new();
     }
 }

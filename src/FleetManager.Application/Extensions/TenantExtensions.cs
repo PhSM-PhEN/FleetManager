@@ -1,3 +1,4 @@
+using FleetManager.Communication.Response;
 using FleetManager.Communication.Response.ToTenant;
 using FleetManager.Domain.Entities;
 
@@ -12,7 +13,11 @@ public static class TenantExtensions
             Id = tenant.Id,
             Name = tenant.Name,
             PhoneNumber = tenant.Contact.PhoneNumber,
-            IsActive = tenant.IsActive
+            Status = new ResponseEnumStatusJson
+            {
+                Id = (int)tenant.Status,
+                Label = tenant.Status.ToString()
+            },
         };
         
     }
@@ -28,12 +33,16 @@ public static class TenantExtensions
             DriverLicenseCategory = tenant.DriverLicense.Category,
             PhoneNumber = tenant.Contact.PhoneNumber,
             Email = tenant.Contact.Email,
-            IsActive = tenant.IsActive,
-            Address = tenant.Address.ToResponse() 
+            Status = new ResponseEnumStatusJson
+            {
+                Id = (int)tenant.Status,
+                Label = tenant.Status.ToString()
+            },
+            Address = tenant.Address.ToResponse()
         };
     }
     public static List<ResponseShortTenantJson> ToResponse(this List<Tenant> tenants)
     {
-        return tenants.Select(t => t.ToResponse()).ToList();
+        return [.. tenants.Select(t => t.ToResponse())];
     }
 }

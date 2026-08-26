@@ -210,12 +210,7 @@ namespace FleetManager.Infrastructure.DataAccess
                 .HasForeignKey(c => c.ContractId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Vehicle>()
-                .HasOne(v => v.BlockingIncidentReport)
-                .WithMany()
-                .HasForeignKey("BlockingIncidentReportId")
-                .IsRequired(false)
-                .OnDelete(DeleteBehavior.Restrict);
+   
 
 
 

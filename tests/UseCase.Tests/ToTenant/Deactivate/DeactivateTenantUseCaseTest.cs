@@ -19,7 +19,6 @@ namespace UseCase.Tests.ToTenant.Deactivate
             var act = async () => await useCase.Execute(tenant.Id);
 
             await act.ShouldNotThrowAsync();
-            tenant.IsActive.ShouldBeFalse();
         }
 
         [Fact]

@@ -1,3 +1,4 @@
+using FleetManager.Communication.Response;
 using FleetManager.Communication.Response.ToMaintenance;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.EnumExtensions;
@@ -13,7 +14,12 @@ namespace FleetManager.Application.Extensions
                 VehicleId = maintenance.VehicleId,
                 IncidentReportId = maintenance.IncidentReportId,
                 ServiceCenter = maintenance.ServiceCenter,
-                ScheduledAt = maintenance.ScheduledAt
+                ScheduledAt = maintenance.ScheduledAt,
+                Status = new ResponseEnumStatusJson
+                {
+                    Id = (int)maintenance.Status,
+                    Label = maintenance.Status.ToStringStatus(),
+                }
             };
         }
         public static ResponseCloseMaintenanceJson ToCloseResponse(this Maintenance maintenance)
@@ -24,11 +30,14 @@ namespace FleetManager.Application.Extensions
                 ScheduledAt = maintenance.ScheduledAt,
                 ServiceCenter = maintenance.ServiceCenter,
                 WorkshopBudget = maintenance.WorkshopBudget,
-                ProblemDescription = maintenance.ProblemDescription,
-                Status = maintenance.Status.ToMaintenanceString(), 
+                ProblemDescription = maintenance.ProblemDescription,        
                 VehicleId = maintenance.VehicleId,
                 IncidentReportId = maintenance.IncidentReportId,
-
+                Status = new ResponseEnumStatusJson
+                {
+                    Id = (int)maintenance.Status,
+                    Label = maintenance.Status.ToStringStatus(),
+                }
             };
         }
         public static ResponseMaintenanceJson ToInfoResponse(this Maintenance maintenance)
@@ -40,14 +49,18 @@ namespace FleetManager.Application.Extensions
                 ServiceCenter = maintenance.ServiceCenter,
                 WorkshopBudget = maintenance.WorkshopBudget,
                 ProblemDescription = maintenance.ProblemDescription,
-                Status = maintenance.Status.ToMaintenanceString(), 
                 Vehicle = maintenance.Vehicle.ToShortResponse(),
-                IncidentReport = maintenance.IncidentReport?.ToResponse()
+                IncidentReport = maintenance.IncidentReport?.ToResponse(),
+                Status = new ResponseEnumStatusJson
+                {
+                    Id = (int)maintenance.Status,
+                    Label = maintenance.Status.ToStringStatus(),
+                }
             };
         }
         public static List<ResponseShortMaintenanceJson> ToResponse(this List<Maintenance> maintenances)
         {
-            return maintenances.Select(m => m.ToResponse()).ToList();
+            return [.. maintenances.Select(m => m.ToResponse())];
         }
     }
 }
