@@ -5,7 +5,7 @@ namespace FleetManager.Domain.EnumExtensions
 {
     public static class CompanyStatusExtensions
     {
-        public static string ToDisplayString(this CompanyStatus status)
+        public static string ToStringStatus(this CompanyStatus status)
         {
             return status switch
             {

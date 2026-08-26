@@ -1,5 +1,7 @@
+using FleetManager.Communication.Response;
 using FleetManager.Communication.Response.ToVehicle;
 using FleetManager.Domain.Entities;
+using FleetManager.Domain.EnumExtensions;
 
 namespace FleetManager.Application.Extensions
 {
@@ -17,8 +19,12 @@ namespace FleetManager.Application.Extensions
                 ChassiNumber = vehicle.ChassiNumber.Number,
                 LicensePlate = vehicle.LicensePlate.Number,
                 CurrentMileage = vehicle.CurrentMileage,
-
-                Company = vehicle.Company.ToResponse()
+                Company = vehicle.Company.ToResponse(),
+                Status = new ResponseEnumStatusJson
+                {
+                    Id = (int)vehicle.Status,
+                    Label = vehicle.Status.ToStringStatus()
+                }
             };
         }
         public static ResponseVehicleJson ToInfoResponse(this Vehicle vehicle)
@@ -35,7 +41,13 @@ namespace FleetManager.Application.Extensions
                 LicensePlate = vehicle.LicensePlate.Number,
                 CurrentMileage = vehicle.CurrentMileage,
                 Company = vehicle.Company.ToResponse(),
-                RentalPlan = vehicle.RentalPlan.ToResponse()
+                RentalPlan = vehicle.RentalPlan.ToResponse(),
+                Status = new ResponseEnumStatusJson
+                {
+                    Id = (int)vehicle.Status,
+                    Label = vehicle.Status.ToStringStatus()
+                }
+                
             
             };
         }
@@ -51,7 +63,12 @@ namespace FleetManager.Application.Extensions
                 Id = vehicle.Id,
                 LicensePlate = vehicle.LicensePlate.Number,
                 Model = vehicle.Model,
-                CurrentMileage = vehicle.CurrentMileage
+                CurrentMileage = vehicle.CurrentMileage,
+                Status = new ResponseEnumStatusJson
+                {
+                    Id = (int)vehicle.Status,
+                    Label = vehicle.Status.ToStringStatus()
+                }
             };
         }
     }

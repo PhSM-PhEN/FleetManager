@@ -1,6 +1,7 @@
 ﻿using FleetManager.Communication.Response;
 using FleetManager.Communication.Response.ToCompany;
 using FleetManager.Domain.Entities;
+using FleetManager.Domain.EnumExtensions;
 
 namespace FleetManager.Application.Extensions
 {
@@ -18,7 +19,7 @@ namespace FleetManager.Application.Extensions
                 Status = new ResponseEnumStatusJson
                 {
                     Id = (int)company.Status,
-                    Label = company.Status.ToString()
+                    Label = company.Status.ToStringStatus()
                 }
             };
         }
@@ -36,7 +37,7 @@ namespace FleetManager.Application.Extensions
                 Status = new ResponseEnumStatusJson
                 {
                     Id = (int)company.Status,
-                    Label = company.Status.ToString()
+                    Label = company.Status.ToStringStatus()
                 }
 
             };
