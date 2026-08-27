@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FleetManager.Infrastructure.Migrations
 {
     [DbContext(typeof(FleetManagerDbContext))]
-    [Migration("20260826201200_Initial_Migration")]
-    partial class Initial_Migration
+    [Migration("20260827135830_Intital_Migration")]
+    partial class Intital_Migration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -639,13 +639,13 @@ namespace FleetManager.Infrastructure.Migrations
                     b.Property<long>("CreatedBy")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("CurrentIncidentReportId")
+                    b.Property<long?>("CurrentIncidentReportId")
                         .HasColumnType("bigint");
 
                     b.Property<long>("CurrentMileage")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("IncidentReportId")
+                    b.Property<long?>("IncidentReportId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Model")
@@ -864,8 +864,7 @@ namespace FleetManager.Infrastructure.Migrations
                     b.HasOne("FleetManager.Domain.Entities.IncidentReport", "IncidentReport")
                         .WithMany()
                         .HasForeignKey("CurrentIncidentReportId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("FleetManager.Domain.Entities.RentalPlan", "RentalPlan")
                         .WithMany("Vehicles")

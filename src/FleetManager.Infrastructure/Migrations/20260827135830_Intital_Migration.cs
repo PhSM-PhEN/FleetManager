@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FleetManager.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial_Migration : Migration
+    public partial class Intital_Migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -356,8 +356,8 @@ namespace FleetManager.Infrastructure.Migrations
                     Status = table.Column<int>(type: "int", nullable: false),
                     CompanyId = table.Column<long>(type: "bigint", nullable: false),
                     RentalPlanId = table.Column<long>(type: "bigint", nullable: false),
-                    IncidentReportId = table.Column<long>(type: "bigint", nullable: false),
-                    CurrentIncidentReportId = table.Column<long>(type: "bigint", nullable: false),
+                    IncidentReportId = table.Column<long>(type: "bigint", nullable: true),
+                    CurrentIncidentReportId = table.Column<long>(type: "bigint", nullable: true),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     UpdatedBy = table.Column<long>(type: "bigint", nullable: true),

@@ -17,7 +17,7 @@ namespace FleetManager.Domain.Entities
         public VehicleStatus Status {get ; private set ;} 
         public long CompanyId { get; private set; }
         public long RentalPlanId {get ; private set;}
-        public long IncidentReportId { get; private set; }
+        public long? IncidentReportId { get; private set; }
         public Company Company { get; internal set; } = default!;
         
         public RentalPlan RentalPlan { get; internal set; } = default!;

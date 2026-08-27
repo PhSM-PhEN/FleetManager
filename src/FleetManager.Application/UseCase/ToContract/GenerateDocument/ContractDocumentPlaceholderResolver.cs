@@ -1,3 +1,4 @@
+using FleetManager.Communication.Response.ToContract;
 using FleetManager.Domain.Entities;
 using System.Globalization;
 
@@ -7,16 +8,15 @@ namespace FleetManager.Application.UseCase.ToContract.GenerateDocument
     {
         private static readonly CultureInfo Culture = new("pt-BR");
 
-        public static string Resolve(string templateContent, Contract contract)
+        public static string Resolve(string templateContent, ResponseContractJson contract)
         {
             var values = new Dictionary<string, string>
             {
+                
                 [ContractPlaceholders.TenantName] = contract.Tenant.Name,
-                [ContractPlaceholders.VehiclePlate] = contract.Vehicle.LicensePlate.Number,
-                [ContractPlaceholders.RentalPlanName] = contract.RentalPlan.Name,
+                [ContractPlaceholders.VehiclePlate] = contract.Vehicle.LicensePlate,
                 [ContractPlaceholders.PrazoLocacao] = FormatDays(contract.TotalDays),
-                [ContractPlaceholders.DataEntregaPrevista] =
-                    contract.ReturnDueDateTime.ToString("dd/MM/yyyy 'às' HH:mm'h'", Culture),
+                [ContractPlaceholders.DataEntregaPrevista] = contract.ReturnDueDateTime.ToString("dd/MM/yyyy 'às' HH:mm'h'", Culture),
                 [ContractPlaceholders.QuilometragemContratada] = FormatMileage(contract.MileageContracted),
                 [ContractPlaceholders.ValorTotal] = FormatCurrency(contract.TotalAmount),
             };

@@ -7,7 +7,6 @@ namespace FleetManager.Communication.Response.ToContract
     {
         public long Id { get; set; }                  
         public string RentalType { get; set; } = string.Empty;
-        public string ContractStatus { get; set; } = string.Empty;
         public DateTime PickupDateTime { get; set; }
         public DateTime ReturnDueDateTime { get; set; }
         public DateTime? ActualReturnDateTime { get; set; }

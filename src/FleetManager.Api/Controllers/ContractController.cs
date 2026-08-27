@@ -6,6 +6,7 @@ using FleetManager.Application.UseCase.ToContract.FinishUp;
 using FleetManager.Application.UseCase.ToContract.GenerateDocument;
 using FleetManager.Application.UseCase.ToContract.GetAll;
 using FleetManager.Application.UseCase.ToContract.GetById;
+using FleetManager.Application.UseCase.ToContract.Preview;
 using FleetManager.Application.UseCase.ToContract.Register;
 using FleetManager.Application.UseCase.ToContract.Renew;
 using FleetManager.Application.UseCase.ToContract.Update;
@@ -32,6 +33,16 @@ namespace FleetManager.Api.Controllers
             var response = await useCase.Execute(request);
             return Created(string.Empty, response);
         }
+        [HttpPost("Preview")]
+        [ProducesResponseType(typeof(ResponseShortContractJson), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status409Conflict)]
+        public async Task<IActionResult> Preview([FromServices] IPreviewContractUseCase useCase, [FromBody] RequestPreviewContractJson request)
+        {
+            var respose = await useCase.Execute(request);
+            return Ok(respose);
+        }    
+        
 
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ResponseContractJson), StatusCodes.Status200OK)]

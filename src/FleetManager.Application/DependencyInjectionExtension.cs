@@ -61,6 +61,7 @@ using FleetManager.Application.UseCase.ToVehicle.GetById;
 using FleetManager.Application.UseCase.ToVehicle.Register;
 using FleetManager.Application.UseCase.ToVehicle.Update;
 using Microsoft.Extensions.DependencyInjection;
+using FleetManager.Application.UseCase.ToContract.Preview;
 
 namespace FleetManager.Application
 {
@@ -117,6 +118,7 @@ namespace FleetManager.Application
             services.AddScoped<IGetAllRentalPlanUseCase, GetAllRentalPlanUseCase>();
             services.AddScoped<IDeleteRentalPlanUseCase, DeleteRentalPlanUseCase>();
             // contract
+            services.AddScoped<IPreviewContractUseCase, PreviewContractUseCase>();
             services.AddScoped<IRegisterContractUseCase, RegisterContractUseCase>();
             services.AddScoped<IGetByIdContractUseCase, GetByIdContractUseCase>();
             services.AddScoped<IGetAllContractUseCase, GetAllContractUseCase>();

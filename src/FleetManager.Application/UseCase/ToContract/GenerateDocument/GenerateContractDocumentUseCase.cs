@@ -1,3 +1,4 @@
+using FleetManager.Application.Extensions;
 using FleetManager.Communication.Response.ToContract;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories;
@@ -25,7 +26,7 @@ namespace FleetManager.Application.UseCase.ToContract.GenerateDocument
             var template = await templateRepository.GetActive() ??
                 throw new BusinessRuleException("ResourceErrorMessages.NO_ACTIVE_CONTRACT_TEMPLATE");
 
-            var resolvedContent = ContractDocumentPlaceholderResolver.Resolve(template.Content, contract);
+            var resolvedContent = ContractDocumentPlaceholderResolver.Resolve(template.Content, contract.ToInfoResponse());
 
             EnsureNoUnresolvedPlaceholders(resolvedContent);
 
@@ -36,7 +37,7 @@ namespace FleetManager.Application.UseCase.ToContract.GenerateDocument
 
             return new ResponseContractDocumentJson
             {
-                ContractId = contract.Id,
+                Contract = contract.ToInfoResponse() ,
                 TemplateVersion = template.Version,
                 Content = resolvedContent,
                 GeneratedAt = document.GeneratedAt
