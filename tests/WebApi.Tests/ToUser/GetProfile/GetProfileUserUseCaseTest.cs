@@ -1,4 +1,4 @@
-﻿using Shouldly;
+using Shouldly;
 using System.Text.Json;
 
 namespace WebApi.Tests.ToUser.GetProfile

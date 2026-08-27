@@ -1,4 +1,4 @@
-﻿using FleetManager.Communication.Response;
+using FleetManager.Communication.Response;
 using FleetManager.Communication.Response.ToUser;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.EnumExtensions;

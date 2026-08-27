@@ -1,4 +1,4 @@
-﻿using FleetManager.Application.Extensions;
+using FleetManager.Application.Extensions;
 using FleetManager.Communication.Request.ToContract;
 using FleetManager.Communication.Response.ToContract;
 using FleetManager.Domain.Entities;

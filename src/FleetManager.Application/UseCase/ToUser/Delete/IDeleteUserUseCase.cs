@@ -1,4 +1,4 @@
-﻿namespace FleetManager.Application.UseCase.ToUser.Delete
+namespace FleetManager.Application.UseCase.ToUser.Delete
 {
     public interface IDeleteUserUseCase
     {

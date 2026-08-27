@@ -1,4 +1,4 @@
-﻿using FleetManager.Domain.Entities;
+using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories.ToVehicle;
 using Microsoft.EntityFrameworkCore;
 

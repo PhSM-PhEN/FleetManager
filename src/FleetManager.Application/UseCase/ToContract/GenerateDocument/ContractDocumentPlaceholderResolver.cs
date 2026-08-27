@@ -1,5 +1,4 @@
 using FleetManager.Communication.Response.ToContract;
-using FleetManager.Domain.Entities;
 using System.Globalization;
 
 namespace FleetManager.Application.UseCase.ToContract.GenerateDocument
@@ -19,6 +18,9 @@ namespace FleetManager.Application.UseCase.ToContract.GenerateDocument
                 [ContractPlaceholders.DataEntregaPrevista] = contract.ReturnDueDateTime.ToString("dd/MM/yyyy 'às' HH:mm'h'", Culture),
                 [ContractPlaceholders.QuilometragemContratada] = FormatMileage(contract.MileageContracted),
                 [ContractPlaceholders.ValorTotal] = FormatCurrency(contract.TotalAmount),
+                // Note: SnapshotPriceDailyRate / SnapshotPriceMonthlyRate / SnapshotPricePerExtraMileage
+                // ficam de fora de propósito — são referência interna de tarifa vigente na assinatura,
+                // não texto de cláusula. O que vai pro contrato é sempre o TotalAmount já calculado.
             };
 
             var result = templateContent;

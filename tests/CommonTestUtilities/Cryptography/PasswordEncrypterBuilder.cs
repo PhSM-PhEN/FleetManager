@@ -1,4 +1,4 @@
-﻿using FleetManager.Domain.Security.CryptoGraphy;
+using FleetManager.Domain.Security.CryptoGraphy;
 using Moq;
 
 namespace CommonTestUtilities.Cryptography

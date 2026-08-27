@@ -1,4 +1,4 @@
-﻿using FleetManager.Domain.Entities;
+using FleetManager.Domain.Entities;
 
 namespace FleetManager.Domain.Repositories.ToVehicle
 {

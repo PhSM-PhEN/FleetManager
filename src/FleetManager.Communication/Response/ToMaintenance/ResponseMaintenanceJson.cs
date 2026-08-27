@@ -1,4 +1,4 @@
-﻿using FleetManager.Communication.Response.ToIncidentReport;
+using FleetManager.Communication.Response.ToIncidentReport;
 using FleetManager.Communication.Response.ToVehicle;
 
 namespace FleetManager.Communication.Response.ToMaintenance

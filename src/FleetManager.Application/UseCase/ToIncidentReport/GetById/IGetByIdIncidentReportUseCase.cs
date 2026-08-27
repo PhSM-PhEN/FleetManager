@@ -1,4 +1,4 @@
-﻿using FleetManager.Communication.Response.ToIncidentReport;
+using FleetManager.Communication.Response.ToIncidentReport;
 
 namespace FleetManager.Application.UseCase.ToIncidentReport.GetById
 {

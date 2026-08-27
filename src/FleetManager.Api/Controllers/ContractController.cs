@@ -1,4 +1,4 @@
-﻿using FleetManager.Application.UseCase.ToContract.Activate;
+using FleetManager.Application.UseCase.ToContract.Activate;
 using FleetManager.Application.UseCase.ToContract.Cancel;
 using FleetManager.Application.UseCase.ToContract.Delete;
 using FleetManager.Application.UseCase.ToContract.DetectOverdue;

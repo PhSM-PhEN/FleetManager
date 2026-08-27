@@ -1,4 +1,4 @@
-﻿using FleetManager.Domain.Repositories;
+using FleetManager.Domain.Repositories;
 using FleetManager.Exception.ExceptionBase;
 using Microsoft.EntityFrameworkCore;
 using MySqlConnector;

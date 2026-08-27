@@ -1,4 +1,4 @@
-﻿namespace FleetManager.Domain.Enum
+namespace FleetManager.Domain.Enum
 {
     public enum MaintenanceStatus
     {

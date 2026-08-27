@@ -1,4 +1,4 @@
-﻿namespace FleetManager.Communication.Request.ToUser
+namespace FleetManager.Communication.Request.ToUser
 {
     public class RequestChangePasswordJson
     {

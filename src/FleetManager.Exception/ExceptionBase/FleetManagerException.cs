@@ -1,4 +1,4 @@
-﻿namespace FleetManager.Exception.ExceptionBase
+namespace FleetManager.Exception.ExceptionBase
 {
     public abstract class FleetManagerException(string message) : SystemException(message)
     {

@@ -1,4 +1,4 @@
-﻿using CommonTestUtilities.Entities;
+using CommonTestUtilities.Entities;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Security.CryptoGraphy;
 using FleetManager.Domain.Security.Token;

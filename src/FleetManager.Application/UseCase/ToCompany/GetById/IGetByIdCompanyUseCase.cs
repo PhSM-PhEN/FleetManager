@@ -1,4 +1,4 @@
-﻿using FleetManager.Communication.Response.ToCompany;
+using FleetManager.Communication.Response.ToCompany;
 
 namespace FleetManager.Application.UseCase.ToCompany.GetById
 {

@@ -1,4 +1,4 @@
-﻿using CommonTestUtilities.Entities;
+using CommonTestUtilities.Entities;
 using CommonTestUtilities.Repositories.ToCompany;
 using FleetManager.Application.UseCase.ToCompany.GetById;
 using FleetManager.Exception.ExceptionBase;

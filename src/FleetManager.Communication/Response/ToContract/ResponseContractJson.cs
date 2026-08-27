@@ -1,4 +1,4 @@
-﻿using FleetManager.Communication.Response.ToTenant;
+using FleetManager.Communication.Response.ToTenant;
 using FleetManager.Communication.Response.ToVehicle;
 
 namespace FleetManager.Communication.Response.ToContract

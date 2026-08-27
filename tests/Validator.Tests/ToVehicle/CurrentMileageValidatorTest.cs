@@ -1,4 +1,4 @@
-﻿using FleetManager.Application.UseCase.ToVehicle.Update;
+using FleetManager.Application.UseCase.ToVehicle.Update;
 using FleetManager.Communication.Request.ToVehicle;
 using FleetManager.Exception.ExceptionBase;
 using Shouldly;

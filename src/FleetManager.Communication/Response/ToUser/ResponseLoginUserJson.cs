@@ -1,4 +1,4 @@
-﻿namespace FleetManager.Communication.Response.ToUser
+namespace FleetManager.Communication.Response.ToUser
 {
     public class ResponseLoginUserJson
     {

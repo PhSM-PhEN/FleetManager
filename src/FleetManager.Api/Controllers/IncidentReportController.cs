@@ -1,4 +1,4 @@
-﻿using FleetManager.Application.UseCase.ToIncidentReport.Delete;
+using FleetManager.Application.UseCase.ToIncidentReport.Delete;
 using FleetManager.Application.UseCase.ToIncidentReport.GetAll;
 using FleetManager.Application.UseCase.ToIncidentReport.GetById;
 using FleetManager.Application.UseCase.ToIncidentReport.Register;

@@ -1,4 +1,4 @@
-﻿using FleetManager.Domain.Enum;
+using FleetManager.Domain.Enum;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToIncidentReport;
 using FleetManager.Domain.Repositories.ToVehicle;

@@ -106,13 +106,9 @@ namespace FleetManager.Infrastructure
             services.AddScoped<IMaintenanceReadOnlyRepository, MaintenanceRepository>();   
             services.AddScoped<IMaintenanceWriteOnlyRepository, MaintenanceRepository>();
 
-            // contract tamplate
             services.AddScoped<IContractTemplateReadOnlyRepository, ContractTemplateRepository>();
             services.AddScoped<IContractTemplateWriteOnlyRepository, ContractTemplateRepository>();
-
-            // contract document
             services.AddScoped<IContractDocumentWriteOnlyRepository, ContractDocumentRepository>();
-
             // unit of work
             services.AddScoped<IUnitOfWork, UnitOfWork>();
         }

@@ -1,4 +1,4 @@
-﻿using FleetManager.Exception.ExceptionBase;
+using FleetManager.Exception.ExceptionBase;
 using FluentValidation;
 using FluentValidation.Validators;
 using System.Text.RegularExpressions;

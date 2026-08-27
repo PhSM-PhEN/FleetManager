@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using Shouldly;
 
 namespace WebApi.Tests.ToUser.Promote

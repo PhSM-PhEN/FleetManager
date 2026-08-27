@@ -1,4 +1,4 @@
-﻿namespace FleetManager.Communication.Response.ToCompany
+namespace FleetManager.Communication.Response.ToCompany
 {
     public class ResponseShortCompanyJson
     {
