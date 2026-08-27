@@ -10,7 +10,7 @@ namespace FleetManager.Application.UseCase.ToContractTemplate.GetById
         public async Task<ResponseContractTemplateJson> Execute(long id)
         {
             var template = await repository.GetById(id) ??
-                throw new NotFoundException("ResourceErrorMessages.CONTRACT_TEMPLATE_NOT_FOUND");
+                throw new NotFoundException(ResourceErrorMessages.CONTRACT_TEMPLATE_NOT_FOUND);
 
             return template.ToResponse();
         }

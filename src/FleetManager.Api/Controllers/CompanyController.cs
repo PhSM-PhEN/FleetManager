@@ -1,4 +1,4 @@
-﻿using FleetManager.Application.UseCase.ToCompany.Delete;
+using FleetManager.Application.UseCase.ToCompany.Delete;
 using FleetManager.Application.UseCase.ToCompany.GetAll;
 using FleetManager.Application.UseCase.ToCompany.GetById;
 using FleetManager.Application.UseCase.ToCompany.Register;

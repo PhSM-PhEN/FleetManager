@@ -1,4 +1,4 @@
-﻿using Bogus;
+using Bogus;
 using FleetManager.Communication.Request.ToVehicle;
 
 namespace CommonTestUtilities.Request.ToVehicle

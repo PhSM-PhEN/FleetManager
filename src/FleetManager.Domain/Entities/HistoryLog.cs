@@ -1,4 +1,4 @@
-﻿namespace FleetManager.Domain.Entities
+namespace FleetManager.Domain.Entities
 {
     public class HistoryLog
     {

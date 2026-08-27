@@ -1,4 +1,4 @@
-﻿using CommonTestUtilities.Entities;
+using CommonTestUtilities.Entities;
 using CommonTestUtilities.Repositories.ToMaintenance;
 using FleetManager.Application.UseCase.ToMaintenance.GetAll;
 using Shouldly;

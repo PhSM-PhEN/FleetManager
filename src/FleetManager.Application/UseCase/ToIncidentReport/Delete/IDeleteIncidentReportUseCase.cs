@@ -1,4 +1,4 @@
-﻿namespace FleetManager.Application.UseCase.ToIncidentReport.Delete
+namespace FleetManager.Application.UseCase.ToIncidentReport.Delete
 {
     public interface IDeleteIncidentReportUseCase
     {

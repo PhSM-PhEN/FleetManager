@@ -1,4 +1,4 @@
-﻿namespace FleetManager.Communication.Request.ToContract
+namespace FleetManager.Communication.Request.ToContract
 {
     public class RequestContractJson
     {

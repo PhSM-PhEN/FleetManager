@@ -1,4 +1,4 @@
-﻿using CommonTestUtilities.Request.ToVehicle;
+using CommonTestUtilities.Request.ToVehicle;
 using FleetManager.Application.UseCase.ToVehicle;
 using FleetManager.Exception.ExceptionBase;
 using Shouldly;

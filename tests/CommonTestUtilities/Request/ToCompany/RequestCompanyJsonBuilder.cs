@@ -1,4 +1,4 @@
-﻿using Bogus;
+using Bogus;
 using Bogus.Extensions.Brazil;
 using FleetManager.Communication.Request.ToCompany;
 

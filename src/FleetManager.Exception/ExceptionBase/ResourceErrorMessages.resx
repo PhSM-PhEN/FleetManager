@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -443,5 +443,23 @@
   </data>
   <data name="MAINTENANCE_WORKSHOP_BUDGET_REQUIRED" xml:space="preserve">
     <value>Maintenance workshop budget required.</value>
+  </data>
+  <data name="CONTRACT_TEMPLATE_NOT_FOUND" xml:space="preserve">
+    <value>Contract template not found.</value>
+  </data>
+  <data name="NO_ACTIVE_CONTRACT_TEMPLATE" xml:space="preserve">
+    <value>There is no active contract template.</value>
+  </data>
+  <data name="CONTRACT_TEMPLATE_ACTIVE_CANNOT_BE_EDITED" xml:space="preserve">
+    <value>An active contract template cannot be edited. Deactivate it first or create a new version.</value>
+  </data>
+  <data name="CONTRACT_TEMPLATE_CONTENT_REQUIRED" xml:space="preserve">
+    <value>Contract template content is required.</value>
+  </data>
+  <data name="CONTRACT_TEMPLATE_UNKNOWN_PLACEHOLDERS" xml:space="preserve">
+    <value>Unknown placeholder(s) found</value>
+  </data>
+  <data name="CONTRACT_TEMPLATE_HAS_UNRESOLVED_PLACEHOLDERS" xml:space="preserve">
+    <value>The generated document still has unresolved placeholders.</value>
   </data>
 </root>

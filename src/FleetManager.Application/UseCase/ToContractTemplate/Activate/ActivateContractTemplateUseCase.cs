@@ -11,7 +11,7 @@ namespace FleetManager.Application.UseCase.ToContractTemplate.Activate
         public async Task Execute(long id)
         {
             var template = await repository.GetById(id) ??
-                throw new NotFoundException("ResourceErrorMessages.CONTRACT_TEMPLATE_NOT_FOUND");
+                throw new NotFoundException(ResourceErrorMessages.CONTRACT_TEMPLATE_NOT_FOUND);
 
             if (template.IsActive)
                 return; // já é o ativo, nada a fazer

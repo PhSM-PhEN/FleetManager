@@ -13,7 +13,7 @@ namespace FleetManager.Application.UseCase.ToContractTemplate
         public ContractTemplateValidator()
         {
             RuleFor(t => t.Name).NotEmpty().WithMessage(ResourceErrorMessages.NAME_IS_REQUIRED);
-            RuleFor(t => t.Content).NotEmpty().WithMessage("ResourceErrorMessages.CONTRACT_TEMPLATE_CONTENT_REQUIRED");
+            RuleFor(t => t.Content).NotEmpty().WithMessage(ResourceErrorMessages.CONTRACT_TEMPLATE_CONTENT_REQUIRED);
 
             RuleFor(t => t.Content).Custom((content, context) =>
             {
@@ -25,7 +25,7 @@ namespace FleetManager.Application.UseCase.ToContractTemplate
 
                 if (unknown.Count > 0)
                     context.AddFailure("Content",
-                        $"{"ResourceErrorMessages.CONTRACT_TEMPLATE_UNKNOWN_PLACEHOLDERS"}: {string.Join(", ", unknown)}");
+                        $"{ResourceErrorMessages.CONTRACT_TEMPLATE_UNKNOWN_PLACEHOLDERS}: {string.Join(", ", unknown)}");
             });
         }
     }

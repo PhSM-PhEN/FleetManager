@@ -1,4 +1,4 @@
-﻿namespace FleetManager.Communication.Request.ToTenant
+namespace FleetManager.Communication.Request.ToTenant
 {
     public class RequestUpdateTenantJson
     {

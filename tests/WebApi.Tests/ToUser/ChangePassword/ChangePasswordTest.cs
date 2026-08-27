@@ -1,4 +1,4 @@
-﻿using CommonTestUtilities.Request.ToUser;
+using CommonTestUtilities.Request.ToUser;
 using FleetManager.Communication.Request.ToUser;
 using Shouldly;
 using System.Net;

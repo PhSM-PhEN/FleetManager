@@ -1,4 +1,4 @@
-﻿using FleetManager.Communication.Response.ToAddress;
+using FleetManager.Communication.Response.ToAddress;
 
 namespace FleetManager.Communication.Response.ToCompany
 {

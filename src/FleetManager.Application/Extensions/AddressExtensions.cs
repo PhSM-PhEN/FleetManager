@@ -1,4 +1,4 @@
-﻿using FleetManager.Communication.Response.ToAddress;
+using FleetManager.Communication.Response.ToAddress;
 using FleetManager.Domain.Entities;
 
 namespace FleetManager.Application.Extensions

@@ -1,4 +1,4 @@
-﻿namespace FleetManager.Application.UseCase.ToIncidentReport.Resolve
+namespace FleetManager.Application.UseCase.ToIncidentReport.Resolve
 {
     public interface IResolveIncidentReportUseCase
     {

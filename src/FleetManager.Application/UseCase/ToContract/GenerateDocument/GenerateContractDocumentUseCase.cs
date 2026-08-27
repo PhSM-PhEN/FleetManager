@@ -1,3 +1,4 @@
+using FleetManager.Application.Extensions;
 using FleetManager.Communication.Response.ToContract;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Repositories;
@@ -23,9 +24,14 @@ namespace FleetManager.Application.UseCase.ToContract.GenerateDocument
                 throw new NotFoundException(ResourceErrorMessages.CONTRACT_NOT_FOUND);
 
             var template = await templateRepository.GetActive() ??
-                throw new BusinessRuleException("ResourceErrorMessages.NO_ACTIVE_CONTRACT_TEMPLATE");
+                throw new BusinessRuleException(ResourceErrorMessages.NO_ACTIVE_CONTRACT_TEMPLATE);
 
-            var resolvedContent = ContractDocumentPlaceholderResolver.Resolve(template.Content, contract);
+            // Mesma fonte de dados que a API já expõe pro cliente (GET /Contract/{id}) —
+            // evita duplicar mapeamento e mantém o texto do contrato consistente com o que
+            // o front mostra na tela.
+            var contractInfo = contract.ToInfoResponse();
+
+            var resolvedContent = ContractDocumentPlaceholderResolver.Resolve(template.Content, contractInfo);
 
             EnsureNoUnresolvedPlaceholders(resolvedContent);
 
@@ -46,7 +52,7 @@ namespace FleetManager.Application.UseCase.ToContract.GenerateDocument
         private static void EnsureNoUnresolvedPlaceholders(string resolvedContent)
         {
             if (UnresolvedPlaceholderRegex.IsMatch(resolvedContent))
-                throw new BusinessRuleException("ResourceErrorMessages.CONTRACT_TEMPLATE_HAS_UNRESOLVED_PLACEHOLDERS");
+                throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_TEMPLATE_HAS_UNRESOLVED_PLACEHOLDERS);
         }
     }
 }

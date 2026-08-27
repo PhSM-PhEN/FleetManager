@@ -1,4 +1,4 @@
-﻿using FleetManager.Domain.Enum;
+using FleetManager.Domain.Enum;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Domain.EnumExtensions

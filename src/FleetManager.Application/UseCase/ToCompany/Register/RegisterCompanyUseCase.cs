@@ -1,4 +1,4 @@
-﻿using FleetManager.Application.Extensions;
+using FleetManager.Application.Extensions;
 using FleetManager.Communication.Request.ToCompany;
 using FleetManager.Communication.Response.ToCompany;
 using FleetManager.Domain.Entities;

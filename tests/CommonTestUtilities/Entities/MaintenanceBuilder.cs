@@ -1,4 +1,4 @@
-﻿using Bogus;
+using Bogus;
 using FleetManager.Domain.Entities;
 
 namespace CommonTestUtilities.Entities

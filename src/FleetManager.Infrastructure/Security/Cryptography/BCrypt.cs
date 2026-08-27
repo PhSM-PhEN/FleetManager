@@ -1,4 +1,4 @@
-﻿using FleetManager.Domain.Security.CryptoGraphy;
+using FleetManager.Domain.Security.CryptoGraphy;
 using BC = BCrypt.Net.BCrypt;
 
 namespace FleetManager.Infrastructure.Security.Cryptography

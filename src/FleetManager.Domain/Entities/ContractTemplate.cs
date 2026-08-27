@@ -25,7 +25,7 @@ namespace FleetManager.Domain.Entities
         public void Update(string name, string content)
         {
             if (IsActive)
-                throw new BusinessRuleException("ResourceErrorMessages.CONTRACT_TEMPLATE_ACTIVE_CANNOT_BE_EDITED");
+                throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_TEMPLATE_ACTIVE_CANNOT_BE_EDITED);
 
             Name = name;
             Content = content;

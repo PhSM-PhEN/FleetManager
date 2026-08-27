@@ -1,4 +1,4 @@
-﻿using CommonTestUtilities.Cryptography;
+using CommonTestUtilities.Cryptography;
 using CommonTestUtilities.Entities;
 using CommonTestUtilities.LoggedUser;
 using CommonTestUtilities.Repositories;

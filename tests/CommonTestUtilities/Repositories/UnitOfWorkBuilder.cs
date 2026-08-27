@@ -1,4 +1,4 @@
-﻿using FleetManager.Domain.Repositories;
+using FleetManager.Domain.Repositories;
 using Moq;
 
 namespace CommonTestUtilities.Repositories

@@ -1,4 +1,4 @@
-﻿namespace FleetManager.Communication.Response.ToMaintenance
+namespace FleetManager.Communication.Response.ToMaintenance
 {
     public class ResponseShortMaintenanceJson
     {

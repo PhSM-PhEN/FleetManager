@@ -9,8 +9,7 @@ namespace FleetManager.Infrastructure.Migrations
             LOCATÁRIO: {{TenantName}}
 
             CLÁUSULA 1ª - DO OBJETO
-            O presente contrato tem por objeto a locação do veículo de placa {{VehiclePlate}},
-            no plano "{{RentalPlanName}}".
+            O presente contrato tem por objeto a locação do veículo de placa {{VehiclePlate}}.
 
             CLÁUSULA 2ª - DO PRAZO
             O prazo de locação é de {{PrazoLocacao}}, com entrega prevista para {{DataEntregaPrevista}}.

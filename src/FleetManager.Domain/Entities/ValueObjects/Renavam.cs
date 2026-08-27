@@ -1,4 +1,4 @@
-﻿using FleetManager.Exception.ExceptionBase;
+using FleetManager.Exception.ExceptionBase;
 using System.Text.RegularExpressions;
 
 namespace FleetManager.Domain.Entities.ValueObjects

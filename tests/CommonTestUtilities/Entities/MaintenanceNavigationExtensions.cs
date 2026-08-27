@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using FleetManager.Domain.Entities;
 
 namespace CommonTestUtilities.Entities

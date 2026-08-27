@@ -1,4 +1,4 @@
-﻿using FleetManager.Communication.Request.ToUser;
+using FleetManager.Communication.Request.ToUser;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToUser;
 using FleetManager.Domain.Services.LoggedUser;

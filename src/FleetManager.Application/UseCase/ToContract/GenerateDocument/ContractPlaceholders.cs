@@ -4,7 +4,6 @@ namespace FleetManager.Application.UseCase.ToContract.GenerateDocument
     {
         public const string TenantName = "{{TenantName}}";
         public const string VehiclePlate = "{{VehiclePlate}}";
-        public const string RentalPlanName = "{{RentalPlanName}}";
         public const string PrazoLocacao = "{{PrazoLocacao}}";
         public const string DataEntregaPrevista = "{{DataEntregaPrevista}}";
         public const string QuilometragemContratada = "{{QuilometragemContratada}}";
@@ -12,7 +11,7 @@ namespace FleetManager.Application.UseCase.ToContract.GenerateDocument
 
         public static readonly string[] All =
         [
-            TenantName, VehiclePlate, RentalPlanName,
+            TenantName, VehiclePlate,
             PrazoLocacao, DataEntregaPrevista, QuilometragemContratada, ValorTotal
         ];
     }

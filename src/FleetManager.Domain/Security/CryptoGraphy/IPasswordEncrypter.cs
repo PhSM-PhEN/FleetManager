@@ -1,4 +1,4 @@
-﻿namespace FleetManager.Domain.Security.CryptoGraphy
+namespace FleetManager.Domain.Security.CryptoGraphy
 {
     public interface IPasswordEncrypter
     {

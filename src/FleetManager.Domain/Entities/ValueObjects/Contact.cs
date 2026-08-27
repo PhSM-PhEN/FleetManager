@@ -1,4 +1,4 @@
-﻿namespace FleetManager.Domain.Entities.ValueObjects
+namespace FleetManager.Domain.Entities.ValueObjects
 {
     public class Contact
     {

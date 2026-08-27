@@ -1,4 +1,4 @@
-﻿using FleetManager.Application.Extensions;
+using FleetManager.Application.Extensions;
 using FleetManager.Communication.Response.ToIncidentReport;
 using FleetManager.Domain.Repositories.ToIncidentReport;
 using FleetManager.Exception.ExceptionBase;

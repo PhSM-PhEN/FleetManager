@@ -1,4 +1,4 @@
-﻿namespace FleetManager.Communication.Request.ToVehicle
+namespace FleetManager.Communication.Request.ToVehicle
 {
     public class RequestMileageVehicleJson
     {

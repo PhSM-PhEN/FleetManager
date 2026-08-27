@@ -1,4 +1,4 @@
-﻿using FleetManager.Domain.Repositories;
+using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToUser;
 using FleetManager.Domain.Services.LoggedUser;
 using FleetManager.Exception.ExceptionBase;
