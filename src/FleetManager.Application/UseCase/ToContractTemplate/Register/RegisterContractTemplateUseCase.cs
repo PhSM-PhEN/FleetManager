@@ -16,7 +16,7 @@ namespace FleetManager.Application.UseCase.ToContractTemplate.Register
         {
             Validate(request);
 
-            var template = new ContractTemplate(request.Name, request.Content, version: 1);
+            var template = new ContractTemplate(request.Name, request.Content, version: 2);
 
             await repository.Add(template);
             await unitOfWork.Commit();

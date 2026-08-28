@@ -38,7 +38,7 @@ namespace FleetManager.Application.UseCase.ToContract.GenerateDocument
                 [ContractPlaceholders.VehicleManufacturingYear] = contract.Vehicle.ManufacturingYear,
                 [ContractPlaceholders.VehicleChassis] = contract.Vehicle.ChassiNumber,
                 [ContractPlaceholders.VehicleModel] = contract.Vehicle.Model,
-                [ContractPlaceholders.VehicleCurrentMileage] = FormatMileage(contract.Vehicle.CurrentMileage),
+                [ContractPlaceholders.VehicleCurrentMileage] = contract.Vehicle.CurrentMileage.ToString(),
                 [ContractPlaceholders.ExpectedMileageReturn] = contract.ExpectedEndMileage.ToString(),
                 [ContractPlaceholders.MileageAtReturn] = contract.FinalMileage.HasValue
                     ? FormatMileage(contract.FinalMileage.Value)
@@ -50,7 +50,7 @@ namespace FleetManager.Application.UseCase.ToContract.GenerateDocument
                 [ContractPlaceholders.RentalPeriodDescription] = NumberToWords.Convert(contract.TotalDays),
                 [ContractPlaceholders.RentalPeriodInDays] = contract.TotalDays == 1 ? "dia" : "dias",
                 [ContractPlaceholders.ContractedMileage] = contract.MileageContracted.ToString(),
-                [ContractPlaceholders.IncludedKm] = FormatMileage(contract.MileageContracted),
+                [ContractPlaceholders.IncludedKm] = contract.MileageContracted.ToString(),
                 [ContractPlaceholders.TotalPrice] = contract.TotalAmount.ToString("C", Culture),
                 [ContractPlaceholders.TotalPriceInWords] = FormatCurrencyInWords(contract.TotalAmount),
                 [ContractPlaceholders.DailyPrice] = FormatCurrency(contract.SnapshotPriceDailyRate),
@@ -61,7 +61,7 @@ namespace FleetManager.Application.UseCase.ToContract.GenerateDocument
 
                 [ContractPlaceholders.ContractCity] = contract.Vehicle.Company.Address.City,
                 [ContractPlaceholders.ContractState] = contract.Vehicle.Company.Address.State,
-                [ContractPlaceholders.ContractDate] = contract.PickupDateTime.ToString("dd/MM/yyyy"),
+                [ContractPlaceholders.ContractDate] = contract.PickupDateTime.ToString("dd  MMMM yyyy"),
                 [ContractPlaceholders.ContractNumber] = contract.Id.ToString(),
                 [ContractPlaceholders.ContractStatus] = contract.Status.Label,
             };
