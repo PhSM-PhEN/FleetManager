@@ -53,6 +53,13 @@ namespace FleetManager.Domain.Entities
             ApplyTerms(rentalPlan, rentalType, mileageContracted, totalAmount, pickupDateTime, returnDueDateTime);
         }
 
+        public ContractStatus GetStatus
+        {
+            get => Status;
+        }
+         
+        
+
         public void Cancel()
         {
             if (Status != ContractStatus.Active && Status != ContractStatus.Reserved)

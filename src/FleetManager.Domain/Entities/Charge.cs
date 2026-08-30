@@ -1,5 +1,6 @@
 using FleetManager.Domain.Enum;
 using FleetManager.Exception.ExceptionBase;
+using System.Data;
 
 namespace FleetManager.Domain.Entities
 {
@@ -40,6 +41,17 @@ namespace FleetManager.Domain.Entities
 
             var description = string.Format(ResourceExtensionsMessages.LATE_FEE_CHARGE_DESCRIPTION, contract.DaysLate);
             return new Charge(contract.Id, description, contract.LateFee.Value);
+        }
+        public static Charge ForContractStart(Contract contract)
+        {
+            if(contract.GetStatus != ContractStatus.Active)
+            {
+                throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_NOT_ACTIVE);
+
+            }
+            var description = string.Format(ResourceExtensionsMessages.PENDING, contract.TotalAmount);
+            return new Charge(contract.Id, description, contract.TotalAmount);
+
         }
         public static Charge ForExceededMileageFee(Contract contract)
         {

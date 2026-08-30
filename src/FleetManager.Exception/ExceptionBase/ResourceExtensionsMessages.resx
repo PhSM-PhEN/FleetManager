@@ -192,4 +192,7 @@
   <data name="INACTIVE" xml:space="preserve">
     <value>Inactive</value>
   </data>
+  <data name="BLOCKED_FOR_MAINTENANCE" xml:space="preserve">
+    <value>Blocked for maintenance</value>
+  </data>
 </root>

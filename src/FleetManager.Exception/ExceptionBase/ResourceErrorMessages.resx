@@ -462,4 +462,7 @@
   <data name="CONTRACT_TEMPLATE_HAS_UNRESOLVED_PLACEHOLDERS" xml:space="preserve">
     <value>The generated document still has unresolved placeholders.</value>
   </data>
+  <data name="TENANT_IS_DELINQUENT" xml:space="preserve">
+    <value>Tennat is delinquent.</value>
+  </data>
 </root>

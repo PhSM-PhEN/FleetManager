@@ -44,7 +44,7 @@ namespace WebApi.Tests.ToCompany.Update
         {
             var companyId = await RegisterCompany();
             var request = RequestCompanyJsonBuilder.Build(_addressId);
-            request.Name = string.Empty;
+            request.LegalName = string.Empty;
 
             var result = await DoPut($"{METHOD}/{companyId}", request, _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.BadRequest);

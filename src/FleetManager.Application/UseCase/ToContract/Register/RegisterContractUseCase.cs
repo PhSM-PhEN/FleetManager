@@ -34,6 +34,7 @@ namespace FleetManager.Application.UseCase.ToContract.Register
 
 
             var rentalType = Enum.Parse<RentalType>(request.RentalType);
+
             var (totalDays, _) = Contract.CalculatePeriod(rentalType, request.PickupDateTime, request.ReturnDueDateTime);
 
             var excessMileage = ContractTermsCalculator.DeriveExcessMileage(request.MileageContracted, rentalType, rentalPlan, totalDays);
@@ -84,7 +85,7 @@ namespace FleetManager.Application.UseCase.ToContract.Register
             if (status == TenantStatus.Deactivate)
                 throw new BusinessRuleException(ResourceErrorMessages.TENANT_NOT_AVAILABLE);
             if(status ==TenantStatus.Delinquent)
-                throw new BusinessRuleException("ResourceErrorMessages.TENANT_IS_DELINQUENT");
+                throw new BusinessRuleException(ResourceErrorMessages.TENANT_IS_DELINQUENT);
         }
 
         private static void Validate(RequestContractJson request)

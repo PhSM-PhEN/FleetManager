@@ -31,14 +31,14 @@ namespace WebApi.Tests.ToCompany.Register
             var body = await result.Content.ReadAsStreamAsync();
             var responseBody = await JsonDocument.ParseAsync(body);
 
-            responseBody.RootElement.GetProperty("name").GetString().ShouldBe(request.Name);
+            responseBody.RootElement.GetProperty("name").GetString().ShouldBe(request.LegalName);
         }
 
         [Fact]
         public async Task Error_Name_Empty()
         {
             var request = RequestCompanyJsonBuilder.Build(_addressId);
-            request.Name = string.Empty;
+            request.LegalName = string.Empty;
 
             var result = await DoPost(METHOD, request, _adminToken);
             result.StatusCode.ShouldBe(HttpStatusCode.BadRequest);

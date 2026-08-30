@@ -2,6 +2,8 @@ using FleetManager.Application.Extensions;
 using FleetManager.Communication.Request.ToCompany;
 using FleetManager.Communication.Response.ToCompany;
 using FleetManager.Domain.Entities;
+using FleetManager.Domain.Entities.ValueObjects;
+using FleetManager.Domain.Enum;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToAddress;
 using FleetManager.Domain.Repositories.ToCompany;
@@ -19,7 +21,20 @@ namespace FleetManager.Application.UseCase.ToCompany.Register
         {
             await Validate(request);
 
-            var company = new Company(request.Name, request.Cnpj, request.PhoneNumber, request.AddressId);
+
+            var contact = new Contact(request.PhoneNumber, request.Email);
+
+
+            TaxRegimeEnum? taxRegime = null;
+
+            if (!string.IsNullOrWhiteSpace(request.TaxRegime))
+            {
+                taxRegime = Enum.Parse<TaxRegimeEnum>(request.TaxRegime);
+            }
+
+
+
+            var company = new Company(request.LegalName, request.TradeName, request.StateRegistration, request.MunicipalRegistration, request.PrimaryCnae, taxRegime, request.Cnpj, contact, request.AddressId);
 
             await repository.Add(company);
             await unitOfWork.Commit();
@@ -47,4 +62,4 @@ namespace FleetManager.Application.UseCase.ToCompany.Register
             }
         }
     }
-}
+}

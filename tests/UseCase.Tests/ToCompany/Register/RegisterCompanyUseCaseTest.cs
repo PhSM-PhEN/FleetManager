@@ -21,7 +21,7 @@ namespace UseCase.Tests.ToCompany.Register
             var result = await useCase.Execute(request);
 
             result.ShouldNotBeNull();
-            result.Name.ShouldBe(request.Name);
+            result.Name.ShouldBe(request.LegalName);
         }
 
         [Fact]
@@ -29,7 +29,7 @@ namespace UseCase.Tests.ToCompany.Register
         {
             var address = AddressBuilder.Build(1);
             var request = RequestCompanyJsonBuilder.Build(address.Id);
-            request.Name = string.Empty;
+            request.LegalName = string.Empty;
 
             var useCase = CreateUseCase(address: address, cnpjExists: false);
             var act = async () => await useCase.Execute(request);

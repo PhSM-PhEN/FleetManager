@@ -8,7 +8,7 @@ public class CompanyValidator : AbstractValidator<RequestCompanyJson>
 {
     public CompanyValidator()
     {
-        RuleFor(x => x.Name).NotEmpty().WithMessage(ResourceErrorMessages.NAME_IS_REQUIRED);
+        RuleFor(x => x.LegalName).NotEmpty().WithMessage(ResourceErrorMessages.NAME_IS_REQUIRED);
 
         RuleFor(x => x.Cnpj).Cascade(CascadeMode.Stop)
             .NotEmpty().WithMessage(ResourceErrorMessages.CNPJ_REQUIRED)

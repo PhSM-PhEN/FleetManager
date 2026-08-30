@@ -26,7 +26,7 @@ namespace Validator.Tests.ToCompany
         {
             var validator = new CompanyValidator();
             var request = RequestCompanyJsonBuilder.Build(1);
-            request.Name = name;
+            request.LegalName = name;
 
             var result = validator.Validate(request);
 

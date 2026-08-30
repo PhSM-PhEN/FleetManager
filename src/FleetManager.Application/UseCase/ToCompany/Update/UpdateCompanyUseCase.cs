@@ -22,7 +22,7 @@ namespace FleetManager.Application.UseCase.ToCompany.Update
                 throw new NotFoundException(ResourceErrorMessages.ADDRESS_NOT_FOUND);
 
             
-            company.Update(request.Name, request.PhoneNumber, request.AddressId);
+            company.Update(request.LegalName, request.PhoneNumber, request.AddressId);
 
             repository.Update(company);
             await unitOfWork.Commit();
