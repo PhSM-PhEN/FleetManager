@@ -691,6 +691,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Neighborhood is required..
+        /// </summary>
+        public static string NEIGHBORHOOD_IS_REQUIRED {
+            get {
+                return ResourceManager.GetString("NEIGHBORHOOD_IS_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New password must be different..
         /// </summary>
         public static string NEW_PASSWORD_MUST_BE_DIFFERENT {
@@ -867,6 +876,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string SCHEDULED_AT_CANNOT_BE_IN_THE_PAST {
             get {
                 return ResourceManager.GetString("SCHEDULED_AT_CANNOT_BE_IN_THE_PAST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Service center is required..
+        /// </summary>
+        public static string SERVICE_CENTER_IS_REQUIRED {
+            get {
+                return ResourceManager.GetString("SERVICE_CENTER_IS_REQUIRED", resourceCulture);
             }
         }
         

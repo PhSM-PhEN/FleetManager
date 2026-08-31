@@ -10,6 +10,7 @@ public class AddressValidator : AbstractValidator<RequestAddressJson>
     {
         RuleFor(x => x.Street).NotEmpty().WithMessage(ResourceErrorMessages.STREET_REQUIRED);
         RuleFor(x => x.Number).NotEmpty().WithMessage(ResourceErrorMessages.NUMBER_REQUIRED);
+        RuleFor(x => x.Neighborhood).NotEmpty().WithMessage(ResourceErrorMessages.NEIGHBORHOOD_IS_REQUIRED);
         RuleFor(x => x.City).NotEmpty().WithMessage(ResourceErrorMessages.CITY_REQUIRED);
         RuleFor(x => x.State).NotEmpty().WithMessage(ResourceErrorMessages.STATE_REQUIRED);
         RuleFor(x => x.ZipCode).Cascade(CascadeMode.Stop)

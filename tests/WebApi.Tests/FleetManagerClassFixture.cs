@@ -61,4 +61,4 @@ namespace WebApi.Tests
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
         }
     }
-}
+}

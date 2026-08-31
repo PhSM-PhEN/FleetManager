@@ -468,4 +468,10 @@
   <data name="CONTRACT_TEMPLATE_NOT_ACTIVE" xml:space="preserve">
     <value>Contract template not active.</value>
   </data>
+  <data name="NEIGHBORHOOD_IS_REQUIRED" xml:space="preserve">
+    <value>Neighborhood is required.</value>
+  </data>
+  <data name="SERVICE_CENTER_IS_REQUIRED" xml:space="preserve">
+    <value>Service center is required.</value>
+  </data>
 </root>
