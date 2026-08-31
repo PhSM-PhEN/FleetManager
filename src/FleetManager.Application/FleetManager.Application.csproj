@@ -7,18 +7,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="UseCase\ToTenant\Active\**" />
-	  <Compile Remove="UseCase\ToTenant\Desactive\**" />
-	  <Compile Remove="UseCase\ToVehicle\Active\**" />
-	  <Compile Remove="UseCase\ToVehicle\Desactive\**" />
-	  <EmbeddedResource Remove="UseCase\ToTenant\Active\**" />
-	  <EmbeddedResource Remove="UseCase\ToTenant\Desactive\**" />
-	  <EmbeddedResource Remove="UseCase\ToVehicle\Active\**" />
-	  <EmbeddedResource Remove="UseCase\ToVehicle\Desactive\**" />
-	  <None Remove="UseCase\ToTenant\Active\**" />
-	  <None Remove="UseCase\ToTenant\Desactive\**" />
-	  <None Remove="UseCase\ToVehicle\Active\**" />
-	  <None Remove="UseCase\ToVehicle\Desactive\**" />
+	
 	</ItemGroup>
 
 	<ItemGroup>
@@ -33,6 +22,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="UseCase\ToCompany\UpdateTaxRegime\" />
+	  <Folder Include="UseCase\ToCompany\UpdateToAddress\" />
 	  <Folder Include="UseCase\ToMaintenance\Close\" />
 	  <Folder Include="UseCase\ToMaintenance\Delete\" />
 	  <Folder Include="UseCase\ToMaintenance\GetById\" />
