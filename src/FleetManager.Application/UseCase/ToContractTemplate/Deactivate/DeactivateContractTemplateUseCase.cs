@@ -2,23 +2,21 @@ using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToContractTemplate;
 using FleetManager.Exception.ExceptionBase;
 
-namespace FleetManager.Application.UseCase.ToContractTemplate.Activate
+namespace FleetManager.Application.UseCase.ToContractTemplate.Deactivate
 {
-    public class ActivateContractTemplateUseCase(
+    public class DeactivateContractTemplateUseCase(
         IContractTemplateWriteOnlyRepository repository,
-        IUnitOfWork unitOfWork) : IActivateContractTemplateUseCase
+        IUnitOfWork unitOfWork) : IDeactivateContractTemplateUseCase
     {
         public async Task Execute(long id)
         {
             var template = await repository.GetById(id) ??
                 throw new NotFoundException(ResourceErrorMessages.CONTRACT_TEMPLATE_NOT_FOUND);
 
-            if (template.IsActive)
-                return; // já está ativo, nada a fazer
+            if (!template.IsActive)
+                return; // já está inativo, nada a fazer
 
-            // Vários templates podem ficar ativos ao mesmo tempo — ativar este
-            // não desativa nenhum outro.
-            template.Activate();
+            template.Deactivate();
             repository.Update(template);
 
             await unitOfWork.Commit();

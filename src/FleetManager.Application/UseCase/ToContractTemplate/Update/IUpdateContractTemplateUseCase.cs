@@ -4,6 +4,6 @@ namespace FleetManager.Application.UseCase.ToContractTemplate.Update
 {
     public interface IUpdateContractTemplateUseCase
     {
-        Task Execute(long id, RequestContractTemplateJson request);
+        Task Execute(long id, RequestUpdateContractTemplateJson request);
     }
 }

@@ -12,7 +12,7 @@ namespace FleetManager.Application.UseCase.ToAddress.Update
             var address = await repository.GetById(id) 
                         ?? throw new NotFoundException(ResourceErrorMessages.ADDRESS_NOT_FOUND);
             Validate(request);
-            address.Update(request.Street, request.Number, request.City, request.State, request.ZipCode);
+            //address.Update(request.Street, request.Number, request.City, request.State, request.ZipCode);
 
             repository.Update(address);
             await unitOfWork.Commit();

@@ -277,6 +277,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contract template not active..
+        /// </summary>
+        public static string CONTRACT_TEMPLATE_NOT_ACTIVE {
+            get {
+                return ResourceManager.GetString("CONTRACT_TEMPLATE_NOT_ACTIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contract template not found..
         /// </summary>
         public static string CONTRACT_TEMPLATE_NOT_FOUND {

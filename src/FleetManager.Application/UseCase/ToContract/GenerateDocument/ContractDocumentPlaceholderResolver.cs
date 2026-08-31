@@ -11,7 +11,7 @@ namespace FleetManager.Application.UseCase.ToContract.GenerateDocument
         {
             var values = new Dictionary<string, string>
             {
-                [ContractPlaceholders.CompanyName] = contract.Vehicle.Company.Name,
+                [ContractPlaceholders.CompanyName] = contract.Vehicle.Company.TradeName,
                 [ContractPlaceholders.CompanyCnpj] = contract.Vehicle.Company.Cnpj,
                 [ContractPlaceholders.CompanyPhone] = contract.Vehicle.Company.PhoneNumber,
                 [ContractPlaceholders.CompanyAddressCity] = contract.Vehicle.Company.Address.City,

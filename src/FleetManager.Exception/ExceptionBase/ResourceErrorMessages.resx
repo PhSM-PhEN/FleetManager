@@ -465,4 +465,7 @@
   <data name="TENANT_IS_DELINQUENT" xml:space="preserve">
     <value>Tennat is delinquent.</value>
   </data>
+  <data name="CONTRACT_TEMPLATE_NOT_ACTIVE" xml:space="preserve">
+    <value>Contract template not active.</value>
+  </data>
 </root>

@@ -1,5 +1,3 @@
-using FleetManager.Exception.ExceptionBase;
-
 namespace FleetManager.Domain.Entities
 {
     public class ContractTemplate : AuditableEntity
@@ -19,17 +17,25 @@ namespace FleetManager.Domain.Entities
             IsActive = false;
         }
 
+        // Vários templates podem estar ativos ao mesmo tempo (ex.: "Locação", "Locação com seguro",
+        // "Locação com pagamento parcelado"). Ativar/desativar um não afeta os demais — quem escolhe
+        // qual template usar é quem gera o documento do contrato, pelo título/finalidade.
         public void Activate() => IsActive = true;
         public void Deactivate() => IsActive = false;
 
-        public void Update(string name, string content)
+        // Edição parcial (PATCH): só os campos informados são alterados. Templates ativos também podem
+        // ser editados — o documento já gerado fica congelado (Content + Version) em ContractDocument,
+        // então mudar o template não altera contratos já gerados, só afeta as próximas gerações.
+        public void Update(string? name, string? content)
         {
-            if (IsActive)
-                throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_TEMPLATE_ACTIVE_CANNOT_BE_EDITED);
+            if (name is not null)
+                Name = name;
 
-            Name = name;
-            Content = content;
-            Version += 1;
+            if (content is not null)
+            {
+                Content = content;
+                Version += 1;
+            }
         }
     }
 }

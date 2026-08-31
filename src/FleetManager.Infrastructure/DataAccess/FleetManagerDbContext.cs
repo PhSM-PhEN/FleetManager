@@ -116,6 +116,9 @@ namespace FleetManager.Infrastructure.DataAccess
                 .HasIndex(c => c.Cnpj)
                 .IsUnique();
 
+            modelBuilder.Entity<Company>()
+                .OwnsOne(c => c.Contact);
+
             modelBuilder.Entity<Vehicle>()
                 .OwnsOne(v => v.ManufacturingYear);
 
@@ -142,6 +145,7 @@ namespace FleetManager.Infrastructure.DataAccess
                 .WithMany()
                 .HasForeignKey(v => v.CompanyId)
                 .OnDelete(DeleteBehavior.Restrict);
+
 
             modelBuilder.Entity<Vehicle>()
                 .HasOne(v => v.RentalPlan)

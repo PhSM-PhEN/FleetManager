@@ -45,31 +45,31 @@ namespace WebApi.Tests
 
         private void StartDataBase(FleetManagerDbContext dbContext, IPasswordEncrypter passwordEncrypter, IAccessTokenGenerator accesTokenGenerator)
         {
-            AddUserAdmin(dbContext, passwordEncrypter, accesTokenGenerator);
-            AddUserTeamMember(dbContext, passwordEncrypter, accesTokenGenerator);
-            dbContext.SaveChanges();
+            //AddUserAdmin(dbContext, passwordEncrypter, accesTokenGenerator);
+            //AddUserTeamMember(dbContext, passwordEncrypter, accesTokenGenerator);
+            //dbContext.SaveChanges();
 
-            var address = AddAddress(dbContext);
-            dbContext.SaveChanges();
-            AddTenant(dbContext, address.Id);
-            var company = AddCompany(dbContext, address.Id);
-            dbContext.SaveChanges();
+            //var address = AddAddress(dbContext);
+            //dbContext.SaveChanges();
+            //AddTenant(dbContext, address.Id);
+            ////var company = AddCompany(dbContext, address.Id);
+            //dbContext.SaveChanges();
 
-            var rentalPlan = AddRentalPlan(dbContext);
+            //var rentalPlan = AddRentalPlan(dbContext);
 
-            var vehicle = AddVehicle(dbContext, company.Id, rentalPlan.Id);
-            dbContext.SaveChanges();
+            //var vehicle = AddVehicle(dbContext, company.Id, rentalPlan.Id);
+            //dbContext.SaveChanges();
 
 
-            var contractVehicle = VehicleBuilder.Build(2, company.Id, rentalPlan.Id);
-            dbContext.Add(contractVehicle);
-            dbContext.SaveChanges();
+            //var contractVehicle = VehicleBuilder.Build(2, company.Id, rentalPlan.Id);
+            //dbContext.Add(contractVehicle);
+            //dbContext.SaveChanges();
 
-            AddContract(dbContext, contractVehicle.Id, TENANT_TEAM_MEMBER.GetById(), rentalPlan);
-            dbContext.SaveChanges();
+            //AddContract(dbContext, contractVehicle.Id, TENANT_TEAM_MEMBER.GetById(), rentalPlan);
+            //dbContext.SaveChanges();
 
-            AddMaintenance(dbContext, vehicle.Id);
-            dbContext.SaveChanges();
+            //AddMaintenance(dbContext, vehicle.Id);
+            //dbContext.SaveChanges();
 
         }
         private Maintenance AddMaintenance(FleetManagerDbContext dbContext, long vehicleId)
@@ -101,13 +101,13 @@ namespace WebApi.Tests
             VEHICLE_TEAM_MEMBER = new VehicleIdentityManager(vehicle);
             return vehicle;
         }
-        private Company AddCompany(FleetManagerDbContext dbContext, long addressId)
-        {
-            var company = CompanyBuilder.Build(1, addressId);
-            dbContext.Companies.Add(company);
-            COMPANY_TEAM_MEMBER = new CompanyIdentityManager(company);
-            return company;
-        }
+        //private Company AddCompany(FleetManagerDbContext dbContext, long addressId)
+        //{
+        //    var company = CompanyBuilder.Build(1, addressId);
+        //    dbContext.Companies.Add(company);
+        //    COMPANY_TEAM_MEMBER = new CompanyIdentityManager(company);
+        //    return company;
+        //}
         private Tenant AddTenant(FleetManagerDbContext dbContext, long addressId)
         {
             var tenant = TenantBuilder.Build(1, addressId: addressId);

@@ -119,14 +119,17 @@ namespace FleetManager.Api.Controllers
             return Ok(new ResponseDetectOverdueContractsJson { TotalContractsMarkedAsOverdue = totalMarked });
         }
 
-        // Gera (e congela) o texto do contrato a partir do ContractTemplate ativo no momento.
+        // Gera (e congela) o texto do contrato a partir de um ContractTemplate ativo escolhido
+        // explicitamente pelo chamador. Como vários templates podem estar ativos ao mesmo tempo
+        // (locação, locação com seguro, pagamento parcelado etc.), a UI deve listar as opções via
+        // GET /ContractTemplate?onlyActive=true (mostrando o Name de cada uma) e mandar o id aqui.
         [HttpPost("{id}/Document")]
         [ProducesResponseType(typeof(ResponseContractDocumentJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status409Conflict)]
-        public async Task<IActionResult> GenerateDocument([FromServices] IGenerateContractDocumentUseCase useCase, [FromRoute] long id)
+        public async Task<IActionResult> GenerateDocument([FromServices] IGenerateContractDocumentUseCase useCase, [FromRoute] long id, [FromQuery] long contractTemplateId)
         {
-            var response = await useCase.Execute(id);
+            var response = await useCase.Execute(id, contractTemplateId);
             return Ok(response);
         }
 

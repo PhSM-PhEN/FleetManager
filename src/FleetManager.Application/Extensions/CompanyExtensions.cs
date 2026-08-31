@@ -12,9 +12,12 @@ namespace FleetManager.Application.Extensions
             return new ResponseCompanyJson
             {
                 Id = company.Id,
-                Name = company.Name,
+                LegalName = company.LegalName,
+                TradeName = company.TradeName,
                 Cnpj = company.Cnpj,
-                PhoneNumber = company.PhoneNumber,
+                
+                PhoneNumber = company.Contact.PhoneNumber,
+                Email = company.Contact?.Email,
                 Address = company.Address.ToResponse(),
                 Status = new ResponseEnumStatusJson
                 {
@@ -32,7 +35,7 @@ namespace FleetManager.Application.Extensions
             return new ResponseShortCompanyJson
             {
                 Id = company.Id,
-                Name = company.Name,
+           
                 Cnpj = company.Cnpj,
                 Status = new ResponseEnumStatusJson
                 {

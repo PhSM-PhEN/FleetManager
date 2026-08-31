@@ -18,13 +18,18 @@ namespace FleetManager.Application.UseCase.ToContract.GenerateDocument
     {
         private static readonly Regex UnresolvedPlaceholderRegex = new(@"\{\{.*?\}\}", RegexOptions.Compiled);
 
-        public async Task<ResponseContractDocumentJson> Execute(long contractId)
+        public async Task<ResponseContractDocumentJson> Execute(long contractId, long contractTemplateId)
         {
             var contract = await contractRepository.GetById(contractId) ??
                 throw new NotFoundException(ResourceErrorMessages.CONTRACT_NOT_FOUND);
 
-            var template = await templateRepository.GetActive() ??
-                throw new BusinessRuleException(ResourceErrorMessages.NO_ACTIVE_CONTRACT_TEMPLATE);
+            // Vários templates podem estar ativos ao mesmo tempo (ex.: locação, locação
+            // com seguro, pagamento parcelado) — quem gera o documento escolhe qual usar.
+            var template = await templateRepository.GetById(contractTemplateId) ??
+                throw new NotFoundException(ResourceErrorMessages.CONTRACT_TEMPLATE_NOT_FOUND);
+
+            if (!template.IsActive)
+                throw new BusinessRuleException(ResourceErrorMessages.CONTRACT_TEMPLATE_NOT_ACTIVE);
 
             var resolvedContent = ContractDocumentPlaceholderResolver.Resolve(template.Content, contract.ToInfoResponse());
 

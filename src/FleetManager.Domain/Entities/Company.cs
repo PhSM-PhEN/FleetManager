@@ -6,7 +6,7 @@ namespace FleetManager.Domain.Entities
     public class Company : AuditableEntity
     {
         public long AddressId { get; private set; }
-        public string LegalName { get; private set; } = string.Empty;
+        public string? LegalName { get; private set; } = string.Empty;
         public string TradeName { get; private set; } = string.Empty;
         public string Cnpj { get; private set; } = string.Empty;
         public string? StateRegistration { get; private set; } = string.Empty;
@@ -20,7 +20,7 @@ namespace FleetManager.Domain.Entities
 
         protected Company() { }
 
-        public Company(string legalName, string tradeName, string? stateRegistration, string? municipalRegistration,string? primaryCnae, TaxRegimeEnum? taxRegime, string cnpj, Contact contact, long addressId)
+        public Company(string? legalName, string tradeName, string? stateRegistration, string? municipalRegistration,string? primaryCnae, TaxRegimeEnum? taxRegime, string cnpj, Contact contact, long addressId)
         {
             LegalName = legalName;
             TradeName = tradeName;

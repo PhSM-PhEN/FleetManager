@@ -1,6 +1,5 @@
 using FleetManager.Domain.Enum;
 using FleetManager.Exception.ExceptionBase;
-using System.Data;
 
 namespace FleetManager.Domain.Entities
 {

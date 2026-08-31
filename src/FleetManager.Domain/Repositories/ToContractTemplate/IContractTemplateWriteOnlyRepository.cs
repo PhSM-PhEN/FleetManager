@@ -6,7 +6,6 @@ namespace FleetManager.Domain.Repositories.ToContractTemplate
     {
         Task Add(ContractTemplate template);
         Task<ContractTemplate?> GetById(long id);
-        Task<ContractTemplate?> GetActive();
         void Update(ContractTemplate template);
     }
 }

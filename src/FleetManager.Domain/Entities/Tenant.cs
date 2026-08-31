@@ -10,6 +10,7 @@ namespace FleetManager.Domain.Entities
         public string Name { get; private set; } = string.Empty;
         public Cpf Cpf { get; private set; } = default!;
         public string RG { get; private set; } = string.Empty;
+        public MaritalStatus MaritalStatus { get ; private set; } 
         public DriverLicense DriverLicense { get; private set; } = default!;
         public Contact Contact { get; private set; } = default!;
         public TenantStatus Status { get; private set; }

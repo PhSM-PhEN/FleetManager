@@ -5,6 +5,6 @@ namespace FleetManager.Application.UseCase.ToContractTemplate.GetAll
 {
     public interface IGetAllContractTemplateUseCase
     {
-        Task<ResponsePaginatedJson<ResponseContractTemplateJson>> Execute(int pageNumber, int pageSize);
+        Task<ResponsePaginatedJson<ResponseContractTemplateJson>> Execute(int pageNumber, int pageSize, bool? onlyActive = null);
     }
 }

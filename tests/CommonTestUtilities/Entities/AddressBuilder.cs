@@ -27,6 +27,7 @@ namespace CommonTestUtilities.Entities
                 .CustomInstantiator(f => new Address(
                     f.Address.StreetName(),
                     f.Address.BuildingNumber(),
+                    "sfsdf",
                     f.Address.City(),
                     f.Address.StateAbbr(),
                     f.Random.Replace("##.###-###")
@@ -39,4 +40,4 @@ namespace CommonTestUtilities.Entities
             return address;
         }
     }
-}
+}

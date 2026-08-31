@@ -4,6 +4,6 @@ namespace FleetManager.Application.UseCase.ToContract.GenerateDocument
 {
     public interface IGenerateContractDocumentUseCase
     {
-        Task<ResponseContractDocumentJson> Execute(long contractId);
+        Task<ResponseContractDocumentJson> Execute(long contractId, long contractTemplateId);
     }
 }

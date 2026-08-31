@@ -24,26 +24,26 @@ namespace FleetManager.Infrastructure.DataAccess.ToContractTemplate
                 .FirstOrDefaultAsync(t => t.Id == id);
         }
 
-        public async Task<ContractTemplate?> GetActive()
-        {
-            return await dbContext.ContractTemplates
-                .FirstOrDefaultAsync(t => t.IsActive);
-        }
-
-        async Task<ContractTemplate?> IContractTemplateReadOnlyRepository.GetActive()
-        {
-            return await dbContext.ContractTemplates.AsNoTracking()
-                .FirstOrDefaultAsync(t => t.IsActive);
-        }
-
         public void Update(ContractTemplate template)
         {
             dbContext.ContractTemplates.Update(template);
         }
 
-        public async Task<(List<ContractTemplate>, int TotalCount)> GetAll(int pageNumber, int pageSize)
+        public async Task<List<ContractTemplate>> GetAllActive()
+        {
+            return await dbContext.ContractTemplates.AsNoTracking()
+                .Where(t => t.IsActive)
+                .OrderBy(t => t.Name)
+                .ToListAsync();
+        }
+
+        public async Task<(List<ContractTemplate>, int TotalCount)> GetAll(int pageNumber, int pageSize, bool? onlyActive = null)
         {
             var query = dbContext.ContractTemplates.AsNoTracking();
+
+            if (onlyActive.HasValue)
+                query = query.Where(t => t.IsActive == onlyActive.Value);
+
             var totalCount = await query.CountAsync();
             var templates = await query
                 .OrderByDescending(t => t.CreatedAt)

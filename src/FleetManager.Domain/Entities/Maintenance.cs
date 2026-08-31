@@ -36,7 +36,7 @@ namespace FleetManager.Domain.Entities
             Status = MaintenanceStatus.Scheduled;
             RegisterHistoryEvent("Scheduled");
         }
-        private void Scheduled(DateTime scheduledAt)
+        public void Scheduled(DateTime scheduledAt)
         {
             if(scheduledAt < ScheduledAt)
             {

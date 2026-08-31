@@ -21,6 +21,7 @@ using FleetManager.Application.UseCase.ToContract.Renew;
 using FleetManager.Application.UseCase.ToContract.GenerateDocument;
 using FleetManager.Application.UseCase.ToContract.Update;
 using FleetManager.Application.UseCase.ToContractTemplate.Activate;
+using FleetManager.Application.UseCase.ToContractTemplate.Deactivate;
 using FleetManager.Application.UseCase.ToContractTemplate.GetAll;
 using FleetManager.Application.UseCase.ToContractTemplate.GetById;
 using FleetManager.Application.UseCase.ToContractTemplate.Register;
@@ -134,6 +135,7 @@ namespace FleetManager.Application
             services.AddScoped<IRegisterContractTemplateUseCase, RegisterContractTemplateUseCase>();
             services.AddScoped<IUpdateContractTemplateUseCase, UpdateContractTemplateUseCase>();
             services.AddScoped<IActivateContractTemplateUseCase, ActivateContractTemplateUseCase>();
+            services.AddScoped<IDeactivateContractTemplateUseCase, DeactivateContractTemplateUseCase>();
             services.AddScoped<IGetAllContractTemplateUseCase, GetAllContractTemplateUseCase>();
             services.AddScoped<IGetByIdContractTemplateUseCase, GetByIdContractTemplateUseCase>();
             // incident report
