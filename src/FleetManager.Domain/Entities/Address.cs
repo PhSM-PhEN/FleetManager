@@ -2,6 +2,7 @@ namespace FleetManager.Domain.Entities
 {
     public class Address : AuditableEntity
     {
+        
         public string Street {get; private set;} = string.Empty;
         public string Number {get; private set;} = string.Empty;
         public string City {get; private set;} = string.Empty;

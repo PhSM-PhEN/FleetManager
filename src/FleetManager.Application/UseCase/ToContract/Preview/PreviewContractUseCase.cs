@@ -72,8 +72,8 @@ namespace FleetManager.Application.UseCase.ToContract.Preview
         {
             if (status.Equals(TenantStatus.Deactivate))
                 throw new BusinessRuleException(ResourceErrorMessages.TENANT_NOT_AVAILABLE);
-            if(status.Equals(TenantStatus.Delinquent))
-                throw new BusinessRuleException("ResourceErrorMessages.TENANT_IS_DELINQUENT");
+            if (status.Equals(TenantStatus.Delinquent))
+                throw new BusinessRuleException(ResourceErrorMessages.TENANT_IS_DELINQUENT);
         }
         private static void Validate(RequestPreviewContractJson request)
         {

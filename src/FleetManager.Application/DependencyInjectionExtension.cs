@@ -8,7 +8,6 @@ using FleetManager.Application.UseCase.ToCompany.Delete;
 using FleetManager.Application.UseCase.ToCompany.GetAll;
 using FleetManager.Application.UseCase.ToCompany.GetById;
 using FleetManager.Application.UseCase.ToCompany.Register;
-using FleetManager.Application.UseCase.ToCompany.Update;
 using FleetManager.Application.UseCase.ToContract.Activate;
 using FleetManager.Application.UseCase.ToContract.Cancel;
 using FleetManager.Application.UseCase.ToContract.Delete;
@@ -102,7 +101,6 @@ namespace FleetManager.Application
             services.AddScoped<IRegisterCompanyUseCase, RegisterCompanyUseCase>();
             services.AddScoped<IGetAllCompanyUseCase, GetAllCompanyUseCase>();
             services.AddScoped<IGetByIdCompanyUseCase, GetByIdCompanyUseCase>();
-            services.AddScoped<IUpdateCompanyUseCase, UpdateCompanyUseCase>();
             services.AddScoped<IDeleteCompanyUseCase, DeleteCompanyUseCase>();
             // vehicle
             services.AddScoped<IRegisterVehicleUseCase, RegisterVehicleUseCase>();

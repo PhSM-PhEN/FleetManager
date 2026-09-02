@@ -321,11 +321,6 @@ namespace FleetManager.Infrastructure.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<bool?>("ActiveFlag")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("tinyint(1)")
-                        .HasComputedColumnSql("CASE WHEN `IsActive` = 1 THEN 1 ELSE NULL END", true);
-
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -353,10 +348,6 @@ namespace FleetManager.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ActiveFlag")
-                        .IsUnique()
-                        .HasDatabaseName("UX_ContractTemplates_SingleActive");
 
                     b.ToTable("ContractTemplates");
                 });

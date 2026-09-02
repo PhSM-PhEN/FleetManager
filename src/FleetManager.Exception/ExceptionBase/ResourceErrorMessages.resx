@@ -474,4 +474,7 @@
   <data name="SERVICE_CENTER_IS_REQUIRED" xml:space="preserve">
     <value>Service center is required.</value>
   </data>
+  <data name="INVALID_TAXE_REGIME_FORMAT" xml:space="preserve">
+    <value>Invalid tax regime format.</value>
+  </data>
 </root>

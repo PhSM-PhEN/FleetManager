@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace FleetManager.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class InitaialMigration : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -56,7 +56,6 @@ namespace FleetManager.Infrastructure.Migrations
                     Content = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    ActiveFlag = table.Column<bool>(type: "tinyint(1)", nullable: true, computedColumnSql: "CASE WHEN `IsActive` = 1 THEN 1 ELSE NULL END", stored: true),
                     CreatedBy = table.Column<long>(type: "bigint", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     UpdatedBy = table.Column<long>(type: "bigint", nullable: true),
@@ -480,12 +479,6 @@ namespace FleetManager.Infrastructure.Migrations
                 name: "UX_Contracts_ActiveVehicle",
                 table: "Contracts",
                 column: "ActiveVehicleId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "UX_ContractTemplates_SingleActive",
-                table: "ContractTemplates",
-                column: "ActiveFlag",
                 unique: true);
 
             migrationBuilder.CreateIndex(

@@ -2,7 +2,6 @@ using FleetManager.Application.UseCase.ToCompany.Delete;
 using FleetManager.Application.UseCase.ToCompany.GetAll;
 using FleetManager.Application.UseCase.ToCompany.GetById;
 using FleetManager.Application.UseCase.ToCompany.Register;
-using FleetManager.Application.UseCase.ToCompany.Update;
 using FleetManager.Communication.Request.ToCompany;
 using FleetManager.Communication.Response;
 using FleetManager.Communication.Response.ToCompany;
@@ -46,18 +45,6 @@ namespace FleetManager.Api.Controllers
         {
             var response = await useCase.Execute(id);
             return Ok(response);
-        }
-
-        [HttpPut]
-        [Route("{id}")]
-        [Authorize(Roles = Roles.ADMIN)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Update([FromServices] IUpdateCompanyUseCase useCase, [FromBody] RequestCompanyJson request, [FromRoute] long id)
-        {
-            await useCase.Execute(id, request);
-            return NoContent();
         }
 
         [HttpDelete]

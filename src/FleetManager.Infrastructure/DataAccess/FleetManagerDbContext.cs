@@ -230,14 +230,14 @@ namespace FleetManager.Infrastructure.DataAccess
 
             // Garante no máximo um ContractTemplate ativo por vez a nível de banco também
             // (a regra em código já impede isso no ActivateContractTemplateUseCase).
-            modelBuilder.Entity<ContractTemplate>()
-                .Property<bool?>("ActiveFlag")
-                .HasComputedColumnSql("CASE WHEN `IsActive` = 1 THEN 1 ELSE NULL END", stored: true);
+            // modelBuilder.Entity<ContractTemplate>()
+            //     .Property<bool?>("ActiveFlag")
+            //     .HasComputedColumnSql("CASE WHEN `IsActive` = 1 THEN 1 ELSE NULL END", stored: true);
 
-            modelBuilder.Entity<ContractTemplate>()
-                .HasIndex("ActiveFlag")
-                .IsUnique()
-                .HasDatabaseName("UX_ContractTemplates_SingleActive");
+            // modelBuilder.Entity<ContractTemplate>()
+            //     .HasIndex("ActiveFlag")
+            //     .IsUnique()
+            //     .HasDatabaseName("UX_ContractTemplates_SingleActive");
 
 
 
