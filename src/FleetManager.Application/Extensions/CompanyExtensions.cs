@@ -35,7 +35,7 @@ namespace FleetManager.Application.Extensions
             return new ResponseShortCompanyJson
             {
                 Id = company.Id,
-           
+                TradeName = company.TradeName,
                 Cnpj = company.Cnpj,
                 Status = new ResponseEnumStatusJson
                 {
