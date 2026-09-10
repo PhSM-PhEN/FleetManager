@@ -22,6 +22,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="UseCase\ToCompany\UpdateLegalInfo\" />
 	  <Folder Include="UseCase\ToCompany\UpdateTaxRegime\" />
 	  <Folder Include="UseCase\ToCompany\UpdateToAddress\" />
 	  <Folder Include="UseCase\ToMaintenance\Close\" />

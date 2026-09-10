@@ -42,8 +42,9 @@ namespace FleetManager.Domain.Entities
         {
             Contact = contact;
         }
-        public void UpdateLegalInfo( string? stateRegistration, string? municipalRegistration, string primaryCnae)
+        public void UpdateLegalInfo( string? legalName, string? stateRegistration, string? municipalRegistration, string? primaryCnae)
         {
+            LegalName = legalName;
             StateRegistration = stateRegistration;
             MunicipalRegistration = municipalRegistration;
             PrimaryCnae = primaryCnae;
