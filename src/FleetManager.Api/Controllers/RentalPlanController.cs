@@ -41,7 +41,7 @@ namespace FleetManager.Api.Controllers
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ResponseRentalPlanJson), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetByVehicleId([FromServices] IGetByRentalPlanUseCase useCase, [FromRoute] long id)
+        public async Task<IActionResult> GetByVehicleId([FromServices] IGetByIdRentalPlanUseCase useCase, [FromRoute] long id)
         {
             var response = await useCase.Execute(id);
             return Ok(response);

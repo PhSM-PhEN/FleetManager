@@ -12,7 +12,12 @@ public class AddressValidator : AbstractValidator<RequestAddressJson>
         RuleFor(x => x.Number).NotEmpty().WithMessage(ResourceErrorMessages.NUMBER_REQUIRED);
         RuleFor(x => x.Neighborhood).NotEmpty().WithMessage(ResourceErrorMessages.NEIGHBORHOOD_IS_REQUIRED);
         RuleFor(x => x.City).NotEmpty().WithMessage(ResourceErrorMessages.CITY_REQUIRED);
-        RuleFor(x => x.State).NotEmpty().WithMessage(ResourceErrorMessages.STATE_REQUIRED);
+
+        RuleFor(x => x.State).Cascade(CascadeMode.Stop).NotEmpty().WithMessage(ResourceErrorMessages.STATE_REQUIRED)
+            .Matches(@"^[A-Z]{2}$")
+            .WithMessage(ResourceErrorMessages.STATE_INVALID);
+
+
         RuleFor(x => x.ZipCode).Cascade(CascadeMode.Stop)
             .NotEmpty().WithMessage(ResourceErrorMessages.ZIPCODE_REQUIRED)
         .Matches(@"^\d{5}-?\d{3}$")

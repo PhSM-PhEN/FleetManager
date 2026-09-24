@@ -15,6 +15,7 @@ namespace FleetManager.Application.UseCase.ToContract.Register
 {
     public class RegisterContractUseCase(
         IVehicleReadOnlyRepository vehicleRepository,
+        IVehicleWriteOnlyRepository vehicleWriteOnlyRepository,
         ITenantReadOnlyRepository tenantRepository,
         IRentalPlanReadOnlyRepository rentalPlanRepository,
         IContractWriteOnlyRepository contractRepository,
@@ -46,8 +47,11 @@ namespace FleetManager.Application.UseCase.ToContract.Register
                             request.MileageContracted, request.TotalAmount,
                             request.PickupDateTime, request.ReturnDueDateTime);
 
+            vehicle.MarkAsRented();
 
             await contractRepository.Add(contract);
+            vehicleWriteOnlyRepository.Update(vehicle);
+
             await unitOfWork.Commit();
 
             return contract.ToResponse();

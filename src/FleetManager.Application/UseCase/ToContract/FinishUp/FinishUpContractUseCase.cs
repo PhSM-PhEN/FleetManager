@@ -30,6 +30,8 @@ namespace FleetManager.Application.UseCase.ToContract.FinishUp
             contract.FinishUp(actualReturnDateTime, request.FinalMileage);
             vehicle.UpdateMileage(request.FinalMileage);
 
+            vehicle.MarkasAvailable();
+
             vehicleWrite.Update(vehicle);
             contractRepository.Update(contract);
 

@@ -113,7 +113,7 @@ namespace FleetManager.Application
             // rental plan
             services.AddScoped<IRegisterRentalPlanUseCase, RegisterRentalPlanUseCase>();
             services.AddScoped<IUpdateRentalPlanUseCase, UpdateRentalPlanUseCase>();
-            services.AddScoped<IGetByRentalPlanUseCase, GetByIdRentalPlanUseCase>();
+            services.AddScoped<IGetByIdRentalPlanUseCase, GetByIdRentalPlanUseCase>();
             services.AddScoped<IGetAllRentalPlanUseCase, GetAllRentalPlanUseCase>();
             services.AddScoped<IDeleteRentalPlanUseCase, DeleteRentalPlanUseCase>();
             // contract

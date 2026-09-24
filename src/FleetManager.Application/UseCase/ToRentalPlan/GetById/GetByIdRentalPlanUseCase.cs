@@ -5,7 +5,7 @@ using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Application.UseCase.ToRentalPlan.GetById
 {
-    public class GetByIdRentalPlanUseCase(IRentalPlanReadOnlyRepository repository) : IGetByRentalPlanUseCase
+    public class GetByIdRentalPlanUseCase(IRentalPlanReadOnlyRepository repository) : IGetByIdRentalPlanUseCase
     {
         public async Task<ResponseRentalPlanJson> Execute(long id)
         {

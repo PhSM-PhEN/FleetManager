@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FleetManager.Infrastructure.DataAccess.ToContract
 {
-    public class ContractRepository(FleetManagerDbContext dbContext) : IContractWriteOnlyRepository, IContractReadOnlyRepository
+    internal class ContractRepository(FleetManagerDbContext dbContext) : IContractWriteOnlyRepository, IContractReadOnlyRepository
     {
         public async Task Add(Contract contract)
         {

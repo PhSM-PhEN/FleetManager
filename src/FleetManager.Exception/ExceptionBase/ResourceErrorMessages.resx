@@ -477,4 +477,10 @@
   <data name="INVALID_TAXE_REGIME_FORMAT" xml:space="preserve">
     <value>Invalid tax regime format.</value>
   </data>
+  <data name="STATE_INVALID" xml:space="preserve">
+    <value>State invalid.</value>
+  </data>
+  <data name="VEHICLE_ALREADY_AVAILABLE" xml:space="preserve">
+    <value>Vehicle already available.</value>
+  </data>
 </root>

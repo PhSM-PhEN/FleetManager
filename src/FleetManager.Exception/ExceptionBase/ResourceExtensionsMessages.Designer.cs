@@ -133,7 +133,7 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Excess mileage fee ({0} km over contract).
+        ///   Looks up a localized string similar to Excess mileage charge description.
         /// </summary>
         public static string EXCESS_MILEAGE_CHARGE_DESCRIPTION {
             get {
@@ -169,7 +169,7 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Late return fee ({0} day(s) late).
+        ///   Looks up a localized string similar to Late fee charge description.
         /// </summary>
         public static string LATE_FEE_CHARGE_DESCRIPTION {
             get {

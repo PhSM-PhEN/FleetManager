@@ -90,5 +90,19 @@ namespace FleetManager.Domain.Entities
             Status = VehicleStatus.Deactivate;
             RegisterHistoryEvent("Deactivated");
         }
+        public void MarkAsRented()
+        {
+            if (Status != VehicleStatus.Available)
+                throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_ALREADY_RENTED);
+            Status = VehicleStatus.Rented;
+            RegisterHistoryEvent("Rented");
+        }
+        public void MarkasAvailable()
+        {
+            if (Status != VehicleStatus.Rented)
+                throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_ALREADY_AVAILABLE);
+            Status = VehicleStatus.Available;
+            RegisterHistoryEvent("Available");
+        }
     }
 }
