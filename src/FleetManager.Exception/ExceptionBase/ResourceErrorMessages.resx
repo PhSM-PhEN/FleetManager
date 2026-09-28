@@ -483,4 +483,7 @@
   <data name="VEHICLE_ALREADY_AVAILABLE" xml:space="preserve">
     <value>Vehicle already available.</value>
   </data>
+  <data name="VEHICLE_NOT_DEACTIVATE" xml:space="preserve">
+    <value>Vehicle not deactivate.</value>
+  </data>
 </root>

@@ -1132,6 +1132,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Vehicle not deactivate..
+        /// </summary>
+        public static string VEHICLE_NOT_DEACTIVATE {
+            get {
+                return ResourceManager.GetString("VEHICLE_NOT_DEACTIVATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vehicle not found..
         /// </summary>
         public static string VEHICLE_NOT_FOUND {

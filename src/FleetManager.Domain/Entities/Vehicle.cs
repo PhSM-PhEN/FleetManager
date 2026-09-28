@@ -74,8 +74,8 @@ namespace FleetManager.Domain.Entities
         
         public void Activate()
         {
-            if (Status == VehicleStatus.Available)
-                throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_ALREADY_ACTIVE);
+            if (Status != VehicleStatus.Deactivate)
+                throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_NOT_DEACTIVATE);
 
             Status = VehicleStatus.Available;
 
