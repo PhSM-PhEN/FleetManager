@@ -1,10 +1,10 @@
-namespace FleetManager.Domain.EnumExtensions
+namespace FleetManager.Domain.Enum
 {
     public enum TenantStatus
     {
-        Available = 1,
+        Active = 1,
         Rented = 2,
         Delinquent = 3,
-        Deactivate = 4
+        Inactive = 4
     }
 }

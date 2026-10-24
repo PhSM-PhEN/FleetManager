@@ -1,6 +1,5 @@
 using FleetManager.Domain.Entities.ValueObjects;
 using FleetManager.Domain.Enum;
-using FleetManager.Domain.EnumExtensions;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Domain.Entities
@@ -30,7 +29,7 @@ namespace FleetManager.Domain.Entities
             DriverLicense = driverLicense;
             Contact = contact;
             AddressId = addressId;
-            Status = TenantStatus.Available;
+            Status = TenantStatus.Active;
             
             
         }
@@ -43,19 +42,19 @@ namespace FleetManager.Domain.Entities
         }
         public void Deactivate()
         {
-            if (Status == TenantStatus.Deactivate)
+            if (Status == TenantStatus.Inactive)
                 throw new BusinessRuleException(ResourceErrorMessages.TENANT_ALREADY_DEACTIVATED);
 
-            Status = TenantStatus.Deactivate;
+            Status = TenantStatus.Inactive;
             RegisterHistoryEvent("Disabled");
         }
 
         public void Activate()
         {
-            if (Status == TenantStatus.Available)
+            if (Status == TenantStatus.Active)
                 throw new BusinessRuleException(ResourceErrorMessages.TENANT_ALREADY_ACTIVE);
 
-            Status = TenantStatus.Available;
+            Status = TenantStatus.Active;
             RegisterHistoryEvent("Activated");
         }
     }

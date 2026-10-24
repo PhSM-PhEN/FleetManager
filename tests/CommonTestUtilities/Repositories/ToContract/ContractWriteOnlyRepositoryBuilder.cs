@@ -31,11 +31,7 @@ namespace CommonTestUtilities.Repositories.ToContract
             return this;
         }
 
-        public ContractWriteOnlyRepositoryBuilder Delete(Contract contract)
-        {
-            _repository.Setup(c => c.Delete(contract)).Returns(Task.CompletedTask);
-            return this;
-        }
+       
 
         public ContractWriteOnlyRepositoryBuilder GetActiveContractsPastDueDate(List<Contract> contracts)
         {

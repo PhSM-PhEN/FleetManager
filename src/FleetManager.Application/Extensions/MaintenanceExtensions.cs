@@ -50,7 +50,6 @@ namespace FleetManager.Application.Extensions
                 WorkshopBudget = maintenance.WorkshopBudget,
                 ProblemDescription = maintenance.ProblemDescription,
                 Vehicle = maintenance.Vehicle.ToShortResponse(),
-                IncidentReport = maintenance.IncidentReport?.ToResponse(),
                 Status = new ResponseEnumStatusJson
                 {
                     Id = (int)maintenance.Status,

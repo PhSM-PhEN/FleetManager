@@ -10,14 +10,14 @@ using FleetManager.Application.UseCase.ToCompany.GetById;
 using FleetManager.Application.UseCase.ToCompany.Register;
 using FleetManager.Application.UseCase.ToContract.Activate;
 using FleetManager.Application.UseCase.ToContract.Cancel;
-using FleetManager.Application.UseCase.ToContract.Delete;
 using FleetManager.Application.UseCase.ToContract.DetectOverdue;
 using FleetManager.Application.UseCase.ToContract.FinishUp;
+using FleetManager.Application.UseCase.ToContract.GenerateDocument;
 using FleetManager.Application.UseCase.ToContract.GetAll;
 using FleetManager.Application.UseCase.ToContract.GetById;
+using FleetManager.Application.UseCase.ToContract.Preview;
 using FleetManager.Application.UseCase.ToContract.Register;
 using FleetManager.Application.UseCase.ToContract.Renew;
-using FleetManager.Application.UseCase.ToContract.GenerateDocument;
 using FleetManager.Application.UseCase.ToContract.Update;
 using FleetManager.Application.UseCase.ToContractTemplate.Activate;
 using FleetManager.Application.UseCase.ToContractTemplate.Deactivate;
@@ -25,11 +25,6 @@ using FleetManager.Application.UseCase.ToContractTemplate.GetAll;
 using FleetManager.Application.UseCase.ToContractTemplate.GetById;
 using FleetManager.Application.UseCase.ToContractTemplate.Register;
 using FleetManager.Application.UseCase.ToContractTemplate.Update;
-using FleetManager.Application.UseCase.ToIncidentReport.Delete;
-using FleetManager.Application.UseCase.ToIncidentReport.GetAll;
-using FleetManager.Application.UseCase.ToIncidentReport.GetById;
-using FleetManager.Application.UseCase.ToIncidentReport.Register;
-using FleetManager.Application.UseCase.ToIncidentReport.Resolve;
 using FleetManager.Application.UseCase.ToMaintenance.Close;
 using FleetManager.Application.UseCase.ToMaintenance.Delete;
 using FleetManager.Application.UseCase.ToMaintenance.GetAll;
@@ -41,8 +36,8 @@ using FleetManager.Application.UseCase.ToRentalPlan.GetById;
 using FleetManager.Application.UseCase.ToRentalPlan.Register;
 using FleetManager.Application.UseCase.ToRentalPlan.Update;
 using FleetManager.Application.UseCase.ToTenant.Activate;
-using FleetManager.Application.UseCase.ToTenant.Delete;
 using FleetManager.Application.UseCase.ToTenant.Deactivate;
+using FleetManager.Application.UseCase.ToTenant.Delete;
 using FleetManager.Application.UseCase.ToTenant.GetAll;
 using FleetManager.Application.UseCase.ToTenant.GetById;
 using FleetManager.Application.UseCase.ToTenant.Register;
@@ -53,15 +48,13 @@ using FleetManager.Application.UseCase.ToUser.GetProfile;
 using FleetManager.Application.UseCase.ToUser.Promote;
 using FleetManager.Application.UseCase.ToUser.Register;
 using FleetManager.Application.UseCase.ToUser.Update;
-using FleetManager.Application.UseCase.ToVehicle.Activate;
-using FleetManager.Application.UseCase.ToVehicle.Delete;
 using FleetManager.Application.UseCase.ToVehicle.Deactivate;
+using FleetManager.Application.UseCase.ToVehicle.Delete;
 using FleetManager.Application.UseCase.ToVehicle.GetAll;
 using FleetManager.Application.UseCase.ToVehicle.GetById;
 using FleetManager.Application.UseCase.ToVehicle.Register;
 using FleetManager.Application.UseCase.ToVehicle.Update;
 using Microsoft.Extensions.DependencyInjection;
-using FleetManager.Application.UseCase.ToContract.Preview;
 
 namespace FleetManager.Application
 {
@@ -108,7 +101,6 @@ namespace FleetManager.Application
             services.AddScoped<IGetByIdVehicleUseCase, GetByIdVehicleUseCase>();
             services.AddScoped<IUpdateMileageVehicleUseCase, UpdateMileageVehicleUseCase>();
             services.AddScoped<IDeleteVehicleUseCase, DeleteVehicleUseCase>();
-            services.AddScoped<IActivateVehicleUseCase, ActivateVehicleUseCase>();
             services.AddScoped<IDeactivateVehicleUseCase, DeactivateVehicleUseCase>();
             // rental plan
             services.AddScoped<IRegisterRentalPlanUseCase, RegisterRentalPlanUseCase>();
@@ -122,7 +114,6 @@ namespace FleetManager.Application
             services.AddScoped<IGetByIdContractUseCase, GetByIdContractUseCase>();
             services.AddScoped<IGetAllContractUseCase, GetAllContractUseCase>();
             services.AddScoped<IUpdateContractUseCase, UpdateContractUseCase>();
-            services.AddScoped<IDeleteContractUseCase, DeleteContractUseCase>();
             services.AddScoped<ICancelContractUseCase, CancelContractUseCase>();
             services.AddScoped<IActivateContractUseCase, ActivateContractUseCase>();
             services.AddScoped<IFinishUpContractUseCase, FinishUpContractUseCase>();
@@ -136,12 +127,6 @@ namespace FleetManager.Application
             services.AddScoped<IDeactivateContractTemplateUseCase, DeactivateContractTemplateUseCase>();
             services.AddScoped<IGetAllContractTemplateUseCase, GetAllContractTemplateUseCase>();
             services.AddScoped<IGetByIdContractTemplateUseCase, GetByIdContractTemplateUseCase>();
-            // incident report
-            services.AddScoped<IRegisterIncidentReportUseCase, RegisterIncidentReportUseCase>();
-            services.AddScoped<IGetAllIncidentReportUseCase, GetAllIncidentReportUseCase>();
-            services.AddScoped<IGetByIdIncidentReportUseCase, GetByIdIncidentReportUseCase>();
-            services.AddScoped<IDeleteIncidentReportUseCase, DeleteIncidentReportUseCase>();
-            services.AddScoped<IResolveIncidentReportUseCase, ResolveIncidentReportUseCase>();
             // maintenance
             services.AddScoped<IRegisterMaintenanceUseCase, RegisterMaintenanceUseCase>();
             services.AddScoped<IGetByIdMaintenanceUseCase, GetByIdMaintenanceUseCase>();

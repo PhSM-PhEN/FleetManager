@@ -1,11 +1,11 @@
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToAddress;
-using FleetManager.Domain.Repositories.ToCompany;
 using FleetManager.Domain.Repositories.ToCharge;
+using FleetManager.Domain.Repositories.ToCompany;
 using FleetManager.Domain.Repositories.ToContract;
 using FleetManager.Domain.Repositories.ToContractDocument;
 using FleetManager.Domain.Repositories.ToContractTemplate;
-using FleetManager.Domain.Repositories.ToIncidentReport;
+using FleetManager.Domain.Repositories.ToMaintenance;
 using FleetManager.Domain.Repositories.ToRentalPlan;
 using FleetManager.Domain.Repositories.ToTenant;
 using FleetManager.Domain.Repositories.ToUser;
@@ -21,7 +21,7 @@ using FleetManager.Infrastructure.DataAccess.ToCompany;
 using FleetManager.Infrastructure.DataAccess.ToContract;
 using FleetManager.Infrastructure.DataAccess.ToContractDocument;
 using FleetManager.Infrastructure.DataAccess.ToContractTemplate;
-using FleetManager.Infrastructure.DataAccess.ToIncidentReport;
+using FleetManager.Infrastructure.DataAccess.ToMaintenance;
 using FleetManager.Infrastructure.DataAccess.ToRentalPlan;
 using FleetManager.Infrastructure.DataAccess.ToTenant;
 using FleetManager.Infrastructure.DataAccess.ToUser;
@@ -32,8 +32,6 @@ using FleetManager.Infrastructure.Services.LoggedUser;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using FleetManager.Infrastructure.DataAccess.ToMaintenance;
-using FleetManager.Domain.Repositories.ToMaintenance;
 
 namespace FleetManager.Infrastructure
 {
@@ -96,9 +94,6 @@ namespace FleetManager.Infrastructure
             //contract
             services.AddScoped<IContractReadOnlyRepository, ContractRepository>();
             services.AddScoped<IContractWriteOnlyRepository, ContractRepository>();
-            //incident report
-            services.AddScoped<IIncidentReportReadOnlyRepository, IncidentReportRepository>();
-            services.AddScoped<IIncidentReportWriteOnlyRepository, IncidentReportRepository>();
             //charge
             services.AddScoped<IChargeReadOnlyRepository, ChargeRepository>();
             services.AddScoped<IChargeWriteOnlyRepository, ChargeRepository>();

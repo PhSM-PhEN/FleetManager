@@ -486,4 +486,7 @@
   <data name="VEHICLE_NOT_DEACTIVATE" xml:space="preserve">
     <value>Vehicle not deactivate.</value>
   </data>
+  <data name="CONTRACT_ACTIVE_CANNOT_BE_DELETED" xml:space="preserve">
+    <value>Contract active cannot be deleted.</value>
+  </data>
 </root>

@@ -4,9 +4,8 @@ namespace FleetManager.Domain.Enum
     {
 
         Available = 1,
-        Deactivate = 2,
+        Inactive = 2,
         Rented = 3,
-        Maintenance = 4,
-        BlockedForMaintenance = 5
+        BlockedForMaintenance = 4
     }
 }

@@ -6,7 +6,6 @@ namespace FleetManager.Domain.Repositories.ToContract
     {
         Task Add(Contract contract);
         Task<Contract?> GetById(long id);
-        Task Delete(Contract contract);
         void Update(Contract contract);
         Task<List<Contract>> GetActiveContractsPastDueDate(DateTime referenceDateTime);
     }

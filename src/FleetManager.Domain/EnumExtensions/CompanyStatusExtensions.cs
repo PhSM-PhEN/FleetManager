@@ -9,8 +9,8 @@ namespace FleetManager.Domain.EnumExtensions
         {
             return status switch
             {
-                CompanyStatus.Available => ResourceExtensionsMessages.AVAILABLE,
-                CompanyStatus.Unavailable => ResourceExtensionsMessages.UNAVAILABLE,
+                CompanyStatus.Active => ResourceExtensionsMessages.ACTIVE,
+                CompanyStatus.Inactive => ResourceExtensionsMessages.INACTIVE,
                 _ => throw new ArgumentOutOfRangeException(nameof(status), status, null)
             };
         }

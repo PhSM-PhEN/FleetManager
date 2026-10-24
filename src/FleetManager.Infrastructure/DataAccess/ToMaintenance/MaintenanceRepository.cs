@@ -36,7 +36,6 @@ namespace FleetManager.Infrastructure.DataAccess.ToMaintenance
         {
             return await dbContext.Maintenances.AsNoTracking()
                         .Include(v => v.Vehicle)
-                        .Include(ir => ir.IncidentReport)
                         .FirstOrDefaultAsync(m => m.Id == id);
         }
 

@@ -187,6 +187,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contract active cannot be deleted..
+        /// </summary>
+        public static string CONTRACT_ACTIVE_CANNOT_BE_DELETED {
+            get {
+                return ResourceManager.GetString("CONTRACT_ACTIVE_CANNOT_BE_DELETED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contract has no excess mileage fee to charge..
         /// </summary>
         public static string CONTRACT_HAS_NO_EXCESS_MILEAGE_FEE {

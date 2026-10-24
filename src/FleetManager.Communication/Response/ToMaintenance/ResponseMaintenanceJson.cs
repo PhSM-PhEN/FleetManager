@@ -1,4 +1,3 @@
-using FleetManager.Communication.Response.ToIncidentReport;
 using FleetManager.Communication.Response.ToVehicle;
 
 namespace FleetManager.Communication.Response.ToMaintenance
@@ -12,6 +11,5 @@ namespace FleetManager.Communication.Response.ToMaintenance
         public string? ProblemDescription { get; set; } = string.Empty;
         public ResponseEnumStatusJson Status { get; set; } = new();
         public ResponseRegisterVehicleJson Vehicle { get; set; } = new();
-        public ResponseShortIncidentReportJson? IncidentReport { get; set; } = new();
     }
 }

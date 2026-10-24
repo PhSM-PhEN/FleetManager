@@ -3,7 +3,6 @@ using FleetManager.Communication.Request.ToContract;
 using FleetManager.Communication.Response.ToContract;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Enum;
-using FleetManager.Domain.EnumExtensions;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToContract;
 using FleetManager.Domain.Repositories.ToRentalPlan;
@@ -77,7 +76,7 @@ namespace FleetManager.Application.UseCase.ToContract.Register
         }
         private static void EnsureVehicleStatusIsValid(VehicleStatus status)
         {
-            if (status == VehicleStatus.Deactivate)
+            if (status == VehicleStatus.Inactive)
                 throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_NOT_AVAILABLE);
             if (status == VehicleStatus.BlockedForMaintenance)
                 throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_BLOCKED_FOR_MAINTENANCE);
@@ -86,7 +85,7 @@ namespace FleetManager.Application.UseCase.ToContract.Register
         }
         private static void EnsureTenantEstatusIsValid(TenantStatus status)
         {
-            if (status == TenantStatus.Deactivate)
+            if (status == TenantStatus.Inactive)
                 throw new BusinessRuleException(ResourceErrorMessages.TENANT_NOT_AVAILABLE);
             if(status ==TenantStatus.Delinquent)
                 throw new BusinessRuleException(ResourceErrorMessages.TENANT_IS_DELINQUENT);

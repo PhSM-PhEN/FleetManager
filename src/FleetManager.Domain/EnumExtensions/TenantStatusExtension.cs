@@ -1,3 +1,4 @@
+using FleetManager.Domain.Enum;
 using FleetManager.Exception.ExceptionBase;
 
 namespace FleetManager.Domain.EnumExtensions
@@ -8,10 +9,10 @@ namespace FleetManager.Domain.EnumExtensions
         {
             return status switch
             {
-               TenantStatus.Available => ResourceExtensionsMessages.AVAILABLE,
+               TenantStatus.Active => ResourceExtensionsMessages.ACTIVE,
                TenantStatus.Rented => ResourceExtensionsMessages.RENTED,
                TenantStatus.Delinquent => ResourceExtensionsMessages.DELINQUENT,
-               TenantStatus.Deactivate => ResourceExtensionsMessages.DEACTIVATE,
+               TenantStatus.Inactive => ResourceExtensionsMessages.INACTIVE,
                _ => throw new ArgumentOutOfRangeException(nameof(status), status, null)
             };
         }

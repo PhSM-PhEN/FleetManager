@@ -31,7 +31,7 @@ namespace FleetManager.Domain.Entities
             Contact = contact;
             AddressId = addressId;
             TaxRegime = taxRegime;
-            Status = CompanyStatus.Available;
+            Status = CompanyStatus.Active;
         }
 
         public void UpdateAddress(long addressId)
@@ -56,12 +56,12 @@ namespace FleetManager.Domain.Entities
         }
         public void Activate()
         {
-            Status = CompanyStatus.Available;
+            Status = CompanyStatus.Active;
         }
 
         public void Deactivate()
         {
-            Status = CompanyStatus.Unavailable;
+            Status = CompanyStatus.Inactive;
         }
     }
 }

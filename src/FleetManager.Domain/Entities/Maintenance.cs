@@ -13,25 +13,21 @@ namespace FleetManager.Domain.Entities
         public string? ProblemDescription { get; private set; } = string.Empty;
         public MaintenanceStatus Status { get; private set; } 
         public Vehicle Vehicle { get; private set; } = default!;
-        public IncidentReport? IncidentReport { get; private set; } = default!;
+       
 
         protected Maintenance() { }
 
-        public Maintenance(long vehicleId, string serviceCenter, IncidentReport? incidentReport, DateTime scheduledAt)
+        public Maintenance(long vehicleId, string serviceCenter,DateTime scheduledAt)
         {
             VehicleId = vehicleId;
             ServiceCenter = serviceCenter;
-            IncidentReport = incidentReport;
-            IncidentReportId = incidentReport?.Id;
             ScheduledAt = scheduledAt;
             Status = MaintenanceStatus.Scheduled;
             RegisterHistoryEvent("Scheduled");
         }
-        public Maintenance(long vehicleId, IncidentReport? incidentReport, DateTime scheduledAt)
+        public Maintenance(long vehicleId,  DateTime scheduledAt)
         {
             VehicleId = vehicleId;
-            IncidentReport = incidentReport;
-            IncidentReportId = incidentReport?.Id;
             ScheduledAt = scheduledAt;
             Status = MaintenanceStatus.Scheduled;
             RegisterHistoryEvent("Scheduled");

@@ -18,13 +18,8 @@ namespace FleetManager.Domain.Entities
         public FuelLevelEnum FuelLevel { get ; private set; }
         public long CompanyId { get; private set; }
         public long RentalPlanId {get ; private set;}
-        public long? IncidentReportId { get; private set; }
         public Company Company { get; internal set; } = default!;
-
-        
-        public RentalPlan RentalPlan { get; internal set; } = default!;
-       
-        public IncidentReport? IncidentReport { get; private set; }
+        public RentalPlan RentalPlan { get; internal set; } = default!;   
         public VehicleStatus GetStatus { get => Status;}
 
         protected Vehicle() { }
@@ -54,41 +49,13 @@ namespace FleetManager.Domain.Entities
             CurrentMileage = newMileage;
             RegisterHistoryEvent("MileageUpdated");
         }
-
-        public void BlockForIncident(IncidentReport incidentReport)
-        {
-            if (Status == VehicleStatus.BlockedForMaintenance)
-                throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_ALREADY_BLOCKED_FOR_MAINTENANCE);
-            Status = VehicleStatus.BlockedForMaintenance;
-            IncidentReport = incidentReport;
-            RegisterHistoryEvent("BlockedForMaintenance");
-        }
-        public void UnblockFromIncident()
-        {
-            if (Status == VehicleStatus.Available)
-                throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_NOT_BLOCKED_FOR_MAINTENANCE);
-            IncidentReport = null;
-            Status = VehicleStatus.Available;
-            RegisterHistoryEvent("UnblockedFromMaintenance");
-        }
-        
-        public void Activate()
-        {
-            if (Status != VehicleStatus.Deactivate)
-                throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_NOT_DEACTIVATE);
-
-            Status = VehicleStatus.Available;
-
-            RegisterHistoryEvent("Activated");
-        }
-
         public void Deactivate()
         {
-            if (Status == VehicleStatus.Deactivate)
+            if (Status == VehicleStatus.Inactive)
                 throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_ALREADY_DEACTIVATED);
 
-            Status = VehicleStatus.Deactivate;
-            RegisterHistoryEvent("Deactivated");
+            Status = VehicleStatus.Inactive;
+            RegisterHistoryEvent("Inactived");
         }
         public void MarkAsRented()
         {
@@ -99,10 +66,11 @@ namespace FleetManager.Domain.Entities
         }
         public void MarkasAvailable()
         {
-            if (Status != VehicleStatus.Rented)
+            if (Status == VehicleStatus.Available)
                 throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_ALREADY_AVAILABLE);
+
             Status = VehicleStatus.Available;
-            RegisterHistoryEvent("Available");
+            RegisterHistoryEvent("Active");
         }
     }
 }

@@ -74,7 +74,7 @@ namespace FleetManager.Api.Controllers
             return NoContent();
         }
 
-        [HttpPatch("{id}/Deactivate")]
+        [HttpPatch("{id}/Inactive")]
         [Authorize(Roles = Roles.ADMIN)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status409Conflict)]

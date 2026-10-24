@@ -11,8 +11,7 @@ namespace FleetManager.Domain.EnumExtensions
            {
                VehicleStatus.Available => ResourceExtensionsMessages.AVAILABLE,
                VehicleStatus.Rented => ResourceExtensionsMessages.RENTED,
-               VehicleStatus.Maintenance => ResourceExtensionsMessages.MAINTENANCE,
-               VehicleStatus.Deactivate => ResourceExtensionsMessages.DEACTIVATE,
+               VehicleStatus.Inactive => ResourceExtensionsMessages.DEACTIVATE,
                VehicleStatus.BlockedForMaintenance => ResourceExtensionsMessages.BLOCKED_FOR_MAINTENANCE,
                _ => throw new ArgumentOutOfRangeException(nameof(status), status, null)
            } ;

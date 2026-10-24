@@ -1,4 +1,3 @@
-using FleetManager.Application.UseCase.ToVehicle.Activate;
 using FleetManager.Application.UseCase.ToVehicle.Deactivate;
 using FleetManager.Application.UseCase.ToVehicle.Delete;
 using FleetManager.Application.UseCase.ToVehicle.GetAll;
@@ -65,17 +64,8 @@ namespace FleetManager.Api.Controllers
             await useCase.Execute(id);
             return NoContent();
         }
-        [HttpPatch("{id}/Activate")]
-        [Authorize(Roles = Roles.ADMIN)]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status409Conflict)]
-        [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Activate([FromServices] IActivateVehicleUseCase useCase, [FromRoute] long id)
-        {
-            await useCase.Execute(id);
-            return NoContent();
-        }
-        [HttpPatch("{id}/Deactivate")]
+
+        [HttpPatch("{id}/Inactive")]
         [Authorize(Roles = Roles.ADMIN)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status409Conflict)]

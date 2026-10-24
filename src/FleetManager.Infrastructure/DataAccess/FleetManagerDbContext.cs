@@ -2,6 +2,7 @@ using FleetManager.Domain.Entities;
 using FleetManager.Domain.Services.LoggedUser;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace FleetManager.Infrastructure.DataAccess
 {
@@ -16,7 +17,6 @@ namespace FleetManager.Infrastructure.DataAccess
         public DbSet<RentalPlan> RentalPlans { get; set; }
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<Maintenance> Maintenances { get; set; }
-        public DbSet<IncidentReport> IncidentReports { get; set; }
         public DbSet<Charge> Charges { get; set; }
         public DbSet<ContractTemplate> ContractTemplates { get; set; }
         public DbSet<ContractDocument> ContractDocuments { get; set; }
@@ -85,6 +85,7 @@ namespace FleetManager.Infrastructure.DataAccess
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
 
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.Email)
@@ -192,35 +193,13 @@ namespace FleetManager.Infrastructure.DataAccess
                 .HasForeignKey(m => m.VehicleId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Maintenance>()
-                .HasOne(m => m.IncidentReport)
-                .WithMany()
-                .HasForeignKey(m => m.IncidentReportId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<IncidentReport>()
-                .HasOne(i => i.Contract)
-                .WithMany()
-                .HasForeignKey(i => i.ContractId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<IncidentReport>()
-                .HasOne(i => i.Vehicle)
-                .WithMany()
-                .HasForeignKey(i => i.VehicleId)
-                .OnDelete(DeleteBehavior.Restrict);
-
+   
             modelBuilder.Entity<Charge>()
                 .HasOne(c => c.Contract)
                 .WithMany()
                 .HasForeignKey(c => c.ContractId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            modelBuilder.Entity<Vehicle>()
-                .HasOne(v => v.IncidentReport)
-                .WithMany()
-                .HasForeignKey("CurrentIncidentReportId")
-                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<ContractDocument>()
                 .HasOne(d => d.Contract)
@@ -240,9 +219,15 @@ namespace FleetManager.Infrastructure.DataAccess
             //     .HasDatabaseName("UX_ContractTemplates_SingleActive");
 
 
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes()
+                .Where(t => t.BaseType is null && typeof(AuditableEntity).IsAssignableFrom(t.ClrType)))
+            {
+                var param = Expression.Parameter(entityType.ClrType, "e");
+                var isDeleted = Expression.Property(param, nameof(AuditableEntity.IsDeleted));
+                entityType.SetQueryFilter(Expression.Lambda(Expression.Not(isDeleted), param));
+            }
 
-
-
+            
 
 
         }

@@ -11,12 +11,7 @@ namespace FleetManager.Infrastructure.DataAccess.ToContract
         {
             await dbContext.Contracts.AddAsync(contract);
         }
-
-        public Task Delete(Contract contract)
-        {
-            dbContext.Contracts.Remove(contract);
-            return Task.CompletedTask;
-        }
+    
 
         public async Task<(List<Contract>, int TotalCount)> GetAll(int pageNumber, int pageSize)
         {

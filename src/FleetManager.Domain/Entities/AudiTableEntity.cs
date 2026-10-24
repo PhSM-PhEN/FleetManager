@@ -7,6 +7,8 @@ namespace FleetManager.Domain.Entities
         public DateTime CreatedAt { get; private set; }
         public long? UpdatedBy { get; private set; }
         public DateTime? UpdatedAt { get; private set; }
+        public bool IsDeleted { get; private set; }
+        public DateTime? DeletedAt { get; private set; }
 
         private string? _lastAction;
         public string? LastAction => _lastAction;
@@ -24,6 +26,13 @@ namespace FleetManager.Domain.Entities
         {
             UpdatedBy = userId;
             UpdatedAt = DateTime.UtcNow;
+        }
+
+        public void SoftDelete()
+        {
+            IsDeleted = true;
+            DeletedAt = DateTime.UtcNow;
+            RegisterHistoryEvent("Deleted");   // ver nota do DbContext
         }
     }
 }
