@@ -20,7 +20,7 @@ namespace FleetManager.Application.UseCase.ToContract.Activate
             var vehicle = await vehicleReadOnlyRepository.GetById(contract.VehicleId) ??
                 throw new NotFoundException(ResourceErrorMessages.VEHICLE_NOT_FOUND);
 
-
+            vehicle.MarkAsRented();
             contract.Confirm();
 
             var charge = Charge.ForContractStart(contract);

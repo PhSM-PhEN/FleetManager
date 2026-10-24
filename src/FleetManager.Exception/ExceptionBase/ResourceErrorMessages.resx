@@ -381,8 +381,8 @@
   <data name="VEHICLE_ALREADY_ACTIVE" xml:space="preserve">
     <value>Vehicle is already active.</value>
   </data>
-  <data name="VEHICLE_ALREADY_DEACTIVATED" xml:space="preserve">
-    <value>Vehicle is already deactivated.</value>
+  <data name="VEHICLE_CANNOT_BE_DEACTIVATED" xml:space="preserve">
+    <value>vehicle cannot be deactivated.</value>
   </data>
   <data name="TENANT_ALREADY_ACTIVE" xml:space="preserve">
     <value>Tenant is already active.</value>
@@ -488,5 +488,8 @@
   </data>
   <data name="CONTRACT_ACTIVE_CANNOT_BE_DELETED" xml:space="preserve">
     <value>Contract active cannot be deleted.</value>
+  </data>
+  <data name="TENANT_CANNOT_BE_DELETED" xml:space="preserve">
+    <value>Tenant cannot be deleted.</value>
   </data>
 </root>

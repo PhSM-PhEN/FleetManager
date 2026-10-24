@@ -1,4 +1,5 @@
 using FleetManager.Domain.Repositories;
+using FleetManager.Domain.Repositories.ToContract;
 using FleetManager.Domain.Repositories.ToTenant;
 using FleetManager.Exception.ExceptionBase;
 
@@ -10,6 +11,12 @@ namespace FleetManager.Application.UseCase.ToTenant.Delete
         {
             var tenant = await repository.GetById(id) ??
                 throw new NotFoundException(ResourceErrorMessages.TENANT_NOT_FOUND);
+
+            if (tenant.GetStatus != Domain.Enum.TenantStatus.Active)
+            {
+                throw new BusinessRuleException(ResourceErrorMessages.TENANT_CANNOT_BE_DELETED);
+            }
+
             await repository.Delete(tenant);
             await unitOfWork.Commit();
         }

@@ -11,11 +11,9 @@ namespace FleetManager.Application.UseCase.ToUser.Delete
         {
             var loggedUser = await logged.Get();
 
-            var user = await repository.GetUserById(loggedUser.Id);
+            var user = await repository.GetUserById(loggedUser.Id) ?? throw new NotFoundException(ResourceErrorMessages.USER_NOT_FOUND);
 
-            if (user == null) {
-                throw new NotFoundException(ResourceErrorMessages.USER_NOT_FOUND);
-            }
+
             await repository.Delete(user);
             await unitOfWork.Commit();
         }

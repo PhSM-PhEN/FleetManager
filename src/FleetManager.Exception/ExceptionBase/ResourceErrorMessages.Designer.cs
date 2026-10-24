@@ -952,6 +952,15 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tenant cannot be deleted..
+        /// </summary>
+        public static string TENANT_CANNOT_BE_DELETED {
+            get {
+                return ResourceManager.GetString("TENANT_CANNOT_BE_DELETED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tenant id required..
         /// </summary>
         public static string TENANT_ID_REQUIRED {
@@ -1078,15 +1087,6 @@ namespace FleetManager.Exception.ExceptionBase {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Vehicle is already deactivated..
-        /// </summary>
-        public static string VEHICLE_ALREADY_DEACTIVATED {
-            get {
-                return ResourceManager.GetString("VEHICLE_ALREADY_DEACTIVATED", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Vehicle already rented..
         /// </summary>
         public static string VEHICLE_ALREADY_RENTED {
@@ -1101,6 +1101,15 @@ namespace FleetManager.Exception.ExceptionBase {
         public static string VEHICLE_BLOCKED_FOR_MAINTENANCE {
             get {
                 return ResourceManager.GetString("VEHICLE_BLOCKED_FOR_MAINTENANCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to vehicle cannot be deactivated..
+        /// </summary>
+        public static string VEHICLE_CANNOT_BE_DEACTIVATED {
+            get {
+                return ResourceManager.GetString("VEHICLE_CANNOT_BE_DEACTIVATED", resourceCulture);
             }
         }
         

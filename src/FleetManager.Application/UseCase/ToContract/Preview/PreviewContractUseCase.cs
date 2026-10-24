@@ -2,7 +2,6 @@ using FleetManager.Communication.Request.ToContract;
 using FleetManager.Communication.Response.ToContract;
 using FleetManager.Domain.Entities;
 using FleetManager.Domain.Enum;
-using FleetManager.Domain.Repositories.ToContract;
 using FleetManager.Domain.Repositories.ToTenant;
 using FleetManager.Domain.Repositories.ToVehicle;
 using FleetManager.Exception.ExceptionBase;

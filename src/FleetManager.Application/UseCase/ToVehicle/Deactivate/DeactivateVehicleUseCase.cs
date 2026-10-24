@@ -9,6 +9,7 @@ namespace FleetManager.Application.UseCase.ToVehicle.Deactivate
         public async Task Execute(long id)
         {
             var vehicle = await repository.GetById(id) ?? throw new NotFoundException(ResourceErrorMessages.VEHICLE_NOT_FOUND);
+
             vehicle.Deactivate();
 
             repository.Update(vehicle);

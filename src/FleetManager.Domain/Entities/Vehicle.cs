@@ -51,9 +51,9 @@ namespace FleetManager.Domain.Entities
         }
         public void Deactivate()
         {
-            if (Status == VehicleStatus.Inactive)
-                throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_ALREADY_DEACTIVATED);
-
+            if (Status != VehicleStatus.Available)
+                throw new BusinessRuleException(ResourceErrorMessages.VEHICLE_CANNOT_BE_DEACTIVATED);
+         
             Status = VehicleStatus.Inactive;
             RegisterHistoryEvent("Inactived");
         }
