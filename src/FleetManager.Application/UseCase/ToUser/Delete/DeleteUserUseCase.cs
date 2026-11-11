@@ -18,4 +18,4 @@ namespace FleetManager.Application.UseCase.ToUser.Delete
             await unitOfWork.Commit();
         }
     }
-}
+}

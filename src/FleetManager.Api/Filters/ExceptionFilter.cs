@@ -27,7 +27,8 @@ namespace FleetManager.Api.Filters
             }
         }
 
-        private static void HandleException(ExceptionContext context, int statusCode, List<string> errors)
+        private static void HandleException(ExceptionContext context,
+                                            int statusCode, List<string> errors)
         {
             context.Result = new ObjectResult(new ResponseErrorJson(errors))
             {

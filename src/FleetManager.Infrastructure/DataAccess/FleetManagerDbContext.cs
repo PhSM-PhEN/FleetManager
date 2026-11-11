@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace FleetManager.Infrastructure.DataAccess
 {
-    public class FleetManagerDbContext(DbContextOptions dbContextOptions, IHttpContextAccessor httpContextAccessor, ILoggedUser loggedUser) : DbContext(dbContextOptions)
+    public class FleetManagerDbContext(DbContextOptions dbContextOptions, ILoggedUser loggedUser) : DbContext(dbContextOptions)
     {
 
         public DbSet<User> Users { get; set; }
@@ -25,61 +25,89 @@ namespace FleetManager.Infrastructure.DataAccess
 
         public override async Task<int> SaveChangesAsync(CancellationToken ct = default)
         {
-            var pendingHistory = new List<(AuditableEntity entity, string action)>();
+            // 1. Filtra apenas as entidades que herdam de AuditableEntity
+            var auditableEntries = ChangeTracker.Entries<AuditableEntity>()
+                .Where(e => e.State == EntityState.Added
+                         || e.State == EntityState.Modified
+                         || e.State == EntityState.Deleted)
+                .ToList();
 
-            if (httpContextAccessor.HttpContext is not null)
+            // 2. Se for um cadastro de User (ou algo não auditável), salva normal e vai embora!
+            if (auditableEntries.Count == 0)
+                return await base.SaveChangesAsync(ct);
+
+            // 3. Se chegou aqui, ESTÁ alterando uma AuditableEntity. 
+            // Obrigatoriamente precisamos de um usuário logado. 
+            // Se não tiver token, o método Get() lança sua UnauthorizedException e aborta tudo.
+            var user = await loggedUser.Get();
+
+            var pendingHistory = new List<(Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<AuditableEntity> Entry, string Action)>();
+
+            // 4. Preenche os dados de auditoria em memória
+            foreach (var entry in auditableEntries)
             {
+                string action = string.Empty;
 
-                var auditableEntries = ChangeTracker.Entries<AuditableEntity>()
-                        .Where(e => e.State == EntityState.Added
-                        || e.State == EntityState.Modified
-                        || e.State == EntityState.Deleted)
-                        .ToList();
-                if (auditableEntries.Count > 0)
+                switch (entry.State)
                 {
-                    var user = await loggedUser.Get();
+                    case EntityState.Added:
+                        entry.Entity.SetCreatedBy(user.Id);
+                        action = "Created";
+                        break;
 
-                    foreach (var entry in auditableEntries)
-                    {
-                        if (entry.State == EntityState.Added)
-                        {
-                            entry.Entity.SetCreatedBy(user.Id);
+                    case EntityState.Modified:
+                        // Se foi um Update comum, o LastAction é nulo e vira "Updated".
+                        // Se o UseCase chamou entity.SoftDelete(), o LastAction é "Deleted".
+                        entry.Entity.SetUpdatedBy(user.Id);
+                        action = entry.Entity.LastAction ?? "Updated";
+                        break;
 
-                            pendingHistory.Add((entry.Entity, "Created"));
-                        }
-                        else if (entry.State == EntityState.Modified)
-                        {
-                            entry.Entity.SetUpdatedBy(user.Id);
-                            pendingHistory.Add((entry.Entity, entry.Entity.LastAction ?? "Updated"));
-                        }
-                        else if (entry.State == EntityState.Deleted)
-                        {
-                            pendingHistory.Add((entry.Entity, "Deleted"));
-                        }
-
-                        entry.Entity.ClearHistoryEvent();
-                    }
+                    case EntityState.Deleted:
+                        // TRAVA DE SEGURANÇA:
+                        // Como a arquitetura define que o UseCase faz o Soft Delete, 
+                        // se o estado chegar aqui como "Deleted", alguém usou _dbContext.Remove() indevidamente.
+                        throw new InvalidOperationException(
+                            $"Hard Delete não é permitido para a entidade {entry.Metadata.ClrType.Name}. " +
+                            "Utilize o método entity.SoftDelete() através do UseCase."
+                        );
                 }
+
+                pendingHistory.Add((entry, action));
+                entry.Entity.ClearHistoryEvent();
             }
 
-            var result = await base.SaveChangesAsync(ct);
+            // 5. Inicia a transação: garante que Dados + Log de Histórico salvem juntos
+            using var transaction = await Database.BeginTransactionAsync(ct);
 
-            if (pendingHistory.Count > 0)
+            try
             {
-                var user = await loggedUser.Get();
-                foreach (var (entity, action) in pendingHistory)
+                // Salva os dados na tabela principal (e gera os Ids de novos registros)
+                var result = await base.SaveChangesAsync(ct);
+
+                // 6. Prepara e salva os logs de histórico
+                foreach (var (entry, action) in pendingHistory)
                 {
                     HistoryLogs.Add(new HistoryLog(
-                        entityName: entity.GetType().Name,
-                        entityId: entity.Id,
+                        entityName: entry.Metadata.ClrType.Name, // Nome real, ignora proxies
+                        entityId: entry.Entity.Id,
                         action: action,
                         performedBy: user.Id,
-                        performedByName: user.Name));
+                        performedByName: user.Name
+                    ));
                 }
-                await base.SaveChangesAsync(ct);
-            }
-            return result;
 
+                await base.SaveChangesAsync(ct); // Salva apenas os HistoryLogs no banco
+
+                await transaction.CommitAsync(ct); // Efetiva a transação "Tudo ou Nada"
+
+                return result;
+            }
+            catch
+            {
+                // Se qualquer um dos dois saves falhar, nada é inserido no banco
+                await transaction.RollbackAsync(ct);
+                throw;
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
