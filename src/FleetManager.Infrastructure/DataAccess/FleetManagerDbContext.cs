@@ -37,9 +37,17 @@ namespace FleetManager.Infrastructure.DataAccess
                 return await base.SaveChangesAsync(ct);
 
             // 3. Se chegou aqui, ESTÁ alterando uma AuditableEntity. 
-            // Obrigatoriamente precisamos de um usuário logado. 
-            // Se não tiver token, o método Get() lança sua UnauthorizedException e aborta tudo.
-            var user = await loggedUser.GetLoggedUserAsync();
+            // Tenta obter o usuário logado via token HTTP. Em rotinas de sistema (como Seeding no startup
+            // ou rotinas em background), nenhum usuário está logado, portanto utiliza fallback seguro.
+            User? user = null;
+            try
+            {
+                user = await loggedUser.Get();
+            }
+            catch (Exception)
+            {
+                // Sem usuário logado (ex.: Seeding no startup, migrações ou jobs de sistema)
+            }
 
             var pendingHistory = new List<(Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<AuditableEntity> Entry, string Action)>();
 
@@ -51,14 +59,20 @@ namespace FleetManager.Infrastructure.DataAccess
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.SetCreatedBy(user.Id);
+                        if (user is not null)
+                            entry.Entity.SetCreatedBy(user.Id);
                         action = "Created";
                         break;
 
                     case EntityState.Modified:
                         // Se foi um Update comum, o LastAction é nulo e vira "Updated".
                         // Se o UseCase chamou entity.SoftDelete(), o LastAction é "Deleted".
-                        entry.Entity.SetUpdatedBy(user.Id);
+                        if (user is not null)
+                        {
+                            entry.Entity.SetUpdatedBy(user.Id);
+                            if (entry.Entity.IsDeleted && entry.Entity.LastAction == "Deleted")
+                                entry.Entity.SetDeletedBy(user.Id);
+                        }
                         action = entry.Entity.LastAction ?? "Updated";
                         break;
 
@@ -95,8 +109,8 @@ namespace FleetManager.Infrastructure.DataAccess
                             entityName: entry.Metadata.ClrType.Name,
                             entityId: entry.Entity.Id,
                             action: action,
-                            performedBy: user.Id,
-                            performedByName: user.Name
+                            performedBy: user?.Id ?? 0,
+                            performedByName: string.IsNullOrEmpty(user?.Name) ? "System" : user.Name
                         ));
                     }
 

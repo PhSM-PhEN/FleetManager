@@ -17,7 +17,8 @@ namespace FleetManager.Application.UseCase.ToTenant.Delete
                 throw new BusinessRuleException(ResourceErrorMessages.TENANT_CANNOT_BE_DELETED);
             }
 
-            await repository.Delete(tenant);
+            tenant.SoftDelete();
+            repository.Update(tenant);
             await unitOfWork.Commit();
         }
     }

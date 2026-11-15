@@ -14,20 +14,10 @@
 		<ProjectReference Include="..\FleetManager.Communication\FleetManager.Communication.csproj" />
 		<ProjectReference Include="..\FleetManager.Domain\FleetManager.Domain.csproj" />
 		<ProjectReference Include="..\FleetManager.Exception\FleetManager.Exception.csproj" />
-		<ProjectReference Include="..\FleetManager.Infrastructure\FleetManager.Infrastructure.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="FluentValidation" Version="12.1.1" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="UseCase\ToCompany\UpdateLegalInfo\" />
-	  <Folder Include="UseCase\ToCompany\UpdateTaxRegime\" />
-	  <Folder Include="UseCase\ToCompany\UpdateToAddress\" />
-	  <Folder Include="UseCase\ToMaintenance\Close\" />
-	  <Folder Include="UseCase\ToMaintenance\Delete\" />
-	  <Folder Include="UseCase\ToMaintenance\GetById\" />
 	</ItemGroup>
 
 </Project>

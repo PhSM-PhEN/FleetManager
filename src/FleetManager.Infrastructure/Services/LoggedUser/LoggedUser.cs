@@ -10,7 +10,10 @@ namespace FleetManager.Infrastructure.Services.LoggedUser
     {
         public Task<User> Get()
         {
-            var claims = httpContextAccessor.HttpContext!.User;
+            var httpContext = httpContextAccessor.HttpContext
+                ?? throw new UnauthorizedException(ResourceErrorMessages.TOKEN_INVALID_OR_MISSING);
+
+            var claims = httpContext.User;
 
             var identifier = claims.FindFirst(ClaimTypes.Sid)?.Value
                     ?? throw new UnauthorizedException(ResourceErrorMessages.TOKEN_INVALID_OR_MISSING);

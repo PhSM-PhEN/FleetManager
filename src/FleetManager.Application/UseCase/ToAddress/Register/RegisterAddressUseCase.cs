@@ -13,7 +13,7 @@ namespace FleetManager.Application.UseCase.ToAddress.Register
         public async Task<ResponseAddressJson> Execute(RequestAddressJson request)
         {
             Validate(request);
-           ;
+
             var address = new Address(request.Street, request.Number, request.Neighborhood, request.City, request.State, request.ZipCode); 
             await repository.Add(address);
             await unitOfWork.Commit();

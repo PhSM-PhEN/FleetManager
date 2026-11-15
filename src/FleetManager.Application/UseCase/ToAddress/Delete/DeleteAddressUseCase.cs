@@ -12,7 +12,8 @@ namespace FleetManager.Application.UseCase.ToAddress.Delete
             var address = await repository.GetById(id) ??
                          throw new NotFoundException(ResourceErrorMessages.ADDRESS_NOT_FOUND);
             
-            await repository.Delete(address);
+            address.SoftDelete();
+            repository.Update(address);
             await unitOfWork.Commit();
                 
         }

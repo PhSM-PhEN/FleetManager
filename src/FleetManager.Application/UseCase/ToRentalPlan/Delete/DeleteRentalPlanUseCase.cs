@@ -11,7 +11,8 @@ namespace FleetManager.Application.UseCase.ToRentalPlan.Delete
             var rentalPlan = await repository.GetById(id) ??
                 throw new NotFoundException(ResourceErrorMessages.RENTAL_PLAN_NOT_FOUND);
 
-            await repository.Delete(rentalPlan);
+            rentalPlan.SoftDelete();
+            repository.Update(rentalPlan);
             await unitOfWork.Commit();
         }
     }

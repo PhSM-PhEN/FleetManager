@@ -34,6 +34,7 @@ namespace FleetManager.Api.Filters
             {
                 StatusCode = statusCode
             };
+            context.ExceptionHandled = true;
         }
 
         private void ThrowUnknownError(ExceptionContext context)
@@ -46,6 +47,7 @@ namespace FleetManager.Api.Filters
             {
                 StatusCode = StatusCodes.Status500InternalServerError
             };
+            context.ExceptionHandled = true;
         }
     }
 }

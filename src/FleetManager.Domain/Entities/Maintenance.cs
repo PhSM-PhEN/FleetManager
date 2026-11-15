@@ -34,7 +34,7 @@ namespace FleetManager.Domain.Entities
         }
         public void Scheduled(DateTime scheduledAt)
         {
-            if(scheduledAt < ScheduledAt)
+            if (scheduledAt < DateTime.UtcNow)
             {
                 throw new BusinessRuleException(ResourceErrorMessages.SCHEDULED_AT_CANNOT_BE_IN_THE_PAST);
             }

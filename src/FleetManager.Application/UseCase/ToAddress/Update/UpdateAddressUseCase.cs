@@ -18,7 +18,7 @@ namespace FleetManager.Application.UseCase.ToAddress.Update
             await unitOfWork.Commit();
             
         }
-        private void Validate(RequestAddressJson request)
+        private static void Validate(RequestAddressJson request)
         {
             var Validator = new AddressValidator();
             var result = Validator.Validate(request);

@@ -1,4 +1,5 @@
 using FleetManager.Domain.Entities;
+using FleetManager.Domain.Enum;
 using FleetManager.Domain.Repositories;
 using FleetManager.Domain.Repositories.ToCharge;
 using FleetManager.Domain.Repositories.ToContract;
@@ -10,21 +11,26 @@ namespace FleetManager.Application.UseCase.ToContract.Activate
     public class ActivateContractUseCase(
         IContractWriteOnlyRepository contractRepository,
         IChargeWriteOnlyRepository chargeWriteOnly,
-        IVehicleReadOnlyRepository vehicleReadOnlyRepository,
+        IVehicleWriteOnlyRepository vehicleRepository,
         IUnitOfWork unitOfWork) : IActivateContractUseCase
     {
         public async Task Execute(long id)
         {
             var contract = await contractRepository.GetById(id) ??
                 throw new NotFoundException(ResourceErrorMessages.CONTRACT_NOT_FOUND);
-            var vehicle = await vehicleReadOnlyRepository.GetById(contract.VehicleId) ??
+            var vehicle = await vehicleRepository.GetById(contract.VehicleId) ??
                 throw new NotFoundException(ResourceErrorMessages.VEHICLE_NOT_FOUND);
 
-            vehicle.MarkAsRented();
+            if (vehicle.Status == VehicleStatus.Available)
+            {
+                vehicle.MarkAsRented();
+                vehicleRepository.Update(vehicle);
+            }
+
             contract.Confirm();
 
             var charge = Charge.ForContractStart(contract);
-            await  chargeWriteOnly.Add(charge);
+            await chargeWriteOnly.Add(charge);
             contractRepository.Update(contract);
             await unitOfWork.Commit();
         }

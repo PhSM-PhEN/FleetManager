@@ -20,7 +20,7 @@ namespace FleetManager.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(ResponseShortMaintenanceJson), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(ResponseErrorJson), StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Register([FromServices] IRegisterMaintenanceUseCase useCase, RequestMaintenanceJson request)
+        public async Task<IActionResult> Register([FromServices] IRegisterMaintenanceUseCase useCase, [FromBody] RequestMaintenanceJson request)
         {
             var response = await useCase.Execute(request);
             return Created(string.Empty, response);
