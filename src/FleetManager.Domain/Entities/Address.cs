@@ -12,7 +12,7 @@ namespace FleetManager.Domain.Entities
 
         protected Address(){}
 
-        public Address(string street, string number, string city, string neighborhood, string state, string zipCode)
+        public Address(string street, string number,  string neighborhood, string city, string state, string zipCode)
         {
             Street = street;
             Number = number;
@@ -21,7 +21,7 @@ namespace FleetManager.Domain.Entities
             State = state;
             ZipCode = zipCode;
         }
-        public void Update(string street, string number, string city, string neighborhood, string state, string zipCode)
+        public void Update(string street, string number, string neighborhood, string city, string state, string zipCode)
         {
             Street = street;
             Number = number;
