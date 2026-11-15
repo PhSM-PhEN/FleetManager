@@ -39,7 +39,7 @@ namespace FleetManager.Infrastructure.DataAccess
             // 3. Se chegou aqui, ESTÁ alterando uma AuditableEntity. 
             // Obrigatoriamente precisamos de um usuário logado. 
             // Se não tiver token, o método Get() lança sua UnauthorizedException e aborta tudo.
-            var user = await loggedUser.Get();
+            var user = await loggedUser.GetLoggedUserAsync();
 
             var pendingHistory = new List<(Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<AuditableEntity> Entry, string Action)>();
 
@@ -76,37 +76,53 @@ namespace FleetManager.Infrastructure.DataAccess
                 entry.Entity.ClearHistoryEvent();
             }
 
-            // 5. Inicia a transação: garante que Dados + Log de Histórico salvem juntos
-            using var transaction = await Database.BeginTransactionAsync(ct);
+            // 1. Checa se o banco suporta transações (MySQL suporta, InMemory não)
+            var isRelational = Database.IsRelational();
+
+            // 2. Só abre a transação se for relacional
+            var transaction = isRelational ? await Database.BeginTransactionAsync(ct) : null;
 
             try
             {
-                // Salva os dados na tabela principal (e gera os Ids de novos registros)
+                // Salva os dados principais
                 var result = await base.SaveChangesAsync(ct);
 
-                // 6. Prepara e salva os logs de histórico
-                foreach (var (entry, action) in pendingHistory)
+                if (pendingHistory.Count > 0)
                 {
-                    HistoryLogs.Add(new HistoryLog(
-                        entityName: entry.Metadata.ClrType.Name, // Nome real, ignora proxies
-                        entityId: entry.Entity.Id,
-                        action: action,
-                        performedBy: user.Id,
-                        performedByName: user.Name
-                    ));
+                    foreach (var (entry, action) in pendingHistory)
+                    {
+                        HistoryLogs.Add(new HistoryLog(
+                            entityName: entry.Metadata.ClrType.Name,
+                            entityId: entry.Entity.Id,
+                            action: action,
+                            performedBy: user.Id,
+                            performedByName: user.Name
+                        ));
+                    }
+
+                    // Salva os logs
+                    await base.SaveChangesAsync(ct);
                 }
 
-                await base.SaveChangesAsync(ct); // Salva apenas os HistoryLogs no banco
-
-                await transaction.CommitAsync(ct); // Efetiva a transação "Tudo ou Nada"
+                // 3. Só commita se a transação foi criada
+                if (transaction is not null)
+                    await transaction.CommitAsync(ct);
 
                 return result;
             }
             catch
             {
-                // Se qualquer um dos dois saves falhar, nada é inserido no banco
-                await transaction.RollbackAsync(ct);
+                // 4. Só faz rollback se a transação existir
+                if (transaction is not null)
+                    await transaction.RollbackAsync(ct);
+
                 throw;
+            }
+            finally
+            {
+                // 5. Garante o descarte da transação da memória
+                if (transaction is not null)
+                    await transaction.DisposeAsync();
             }
         }
 
